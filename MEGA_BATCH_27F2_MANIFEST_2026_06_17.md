@@ -1,0 +1,7 @@
+# Manifest — Mega Batch 27F-2
+
+- Baseline in: `waqf_ai_model_hybrid_llm_admin_v38a_mb27f1_knowledge_runtime_tdz_hotfix_2026_06_17.zip`
+- Baseline out: `waqf_ai_model_hybrid_llm_admin_v38b_mb27f2_chat_llm_local_provider_fallback_hardening_2026_06_17.zip`
+- Updates-only: `mega_batch_27f2_chat_llm_local_provider_fallback_hardening_updates_only_2026_06_17.zip`
+- Decision: `MEGA_BATCH_27F2_CHAT_LLM_LOCAL_PROVIDER_FALLBACK_HARDENING_APPLIED_ROUTER_STATIC_CHECK_PASSED_LOCAL_BROWSER_RETEST_REQUIRED`
+- Production approval: not granted

@@ -1,0 +1,23 @@
+{
+  "batch": "Knowledge Batch 06B",
+  "date": "2026-06-18",
+  "baseline": "v50",
+  "based_on": "v49",
+  "decision": "KNOWLEDGE_BATCH_06B_CHAT_CITATION_BROWSER_EVIDENCE_GATE_PREPARED_EVIDENCE_NOT_SUPPLIED_ACCEPTANCE_PENDING",
+  "evidence_supplied_in_request": false,
+  "accepted_prior_evidence": {
+    "kb05a_database_import_138_records": true,
+    "kb05a_approved_chat_visible": true,
+    "kb06_admin_search_contract_fix_prepared": true,
+    "kb06a_typescript_check_accepted": true
+  },
+  "acceptance": {
+    "chat_retrieval_browser_evidence": "pending_not_supplied",
+    "citation_runtime_evidence": "pending_not_supplied",
+    "admin_knowledge_search_browser_api_evidence": "pending_not_supplied",
+    "remote_staging_evidence": "pending",
+    "rbac_rls_negative_uat": "pending",
+    "production_approved": false,
+    "mega_batch_30_allowed": false
+  }
+}

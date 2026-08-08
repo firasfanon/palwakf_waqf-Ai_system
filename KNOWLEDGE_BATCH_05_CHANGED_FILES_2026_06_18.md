@@ -1,0 +1,17 @@
+# Changed Files — Knowledge Batch 05
+
+- `KNOWLEDGE_BATCH_05_FULL_DATABASE_IMPORT_APPROVAL_CHAT_PACK_2026_06_18.md`
+- `KNOWLEDGE_BATCH_05_OPERATOR_RUNBOOK_2026_06_18.md`
+- `KNOWLEDGE_BATCH_05_APPROVAL_CHAT_VISIBILITY_POLICY_2026_06_18.md`
+- `KNOWLEDGE_BATCH_05_VERIFICATION_NOTES_2026_06_18.md`
+- `ERROR_RECORD_KNOWLEDGE_BATCH_05_2026_06_18.md`
+- `KNOWLEDGE_BATCH_05_CHANGELOG_2026_06_18.md`
+- `SESSION_HANDOFF_KNOWLEDGE_BATCH_05_TO_POST_APPLY_OR_29A_2026_06_18.md`
+- `LATEST_BASELINE_KNOWLEDGE_BATCH_05_2026_06_18.md`
+- `PALWAKF_PLATFORM_COMPREHENSIVE_GUIDE.md`
+- `knowledge_batch_05_full_database_import/full_recovered_records_db_import_payload_v1.json`
+- `knowledge_batch_05_full_database_import/full_recovered_records_db_import_payload_v1.csv`
+- `knowledge_batch_05_full_database_import/full_recovered_records_db_import_summary_v1.json`
+- `sql_sandbox/knowledge_batch_05_full_database_import_approval_chat_pack/knowledge_batch_05_full_import_APPROVED_CHAT_VISIBLE_primary_operator_apply.sql`
+- `sql_sandbox/knowledge_batch_05_full_database_import_approval_chat_pack/knowledge_batch_05_full_import_REVIEW_ONLY_safe_fallback_operator_apply.sql`
+- `sql_sandbox/knowledge_batch_05_full_database_import_approval_chat_pack/knowledge_batch_05_post_apply_read_only_verification.sql`

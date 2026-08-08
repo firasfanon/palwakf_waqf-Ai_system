@@ -1,0 +1,64 @@
+{
+  "batch": "Knowledge Batch 07 — Legacy DB Full Census + Migration Readiness + Page Operations Audit",
+  "date": "2026-06-19",
+  "base_baseline": "v55 UI/UX 01C",
+  "old_db_query_log_files": 100,
+  "old_db_tables_observed": 52,
+  "old_db_show_tables_count": 47,
+  "insert_records_extracted_total": 490,
+  "insert_records_by_table": {
+    "knowledge_documents": 418,
+    "land_references": 12,
+    "content_templates": 10,
+    "roles": 4,
+    "permissions": 10,
+    "__drizzle_migrations": 18,
+    "knowledge_base": 4,
+    "page_settings": 14
+  },
+  "json_content_records_extracted_total": 520,
+  "old_counts": {
+    "conversations_observed_total": "49",
+    "messages_observed_total": "39",
+    "user_messages_observed_total": "20",
+    "conversations_observed_real": "49",
+    "conversations_observed_test": "10",
+    "knowledge_documents_observed_total_documents": "202",
+    "knowledge_documents_observed_total": "226",
+    "knowledge_documents_observed_max": "307",
+    "content_templates_observed_total": "10",
+    "fetched_content_observed_total": "28"
+  },
+  "legacy_knowledge_max_observed": "307",
+  "already_imported_kb05_records": 138,
+  "minimum_old_knowledge_delta_by_count": 169,
+  "knowledge_sql_insert_candidates_extracted": 136,
+  "knowledge_sql_insert_candidates_not_title_matched_to_kb05_payload": 36,
+  "fetched_content_observed_total": "28",
+  "knowledge_sources_observed_rows": "8",
+  "suggested_questions_seed_file_records": 8,
+  "page_static_audit_files": 82,
+  "page_status_counts": {
+    "unrouted_or_component_only": 58,
+    "static_placeholder_risk": 1,
+    "has_runtime_contract_static_check_only": 9,
+    "mixed_needs_browser_uat": 12,
+    "static_display_or_missing_backend_risk": 2
+  },
+  "migration_priority_counts": {
+    "Review": 11,
+    "P2": 10,
+    "P3": 6,
+    "P1": 17,
+    "Domain-mapped / no direct assistant ownership": 8
+  },
+  "decision": "LEGACY_DB_FULL_CENSUS_COMPLETED_IMPORT_NOT_APPLIED_P1_MIGRATION_BACKLOG_PREPARED_PAGE_OPERATIONS_STATIC_AUDIT_COMPLETED_BROWSER_UAT_REQUIRED",
+  "notes": [
+    "Counts are based on available old DB query logs, seed SQL, JSON registries and current v55 baseline, not on a live connection to the old MySQL/TiDB database. Canonical old tables are taken from SHOW TABLES evidence; seed/alias objects are tracked separately.",
+    "The old DB reached at least 307 knowledge_documents, while KB05A evidence accepted 138 imported records. This implies a minimum count gap of 169 records by historical count before dedupe/review.",
+    "Old tables include page/content/FAQ/suggested-question/search/fetched-content operational data not yet proven migrated to Supabase assistant schema.",
+    "Page audit is static: it checks routes/API references/placeholders; production readiness still requires browser/API UAT."
+  ],
+  "old_db_canonical_tables_observed": 47,
+  "legacy_seed_or_alias_tables_observed": 5
+}

@@ -1,0 +1,16 @@
+{
+  "filename": "R9_DISCOVERY_AND_DESIGN_20260719_232014(1).zip",
+  "sha256": "B4E4B6836175FBA3DDD7687734B60B192736D913C4CDE54C8C64BEC6F543D66C",
+  "sizeBytes": 775360,
+  "zipIntegrity": "PASS",
+  "itemCount": 42,
+  "databaseIdentity": [
+    {
+      "database_name": "postgres",
+      "current_user_name": "postgres",
+      "server_version": 17.6,
+      "transaction_read_only": "off",
+      "search_path": "assistant,public"
+    }
+  ]
+}

@@ -1,0 +1,153 @@
+{
+  "answer": {
+    "action": "answer",
+    "confidence": "low",
+    "answer": "تم إعداد حزمة أدلة داخلية محدودة من corpus التجريبي.\n\nهذه النتيجة ليست فتوى ولا رأيًا قانونيًا ولا توجيهًا إجرائيًا. يجب مراجعة النصوص الأصلية ومختص مختص قبل اتخاذ أي إجراء.\n\nالسؤال: ما مهام الوزارة المتعلقة بالأوقاف وإدارة العقارات الوقفية؟\n\n1. مهام وزارة الأوقاف والشؤون الدينية الفلسطينية [[AR1P:8f90755c6866:c3ebc0f4-fc16-4e49-bb25-4f87b9d63f88]]\nوزارة الأوقاف والشؤون الدينية هي الجهة الحكومية المسؤولة عن إدارة الأوقاف والشؤون الدينية في فلسطين. المهام الأساسية: 1. رعاية الأركان الخمس (الشهادتان، الصلاة، الزكاة، الصوم، الحج) 2. رعاية الشؤون الدينية والحفاظ على وسطية المنهج 3. الحفاظ على أملاك الوقف وتنميتها واستثمارها 4. حفظ الموروث الديني والثقافي والارتقاء بالتعليم الشرعي البرامج الرئيسية: - برنامج الأركان الخمسة - برنامج إدارة الأملاك الوقفية - برنامج التعليم الشرعي والمهني والتراث - البرنامج الإداري",
+    "citations": [
+      {
+        "citationId": "AR1P:8f90755c6866:c3ebc0f4-fc16-4e49-bb25-4f87b9d63f88",
+        "documentId": "c3ebc0f4-fc16-4e49-bb25-4f87b9d63f88",
+        "title": "مهام وزارة الأوقاف والشؤون الدينية الفلسطينية",
+        "source": null,
+        "sourceUrl": null,
+        "evidenceTier": "T3_CONTROLLED_INTERNAL_EVIDENCE",
+        "clusterKey": "url:https://www.palestinecabinet.gov.ps/portal/OrgStructure/Details/20",
+        "excerpt": "وزارة الأوقاف والشؤون الدينية هي الجهة الحكومية المسؤولة عن إدارة الأوقاف والشؤون الدينية في فلسطين. المهام الأساسية: 1. رعاية الأركان الخمس (الشهادتان، الصلاة، الزكاة، الصوم، الحج) 2. رعاية الشؤون الدينية والحفاظ على وسطية المنهج 3. الحفاظ على أملاك الوقف وتنميتها واستثمارها 4. حفظ الموروث الديني والثقافي والارتقاء بالتعليم الشرعي البرامج الرئيسية: - برنامج الأركان الخمسة - برنامج إدارة الأملاك الوقفية - برنامج التعليم الشرعي والمهني والتراث - البرنامج الإداري",
+        "relevanceScore": 28.5
+      }
+    ],
+    "reasonCodes": [
+      "INTERNAL_PILOT_ONLY",
+      "CITATION_BOUND",
+      "NO_EXTERNAL_WEB_AGENT",
+      "EXPLICIT_EVIDENCE_ONLY_RUNTIME_UAT",
+      "LLM_GENERATION_DISABLED_BY_SESSION_CONTRACT"
+    ],
+    "executionMode": "evidence_only_runtime_uat",
+    "questionCount": 1,
+    "maxQuestions": 1,
+    "llmGenerationUsed": false,
+    "databaseWrites": 0,
+    "sourceOrRightsWrites": 0,
+    "nextAction": "ROLLBACK_SESSION",
+    "toolTrace": [
+      "C4_SELECTED_COHORT_BINDING",
+      "T3_T4_OPERATOR_DECLARED_SESSION_SCOPE",
+      "SCOPED_KEYWORD_RETRIEVAL",
+      "EVIDENCE_ONLY_OUTPUT",
+      "CITATION_AND_ABSTENTION_GATE"
+    ],
+    "publicRelease": "blocked",
+    "chatRelease": "blocked",
+    "production": "not_authorized"
+  },
+  "rollback": {
+    "id": "AR1P-da016217-3af8-4ed0-894e-8f90755c6866",
+    "createdAt": "2026-07-12T22:10:43.396Z",
+    "expiresAt": "2026-07-12T22:40:43.396Z",
+    "status": "rolled_back",
+    "executionMode": "evidence_only_runtime_uat",
+    "sessionStartDecision": "AUTHORIZE_ONE_EPHEMERAL_EVIDENCE_ONLY_UAT_SESSION",
+    "uatReference": "UAT-AR1-EVIDENCE-ONLY-SESSION-20260713-001",
+    "maxQuestions": 1,
+    "questionsExecuted": 1,
+    "llmGenerationUsed": false,
+    "authorityPreparationId": "AR1A-ef108e15-dc75-4614-b514-573ea8e5b165",
+    "authorityFingerprint": "d240d577a4e6ceda",
+    "bindingCount": 1,
+    "bindings": [
+      {
+        "documentId": "c3ebc0f4-fc16-4e49-bb25-4f87b9d63f88",
+        "documentTitle": "مهام وزارة الأوقاف والشؤون الدينية الفلسطينية",
+        "clusterKey": "url:https://www.palestinecabinet.gov.ps/portal/OrgStructure/Details/20",
+        "evidenceTier": "T3_CONTROLLED_INTERNAL_EVIDENCE",
+        "internalUseApprovalRef": "UAT-AR1-EVIDENCE-ONLY-20260713-001",
+        "resolutionMethod": "C4_DIRECT_MATERIAL_REFERENCE",
+        "resolutionEvidence": [
+          "candidateMaterials.id_field_normalized_to_knowledge_document_uuid",
+          "candidateMaterials.knowledge_document_id_exact",
+          "runtimeRepository.assistant_knowledge_documents_uuid_exact_lookup",
+          "runtimeRepository.uuid_or_numeric_id_resolution",
+          "C4_SELECTED_COHORT_CURRENT_PROCESS_ONLY"
+        ]
+      }
+    ],
+    "rightsApprovalRef": "INTERNAL-EVIDENCE-ONLY-SCOPE-20260713-001",
+    "reviewerNote": "اختبار تشغيل فعلي محكوم لجلسة AR1 بنمط Evidence-only لسؤال واحد دون استخدام نموذج لغوي أو كتابة دائمة.",
+    "sessionStorage": "process_memory_only",
+    "rollback": "clears the in-memory binding and trace; no database rollback is needed because AR1 writes no database state.",
+    "rollbackApplied": true,
+    "activeSessions": 0,
+    "sessionStarted": false,
+    "databaseWrites": 0,
+    "sourceOrRightsWrites": 0,
+    "nextAction": "NONE"
+  },
+  "statusAfterRollback": {
+    "contract": "governed_agentic_rag_internal_pilot_vertical_slice_v1",
+    "mode": "internal_admin_only_ephemeral_session",
+    "status": "READY_FOR_OPERATOR_BINDING",
+    "reason": null,
+    "c3EvidenceExpiresAt": "2026-07-12T22:37:34.038Z",
+    "availableCandidateDocuments": 2,
+    "corpusResolution": {
+      "directC4MaterialReferences": 2,
+      "directReferenceDocumentAssociations": 0,
+      "deterministicExactMatches": 0,
+      "rejectedFuzzyOrAmbiguousMatches": 0,
+      "rejectedAmbiguousDirectAssociations": 0
+    },
+    "activeSessions": 0,
+    "activeAuthorityPreparations": 0,
+    "maxBindings": 5,
+    "maxSessionMinutes": 30,
+    "maxAuthorityPreparations": 16,
+    "authorityPreparationMinutes": 10,
+    "sessionStartRequiresAuthorityPreparation": true,
+    "sessionStartPolicy": "EXPLICIT_EPHEMERAL_EVIDENCE_ONLY_SESSION_START_ENABLED",
+    "sessionStartAuthorizationScope": "ONE_PREPARED_AUTHORITY_ONE_QUESTION_RUNTIME_UAT",
+    "llmGenerationEnabled": false,
+    "invariants": [
+      "NO_EXTERNAL_WEB_AGENT",
+      "NO_DATABASE_WRITE",
+      "NO_SOURCE_LINK_WRITE",
+      "NO_RIGHTS_ASSIGNMENT",
+      "NO_DOCUMENT_COPY",
+      "NO_CHUNK_OR_EMBEDDING_WRITE",
+      "NO_VECTOR_INDEXING",
+      "NO_FUZZY_OR_SEMANTIC_CORPUS_LINKING",
+      "NO_PUBLIC_CHAT_RELEASE",
+      "NO_PUBLIC_RELEASE",
+      "NO_PRODUCTION"
+    ]
+  },
+  "acceptance": {
+    "acceptanceId": "MEGA_BATCH_AR1_EXPLICIT_EPHEMERAL_SESSION_START_AND_EVIDENCE_ONLY_RUNTIME_UAT_V1_RUNTIME_UAT_ACCEPTED_LOCAL_20260713",
+    "status": "PASS",
+    "scope": "LOCAL_INTERNAL_ADMIN_EVIDENCE_ONLY_ONE_QUESTION_SESSION",
+    "runtime": {
+      "sessionId": "AR1P-da016217-3af8-4ed0-894e-8f90755c6866",
+      "executionMode": "evidence_only_runtime_uat",
+      "questionsExecuted": 1,
+      "maxQuestions": 1,
+      "llmGenerationUsed": false,
+      "databaseWrites": 0,
+      "sourceOrRightsWrites": 0,
+      "rollbackApplied": true,
+      "activeSessionsAfterRollback": 0,
+      "activeAuthorityPreparationsAfterRollback": 0,
+      "publicRelease": "blocked",
+      "chatRelease": "blocked",
+      "production": "not_authorized"
+    },
+    "negativeGateEvidence": {
+      "manualBrowserSecondQuestionAttempt": "NOT_CAPTURED",
+      "functionalIsolatedSecondQuestionGate": "PASS",
+      "uiRepeatQuestionControl": "DISABLED_AFTER_RESULT"
+    },
+    "baselineR5": "READY_FOR_ACCEPTED_LOCAL_PROMOTION",
+    "nextRecommendedTrack": "MEGA_BATCH_ASSISTANT_KNOWLEDGE_SOVEREIGN_AUDIT_APPROVAL_AND_PRODUCTIVITY_ACTIVATION_V1",
+    "llmActivation": "NOT_AUTHORIZED",
+    "production": "NOT_APPROVED"
+  }
+}

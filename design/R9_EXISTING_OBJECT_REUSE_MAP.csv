@@ -1,0 +1,11 @@
+﻿capability,existing_objects,evidence,decision,required_extension
+SOURCE_REGISTRY,assistant.knowledge_sources,10 exact rows; all verification_status=pending,REUSE_AND_EXTEND,rights classification and evidence linkage
+REFERENCE_DOCUMENTS,assistant.reference_documents|assistant.reference_files,reference_documents estimated 608,REUSE,rights and citation evidence contract
+KNOWLEDGE_DOCUMENTS,assistant.knowledge_documents,"614 exact; 462 in_review, 146 approved, 6 draft",REUSE,activation-readiness computed gate
+CITATION_VERIFICATION,assistant.knowledge_citations|assistant.rpc_verify_knowledge_citation_v1,knowledge_citations estimated 746,REUSE,exact queue/status census
+HUMAN_REVIEW_QUEUE,assistant.knowledge_review_tasks,estimated 1383; unique dedupe_key; stage/status constraints,REUSE_AS_CANONICAL_QUEUE,rights_review and ai_tool_run support need constraint confirmation
+REVIEW_EVENT_LEDGER,assistant.review_events|assistant.knowledge_review_task_reconciliation_events,specialized reconciliation events estimated 276,REUSE_WITH_BOUNDARY_DECISION,define canonical event ledger versus specialized evidence
+ACTIVATION_AUDIT,assistant.knowledge_activation_runs|assistant.knowledge_activation_items,614 activation items; no direct client table grants,REUSE,rights/human/mapping/containment gate contract
+AI_TOOL_OUTPUT_BINDING,assistant.ai_tool_runs|assistant.ai_tool_run_links|assistant.ai_tool_run_events,"13 runs; 6 links; 34 events; 11 pending approval, 2 approved",REUSE_AND_INTEGRATE_WITH_REVIEW_QUEUE,review target/stage contract and RLS hardening
+PROVENANCE_LEDGER,assistant.knowledge_provenance_reconstruction_*_v1_1|assistant.knowledge_provenance_resolution_decisions_v1_1,602 reconstruction items estimated,REUSE_AS_SUPPORTING_LEDGER,not a replacement for source/rights registry
+RIGHTS_REGISTRY,none detected by rights/license object names,0 assistant schema objects containing right or license,DESIGN_GAP,dedicated governed rights evidence model or explicit canonical metadata contract

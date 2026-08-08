@@ -1,0 +1,79 @@
+﻿{
+    "baseline_id":  "PALWAKF_ASSISTANT_SOURCE_BASELINE_AR1_SOURCE_PROVENANCE_RIGHTS_OPERATIONAL_UX_REFINEMENT_V1_20260706_R1",
+    "batch_id":  "MEGA_BATCH_AR1_SOURCE_PROVENANCE_RIGHTS_OPERATIONAL_UX_REFINEMENT_V1",
+    "closure_automation":  "V1_2_LITERAL_VERIFIER_FIX",
+    "created_at_local":  "2026-07-06T03:45:34.5896095+03:00",
+    "acceptance":  {
+                       "local_only":  true,
+                       "static_verify":  "PASS",
+                       "patch_apply":  "PASS",
+                       "browser_uat":  "PASS",
+                       "closure_literal_verifier":  "PASS",
+                       "staging":  "NOT_APPROVED",
+                       "production":  "NOT_APPROVED"
+                   },
+    "exclusions":  [
+                       "node_modules/",
+                       "dist/",
+                       ".vite-dev-cache/",
+                       ".env",
+                       ".env.* except .env.example",
+                       "generated archives",
+                       "temporary closure-package files"
+                   ],
+    "tracked_files":  [
+                          {
+                              "path":  "client/src/pages/admin/SourceProvenanceRightsRegistry.tsx",
+                              "sha256":  "82ACA206B2972E0DFE487F028CEAA6F5E1C3D8DB3D0A0D92673E516ACBC3D2B1"
+                          },
+                          {
+                              "path":  "scripts/verify-mega-batch-ar1-source-provenance-rights-operational-ux-refinement.mjs",
+                              "sha256":  "95F52E7E53DB1523BB2B66DE6722DF7E858AD2F79ECD59AC69E7AECE1E7B7A7A"
+                          },
+                          {
+                              "path":  "PALWAKF_PLATFORM_COMPREHENSIVE_GUIDE.md",
+                              "sha256":  "BB6CA59645521B22651A06DD74A95DC45073D8275F82EF860D550EB331E52B45"
+                          },
+                          {
+                              "path":  "CHANGELOG.md",
+                              "sha256":  "F6130D105EB21A0B803F30412440EC45057392ABC25FC8DD263FAF44B7EB3D33"
+                          },
+                          {
+                              "path":  "LATEST_BASELINE_CURRENT.md",
+                              "sha256":  "F665D42B79EA80F31375F344F9A0A93B3176CE3334C764C529B977DD23AAFDF7"
+                          },
+                          {
+                              "path":  "docs/ar1_source_provenance_rights_operational_ux_refinement/BASELINE_ACCEPTANCE_STATE_20260706.md",
+                              "sha256":  "3334A4D51DB312A3F9822D314574DF0621F147EDAB10E23C5A8BC65B34B511DF"
+                          },
+                          {
+                              "path":  "docs/ar1_source_provenance_rights_operational_ux_refinement/SESSION_HANDOFF_20260706.md",
+                              "sha256":  "2A7E9AE1A5B15365F4061D17C67D724634236BD9D6224283FD62D85ADEBAB638"
+                          },
+                          {
+                              "path":  "docs/ar1_source_provenance_rights_operational_ux_refinement/ERROR_RECORD_BASELINE_HYGIENE_LOCKFILE_20260706.md",
+                              "sha256":  "177731E464F73AFB8063897B087BD0E8267CBB9225EED20AEB982654D5A1BDB7"
+                          },
+                          {
+                              "path":  "docs/ar1_source_provenance_rights_operational_ux_refinement/ERROR_RECORD_BASELINE_CLOSURE_HERESTRING_PARSE_20260706.md",
+                              "sha256":  "0999FFC2F8EF55C04A310924E6CFD2B06B0257E63B46F2049934545D748472CE"
+                          },
+                          {
+                              "path":  "docs/ar1_source_provenance_rights_operational_ux_refinement/ERROR_RECORD_BASELINE_CLOSURE_SOURCE_MARKER_FALSE_NEGATIVE_20260706.md",
+                              "sha256":  "F1E2AFA43F0F8A0F920A25E7ED9F3B25D14ADC0E5281C7ADFB93F9DBC01CA361"
+                          },
+                          {
+                              "path":  "docs/ar1_source_provenance_rights_operational_ux_refinement/CLOSURE_CORRECTION_V1_2_LITERAL_VERIFIER_FIX_20260706.md",
+                              "sha256":  "1CB4808C31ADE0FB6C422D66186F8E24B00B4351DDBC6113251FC5CF71B382F6"
+                          },
+                          {
+                              "path":  "docs/ar1_source_provenance_rights_operational_ux_refinement/EVIDENCE_ACCEPTANCE_20260706.md",
+                              "sha256":  "E0C985F4E638168A1A007F4D101376B67C766DB9C118DA83EA55A2AA43F58FFD"
+                          }
+                      ],
+    "known_deferred":  [
+                           "Mega Batch C support-layer SQL / rights activation is not applied.",
+                           "C4 has zero eligible deterministic candidates in accepted browser UAT.",
+                           "Strict frozen lockfile revalidation is not re-evidenced in this closure."
+                       ]
+}

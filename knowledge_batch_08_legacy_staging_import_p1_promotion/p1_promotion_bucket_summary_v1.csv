@@ -1,0 +1,10 @@
+﻿legacy_table_name,target_table,migration_priority,planned_batch08_action,count
+__drizzle_migrations,,Review,stage_only_review_or_domain_mapped,18
+content_templates,content_templates,P1,stage_all_then_operational_register,10
+knowledge_base,,Review,stage_only_review_or_domain_mapped,4
+knowledge_documents,knowledge_documents,P1,stage_all_then_promote_p1_knowledge,344
+land_references,,P1,stage_all_then_promote_p1_knowledge,12
+legacy_json_content,,P1,stage_all_then_promote_p1_knowledge,520
+page_settings,page_settings,P1,stage_all_then_operational_register,7
+permissions,,Domain-mapped / no direct assistant ownership,stage_only_review_or_domain_mapped,10
+roles,,Domain-mapped / no direct assistant ownership,stage_only_review_or_domain_mapped,4

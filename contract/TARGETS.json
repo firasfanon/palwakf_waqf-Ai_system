@@ -1,0 +1,82 @@
+[
+  {
+    "relativePath": "client/src/lib/appRoutes.ts",
+    "preimageState": "present",
+    "preimageSha256": "E561FC1407EF3EDF3914AB35F4A9CD5625D627F89130FF1192F439EB639924DD",
+    "preimageBytes": 1650,
+    "postimageSha256": "B26C174C2B233B54FDA63D94038659332BFBFDE30CE60237EEAD2C1033D798CF",
+    "postimageBytes": 2026
+  },
+  {
+    "relativePath": "client/src/config/adminRegistryV2.ts",
+    "preimageState": "present",
+    "preimageSha256": "373DAFC241D471E6E5009BC928574582D7B1933BDDDE145CCB5D8BD7443643E3",
+    "preimageBytes": 31361,
+    "postimageSha256": "7C9AF0EC370E8F28A1660DA65D64B2C673AE6419B1BC24EEEBB0C5A51E2065A9",
+    "postimageBytes": 31364
+  },
+  {
+    "relativePath": "client/src/components/admin/AdminSidebarV2.tsx",
+    "preimageState": "present",
+    "preimageSha256": "31437A00F0B666347D5BCAC851E550C4EBAF57C7BDE59A04447346D67C851144",
+    "preimageBytes": 10815,
+    "postimageSha256": "95D8464F98530DDF944033F46B01220E42452EBD7FB974E9D5E3AE52CA6FBBEC",
+    "postimageBytes": 10812
+  },
+  {
+    "relativePath": "client/src/pages/AdminDashboard.tsx",
+    "preimageState": "present",
+    "preimageSha256": "18C225B451EFF77E095BCB101B26391BD8A87D5B13CB1DB1F0E6CE4F3342FE57",
+    "preimageBytes": 19838,
+    "postimageSha256": "8F561F29B5BC6943C3AEBB76D7FEF0A33C4A623E4D066AAE2B7A1FD0B9E1D5B3",
+    "postimageBytes": 22587
+  },
+  {
+    "relativePath": "client/src/pages/AITools.tsx",
+    "preimageState": "present",
+    "preimageSha256": "BD5C34ECC90BCDCF3FB7C5B71307C83197326E183AC747F194C0E0E642A72E87",
+    "preimageBytes": 14608,
+    "postimageSha256": "5D0E55BA1C95A44A014E889439D1BB827366B50D792F4D62B8BEB450B39EF2D3",
+    "postimageBytes": 15155
+  },
+  {
+    "relativePath": "client/src/pages/AIToolRuns.tsx",
+    "preimageState": "present",
+    "preimageSha256": "6D136F4636F6E4396BB0CBC17B397E5325DA0288F43581F341B10947A8F15322",
+    "preimageBytes": 20928,
+    "postimageSha256": "E4ED22CEBFF45F9B67CEE9E6A0EBE30413FE3B95B0D4C37582B45AC34A115AC4",
+    "postimageBytes": 21884
+  },
+  {
+    "relativePath": "client/src/pages/admin/ToolOutputIntake.tsx",
+    "preimageState": "present",
+    "preimageSha256": "BC59B86433BCA7D0B0D6B3297800994491105180A7F57C0350191C20D672B9AF",
+    "preimageBytes": 7516,
+    "postimageSha256": "904A3D170696EAC3C7574B65EED07EFE59EE2AFFAF8732FC1F6045C31C830D1E",
+    "postimageBytes": 8333
+  },
+  {
+    "relativePath": "client/src/pages/admin/KnowledgeOperationsWorkspace.tsx",
+    "preimageState": "present",
+    "preimageSha256": "F3DA17E15328C7F8682C297B9C6EA481D14C613ADE8456279F8818E165451609",
+    "preimageBytes": 6689,
+    "postimageSha256": "E7C354F142124CEE8B38B1DB58026FAA4E2F8782E844B59EA2D9A10522B4F41D",
+    "postimageBytes": 7212
+  },
+  {
+    "relativePath": "client/src/pages/admin/KnowledgeActivationCenter.tsx",
+    "preimageState": "present",
+    "preimageSha256": "143B5B2E3A0BA54C554653CED692F40CF6AD8FD9A3F02AE4F8A43C85BD261123",
+    "preimageBytes": 11927,
+    "postimageSha256": "1E808547220341AB9D441BCDD65B4B2445CF6E4BFD5CC9EBB0107E481667FA41",
+    "postimageBytes": 12058
+  },
+  {
+    "relativePath": "client/src/pages/admin/SourceInventoryPreview.tsx",
+    "preimageState": "absent",
+    "preimageSha256": null,
+    "preimageBytes": 0,
+    "postimageSha256": "571A5B647352142CF95FA9A5C4EC9DD6226321153F21D3C6E79D99722FD79196",
+    "postimageBytes": 15426
+  }
+]

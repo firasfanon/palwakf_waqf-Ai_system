@@ -1,0 +1,21 @@
+{
+  "batch": "Knowledge Batch 08 — Legacy DB Staging Import + P1 Data Promotion Pack",
+  "date": "2026-06-19",
+  "base_baseline": "v56",
+  "new_baseline": "v57",
+  "operator_apply_live_db_executed_in_chatgpt_sandbox": false,
+  "primary_stage_payloads_from_kb07": 929,
+  "supplemental_observed_select_rows": 74,
+  "stage_batch_key": "knowledge_batch_08",
+  "supplemental_stage_batch_key": "knowledge_batch_08_observed_rows",
+  "p1_total_rows_from_kb07_payloads": 893,
+  "p1_knowledge_reference_candidates": 876,
+  "p1_auxiliary_candidates": 17,
+  "review_or_domain_mapped_payloads": 36,
+  "decision": "KNOWLEDGE_BATCH_08_OPERATOR_STAGING_AND_P1_PROMOTION_PACK_PREPARED_LIVE_APPLY_PENDING",
+  "notes": [
+    "The full 929-payload staging SQL is generated under knowledge_batch_08 to avoid mutating the KB07 audit record.",
+    "P1 promotion is idempotent by legacy key/title checks and should be run only after the staging SQL succeeds.",
+    "Runtime page binding is intentionally deferred to Knowledge Batch 09."
+  ]
+}

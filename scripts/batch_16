@@ -1,0 +1,10 @@
+INSERT INTO knowledge_documents (title, content, source, category, tags, isActive, createdAt, updatedAt) VALUES ('وقف أبو مدين الغوث - القدس', 'وقف أبو مدين الغوث من أقدم الأوقاف في القدس، ويشمل عقارات ومساجد ومدارس، وتعرض للاستيلاء الإسرائيلي.', 'أوقاف القدس التاريخية', 'historical', 'أبو مدين، الأوقاف، القدس', 1, FROM_UNIXTIME(1767919372), FROM_UNIXTIME(1767919372));
+
+INSERT INTO knowledge_documents (title, content, source, category, tags, isActive, createdAt, updatedAt) VALUES ('الفقه المالكي - تعريف الوقف', 'الوقف في المذهب المالكي هو جعل المنفعة للموقوف عليه ولو في المآل، مع بقاء العين على ملك الواقف أو على حكم ملكه.', 'الفقه المالكي - كتاب الوقف', 'jurisprudence', 'الفقه المالكي، تعريف الوقف، المنفعة', 1, FROM_UNIXTIME(1767919372), FROM_UNIXTIME(1767919372));
+
+INSERT INTO knowledge_documents (title, content, source, category, tags, isActive, createdAt, updatedAt) VALUES ('الفقه الشافعي - تعريف الوقف', 'الوقف في المذهب الشافعي هو حبس مال يمكن الانتفاع به مع بقاء عينه، بقطع التصرف في رقبته على مصرف مباح موجود.', 'الفقه الشافعي - كتاب الوقف', 'jurisprudence', 'الفقه الشافعي، تعريف الوقف، حبس المال', 1, FROM_UNIXTIME(1767919372), FROM_UNIXTIME(1767919372));
+
+INSERT INTO knowledge_documents (title, content, source, category, tags, isActive, createdAt, updatedAt) VALUES ('الفقه الحنبلي - تعريف الوقف', 'الوقف في المذهب الحنبلي هو تحبيس الأصل وتسبيل المنفعة، فتحبس العين ويسبل نفعها في سبيل الخير.', 'الفقه الحنبلي - كتاب الوقف', 'jurisprudence', 'الفقه الحنبلي، تعريف الوقف، تحبيس الأصل', 1, FROM_UNIXTIME(1767919372), FROM_UNIXTIME(1767919372));
+
+INSERT INTO knowledge_documents (title, content, source, category, tags, isActive, createdAt, updatedAt) VALUES ('شروط الموقوف - الفقه الإسلامي', 'يشترط في الموقوف أن يكون مالاً متقوماً يمكن الانتفاع به مع بقاء عينه، كالعقار والحيوان والكتب.', 'الفقه الإسلامي العام', 'jurisprudence', 'شروط الموقوف، المال المتقوم، الانتفاع', 1, FROM_UNIXTIME(1767919372), FROM_UNIXTIME(1767919372));
+

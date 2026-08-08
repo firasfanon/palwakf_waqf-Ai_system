@@ -1,0 +1,15 @@
+PASS :: Mega Batch A static verification retained
+PASS :: Mega Batch B static verification retained
+PASS :: Mega Batch B runtime closure verification retained
+PASS :: admin layout owns mobile sidebar state
+PASS :: admin layout renders mobile menu button
+PASS :: admin layout renders mobile scrim
+PASS :: admin sidebar accepts mobile props
+PASS :: admin sidebar exposes mobile open state
+PASS :: admin sidebar has mobile close action
+PASS :: admin mobile media query exists
+PASS :: mobile sidebar removed from document flow
+PASS :: mobile sidebar opens via transform
+PASS :: mobile content owns full viewport width
+PASS :: mobile page prevents horizontal clipping
+ADMIN_SHELL_MOBILE_RESPONSIVENESS_STATIC_VERIFICATION=PASS

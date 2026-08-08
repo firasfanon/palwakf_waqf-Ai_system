@@ -1,0 +1,660 @@
+PS C:\> $ErrorActionPreference = "Stop"
+PS C:\>
+PS C:\> $downloads = "C:\Users\DELL\Downloads"
+PS C:\> $expectedSha = "4A30E2C457D978629B9E61EBB63B0842829AD4DCAA7387FBBB0FD39647DB74C4"
+PS C:\>
+PS C:\> $zip = Get-ChildItem -LiteralPath $downloads -Filter "*.zip" -File |
+>>     Where-Object {
+>>         (Get-FileHash -LiteralPath $_.FullName -Algorithm SHA256).Hash.ToUpperInvariant() -eq $expectedSha
+>>     } |
+>>     Select-Object -First 1
+PS C:\>
+PS C:\> if (-not $zip) {
+>>     throw "TARGETED_SOURCE_CAPTURE_PACKAGE_NOT_FOUND"
+>> }
+PS C:\>
+PS C:\> $pkgWave1Targeted = Join-Path $downloads `
+>>     "PALWAKF_ASSISTANT_PRODUCT_SURFACES_WAVE_1_TARGETED_SOURCE_CAPTURE_V1_20260716"
+PS C:\>
+PS C:\> if (Test-Path -LiteralPath $pkgWave1Targeted) {
+>>     Remove-Item -LiteralPath $pkgWave1Targeted -Recurse -Force
+>> }
+PS C:\>
+PS C:\> Expand-Archive `
+>>     -LiteralPath $zip.FullName `
+>>     -DestinationPath $pkgWave1Targeted `
+>>     -Force
+PS C:\>
+PS C:\> Write-Host "PACKAGE_EXTRACTION=PASS"
+PACKAGE_EXTRACTION=PASS
+PS C:\> Write-Host "PACKAGE_ROOT=$pkgWave1Targeted"
+PACKAGE_ROOT=C:\Users\DELL\Downloads\PALWAKF_ASSISTANT_PRODUCT_SURFACES_WAVE_1_TARGETED_SOURCE_CAPTURE_V1_20260716
+PS C:\> & "$pkgWave1Targeted\RUN_00_HARNESS_SELF_TEST.cmd"
+POWERSHELL_VERSION=5.1.26100.8875
+POWERSHELL_EDITION=Desktop
+PACKAGE_HASH_VALIDATION=PASS
+PARAM_BLOCK_POSITION=PASS
+ACTIVE_CLIENT_SOURCE_CAPTURE_CONTRACT=PASS
+PREIMAGE_MANIFEST_CONTRACT=PASS
+EVIDENCE_DESTINATION_GUARD=PASS
+NO_PROJECT_SOURCE_MUTATION=PASS
+NO_DATABASE_ACCESS=PASS
+NO_NETWORK_ACCESS=PASS
+HARNESS_SELF_TEST=PASS
+HARNESS_SELF_TEST_EXIT_CODE=0
+PS C:\>
+PS C:\> $harnessExitCode = $LASTEXITCODE
+PS C:\>
+PS C:\> Write-Host "HARNESS_WRAPPER_EXIT_CODE=$harnessExitCode"
+HARNESS_WRAPPER_EXIT_CODE=0
+PS C:\>
+PS C:\> if ($harnessExitCode -ne 0) {
+>>     throw "TARGETED_SOURCE_CAPTURE_HARNESS_FAILED"
+>> }
+PS C:\> & "$pkgWave1Targeted\RUN_01_TARGETED_SOURCE_CAPTURE.cmd"
+PRODUCT_SURFACES_TARGETED_SOURCE_CAPTURE=PASS
+PROJECT_SOURCE_WRITE=NO
+DATABASE_ACCESS=NO
+NETWORK_ACCESS=NO
+BUILD_EXECUTION=NO
+TEST_EXECUTION=NO
+CAPTURED_FILE_COUNT=249
+EVIDENCE_ROOT=C:\Users\DELL\Downloads\PALWAKF_ASSISTANT_PRODUCT_SURFACES_WAVE_1_TARGETED_SOURCE_CAPTURE_V1_20260716\evidence\PRODUCT_SURFACES_WAVE_1_TARGETED_CAPTURE_20260716_011706
+EVIDENCE_ZIP=C:\Users\DELL\Downloads\PALWAKF_ASSISTANT_PRODUCT_SURFACES_WAVE_1_TARGETED_SOURCE_CAPTURE_V1_20260716\evidence\PRODUCT_SURFACES_WAVE_1_TARGETED_CAPTURE_20260716_011706.zip
+TARGETED_SOURCE_CAPTURE_EXIT_CODE=0
+PS C:\>
+PS C:\> $captureExitCode = $LASTEXITCODE
+PS C:\>
+PS C:\> Write-Host "TARGETED_SOURCE_CAPTURE_WRAPPER_EXIT_CODE=$captureExitCode"
+TARGETED_SOURCE_CAPTURE_WRAPPER_EXIT_CODE=0
+PS C:\>
+PS C:\> if ($captureExitCode -ne 0) {
+>>     throw "TARGETED_SOURCE_CAPTURE_FAILED"
+>> }
+PS C:\> $ErrorActionPreference = "Stop"
+PS C:\>
+PS C:\> $downloads = "C:\Users\DELL\Downloads"
+PS C:\> $expectedSha = "674E6DC8A620EF66D5ED16E194B7697526DCC619A7EAB1BCF893A7AA5A1DD0E6"
+PS C:\>
+PS C:\> $zip = Get-ChildItem -LiteralPath $downloads -Filter "*.zip" -File |
+>>     Where-Object {
+>>         (Get-FileHash -LiteralPath $_.FullName -Algorithm SHA256).Hash.ToUpperInvariant() -eq $expectedSha
+>>     } |
+>>     Select-Object -First 1
+PS C:\>
+PS C:\> if (-not $zip) {
+>>     throw "PRODUCT_SURFACES_WAVE_1_PACKAGE_NOT_FOUND"
+>> }
+PS C:\>
+PS C:\> $pkgWave1 = Join-Path $downloads `
+>>     "PALWAKF_ASSISTANT_PRODUCT_SURFACES_COMPLETION_AND_OPERATIONAL_NAVIGATION_WAVE_1_V1_20260716"
+PS C:\>
+PS C:\> if (Test-Path -LiteralPath $pkgWave1) {
+>>     Remove-Item -LiteralPath $pkgWave1 -Recurse -Force
+>> }
+PS C:\>
+PS C:\> Expand-Archive `
+>>     -LiteralPath $zip.FullName `
+>>     -DestinationPath $pkgWave1 `
+>>     -Force
+PS C:\>
+PS C:\> Write-Host "PACKAGE_EXTRACTION=PASS"
+PACKAGE_EXTRACTION=PASS
+PS C:\> Write-Host "PACKAGE_ROOT=$pkgWave1"
+PACKAGE_ROOT=C:\Users\DELL\Downloads\PALWAKF_ASSISTANT_PRODUCT_SURFACES_COMPLETION_AND_OPERATIONAL_NAVIGATION_WAVE_1_V1_20260716
+PS C:\> & "$pkgWave1\RUN_00_HARNESS_SELF_TEST.cmd"
+POWERSHELL_VERSION=5.1.26100.8875
+POWERSHELL_EDITION=Desktop
+PACKAGE_HASH_VALIDATION=PASS
+TARGET_COUNT=10
+PREIMAGE_GUARD_CONTRACT=PASS
+POSTIMAGE_HASH_CONTRACT=PASS
+WHATIF_NO_PROJECT_WRITE=PASS
+APPLY_BACKUP_AND_AUTO_ROLLBACK=PASS
+LOCAL_MANUS_PREVIEW_NO_NETWORK_OR_PERSISTENCE=PASS
+DATABASE_CHANGE=NO
+SERVER_API_CHANGE=NO
+HARNESS_SELF_TEST=PASS
+HARNESS_SELF_TEST_EXIT_CODE=0
+PS C:\>
+PS C:\> $harnessExitCode = $LASTEXITCODE
+PS C:\>
+PS C:\> Write-Host "HARNESS_WRAPPER_EXIT_CODE=$harnessExitCode"
+HARNESS_WRAPPER_EXIT_CODE=0
+PS C:\>
+PS C:\> if ($harnessExitCode -ne 0) {
+>>     throw "PRODUCT_SURFACES_WAVE_1_HARNESS_FAILED"
+>> }
+PS C:\> & "$pkgWave1\RUN_01_WHATIF.cmd"
+PRODUCT_SURFACES_WAVE_1_WHATIF_START
+PROJECT_ROOT=D:\waqf_ai_model
+PACKAGE_POSTIMAGE_HASHES=PASS
+PROJECT_PREIMAGE_HASHES=PASS
+ROUTE_CONSTANT_ADMINTOOLSOUTPUTINTAKE=PASS
+ROUTE_CONSTANT_ADMINKNOWLEDGEWORKSPACE=PASS
+ROUTE_CONSTANT_ADMINKNOWLEDGEREVIEWOPERATIONS=PASS
+ROUTE_CONSTANT_ADMINKNOWLEDGEACTIVATION=PASS
+ROUTE_CONSTANT_ADMINSOURCEPROVENANCERIGHTS=PASS
+ROUTE_CONSTANT_ADMINSOURCEINVENTORYPREVIEW=PASS
+SOURCE_INVENTORY_PREVIEW_IMPORT=PASS
+SOURCE_INVENTORY_PREVIEW_ROUTE_BINDING=PASS
+SMART_OPERATION_SECTION_RENAMED=PASS
+SMART_TOOLS_PARENT_RENAMED=PASS
+SIDEBAR_ITEM_KEY_USES_HREF=PASS
+SIDEBAR_CHILD_KEY_USES_HREF=PASS
+SIDEBAR_TITLE_KEY_REMOVED=PASS
+DASHBOARD_OPERATIONAL_ACTIONS=PASS
+DASHBOARD_ACTION_KEY_UNIQUE=PASS
+DASHBOARD_DUPLICATE_SMART_TOOLS_ACTION_REMOVED=PASS
+DASHBOARD_NONFUNCTIONAL_PDF_CONTROL_REMOVED=PASS
+DASHBOARD_REFRESH_CONNECTED=PASS
+DASHBOARD_OPERATIONAL_METRICS_CONNECTED=PASS
+SMART_TOOL_CLASSIFY_ROUTE=PASS
+SMART_TOOL_EXTRACT_ROUTE=PASS
+SMART_TOOL_SUMMARIZE_ROUTE=PASS
+SMART_TOOL_COMPARE_ROUTE=PASS
+SMART_TOOL_PRECEDENTS_ROUTE=PASS
+SMART_TOOL_PREDICT_ROUTE=PASS
+TOOLS_OUTPUT_INTAKE_LINK=PASS
+TOOLS_KNOWLEDGE_WORKSPACE_LINK=PASS
+TOOLS_CARD_KEY_USES_ROUTE=PASS
+RUNS_DEEP_LINK_READER=PASS
+RUNS_DEEP_LINK_WRITER=PASS
+RUNS_OUTPUT_INTAKE_LINK=PASS
+OUTPUT_INTAKE_RUN_DEEP_LINK=PASS
+OUTPUT_INTAKE_KNOWLEDGE_LINK=PASS
+KNOWLEDGE_WORKSPACE_LIVE_SOURCE_COUNT=PASS
+KNOWLEDGE_WORKSPACE_MANUS_PREVIEW_LINK=PASS
+ACTIVATION_STAGING_COPY_REMOVED=PASS
+ACTIVATION_CENTRAL_ROUTES=PASS
+PREVIEW_MARKER_LOCAL_MEMORY_ONLY=PASS
+PREVIEW_MARKER_NO_DATABASE_WRITE=PASS
+PREVIEW_MARKER_NO_AUTOMATIC_APPROVAL=PASS
+PREVIEW_MARKER_PUBLIC_DOMAIN=PASS
+PREVIEW_MARKER_OPEN_LICENSE=PASS
+PREVIEW_MARKER_RIGHTS_UNCLEAR=PASS
+PREVIEW_MARKER_NOT_VERIFIED=PASS
+PREVIEW_LOCAL_FILE_READ=PASS
+PREVIEW_FORBIDDEN_trpc_=PASS
+PREVIEW_FORBIDDEN_fetch_=PASS
+PREVIEW_FORBIDDEN_axios=PASS
+PREVIEW_FORBIDDEN_XMLHttpRequest=PASS
+PREVIEW_FORBIDDEN_WebSocket=PASS
+PREVIEW_FORBIDDEN_localStorage=PASS
+PREVIEW_FORBIDDEN_sessionStorage=PASS
+REGISTRY_ROUTE_DUPLICATION=PASS
+STATIC_ASSERTION_COUNT=53
+PRODUCT_SURFACES_WAVE_1_STATIC_VERIFY=PASS
+DATABASE_CHANGE=NO
+SERVER_API_CHANGE=NO
+CHAT_RELEASE=NO
+PRODUCTION=NO
+TARGET_FILE_COUNT=10
+PROJECT_SOURCE_WRITE=NO
+DATABASE_WRITE=NO
+SERVER_API_CHANGE=NO
+CHAT_RELEASE=NO
+PRODUCTION=NO
+STOP_BEFORE_APPLY=YES
+PRODUCT_SURFACES_WAVE_1_WHATIF=PASS
+WHATIF_EXIT_CODE=0
+PS C:\>
+PS C:\> $whatIfExitCode = $LASTEXITCODE
+PS C:\>
+PS C:\> Write-Host "WHATIF_WRAPPER_EXIT_CODE=$whatIfExitCode"
+WHATIF_WRAPPER_EXIT_CODE=0
+PS C:\>
+PS C:\> if ($whatIfExitCode -ne 0) {
+>>     throw "PRODUCT_SURFACES_WAVE_1_WHATIF_FAILED"
+>> }
+PS C:\> $ErrorActionPreference = "Stop"
+PS C:\>
+PS C:\> $env:PALWAKF_ASSISTANT_PRODUCT_SURFACES_WAVE_1_APPLY_APPROVED = "YES"
+PS C:\>
+PS C:\> & "$pkgWave1\RUN_02_APPLY.cmd"
+PRODUCT_SURFACES_WAVE_1_APPLY_START
+BACKUP_ROOT=D:\PALWAKF_ASSISTANT_BASELINES\PRODUCT_SURFACES_WAVE_1_BACKUPS\PRODUCT_SURFACES_WAVE_1_20260716_014209
+APPLIED=client/src/lib/appRoutes.ts
+APPLIED=client/src/config/adminRegistryV2.ts
+APPLIED=client/src/components/admin/AdminSidebarV2.tsx
+APPLIED=client/src/pages/AdminDashboard.tsx
+APPLIED=client/src/pages/AITools.tsx
+APPLIED=client/src/pages/AIToolRuns.tsx
+APPLIED=client/src/pages/admin/ToolOutputIntake.tsx
+APPLIED=client/src/pages/admin/KnowledgeOperationsWorkspace.tsx
+APPLIED=client/src/pages/admin/KnowledgeActivationCenter.tsx
+APPLIED=client/src/pages/admin/SourceInventoryPreview.tsx
+PROJECT_POSTIMAGE_HASHES=PASS
+ROUTE_CONSTANT_ADMINTOOLSOUTPUTINTAKE=PASS
+ROUTE_CONSTANT_ADMINKNOWLEDGEWORKSPACE=PASS
+ROUTE_CONSTANT_ADMINKNOWLEDGEREVIEWOPERATIONS=PASS
+ROUTE_CONSTANT_ADMINKNOWLEDGEACTIVATION=PASS
+ROUTE_CONSTANT_ADMINSOURCEPROVENANCERIGHTS=PASS
+ROUTE_CONSTANT_ADMINSOURCEINVENTORYPREVIEW=PASS
+SOURCE_INVENTORY_PREVIEW_IMPORT=PASS
+SOURCE_INVENTORY_PREVIEW_ROUTE_BINDING=PASS
+SMART_OPERATION_SECTION_RENAMED=PASS
+SMART_TOOLS_PARENT_RENAMED=PASS
+SIDEBAR_ITEM_KEY_USES_HREF=PASS
+SIDEBAR_CHILD_KEY_USES_HREF=PASS
+SIDEBAR_TITLE_KEY_REMOVED=PASS
+DASHBOARD_OPERATIONAL_ACTIONS=PASS
+DASHBOARD_ACTION_KEY_UNIQUE=PASS
+DASHBOARD_DUPLICATE_SMART_TOOLS_ACTION_REMOVED=PASS
+DASHBOARD_NONFUNCTIONAL_PDF_CONTROL_REMOVED=PASS
+DASHBOARD_REFRESH_CONNECTED=PASS
+DASHBOARD_OPERATIONAL_METRICS_CONNECTED=PASS
+SMART_TOOL_CLASSIFY_ROUTE=PASS
+SMART_TOOL_EXTRACT_ROUTE=PASS
+SMART_TOOL_SUMMARIZE_ROUTE=PASS
+SMART_TOOL_COMPARE_ROUTE=PASS
+SMART_TOOL_PRECEDENTS_ROUTE=PASS
+SMART_TOOL_PREDICT_ROUTE=PASS
+TOOLS_OUTPUT_INTAKE_LINK=PASS
+TOOLS_KNOWLEDGE_WORKSPACE_LINK=PASS
+TOOLS_CARD_KEY_USES_ROUTE=PASS
+RUNS_DEEP_LINK_READER=PASS
+RUNS_DEEP_LINK_WRITER=PASS
+RUNS_OUTPUT_INTAKE_LINK=PASS
+OUTPUT_INTAKE_RUN_DEEP_LINK=PASS
+OUTPUT_INTAKE_KNOWLEDGE_LINK=PASS
+KNOWLEDGE_WORKSPACE_LIVE_SOURCE_COUNT=PASS
+KNOWLEDGE_WORKSPACE_MANUS_PREVIEW_LINK=PASS
+ACTIVATION_STAGING_COPY_REMOVED=PASS
+ACTIVATION_CENTRAL_ROUTES=PASS
+PREVIEW_MARKER_LOCAL_MEMORY_ONLY=PASS
+PREVIEW_MARKER_NO_DATABASE_WRITE=PASS
+PREVIEW_MARKER_NO_AUTOMATIC_APPROVAL=PASS
+PREVIEW_MARKER_PUBLIC_DOMAIN=PASS
+PREVIEW_MARKER_OPEN_LICENSE=PASS
+PREVIEW_MARKER_RIGHTS_UNCLEAR=PASS
+PREVIEW_MARKER_NOT_VERIFIED=PASS
+PREVIEW_LOCAL_FILE_READ=PASS
+PREVIEW_FORBIDDEN_trpc_=PASS
+PREVIEW_FORBIDDEN_fetch_=PASS
+PREVIEW_FORBIDDEN_axios=PASS
+PREVIEW_FORBIDDEN_XMLHttpRequest=PASS
+PREVIEW_FORBIDDEN_WebSocket=PASS
+PREVIEW_FORBIDDEN_localStorage=PASS
+PREVIEW_FORBIDDEN_sessionStorage=PASS
+REGISTRY_ROUTE_DUPLICATION=PASS
+STATIC_ASSERTION_COUNT=53
+PRODUCT_SURFACES_WAVE_1_STATIC_VERIFY=PASS
+DATABASE_CHANGE=NO
+SERVER_API_CHANGE=NO
+CHAT_RELEASE=NO
+PRODUCTION=NO
+TARGET_FILE_COUNT=10
+DATABASE_WRITE=NO
+SERVER_API_CHANGE=NO
+CHAT_RELEASE=NO
+PRODUCTION=NO
+PRODUCT_SURFACES_WAVE_1_APPLY=PASS
+APPLY_EXIT_CODE=0
+PS C:\>
+PS C:\> $applyExitCode = $LASTEXITCODE
+PS C:\>
+PS C:\> Write-Host "APPLY_WRAPPER_EXIT_CODE=$applyExitCode"
+APPLY_WRAPPER_EXIT_CODE=0
+PS C:\>
+PS C:\> if ($applyExitCode -ne 0) {
+>>     throw "PRODUCT_SURFACES_WAVE_1_APPLY_FAILED"
+>> }
+PS C:\> & "$pkgWave1\RUN_03_TARGETED_VERIFY.cmd"
+PROJECT_POSTIMAGE_HASHES=PASS
+ROUTE_CONSTANT_ADMINTOOLSOUTPUTINTAKE=PASS
+ROUTE_CONSTANT_ADMINKNOWLEDGEWORKSPACE=PASS
+ROUTE_CONSTANT_ADMINKNOWLEDGEREVIEWOPERATIONS=PASS
+ROUTE_CONSTANT_ADMINKNOWLEDGEACTIVATION=PASS
+ROUTE_CONSTANT_ADMINSOURCEPROVENANCERIGHTS=PASS
+ROUTE_CONSTANT_ADMINSOURCEINVENTORYPREVIEW=PASS
+SOURCE_INVENTORY_PREVIEW_IMPORT=PASS
+SOURCE_INVENTORY_PREVIEW_ROUTE_BINDING=PASS
+SMART_OPERATION_SECTION_RENAMED=PASS
+SMART_TOOLS_PARENT_RENAMED=PASS
+SIDEBAR_ITEM_KEY_USES_HREF=PASS
+SIDEBAR_CHILD_KEY_USES_HREF=PASS
+SIDEBAR_TITLE_KEY_REMOVED=PASS
+DASHBOARD_OPERATIONAL_ACTIONS=PASS
+DASHBOARD_ACTION_KEY_UNIQUE=PASS
+DASHBOARD_DUPLICATE_SMART_TOOLS_ACTION_REMOVED=PASS
+DASHBOARD_NONFUNCTIONAL_PDF_CONTROL_REMOVED=PASS
+DASHBOARD_REFRESH_CONNECTED=PASS
+DASHBOARD_OPERATIONAL_METRICS_CONNECTED=PASS
+SMART_TOOL_CLASSIFY_ROUTE=PASS
+SMART_TOOL_EXTRACT_ROUTE=PASS
+SMART_TOOL_SUMMARIZE_ROUTE=PASS
+SMART_TOOL_COMPARE_ROUTE=PASS
+SMART_TOOL_PRECEDENTS_ROUTE=PASS
+SMART_TOOL_PREDICT_ROUTE=PASS
+TOOLS_OUTPUT_INTAKE_LINK=PASS
+TOOLS_KNOWLEDGE_WORKSPACE_LINK=PASS
+TOOLS_CARD_KEY_USES_ROUTE=PASS
+RUNS_DEEP_LINK_READER=PASS
+RUNS_DEEP_LINK_WRITER=PASS
+RUNS_OUTPUT_INTAKE_LINK=PASS
+OUTPUT_INTAKE_RUN_DEEP_LINK=PASS
+OUTPUT_INTAKE_KNOWLEDGE_LINK=PASS
+KNOWLEDGE_WORKSPACE_LIVE_SOURCE_COUNT=PASS
+KNOWLEDGE_WORKSPACE_MANUS_PREVIEW_LINK=PASS
+ACTIVATION_STAGING_COPY_REMOVED=PASS
+ACTIVATION_CENTRAL_ROUTES=PASS
+PREVIEW_MARKER_LOCAL_MEMORY_ONLY=PASS
+PREVIEW_MARKER_NO_DATABASE_WRITE=PASS
+PREVIEW_MARKER_NO_AUTOMATIC_APPROVAL=PASS
+PREVIEW_MARKER_PUBLIC_DOMAIN=PASS
+PREVIEW_MARKER_OPEN_LICENSE=PASS
+PREVIEW_MARKER_RIGHTS_UNCLEAR=PASS
+PREVIEW_MARKER_NOT_VERIFIED=PASS
+PREVIEW_LOCAL_FILE_READ=PASS
+PREVIEW_FORBIDDEN_trpc_=PASS
+PREVIEW_FORBIDDEN_fetch_=PASS
+PREVIEW_FORBIDDEN_axios=PASS
+PREVIEW_FORBIDDEN_XMLHttpRequest=PASS
+PREVIEW_FORBIDDEN_WebSocket=PASS
+PREVIEW_FORBIDDEN_localStorage=PASS
+PREVIEW_FORBIDDEN_sessionStorage=PASS
+REGISTRY_ROUTE_DUPLICATION=PASS
+STATIC_ASSERTION_COUNT=53
+PRODUCT_SURFACES_WAVE_1_STATIC_VERIFY=PASS
+DATABASE_CHANGE=NO
+SERVER_API_CHANGE=NO
+CHAT_RELEASE=NO
+PRODUCTION=NO
+[EPERM] EPERM: operation not permitted, open 'C:\_tmp_7900_b4e4aadc0e7b1a6f86c44073267a7279'
+
+
+
+[ERROR] Command failed with exit code 4294963248: "D:\Program Files\nodejs\node.exe" "C:\Users\DELL\AppData\Local\node\corepack\v1\pnpm\11.7.0\bin\pnpm.mjs" install
+
+pnpm: Command failed with exit code 4294963248: "D:\Program Files\nodejs\node.exe" "C:\Users\DELL\AppData\Local\node\corepack\v1\pnpm\11.7.0\bin\pnpm.mjs" install
+    at getFinalError (file:///C:/Users/DELL/AppData/Local/node/corepack/v1/pnpm/11.7.0/dist/pnpm.mjs:34109:14)
+    at makeError (file:///C:/Users/DELL/AppData/Local/node/corepack/v1/pnpm/11.7.0/dist/pnpm.mjs:36416:21)
+    at getSyncResult (file:///C:/Users/DELL/AppData/Local/node/corepack/v1/pnpm/11.7.0/dist/pnpm.mjs:38260:10)
+    at spawnSubprocessSync (file:///C:/Users/DELL/AppData/Local/node/corepack/v1/pnpm/11.7.0/dist/pnpm.mjs:38220:14)
+    at execaCoreSync (file:///C:/Users/DELL/AppData/Local/node/corepack/v1/pnpm/11.7.0/dist/pnpm.mjs:38150:23)
+    at callBoundExeca (file:///C:/Users/DELL/AppData/Local/node/corepack/v1/pnpm/11.7.0/dist/pnpm.mjs:40678:23)
+    at boundExeca (file:///C:/Users/DELL/AppData/Local/node/corepack/v1/pnpm/11.7.0/dist/pnpm.mjs:40655:49)
+    at sync (file:///C:/Users/DELL/AppData/Local/node/corepack/v1/pnpm/11.7.0/dist/pnpm.mjs:40814:10)
+    at runPnpmCli (file:///C:/Users/DELL/AppData/Local/node/corepack/v1/pnpm/11.7.0/dist/pnpm.mjs:245099:5)
+    at runDepsStatusCheck (file:///C:/Users/DELL/AppData/Local/node/corepack/v1/pnpm/11.7.0/dist/pnpm.mjs:246833:7)
+ESBUILD_PARSE_FAILED::client/src/pages/admin/SourceInventoryPreview.tsx::1
+At C:\Users\DELL\Downloads\PALWAKF_ASSISTANT_PRODUCT_SURFACES_COMPLETION_AND_OPERATIONAL_NAVIGATION_WAVE_1_V1_20260716\03_TARGETED_VERIFY.ps1:66 char:7
++       throw "ESBUILD_PARSE_FAILED::$relativePath::$LASTEXITCODE"
++       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : OperationStopped: (ESBUILD_PARSE_F...yPreview.tsx::1:String) [], RuntimeException
+    + FullyQualifiedErrorId : ESBUILD_PARSE_FAILED::client/src/pages/admin/SourceInventoryPreview.tsx::1
+
+TARGETED_VERIFY_EXIT_CODE=1
+PS C:\>
+PS C:\> $targetedVerifyExitCode = $LASTEXITCODE
+PS C:\>
+PS C:\> Write-Host "TARGETED_VERIFY_WRAPPER_EXIT_CODE=$targetedVerifyExitCode"
+TARGETED_VERIFY_WRAPPER_EXIT_CODE=1
+PS C:\>
+PS C:\> if ($targetedVerifyExitCode -ne 0) {
+>>     throw "PRODUCT_SURFACES_WAVE_1_TARGETED_VERIFY_FAILED"
+>> }
+PRODUCT_SURFACES_WAVE_1_TARGETED_VERIFY_FAILED
+At line:2 char:5
++     throw "PRODUCT_SURFACES_WAVE_1_TARGETED_VERIFY_FAILED"
++     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : OperationStopped: (PRODUCT_SURFACE...D_VERIFY_FAILED:String) [], RuntimeException
+    + FullyQualifiedErrorId : PRODUCT_SURFACES_WAVE_1_TARGETED_VERIFY_FAILED
+
+PS C:\> & "$pkgWave1\RUN_04_FULL_PROJECT_GATES.cmd"
+FULL_PROJECT_TYPESCRIPT_CHECK_START
+
+> waqf_ai_model@1.0.0 check D:\waqf_ai_model
+> tsc --noEmit
+
+FULL_PROJECT_TYPESCRIPT_CHECK_EXIT_CODE=0
+FULL_PROJECT_TEST_START
+
+> waqf_ai_model@1.0.0 test D:\waqf_ai_model
+> vitest run
+
+
+ RUN  v2.1.9 D:/waqf_ai_model
+
+ ظإ» server/interaction-analytics.test.ts (14 tests | 14 failed) 18ms
+   ├ù Interaction Analytics > getInteractionStats > should return interaction statistics 7ms
+     ظْ Database not available
+   ├ù Interaction Analytics > getCommentsOverTime > should return comments over time (last 30 days) 1ms
+     ظْ Database not available
+   ├ù Interaction Analytics > getCommentsOverTime > should return data within last 30 days 1ms
+     ظْ Database not available
+   ├ù Interaction Analytics > getRatingsDistribution > should return ratings distribution (1-5 stars) 1ms
+     ظْ Database not available
+   ├ù Interaction Analytics > getNotificationsByType > should return notifications by type 1ms
+     ظْ Database not available
+   ├ù Interaction Analytics > getRecentComments > should return recent comments (last 20) 1ms
+     ظْ Database not available
+   ├ù Interaction Analytics > getRecentComments > should return comments in descending order by date 0ms
+     ظْ Database not available
+   ├ù Interaction Analytics > getCommentsByEntityType > should return comments grouped by entity type 0ms
+     ظْ Database not available
+   ├ù Interaction Analytics > getRatingsByEntityType > should return ratings grouped by entity type with average 0ms
+     ظْ Database not available
+   ├ù Admin Notifications > getAdminUsers > should return list of admin users 1ms
+     ظْ Database not available
+   ├ù Admin Notifications > createAdminNotification > should create notification for all admins 1ms
+     ظْ Database not available
+   ├ù Admin Notifications > notifyAdminsNewComment > should notify admins about new comment 1ms
+     ظْ Database not available
+   ├ù Admin Notifications > notifyAdminsLowRating > should notify admins about low rating 0ms
+     ظْ Database not available
+   ├ù Admin Notifications > notifyAdminsCommentPendingApproval > should notify admins about comment pending approval 0ms
+     ظْ Database not available
+ ظإ» server/cache.analytics.test.ts (18 tests | 18 skipped) 8ms
+ ظإ» server/knowledgeSources.test.ts (20 tests | 12 failed) 1626ms
+   ├ù Knowledge Sources Management > Admin Operations > should create a new knowledge source 20ms
+     ظْ expected undefined to be true // Object.is equality
+   ├ù Knowledge Sources Management > Admin Operations > should list all knowledge sources 1372ms
+     ظْ expected 0 to be greater than 0
+   ├ù Knowledge Sources Management > Admin Operations > should get a specific knowledge source by ID 23ms
+     ظْ No procedure found on path "knowledgeSources,get"
+   ├ù Knowledge Sources Management > Admin Operations > should update a knowledge source 28ms
+     ظْ [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid input: expected number, received undefined"
+  }
+]
+   ├ù Knowledge Sources Management > Admin Operations > should toggle source active status 1ms
+     ظْ [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid input: expected number, received undefined"
+  },
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "path": [
+      "isActive"
+    ],
+    "message": "Invalid input: expected number, received boolean"
+  }
+]
+   ├ù Knowledge Sources Management > Admin Operations > should filter sources by active status 1ms
+     ظْ [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "path": [
+      "isActive"
+    ],
+    "message": "Invalid input: expected number, received boolean"
+  }
+]
+   ├ù Knowledge Sources Management > Admin Operations > should delete a knowledge source 1ms
+     ظْ [
+  {
+    "expected": "number",
+    "code": "invalid_type",
+    "path": [
+      "id"
+    ],
+    "message": "Invalid input: expected number, received undefined"
+  }
+]
+   ├ù Knowledge Sources Management > Permission Tests > should allow regular users to get source details 4ms
+     ظْ Cannot read properties of undefined (reading 'id')
+   ├ù Knowledge Sources Management > Validation Tests > should reject empty name 10ms
+     ظْ promise resolved "{ id: 11, type: 'wikipedia', ظخ(11) }" instead of rejecting
+   ├ù Knowledge Sources Management > Edge Cases > should handle getting non-existent source 3ms
+     ظْ expected [Function] to throw error including '╪د┘┘à╪╡╪»╪▒ ╪║┘è╪▒ ┘à┘ê╪ش┘ê╪»' but got 'No procedure found on path "knowledgeظخ'
+   ├ù Knowledge Sources Management > Edge Cases > should handle optional config field 4ms
+     ظْ expected undefined to be true // Object.is equality
+   ├ù Knowledge Sources Management > Edge Cases > should handle valid JSON config 4ms
+     ظْ expected undefined to be true // Object.is equality
+ ظإ» server/knowledgeStats.test.ts (22 tests | 4 failed) 3163ms
+   ├ù Knowledge Sources Statistics > Stats Endpoint > should return comprehensive statistics 1373ms
+     ظْ expected 0 to be greater than 0
+   ├ù Knowledge Sources Statistics > Stats Endpoint > should include source type breakdown 192ms
+     ظْ expected 0 to be greater than 0
+   ├ù Knowledge Sources Statistics > Stats Endpoint > should allow regular users to view stats 205ms
+     ظْ expected 0 to be greater than 0
+   ├ù Knowledge Sources Statistics > Statistics Consistency > should have valid success rate calculation 132ms
+     ظْ expected 100 to be +0 // Object.is equality
+ ظإ» server/admin.test.ts (21 tests | 3 failed) 1141ms
+   ├ù Admin APIs - Users Management > should allow admin to get user by ID 10ms
+     ظْ No procedure found on path "admin,users,getById"
+   ظ£ô Admin APIs - Content Management > should allow admin to list documents 400ms
+   ├ù Admin APIs - Content Management > should allow admin to filter documents by category 94ms
+     ظْ expected 'jurisprudence' to be 'law' // Object.is equality
+   ├ù Admin APIs - Data Integrity > should return consistent user count across endpoints 81ms
+     ظْ [
+  {
+    "origin": "number",
+    "code": "too_big",
+    "maximum": 100,
+    "inclusive": true,
+    "path": [
+      "limit"
+    ],
+    "message": "Too big: expected number to be <=100"
+  }
+]
+ ظإ» server/knowledge.test.ts (24 tests | 22 failed) 42ms
+   ├ù Knowledge Management System > Create Knowledge Document > should create a new knowledge document 15ms
+     ظْ Database not available
+   ├ù Knowledge Management System > Create Knowledge Document > should create document with minimal required fields 1ms
+     ظْ Database not available
+   ├ù Knowledge Management System > Get Knowledge Documents > should retrieve all active documents 7ms
+     ظْ expected 0 to be greater than 0
+   ├ù Knowledge Management System > Get Knowledge Documents > should search documents by title 1ms
+     ظْ expected 0 to be greater than 0
+   ├ù Knowledge Management System > Get Knowledge Documents > should search documents by content 1ms
+     ظْ expected 0 to be greater than 0
+   ├ù Knowledge Management System > Get Knowledge Document by ID > should retrieve a specific document by ID 1ms
+     ظْ expected undefined to be defined
+   ├ù Knowledge Management System > Update Knowledge Document > should update document title 1ms
+     ظْ Database not available
+   ├ù Knowledge Management System > Update Knowledge Document > should update document content 1ms
+     ظْ Database not available
+   ├ù Knowledge Management System > Update Knowledge Document > should update document category 1ms
+     ظْ Database not available
+   ├ù Knowledge Management System > Update Knowledge Document > should update multiple fields at once 1ms
+     ظْ Database not available
+   ├ù Knowledge Management System > Update Knowledge Document > should deactivate document 0ms
+     ظْ Database not available
+   ├ù Knowledge Management System > Update Knowledge Document > should reactivate document 0ms
+     ظْ Database not available
+   ├ù Knowledge Management System > Delete Knowledge Document > should delete a document 1ms
+     ظْ Database not available
+   ├ù Knowledge Management System > Delete Knowledge Document > should not throw error when deleting non-existent document 4ms
+     ظْ promise rejected "Error: Database not available" instead of resolving
+   ├ù Knowledge Management System > Knowledge Base Integration > should have seeded documents from knowledge_base.json 1ms
+     ظْ expected 0 to be greater than or equal to 19
+   ├ù Knowledge Management System > Knowledge Base Integration > should have documents in all categories 1ms
+     ظْ expected 0 to be greater than 0
+   ├ù Knowledge Management System > Knowledge Base Integration > should have Palestinian Waqf Law document 1ms
+     ظْ expected 0 to be greater than 0
+   ├ù Knowledge Management System > Knowledge Base Integration > should have Ottoman Land Law document 1ms
+     ظْ expected 0 to be greater than 0
+   ├ù Knowledge Management System > Knowledge Base Integration > should have Majalla documents 1ms
+     ظْ expected 0 to be greater than 0
+   ├ù Knowledge Management System > RAG System Integration > should find relevant documents for waqf queries 0ms
+     ظْ expected 0 to be greater than 0
+   ├ù Knowledge Management System > RAG System Integration > should find relevant documents for property queries 0ms
+     ظْ expected 0 to be greater than 0
+   ├ù Knowledge Management System > RAG System Integration > should find relevant documents for legal queries 0ms
+     ظْ expected 0 to be greater than 0
+ ظإ» server/references.test.ts (20 tests | 13 failed) 44ms
+   ├ù Land References Router > references.list > should return all active land references 12ms
+     ظْ expected 0 to be greater than 0
+   ├ù Land References Router > references.getById > should return undefined for non-existent ID 3ms
+     ظْ No procedure found on path "references,getById"
+   ├ù Land References Router > references.getRegions > should return list of unique regions 2ms
+     ظْ No procedure found on path "references,getRegions"
+   ├ù Land References Router > references.getRegions > should return regions in alphabetical order 1ms
+     ظْ No procedure found on path "references,getRegions"
+   ├ù Land References Router > references.getRegions > should not contain duplicate regions 0ms
+     ظْ No procedure found on path "references,getRegions"
+   ├ù Land References Router > references.getStats > should return statistics object 1ms
+     ظْ No procedure found on path "references,getStats"
+   ├ù Land References Router > references.getStats > should have correct total count 2ms
+     ظْ No procedure found on path "references,getStats"
+   ├ù Land References Router > references.getStats > should have valid type distribution 1ms
+     ظْ No procedure found on path "references,getStats"
+   ├ù Land References Router > references.getStats > should have valid region distribution 1ms
+     ظْ No procedure found on path "references,getStats"
+   ├ù Land References Router > references.create (Admin only) > should create a new land reference 1ms
+     ظْ No procedure found on path "references,create"
+   ├ù Land References Router > references.create (Admin only) > should require admin role 11ms
+     ظْ expected [Function] to throw error including 'Unauthorized' but got 'No procedure found on path "referenceظخ'
+   ├ù Land References Router > references.update (Admin only) > should require admin role 2ms
+     ظْ expected [Function] to throw error including 'Unauthorized' but got 'No procedure found on path "referenceظخ'
+   ├ù Land References Router > references.delete (Admin only) > should require admin role 1ms
+     ظْ expected [Function] to throw error including 'Unauthorized' but got 'No procedure found on path "referenceظخ'
+ ظإ» server/waqf-categories.test.ts (20 tests | 8 failed) 33ms
+   ├ù Waqf Categories Management > createWaqfCategory > should create a new waqf category 11ms
+     ظْ Database not available
+   ├ù Waqf Categories Management > createWaqfCategory > should create category without optional fields 1ms
+     ظْ Database not available
+   ├ù Waqf Categories Management > getWaqfCategories > should retrieve all active categories 3ms
+     ظْ expected 0 to be greater than 0
+   ├ù Waqf Categories Management > getWaqfCategoryById > should retrieve a category by ID 2ms
+     ظْ expected undefined to be defined
+   ├ù Waqf Categories Management > updateWaqfCategory > should update category name 1ms
+     ظْ Database not available
+   ├ù Waqf Categories Management > updateWaqfCategory > should update category icon and color 1ms
+     ظْ Database not available
+   ├ù Waqf Categories Management > updateWaqfCategory > should update category order 1ms
+     ظْ Database not available
+   ├ù Waqf Categories Management > deleteWaqfCategory > should soft delete a category 1ms
+     ظْ Database not available
+corepack.cmd : stderr | server/semantic-search.test.ts > Semantic Search System > generateEmbeddings > should generate embeddings for Arabic text
+At C:\Users\DELL\Downloads\PALWAKF_ASSISTANT_PRODUCT_SURFACES_COMPLETION_AND_OPERATIONAL_NAVIGATION_WAVE_1_V1_20260716\04_FULL_PROJECT_GATES.ps1:30 char:3
++   & $corepack.Source pnpm test 2>&1 | Tee-Object -FilePath $EvidenceF ...
++   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (stderr...for Arabic text:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+
+FULL_PROJECT_GATES_EXIT_CODE=1
+PS C:\>
+PS C:\> $fullGatesExitCode = $LASTEXITCODE
+PS C:\>
+PS C:\> Write-Host "FULL_PROJECT_GATES_WRAPPER_EXIT_CODE=$fullGatesExitCode"
+FULL_PROJECT_GATES_WRAPPER_EXIT_CODE=1
+PS C:\>
+PS C:\> if ($fullGatesExitCode -ne 0) {
+>>     throw "PRODUCT_SURFACES_WAVE_1_FULL_PROJECT_GATES_FAILED"
+>> }
+PRODUCT_SURFACES_WAVE_1_FULL_PROJECT_GATES_FAILED
+At line:2 char:5
++     throw "PRODUCT_SURFACES_WAVE_1_FULL_PROJECT_GATES_FAILED"
++     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : OperationStopped: (PRODUCT_SURFACE...CT_GATES_FAILED:String) [], RuntimeException
+    + FullyQualifiedErrorId : PRODUCT_SURFACES_WAVE_1_FULL_PROJECT_GATES_FAILED
+
+PS C:\>

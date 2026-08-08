@@ -1,0 +1,156 @@
+{
+  "batch": "Mega Batch 29A v65 — Remote Staging Evidence + RBAC/RLS Negative UAT",
+  "baseline_id": "v65_mega_batch_29a_remote_staging_rbac_rls_uat_preapply_2026_06_20",
+  "date": "2026-06-20",
+  "base": "v64 Smart Tools 3 with accepted Staging SQL governance evidence",
+  "state": "code and evidence pack prepared; remote deployment/UAT pending; production not approved",
+  "validation": {
+    "changed_typescript_tsx_syntax": "PASS (TypeScript createSourceFile parse diagnostics)",
+    "admin_access_contract": "PASS (explicit admin allows; manager/employee/viewer deny)",
+    "modified_client_direct_dml_scan": "PASS (no .from/.rpc/createClient/service-role reference in modified pages)",
+    "full_pnpm_check_build": "NOT_RUN — dependencies absent in packaging sandbox; operator must run on Windows/Staging source"
+  },
+  "changed_files": [
+    {
+      "path": ".env.example",
+      "sha256": "52b1e17c4b1237240c6b73c189ec439637ce8e3b0adaa297d50da6c4fabedeaa",
+      "bytes": 3238
+    },
+    {
+      "path": "client/src/components/admin/AdminLayoutV2.tsx",
+      "sha256": "7d3f26624b30e3b880ded907b28a7c6d07026375dd60fe7149a0e83a10ea99fa",
+      "bytes": 6685
+    },
+    {
+      "path": "client/src/config/adminRegistryV2.ts",
+      "sha256": "2d778c3ca870a30722abe36a6ce5b1c784440b1e6aee7b3dcfa048472674dcb1",
+      "bytes": 27730
+    },
+    {
+      "path": "client/src/lib/access.ts",
+      "sha256": "3f84defde99f513303e3742823b0241661f9e8ef449d82b90f13a34105399167",
+      "bytes": 1213
+    },
+    {
+      "path": "client/src/pages/admin/KnowledgeReviewOperations.tsx",
+      "sha256": "bd055a19587709c97c06d48ea794b0e325fd67449e15df98ed1dd72ff0edcf6e",
+      "bytes": 19008
+    },
+    {
+      "path": "client/src/pages/admin/RemoteStagingEvidence.tsx",
+      "sha256": "f8c120fe323a58b3b2f2d5ed1b138aab5f7033067993507761c19dd12aa1c35b",
+      "bytes": 5849
+    },
+    {
+      "path": "server/_core/access.ts",
+      "sha256": "e03db13730fe9bb97af26c3b5f4f2fe12c940e9361f09b4706aec351980dec40",
+      "bytes": 1149
+    },
+    {
+      "path": "server/_core/access.test.ts",
+      "sha256": "ae2d2896f8dea52b0cbfa56ca0d94e0cc05f7d1f9074938105743688180eb150",
+      "bytes": 930
+    },
+    {
+      "path": "server/_core/index.ts",
+      "sha256": "78bd09d80c9d72c9c1cf1a85e86936a50b8c9d8f4044b1a59f258bff393704f3",
+      "bytes": 6671
+    },
+    {
+      "path": "server/knowledgeOperations.ts",
+      "sha256": "58c99056f94284e46f6ddc6d456a841391fb7ffc94f9cacb064515180940a90c",
+      "bytes": 15653
+    },
+    {
+      "path": "server/routers.ts",
+      "sha256": "220a7fe181d5a8f955ce9b86c8222277d1d8f442dbd7e5b04a4bbf2150aaad92",
+      "bytes": 169741
+    },
+    {
+      "path": "server/stagingEvidence.ts",
+      "sha256": "9469449840aae26523af9929d507f88a0bee010b8b762e55cd1b9b0355a4f559",
+      "bytes": 3455
+    },
+    {
+      "path": "scripts/mb29a_capture_remote_staging_evidence.ps1",
+      "sha256": "bd27f83a843b7ebaf92c079c30633dece81118a0f153e7a84a04babc798c11d6",
+      "bytes": 2494
+    },
+    {
+      "path": "sql_sandbox/mega_batch_29a_remote_staging_rbac_rls_uat/00_MB29A_STAGING_RBAC_RLS_SERVER_CONTRACT_READ_ONLY.sql",
+      "sha256": "9aa7281cdf87b21b3d0d1c4101f01901c77e4148378590ed4145b4bf5e6d5865",
+      "bytes": 4729
+    },
+    {
+      "path": "sql_sandbox/mega_batch_29a_remote_staging_rbac_rls_uat/01_MB29A_POST_BROWSER_UAT_GOVERNANCE_READ_ONLY.sql",
+      "sha256": "2a998fbbe6930275836d9772206f3af09fdb16b0ce7129e5933af2a4817410c3",
+      "bytes": 2546
+    },
+    {
+      "path": "docs/mega_batch_29a_remote_staging_rbac_rls_uat/README_AR.md",
+      "sha256": "f204b8aaf84667524c28ed517acf89b55199d48bd626834b44251198ac9e5f13",
+      "bytes": 735
+    },
+    {
+      "path": "docs/mega_batch_29a_remote_staging_rbac_rls_uat/MEGA_BATCH_29A_REMOTE_STAGING_RBAC_RLS_NEGATIVE_UAT_RUNBOOK_AR.md",
+      "sha256": "f298a04a65f074381ae780c60bc303b3aeeddf6e4452e642fcd3da855016bbef",
+      "bytes": 8270
+    },
+    {
+      "path": "docs/mega_batch_29a_remote_staging_rbac_rls_uat/MEGA_BATCH_29A_EVIDENCE_INTAKE_TEMPLATE_AR.md",
+      "sha256": "b7e490bf721e055176ef51c42b72deec25c7c36f3ba47dfcbf92b21641528499",
+      "bytes": 1759
+    },
+    {
+      "path": "docs/mega_batch_29a_remote_staging_rbac_rls_uat/MEGA_BATCH_29A_RBAC_RLS_NEGATIVE_UAT_MATRIX_2026_06_20.md",
+      "sha256": "1a4fc2325484d58a2475d1950914207d3b38d72cf6169461fc465b2cabdf3aba",
+      "bytes": 933
+    },
+    {
+      "path": "MEGA_BATCH_29A_V65_CHANGELOG_2026_06_20.md",
+      "sha256": "ced8a2ac107d36f01915ba61c907e5c69915706cae37975e3ec20067c0570eeb",
+      "bytes": 1412
+    },
+    {
+      "path": "MEGA_BATCH_29A_V65_CHANGED_FILES_2026_06_20.md",
+      "sha256": "ab55b4631836adb7cc6d38835e409efae2412e12ca81f3968e26de8019c99217",
+      "bytes": 948
+    },
+    {
+      "path": "ERROR_RECORD_MEGA_BATCH_29A_V65_2026_06_20.md",
+      "sha256": "0f01235ef17770f130a5d6852308c8edb0d69030892308cedc2c8077b0fe5247",
+      "bytes": 2064
+    },
+    {
+      "path": "LATEST_BASELINE_MEGA_BATCH_29A_V65_2026_06_20.md",
+      "sha256": "019d31af1edfc0b568355f453ccd0b1e7395d2c01abc8c033a7f5c194d396d9e",
+      "bytes": 760
+    },
+    {
+      "path": "SESSION_HANDOFF_MEGA_BATCH_29A_V65_2026_06_20.md",
+      "sha256": "617bec84c6c40c89d8e61b2ba45211d0e0122d14be8256efcd9f5989509c7bcd",
+      "bytes": 2776
+    },
+    {
+      "path": "PALWAKF_PLATFORM_COMPREHENSIVE_GUIDE.md",
+      "sha256": "e2bca8e72c1aa60a6326277cb2ffb17435e21729fbaa5c97b3ccca0a8e7da095",
+      "bytes": 47953
+    },
+    {
+      "path": "LATEST_BASELINE_CURRENT.md",
+      "sha256": "3fd8fe608f54ea5808bc7936e3b435141998b729a7ead4715d2f020a1af013d5",
+      "bytes": 414
+    },
+    {
+      "path": "MEGA_BATCH_29A_V65_MANIFEST_2026_06_20.json",
+      "sha256": "d811b476eff492fcfec672f0eb5c468ccb6714fb3bf2649fcf118322e1300bc9",
+      "bytes": 5684
+    },
+    {
+      "path": "VALIDATION_REPORT_MEGA_BATCH_29A_V65_2026_06_20.md",
+      "sha256": "317e23cdd1c0729f23743850f7467fc2315e0f2b8556e44874810b022f81ec6e",
+      "bytes": 1284
+    }
+  ],
+  "production_approved": false
+}

@@ -1,0 +1,200 @@
+/*
+ * Mega Batch A — Operational UI Foundation
+ * Daily operations use solid, readable surfaces. Governance remains route-separated.
+ */
+:root {
+  color-scheme: light;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+  background-color: hsl(var(--background));
+}
+
+body {
+  overflow-x: hidden;
+}
+
+/* Global daily-use surface contract: no frosted content panels. */
+.card-gradient,
+.side-card-gradient,
+.chat-gradient,
+.public-page-header,
+.public-page-tabs,
+.public-page-title-icon {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+.card-gradient,
+.side-card-gradient,
+.chat-gradient,
+.public-page-tabs {
+  background: hsl(var(--card)) !important;
+}
+
+.public-page-header {
+  background: hsl(var(--background)) !important;
+  border-color: hsl(var(--border)) !important;
+}
+
+/* Dialogs: overlay may dim the page; the dialog itself is always opaque and self-contained. */
+[data-slot="dialog-overlay"] {
+  background: hsl(222 24% 12% / 0.72) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+[data-slot="dialog-content"] {
+  background-color: hsl(var(--background)) !important;
+  border-color: hsl(var(--border)) !important;
+  box-shadow: 0 24px 72px hsl(222 24% 12% / 0.24) !important;
+}
+
+[data-slot="dialog-content"] [data-slot="dialog-header"],
+[data-slot="dialog-content"] [data-slot="dialog-footer"] {
+  background-color: hsl(var(--background)) !important;
+}
+
+/* Admin shell: opaque comfort-light operational surfaces. */
+body.admin-scope,
+body.admin-scope #root,
+body.admin-scope .admin-layout,
+body.admin-scope .admin-content,
+body.admin-scope .admin-main {
+  background: hsl(var(--background)) !important;
+  color: hsl(var(--foreground)) !important;
+}
+
+body.admin-scope .admin-topbar {
+  background: hsl(var(--background)) !important;
+  border-bottom-color: hsl(var(--border)) !important;
+  box-shadow: 0 1px 0 hsl(var(--border)) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+body.admin-scope .admin-sidebar {
+  background: hsl(var(--sidebar)) !important;
+  border-left-color: hsl(var(--sidebar-border)) !important;
+  box-shadow: -1px 0 0 hsl(var(--sidebar-border)) !important;
+}
+
+body.admin-scope .admin-sidebar-head,
+body.admin-scope .admin-sidebar-path,
+body.admin-scope .admin-sidebar-search,
+body.admin-scope .admin-action,
+body.admin-scope .admin-path,
+body.admin-scope .admin-card,
+body.admin-scope [data-admin-card="true"],
+body.admin-scope [data-slot="card"],
+body.admin-scope .operational-surface,
+body.admin-scope .review-task-card,
+body.admin-scope .review-context-section,
+body.admin-scope .workflow-stage-panel {
+  background: hsl(var(--card)) !important;
+  border-color: hsl(var(--border)) !important;
+  color: hsl(var(--card-foreground)) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+body.admin-scope .admin-sidebar-head,
+body.admin-scope .admin-sidebar-path,
+body.admin-scope .admin-sidebar-search,
+body.admin-scope .admin-nav-item,
+body.admin-scope .admin-nav-child {
+  color: hsl(var(--sidebar-foreground)) !important;
+}
+
+body.admin-scope .admin-nav-item,
+body.admin-scope .admin-nav-child,
+body.admin-scope .admin-action {
+  background-color: transparent !important;
+}
+
+body.admin-scope .admin-nav-item.active,
+body.admin-scope .admin-nav-child.active,
+body.admin-scope .admin-nav-item:hover,
+body.admin-scope .admin-nav-child:hover,
+body.admin-scope .admin-action:hover {
+  background: hsl(var(--sidebar-accent)) !important;
+  color: hsl(var(--sidebar-accent-foreground)) !important;
+}
+
+body.admin-scope [class*="bg-muted/"] {
+  background-color: hsl(var(--muted)) !important;
+}
+
+body.admin-scope [class*="bg-primary/"] {
+  background-color: hsl(var(--accent)) !important;
+}
+
+body.admin-scope table {
+  background: hsl(var(--card)) !important;
+  border-color: hsl(var(--border)) !important;
+}
+
+body.admin-scope th {
+  background: hsl(var(--muted)) !important;
+}
+
+body.admin-scope tr:hover {
+  background: hsl(var(--accent)) !important;
+}
+
+.daily-workspace {
+  isolation: isolate;
+}
+
+.daily-workspace[data-workspace-kind="governance"] {
+  max-width: 78rem;
+}
+
+.workflow-dialog {
+  background: hsl(var(--background)) !important;
+}
+
+.workflow-dialog .workflow-dialog-scroll {
+  overscroll-behavior: contain;
+}
+
+.workflow-stage-panel[data-stage-mismatch="true"] {
+  border-color: hsl(var(--destructive)) !important;
+}
+
+.admin-governance-toggle {
+  display: inline-flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  border: 1px solid hsl(var(--sidebar-border));
+  border-radius: 0.75rem;
+  padding: 0.7rem 0.8rem;
+  margin: 0.75rem 0;
+  background: hsl(var(--sidebar-accent));
+  color: hsl(var(--sidebar-accent-foreground));
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+@media (max-width: 768px) {
+  body.admin-scope .admin-main {
+    padding: 1rem !important;
+  }
+
+  /* Must remain percentage-based: vw includes desktop scrollbars in emulation and can create a visible rail. */
+  body.admin-scope .admin-sidebar {
+    width: min(88%, 20rem) !important;
+    max-width: calc(100% - 1.5rem) !important;
+    flex-basis: auto !important;
+  }
+
+  [data-slot="dialog-content"].workflow-dialog {
+    max-height: calc(100dvh - 1rem) !important;
+    width: calc(100vw - 1rem) !important;
+  }
+}

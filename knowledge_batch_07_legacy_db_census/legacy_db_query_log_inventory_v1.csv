@@ -1,0 +1,101 @@
+﻿file,op,query_preview,rows_count,is_error
+.manus/db/db-query-1765143284155.json,INSERT,"INSERT INTO knowledge_documents (title, content, category, source, tags, isActive, createdBy, createdAt, updatedAt) VALUES  ('قانون الأوقاف والشؤون والمقدسات الإسلامية رقم (26) لسنة 1966', 'العمود الفقري لأحكام الأوقاف ف",0,False
+.manus/db/db-query-1765143321218.json,INSERT,"INSERT INTO knowledge_documents (title, content, category, source, tags, isActive, createdBy, createdAt, updatedAt) VALUES  ('مجلة الأحكام العدلية + شروحها', 'مصدر تشريعي/فقهي مهم في البلدان التي اعتمدتها\n\nالمؤلف: محمد",0,False
+.manus/db/db-query-1765143346752.json,INSERT,"INSERT INTO knowledge_documents (title, content, category, source, tags, isActive, createdBy, createdAt, updatedAt) VALUES  ('الأوقاف الإسلامية في فلسطين ودورها في مواجهة الاحتلال الإسرائيلي', 'يتناول واقع الأوقاف الإسلا",0,False
+.manus/db/db-query-1765145119332.json,INSERT,"INSERT INTO knowledge_documents (title, content, category, source, tags, createdAt, updatedAt) VALUES  ('تعريف الوقف في الفقه الإسلامي',   'الوقف لغة: الحبس والمنع. واصطلاحاً: حبس العين عن التمليك لأحد من العباد والتصدق ",0,False
+.manus/db/db-query-1765145162608.json,INSERT,"INSERT INTO knowledge_documents (title, content, category, source, tags, createdAt, updatedAt) VALUES  ('الأوقاف في العهد الأيوبي والمملوكي',  'شهدت فترة الحكم الأيوبي (1187-1250م) والمملوكي (1250-1517م) ازدهاراً كبيراً ",0,False
+.manus/db/db-query-1765145206904.json,INSERT,"INSERT INTO knowledge_documents (title, content, category, source, tags, createdAt, updatedAt) VALUES  ('إدارة الأوقاف - النظام الشرعي والقانوني',  'تخضع إدارة الأوقاف لأحكام شرعية وقانونية محددة:\n\n1. النظام الشرعي:\n-",0,False
+.manus/db/db-query-1765146509671.json,DESCRIBE,DESCRIBE messages;,6,False
+.manus/db/db-query-1765146517934.json,SELECT,"SELECT id, conversationId, role, LEFT(content, 100) as preview, createdAt  FROM messages  WHERE conversationId IN (SELECT id FROM conversations ORDER BY updatedAt DESC LIMIT 3) ORDER BY conversationId, createdAt  LIMIT 2",6,False
+.manus/db/db-query-1765179073222.json,SELECT,"SELECT    (SELECT COUNT(*) FROM conversations) as total_conversations,   (SELECT COUNT(*) FROM messages) as total_messages,   (SELECT COUNT(*) FROM messages WHERE role = 'user') as user_messages;",1,False
+.manus/db/db-query-1765182289702.json,DELETE,DELETE FROM faqs;,0,False
+.manus/db/db-query-1765186102437.json,SELECT,"SELECT COUNT(*) as total_conversations,         SUM(CASE WHEN userId != 2580001 THEN 1 ELSE 0 END) as real_conversations,        SUM(CASE WHEN userId = 2580001 THEN 1 ELSE 0 END) as test_conversations FROM conversations;",1,False
+.manus/db/db-query-1765186108278.json,SELECT,"SELECT COUNT(*) as total_conversations,         SUM(CASE WHEN userId != 2580001 THEN 1 ELSE 0 END) as real_conversations,        SUM(CASE WHEN userId = 2580001 THEN 1 ELSE 0 END) as test_conversations FROM conversations ",1,False
+.manus/db/db-query-1765660066955.json,SELECT,SELECT menu_items FROM site_settings LIMIT 1;,1,False
+.manus/db/db-query-1765660075904.json,UPDATE,UPDATE site_settings SET menu_items = NULL;,0,False
+.manus/db/db-query-1767825698276.json,CREATE,CREATE INDEX IF NOT EXISTS idx_knowledge_documents_title ON knowledge_documents(title),0,False
+.manus/db/db-query-1767825762065.json,CREATE,CREATE INDEX IF NOT EXISTS idx_knowledge_documents_category ON knowledge_documents(category); CREATE INDEX IF NOT EXISTS idx_conversations_userId ON conversations(userId); CREATE INDEX IF NOT EXISTS idx_messages_conversa,0,False
+.manus/db/db-query-1767916790725.json,SELECT,SELECT COUNT(*) as total_documents FROM knowledge_documents;,1,False
+.manus/db/db-query-1767916796046.json,SELECT,"SELECT COUNT(*) as total_fetched,         SUM(CASE WHEN status = 'pending' THEN 1 ELSE 0 END) as pending,        SUM(CASE WHEN status = 'approved' THEN 1 ELSE 0 END) as approved,        SUM(CASE WHEN status = 'rejected' ",1,False
+.manus/db/db-query-1767916828066.json,SELECT,"SELECT status, items_fetched, items_approved, items_rejected, started_at, completed_at  FROM fetch_logs  ORDER BY started_at DESC  LIMIT 5;",0,False
+.manus/db/db-query-1767917131739.json,SELECT,"SELECT id, title, category, relevance_score, status  FROM fetched_content  ORDER BY id DESC  LIMIT 5;",5,False
+.manus/db/db-query-1767917335969.json,SELECT,"SELECT id, title, category, source  FROM knowledge_documents  WHERE source LIKE '%ويكيبيديا%'  ORDER BY id DESC  LIMIT 5;",0,False
+.manus/db/db-query-1767917341400.json,SELECT,"SELECT id, title, status, category  FROM fetched_content  ORDER BY id;",20,False
+.manus/db/db-query-1767917346172.json,SELECT,"SELECT status, COUNT(*) as count  FROM fetched_content  GROUP BY status;",3,False
+.manus/db/db-query-1767917356953.json,SELECT,"SELECT id, title, category, source, createdAt  FROM knowledge_documents  ORDER BY id DESC  LIMIT 5;",5,False
+.manus/db/db-query-1767917361721.json,SELECT,SELECT COUNT(*) as total FROM knowledge_documents;,1,False
+.manus/db/db-query-1767919471890.json,INSERT,"INSERT INTO knowledge_documents (title, content, source, category, tags, isActive, createdAt, updatedAt) VALUES ('قانون الأراضي العثماني - المادة 1: تعريف الأراضي', 'المادة الأولى: الأراضي على خمسة أقسام:\n1. الأراضي الم",0,False
+.manus/db/db-query-1767919863002.json,SELECT,"SELECT category, COUNT(*) as count FROM knowledge_documents GROUP BY category ORDER BY count DESC;",6,False
+.manus/db/db-query-1767919867643.json,SELECT,SELECT COUNT(*) as total_documents FROM knowledge_documents;,1,False
+.manus/db/db-query-1767964876124.json,DESCRIBE,DESCRIBE home_sections,10,False
+.manus/db/db-query-1767964895677.json,ALTER,"ALTER TABLE home_sections ADD COLUMN publishAt timestamp NULL, ADD COLUMN unpublishAt timestamp NULL, ADD COLUMN scheduledStatus enum('draft','scheduled','published','unpublished') NOT NULL DEFAULT 'draft', ADD COLUMN te",0,False
+.manus/db/db-query-1767966177181.json,DESCRIBE,DESCRIBE home_sections;,14,False
+.manus/db/db-query-1767966195606.json,ALTER,ALTER TABLE home_sections ADD COLUMN content TEXT NOT NULL AFTER title;,0,False
+.manus/db/db-query-1767966297597.json,ALTER,ALTER TABLE home_sections ADD COLUMN `order` INT NOT NULL DEFAULT 0 AFTER content;,0,False
+.manus/db/db-query-1767966361862.json,SHOW,SHOW COLUMNS FROM home_sections;,16,False
+.manus/db/db-query-1767966374380.json,ALTER,ALTER TABLE home_sections ADD COLUMN backgroundColor VARCHAR(50) DEFAULT '#ffffff';,0,False
+.manus/db/db-query-1767966381124.json,ALTER,"ALTER TABLE home_sections  ADD COLUMN textColor VARCHAR(50) DEFAULT '#000000', ADD COLUMN layout ENUM('full-width', 'centered', 'two-columns', 'three-columns', 'grid') DEFAULT 'centered', ADD COLUMN imageUrl VARCHAR(1000",0,False
+.manus/db/db-query-1767967445194.json,SELECT,"SELECT id, title, category, source FROM knowledge_documents WHERE title LIKE '%العدل والإنصاف%' OR title LIKE '%المغني%' OR title LIKE '%الأم%' OR title LIKE '%المبسوط%' ORDER BY id DESC LIMIT 10",10,False
+.manus/db/db-query-1767967449651.json,SELECT,SELECT COUNT(*) as total FROM knowledge_documents,1,False
+.manus/db/db-query-1767972509854.json,SELECT," SELECT    id,   title,   category,   source,   LEFT(content, 100) as content_preview,   createdAt FROM knowledge_documents WHERE title LIKE '%خاصكي%'     OR title LIKE '%خليل%'     OR title LIKE '%أمين%'    OR title LIK",5,False
+.manus/db/db-query-1767972513332.json,SELECT," SELECT    category,   COUNT(*) as count FROM knowledge_documents WHERE createdAt >= '2026-01-09 15:28:00' GROUP BY category ORDER BY count DESC; ",3,False
+.manus/db/db-query-1767974478166.json,SELECT,"SELECT COUNT(*) as total_count FROM knowledge_documents; SELECT COUNT(*) as land_refs_count FROM knowledge_documents WHERE tags LIKE '%ملكية الأراضي%' OR tags LIKE '%لواء القدس%' OR tags LIKE '%الطابو%'; SELECT id, title",9,False
+.manus/db/db-query-1767974651298.json,DESCRIBE,DESCRIBE knowledge_documents;,13,False
+.manus/db/db-query-1767974684070.json,INSERT,"INSERT INTO knowledge_documents (title, content, category, source, sourceUrl, tags, createdAt, updatedAt) VALUES  ('متصرفية القدس أواخر العهد العثماني', 'دراسة تاريخية شاملة لمتصرفية القدس في نهاية العهد العثماني، تغطي ا",0,False
+.manus/db/db-query-1767974699280.json,INSERT,"INSERT INTO knowledge_documents (title, content, category, source, sourceUrl, tags, createdAt, updatedAt) VALUES  ('Consequences of the Ottoman land law: Agrarian and privatization processes in Palestine, 1858–1918', 'در",0,False
+.manus/db/db-query-1767974719121.json,INSERT,"INSERT INTO knowledge_documents (title, content, category, source, sourceUrl, tags, createdAt, updatedAt) VALUES  ('قانون الأراضي العثماني (1858)', 'القانون الأساسي الذي نظم ملكية الأراضي في الدولة العثمانية. قسّم الأراض",0,False
+.manus/db/db-query-1767974724109.json,SELECT,SELECT COUNT(*) as total_count FROM knowledge_documents; SELECT COUNT(*) as land_refs FROM knowledge_documents WHERE tags LIKE '%ملكية الأراضي%' OR tags LIKE '%الطابو%' OR tags LIKE '%متصرفية القدس%' OR tags LIKE '%الأرا,19,False
+.manus/db/db-query-1767975657354.json,SHOW,SHOW TABLES LIKE 'land_references';,0,False
+.manus/db/db-query-1767975663068.json,CREATE,"CREATE TABLE `land_references` (   `id` int AUTO_INCREMENT NOT NULL,   `title` varchar(500) NOT NULL,   `description` text,   `author` varchar(200),   `type` enum('ottoman_record','british_mandate','jordanian_law','israe",0,False
+.manus/db/db-query-1767975668723.json,CREATE,CREATE INDEX type_idx ON land_references(type); CREATE INDEX region_idx ON land_references(region); CREATE INDEX year_idx ON land_references(year); CREATE INDEX title_idx ON land_references(title);,0,False
+.manus/db/db-query-1767975773406.json,INSERT,"INSERT INTO land_references (title, description, author, type, region, year, source_url, is_active) VALUES ('سجلات الطابو العثماني - القدس', 'سجلات الطابو العثمانية التي توثق ملكية الأراضي في منطقة القدس خلال الفترة العث",0,False
+.manus/db/db-query-1767976165797.json,CREATE," CREATE TABLE IF NOT EXISTS `waqf_categories` (   `id` int AUTO_INCREMENT NOT NULL,   `name` varchar(200) NOT NULL,   `nameAr` varchar(200) NOT NULL,   `description` text,   `icon` varchar(100),   `color` varchar(50),   ",0,False
+.manus/db/db-query-1767976170047.json,ALTER, ALTER TABLE `waqf_properties` ADD COLUMN `categoryId` int AFTER `name`; ALTER TABLE `waqf_properties` ADD INDEX `category_idx` (`categoryId`); ,0,False
+.manus/db/db-query-1768943721706.json,ALTER,ALTER TABLE home_sections MODIFY COLUMN `key` varchar(100) NULL;,0,False
+.manus/db/db-query-1768943787249.json,ALTER,ALTER TABLE home_sections MODIFY COLUMN `displayOrder` int NOT NULL DEFAULT 0; ALTER TABLE home_section_items MODIFY COLUMN `displayOrder` int NOT NULL DEFAULT 0;,0,False
+.manus/db/db-query-1769029488545.json,CREATE,"CREATE TABLE IF NOT EXISTS `content_templates` ( 	`id` int AUTO_INCREMENT NOT NULL PRIMARY KEY, 	`name` varchar(200) NOT NULL, 	`name_ar` varchar(200) NOT NULL, 	`description` text, 	`description_ar` text, 	`type` enum('",0,False
+.manus/db/db-query-1769029505700.json,INSERT,"INSERT INTO `content_templates` (`name`, `name_ar`, `description`, `description_ar`, `type`, `sections`, `layout`, `color_scheme`) VALUES ('Modern Landing', 'صفحة هبوط حديثة', 'A modern landing page with hero section, fe",0,False
+.manus/db/db-query-1769118045031.json,SELECT,SELECT COUNT(*) as total FROM content_templates;,1,False
+.manus/db/db-query-1769208749519.json,CREATE,"CREATE TABLE IF NOT EXISTS `roles` (   `id` INT AUTO_INCREMENT PRIMARY KEY,   `name` VARCHAR(100) NOT NULL UNIQUE,   `name_ar` VARCHAR(100) NOT NULL,   `description` TEXT,   `description_ar` TEXT,   `is_system` TINYINT D",0,False
+.manus/db/db-query-1769208760921.json,INSERT,"INSERT INTO `roles` (`name`, `name_ar`, `description`, `description_ar`, `is_system`) VALUES ('super_admin', 'مدير عام', 'Full system access', 'صلاحيات كاملة للنظام', 1), ('admin', 'مدير', 'Administrative access', 'صلاحي",0,False
+.manus/db/db-query-1769461269251.json,SHOW,SHOW TABLES;,47,False
+.manus/db/db-query-1769461462989.json,CREATE,"CREATE TABLE IF NOT EXISTS `page_settings` (   `id` int AUTO_INCREMENT PRIMARY KEY NOT NULL,   `page_name` varchar(100) NOT NULL UNIQUE,   `title` varchar(200),   `description` text,   `meta_keywords` text,   `og_image` ",0,False
+.manus/db/db-query-1770368728715.json,SHOW,SHOW TABLES LIKE 'page_settings';,1,False
+.manus/db/db-query-1770368733718.json,SELECT,SELECT * FROM page_settings LIMIT 5;,0,False
+.manus/db/db-query-1770368753168.json,DESCRIBE,DESCRIBE page_settings;,11,False
+.manus/db/db-query-1772146741487.json,ALTER,"ALTER TABLE fetched_content   ADD COLUMN ai_category ENUM('law','jurisprudence','majalla','historical','administrative','reference') NULL,   ADD COLUMN ai_keywords TEXT NULL,   ADD COLUMN ai_summary TEXT NULL,   ADD COLU",0,False
+.manus/db/db-query-1772486274000.json,ALTER,"ALTER TABLE page_settings    ADD COLUMN IF NOT EXISTS title VARCHAR(200) NULL,   ADD COLUMN IF NOT EXISTS description TEXT NULL,   ADD COLUMN IF NOT EXISTS meta_keywords TEXT NULL,   ADD COLUMN IF NOT EXISTS og_image VAR",0,False
+.manus/db/db-query-1772486277281.json,SELECT,"SELECT id, page_name, title, description, is_active, created_at FROM page_settings LIMIT 3;",0,False
+.manus/db/db-query-1772486391212.json,SELECT,"SELECT id, page_name, title, description, meta_keywords, og_image, custom_css, custom_js, is_active, created_at, updated_at FROM page_settings LIMIT 1;",0,False
+.manus/db/db-query-1772747591146.json,SELECT,"SELECT id, name, type, is_active, config FROM knowledge_sources LIMIT 20;",8,False
+.manus/db/db-query-1772747596431.json,SELECT,"SELECT id, name, type, is_active, config FROM knowledge_sources;",8,False
+.manus/db/db-query-1772748249783.json,SELECT,"SELECT id, source_id, status, items_fetched, errors, started_at, completed_at FROM fetch_logs ORDER BY started_at DESC LIMIT 10;",6,False
+.manus/db/db-query-1772831507766.json,SELECT,SELECT COUNT(*) as total FROM fetched_content;,1,False
+.manus/db/db-query-1772835117158.json,DESCRIBE,DESCRIBE fetched_content;,22,False
+.manus/db/db-query-1772918772278.json,DELETE,DELETE FROM __drizzle_migrations WHERE hash = 'free_leper_queen' OR hash LIKE '%0004%' OR hash LIKE '%bookmarks%';,0,False
+.manus/db/db-query-1772922254679.json,SELECT,"SELECT created_at, hash FROM __drizzle_migrations ORDER BY created_at ASC;",25,False
+.manus/db/db-query-1772922268453.json,INSERT,"INSERT INTO __drizzle_migrations (created_at, hash) VALUES (FROM_UNIXTIME(1767964934024/1000), 'manual_0000'), (FROM_UNIXTIME(1767975640312/1000), 'manual_0001'), (FROM_UNIXTIME(1767976144157/1000), 'manual_0002'), (FROM",0,False
+.manus/db/db-query-1773190485871.json,SELECT,"SELECT id, openId, name, email, loginMethod, role, isActive, createdAt, lastSignedIn FROM users WHERE email = 'firasfanon@gmail.com';",1,False
+.manus/db/db-query-error-1765143239886.json,INSERT,"INSERT INTO knowledge_base (title, content, category, tags, source, source_type, is_verified, created_by, created_at, updated_at) VALUES  ('قانون الأوقاف والشؤون والمقدسات الإسلامية رقم (26) لسنة 1966', 'العمود الفقري لأ",0,True
+.manus/db/db-query-error-1765145073080.json,INSERT,"INSERT INTO knowledge_documents (title, type, content, category, keywords, sources, legalReferences, createdAt, updatedAt) VALUES (   'تعريف الوقف في الفقه الإسلامي',   'مقال',   'الوقف لغة: الحبس والمنع. واصطلاحاً: حبس ",0,True
+.manus/db/db-query-error-1765146503570.json,SELECT,"SELECT m.id, m.conversation_id, m.role, LEFT(m.content, 100) as content_preview, m.created_at  FROM messages m WHERE m.conversation_id IN (   SELECT id FROM conversations ORDER BY updated_at DESC LIMIT 3 ) ORDER BY m.con",0,True
+.manus/db/db-query-error-1765179063014.json,SELECT,"SELECT    (SELECT COUNT(*) FROM conversations) as total_conversations,   (SELECT COUNT(*) FROM chat_messages) as total_messages,   (SELECT COUNT(DISTINCT question) FROM chat_messages WHERE role = 'user') as unique_questi",0,True
+.manus/db/db-query-error-1765660033285.json,SELECT,SELECT menuItems FROM siteSettings LIMIT 1;,0,True
+.manus/db/db-query-error-1765660055143.json,SELECT,SELECT menuItems FROM site_settings LIMIT 1;,0,True
+.manus/db/db-query-error-1767825711528.json,CREATE,CREATE INDEX IF NOT EXISTS idx_knowledge_documents_category ON knowledge_documents(category); CREATE INDEX IF NOT EXISTS idx_conversations_user_id ON conversations(user_id); CREATE INDEX IF NOT EXISTS idx_messages_conver,0,True
+.manus/db/db-query-error-1767916801675.json,SELECT,"SELECT operation, status, items_fetched, created_at  FROM fetch_logs  ORDER BY created_at DESC  LIMIT 5;",0,True
+.manus/db/db-query-error-1767916816831.json,SELECT,"SELECT status, items_fetched, items_saved, error_message, created_at  FROM fetch_logs  ORDER BY created_at DESC  LIMIT 5;",0,True
+.manus/db/db-query-error-1767917351624.json,SELECT,"SELECT id, title, category, source, created_at  FROM knowledge_documents  ORDER BY id DESC  LIMIT 5;",0,True
+.manus/db/db-query-error-1767919336713.json,INSERT,"INSERT INTO knowledge_documents (title, content, source, category, tags, createdAt, updatedAt) VALUES ('قانون الأراضي العثماني - المادة 1: تعريف الأراضي', 'المادة الأولى: الأراضي على خمسة أقسام...', 'قانون الأراضي العثما",0,True
+.manus/db/db-query-error-1767966368249.json,ALTER,"ALTER TABLE home_sections  ADD COLUMN backgroundColor VARCHAR(50) DEFAULT '#ffffff' AFTER `order`, ADD COLUMN textColor VARCHAR(50) DEFAULT '#000000' AFTER backgroundColor, ADD COLUMN layout ENUM('full-width', 'centered'",0,True
+.manus/db/db-query-error-1767974642436.json,INSERT,"INSERT INTO knowledge_documents (title, author, year, category, type, url, content, tags, createdAt, updatedAt) VALUES ('متصرفية القدس أواخر العهد العثماني', 'عبد العزيز عوض', NULL, 'historical', 'كتاب', 'https://archive",0,True
+.manus/db/db-query-error-1767974647793.json,INSERT,"INSERT INTO knowledge_documents (title, author, year, category, type, url, content, tags, createdAt, updatedAt) VALUES ('متصرفية القدس أواخر العهد العثماني', 'عبد العزيز عوض', NULL, 'historical', 'كتاب', 'https://archive",0,True
+.manus/db/db-query-error-1767976161592.json,CREATE," CREATE TABLE IF NOT EXISTS `waqf_categories` (   `id` int AUTO_INCREMENT NOT NULL,   `name` varchar(200) NOT NULL,   `nameAr` varchar(200) NOT NULL,   `description` text,   `icon` varchar(100),   `color` varchar(50),   ",0,True
+.manus/db/db-query-error-1768943696645.json,ALTER,"ALTER TABLE home_sections MODIFY COLUMN `key` varchar(100) NOT NULL DEFAULT CONCAT('section-', UNIX_TIMESTAMP(), '-', SUBSTRING(MD5(RAND()), 1, 9));",0,True
+.manus/db/db-query-error-1769461262269.json,SHOW,SHOW TABLES LIKE '%template%' OR SHOW TABLES LIKE '%section%' OR SHOW TABLES LIKE '%page%';,0,True
+.manus/db/db-query-error-1770368748592.json,INSERT,"INSERT INTO page_settings (page_name, title, description, meta_keywords, og_image, custom_css, custom_js, is_active) VALUES ('home', 'نموذج الذكاء الصناعي للأوقاف الإسلامية في فلسطين', 'نظام ذكاء اصطناعي شامل يستند إلى ا",0,True
+.manus/db/db-query-error-1770368775940.json,INSERT,"INSERT INTO page_settings (page_name, title, description, meta_keywords, og_image, custom_css, custom_js, is_active) VALUES ('home', 'نموذج الذكاء الصناعي للأوقاف الإسلامية في فلسطين', 'نظام ذكاء اصطناعي شامل يستند إلى ا",0,True
+.manus/db/db-query-error-1772486231014.json,ALTER,ALTER TABLE page_settings ADD COLUMN page_name VARCHAR(100) NOT NULL DEFAULT '' AFTER id; ALTER TABLE page_settings ADD UNIQUE INDEX idx_page_settings_page_name (page_name);,0,True
+.manus/db/db-query-error-1772486239114.json,SELECT,"SELECT id, page_name, title FROM page_settings LIMIT 5;",0,True
+.manus/db/db-query-error-1772486381901.json,ALTER,ALTER TABLE page_settings ADD COLUMN title VARCHAR(200) NULL;,0,True
+.manus/db/db-query-error-1772747585113.json,SELECT,"SELECT id, name, type, isActive, config FROM knowledge_sources LIMIT 20;",0,True

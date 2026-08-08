@@ -1,0 +1,1665 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PalWaqf AI - المساعد الذكي للأوقاف الإسلامية في فلسطين</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #1a472a;
+            --primary-dark: #0d2b1a;
+            --secondary: #d4af37;
+            --light: #f9f7f3;
+            --dark: #121212;
+            --radius: 16px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            font-family: 'Cairo', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f9f7f3 0%, #f0ede5 100%);
+            color: #333;
+        }
+
+        .dark body {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            color: #f0f0f0;
+        }
+
+        .card-gradient {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.85) 100%);
+            backdrop-filter: blur(10px);
+        }
+
+        .dark .card-gradient {
+            background: linear-gradient(135deg, rgba(30, 30, 30, 0.95) 0%, rgba(40, 40, 40, 0.85) 100%);
+        }
+
+        .side-card-gradient {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+        }
+
+        .dark .side-card-gradient {
+            background: linear-gradient(135deg, #1e1e1e 0%, #252525 100%);
+        }
+
+        .service-gradient {
+            background: linear-gradient(135deg, #1a472a 0%, #2d5a3a 100%);
+        }
+
+        .feature-gradient {
+            background: linear-gradient(135deg, #1a472a 0%, #2d5a3a 100%);
+        }
+
+        .footer-gradient {
+            background: linear-gradient(135deg, #0d2b1a 0%, #1a472a 100%);
+        }
+
+        .chat-gradient {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+        }
+
+        .dark .chat-gradient {
+            background: linear-gradient(135deg, #1a1a1a 0%, #252525 100%);
+        }
+
+        /* تحسين تصميم رسائل الشات */
+        .message-user {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            border-right: 4px solid #2196f3;
+            margin-left: 10%; /* تحريك الرسائل لليسار قليلاً */
+            margin-right: auto;
+        }
+
+        .dark .message-user {
+            background: linear-gradient(135deg, #1e3a5f 0%, #0d2b5a 100%);
+        }
+
+        .message-ai {
+            background: linear-gradient(135deg, #f1f8e9 0%, #dcedc8 100%);
+            border-left: 4px solid #4caf50;
+            margin-right: 15%; /* تحريك الرسائل لليسار أكثر للتفريق */
+        }
+
+        .dark .message-ai {
+            background: linear-gradient(135deg, #1e3a1e 0%, #0d2b0d 100%);
+        }
+
+        .hover-lift:hover {
+            transform: translateY(-4px);
+            transition: transform 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(20px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        .animate-slide-in {
+            animation: slideIn 0.5s ease-out;
+        }
+
+        .scrollbar-thin::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .scrollbar-thin::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        .scrollbar-thin::-webkit-scrollbar-thumb {
+            background: #c1c1c1;
+            border-radius: 3px;
+        }
+
+        .dark .scrollbar-thin::-webkit-scrollbar-track {
+            background: #2d2d2d;
+        }
+
+        .dark .scrollbar-thin::-webkit-scrollbar-thumb {
+            background: #555;
+        }
+
+        /* تحسينات للشات */
+        .chat-container {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .chat-messages-container {
+            flex: 1;
+            overflow-y: auto;
+            padding-bottom: 20px;
+        }
+
+        .chat-input-container {
+            margin-top: auto;
+            background: white;
+            padding: 20px;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .dark .chat-input-container {
+            background: #1a1a1a;
+            border-top: 1px solid #374151;
+        }
+
+        /* تحسينات للصور المتحركة */
+        .image-slider {
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .slider-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .slider-image:hover {
+            transform: scale(1.05);
+        }
+
+        .image-overlay {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            color: white;
+            padding: 20px;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .image-slider:hover .image-overlay {
+            transform: translateY(0);
+        }
+
+        /* محاذاة الأعمدة */
+        .column-alignment {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        /* Responsive design improvements */
+        @media (max-width: 768px) {
+            .container {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+            
+            .grid-cols-1-mobile {
+                grid-template-columns: 1fr;
+            }
+            
+            .text-center-mobile {
+                text-align: center;
+            }
+            
+            .flex-col-mobile {
+                flex-direction: column;
+            }
+            
+            .px-4-mobile {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+            
+            .py-2-mobile {
+                padding-top: 0.5rem;
+                padding-bottom: 0.5rem;
+            }
+        }
+
+        /* Enhanced typography */
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+        }
+
+        h2 {
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        @media (max-width: 640px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+            
+            h3 {
+                font-size: 1.25rem;
+            }
+            
+            p {
+                font-size: 0.95rem;
+            }
+        }
+
+        /* Enhanced navigation colors */
+        .nav-link {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.1) 100%);
+        }
+
+        /* Improved button styles - موحد */
+        .btn-primary {
+            background: linear-gradient(135deg, #1a472a 0%, #2d5a3a 100%);
+            color: white;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            height: 44px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 120px;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #2d5a3a 0%, #1a472a 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(26, 71, 42, 0.2);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #d4af37 0%, #b8941f 100%);
+            color: white;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            height: 44px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 120px;
+        }
+
+        .btn-secondary:hover {
+            background: linear-gradient(135deg, #b8941f 0%, #d4af37 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.2);
+        }
+
+        .btn-action {
+            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+            color: white;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            height: 44px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 120px;
+        }
+
+        .btn-action:hover {
+            background: linear-gradient(135deg, #1d4ed8 0%, #2563eb 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(37, 99, 235, 0.2);
+        }
+
+        /* تحسين حجم الأزرار في القائمة الرئيسية */
+        .nav-action-btn {
+            height: 44px;
+            padding: 0 16px;
+            font-size: 0.875rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+    </style>
+</head>
+<body class="min-h-screen transition-colors duration-300">
+    <!-- Night Mode Toggle -->
+    <button id="nightModeToggle" class="fixed bottom-6 left-6 z-50 w-12 h-12 rounded-full bg-gradient-to-br from-gray-800 to-gray-900 dark:from-amber-600 dark:to-amber-700 text-white shadow-xl hover:shadow-2xl transition-all duration-300 flex items-center justify-center hover:scale-110">
+        <i class="fas fa-moon dark:hidden text-lg"></i>
+        <i class="fas fa-sun hidden dark:block text-lg"></i>
+    </button>
+
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-[#1a472a] to-[#2d5a3a] text-white sticky top-0 z-40 shadow-2xl">
+        <div class="container mx-auto px-4 md:px-6">
+            <div class="flex items-center justify-between h-16 md:h-20">
+                <!-- Logo -->
+                <div class="flex items-center gap-3 md:gap-4">
+                    <div class="w-10 h-10 md:w-14 md:h-14 rounded-xl md:rounded-2xl bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center shadow-lg">
+                        <i class="fas fa-mosque text-xl md:text-2xl text-white"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-lg md:text-2xl font-bold text-white">PalWaqf AI</h1>
+                        <p class="text-amber-100 text-xs md:text-sm">المساعد الذكي للأوقاف الإسلامية في فلسطين</p>
+                    </div>
+                </div>
+
+                <!-- Navigation -->
+                <div class="hidden lg:flex items-center gap-2">
+                    <nav class="flex items-center gap-2">
+                        <a href="#" class="flex items-center gap-2 px-3 md:px-4 py-2 md:py-3 rounded-xl text-white hover:text-amber-300 hover:bg-white/10 transition-all duration-300 group nav-link">
+                            <i class="fas fa-home text-base md:text-lg"></i>
+                            <span class="font-semibold text-sm md:text-base">الرئيسية</span>
+                            <div class="w-0 group-hover:w-6 md:group-hover:w-8 h-0.5 bg-amber-300 transition-all duration-300"></div>
+                        </a>
+                        <a href="#" class="flex items-center gap-2 px-3 md:px-4 py-2 md:py-3 rounded-xl text-white hover:text-amber-300 hover:bg-white/10 transition-all duration-300 group nav-link">
+                            <i class="fas fa-comments text-base md:text-lg"></i>
+                            <span class="font-semibold text-sm md:text-base">المحادثة</span>
+                            <div class="w-0 group-hover:w-6 md:group-hover:w-8 h-0.5 bg-amber-300 transition-all duration-300"></div>
+                        </a>
+                        <a href="#" class="flex items-center gap-2 px-3 md:px-4 py-2 md:py-3 rounded-xl text-white hover:text-amber-300 hover:bg-white/10 transition-all duration-300 group nav-link">
+                            <i class="fas fa-book text-base md:text-lg"></i>
+                            <span class="font-semibold text-sm md:text-base">قاعدة المعرفة</span>
+                            <div class="w-0 group-hover:w-6 md:group-hover:w-8 h-0.5 bg-amber-300 transition-all duration-300"></div>
+                        </a>
+                        <a href="#" class="flex items-center gap-2 px-3 md:px-4 py-2 md:py-3 rounded-xl text-white hover:text-amber-300 hover:bg-white/10 transition-all duration-300 group nav-link">
+                            <i class="fas fa-users text-base md:text-lg"></i>
+                            <span class="font-semibold text-sm md:text-base">من نحن</span>
+                            <div class="w-0 group-hover:w-6 md:group-hover:w-8 h-0.5 bg-amber-300 transition-all duration-300"></div>
+                        </a>
+                        <a href="#" class="flex items-center gap-2 px-3 md:px-4 py-2 md:py-3 rounded-xl text-white hover:text-amber-300 hover:bg-white/10 transition-all duration-300 group nav-link">
+                            <i class="fas fa-question-circle text-base md:text-lg"></i>
+                            <span class="font-semibold text-sm md:text-base">الأسئلة الشائعة</span>
+                            <div class="w-0 group-hover:w-6 md:group-hover:w-8 h-0.5 bg-amber-300 transition-all duration-300"></div>
+                        </a>
+                        <a href="#" class="flex items-center gap-2 px-3 md:px-4 py-2 md:py-3 rounded-xl text-white hover:text-amber-300 hover:bg-white/10 transition-all duration-300 group nav-link">
+                            <i class="fas fa-phone text-base md:text-lg"></i>
+                            <span class="font-semibold text-sm md:text-base">اتصال بنا</span>
+                            <div class="w-0 group-hover:w-6 md:group-hover:w-8 h-0.5 bg-amber-300 transition-all duration-300"></div>
+                        </a>
+                    </nav>
+                    
+                    <!-- User Actions - بأحجام موحدة -->
+                    <div class="flex items-center gap-2 mr-4">
+                        <div class="flex items-center gap-2 px-3 md:px-4 py-2 rounded-xl bg-white/10 nav-action-btn">
+                            <i class="fas fa-user-circle text-base md:text-lg text-amber-300"></i>
+                            <span class="font-semibold text-sm md:text-base">مرحباً، أحمد</span>
+                        </div>
+                        
+                        <!-- Login/Logout Button -->
+                        <button id="loginLogoutBtn" class="nav-action-btn bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white transition-all duration-300 hover:shadow-lg">
+                            <i class="fas fa-sign-in-alt text-sm md:text-base"></i>
+                            <span class="font-semibold text-xs md:text-sm mr-2">تسجيل الدخول</span>
+                        </button>
+                        
+                        <!-- Dashboard Button -->
+                        <button id="dashboardBtn" class="nav-action-btn bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-700 hover:to-amber-800 text-white transition-all duration-300 hover:shadow-lg">
+                            <i class="fas fa-tachometer-alt text-sm md:text-base"></i>
+                            <span class="font-semibold text-xs md:text-sm mr-2">لوحة التحكم</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobileMenuBtn" class="lg:hidden text-white text-xl md:text-2xl">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            
+            <!-- Mobile Menu -->
+            <div id="mobileMenu" class="lg:hidden hidden bg-gradient-to-r from-[#1a472a] to-[#2d5a3a] pt-4 pb-6 px-4 rounded-b-2xl shadow-2xl">
+                <div class="space-y-2">
+                    <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl text-white hover:text-amber-300 hover:bg-white/10 transition-all duration-300 nav-link">
+                        <i class="fas fa-home text-lg"></i>
+                        <span class="font-semibold">الرئيسية</span>
+                    </a>
+                    <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl text-white hover:text-amber-300 hover:bg-white/10 transition-all duration-300 nav-link">
+                        <i class="fas fa-comments text-lg"></i>
+                        <span class="font-semibold">المحادثة</span>
+                    </a>
+                    <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl text-white hover:text-amber-300 hover:bg-white/10 transition-all duration-300 nav-link">
+                        <i class="fas fa-book text-lg"></i>
+                        <span class="font-semibold">قاعدة المعرفة</span>
+                    </a>
+                    <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl text-white hover:text-amber-300 hover:bg-white/10 transition-all duration-300 nav-link">
+                        <i class="fas fa-users text-lg"></i>
+                        <span class="font-semibold">من نحن</span>
+                    </a>
+                    <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl text-white hover:text-amber-300 hover:bg-white/10 transition-all duration-300 nav-link">
+                        <i class="fas fa-question-circle text-lg"></i>
+                        <span class="font-semibold">الأسئلة الشائعة</span>
+                    </a>
+                    <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl text-white hover:text-amber-300 hover:bg-white/10 transition-all duration-300 nav-link">
+                        <i class="fas fa-phone text-lg"></i>
+                        <span class="font-semibold">اتصال بنا</span>
+                    </a>
+                    
+                    <div class="pt-4 border-t border-white/20">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="flex items-center gap-3 px-4 py-2 rounded-xl bg-white/10">
+                                <i class="fas fa-user-circle text-amber-300"></i>
+                                <span class="font-semibold">مرحباً، أحمد</span>
+                            </div>
+                        </div>
+                        
+                        <div class="grid grid-cols-2 gap-3">
+                            <button id="mobileLoginBtn" class="flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-gradient-to-r from-blue-600 to-blue-700 text-white transition-all duration-300 hover:shadow-lg">
+                                <i class="fas fa-sign-in-alt"></i>
+                                <span class="font-semibold">تسجيل الدخول</span>
+                            </button>
+                            
+                            <button id="mobileDashboardBtn" class="flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-gradient-to-r from-amber-600 to-amber-700 text-white transition-all duration-300 hover:shadow-lg">
+                                <i class="fas fa-tachometer-alt"></i>
+                                <span class="font-semibold">لوحة التحكم</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section مع الصور المتحركة -->
+    <section class="py-12 md:py-16 bg-gradient-to-b from-emerald-900 to-emerald-800 text-white">
+        <div class="container mx-auto px-4 md:px-6">
+            <div class="grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
+                <!-- النص -->
+                <div class="space-y-6 md:space-y-8">
+                    <div class="inline-flex items-center gap-3 px-4 md:px-6 py-2 md:py-3 rounded-full bg-white/10 backdrop-blur-sm animate-fade-in">
+                        <i class="fas fa-robot text-amber-300 text-base md:text-lg"></i>
+                        <span class="font-semibold text-sm md:text-base">مدعوم بالذكاء الاصطناعي المتقدم</span>
+                    </div>
+                    
+                    <h1 class="text-2xl md:text-4xl lg:text-5xl font-bold leading-tight animate-fade-in">
+                        مساعدك الذكي المتخصص في
+                        <br class="hidden md:block">
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 to-amber-100">الأوقاف الإسلامية في فلسطين</span>
+                    </h1>
+                    
+                    <p class="text-base md:text-xl text-emerald-100 leading-relaxed animate-fade-in">
+                        نظام ذكاء اصطناعي شامل يستند إلى القوانين الفلسطينية، مجلة الأحكام العدلية، والمراجع الشرعية
+                        والتاريخية لتقديم استشارات دقيقة حول الأوقاف الإسلامية
+                    </p>
+                    
+                    <div class="flex flex-col sm:flex-row items-center gap-4 md:gap-6 pt-4 animate-fade-in">
+                        <button class="px-8 md:px-12 py-3 md:py-4 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white rounded-xl shadow-2xl hover:shadow-3xl transition-all duration-300 flex items-center gap-3 text-base md:text-lg font-semibold hover-lift btn-secondary">
+                            <i class="fas fa-comments text-lg md:text-xl"></i>
+                            ابدأ المحادثة الآن
+                        </button>
+                        
+                        <!-- زر إنشاء حساب جديد -->
+                        <button id="createAccountBtn" class="px-8 md:px-12 py-3 md:py-4 bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 flex items-center gap-3 text-base md:text-lg font-semibold hover-lift btn-primary">
+                            <i class="fas fa-user-plus text-lg md:text-xl"></i>
+                            إنشاء حساب جديد
+                        </button>
+                    </div>
+                </div>
+
+                <!-- الصور المتحركة -->
+                <div class="grid grid-cols-3 gap-4 md:gap-6 animate-fade-in">
+                    <!-- الصورة 1 -->
+                    <div class="image-slider animate-float" style="animation-delay: 0s;">
+                        <img src="https://images.unsplash.com/photo-1562774053-701939374585?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" 
+                             alt="الأوقاف التاريخية" 
+                             class="slider-image rounded-xl">
+                        <div class="image-overlay rounded-b-xl">
+                            <h4 class="font-bold text-lg mb-2">الأوقاف التاريخية</h4>
+                            <p class="text-sm">حماية وتوثيق الأوقاف الإسلامية التاريخية في فلسطين</p>
+                        </div>
+                    </div>
+                    
+                    <!-- الصورة 2 -->
+                    <div class="image-slider animate-float" style="animation-delay: 0.5s;">
+                        <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" 
+                             alt="الاستشارات الشرعية" 
+                             class="slider-image rounded-xl">
+                        <div class="image-overlay rounded-b-xl">
+                            <h4 class="font-bold text-lg mb-2">الاستشارات الشرعية</h4>
+                            <p class="text-sm">تقديم استشارات فقهية وقانونية متخصصة</p>
+                        </div>
+                    </div>
+                    
+                    <!-- الصورة 3 -->
+                    <div class="image-slider animate-float" style="animation-delay: 1s;">
+                        <img src="https://images.unsplash.com/photo-1586773860418-dc22f8b874bc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" 
+                             alt="التوثيق الرقمي" 
+                             class="slider-image rounded-xl">
+                        <div class="image-overlay rounded-b-xl">
+                            <h4 class="font-bold text-lg mb-2">التوثيق الرقمي</h4>
+                            <p class="text-sm">نظام متكامل لتوثيق وإدارة الأوقاف رقمياً</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- معلومات مبسطة عن النظام -->
+            <div class="mt-12 md:mt-16 grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+                <div class="p-6 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20 animate-slide-in">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-500 to-amber-600 flex items-center justify-center">
+                            <i class="fas fa-brain text-xl text-white"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">نموذج ذكي متخصص</h3>
+                    </div>
+                    <p class="text-emerald-100">يعتمد على تقنيات الذكاء الاصطناعي المتقدمة لفهم وتحليل استفسارات الأوقاف بدقة عالية</p>
+                </div>
+                
+                <div class="p-6 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20 animate-slide-in" style="animation-delay: 0.2s;">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-500 to-emerald-600 flex items-center justify-center">
+                            <i class="fas fa-balance-scale text-xl text-white"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">مراجع قانونية شاملة</h3>
+                    </div>
+                    <p class="text-emerald-100">يستند إلى القوانين الفلسطينية ومجلة الأحكام العدلية والمراجع الفقهية المعتمدة</p>
+                </div>
+                
+                <div class="p-6 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20 animate-slide-in" style="animation-delay: 0.4s;">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center">
+                            <i class="fas fa-shield-alt text-xl text-white"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">حماية الأوقاف</h3>
+                    </div>
+                    <p class="text-emerald-100">يساهم في حماية أملاك الأوقاف الإسلامية والمقدسات في فلسطين</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content مع محاذاة سفلي -->
+    <main class="py-8 md:py-12">
+        <div class="container mx-auto px-4 md:px-6">
+            <div class="grid lg:grid-cols-12 gap-6 md:gap-8 items-stretch">
+                <!-- Left Column: Services & FAQ -->
+                <div class="lg:col-span-3">
+                    <div class="column-alignment h-full">
+                        <!-- Services Card -->
+                        <div class="side-card-gradient rounded-2xl p-4 md:p-6 shadow-2xl border border-emerald-100 dark:border-emerald-900 mb-6 md:mb-8">
+                            <div class="flex items-center gap-3 mb-6">
+                                <div class="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-gradient-to-br from-emerald-600 to-emerald-700 flex items-center justify-center shadow-lg">
+                                    <i class="fas fa-cogs text-lg md:text-xl text-white"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg md:text-xl font-bold text-gray-800 dark:text-white">خدمات النظام المتكاملة</h3>
+                                    <p class="text-emerald-600 dark:text-emerald-400 text-xs md:text-sm">انقر على أي خدمة لبدء المحادثة</p>
+                                </div>
+                            </div>
+
+                            <div class="space-y-4">
+                                <!-- Service 1 -->
+                                <button onclick="askQuestion('ما هي إجراءات توثيق وقف جديد في فلسطين؟')" 
+                                        class="w-full p-4 service-gradient rounded-xl hover:shadow-xl transition-all duration-300 text-right group hover-lift border border-emerald-700">
+                                    <div class="flex items-start gap-3">
+                                        <div class="w-8 h-8 md:w-10 md:h-10 rounded-lg bg-white/20 flex items-center justify-center group-hover:scale-110 transition-transform">
+                                            <i class="fas fa-file-contract text-white text-sm md:text-base"></i>
+                                        </div>
+                                        <div class="flex-1">
+                                            <h4 class="font-bold text-white group-hover:text-amber-300 text-sm md:text-base">توثيق الأوقاف</h4>
+                                            <p class="text-emerald-200 text-xs md:text-sm mt-1">إجراءات وشروط تسجيل وتوثيق وقف جديد</p>
+                                        </div>
+                                    </div>
+                                </button>
+
+                                <!-- Service 2 -->
+                                <button onclick="askQuestion('كيف يمكن استثمار أموال الوقف بطرق شرعية؟')" 
+                                        class="w-full p-4 service-gradient rounded-xl hover:shadow-xl transition-all duration-300 text-right group hover-lift border border-emerald-700">
+                                    <div class="flex items-start gap-3">
+                                        <div class="w-8 h-8 md:w-10 md:h-10 rounded-lg bg-white/20 flex items-center justify-center group-hover:scale-110 transition-transform">
+                                            <i class="fas fa-chart-line text-white text-sm md:text-base"></i>
+                                        </div>
+                                        <div class="flex-1">
+                                            <h4 class="font-bold text-white group-hover:text-amber-300 text-sm md:text-base">استثمار الأوقاف</h4>
+                                            <p class="text-emerald-200 text-xs md:text-sm mt-1">آليات استثمارية شرعية لتنمية موارد الأوقاف</p>
+                                        </div>
+                                    </div>
+                                </button>
+
+                                <!-- Service 3 -->
+                                <button onclick="askQuestion('ما هي استراتيجيات حماية أوقاف القدس من المصادرة؟')" 
+                                        class="w-full p-4 service-gradient rounded-xl hover:shadow-xl transition-all duration-300 text-right group hover-lift border border-emerald-700">
+                                    <div class="flex items-start gap-3">
+                                        <div class="w-8 h-8 md:w-10 md:h-10 rounded-lg bg-white/20 flex items-center justify-center group-hover:scale-110 transition-transform">
+                                            <i class="fas fa-shield-alt text-white text-sm md:text-base"></i>
+                                        </div>
+                                        <div class="flex-1">
+                                            <h4 class="font-bold text-white group-hover:text-amber-300 text-sm md:text-base">حماية الأوقاف</h4>
+                                            <p class="text-emerald-200 text-xs md:text-sm mt-1">إستراتيجيات قانونية وعملية لحماية أملاك الأوقاف</p>
+                                        </div>
+                                    </div>
+                                </button>
+
+                                <!-- Service 4 -->
+                                <button onclick="askQuestion('ما الضوابط الشرعية لتوزيع ريع الوقف؟')" 
+                                        class="w-full p-4 service-gradient rounded-xl hover:shadow-xl transition-all duration-300 text-right group hover-lift border border-emerald-700">
+                                    <div class="flex items-start gap-3">
+                                        <div class="w-8 h-8 md:w-10 md:h-10 rounded-lg bg-white/20 flex items-center justify-center group-hover:scale-110 transition-transform">
+                                            <i class="fas fa-hand-holding-usd text-white text-sm md:text-base"></i>
+                                        </div>
+                                        <div class="flex-1">
+                                            <h4 class="font-bold text-white group-hover:text-amber-300 text-sm md:text-base">توزيع الريع</h4>
+                                            <p class="text-emerald-200 text-xs md:text-sm mt-1">الضوابط الشرعية والإجرائية لتوزيع عوائد الوقف</p>
+                                        </div>
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- FAQ Section - أصبحت 6 أسئلة -->
+                        <div class="side-card-gradient rounded-2xl p-4 md:p-6 shadow-2xl border border-emerald-100 dark:border-emerald-900">
+                            <div class="flex items-center gap-3 mb-6">
+                                <i class="fas fa-question-circle text-xl md:text-2xl text-emerald-600 dark:text-emerald-400"></i>
+                                <h3 class="text-lg md:text-xl font-bold text-gray-800 dark:text-white">أسئلة شائعة</h3>
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-3 md:gap-4">
+                                <!-- FAQ 1 -->
+                                <button onclick="askQuestion('ما هي شروط صحة الوقف في الفقه الإسلامي؟')" 
+                                        class="p-3 md:p-4 service-gradient rounded-xl hover:shadow-lg transition-all duration-300 hover-lift border border-emerald-700">
+                                    <div class="flex flex-col items-center text-center">
+                                        <i class="fas fa-book text-white text-base md:text-lg mb-2"></i>
+                                        <p class="text-xs md:text-sm font-medium text-white">شروط صحة الوقف</p>
+                                    </div>
+                                </button>
+
+                                <!-- FAQ 2 -->
+                                <button onclick="askQuestion('كيف يمكن التبرع للوقف الشرعي؟')" 
+                                        class="p-3 md:p-4 service-gradient rounded-xl hover:shadow-lg transition-all duration-300 hover-lift border border-emerald-700">
+                                    <div class="flex flex-col items-center text-center">
+                                        <i class="fas fa-hand-holding-heart text-white text-base md:text-lg mb-2"></i>
+                                        <p class="text-xs md:text-sm font-medium text-white">التبرع للوقف</p>
+                                    </div>
+                                </button>
+
+                                <!-- FAQ 3 -->
+                                <button onclick="askQuestion('ما هي حقوق الواقف بعد إنشاء الوقف؟')" 
+                                        class="p-3 md:p-4 service-gradient rounded-xl hover:shadow-lg transition-all duration-300 hover-lift border border-emerald-700">
+                                    <div class="flex flex-col items-center text-center">
+                                        <i class="fas fa-gavel text-white text-base md:text-lg mb-2"></i>
+                                        <p class="text-xs md:text-sm font-medium text-white">حقوق الواقف</p>
+                                    </div>
+                                </button>
+
+                                <!-- FAQ 4 -->
+                                <button onclick="askQuestion('كيف يتم حساب ريع الوقف وتوزيعه؟')" 
+                                        class="p-3 md:p-4 service-gradient rounded-xl hover:shadow-lg transition-all duration-300 hover-lift border border-emerald-700">
+                                    <div class="flex flex-col items-center text-center">
+                                        <i class="fas fa-calculator text-white text-base md:text-lg mb-2"></i>
+                                        <p class="text-xs md:text-sm font-medium text-white">حساب ريع الوقف</p>
+                                    </div>
+                                </button>
+
+                                <!-- FAQ 5 (جديدة) -->
+                                <button onclick="askQuestion('ما الفرق بين الوقف الذري والوقف الخيري؟')" 
+                                        class="p-3 md:p-4 service-gradient rounded-xl hover:shadow-lg transition-all duration-300 hover-lift border border-emerald-700">
+                                    <div class="flex flex-col items-center text-center">
+                                        <i class="fas fa-scale-balanced text-white text-base md:text-lg mb-2"></i>
+                                        <p class="text-xs md:text-sm font-medium text-white">أنواع الوقف</p>
+                                    </div>
+                                </button>
+
+                                <!-- FAQ 6 (جديدة) -->
+                                <button onclick="askQuestion('هل يمكن إلغاء الوقف أو تغييره؟')" 
+                                        class="p-3 md:p-4 service-gradient rounded-xl hover:shadow-lg transition-all duration-300 hover-lift border border-emerald-700">
+                                    <div class="flex flex-col items-center text-center">
+                                        <i class="fas fa-exchange-alt text-white text-base md:text-lg mb-2"></i>
+                                        <p class="text-xs md:text-sm font-medium text-white">تعديل الوقف</p>
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Middle Column: Chat متجاوب -->
+                <div class="lg:col-span-6">
+                    <div class="chat-container h-full">
+                        <!-- Chat Container -->
+                        <div class="chat-gradient rounded-2xl shadow-2xl overflow-hidden h-full border border-emerald-100 dark:border-emerald-900">
+                            <!-- Chat Header -->
+                            <div class="bg-gradient-to-r from-emerald-700 to-emerald-800 p-4 md:p-6">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center gap-3 md:gap-4">
+                                        <div class="w-10 h-10 md:w-14 md:h-14 rounded-xl bg-white/20 flex items-center justify-center">
+                                            <i class="fas fa-robot text-xl md:text-2xl text-white"></i>
+                                        </div>
+                                        <div>
+                                            <h3 class="text-lg md:text-2xl font-bold text-white">المساعد الذكي لأوقاف فلسطين</h3>
+                                            <p class="text-emerald-100 text-sm md:text-base">نموذج ذكاء اصطناعي شامل</p>
+                                        </div>
+                                    </div>
+                                    <div class="px-3 py-1 md:px-5 md:py-2 bg-white/20 rounded-full backdrop-blur-sm">
+                                        <span class="text-white font-semibold text-xs md:text-sm">3 رسائل متبقية</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Chat Messages Container -->
+                            <div id="chatMessages" class="chat-messages-container p-4 md:p-6 scrollbar-thin">
+                                <!-- AI Welcome Message -->
+                                <div class="message-ai rounded-2xl p-4 md:p-5 mb-4 max-w-[90%] md:max-w-[85%] animate-fade-in">
+                                    <div class="flex items-center gap-3 mb-3">
+                                        <div class="w-8 h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-br from-emerald-500 to-emerald-600 flex items-center justify-center">
+                                            <i class="fas fa-robot text-white text-sm md:text-base"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-bold text-gray-800 dark:text-white text-sm md:text-base">مساعد PalWaqf AI</h4>
+                                            <p class="text-xs text-gray-500 dark:text-gray-400">الآن</p>
+                                        </div>
+                                    </div>
+                                    <div class="text-gray-700 dark:text-gray-300 space-y-3 text-sm md:text-base">
+                                        <p>السلام عليكم ورحمة الله وبركاته. أنا مساعدكم الذكي المتخصص في شؤون إدارة الأوقاف الإسلامية في فلسطين.</p>
+                                        <p class="font-bold text-emerald-700 dark:text-emerald-400">كيف يمكنني مساعدتكم اليوم؟</p>
+                                        <div class="space-y-2 pr-4">
+                                            <div class="flex items-center gap-2">
+                                                <i class="fas fa-circle text-xs text-emerald-500"></i>
+                                                <span>توثيق الوقف الجديد وضوابطه الشرعية والقانونية</span>
+                                            </div>
+                                            <div class="flex items-center gap-2">
+                                                <i class="fas fa-circle text-xs text-emerald-500"></i>
+                                                <span>استثمار أموال الوقف وفق الشريعة الإسلامية</span>
+                                            </div>
+                                            <div class="flex items-center gap-2">
+                                                <i class="fas fa-circle text-xs text-emerald-500"></i>
+                                                <span>حماية أملاك الأوقاف في القدس والمناطق المهددة</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- User Message -->
+                                <div class="message-user rounded-2xl p-4 md:p-5 mb-4 max-w-[90%] md:max-w-[85%] animate-fade-in">
+                                    <div class="flex items-center gap-3 mb-3">
+                                        <div class="w-8 h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center">
+                                            <i class="fas fa-user text-white text-sm md:text-base"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-bold text-gray-800 dark:text-white text-sm md:text-base">أنت</h4>
+                                            <p class="text-xs text-gray-500 dark:text-gray-400">منذ قليل</p>
+                                        </div>
+                                    </div>
+                                    <p class="text-gray-700 dark:text-gray-300 text-sm md:text-base">ما هي إجراءات توثيق وقف جديد في فلسطين؟</p>
+                                </div>
+
+                                <!-- AI Response -->
+                                <div class="message-ai rounded-2xl p-4 md:p-5 mb-4 max-w-[90%] md:max-w-[85%] animate-fade-in">
+                                    <div class="flex items-center gap-3 mb-3">
+                                        <div class="w-8 h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-br from-emerald-500 to-emerald-600 flex items-center justify-center">
+                                            <i class="fas fa-robot text-white text-sm md:text-base"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-bold text-gray-800 dark:text-white text-sm md:text-base">مساعد PalWaqf AI</h4>
+                                            <p class="text-xs text-gray-500 dark:text-gray-400">منذ دقيقة</p>
+                                        </div>
+                                    </div>
+                                    <div class="text-gray-700 dark:text-gray-300 space-y-4 text-sm md:text-base">
+                                        <p class="font-bold text-emerald-700 dark:text-emerald-400">إجراءات توثيق وقف جديد في فلسطين:</p>
+                                        <ol class="space-y-2 pr-6">
+                                            <li class="flex items-start gap-2">
+                                                <span class="w-5 h-5 md:w-6 md:h-6 rounded-full bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 flex items-center justify-center text-xs md:text-sm">1</span>
+                                                <span>التوجه لمكتب وزارة الأوقاف في المحافظة</span>
+                                            </li>
+                                            <li class="flex items-start gap-2">
+                                                <span class="w-5 h-5 md:w-6 md:h-6 rounded-full bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 flex items-center justify-center text-xs md:text-sm">2</span>
+                                                <span>تقديم المستندات المطلوبة (صك الملكية، الهوية، وثيقة الوقف)</span>
+                                            </li>
+                                            <li class="flex items-start gap-2">
+                                                <span class="w-5 h-5 md:w-6 md:h-6 rounded-full bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 flex items-center justify-center text-xs md:text-sm">3</span>
+                                                <span>فحص المستندات من قبل اللجنة القانونية</span>
+                                            </li>
+                                        </ol>
+                                        <div class="p-3 bg-amber-50 dark:bg-amber-900/20 rounded-lg border border-amber-200 dark:border-amber-800">
+                                            <p class="text-xs md:text-sm text-amber-700 dark:text-amber-300">
+                                                <i class="fas fa-clock ml-2"></i>
+                                                <strong>المدة التقريبية:</strong> 30-60 يوم عمل
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Chat Input Container -->
+                            <div class="chat-input-container">
+                                <div class="space-y-4">
+                                    <div class="relative">
+                                        <textarea id="chatInput" 
+                                                  placeholder="اكتب سؤالك هنا حول الأوقاف الإسلامية في فلسطين..."
+                                                  class="w-full p-3 md:p-4 border-2 border-emerald-200 dark:border-emerald-800 rounded-xl focus:border-emerald-500 dark:focus:border-emerald-600 focus:ring-2 focus:ring-emerald-200 dark:focus:ring-emerald-900 outline-none transition-all bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 min-h-[100px] md:min-h-[120px] max-h-[150px] md:max-h-[200px] resize-none pr-12 text-sm md:text-base"></textarea>
+                                        <div class="absolute left-3 md:left-4 bottom-3 md:bottom-4 flex items-center gap-2">
+                                            <button class="w-8 h-8 md:w-10 md:h-10 rounded-full bg-emerald-100 dark:bg-emerald-900/30 hover:bg-emerald-200 dark:hover:bg-emerald-900/50 transition-colors flex items-center justify-center">
+                                                <i class="fas fa-paperclip text-emerald-600 dark:text-emerald-400 text-sm md:text-base"></i>
+                                            </button>
+                                            <button class="w-8 h-8 md:w-10 md:h-10 rounded-full bg-emerald-100 dark:bg-emerald-900/30 hover:bg-emerald-200 dark:hover:bg-emerald-900/50 transition-colors flex items-center justify-center">
+                                                <i class="fas fa-microphone text-emerald-600 dark:text-emerald-400 text-sm md:text-base"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+                                        <div class="flex items-center gap-4 text-xs md:text-sm text-gray-500 dark:text-gray-400">
+                                            <span class="flex items-center gap-1">
+                                                <i class="fas fa-keyboard text-xs"></i>
+                                                Enter للإرسال
+                                            </span>
+                                            <span class="text-emerald-600 dark:text-emerald-400 font-semibold">
+                                                3 رسائل متبقية
+                                            </span>
+                                        </div>
+
+                                        <div class="flex items-center gap-3">
+                                            <button id="clearChat" class="px-3 py-2 md:px-4 md:py-2.5 text-red-600 dark:text-red-400 border border-red-200 dark:border-red-800 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-xl transition-colors flex items-center gap-2 font-medium text-xs md:text-sm">
+                                                <i class="fas fa-trash-alt text-xs md:text-sm"></i>
+                                                مسح المحادثة
+                                            </button>
+                                            <button id="sendMessage" class="px-6 py-2.5 md:px-8 md:py-3 bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white rounded-xl shadow-lg hover:shadow-xl transition-all hover-lift flex items-center gap-2 font-medium text-xs md:text-sm">
+                                                <i class="fas fa-paper-plane text-xs md:text-sm"></i>
+                                                إرسال السؤال
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Quick Info & Achievements -->
+                <div class="lg:col-span-3">
+                    <div class="column-alignment h-full">
+                        <!-- بطاقة معلومات سريعة -->
+                        <div class="side-card-gradient rounded-2xl p-4 md:p-6 shadow-2xl border border-emerald-100 dark:border-emerald-900 mb-6 md:mb-8">
+                            <div class="flex items-center gap-3 mb-6">
+                                <i class="fas fa-info-circle text-xl md:text-2xl text-emerald-600 dark:text-emerald-400"></i>
+                                <h3 class="text-lg md:text-xl font-bold text-gray-800 dark:text-white">معلومات سريعة</h3>
+                            </div>
+                            
+                            <div class="space-y-4">
+                                <!-- Info 1 -->
+                                <div class="flex items-start gap-3 p-3 md:p-4 bg-gradient-to-r from-emerald-50 to-emerald-100 dark:from-emerald-900/30 dark:to-emerald-800/30 rounded-xl border border-emerald-200 dark:border-emerald-700">
+                                    <div class="w-8 h-8 md:w-10 md:h-10 rounded-lg bg-gradient-to-br from-emerald-500 to-emerald-600 flex items-center justify-center flex-shrink-0">
+                                        <i class="fas fa-bolt text-white text-sm md:text-base"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-gray-800 dark:text-white text-sm md:text-base">رد فوري خلال ثوانٍ</h4>
+                                        <p class="text-emerald-600 dark:text-emerald-400 text-xs md:text-sm mt-1">إجابات فورية على استفساراتك حول الأوقاف</p>
+                                    </div>
+                                </div>
+                                
+                                <!-- Info 2 -->
+                                <div class="flex items-start gap-3 p-3 md:p-4 bg-gradient-to-r from-emerald-50 to-emerald-100 dark:from-emerald-900/30 dark:to-emerald-800/30 rounded-xl border border-emerald-200 dark:border-emerald-700">
+                                    <div class="w-8 h-8 md:w-10 md:h-10 rounded-lg bg-gradient-to-br from-emerald-500 to-emerald-600 flex items-center justify-center flex-shrink-0">
+                                        <i class="fas fa-balance-scale text-white text-sm md:text-base"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-gray-800 dark:text-white text-sm md:text-base">مراجع قانونية موثوقة</h4>
+                                        <p class="text-emerald-600 dark:text-emerald-400 text-xs md:text-sm mt-1">مستند إلى القوانين الفلسطينية والمراجع الشرعية</p>
+                                    </div>
+                                </div>
+                                
+                                <!-- Info 3 -->
+                                <div class="flex items-start gap-3 p-3 md:p-4 bg-gradient-to-r from-emerald-50 to-emerald-100 dark:from-emerald-900/30 dark:to-emerald-800/30 rounded-xl border border-emerald-200 dark:border-emerald-700">
+                                    <div class="w-8 h-8 md:w-10 md:h-10 rounded-lg bg-gradient-to-br from-emerald-500 to-emerald-600 flex items-center justify-center flex-shrink-0">
+                                        <i class="fas fa-headset text-white text-sm md:text-base"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-gray-800 dark:text-white text-sm md:text-base">دعم متخصص 24/7</h4>
+                                        <p class="text-emerald-600 dark:text-emerald-400 text-xs md:text-sm mt-1">فريق متخصص لدعمك على مدار الساعة</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Achievements Card -->
+                        <div class="side-card-gradient rounded-2xl p-4 md:p-6 shadow-2xl border border-emerald-100 dark:border-emerald-900">
+                            <div class="flex items-center gap-3 mb-6">
+                                <div class="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-gradient-to-br from-amber-500 to-amber-600 flex items-center justify-center shadow-lg">
+                                    <i class="fas fa-trophy text-lg md:text-xl text-white"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg md:text-xl font-bold text-gray-800 dark:text-white">آخر الإنجازات</h3>
+                                    <p class="text-amber-600 dark:text-amber-400 text-xs md:text-sm">مؤشرات أداء ومشاريع الأوقاف</p>
+                                </div>
+                            </div>
+
+                            <div class="space-y-6">
+                                <!-- Achievement 1 -->
+                                <div class="p-4 md:p-5 rounded-xl bg-gradient-to-br from-emerald-900/50 to-emerald-800/50 border border-emerald-700">
+                                    <div class="flex justify-between items-start mb-4">
+                                        <div class="flex items-center gap-3">
+                                            <div class="w-8 h-8 md:w-10 md:h-10 rounded-lg bg-emerald-800/30 flex items-center justify-center">
+                                                <i class="fas fa-shield-alt text-emerald-300 text-sm md:text-base"></i>
+                                            </div>
+                                            <h4 class="font-bold text-white text-sm md:text-base">توثيق أوقاف القدس</h4>
+                                        </div>
+                                        <span class="text-xs bg-emerald-700 text-emerald-200 px-2 py-1 rounded-full">ديسمبر 2024</span>
+                                    </div>
+                                    <p class="text-emerald-200 text-xs md:text-sm mb-4">تم توثيق 12 عقاراً وقفياً جديداً في محيط البلدة القديمة بالقدس</p>
+                                    <div class="space-y-2">
+                                        <div class="flex justify-between text-xs text-emerald-300">
+                                            <span>مستوى الإنجاز</span>
+                                            <span>17/20 عقاراً</span>
+                                        </div>
+                                        <div class="h-2 bg-emerald-900/50 rounded-full overflow-hidden">
+                                            <div class="h-full bg-gradient-to-r from-emerald-400 to-amber-400 rounded-full" style="width: 85%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Achievement 2 -->
+                                <div class="p-4 md:p-5 rounded-xl bg-gradient-to-br from-emerald-900/50 to-emerald-800/50 border border-emerald-700">
+                                    <div class="flex justify-between items-start mb-4">
+                                        <div class="flex items-center gap-3">
+                                            <div class="w-8 h-8 md:w-10 md:h-10 rounded-lg bg-emerald-800/30 flex items-center justify-center">
+                                                <i class="fas fa-chart-line text-emerald-300 text-sm md:text-base"></i>
+                                            </div>
+                                            <h4 class="font-bold text-white text-sm md:text-base">مشاريع استثمارية</h4>
+                                    </div>
+                                    <span class="text-xs bg-emerald-700 text-emerald-200 px-2 py-1 rounded-full">نوفمبر 2024</span>
+                                </div>
+                                <p class="text-emerald-200 text-xs md:text-sm mb-4">3 مشاريع استثمارية شرعية جديدة قيد التنفيذ</p>
+                                <div class="space-y-2">
+                                    <div class="flex justify-between text-xs text-emerald-300">
+                                        <span>مستوى الإنجاز</span>
+                                        <span>2/3 مشاريع</span>
+                                    </div>
+                                    <div class="h-2 bg-emerald-900/50 rounded-full overflow-hidden">
+                                        <div class="h-full bg-gradient-to-r from-emerald-400 to-amber-400 rounded-full" style="width: 60%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Quick Stats -->
+                        <div class="mt-6 md:mt-8 pt-4 md:pt-6 border-t border-emerald-700">
+                            <h4 class="font-bold text-gray-800 dark:text-white mb-4 text-sm md:text-base">إحصائيات سريعة</h4>
+                            <div class="grid grid-cols-2 gap-3 md:gap-4">
+                                <div class="text-center p-3 md:p-4 rounded-xl bg-gradient-to-br from-emerald-900/30 to-emerald-800/30 border border-emerald-700">
+                                    <div class="text-xl md:text-2xl font-bold text-white">2,450+</div>
+                                    <div class="text-xs md:text-sm text-emerald-300">وقف مسجل</div>
+                                </div>
+                                <div class="text-center p-3 md:p-4 rounded-xl bg-gradient-to-br from-emerald-900/30 to-emerald-800/30 border border-emerald-700">
+                                    <div class="text-xl md:text-2xl font-bold text-white">850+</div>
+                                    <div class="text-xs md:text-sm text-emerald-300">أسرة مستفيدة</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- Features Section -->
+<section class="py-12 md:py-16 bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800">
+    <div class="container mx-auto px-4 md:px-6">
+        <div class="text-center max-w-3xl mx-auto mb-8 md:mb-12">
+            <h3 class="text-2xl md:text-3xl font-bold text-gray-800 dark:text-white mb-3 md:mb-4">المميزات الرئيسية</h3>
+            <p class="text-gray-600 dark:text-gray-400 text-base md:text-lg">نظام متكامل لخدمة الباحثين والمختصين في مجال الأوقاف</p>
+        </div>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+            <!-- Feature 1 -->
+            <div class="feature-gradient rounded-2xl p-6 md:p-8 text-white shadow-2xl hover-lift">
+                <div class="w-12 h-12 md:w-16 md:h-16 rounded-2xl bg-white/20 flex items-center justify-center mb-4 md:mb-6">
+                    <i class="fas fa-robot text-xl md:text-2xl"></i>
+                </div>
+                <h4 class="text-lg md:text-xl font-bold mb-3 md:mb-4">محادثة ذكية تفاعلية</h4>
+                <p class="text-emerald-100 text-sm md:text-base">تفاعل مباشر مع النموذج للحصول على إجابات فورية ودقيقة حول أي استفسار يتعلق بالأوقاف الإسلامية</p>
+            </div>
+            
+            <!-- Feature 2 -->
+            <div class="feature-gradient rounded-2xl p-6 md:p-8 text-white shadow-2xl hover-lift">
+                <div class="w-12 h-12 md:w-16 md:h-16 rounded-2xl bg-white/20 flex items-center justify-center mb-4 md:mb-6">
+                    <i class="fas fa-balance-scale text-xl md:text-2xl"></i>
+                </div>
+                <h4 class="text-lg md:text-xl font-bold mb-3 md:mb-4">مرجعية قانونية شاملة</h4>
+                <p class="text-emerald-100 text-sm md:text-base">يستند النموذج إلى القوانين الفلسطينية الحالية، مجلة الأحكام العدلية العثمانية، والتشريعات التاريخية</p>
+            </div>
+            
+            <!-- Feature 3 -->
+            <div class="feature-gradient rounded-2xl p-6 md:p-8 text-white shadow-2xl hover-lift">
+                <div class="w-12 h-12 md:w-16 md:h-16 rounded-2xl bg-white/20 flex items-center justify-center mb-4 md:mb-6">
+                    <i class="fas fa-book text-xl md:text-2xl"></i>
+                </div>
+                <h4 class="text-lg md:text-xl font-bold mb-3 md:mb-4">مراجع فقهية موثوقة</h4>
+                <p class="text-emerald-100 text-sm md:text-base">يعتمد على المصادر الفقهية الإسلامية المعتمدة والأحكام الشرعية المتعلقة بالوقف وشروطه وأنواعه</p>
+            </div>
+            
+            <!-- Feature 4 -->
+            <div class="feature-gradient rounded-2xl p-6 md:p-8 text-white shadow-2xl hover-lift">
+                <div class="w-12 h-12 md:w-16 md:h-16 rounded-2xl bg-white/20 flex items-center justify-center mb-4 md:mb-6">
+                    <i class="fas fa-search text-xl md:text-2xl"></i>
+                </div>
+                <h4 class="text-lg md:text-xl font-bold mb-3 md:mb-4">بحث متقدم في المعرفة</h4>
+                <p class="text-emerald-100 text-sm md:text-base">نظام بحث ذكي يستخدم تقنيات RAG للعثور على المعلومات الأكثر صلة من قاعدة المعرفة الشاملة</p>
+            </div>
+            
+            <!-- Feature 5 -->
+            <div class="feature-gradient rounded-2xl p-6 md:p-8 text-white shadow-2xl hover-lift">
+                <div class="w-12 h-12 md:w-16 md:h-16 rounded-2xl bg-white/20 flex items-center justify-center mb-4 md:mb-6">
+                    <i class="fas fa-users text-xl md:text-2xl"></i>
+                </div>
+                <h4 class="text-lg md:text-xl font-bold mb-3 md:mb-4">استشارات متخصصة</h4>
+                <p class="text-emerald-100 text-sm md:text-base">يقدم استشارات قانونية وشرعية متخصصة في مجالات إدارة الأوقاف، التوثيق، والإجراءات الإدارية</p>
+            </div>
+            
+            <!-- Feature 6 -->
+            <div class="feature-gradient rounded-2xl p-6 md:p-8 text-white shadow-2xl hover-lift">
+                <div class="w-12 h-12 md:w-16 md:h-16 rounded-2xl bg-white/20 flex items-center justify-center mb-4 md:mb-6">
+                    <i class="fas fa-sparkles text-xl md:text-2xl"></i>
+                </div>
+                <h4 class="text-lg md:text-xl font-bold mb-3 md:mb-4">تصنيف تلقائي للأسئلة</h4>
+                <p class="text-emerald-100 text-sm md:text-base">يحلل النموذج طبيعة السؤال تلقائياً ويصنفه لتقديم إجابة أكثر دقة وتخصصاً</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Coverage Areas Section -->
+<section class="py-12 md:py-16 bg-gradient-to-b from-white to-gray-50 dark:from-gray-800 dark:to-gray-900">
+    <div class="container mx-auto px-4 md:px-6">
+        <div class="text-center max-w-3xl mx-auto mb-8 md:mb-12">
+            <h3 class="text-2xl md:text-3xl font-bold text-gray-800 dark:text-white mb-3 md:mb-4">المجالات المغطاة</h3>
+            <p class="text-gray-600 dark:text-gray-400 text-base md:text-lg">يغطي النموذج جميع جوانب الأوقاف الإسلامية في فلسطين</p>
+        </div>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+            <!-- Coverage 1 -->
+            <div class="feature-gradient rounded-2xl p-6 md:p-8 text-white shadow-2xl hover-lift">
+                <div class="w-12 h-12 md:w-16 md:h-16 rounded-2xl bg-white/20 flex items-center justify-center mb-4 md:mb-6">
+                    <i class="fas fa-gavel text-xl md:text-2xl"></i>
+                </div>
+                <h4 class="text-lg md:text-xl font-bold mb-3 md:mb-4">القوانين والتشريعات</h4>
+                <p class="text-emerald-100 text-sm md:text-base">قانون الأوقاف الفلسطيني، قرارات بقوانين، وتشريعات تاريخية عثمانية متكاملة</p>
+            </div>
+            
+            <!-- Coverage 2 -->
+            <div class="feature-gradient rounded-2xl p-6 md:p-8 text-white shadow-2xl hover-lift">
+                <div class="w-12 h-12 md:w-16 md:h-16 rounded-2xl bg-white/20 flex items-center justify-center mb-4 md:mb-6">
+                    <i class="fas fa-scale-balanced text-xl md:text-2xl"></i>
+                </div>
+                <h4 class="text-lg md:text-xl font-bold mb-3 md:mb-4">الأحكام الفقهية</h4>
+                <p class="text-emerald-100 text-sm md:text-base">شروط صحة الوقف، أركانه، أنواعه، وأحكام النظارة والإدارة الشرعية</p>
+            </div>
+            
+            <!-- Coverage 3 -->
+            <div class="feature-gradient rounded-2xl p-6 md:p-8 text-white shadow-2xl hover-lift">
+                <div class="w-12 h-12 md:w-16 md:h-16 rounded-2xl bg-white/20 flex items-center justify-center mb-4 md:mb-6">
+                    <i class="fas fa-book-open text-xl md:text-2xl"></i>
+                </div>
+                <h4 class="text-lg md:text-xl font-bold mb-3 md:mb-4">مجلة الأحكام العدلية</h4>
+                <p class="text-emerald-100 text-sm md:text-base">القواعد الفقهية الكلية (99 قاعدة) وأحكام الوقف في المجلة وتطبيقاتها المعاصرة</p>
+            </div>
+            
+            <!-- Coverage 4 -->
+            <div class="feature-gradient rounded-2xl p-6 md:p-8 text-white shadow-2xl hover-lift">
+                <div class="w-12 h-12 md:w-16 md:h-16 rounded-2xl bg-white/20 flex items-center justify-center mb-4 md:mb-6">
+                    <i class="fas fa-building text-xl md:text-2xl"></i>
+                </div>
+                <h4 class="text-lg md:text-xl font-bold mb-3 md:mb-4">الجوانب الإدارية</h4>
+                <p class="text-emerald-100 text-sm md:text-base">إجراءات توثيق الوقف، دور وزارة الأوقاف، وإدارة الأموال الوقفية وتنميتها</p>
+            </div>
+            
+            <!-- Coverage 5 -->
+            <div class="feature-gradient rounded-2xl p-6 md:p-8 text-white shadow-2xl hover-lift">
+                <div class="w-12 h-12 md:w-16 md:h-16 rounded-2xl bg-white/20 flex items-center justify-center mb-4 md:mb-6">
+                    <i class="fas fa-landmark text-xl md:text-2xl"></i>
+                </div>
+                <h4 class="text-lg md:text-xl font-bold mb-3 md:mb-4">التراث الوقفي</h4>
+                <p class="text-emerald-100 text-sm md:text-base">الأوقاف التاريخية في فلسطين، توثيقها، والحفاظ على التراث المعماري الإسلامي</p>
+            </div>
+            
+            <!-- Coverage 6 -->
+            <div class="feature-gradient rounded-2xl p-6 md:p-8 text-white shadow-2xl hover-lift">
+                <div class="w-12 h-12 md:w-16 md:h-16 rounded-2xl bg-white/20 flex items-center justify-center mb-4 md:mb-6">
+                    <i class="fas fa-handshake text-xl md:text-2xl"></i>
+                </div>
+                <h4 class="text-lg md:text-xl font-bold mb-3 md:mb-4">النزاعات الوقفية</h4>
+                <p class="text-emerald-100 text-sm md:text-base">حل النزاعات الوقفية، الوساطة الشرعية، والطرق القانونية لحماية الحقوق الوقفية</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer-gradient text-white pt-12 md:pt-16 pb-6 md:pb-8">
+    <div class="container mx-auto px-4 md:px-6">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 mb-8 md:mb-12">
+            <!-- About -->
+            <div>
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-10 h-10 md:w-14 md:h-14 rounded-xl bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center">
+                        <i class="fas fa-mosque text-xl md:text-2xl text-white"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-lg md:text-xl font-bold">PalWaqf AI</h4>
+                        <p class="text-emerald-100 text-xs md:text-sm">المساعد الذكي للأوقاف الإسلامية</p>
+                    </div>
+                </div>
+                <p class="text-emerald-100 leading-relaxed text-sm md:text-base">
+                    نظام ذكاء اصطناعي متكامل لإدارة الأوقاف الإسلامية في فلسطين، يجمع بين الأصالة الشرعية والتقنية الحديثة للحفاظ على المقدسات ودعم الصمود.
+                </p>
+            </div>
+            
+            <!-- Sources -->
+            <div>
+                <h4 class="text-base md:text-lg font-bold text-amber-300 mb-4 md:mb-6">المصادر والمراجع</h4>
+                <ul class="space-y-3">
+                    <li>
+                        <a href="#" class="text-emerald-100 hover:text-amber-300 transition-colors flex items-center gap-2 text-sm md:text-base">
+                            <i class="fas fa-arrow-left text-xs"></i>
+                            قانون الأوقاف الفلسطيني
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="text-emerald-100 hover:text-amber-300 transition-colors flex items-center gap-2 text-sm md:text-base">
+                            <i class="fas fa-arrow-left text-xs"></i>
+                            مجلة الأحكام العدلية
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="text-emerald-100 hover:text-amber-300 transition-colors flex items-center gap-2 text-sm md:text-base">
+                            <i class="fas fa-arrow-left text-xs"></i>
+                            وزارة الأوقاف الفلسطينية
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="text-emerald-100 hover:text-amber-300 transition-colors flex items-center gap-2 text-sm md:text-base">
+                            <i class="fas fa-arrow-left text-xs"></i>
+                            الدراسات والأبحاث
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- Contact -->
+            <div>
+                <h4 class="text-base md:text-lg font-bold text-amber-300 mb-4 md:mb-6">اتصل بنا</h4>
+                <ul class="space-y-4 text-emerald-100 text-sm md:text-base">
+                    <li class="flex items-center gap-3">
+                        <i class="fas fa-map-marker-alt text-amber-300"></i>
+                        <span>رام الله - فلسطين</span>
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <i class="fas fa-phone text-amber-300"></i>
+                        <span>0097222345678</span>
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <i class="fas fa-envelope text-amber-300"></i>
+                        <span>info@palwaqf-ai.ps</span>
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <i class="fas fa-clock text-amber-300"></i>
+                        <span>الأحد - الخميس: 8:00 ص - 4:00 م</span>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- Social Media -->
+            <div>
+                <h4 class="text-base md:text-lg font-bold text-amber-300 mb-4 md:mb-6">وسائل التواصل الاجتماعي</h4>
+                <div class="flex gap-3 md:gap-4">
+                    <a href="#" class="w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/10 hover:bg-white/20 transition-colors flex items-center justify-center">
+                        <i class="fab fa-twitter text-lg md:text-xl"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/10 hover:bg-white/20 transition-colors flex items-center justify-center">
+                        <i class="fab fa-facebook-f text-lg md:text-xl"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/10 hover:bg-white/20 transition-colors flex items-center justify-center">
+                        <i class="fab fa-linkedin-in text-lg md:text-xl"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/10 hover:bg-white/20 transition-colors flex items-center justify-center">
+                        <i class="fab fa-youtube text-lg md:text-xl"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Copyright -->
+        <div class="pt-6 md:pt-8 border-t border-emerald-700 text-center">
+            <p class="text-base md:text-lg mb-2">© 2026 PalWaqf AI. جميع الحقوق محفوظة. نموذج ذكاء اصطناعي متخصص.</p>
+            <p class="text-emerald-300 text-xs md:text-sm">يستند النظام إلى القوانين الفلسطينية ومجلة الأحكام العدلية والمراجع الشرعية الموثوقة.</p>
+        </div>
+    </div>
+</footer>
+
+<!-- JavaScript -->
+<script>
+    // DOM Elements
+    const nightModeToggle = document.getElementById('nightModeToggle');
+    const chatInput = document.getElementById('chatInput');
+    const chatMessages = document.getElementById('chatMessages');
+    const sendButton = document.getElementById('sendMessage');
+    const clearChatButton = document.getElementById('clearChat');
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const createAccountBtn = document.getElementById('createAccountBtn');
+    const loginLogoutBtn = document.getElementById('loginLogoutBtn');
+    const dashboardBtn = document.getElementById('dashboardBtn');
+    const mobileLoginBtn = document.getElementById('mobileLoginBtn');
+    const mobileDashboardBtn = document.getElementById('mobileDashboardBtn');
+
+    // Night Mode Toggle
+    function toggleNightMode() {
+        document.documentElement.classList.toggle('dark');
+        const icon = nightModeToggle.querySelector('i');
+        if (document.documentElement.classList.contains('dark')) {
+            icon.classList.remove('fa-moon');
+            icon.classList.add('fa-sun');
+            localStorage.setItem('nightMode', 'enabled');
+        } else {
+            icon.classList.remove('fa-sun');
+            icon.classList.add('fa-moon');
+            localStorage.setItem('nightMode', 'disabled');
+        }
+    }
+
+    // Load Night Mode Preference
+    function loadNightMode() {
+        const nightMode = localStorage.getItem('nightMode');
+        if (nightMode === 'enabled') {
+            document.documentElement.classList.add('dark');
+            const icon = nightModeToggle.querySelector('i');
+            icon.classList.remove('fa-moon');
+            icon.classList.add('fa-sun');
+        }
+    }
+
+    // Mobile Menu Toggle
+    function toggleMobileMenu() {
+        mobileMenu.classList.toggle('hidden');
+    }
+
+    // Create Account Function
+    function createAccount() {
+        alert('سيتم توجيهك إلى صفحة إنشاء حساب جديد. ستتمكن من التسجيل باستخدام البريد الإلكتروني أو رقم الهاتف.');
+        // في التطبيق الفعلي، ستوجه المستخدم إلى صفحة التسجيل
+        window.location.href = '#';
+    }
+
+    // Login/Logout Function
+    function toggleLogin() {
+        const loginBtn = document.getElementById('loginLogoutBtn');
+        const isLoggedIn = loginBtn.textContent.includes('تسجيل الخروج');
+        
+        if (isLoggedIn) {
+            loginBtn.innerHTML = '<i class="fas fa-sign-in-alt text-sm md:text-base"></i><span class="font-semibold text-xs md:text-sm mr-2">تسجيل الدخول</span>';
+            alert('تم تسجيل الخروج بنجاح');
+        } else {
+            loginBtn.innerHTML = '<i class="fas fa-sign-out-alt text-sm md:text-base"></i><span class="font-semibold text-xs md:text-sm mr-2">تسجيل الخروج</span>';
+            alert('تم تسجيل الدخول بنجاح. مرحباً بك!');
+        }
+    }
+
+    // Dashboard Function
+    function openDashboard() {
+        alert('سيتم فتح لوحة التحكم الخاصة بك. هنا يمكنك إدارة حسابك ومتابعة استفساراتك السابقة.');
+        // في التطبيق الفعلي، ستوجه المستخدم إلى لوحة التحكم
+        window.location.href = '#';
+    }
+
+    // AI Responses مع إضافة ردود جديدة للأسئلة الجديدة
+    const aiResponses = {
+        'default': `شكراً لسؤالك. للإجابة الدقيقة على هذا الاستفسار المتخصص، أحتاج إلى البحث في قاعدة المعرفة القانونية والشرعية. يرجى تسجيل الدخول للحصول على إجابات مفصلة ومخصصة.`,
+        'توثيق': `**إجراءات توثيق وقف جديد في فلسطين:**
+
+1. **التوجه لمكتب وزارة الأوقاف** في المحافظة المعنية
+2. **تقديم المستندات المطلوبة:**
+   - صك الملكية الأصلي (طابو)
+   - هوية الواقف الأصلية
+   - وثيقة الوقف موقعة من الواقف وشاهدين عدلين
+   - مخطط العقار المصدق
+
+3. **الفحص القانوني:** من قبل اللجنة القانونية المختصة
+4. **التسجيل الرسمي:** في السجل الوقفي المركزي
+5. **إصدار الوثيقة:** وثيقة وقف رسمية مختومة
+
+⏱️ **المدة التقريبية:** 30-60 يوم عمل.`,
+        'استثمار': `**طرق استثمار أموال الوقف شرعاً:**
+
+✅ **المضاربة الشرعية:** مع رجال أعمال موثوقين في مشاريع منتجة
+✅ **الإجارة الطويلة:** تأجير عقارات الوقف بعقود 10-20 سنة
+✅ **المرابحة:** تمويل مشاريع صغيرة للأسر المنتجة
+
+🔒 **شروط الاستثمار الشرعي:**
+- تجنب الربا بجميع أشكاله
+- الابتعاد عن المجالات المحرمة
+- وجود عائد منتظم ومضمون`,
+        'أنواع': `**الفرق بين الوقف الذري والوقف الخيري:**
+
+**الوقف الذري (الأهلي):**
+✅ يكون المستفيدون منه أشخاصاً معينين (الذرية والأقارب)
+✅ ينتقل من جيل إلى جيل
+✅ ينتهي بانقطاع الذرية فينتقل للوقف الخيري
+
+**الوقف الخيري:**
+✅ يكون للمنفعة العامة (مساجد، مستشفيات، مدارس)
+✅ يستمر إلى يوم القيامة
+✅ لا ينتهي بانقطاع أشخاص معينين
+
+📚 **المصدر:** مجلة الأحكام العدلية، المادة 184.`,
+        'تعديل': `**إمكانية إلغاء الوقف أو تغييره:**
+
+🔒 **الوقف صحيح لا يمكن إلغاؤه** إذا تم استيفاء شروطه.
+
+🔄 **التغييرات المسموحة:**
+1. تغيير الناظر (المشرف) عند العجز أو الوفاة
+2. تغيير طريقة الاستثمار بما يتوافق مع الشريعة
+3. تحويل المنفعة بما يحقق مصلحة الوقف
+
+⚠️ **لا يجوز:**
+- بيع عقار الوقف إلا في حالات استثنائية
+- تغيير الجهة الموقوف عليها
+- تحويل الوقف الخيري إلى ذري
+
+📜 **المرجع:** القاعدة الفقهية "الوقف لا يحل ولا يباع"`
+    };
+
+    // Add Message to Chat مع تحسين المحاذاة
+    function addMessage(text, isUser = false) {
+        const messageDiv = document.createElement('div');
+        const timestamp = new Date().toLocaleTimeString('ar-EG', { 
+            hour: '2-digit', 
+            minute: '2-digit' 
+        });
+
+        messageDiv.className = isUser ? 
+            'message-user rounded-2xl p-4 md:p-5 mb-4 max-w-[90%] md:max-w-[85%] animate-fade-in' : 
+            'message-ai rounded-2xl p-4 md:p-5 mb-4 max-w-[90%] md:max-w-[85%] animate-fade-in';
+
+        const sender = isUser ? 'أنت' : 'مساعد PalWaqf AI';
+        const icon = isUser ? 'fa-user' : 'fa-robot';
+        const iconBg = isUser ? 'from-blue-500 to-blue-600' : 'from-emerald-500 to-emerald-600';
+
+        // Format text with markdown
+        let formattedText = text
+            .replace(/\*\*(.*?)\*\*/g, '<strong class="text-emerald-700 dark:text-emerald-400">$1</strong>')
+            .replace(/\n/g, '<br>')
+            .replace(/✅/g, '<span class="text-green-500">✅</span>')
+            .replace(/🔒/g, '<span class="text-red-500">🔒</span>')
+            .replace(/⏱️/g, '<span class="text-amber-500">⏱️</span>')
+            .replace(/⚠️/g, '<span class="text-red-500">⚠️</span>')
+            .replace(/🔄/g, '<span class="text-blue-500">🔄</span>')
+            .replace(/📚/g, '<span class="text-purple-500">📚</span>')
+            .replace(/📜/g, '<span class="text-amber-500">📜</span>');
+
+        messageDiv.innerHTML = `
+            <div class="flex items-center gap-3 mb-3">
+                <div class="w-8 h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-br ${iconBg} flex items-center justify-center">
+                    <i class="fas ${icon} text-white text-sm md:text-base"></i>
+                </div>
+                <div>
+                    <h4 class="font-bold text-gray-800 dark:text-white text-sm md:text-base">${sender}</h4>
+                    <p class="text-xs text-gray-500 dark:text-gray-400">${timestamp}</p>
+                </div>
+            </div>
+            <div class="text-gray-700 dark:text-gray-300 space-y-3 text-sm md:text-base">
+                ${formattedText}
+            </div>
+        `;
+
+        chatMessages.appendChild(messageDiv);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+
+        // Auto-response for user messages
+        if (isUser) {
+            setTimeout(() => {
+                let response = aiResponses.default;
+                const lowerText = text.toLowerCase();
+                
+                if (lowerText.includes('توثيق') || lowerText.includes('وقف جديد')) {
+                    response = aiResponses.توثيق;
+                } else if (lowerText.includes('استثمار') || lowerText.includes('ريع')) {
+                    response = aiResponses.استثمار;
+                } else if (lowerText.includes('فرق') || lowerText.includes('ذري') || lowerText.includes('خيري')) {
+                    response = aiResponses.أنواع;
+                } else if (lowerText.includes('إلغاء') || lowerText.includes('تغيير') || lowerText.includes('تعديل')) {
+                    response = aiResponses.تعديل;
+                }
+                
+                addMessage(response, false);
+            }, 1500);
+        }
+    }
+
+    // Send Message
+    function sendMessage() {
+        const message = chatInput.value.trim();
+        if (!message) return;
+
+        addMessage(message, true);
+        chatInput.value = '';
+        chatInput.style.height = 'auto';
+        chatInput.focus();
+    }
+
+    // Ask Question from services/FAQ
+    function askQuestion(question) {
+        chatInput.value = question;
+        chatInput.focus();
+        chatInput.style.height = 'auto';
+        chatInput.style.height = Math.min(chatInput.scrollHeight, 150) + 'px';
+        
+        // Scroll to chat on mobile
+        if (window.innerWidth < 1024) {
+            document.querySelector('.chat-container').scrollIntoView({ 
+                behavior: 'smooth', 
+                block: 'center' 
+            });
+        }
+    }
+
+    // Clear Chat
+    function clearChat() {
+        if (confirm('هل أنت متأكد من مسح المحادثة؟ سيتم حذف جميع الرسائل.')) {
+            chatMessages.innerHTML = `
+                <div class="message-ai rounded-2xl p-4 md:p-5 mb-4 max-w-[90%] md:max-w-[85%] animate-fade-in">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-8 h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-br from-emerald-500 to-emerald-600 flex items-center justify-center">
+                            <i class="fas fa-robot text-white text-sm md:text-base"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-800 dark:text-white text-sm md:text-base">مساعد PalWaqf AI</h4>
+                            <p class="text-xs text-gray-500 dark:text-gray-400">الآن</p>
+                        </div>
+                    </div>
+                    <div class="text-gray-700 dark:text-gray-300 space-y-3 text-sm md:text-base">
+                        <p>السلام عليكم ورحمة الله وبركاته. أنا مساعدكم الذكي المتخصص في شؤون إدارة الأوقاف الإسلامية في فلسطين.</p>
+                        <p class="font-bold text-emerald-700 dark:text-emerald-400">كيف يمكنني مساعدتكم اليوم؟</p>
+                    </div>
+                </div>
+            `;
+        }
+    }
+
+    // Event Listeners
+    nightModeToggle.addEventListener('click', toggleNightMode);
+    sendButton.addEventListener('click', sendMessage);
+    clearChatButton.addEventListener('click', clearChat);
+    mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+    createAccountBtn.addEventListener('click', createAccount);
+    loginLogoutBtn.addEventListener('click', toggleLogin);
+    dashboardBtn.addEventListener('click', openDashboard);
+    mobileLoginBtn.addEventListener('click', toggleLogin);
+    mobileDashboardBtn.addEventListener('click', openDashboard);
+
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!mobileMenu.contains(e.target) && !mobileMenuBtn.contains(e.target) && !mobileMenu.classList.contains('hidden')) {
+            mobileMenu.classList.add('hidden');
+        }
+    });
+
+    chatInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            sendMessage();
+        }
+    });
+
+    // Auto-resize textarea
+    chatInput.addEventListener('input', function() {
+        this.style.height = 'auto';
+        const maxHeight = window.innerWidth < 768 ? 150 : 200;
+        this.style.height = Math.min(this.scrollHeight, maxHeight) + 'px';
+    });
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', () => {
+        loadNightMode();
+        
+        // Auto-welcome message
+        setTimeout(() => {
+            if (!document.querySelector('.message-user')) {
+                addMessage('ما هي شروط الوقف في الفقه الإسلامي؟', true);
+            }
+        }, 2000);
+        
+        // Responsive adjustments
+        window.addEventListener('resize', function() {
+            const maxHeight = window.innerWidth < 768 ? 150 : 200;
+            chatInput.style.height = 'auto';
+            chatInput.style.height = Math.min(chatInput.scrollHeight, maxHeight) + 'px';
+            
+            // ضبط ارتفاع الشات ديناميكياً
+            const chatContainer = document.querySelector('.chat-container');
+            if (chatContainer) {
+                const viewportHeight = window.innerHeight;
+                chatContainer.style.height = Math.min(viewportHeight * 0.7, 600) + 'px';
+            }
+        });
+        
+        // ضبط ارتفاع الشات الأولي
+        setTimeout(() => {
+            const chatContainer = document.querySelector('.chat-container');
+            if (chatContainer) {
+                const viewportHeight = window.innerHeight;
+                chatContainer.style.height = Math.min(viewportHeight * 0.7, 600) + 'px';
+            }
+        }, 100);
+    });
+</script>
+
+<!-- تعليمات Manus.ai -->
+<div id="manusInstructions" style="display: none;">
+    <!-- 
+        ===============================================
+        📋 تعليمات Manus.ai - التحسينات النهائية
+        ===============================================
+        
+        ✅ التحسينات التي تم تنفيذها في هذه المرحلة:
+        
+        1. زيادة عدد الأسئلة الشائعة لتصبح 6 بدلاً من 4:
+           - أضيفت سؤالان جديدان:
+             * "ما الفرق بين الوقف الذري والوقف الخيري؟" (أنواع الوقف)
+             * "هل يمكن إلغاء الوقف أو تغييره؟" (تعديل الوقف)
+           - تم تحديث الردود الآلية لتناسب الأسئلة الجديدة
+           - بقيت الشبكة grid-cols-2 لتعرض 6 أسئلة بشكل مرتب
+           
+        2. تحسين العمود الأوسط (المحادثة الرئيسية):
+           - جعل الشات متجاوب مع تمدد وتقلص الصفحة
+           - استخدام flexbox column لضمان بقاء مربع المحادثة في الأسفل
+           - تقسيم الشات إلى قسمين:
+             * chat-messages-container (الجزء العلوي مع التمرير)
+             * chat-input-container (الجزء السفلي الثابت)
+           - تحسين محاذاة الرسائل:
+             * رسائل المستخدم: margin-left: 10% (لليسار قليلاً)
+             * رسائل الذكاء الاصطناعي: margin-right: 15% (لليسار أكثر للتفريق)
+           - إضافة تأثيرات حركة وتحسين التصميم
+           
+        3. إضافة صور متحركة في قسم Hero:
+           - أضيفت 3 صور متحركة مع تأثير float
+           - كل صورة لها overlay يظهر عند hover
+           - الصور تعرض مواضيع مرتبطة بالنظام:
+             * الأوقاف التاريخية
+             * الاستشارات الشرعية
+             * التوثيق الرقمي
+           - إضافة معلومات مبسطة تحت الصور في 3 أقسام:
+             * نموذج ذكي متخصص
+             * مراجع قانونية شاملة
+             * حماية الأوقاف
+           - تحسين تخطيط Hero ليكون بنظام grid من عمودين
+           
+        4. محاذاة سفلي للأعمدة الثلاثة:
+           - استخدام class "column-alignment" على كل عمود
+           - تطبيق display: flex مع flex-direction: column
+           - استخدام height: 100% لملء المساحة المتاحة
+           - ضمان محاذاة جميع الأعمدة من الأسفل
+           - تحسين المسافات بين المكونات داخل كل عمود
+           
+        ✅ الإضافات السابقة التي تم الحفاظ عليها:
+        
+        1. تنسيق حجم موحد للأزرار في القائمة الرئيسية
+        2. بطاقة معلومات سريعة في العمود الأيمن
+        3. زر إنشاء حساب جديد في قسم Hero
+        4. زر تسجيل الدخول/تسجيل خروج
+        5. زر لوحة التحكم
+        6. تصميم متجاوب مع جميع الشاشات
+        7. اتجاه الصفحة من اليمين لليسار
+        
+        🎨 تحسينات التصميم:
+        - إضافة أنيميشنات جديدة (float, slideIn)
+        - تحسين تأثيرات hover على الصور
+        - تحسين تدرجات الألوان والظلال
+        - تحسين المسافات والمحاذاة العامة
+        
+        📱 تحسينات الاستجابة:
+        - تحسين تخطيط Hero للشاشات الصغيرة
+        - ضبط ارتفاعات الشات ديناميكياً
+        - تحسين حجم الخطوط والمسافات على الموبايل
+        
+        🚀 تحسينات الوظائف:
+        - إضافة ردود ذكاء اصطناعي للأسئلة الجديدة
+        - تحسين تجربة المحادثة مع محاذاة متقدمة
+        - تحسين تفاعل الصور المتحركة
+        
+        🔧 الهيكل النهائي:
+        - العمود الأيسر: الخدمات (4) + الأسئلة الشائعة (6)
+        - العمود الأوسط: شات متجاوب مع محاذاة محسنة
+        - العمود الأيمن: معلومات سريعة + الإنجازات + الإحصائيات
+        
+        🎯 النتيجة النهائية:
+        صفحة ويب متكاملة ومتجاوبة مع تحسينات بصرية ووظيفية شاملة
+        تلبي احتياجات مستخدمي نظام PalWaqf AI المتخصص في الأوقاف الإسلامية
+    -->
+</div>
+</body>
+</html>

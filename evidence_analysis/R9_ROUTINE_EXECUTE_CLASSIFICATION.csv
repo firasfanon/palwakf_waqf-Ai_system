@@ -1,0 +1,31 @@
+﻿routine_name,identity_arguments,security_definer,volatility,public_execute,anon_execute,authenticated_execute,service_role_execute,broad_client_execute,likely_mutation_rpc,classification,missing_evidence
+_find_admin_users_column,candidates text[],False,s,True,True,True,True,True,False,BROAD_EXECUTE_FUNCTION_REVIEW_REQUIRED,FUNCTION_BODY|PROCONFIG_SEARCH_PATH|ROLE_IMPERSONATION_RESULT
+assert_knowledge_review_task_claim_v1,"p_target_type text, p_target_id uuid, p_workflow_stage text, p_reviewer_auth_user_id uuid",False,v,False,False,False,True,False,False,SERVICE_ROLE_OR_OWNER_SCOPED,
+assert_knowledge_reviewer_scope_v1,"p_auth_user_id uuid, p_required_scope text",False,v,False,False,False,True,False,False,SERVICE_ROLE_OR_OWNER_SCOPED,
+can_access_message_conversation,p_conversation_id uuid,True,s,True,True,True,True,True,False,SECURITY_DEFINER_BROAD_EXECUTE_REVIEW_REQUIRED,FUNCTION_BODY|PROCONFIG_SEARCH_PATH|ROLE_IMPERSONATION_RESULT
+can_manage_assistant,,True,s,True,True,True,True,True,False,SECURITY_DEFINER_BROAD_EXECUTE_REVIEW_REQUIRED,FUNCTION_BODY|PROCONFIG_SEARCH_PATH|ROLE_IMPERSONATION_RESULT
+can_read_assistant,,True,s,True,True,True,True,True,False,SECURITY_DEFINER_BROAD_EXECUTE_REVIEW_REQUIRED,FUNCTION_BODY|PROCONFIG_SEARCH_PATH|ROLE_IMPERSONATION_RESULT
+document_can_read_v1,,True,s,True,True,True,True,True,False,SECURITY_DEFINER_BROAD_EXECUTE_REVIEW_REQUIRED,FUNCTION_BODY|PROCONFIG_SEARCH_PATH|ROLE_IMPERSONATION_RESULT
+document_can_write_v1,,True,s,True,True,True,True,True,False,SECURITY_DEFINER_BROAD_EXECUTE_REVIEW_REQUIRED,FUNCTION_BODY|PROCONFIG_SEARCH_PATH|ROLE_IMPERSONATION_RESULT
+is_authenticated_admin_user,,True,s,True,True,True,True,True,False,SECURITY_DEFINER_BROAD_EXECUTE_REVIEW_REQUIRED,FUNCTION_BODY|PROCONFIG_SEARCH_PATH|ROLE_IMPERSONATION_RESULT
+is_conversation_owner,p_user_id uuid,True,s,True,True,True,True,True,False,SECURITY_DEFINER_BROAD_EXECUTE_REVIEW_REQUIRED,FUNCTION_BODY|PROCONFIG_SEARCH_PATH|ROLE_IMPERSONATION_RESULT
+rpc_claim_knowledge_review_task_v1,"p_task_id uuid, p_reviewer_auth_user_id uuid",False,v,False,False,False,True,False,True,SERVICE_ROLE_OR_OWNER_SCOPED,
+rpc_get_knowledge_activation_snapshot_v1,,False,s,False,False,False,True,False,False,SERVICE_ROLE_OR_OWNER_SCOPED,
+rpc_get_legacy_provenance_reconstruction_snapshot_v1_1,,False,s,True,True,True,True,True,False,BROAD_EXECUTE_FUNCTION_REVIEW_REQUIRED,FUNCTION_BODY|PROCONFIG_SEARCH_PATH|ROLE_IMPERSONATION_RESULT
+rpc_kb08b_mapping_queue_v1,"p_limit integer, p_offset integer",False,s,False,False,False,True,False,False,SERVICE_ROLE_OR_OWNER_SCOPED,
+rpc_kb08b_resolve_mapping_v1,"p_legacy_import_id uuid, p_reviewer_auth_user_id uuid, p_resolution_action text, p_target_reference_document_id uuid, p_target_knowledge_document_id uuid, p_source_id uuid, p_category text, p_domain_scope text, p_notes text, p_evidence_json jsonb",False,v,False,False,False,True,False,False,SERVICE_ROLE_OR_OWNER_SCOPED,
+rpc_kb09_set_page_operation_binding_v1,"p_page_key text, p_reviewer_auth_user_id uuid, p_binding_status text, p_read_contract text, p_write_contract text, p_notes text",False,v,False,False,False,True,False,False,SERVICE_ROLE_OR_OWNER_SCOPED,
+rpc_list_chat_retrieval_candidates_v1,"p_limit integer, p_require_verified_citation boolean",False,s,False,False,False,True,False,False,SERVICE_ROLE_OR_OWNER_SCOPED,
+rpc_list_duplicate_citation_review_task_groups_v1_1,p_limit integer,False,s,True,True,True,True,True,False,BROAD_EXECUTE_FUNCTION_REVIEW_REQUIRED,FUNCTION_BODY|PROCONFIG_SEARCH_PATH|ROLE_IMPERSONATION_RESULT
+rpc_list_knowledge_activation_items_v1,"p_run_id uuid, p_bucket text, p_limit integer",False,s,False,False,False,True,False,False,SERVICE_ROLE_OR_OWNER_SCOPED,
+rpc_list_legacy_provenance_groups_v1_1,"p_run_id uuid, p_limit integer",False,s,True,True,True,True,True,False,BROAD_EXECUTE_FUNCTION_REVIEW_REQUIRED,FUNCTION_BODY|PROCONFIG_SEARCH_PATH|ROLE_IMPERSONATION_RESULT
+rpc_list_legacy_provenance_reconstruction_items_v1_1,"p_run_id uuid, p_state text, p_limit integer",False,s,True,True,True,True,True,False,BROAD_EXECUTE_FUNCTION_REVIEW_REQUIRED,FUNCTION_BODY|PROCONFIG_SEARCH_PATH|ROLE_IMPERSONATION_RESULT
+rpc_reconcile_duplicate_citation_review_task_v1_1,"p_reviewer_auth_user_id uuid, p_keep_task_id uuid, p_cancel_task_id uuid, p_rationale text",False,v,True,True,True,True,True,True,MUTATION_RPC_BROAD_EXECUTE_REVIEW_REQUIRED,FUNCTION_BODY|PROCONFIG_SEARCH_PATH|ROLE_IMPERSONATION_RESULT
+rpc_record_legacy_provenance_resolution_v1_1,"p_reviewer_auth_user_id uuid, p_item_id uuid, p_decision_code text, p_evidence_reference text, p_candidate_url text, p_issuer_name text, p_notes text",False,v,True,True,True,True,True,True,MUTATION_RPC_BROAD_EXECUTE_REVIEW_REQUIRED,FUNCTION_BODY|PROCONFIG_SEARCH_PATH|ROLE_IMPERSONATION_RESULT
+rpc_refresh_knowledge_activation_audit_v1,"p_reviewer_auth_user_id uuid, p_run_note text",False,v,False,False,False,True,False,True,SERVICE_ROLE_OR_OWNER_SCOPED,
+rpc_refresh_legacy_provenance_reconstruction_v1_1,"p_reviewer_auth_user_id uuid, p_activation_run_id uuid, p_run_note text",False,v,True,True,True,True,True,True,MUTATION_RPC_BROAD_EXECUTE_REVIEW_REQUIRED,FUNCTION_BODY|PROCONFIG_SEARCH_PATH|ROLE_IMPERSONATION_RESULT
+rpc_release_official_knowledge_document_v1,"p_knowledge_document_id uuid, p_reviewer_auth_user_id uuid, p_release_notes text",False,v,False,False,False,True,False,True,SERVICE_ROLE_OR_OWNER_SCOPED,
+rpc_resolve_content_classification_containment_v1,"p_task_id uuid, p_reviewer_auth_user_id uuid, p_decision text, p_evidence_note text, p_evidence_json jsonb",False,v,False,False,False,True,False,True,SERVICE_ROLE_OR_OWNER_SCOPED,
+rpc_verify_knowledge_citation_v1,"p_knowledge_document_id uuid, p_citation_id uuid, p_reviewer_auth_user_id uuid, p_locator text, p_excerpt text, p_evidence_json jsonb",False,v,False,False,False,True,False,True,SERVICE_ROLE_OR_OWNER_SCOPED,
+rpc_verify_official_reference_source_v1,"p_reference_document_id uuid, p_reviewer_auth_user_id uuid, p_canonical_source_url text, p_issuer_name text, p_evidence_json jsonb",False,v,False,False,False,True,False,True,SERVICE_ROLE_OR_OWNER_SCOPED,
+set_updated_at,,False,v,True,True,True,True,True,False,TRIGGER_HELPER_BROAD_EXECUTE_REVIEW_REQUIRED,FUNCTION_BODY|PROCONFIG_SEARCH_PATH|ROLE_IMPERSONATION_RESULT

@@ -1,0 +1,12 @@
+PASS_PARSE server/assistantMaturityPolicy.ts
+PASS_PARSE server/runtimeRepository.ts
+PASS_PARSE server/knowledgeOperations.ts
+PASS_PARSE server/routers.ts
+PASS_PARSE server/_core/siteSettingsRouter.ts
+PASS_PARSE client/src/pages/admin/KnowledgeReviewOperations.tsx
+PASS_PARSE client/src/components/ui/dialog.tsx
+PASS_UI_DEFERRED_MUTATION_CONTROLS_ABSENT
+PASS_PHASE_GATE official_knowledge_release
+PASS_PHASE_GATE kb08b_mapping_mutation
+PASS_PHASE_GATE page_binding_mutation
+PASS_PARTIAL_BUNDLE_REJECTED

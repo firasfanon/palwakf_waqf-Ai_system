@@ -1,0 +1,33 @@
+# Sovereign Trust Foundation v1 — Changed Files
+
+## Runtime code
+
+```text
+server/assistantTrust.ts
+server/assistantTrust.test.ts
+server/rag.ts
+server/runtimeRepository.ts
+server/routers.ts
+client/src/components/ReferencesDisplay.tsx
+```
+
+## SQL/operator pack
+
+```text
+sql_sandbox/sovereign_assistant_trust_foundation_v1/00_PRECHECK_READ_ONLY.sql
+sql_sandbox/sovereign_assistant_trust_foundation_v1/01_SCHEMA_SCOPES_WORKFLOWS_RLS_OPERATOR_APPLY.sql
+sql_sandbox/sovereign_assistant_trust_foundation_v1/02_BACKFILL_CLASSIFY_QUARANTINE_AND_CREATE_REVIEW_TASKS_OPERATOR_APPLY.sql
+sql_sandbox/sovereign_assistant_trust_foundation_v1/03_VIEWS_RPC_AND_READ_ONLY_GATES_OPERATOR_APPLY.sql
+sql_sandbox/sovereign_assistant_trust_foundation_v1/04_POST_APPLY_READ_ONLY_VERIFICATION.sql
+sql_sandbox/sovereign_assistant_trust_foundation_v1/05_OPERATOR_SEQUENCE.md
+```
+
+## Governance / baseline
+
+```text
+PALWAKF_PLATFORM_COMPREHENSIVE_GUIDE.md
+SOVEREIGN_TRUST_FOUNDATION_V1_*.md
+ERROR_RECORD_SOVEREIGN_TRUST_FOUNDATION_V1_2026_06_19.md
+LATEST_BASELINE_FINAL_HANDOFF_2026_06_19.md
+SESSION_HANDOFF_SOVEREIGN_TRUST_FOUNDATION_V1_TO_KB08A_KB09_2026_06_19.md
+```

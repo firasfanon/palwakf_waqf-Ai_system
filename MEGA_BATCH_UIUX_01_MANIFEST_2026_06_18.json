@@ -1,0 +1,82 @@
+{
+  "batch": "Mega Batch UI/UX 01",
+  "version": "v52",
+  "decision": "MEGA_BATCH_UIUX_01_COMFORT_LIGHT_REWORK_APPLIED_RUNTIME_BROWSER_EVIDENCE_PENDING",
+  "changed_files": [
+    {
+      "path": "client/src/contexts/ThemeContext.tsx",
+      "size_bytes": 2079,
+      "sha256": "36b4c213af068755ad7abc09717baa156b28df7301118594acf21cd48f6759d1"
+    },
+    {
+      "path": "client/src/main.tsx",
+      "size_bytes": 2630,
+      "sha256": "9ac87bd229e900040ca47f0b9d1ef9fa60f2f68b1bd70a01ea0e532bc905974f"
+    },
+    {
+      "path": "client/src/App.tsx",
+      "size_bytes": 6174,
+      "sha256": "a1b97a8b1ef71b3f8bf6928c0ac1353250040c2ac29db77808d51d4a82d6dc41"
+    },
+    {
+      "path": "client/src/lib/themes.ts",
+      "size_bytes": 1513,
+      "sha256": "3185f4285665c625c5b5fc7b0fed2e657247791f8feca0d3c48b4e999bfe3da9"
+    },
+    {
+      "path": "client/src/index.css",
+      "size_bytes": 53801,
+      "sha256": "df5573d5ea3ea8f4ffcb63eb2b0fb32f8683f476b10487425598ee30fdd6d41b"
+    },
+    {
+      "path": "client/src/styles/admin.css",
+      "size_bytes": 35127,
+      "sha256": "be9c957bb9e5f45ca915da990aa198acff788514a6424ce0e40bf6030b593471"
+    },
+    {
+      "path": "client/src/pages/Chat.tsx",
+      "size_bytes": 67701,
+      "sha256": "764aa3697748c25407d7502b74675e41ac8ed137e71fbf3dca37624add41ea16"
+    },
+    {
+      "path": "MEGA_BATCH_UIUX_01_ASSISTANT_COMFORT_LIGHT_REWORK_2026_06_18.md",
+      "size_bytes": 2668,
+      "sha256": "d5e55bd36d23614d78c4b96c6942f4f24bda7daaa5efc1be7ee3aa39685689da"
+    },
+    {
+      "path": "MEGA_BATCH_UIUX_01_CHANGELOG_2026_06_18.md",
+      "size_bytes": 1504,
+      "sha256": "22dbe29999d19e175f7dceafc6b2e14c471ad69b24ed1309c287f70826b4fbdf"
+    },
+    {
+      "path": "MEGA_BATCH_UIUX_01_CHANGED_FILES_2026_06_18.md",
+      "size_bytes": 742,
+      "sha256": "68a2aa7c7b2a3674dda5ba86213acee2464efd4db5d0bac8ce603eb07062587b"
+    },
+    {
+      "path": "MEGA_BATCH_UIUX_01_VERIFICATION_NOTES_2026_06_18.md",
+      "size_bytes": 1265,
+      "sha256": "104c3dcc3ef5082d5872429e0e49447bbbe37f1259d830cc7718751591aaefaf"
+    },
+    {
+      "path": "ERROR_RECORD_MEGA_BATCH_UIUX_01_2026_06_18.md",
+      "size_bytes": 1218,
+      "sha256": "671134d81ab6ff998c6f444887a154bc85ef7d76f5192c56131b0400fa55b616"
+    },
+    {
+      "path": "SESSION_HANDOFF_MEGA_BATCH_UIUX_01_TO_KNOWLEDGE_06C_OR_29A_2026_06_18.md",
+      "size_bytes": 1434,
+      "sha256": "1d6159ca4d9da7b93529e1db13f29b4d2b36205fc7b4aa675eaa79804333739f"
+    },
+    {
+      "path": "LATEST_BASELINE_FINAL_HANDOFF_2026_06_18.md",
+      "size_bytes": 387,
+      "sha256": "0c2f0808bb359588a2b083be06369b52c29fa0a1bdad2439ce496688fa8bccf0"
+    },
+    {
+      "path": "PALWAKF_PLATFORM_COMPREHENSIVE_GUIDE.md",
+      "size_bytes": 31768,
+      "sha256": "b04b93103d041f037f4e0bd507c96082ce607a0dea659766a6667aa4d04f8f34"
+    }
+  ]
+}

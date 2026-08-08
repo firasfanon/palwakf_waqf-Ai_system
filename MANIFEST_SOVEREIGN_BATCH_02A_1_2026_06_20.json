@@ -1,0 +1,89 @@
+{
+  "package": "SOVEREIGN_BATCH_02A_1_REVIEW_CASE_MODAL_CONTAINMENT_AND_RUNTIME_READ_RESILIENCE",
+  "generated_at": "2026-06-20",
+  "mode": "preapply_only",
+  "mutates_database": false,
+  "contains_sql_apply": false,
+  "production_approved": false,
+  "static_validation": [
+    "typescript_ast_parse_pass",
+    "zip_integrity_pass"
+  ],
+  "files": [
+    {
+      "path": "CHANGELOG_SOVEREIGN_BATCH_02A_1_2026_06_20.md",
+      "sha256": "15213e7b0a8c9b7a89ef1dea64654a37b2630188b2682f3c2c97ecfa429c76d5",
+      "bytes": 579
+    },
+    {
+      "path": "ERROR_RECORD_SOVEREIGN_BATCH_02A_1_2026_06_20.md",
+      "sha256": "9fa8ae39987c1f4b552ba81e9da4984d76b622bdfae096a99c29979192778c4c",
+      "bytes": 1077
+    },
+    {
+      "path": "LATEST_BASELINE_SOVEREIGN_BATCH_02A_1_PREAPPLY_2026_06_20.md",
+      "sha256": "25c3ecc86c019df96646075517b8a96fefabf6dc7c6d61ab2ef673b7634ba0ee",
+      "bytes": 430
+    },
+    {
+      "path": "PALWAKF_PLATFORM_COMPREHENSIVE_GUIDE_PATCH_SOVEREIGN_BATCH_02A_1_2026_06_20.md",
+      "sha256": "336418da686761fb611d09f11bcf32dff8d6dd0be0bb8c59f64fb5619f9dad63",
+      "bytes": 622
+    },
+    {
+      "path": "README_AR.md",
+      "sha256": "1f14d0054239dabdd2f787518f464aa9b22d818ecf20ad6fe175778d50fe0dbc",
+      "bytes": 1823
+    },
+    {
+      "path": "SESSION_HANDOFF_SOVEREIGN_BATCH_02A_1_2026_06_20.md",
+      "sha256": "1c7a4d420ff135646a33b9d17426fa8e1648cbd9914b627d7c5654fc7de97648",
+      "bytes": 817
+    },
+    {
+      "path": "VALIDATION_REPORT_SOVEREIGN_BATCH_02A_1_2026_06_20.md",
+      "sha256": "f7b98d61bf6e9d74fb7172db5d9cc9efbbbd50c5ac5466919dd65fdd7e59aa30",
+      "bytes": 764
+    },
+    {
+      "path": "client/src/components/ui/dialog.tsx",
+      "sha256": "17dcfc545887afc798262d559793dd1fa3bd00fc416134aa502b6bba450e2b24",
+      "bytes": 6358
+    },
+    {
+      "path": "client/src/pages/admin/KnowledgeReviewOperations.tsx",
+      "sha256": "08a0d599df87784d8de36b1289545448ed481dcf5e42e036289f48adde4950cd",
+      "bytes": 26980
+    },
+    {
+      "path": "docs/sovereign_batch_02a_1_review_case_modal_containment_runtime_read_resilience/RUNBOOK_AR.md",
+      "sha256": "5d3ca74b7667813a866c47f0ad533317a9ed2ed44189b1131beb13fdc745021a",
+      "bytes": 1400
+    },
+    {
+      "path": "docs/sovereign_batch_02a_1_review_case_modal_containment_runtime_read_resilience/RUNTIME_READ_FAILURE_TRIAGE_AR.md",
+      "sha256": "cf237244d1a21777fb6e154c3038f98f16723a2c7907bd8a7798e082245fb696",
+      "bytes": 1407
+    },
+    {
+      "path": "scripts/apply_sovereign_batch_02a_1_review_case_modal_containment.ps1",
+      "sha256": "d9b94f232a172d32647965751d267f8cfab9591be0ddd106cd61e57823622eb0",
+      "bytes": 2041
+    },
+    {
+      "path": "scripts/inspect_local_assistant_runtime_connectivity.ps1",
+      "sha256": "00ab0b3133b605f49ed40a9eb91ef0ac9fb7a704ecd923b8f7decc230ac64ae0",
+      "bytes": 902
+    },
+    {
+      "path": "server/runtimeRepository.ts",
+      "sha256": "9693a531f24b63f70afeec1d1b70ce0637b628bfdce31d6c0660ae623c3f2dfc",
+      "bytes": 56303
+    },
+    {
+      "path": "sql_sandbox/sovereign_batch_02a_1_review_case_modal_containment_runtime_read_resilience/README_NO_SQL.md",
+      "sha256": "593c5feef1b7606ef474da4d6f7f77c79f8798c2578adefe596cce07724202ab",
+      "bytes": 187
+    }
+  ]
+}

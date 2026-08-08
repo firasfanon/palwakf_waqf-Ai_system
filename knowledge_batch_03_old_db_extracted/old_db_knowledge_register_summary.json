@@ -1,0 +1,337 @@
+{
+  "total_distinct_discovered_records": 138,
+  "by_origin": {
+    "old_db_success_land_reference_insert_query": 1,
+    "old_db_select_row": 27,
+    "legacy_source_file": 100,
+    "old_db_success_insert_query": 10
+  },
+  "by_authority_tier_candidate": {
+    "excluded_or_non_authoritative_candidate": 2,
+    "ministry_or_administrative_candidate": 14,
+    "official_or_legal_primary_candidate": 41,
+    "review_required_candidate": 58,
+    "review_required_public_web_candidate": 1,
+    "supporting_reference_candidate": 22
+  },
+  "by_category": {
+    "land_reference": 1,
+    "reference": 9,
+    "historical": 9,
+    "إداري": 10,
+    "تاريخي": 22,
+    "فقهي": 35,
+    "law": 18,
+    "قانوني": 22,
+    "مجلة الأحكام": 3,
+    "administrative": 2,
+    "jurisprudence": 7
+  },
+  "old_db_evidence_facts": [
+    {
+      "origin_file": "db-query-1767916790725.json",
+      "query_kind": "knowledge_documents_count_or_category",
+      "rows": [
+        {
+          "total_documents": "131"
+        }
+      ]
+    },
+    {
+      "origin_file": "db-query-1767917361721.json",
+      "query_kind": "knowledge_documents_count_or_category",
+      "rows": [
+        {
+          "total": "132"
+        }
+      ]
+    },
+    {
+      "origin_file": "db-query-1767919863002.json",
+      "query_kind": "knowledge_documents_count_or_category",
+      "rows": [
+        {
+          "category": "jurisprudence",
+          "count": "59"
+        },
+        {
+          "category": "law",
+          "count": "52"
+        },
+        {
+          "category": "historical",
+          "count": "49"
+        },
+        {
+          "category": "reference",
+          "count": "25"
+        },
+        {
+          "category": "administrative",
+          "count": "12"
+        },
+        {
+          "category": "majalla",
+          "count": "5"
+        }
+      ]
+    },
+    {
+      "origin_file": "db-query-1767919867643.json",
+      "query_kind": "knowledge_documents_count_or_category",
+      "rows": [
+        {
+          "total_documents": "202"
+        }
+      ]
+    },
+    {
+      "origin_file": "db-query-1767967449651.json",
+      "query_kind": "knowledge_documents_count_or_category",
+      "rows": [
+        {
+          "total": "226"
+        }
+      ]
+    },
+    {
+      "origin_file": "db-query-1767972513332.json",
+      "query_kind": "knowledge_documents_count_or_category",
+      "rows": [
+        {
+          "category": "reference",
+          "count": "24"
+        },
+        {
+          "category": "law",
+          "count": "2"
+        },
+        {
+          "category": "historical",
+          "count": "2"
+        }
+      ]
+    },
+    {
+      "origin_file": "db-query-1767974478166.json",
+      "query_kind": "knowledge_documents_count_or_category",
+      "rows": [
+        {
+          "total_count": "293"
+        },
+        {
+          "total_count": "land_refs_count"
+        },
+        {
+          "total_count": "16"
+        },
+        {
+          "total_count": "id\ttitle\tcategory"
+        },
+        {
+          "total_count": "390090\tالتنظيم القانوني للأراضي في فلسطين (1858 - الحاضر)\treference"
+        },
+        {
+          "total_count": "390089\tالأرشيف العثماني بأيدٍ فلسطينية.. وثائق تثبت ملكية الأراضي\treference"
+        },
+        {
+          "total_count": "390088\tوثائق الملكية الفلسطينية في الأرشيف العثماني\treference"
+        },
+        {
+          "total_count": "390087\tنظام ملكية الأراضي في العهد العثماني\treference"
+        },
+        {
+          "total_count": "390086\tقانون الأراضي العثماني (1858)\treference"
+        }
+      ]
+    },
+    {
+      "origin_file": "db-query-1767974724109.json",
+      "query_kind": "knowledge_documents_count_or_category",
+      "rows": [
+        {
+          "total_count": "307"
+        },
+        {
+          "total_count": "land_refs"
+        },
+        {
+          "total_count": "31"
+        },
+        {
+          "total_count": "id\ttitle\tcategory"
+        },
+        {
+          "total_count": "390104\tالتنظيم القانوني للأراضي في فلسطين (1858 - الحاضر)\treference"
+        },
+        {
+          "total_count": "390103\tالأرشيف العثماني بأيدٍ فلسطينية.. وثائق تثبت ملكية الأراضي\treference"
+        },
+        {
+          "total_count": "390102\tوثائق الملكية الفلسطينية في الأرشيف العثماني\treference"
+        },
+        {
+          "total_count": "390101\tنظام ملكية الأراضي في العهد العثماني\treference"
+        },
+        {
+          "total_count": "390100\tقانون الأراضي العثماني (1858)\tlaw"
+        },
+        {
+          "total_count": "390099\tMind the Gap: An Archaeological View of Land Tenure and Usufruct Rights Around Jerusalem\thistorical"
+        },
+        {
+          "total_count": "390098\tLand registry maps in Palestine during the Ottoman period\tlaw"
+        },
+        {
+          "total_count": "390097\tLand privatization in nineteenth-century Ottoman Palestine\tlaw"
+        },
+        {
+          "total_count": "390096\tConsequences of the Ottoman land law: Agrarian and privatization processes in Palestine, 1858–1918\tlaw"
+        },
+        {
+          "total_count": "390095\tتسوية وتسجيل الأراضي في القدس الشرقية: الإشكاليات، التحديات والإسقاطات\tlaw"
+        },
+        {
+          "total_count": "390094\tالنظام القانوني للأراضي الأميرية في فلسطين\tlaw"
+        },
+        {
+          "total_count": "390093\tحق التصرف الوارد على الأراضي الأميرية وفقاً للتشريعات النافذة في فلسطين\tlaw"
+        },
+        {
+          "total_count": "390092\tديار بئر السبع: جنوب فلسطين العثماني - الأرض والمجتمع والدولة\tlaw"
+        },
+        {
+          "total_count": "390091\tمتصرفية القدس أواخر العهد العثماني\thistorical"
+        },
+        {
+          "total_count": "390090\tالتنظيم القانوني للأراضي في فلسطين (1858 - الحاضر)\treference"
+        }
+      ]
+    },
+    {
+      "origin_file": "db-query-1772747591146.json",
+      "query_kind": "knowledge_sources_rows",
+      "rows": [
+        {
+          "id": "1",
+          "name": "مصدر اختباري",
+          "type": "api",
+          "is_active": "1",
+          "config": "NULL"
+        },
+        {
+          "id": "2",
+          "name": "مصدر اختباري",
+          "type": "api",
+          "is_active": "1",
+          "config": "NULL"
+        },
+        {
+          "id": "3",
+          "name": "مصدر اختباري",
+          "type": "api",
+          "is_active": "1",
+          "config": "NULL"
+        },
+        {
+          "id": "4",
+          "name": "ويكيبيديا العربية",
+          "type": "wikipedia",
+          "is_active": "1",
+          "config": "{\"api\":\"https://ar.wikipedia.org/w/api.php\"}"
+        },
+        {
+          "id": "60001",
+          "name": "Stats Test Wikipedia",
+          "type": "wikipedia",
+          "is_active": "1",
+          "config": "NULL"
+        },
+        {
+          "id": "60002",
+          "name": "Stats Test RSS",
+          "type": "rss",
+          "is_active": "1",
+          "config": "NULL"
+        },
+        {
+          "id": "60003",
+          "name": "Stats Test API",
+          "type": "api",
+          "is_active": "1",
+          "config": "NULL"
+        },
+        {
+          "id": "90001",
+          "name": "Pilot Scraper",
+          "type": "scraper",
+          "is_active": "1",
+          "config": "{\"allowedDomains\": [\"example.com\"], \"respectRobots\": true, \"rateLimitMs\": 1000, \"maxPages\": 1, \"urls\": [\"https://example.com/\"]}"
+        }
+      ]
+    },
+    {
+      "origin_file": "db-query-1772747596431.json",
+      "query_kind": "knowledge_sources_rows",
+      "rows": [
+        {
+          "id": "1",
+          "name": "مصدر اختباري",
+          "type": "api",
+          "is_active": "1",
+          "config": "NULL"
+        },
+        {
+          "id": "2",
+          "name": "مصدر اختباري",
+          "type": "api",
+          "is_active": "1",
+          "config": "NULL"
+        },
+        {
+          "id": "3",
+          "name": "مصدر اختباري",
+          "type": "api",
+          "is_active": "1",
+          "config": "NULL"
+        },
+        {
+          "id": "4",
+          "name": "ويكيبيديا العربية",
+          "type": "wikipedia",
+          "is_active": "1",
+          "config": "{\"api\":\"https://ar.wikipedia.org/w/api.php\"}"
+        },
+        {
+          "id": "60001",
+          "name": "Stats Test Wikipedia",
+          "type": "wikipedia",
+          "is_active": "1",
+          "config": "NULL"
+        },
+        {
+          "id": "60002",
+          "name": "Stats Test RSS",
+          "type": "rss",
+          "is_active": "1",
+          "config": "NULL"
+        },
+        {
+          "id": "60003",
+          "name": "Stats Test API",
+          "type": "api",
+          "is_active": "1",
+          "config": "NULL"
+        },
+        {
+          "id": "90001",
+          "name": "Pilot Scraper",
+          "type": "scraper",
+          "is_active": "1",
+          "config": "{\"allowedDomains\": [\"example.com\"], \"respectRobots\": true, \"rateLimitMs\": 1000, \"maxPages\": 1, \"urls\": [\"https://example.com/\"]}"
+        }
+      ]
+    }
+  ],
+  "important_note": "Only successful old DB logs and carried legacy source files were used for sanitized intake records. Error logs were not treated as approved/intake records."
+}

@@ -1,0 +1,10 @@
+INSERT INTO knowledge_documents (title, content, source, category, tags, isActive, createdAt, updatedAt) VALUES ('قرار بقانون رقم 1 لسنة 2018 - المادة 2: أهداف الوزارة', 'تهدف وزارة الأوقاف والشؤون الدينية إلى إدارة وتنظيم الأوقاف الإسلامية وحمايتها وتنميتها واستثمارها.', 'قرار بقانون رقم (1) لسنة 2018 بشأن الأوقاف الإسلامية', 'law', 'وزارة الأوقاف، الأهداف، الإدارة', 1, FROM_UNIXTIME(1767919372), FROM_UNIXTIME(1767919372));
+
+INSERT INTO knowledge_documents (title, content, source, category, tags, isActive, createdAt, updatedAt) VALUES ('قرار بقانون 2018 - المادة 5: المجلس الأعلى للأوقاف', 'يشكل مجلس أعلى للأوقاف برئاسة الوزير وعضوية ممثلين عن الجهات ذات العلاقة، ويختص بوضع السياسات العامة للأوقاف.', 'قرار بقانون رقم (1) لسنة 2018', 'law', 'المجلس الأعلى، السياسات، الوزير', 1, FROM_UNIXTIME(1767919372), FROM_UNIXTIME(1767919372));
+
+INSERT INTO knowledge_documents (title, content, source, category, tags, isActive, createdAt, updatedAt) VALUES ('قرار بقانون 2018 - المادة 10: حماية الأوقاف', 'تتمتع الأوقاف بالحماية القانونية، ولا يجوز الاعتداء عليها أو الاستيلاء عليها أو تغيير معالمها.', 'قرار بقانون رقم (1) لسنة 2018', 'law', 'حماية الأوقاف، الاعتداء، الاستيلاء', 1, FROM_UNIXTIME(1767919372), FROM_UNIXTIME(1767919372));
+
+INSERT INTO knowledge_documents (title, content, source, category, tags, isActive, createdAt, updatedAt) VALUES ('الفقه الحنفي - تعريف الوقف', 'الوقف في الفقه الحنفي هو حبس العين على ملك الواقف والتصدق بالمنفعة. فالعين تبقى على ملك الواقف، والمنفعة تصرف في الجهة الموقوف عليها.', 'الفقه الحنفي - كتاب الوقف', 'jurisprudence', 'الفقه الحنفي، تعريف الوقف، حبس العين', 1, FROM_UNIXTIME(1767919372), FROM_UNIXTIME(1767919372));
+
+INSERT INTO knowledge_documents (title, content, source, category, tags, isActive, createdAt, updatedAt) VALUES ('الفقه الحنفي - شروط صحة الوقف', 'يشترط لصحة الوقف في المذهب الحنفي: التأبيد، والقربة، وخروج الموقوف عن ملك الواقف حكماً، والقبول من الموقوف عليه إن كان معيناً.', 'الفقه الحنفي - كتاب الوقف', 'jurisprudence', 'شروط الوقف، التأبيد، القربة', 1, FROM_UNIXTIME(1767919372), FROM_UNIXTIME(1767919372));
+

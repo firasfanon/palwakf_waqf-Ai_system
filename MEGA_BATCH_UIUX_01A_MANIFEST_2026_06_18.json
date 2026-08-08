@@ -1,0 +1,135 @@
+{
+  "batch": "Mega Batch UI/UX 01A — Hash Navigation + Home CTA + Logout Fix",
+  "date": "2026-06-18",
+  "baseline": "v53",
+  "decision": "MEGA_BATCH_UIUX_01A_HASH_NAVIGATION_HOME_CTA_LOGOUT_FIX_APPLIED_BROWSER_RETEST_REQUIRED",
+  "scope": [
+    "Assistant-only",
+    "UI/UX-only",
+    "Light-comfort-first",
+    "No governance expansion",
+    "No production gate"
+  ],
+  "files": [
+    {
+      "path": "client/src/App.tsx",
+      "bytes": 6391,
+      "sha256": "13c9cafaae99ddc4a2ae766c5283c2f76b28a5ac341f6bc8532e33e57013817e"
+    },
+    {
+      "path": "client/src/const.ts",
+      "bytes": 3696,
+      "sha256": "b040821873d21658f619e4bb3a7cfbd1f177608bed499cfce03618c6a0a5da03"
+    },
+    {
+      "path": "client/src/lib/useHybridLocation.ts",
+      "bytes": 2201,
+      "sha256": "1a53684640e0ca24c629b22d254f0feb4cacbdd34c26176593e3d192723d163b"
+    },
+    {
+      "path": "client/src/lib/appRoutes.ts",
+      "bytes": 1650,
+      "sha256": "e561fc1407ef3edf3914ab35f4a9cd5625d627f89130ff1192f439eb639924dd"
+    },
+    {
+      "path": "client/src/pages/Home.tsx",
+      "bytes": 34911,
+      "sha256": "e75f190ccdda7aec6986feb32cca49f2981226be6a4c35dbb2711407155c63de"
+    },
+    {
+      "path": "client/src/components/Navbar.tsx",
+      "bytes": 26447,
+      "sha256": "3fe6e8bb955841f2c3e700ea1486864386265586deecb95b9da54417bdcc432b"
+    },
+    {
+      "path": "client/src/components/Footer.tsx",
+      "bytes": 3229,
+      "sha256": "cad5761750571f98adaee5421f80edbaa485bbdefed94c41fdad9a3b33a4b71b"
+    },
+    {
+      "path": "client/src/components/CommandPalette.tsx",
+      "bytes": 10091,
+      "sha256": "e055dda5662c3f3130d36b2343be8c917d94d6c9521ab3bebee9f674c2b7feb4"
+    },
+    {
+      "path": "client/src/components/PageBreadcrumbs.tsx",
+      "bytes": 4783,
+      "sha256": "612d6cdb00b6476f799ffc50f6244f22769a8de4f977ba0f108597a06a51c5fa"
+    },
+    {
+      "path": "client/src/pages/Chat.tsx",
+      "bytes": 67721,
+      "sha256": "cc248b93810df789c5237cf0f411b48bc18f2a05145f1e561947d81f2cc92f32"
+    },
+    {
+      "path": "client/src/pages/Bookmarks.tsx",
+      "bytes": 10676,
+      "sha256": "ad436d34a1e75d582397b0eb40ee388127c4f5bff97014607912a7d535c8122f"
+    },
+    {
+      "path": "client/src/components/ReferencesDisplay.tsx",
+      "bytes": 5407,
+      "sha256": "7c38e7f9585dbc47bc0c11cf533f32d1d943b6cf8d1445af03deb8a5fb0a2155"
+    },
+    {
+      "path": "client/src/pages/KnowledgeDetails.tsx",
+      "bytes": 12380,
+      "sha256": "65e3628c176a0185b5c8078af70e25c8c0e242b3eb21fa1b254641dcc7c3f1fc"
+    },
+    {
+      "path": "client/src/pages/ManageKnowledge.tsx",
+      "bytes": 30285,
+      "sha256": "a3a57b6f99dd17a1bce0ff7c17804efcb814915a121d92ceff9440c3461d19d1"
+    },
+    {
+      "path": "client/src/pages/ManageKnowledge_old.tsx",
+      "bytes": 17701,
+      "sha256": "0159bcd28c873b11ebec9f31fd8e93d4f89121a1b9bdb7901da6a26da1ac85b7"
+    },
+    {
+      "path": "client/src/pages/admin/KnowledgeSearch.tsx",
+      "bytes": 9034,
+      "sha256": "7e28f985392041325bae740249033b2728b9f0ca3341f11d740f65bbd994d3b9"
+    },
+    {
+      "path": "MEGA_BATCH_UIUX_01A_HASH_NAVIGATION_HOME_CTA_LOGOUT_FIX_2026_06_18.md",
+      "bytes": 2433,
+      "sha256": "5201a14a0796551bd82b2a7f178c6c503a47119caaef433bd0cf23850d6bc44c"
+    },
+    {
+      "path": "MEGA_BATCH_UIUX_01A_CHANGELOG_2026_06_18.md",
+      "bytes": 701,
+      "sha256": "d58eaf14de1c13549f8a422514f0e9f3a84b66e6210e22d3e1ae54dd9c67b05f"
+    },
+    {
+      "path": "MEGA_BATCH_UIUX_01A_CHANGED_FILES_2026_06_18.md",
+      "bytes": 1082,
+      "sha256": "ca3bb51b4b6fd149b30c28e1641db53736c7ff987d680a33e1a34c818cab8aa4"
+    },
+    {
+      "path": "MEGA_BATCH_UIUX_01A_VERIFICATION_NOTES_2026_06_18.md",
+      "bytes": 1377,
+      "sha256": "48546ef3d8cc7d0dab3cd1342650148db8f9b43af14f9cc1735b66c727de32cd"
+    },
+    {
+      "path": "ERROR_RECORD_MEGA_BATCH_UIUX_01A_2026_06_18.md",
+      "bytes": 1203,
+      "sha256": "59058c9e2a524d264bc08ccf63d6c0c1348fbacb4fad5f5151921afc6612d003"
+    },
+    {
+      "path": "SESSION_HANDOFF_MEGA_BATCH_UIUX_01A_TO_KNOWLEDGE_06C_OR_29A_2026_06_18.md",
+      "bytes": 1189,
+      "sha256": "cde0683a321824a0803f01f50257bd567a54f14147013a2dc80e31a98e515887"
+    },
+    {
+      "path": "LATEST_BASELINE_FINAL_HANDOFF_2026_06_18.md",
+      "bytes": 405,
+      "sha256": "e33c90738eb82ed5f621fe4f9379cc1d805bef870c4f0339ab2d0594d9b5e286"
+    },
+    {
+      "path": "PALWAKF_PLATFORM_COMPREHENSIVE_GUIDE.md",
+      "bytes": 32773,
+      "sha256": "0d8870086943b226eca0e5dd20eec97506e5131c9ab58d35ebac7a766fc8aeb7"
+    }
+  ]
+}

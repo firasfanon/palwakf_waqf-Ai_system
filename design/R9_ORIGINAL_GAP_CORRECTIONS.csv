@@ -1,0 +1,4 @@
+﻿original_gap,correction,evidence,status
+assistant.review_tasks not confirmed,assistant.knowledge_review_tasks exists,estimated 1383 rows; canonical queue candidate,FALSE_POSITIVE_CLOSED
+assistant.review_task_events not confirmed,assistant.review_events and assistant.knowledge_review_task_reconciliation_events exist,specialized reconciliation events estimated 276,NAMING_AND_BOUNDARY_CORRECTED
+assistant.activation_runs not confirmed,assistant.knowledge_activation_runs exists,paired with 614 activation items,FALSE_POSITIVE_CLOSED

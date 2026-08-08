@@ -1,0 +1,29 @@
+# Knowledge Batch 06B-1 — Changelog
+
+**Date:** 2026-06-18
+
+## Added
+
+```text
+KNOWLEDGE_BATCH_06B1_ADMIN_SEARCH_EVIDENCE_SQL_VERIFICATION_FIX_2026_06_18.md
+KNOWLEDGE_BATCH_06B1_VERIFICATION_NOTES_2026_06_18.md
+ERROR_RECORD_KNOWLEDGE_BATCH_06B1_SQL_CTE_SCOPE_42P01_2026_06_18.md
+SESSION_HANDOFF_KNOWLEDGE_BATCH_06B1_TO_06C_OR_29A_2026_06_18.md
+knowledge_batch_06b1_evidence/admin_knowledge_search_evidence_sample_2026_06_18.csv
+knowledge_batch_06b1_evidence/knowledge_batch_06b1_evidence_summary.json
+sql_sandbox/knowledge_batch_06b1_admin_search_evidence_sql_fix/knowledge_batch_06b1_read_only_db_visibility_helper_cte_scope_fixed.sql
+```
+
+## Changed
+
+```text
+sql_sandbox/knowledge_batch_06b_chat_citation_browser_evidence_gate/knowledge_batch_06b_optional_read_only_db_visibility_helper.sql
+PALWAKF_PLATFORM_COMPREHENSIVE_GUIDE.md
+LATEST_BASELINE_FINAL_HANDOFF_2026_06_18.md
+```
+
+## Decision
+
+```text
+KNOWLEDGE_BATCH_06B1_ADMIN_KNOWLEDGE_SEARCH_EVIDENCE_ACCEPTED_SQL_VERIFICATION_CTE_FIX_PREPARED_CHAT_ANSWER_CITATION_BROWSER_EVIDENCE_PENDING
+```

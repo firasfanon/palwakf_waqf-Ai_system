@@ -1,0 +1,33 @@
+{
+  "batch": "MEGA_BATCH_AR1_C4_DETERMINISTIC_ELIGIBILITY_RESOLUTION_AND_CONTROLLED_INTERNAL_PILOT_V1",
+  "baseline_preimage": "AR1_SOURCE_PROVENANCE_RIGHTS_OPERATIONAL_UX_REFINEMENT_V1_R1",
+  "preimage_sha256": {
+    "server/governedAgenticRagPilot.ts": "891387c53b24da8e9a2bd8ceda1829fb15602804c0de32f2415900be150de9e7",
+    "server/routers.ts": "efdf478cab26a017fe8a4cf7a93095316a85b84e146699daa7a8dedc27bdda39",
+    "client/src/pages/admin/SourceProvenanceRightsRegistry.tsx": "82aca206b2972e0dfe487f028ceaa6f5e1c3d8db3d0a0d92673e516acbc3d2b1",
+    "package.json": "91a9ef001fd05f7c15cc958581e8f5d94a1924e01b8e1d8e2e50d8d2be713cf0"
+  },
+  "postimage_sha256": {
+    "server/governedAgenticRagPilot.ts": "877b456bf3125917812b6117d839f39fad3d5c9cdf6b9bc974db2cd0232a6627",
+    "server/routers.ts": "119c67215cd48afe7cc64f4411f5c6ca2a1066df874b38ad06d765ecbc82b0f1",
+    "client/src/pages/admin/SourceProvenanceRightsRegistry.tsx": "a2191722186556dc8718cb1888765d52a96d4dcaa1862857a5f501b1838ffe04",
+    "package.json": "d23719904b5b89dc347991261bb9252262ed52fd0e3e3b55cf1462c44e200200",
+    "scripts/verify-mega-batch-ar1-c4-deterministic-eligibility.mjs": "c81fc35c6e4531dfc0ee8bdb6be9e8fb3252c6f35c9e5c8c5c574f28f1fb284a",
+    "docs/ai/governed_agentic_rag/AR1_C4_DETERMINISTIC_ELIGIBILITY_RESOLUTION_AND_CONTROLLED_INTERNAL_PILOT_V1_AR.md": "68d8273bf713f0ef711dc9f7feb0c961586975b103012ebd6bea0b03ab3a15dd",
+    "docs/ai/governed_agentic_rag/STATE_MEGA_BATCH_AR1_C4_DETERMINISTIC_ELIGIBILITY_RESOLUTION_AND_CONTROLLED_INTERNAL_PILOT_V1.md": "e6bffd7020b28511fc15328458e1888d7c2a0af13dd081c3aa9959096344a0a9",
+    "docs/ai/governed_agentic_rag/AR1_C4_DETERMINISTIC_ELIGIBILITY_RESOLUTION_AND_CONTROLLED_INTERNAL_PILOT_UAT_AR.md": "dfbe98632829582b030a47f440c58a13f65417cf7fa238bac5e86ba58f33d169"
+  },
+  "new_artifacts": [
+    "scripts/verify-mega-batch-ar1-c4-deterministic-eligibility.mjs",
+    "docs/ai/governed_agentic_rag/AR1_C4_DETERMINISTIC_ELIGIBILITY_RESOLUTION_AND_CONTROLLED_INTERNAL_PILOT_V1_AR.md",
+    "docs/ai/governed_agentic_rag/STATE_MEGA_BATCH_AR1_C4_DETERMINISTIC_ELIGIBILITY_RESOLUTION_AND_CONTROLLED_INTERNAL_PILOT_V1.md",
+    "docs/ai/governed_agentic_rag/AR1_C4_DETERMINISTIC_ELIGIBILITY_RESOLUTION_AND_CONTROLLED_INTERNAL_PILOT_UAT_AR.md"
+  ],
+  "scope": {
+    "sql_operator_apply": "not_authorized",
+    "database_writes": "none",
+    "rights_layer_activation": "not_authorized",
+    "public_chat_release": "not_authorized",
+    "production": "not_authorized"
+  }
+}

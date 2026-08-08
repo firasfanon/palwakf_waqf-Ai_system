@@ -1,0 +1,347 @@
+/* =========================================================
+   PalWakf Admin Identity (STRICT)
+   Applies ONLY under body.admin-scope
+   ========================================================= */
+
+body.admin-scope {
+  background: radial-gradient(900px 500px at 20% 10%, rgba(31,90,166,0.30), transparent 60%),
+              radial-gradient(700px 500px at 90% 30%, rgba(212,175,55,0.22), transparent 55%),
+              radial-gradient(600px 450px at 50% 110%, rgba(178,34,34,0.18), transparent 60%),
+              #0B1220 !important;
+  min-height: 100vh;
+}
+
+/* CRITICAL:
+   index.css forces background on html/body/#root with !important.
+   Make #root transparent in admin so the admin gradient shows.
+*/
+body.admin-scope #root{
+  background: transparent !important;
+}
+
+/* Layout scaffolding (AdminLayoutV2 uses these classnames) */
+body.admin-scope .admin-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+body.admin-scope .admin-content {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+body.admin-scope .admin-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  background: rgba(17, 24, 39, 0.72);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.10);
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+body.admin-scope .admin-main {
+  padding: 18px;
+  flex: 1 1 auto;
+}
+
+body.admin-scope .admin-page {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+body.admin-scope .admin-page-title {
+  font-size: 18px;
+  font-weight: 800;
+  margin: 6px 0 0;
+}
+
+body.admin-scope .admin-breadcrumbs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+  font-size: 12px;
+  color: rgba(255,255,255,0.78);
+}
+
+body.admin-scope .admin-sep {
+  opacity: 0.7;
+}
+
+body.admin-scope .admin-path {
+  margin-inline-start: 8px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(0,0,0,0.22);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+body.admin-scope .admin-topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+body.admin-scope .admin-action {
+  padding: 8px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(0,0,0,0.22);
+  color: rgba(255,255,255,0.92);
+  cursor: pointer;
+}
+
+body.admin-scope .admin-action:hover {
+  border-color: rgba(212,175,55,0.35);
+  background: rgba(212,175,55,0.14);
+}
+
+body.admin-scope .admin-action-secondary {
+  background: rgba(255,255,255,0.06);
+}
+
+body.admin-scope .admin-badge-soon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px 10px;
+  font-size: 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(178,34,34,0.35);
+  background: rgba(178,34,34,0.12);
+  color: rgba(255,255,255,0.92);
+}
+
+/* Force admin content surfaces (no more white backgrounds). */
+body.admin-scope main,
+body.admin-scope .admin-content {
+  background: transparent !important;
+}
+
+/* Cards / panels */
+body.admin-scope [data-admin-card="true"],
+body.admin-scope [data-slot="card"] {
+  background: rgba(17, 24, 39, 0.92) !important; /* #111827 */
+  border: 1px solid rgba(255,255,255,0.10) !important;
+}
+
+/* Sidebar */
+body.admin-scope .admin-sidebar {
+  width: 320px;
+  flex: 0 0 320px;
+  background: linear-gradient(180deg, rgba(15,26,46,0.96), rgba(13,23,48,0.94)) !important;
+  border-left: 1px solid rgba(255,255,255,0.10) !important;
+  padding: 14px;
+  overflow: auto;
+}
+
+body.admin-scope .admin-sidebar-head {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(0,0,0,0.20);
+  margin-bottom: 12px;
+}
+
+body.admin-scope .admin-sidebar-title {
+  font-weight: 800;
+  color: rgba(255,255,255,0.92);
+}
+
+body.admin-scope .admin-sidebar-path {
+  padding: 6px 8px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(0,0,0,0.22);
+  color: rgba(255,255,255,0.90);
+  font-size: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+body.admin-scope .admin-sidebar-search {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.06);
+  color: rgba(255,255,255,0.92);
+  outline: none;
+}
+
+body.admin-scope .admin-sidebar-search::placeholder {
+  color: rgba(255,255,255,0.60);
+}
+
+body.admin-scope .admin-nav-section-title {
+  margin: 14px 10px 8px;
+  font-size: 11px;
+  font-weight: 800;
+  color: rgba(212,175,55,0.95);
+}
+
+body.admin-scope .admin-nav-items {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Nav items */
+body.admin-scope .admin-nav-item,
+body.admin-scope .admin-nav-child {
+  border: 1px solid transparent;
+  background: rgba(0,0,0,0.18);
+  color: rgba(255,255,255,0.92);
+  border-radius: 14px;
+  padding: 10px 10px;
+  transition: 150ms ease;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  text-decoration: none;
+}
+
+body.admin-scope .admin-nav-item:hover,
+body.admin-scope .admin-nav-child:hover{
+  border-color: rgba(212,175,55,0.25);
+  background: rgba(212,175,55,0.14);
+  color: rgba(255,255,255,0.95);
+}
+
+body.admin-scope .admin-nav-item.active,
+body.admin-scope .admin-nav-child.active{
+  border-color: rgba(31,90,166,0.45);
+  background: rgba(31,90,166,0.18);
+}
+
+body.admin-scope .admin-nav-item.disabled,
+body.admin-scope .admin-nav-child.disabled{
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+body.admin-scope .admin-nav-item.disabled:hover,
+body.admin-scope .admin-nav-child.disabled:hover{
+  border-color: rgba(178,34,34,0.30);
+  background: rgba(178,34,34,0.12);
+}
+
+body.admin-scope .admin-nav-item-col {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+body.admin-scope .admin-nav-item-text {
+  font-weight: 800;
+  font-size: 13px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+body.admin-scope .admin-nav-meta{
+  margin-top: 2px;
+  font-size: 11px;
+  color: rgba(255,255,255,0.65);
+  direction: ltr;
+  text-align: right;
+  overflow:hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+body.admin-scope .admin-nav-children {
+  margin-top: 8px;
+  margin-right: 10px;
+  padding-right: 10px;
+  border-right: 1px dashed rgba(255,255,255,0.16);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+
+/* ===== Polish (Phase P1) ===== */
+body.admin-scope .admin-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+}
+
+body.admin-scope .admin-filters input,
+body.admin-scope .admin-filters button,
+body.admin-scope .admin-filters [role="combobox"] {
+  height: 40px;
+}
+
+body.admin-scope .admin-table table th:last-child,
+body.admin-scope .admin-table table td:last-child {
+  text-align: center;
+  white-space: nowrap;
+}
+
+body.admin-scope .admin-table table td:last-child > * {
+  margin-inline: auto;
+}
+
+/* Light mode adjustments (keep readable) */
+html:not(.dark) body.admin-scope{
+  background: radial-gradient(900px 500px at 20% 10%, rgba(31,90,166,0.18), transparent 60%),
+              radial-gradient(700px 500px at 90% 30%, rgba(212,175,55,0.14), transparent 55%),
+              radial-gradient(600px 450px at 50% 110%, rgba(178,34,34,0.10), transparent 60%),
+              #EEF6FF !important;
+}
+
+html:not(.dark) body.admin-scope .admin-topbar{
+  background: rgba(255,255,255,0.70);
+  border-bottom: 1px solid rgba(15,26,46,0.10);
+}
+
+html:not(.dark) body.admin-scope .admin-breadcrumbs{
+  color: rgba(15,26,46,0.70);
+}
+
+html:not(.dark) body.admin-scope .admin-action{
+  border: 1px solid rgba(15,26,46,0.10);
+  background: rgba(255,255,255,0.80);
+  color: rgba(15,26,46,0.92);
+}
+
+html:not(.dark) body.admin-scope [data-admin-card="true"],
+html:not(.dark) body.admin-scope [data-slot="card"]{
+  background: rgba(255,255,255,0.84) !important;
+  border: 1px solid rgba(15,26,46,0.12) !important;
+}
+
+html:not(.dark) body.admin-scope .admin-sidebar{
+  background: linear-gradient(180deg, rgba(15,26,46,0.10), rgba(13,23,48,0.08)) !important;
+  border-left: 1px solid rgba(15,26,46,0.12) !important;
+}
+
+html:not(.dark) body.admin-scope .admin-nav-item,
+html:not(.dark) body.admin-scope .admin-nav-child{
+  background: rgba(255,255,255,0.85);
+  color: rgba(15,26,46,0.92);
+  border: 1px solid rgba(15,26,46,0.10);
+}
+
+html:not(.dark) body.admin-scope .admin-nav-meta{
+  color: rgba(15,26,46,0.65);
+}

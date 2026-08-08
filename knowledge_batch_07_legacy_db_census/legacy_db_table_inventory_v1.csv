@@ -1,0 +1,53 @@
+﻿table_name,schema_observed,insert_observed,query_evidence_count,schema_sources,insert_sources,suggested_target,migration_priority,action,canonical_old_show_table,object_class
+__drizzle_migrations,False,True,4,,.manus/db/db-query-1772922268453.json,do not migrate; audit only,Review,review,True,canonical_old_table
+achievements,False,False,0,,,assistant.legacy_import_register first; target decision required,Review,review,True,canonical_old_table
+attachments,False,False,0,,,assistant.legacy_import_register first; target decision required,Review,review,True,canonical_old_table
+bookmarks,False,False,0,,,assistant.bookmarks,P2,migrate_or_stage,True,canonical_old_table
+cached_responses,False,False,0,,,assistant.cached_responses / rebuildable cache,P3,migrate_or_stage,True,canonical_old_table
+chat_messages,False,False,2,,,assistant.legacy_import_register first; target decision required,Review,review,False,legacy_seed_or_alias_table
+classification_ratings,False,False,0,,,assistant.classification_ratings,Review,review,True,canonical_old_table
+comments,False,False,0,,,assistant.comments,P2,migrate_or_stage,True,canonical_old_table
+contact_messages,False,False,0,,,assistant.contact_messages or platform contact module,P2,migrate_or_stage,True,canonical_old_table
+content,False,False,1,,,assistant.legacy_import_register first; target decision required,Review,review,False,legacy_seed_or_alias_table
+content_templates,False,True,2,,.manus/db/db-query-1769029505700.json,assistant.content_templates,P1,migrate_or_stage,True,canonical_old_table
+conversations,False,False,6,,,assistant.conversations,P2,migrate_or_stage,True,canonical_old_table
+document_files,False,False,0,,,assistant.reference_files,P1,migrate_or_stage,True,canonical_old_table
+faqs,False,False,2,,,assistant.faqs / assistant.knowledge_documents(category=faq),P1,migrate_or_stage,True,canonical_old_table
+favorite_conversations,False,False,0,,,assistant.favorite_conversations,P2,migrate_or_stage,True,canonical_old_table
+feedback,False,False,0,,,assistant.feedback / message_ratings,P2,migrate_or_stage,True,canonical_old_table
+fetch_logs,False,False,4,,,assistant.fetch_logs,P1,migrate_or_stage,True,canonical_old_table
+fetched_content,True,False,6,.manus/db/db-query-1772835117158.json,,assistant.fetched_content,P1,migrate_or_stage,True,canonical_old_table
+files,False,False,0,,,assistant.files / storage metadata,P1,migrate_or_stage,True,canonical_old_table
+home_section_items,False,False,0,,,assistant.home_section_items or platform CMS bridge,P1,migrate_or_stage,True,canonical_old_table
+home_sections,True,False,4,.manus/db/db-query-1767964876124.json | .manus/db/db-query-1767966177181.json,,assistant.home_sections or platform CMS bridge,P1,migrate_or_stage,True,canonical_old_table
+judicial_rulings,False,False,0,,,assistant.judicial_rulings / reference_documents,P1,migrate_or_stage,True,canonical_old_table
+knowledge_base,False,True,1,,.manus/db/db-query-error-1765143239886.json,assistant.legacy_import_register first; target decision required,Review,review,False,legacy_seed_or_alias_table
+knowledge_documents,True,True,36,.manus/db/db-query-1767974651298.json,.manus/db/db-query-1765143284155.json | .manus/db/db-query-1765143321218.json | .manus/db/db-query-1765143346752.json | .manus/db/db-query-1765145119332.json | .manus/db/db-query-1765145162608.json,assistant.knowledge_documents + assistant.reference_documents,P1,migrate_or_stage,True,canonical_old_table
+knowledge_sources,False,False,3,,,assistant.knowledge_sources,P1,migrate_or_stage,True,canonical_old_table
+land_references,False,True,2,,.manus/db/db-query-1767975773406.json,assistant.reference_documents(domain_scope=historical/waqf_law),P1,migrate_or_stage,True,canonical_old_table
+learning_log,False,False,0,,,assistant.legacy_import_register first; target decision required,P3,migrate_or_stage,True,canonical_old_table
+legal_precedents,False,False,0,,,assistant.legal_precedents / reference_documents,P1,migrate_or_stage,True,canonical_old_table
+message_ratings,False,False,0,,,assistant.message_ratings,P2,migrate_or_stage,True,canonical_old_table
+messages,True,False,5,.manus/db/db-query-1765146509671.json,,assistant.messages,P2,migrate_or_stage,True,canonical_old_table
+ministerial_instructions,False,False,0,,,assistant.ministerial_instructions / reference_documents,P1,migrate_or_stage,True,canonical_old_table
+notifications,False,False,0,,,assistant.notifications / platform_notifications,P3,migrate_or_stage,True,canonical_old_table
+ottoman_land_law,False,False,0,,,assistant.reference_documents + knowledge_documents,P1,migrate_or_stage,True,canonical_old_table
+page_settings,True,True,8,.manus/db/db-query-1770368753168.json,.manus/db/db-query-error-1770368748592.json | .manus/db/db-query-error-1770368775940.json,assistant.page_settings or platform CMS bridge,P1,migrate_or_stage,True,canonical_old_table
+permissions,False,False,1,,,core/platform RBAC or assistant legacy mirror only,Domain-mapped / no direct assistant ownership,map_to_sovereign_domain,True,canonical_old_table
+ratings,False,False,0,,,assistant.ratings,P2,migrate_or_stage,True,canonical_old_table
+role_permissions,False,False,0,,,core/platform RBAC or assistant legacy mirror only,Domain-mapped / no direct assistant ownership,map_to_sovereign_domain,True,canonical_old_table
+roles,False,True,1,,.manus/db/db-query-1769208760921.json,core/platform RBAC or assistant legacy mirror only,Domain-mapped / no direct assistant ownership,map_to_sovereign_domain,True,canonical_old_table
+search_logs,False,False,0,,,assistant.search_logs,P2,migrate_or_stage,True,canonical_old_table
+section_templates,False,False,0,,,assistant.legacy_import_register first; target decision required,P3,migrate_or_stage,True,canonical_old_table
+settings,False,False,1,,,assistant.legacy_import_register first; target decision required,Review,review,False,legacy_seed_or_alias_table
+siteSettings,False,False,1,,,assistant.legacy_import_register first; target decision required,Review,review,False,legacy_seed_or_alias_table
+site_settings,False,False,3,,,assistant.legacy_import_register first; target decision required,Review,review,True,canonical_old_table
+suggested_questions,False,False,0,,,assistant.suggested_questions / assistant.chat_prompts,P1,migrate_or_stage,True,canonical_old_table
+system_settings,False,False,0,,,assistant.legacy_import_register first; target decision required,Review,review,True,canonical_old_table
+table_settings,False,False,0,,,assistant.legacy_import_register first; target decision required,P3,migrate_or_stage,True,canonical_old_table
+user_notifications,False,False,0,,,assistant.user_notifications / platform_notifications,P3,migrate_or_stage,True,canonical_old_table
+users,False,False,2,,,"core/auth, not assistant source of truth",Domain-mapped / no direct assistant ownership,map_to_sovereign_domain,True,canonical_old_table
+waqf_cases,False,False,0,,,"cases/legal_system, not assistant source of truth",Domain-mapped / no direct assistant ownership,map_to_sovereign_domain,True,canonical_old_table
+waqf_categories,False,False,0,,,waqf master data or assistant taxonomy mirror,Domain-mapped / no direct assistant ownership,map_to_sovereign_domain,True,canonical_old_table
+waqf_deeds,False,False,0,,,"waqf/cases domain, reference-only inside assistant if needed",Domain-mapped / no direct assistant ownership,map_to_sovereign_domain,True,canonical_old_table
+waqf_properties,False,False,0,,,"waqf_assets/properties, not assistant source of truth",Domain-mapped / no direct assistant ownership,map_to_sovereign_domain,True,canonical_old_table

@@ -1,0 +1,121 @@
+{
+  "baseline_id": "v64_smart_tools_3_human_review_kb08b_kb09_preapply_2026_06_20",
+  "source_baseline": "knowledge_batch_08a_apply_intake_trust_aligned_p1_promotion_acceptance_2026_06_20",
+  "state": "implementation_prepared_statically_validated_live_apply_pending",
+  "production_approved": false,
+  "live_supabase_apply": false,
+  "files": [
+    {
+      "path": "server/knowledgeOperations.ts",
+      "sha256": "94ce8768922d22cab79b31c6404e799413e3cb69660d32ad9145898d2fcdbf5d",
+      "bytes": 11606
+    },
+    {
+      "path": "server/routers.ts",
+      "sha256": "63ececcf4e4999dde897be4e29512ead17ab98c5fb5ac5bb15ce6228981d7999",
+      "bytes": 166792
+    },
+    {
+      "path": "client/src/pages/admin/KnowledgeReviewOperations.tsx",
+      "sha256": "91145a9c577b337f76a7b6f6bafb87ec1c3309643ed3e69f79f951fba131a342",
+      "bytes": 17462
+    },
+    {
+      "path": "client/src/config/adminRegistryV2.ts",
+      "sha256": "cfe11cc9fd84e1272e03354f238ba8e8e1d525d91d71a5af1e921a69067103f8",
+      "bytes": 27340
+    },
+    {
+      "path": "client/src/components/PageBreadcrumbs.tsx",
+      "sha256": "b00e0f6792fa5862e388d81d6d6feadf24242339ae1df8cdb2ef4dad61e529ad",
+      "bytes": 4871
+    },
+    {
+      "path": "CHANGELOG.md",
+      "sha256": "200edc4133fab42c070d3bbed893120739319e635d4eb49f77eaed784f8c24c9",
+      "bytes": 4338
+    },
+    {
+      "path": "PALWAKF_PLATFORM_COMPREHENSIVE_GUIDE.md",
+      "sha256": "4415c338aa6f3dac1ba6c8a882737f02f33efa67c6949af7cf72bb63fadac8ac",
+      "bytes": 46105
+    },
+    {
+      "path": "docs/smart_tools_3/SMART_TOOLS_3_HUMAN_REVIEW_KB08B_KB09_2026_06_20.md",
+      "sha256": "42be87f1669b80739536d5eb81d0db43a32e142d6ced50b916c6d43acf6e4401",
+      "bytes": 6922
+    },
+    {
+      "path": "docs/smart_tools_3/SMART_TOOLS_3_CHANGELOG_2026_06_20.md",
+      "sha256": "a27b243949bfefd91946b232465a03359f7468ad2629938faf80b18b6a0c166d",
+      "bytes": 1981
+    },
+    {
+      "path": "docs/smart_tools_3/ERROR_RECORD_SMART_TOOLS_3_2026_06_20.md",
+      "sha256": "1f2e738d3f59d87201fc70131afabc322e604969930e4169d756e5d584d6f03e",
+      "bytes": 2424
+    },
+    {
+      "path": "docs/smart_tools_3/BASELINE_V64_SMART_TOOLS_3_2026_06_20.md",
+      "sha256": "0a68c5563e68006d941f65b0e8aef0d5791ee195f1a7262f2a6404bd529943af",
+      "bytes": 1245
+    },
+    {
+      "path": "docs/smart_tools_3/SESSION_HANDOFF_SMART_TOOLS_3_2026_06_20.md",
+      "sha256": "713b15f9e1ff1bb8cbde760352fa0945c48e980a622af0875fdb4b1a541e6360",
+      "bytes": 6374
+    },
+    {
+      "path": "docs/smart_tools_3/VALIDATION_REPORT_SMART_TOOLS_3_2026_06_20.md",
+      "sha256": "04f75a16edc36e28e428ac07c2711ce2ff82f41848d676b0a54307610bd0b424",
+      "bytes": 1286
+    },
+    {
+      "path": "sql_sandbox/smart_tools_3_human_review_kb08b_kb09/00_PREFLIGHT_READ_ONLY.sql",
+      "sha256": "07191869d34a20687413bcb08baf78f677fb6d17e3865bf4c60b6454bb044bd5",
+      "bytes": 1072
+    },
+    {
+      "path": "sql_sandbox/smart_tools_3_human_review_kb08b_kb09/00A_CONTENT_CLASSIFICATION_RECONCILIATION_READ_ONLY.sql",
+      "sha256": "7b1566fbdd3e4b493adc4c6a9b24f1dcbb6443d1eaca2ba8f354bfa0f5599f31",
+      "bytes": 1857
+    },
+    {
+      "path": "sql_sandbox/smart_tools_3_human_review_kb08b_kb09/01_HUMAN_REVIEW_OPERATIONS_V1_OPERATOR_APPLY.sql",
+      "sha256": "b45079054987db40996710146f3edf163d0ef884c83ba87fc2c6d898a0298068",
+      "bytes": 14178
+    },
+    {
+      "path": "sql_sandbox/smart_tools_3_human_review_kb08b_kb09/02_KB08B_MAPPING_RESOLUTION_OPERATOR_APPLY.sql",
+      "sha256": "528de8534ba8dc57f1467eb3de44b737c335a599fe3cd0d82c71a7b431babeb6",
+      "bytes": 12636
+    },
+    {
+      "path": "sql_sandbox/smart_tools_3_human_review_kb08b_kb09/03_KB09_PAGE_BINDING_REAL_OPERATIONS_OPERATOR_APPLY.sql",
+      "sha256": "8ad9af21a3545d5e40b5937021c4ff88d6f1968d3106962a85bd2b52bf7a44a7",
+      "bytes": 6405
+    },
+    {
+      "path": "sql_sandbox/smart_tools_3_human_review_kb08b_kb09/04_POST_APPLY_READ_ONLY_VERIFICATION.sql",
+      "sha256": "2ff93e4e0688da39b80971d6ee33fa2111dafbeaf06b409d2abc5605f1961b6c",
+      "bytes": 1237
+    },
+    {
+      "path": "sql_sandbox/smart_tools_3_human_review_kb08b_kb09/00_OPERATOR_SEQUENCE.md",
+      "sha256": "14bf2d61138ed459be0e857ea7b4af70afa12ff4f5f7f593ddb168ce463e85b9",
+      "bytes": 2071
+    },
+    {
+      "path": "LATEST_BASELINE_SMART_TOOLS_3_2026_06_20.md",
+      "sha256": "9c91559971bf9973c22c899e4aa5c05d360c6bf360d0e5c2c4b82f1dcfd629f6",
+      "bytes": 1138
+    }
+  ],
+  "invariants": [
+    "No automatic approval",
+    "No automatic chat publication",
+    "Official verified source plus verified citation plus assistant.publish required for release",
+    "No direct browser DML",
+    "No deletion of legacy import records"
+  ]
+}

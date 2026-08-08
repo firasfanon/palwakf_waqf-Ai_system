@@ -1,0 +1,9 @@
+test_id,surface,input,expected_user_visible_result,technical_acceptance_signal,status
+UAT-01,/knowledge#/chat,ما هو الوقف الذري؟,answer includes a grounded definition and at least one citation/reference,groundingReferences.length >= 1; sources column is not empty,pending_browser_evidence
+UAT-02,/knowledge#/chat,ما هي تعليمات لجان رعاية المساجد لسنة 2023؟,answer cites the imported instructions record,groundingReferences includes a title containing تعليمات لجان رعاية المساجد,pending_browser_evidence
+UAT-03,/knowledge#/chat,اشرح حق التصرف في الأراضي الأميرية في فلسطين,answer cites land-law/أراضي أميرية records,groundingReferences.length >= 1 and citationLocator/excerpt present when available,pending_browser_evidence
+UAT-04,/knowledge#/chat,ماذا تقول المراجع عن إدارة الأوقاف في عهد الانتداب البريطاني؟,answer retrieves historical records and cites source title,groundingReferences contains الانتداب البريطاني or إدارة الأوقاف,pending_browser_evidence
+UAT-05,/admin/knowledge-search,q=الأراضي الأميرية,"admin table displays results with status approved, chat ظاهر, citations count",searchMutation.data.results.length > 0,pending_browser_evidence
+UAT-06,/admin/knowledge-search,q=تعليمات لجان رعاية المساجد,admin table displays matching imported reference,results include KB05 imported title,pending_browser_evidence
+UAT-07,/knowledge,search=الوقف الذري,public knowledge list shows approved/chat-visible records only,only status approved/isActive records appear,pending_browser_evidence
+UAT-08,/knowledge/{id},open imported document,detail page shows reference/citation/review trace where available,document loads without fallback or empty citation state,pending_browser_evidence

@@ -1,0 +1,10 @@
+INSERT INTO knowledge_documents (title, content, source, category, tags, isActive, createdAt, updatedAt) VALUES ('أوقاف القدس - المدارس الوقفية', 'أنشئت العديد من المدارس الوقفية في القدس لتعليم القرآن والعلوم الشرعية، وكانت تمول من ريع الأوقاف.', 'تاريخ التعليم في القدس', 'historical', 'المدارس الوقفية، التعليم، القدس', 1, FROM_UNIXTIME(1767919372), FROM_UNIXTIME(1767919372));
+
+INSERT INTO knowledge_documents (title, content, source, category, tags, isActive, createdAt, updatedAt) VALUES ('قانون أملاك الغائبين الإسرائيلي 1950 - التعريف', 'يعرف القانون الإسرائيلي ''الغائب'' بأنه كل من ترك مكان إقامته في فلسطين قبل 1948 أو بعده، وتم الاستيلاء على أملاكه.', 'قانون أملاك الغائبين الإسرائيلي (1950)', 'law', 'أملاك الغائبين، الاستيلاء، فلسطين', 1, FROM_UNIXTIME(1767919372), FROM_UNIXTIME(1767919372));
+
+INSERT INTO knowledge_documents (title, content, source, category, tags, isActive, createdAt, updatedAt) VALUES ('قانون أملاك الغائبين - الأوقاف', 'استولت إسرائيل على العديد من الأوقاف الإسلامية بحجة أنها أملاك غائبين، رغم أن الوقف لا يملكه شخص معين.', 'قانون أملاك الغائبين الإسرائيلي (1950)', 'law', 'الأوقاف، الاستيلاء، أملاك الغائبين', 1, FROM_UNIXTIME(1767919372), FROM_UNIXTIME(1767919372));
+
+INSERT INTO knowledge_documents (title, content, source, category, tags, isActive, createdAt, updatedAt) VALUES ('الانتداب البريطاني - قانون الأوقاف 1922', 'أصدرت سلطات الانتداب البريطاني قانون الأوقاف عام 1922 الذي نظم إدارة الأوقاف وأنشأ المجلس الإسلامي الأعلى.', 'قوانين الانتداب البريطاني', 'historical', 'الانتداب البريطاني، قانون الأوقاف، المجلس الإسلامي', 1, FROM_UNIXTIME(1767919372), FROM_UNIXTIME(1767919372));
+
+INSERT INTO knowledge_documents (title, content, source, category, tags, isActive, createdAt, updatedAt) VALUES ('المجلس الإسلامي الأعلى - الصلاحيات', 'كان للمجلس الإسلامي الأعلى صلاحيات واسعة في إدارة الأوقاف والمحاكم الشرعية والشؤون الدينية في فلسطين.', 'تاريخ المجلس الإسلامي الأعلى', 'historical', 'المجلس الإسلامي، الصلاحيات، الإدارة', 1, FROM_UNIXTIME(1767919372), FROM_UNIXTIME(1767919372));
+

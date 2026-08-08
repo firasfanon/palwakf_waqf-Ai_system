@@ -1,0 +1,10 @@
+- عدم التصرف في الوقف إلا بإذن من الوزارة', 'قانون الأوقاف الأردني رقم 23 لسنة 1964', 'law', 'إدارة أوقاف، ناظر، وزارة أوقاف', 1, FROM_UNIXTIME(1767919372), FROM_UNIXTIME(1767919372));
+
+INSERT INTO knowledge_documents (title, content, source, category, tags, isActive, createdAt, updatedAt) VALUES ('قانون الأراضي العثماني - المادة 4: الأراضي الموقوفة', 'الأراضي الموقوفة هي الأراضي التي أوقفها أصحابها على جهة بر أو خير. ولا يجوز بيعها أو رهنها أو توريثها، وإنما تبقى على ملك الموقوف عليهم أو الجهة الموقوف عليها.', 'قانون الأراضي العثماني (1858)', 'law', 'قانون الأراضي، الوقف، الأراضي الموقوفة', 1, FROM_UNIXTIME(1767919372), FROM_UNIXTIME(1767919372));
+
+INSERT INTO knowledge_documents (title, content, source, category, tags, isActive, createdAt, updatedAt) VALUES ('قانون الأراضي العثماني - المادة 36: حقوق المتولي', 'للمتولي على الوقف حق الإدارة والنظر في شؤونه، وله أن يؤجر الأرض الموقوفة بما يحقق مصلحة الوقف، ولا يجوز له التصرف فيها بالبيع أو الرهن.', 'قانون الأراضي العثماني (1858)', 'law', 'المتولي، إدارة الوقف، حقوق المتولي', 1, FROM_UNIXTIME(1767919372), FROM_UNIXTIME(1767919372));
+
+INSERT INTO knowledge_documents (title, content, source, category, tags, isActive, createdAt, updatedAt) VALUES ('مجلة الأحكام العدلية - المادة 2: أركان الوقف', 'أركان الوقف أربعة: الواقف، والموقوف، والموقوف عليه، والصيغة. ولا يصح الوقف إلا باجتماع هذه الأركان الأربعة.', 'مجلة الأحكام العدلية', 'reference', 'أركان الوقف، الواقف، الموقوف عليه', 1, FROM_UNIXTIME(1767919372), FROM_UNIXTIME(1767919372));
+
+INSERT INTO knowledge_documents (title, content, source, category, tags, isActive, createdAt, updatedAt) VALUES ('مجلة الأحكام العدلية - المادة 3: شروط الواقف', 'يشترط في الواقف أن يكون حراً مكلفاً مالكاً للموقوف، فلا يصح وقف العبد ولا الصبي ولا المجنون ولا من لا يملك الموقوف.', 'مجلة الأحكام العدلية', 'reference', 'شروط الواقف، الأهلية، الملكية', 1, FROM_UNIXTIME(1767919372), FROM_UNIXTIME(1767919372));
+

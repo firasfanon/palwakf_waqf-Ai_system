@@ -1,0 +1,239 @@
+{
+  "batch": "MEGA_BATCH_ASSISTANT_PROVENANCE_PIPELINE_CROSSWALK_GAP_DIAGNOSIS_V1",
+  "mode": "READ_ONLY_SOURCE_AND_RUNTIME_CONTRACT_AUDIT",
+  "generated": "2026-07-08",
+  "source_root_observed_in_container": "/mnt/data/source_audit_current",
+  "database_write": "NONE",
+  "source_write": "NONE",
+  "sql_execution": "NONE",
+  "external_requests": "NONE",
+  "legacy_v1_1_response": {
+    "items_total_in_response": 169,
+    "groups_total_in_response": 60,
+    "government_candidate_items": 19,
+    "government_candidate_unique_targets": 3,
+    "government_targets": [
+      {
+        "legacy_title": "الإشراف المعاصر على العقارات الوقفية",
+        "candidate_url": "https://www.palestinecabinet.gov.ps/portal/govservice/details/129",
+        "legacy_v1_1_item_count": 7,
+        "legacy_binding_methods": "exact_content_fingerprint=1; exact_legacy_key=5; exact_title_and_url=1",
+        "legacy_source_task_count_distribution": "1=5; 2=2",
+        "legacy_citation_duplicate_count_distribution": "0=5; 1=2",
+        "legacy_latest_decision_code": "all_null",
+        "crosswalk_status": "NOT_RESOLVED_STATIC_ONLY",
+        "gap_hypothesis": "needs_runtime_C1_C2_C3_C4_AR1_response_to_map_clusterKey_and_candidateMaterials",
+        "allowed_next_action": "read_only_crosswalk_runtime_snapshot_only"
+      },
+      {
+        "legacy_title": "قانون الأوقاف والشؤون الدينية رقم (26) لسنة 1966م وتعديلاته",
+        "candidate_url": "https://mjr.ogb.gov.ps/mergedlegislations/viewtext/165",
+        "legacy_v1_1_item_count": 6,
+        "legacy_binding_methods": "exact_content_fingerprint=1; exact_legacy_key=5",
+        "legacy_source_task_count_distribution": "1=5; 2=1",
+        "legacy_citation_duplicate_count_distribution": "0=5; 1=1",
+        "legacy_latest_decision_code": "all_null",
+        "crosswalk_status": "NOT_RESOLVED_STATIC_ONLY",
+        "gap_hypothesis": "needs_runtime_C1_C2_C3_C4_AR1_response_to_map_clusterKey_and_candidateMaterials",
+        "allowed_next_action": "read_only_crosswalk_runtime_snapshot_only"
+      },
+      {
+        "legacy_title": "مهام وزارة الأوقاف والشؤون الدينية الفلسطينية",
+        "candidate_url": "https://www.palestinecabinet.gov.ps/portal/orgstructure/details/20",
+        "legacy_v1_1_item_count": 6,
+        "legacy_binding_methods": "exact_content_fingerprint=1; exact_legacy_key=5",
+        "legacy_source_task_count_distribution": "1=5; 2=1",
+        "legacy_citation_duplicate_count_distribution": "0=5; 1=1",
+        "legacy_latest_decision_code": "all_null",
+        "crosswalk_status": "NOT_RESOLVED_STATIC_ONLY",
+        "gap_hypothesis": "needs_runtime_C1_C2_C3_C4_AR1_response_to_map_clusterKey_and_candidateMaterials",
+        "allowed_next_action": "read_only_crosswalk_runtime_snapshot_only"
+      }
+    ],
+    "source_file_sha256": "10EFB62F45BC988FB183B4B368BCCC031D8BB940E5F13FE8A717F1D9C4A54612"
+  },
+  "static_contract_findings": {
+    "c1_c2_c3_c4_ar1_pipeline_exists": true,
+    "source_provenance_rights_route_exists": true,
+    "legacy_v1_1_is_supporting_lineage_surface": true,
+    "c3_is_operator_triggered_and_ephemeral": true,
+    "c4_is_read_only_plan_and_requires_fresh_c3": true,
+    "c4_requires_candidate_materials_for_controlled_candidate": true,
+    "ar1_uses_direct_c4_material_or_exact_title_url_only": true,
+    "ar1_fuzzy_semantic_vector_matching_blocked": true,
+    "current_primary_gap": "crosswalk/material eligibility: C4/AR1 needs knowledge_document candidate material or exact deterministic title/url match",
+    "do_not_rebuild": [
+      "Manus recovery",
+      "C2 disposition",
+      "C3 external status/header checks",
+      "AR1 fail-closed UX"
+    ]
+  },
+  "line_evidence_index": [
+    {
+      "file": "server/autonomousProvenanceAudit.ts",
+      "line": 6,
+      "key": "c2_read_only",
+      "text": "* This module never writes sources, rights, documents, lifecycle state, or"
+    },
+    {
+      "file": "server/autonomousProvenanceAudit.ts",
+      "line": 41,
+      "key": "c2_candidate_materials_type",
+      "text": "candidateMaterials: Array<{ id: string; title: string | null; materialKind: string }>;"
+    },
+    {
+      "file": "server/autonomousProvenanceAudit.ts",
+      "line": 73,
+      "key": "rights_read_fail",
+      "text": "'source_provenance_supporting_read_failed',"
+    },
+    {
+      "file": "server/autonomousProvenanceAudit.ts",
+      "line": 192,
+      "key": "c2_official_candidate_domain",
+      "text": "if (host.endsWith('.gov') || host.endsWith('.gov.ps') || host.includes('.gov.')) return 'official_candidate';"
+    },
+    {
+      "file": "server/autonomousProvenanceAudit.ts",
+      "line": 215,
+      "key": "c2_material_rows",
+      "text": "function materialRows(items: LegacyItem[]): Array<{ id: string; title: string | null; materialKind: string }> {"
+    },
+    {
+      "file": "server/autonomousProvenanceAudit.ts",
+      "line": 281,
+      "key": "c2_official_disposition",
+      "text": "disposition: 'OFFICIAL_SOURCE_CANDIDATE',"
+    },
+    {
+      "file": "server/externalSourceVerification.ts",
+      "line": 75,
+      "key": "c3_ephemeral",
+      "text": "* C4 consumes the latest C3 observation only from process memory. The snapshot"
+    },
+    {
+      "file": "server/externalSourceVerification.ts",
+      "line": 95,
+      "key": "c3_ttl",
+      "text": "const C3_EVIDENCE_TTL_MS = 30 * 60 * 1_000;"
+    },
+    {
+      "file": "server/externalSourceVerification.ts",
+      "line": 109,
+      "key": "c3_no_request_by_c4",
+      "text": "* C4 must explicitly hold when no fresh C3 evidence exists in this process."
+    },
+    {
+      "file": "server/externalSourceVerification.ts",
+      "line": 500,
+      "key": "c3_remember",
+      "text": "rememberC3Evidence(result);"
+    },
+    {
+      "file": "server/verifiedSourceSelection.ts",
+      "line": 7,
+      "key": "c4_planning_only",
+      "text": "* C4 is a planning-only aggregation of C2 provenance clusters and the latest"
+    },
+    {
+      "file": "server/verifiedSourceSelection.ts",
+      "line": 13,
+      "key": "c4_threshold",
+      "text": "* evidence threshold: C2 official-domain candidate + fresh C3 2xx metadata"
+    },
+    {
+      "file": "server/verifiedSourceSelection.ts",
+      "line": 28,
+      "key": "c2_candidate_materials_type",
+      "text": "candidateMaterials: Array<{ id: string; title: string | null; materialKind: string }>;"
+    },
+    {
+      "file": "server/verifiedSourceSelection.ts",
+      "line": 126,
+      "key": "c4_candidate_materials_required",
+      "text": "if (isC3ReachableOfficial(c3) && !cluster.hasConflictingUrlEvidence && cluster.candidateMaterials.length > 0) {"
+    },
+    {
+      "file": "server/verifiedSourceSelection.ts",
+      "line": 290,
+      "key": "c4_no_rerun",
+      "text": "'C4 does not re-run C3 and does not issue DNS or HTTP requests itself.',"
+    },
+    {
+      "file": "server/governedAgenticRagPilot.ts",
+      "line": 337,
+      "key": "ar1_direct_material",
+      "text": "resolutionMethod: 'C4_DIRECT_MATERIAL_REFERENCE',"
+    },
+    {
+      "file": "server/governedAgenticRagPilot.ts",
+      "line": 370,
+      "key": "ar1_no_fuzzy",
+      "text": "'NO_FUZZY_OR_SEMANTIC_MATCHING',"
+    },
+    {
+      "file": "server/governedAgenticRagPilot.ts",
+      "line": 420,
+      "key": "ar1_hold_reason",
+      "text": "status: finalCandidates.length ? 'READY_FOR_OPERATOR_BINDING' : 'C4_CANDIDATE_MATERIAL_NOT_FOUND_HOLD',"
+    },
+    {
+      "file": "server/routers.ts",
+      "line": 3596,
+      "key": "router_ar1_status",
+      "text": "status: adminProcedure.query(async () => {"
+    },
+    {
+      "file": "server/routers.ts",
+      "line": 3602,
+      "key": "router_ar1_start",
+      "text": "startSession: adminProcedure"
+    },
+    {
+      "file": "server/routers.ts",
+      "line": 3655,
+      "key": "router_source_external",
+      "text": "externalVerification: adminProcedure"
+    },
+    {
+      "file": "server/routers.ts",
+      "line": 3663,
+      "key": "router_c4_plan",
+      "text": "controlledReleasePlan: adminProcedure.query(async () => {"
+    },
+    {
+      "file": "server/routers.ts",
+      "line": 3745,
+      "key": "router_ar1_status",
+      "text": "status: adminProcedure.query(async () => {"
+    },
+    {
+      "file": "server/sourceProvenanceRights.ts",
+      "line": 68,
+      "key": "rights_capability",
+      "text": "reason: error.code === '42P01' ? 'source_provenance_schema_not_applied' : `source_provenance_schema_unavailable:${error.code || 'unknown'}`,"
+    },
+    {
+      "file": "server/sourceProvenanceRights.ts",
+      "line": 112,
+      "key": "rights_read_fail",
+      "text": "capability.reason = `source_provenance_supporting_read_failed:${rightsResponse.error?.code || historyResponse.error?.code || 'unknown'}`;"
+    }
+  ],
+  "next_required_runtime_snapshot": [
+    "sourceProvenance.legacyManusReconciliation response",
+    "sourceProvenance.autonomousAudit response",
+    "sourceProvenance.externalVerification response only if already executed or explicitly re-run by operator",
+    "sourceProvenance.controlledReleasePlan response after fresh C3 if available",
+    "agenticRagPilot.status response",
+    "agenticRagPilot.candidates response"
+  ],
+  "hard_blocks": [
+    "No source or DB write in this diagnosis batch",
+    "Do not press externalVerification / C3 re-run without separate explicit authorization",
+    "Do not start AR1 session",
+    "Do not record Legacy V1.1 Ledger decision",
+    "Do not add source rights record"
+  ]
+}

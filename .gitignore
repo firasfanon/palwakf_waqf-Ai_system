@@ -1,0 +1,62 @@
+﻿# Secrets / environment
+.env
+.env.*
+!.env.example
+env.prefilled_for_platform_bridge
+*.pem
+*.key
+*.p12
+*.pfx
+*credentials*
+*service-account*
+*.jks
+*.keystore
+
+# Dependencies
+node_modules/
+
+# Build / caches
+dist/
+build/
+.vite/
+.vite-dev-cache/
+.cache/
+coverage/
+tmp/
+temp/
+
+# Local tool/runtime state
+.manus/
+.palwakf_backups/
+.pwf-backups/
+
+# Local backups
+backups/
+*.bak
+*.backup
+
+# Archives / split archives
+*.zip
+*.7z
+*.rar
+*.z01
+*.z02
+*.z03
+*.z04
+*.z05
+*.z06
+*.z07
+*.z08
+*.z09
+
+# Logs
+*.log
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# PalWakf local runtime state
+.palwakf/runtime/

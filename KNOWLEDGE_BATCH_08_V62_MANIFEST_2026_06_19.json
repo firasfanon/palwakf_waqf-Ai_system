@@ -1,0 +1,10 @@
+{
+  "batch": "Knowledge Batch 08 v62",
+  "date": "2026-06-19",
+  "decision": "KB08_STAGING_ACCEPTED_P1_PROMOTION_CORRECTED_TO_REVIEW_ONLY_OPERATOR_APPLY_PENDING",
+  "database_actions_by_packaging": "none",
+  "files": [
+    "/tmp/v62_full/waqf_ai_model/sql_sandbox/knowledge_batch_08_legacy_staging_import_p1_promotion/04_promote_p1_knowledge_reference_documents_OPERATOR_APPLY.sql",
+    "/tmp/v62_full/waqf_ai_model/sql_sandbox/knowledge_batch_08_legacy_staging_import_p1_promotion/06_post_apply_read_only_verification.sql"
+  ]
+}

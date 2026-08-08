@@ -1,0 +1,80 @@
+{
+  "promotionId": "PALWAKF_AR1_AUTH_PREP_R4_PROMOTE_V1",
+  "batch": "MEGA_BATCH_AR1_DETERMINISTIC_CANDIDATE_REVIEW_AND_EPHEMERAL_SESSION_AUTHORITY_PREP_V1",
+  "mode": "DOCUMENTATION_AND_BASELINE_PROMOTION_ONLY",
+  "sourceRootDefault": "D:\\waqf_ai_model",
+  "replace": [
+    "PALWAKF_PLATFORM_COMPREHENSIVE_GUIDE.md",
+    "CHANGELOG.md",
+    "CURRENT_TASK.md",
+    "STATE.md",
+    "ERROR_RECORD_MEGA_BATCH_AR1_DETERMINISTIC_CANDIDATE_REVIEW_AND_EPHEMERAL_SESSION_AUTHORITY_PREP_V1_2026_07_12.md",
+    "docs/ai/governed_agentic_rag/STATE_MEGA_BATCH_AR1_DETERMINISTIC_CANDIDATE_REVIEW_AND_EPHEMERAL_SESSION_AUTHORITY_PREP_V1.md",
+    "docs/ai/governed_agentic_rag/AR1_DETERMINISTIC_CANDIDATE_REVIEW_AND_EPHEMERAL_SESSION_AUTHORITY_PREP_V1_UAT_AR.md"
+  ],
+  "create": [
+    "docs/ai/governed_agentic_rag/AR1_DETERMINISTIC_CANDIDATE_REVIEW_AND_EPHEMERAL_SESSION_AUTHORITY_PREP_V1_BASELINE_ACCEPTANCE_AR.md",
+    "docs/ai/governed_agentic_rag/evidence/AR1_AUTHORITY_PREP_RUNTIME_ACCEPTANCE_20260713.json"
+  ],
+  "runtimeAcceptance": {
+    "acceptanceId": "MEGA_BATCH_AR1_DETERMINISTIC_CANDIDATE_REVIEW_AND_EPHEMERAL_SESSION_AUTHORITY_PREP_V1_RUNTIME_UAT_ACCEPTED_LOCAL_20260713",
+    "status": "PASS",
+    "scope": "LOCAL_INTERNAL_ADMIN_AUTHORITY_PREPARATION_ONLY",
+    "selectedCandidate": {
+      "clusterKey": "url:https://www.palestinecabinet.gov.ps/portal/OrgStructure/Details/20",
+      "documentId": "c3ebc0f4-fc16-4e49-bb25-4f87b9d63f88",
+      "documentTitle": "مهام وزارة الأوقاف والشؤون الدينية الفلسطينية",
+      "evidenceTier": "T3_CONTROLLED_INTERNAL_EVIDENCE",
+      "internalUseApprovalRef": "UAT-AR1-AUTHORITY-PREP-20260713-001",
+      "resolutionMethod": "C4_DIRECT_MATERIAL_REFERENCE",
+      "resolutionEvidence": [
+        "candidateMaterials.id_field_normalized_to_knowledge_document_uuid",
+        "candidateMaterials.knowledge_document_id_exact",
+        "runtimeRepository.assistant_knowledge_documents_uuid_exact_lookup",
+        "runtimeRepository.uuid_or_numeric_id_resolution",
+        "C4_SELECTED_COHORT_CURRENT_PROCESS_ONLY"
+      ]
+    },
+    "preparation": {
+      "id": "AR1A-92ea2179-e49b-43f1-896d-84ec3654315e",
+      "status": "prepared",
+      "storage": "process_memory_only",
+      "ttlMinutes": 10,
+      "createdAt": "2026-07-12T21:22:23.734Z",
+      "expiresAt": "2026-07-12T21:32:23.734Z",
+      "c3EvidenceExpiresAt": "2026-07-12T21:51:10.046Z",
+      "operatorBound": true,
+      "oneTimeConsumption": true,
+      "consumedAt": null,
+      "sessionId": null,
+      "sessionStarted": false,
+      "activeSessions": 0,
+      "databaseWrites": 0,
+      "sourceOrRightsWrites": 0
+    },
+    "revocation": {
+      "status": "revoked",
+      "revoked": true,
+      "activeAuthorityPreparations": 0,
+      "sessionStarted": false,
+      "activeSessions": 0,
+      "consumedAt": null,
+      "sessionId": null,
+      "databaseWrites": 0,
+      "sourceOrRightsWrites": 0
+    },
+    "statusAfterRevocation": {
+      "status": "READY_FOR_OPERATOR_BINDING",
+      "activeSessions": 0,
+      "activeAuthorityPreparations": 0,
+      "sessionStartRequiresAuthorityPreparation": true,
+      "sessionStartPolicy": "SEPARATE_EXPLICIT_SESSION_START_AUTHORIZATION_REQUIRED",
+      "llmGenerationEnabled": false
+    },
+    "production": "NOT_APPROVED",
+    "nextAuthorizationRequired": "SEPARATE_EXPLICIT_SESSION_START_AUTHORIZATION_REQUIRED"
+  },
+  "sourceCodeChange": false,
+  "databaseWrite": false,
+  "production": "NOT_APPROVED"
+}

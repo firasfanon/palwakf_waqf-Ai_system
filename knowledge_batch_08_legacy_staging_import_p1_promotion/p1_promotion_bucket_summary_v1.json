@@ -1,0 +1,65 @@
+[
+  {
+    "legacy_table_name": "__drizzle_migrations",
+    "target_table": "",
+    "migration_priority": "Review",
+    "planned_batch08_action": "stage_only_review_or_domain_mapped",
+    "count": 18
+  },
+  {
+    "legacy_table_name": "content_templates",
+    "target_table": "content_templates",
+    "migration_priority": "P1",
+    "planned_batch08_action": "stage_all_then_operational_register",
+    "count": 10
+  },
+  {
+    "legacy_table_name": "knowledge_base",
+    "target_table": "",
+    "migration_priority": "Review",
+    "planned_batch08_action": "stage_only_review_or_domain_mapped",
+    "count": 4
+  },
+  {
+    "legacy_table_name": "knowledge_documents",
+    "target_table": "knowledge_documents",
+    "migration_priority": "P1",
+    "planned_batch08_action": "stage_all_then_promote_p1_knowledge",
+    "count": 344
+  },
+  {
+    "legacy_table_name": "land_references",
+    "target_table": "",
+    "migration_priority": "P1",
+    "planned_batch08_action": "stage_all_then_promote_p1_knowledge",
+    "count": 12
+  },
+  {
+    "legacy_table_name": "legacy_json_content",
+    "target_table": "",
+    "migration_priority": "P1",
+    "planned_batch08_action": "stage_all_then_promote_p1_knowledge",
+    "count": 520
+  },
+  {
+    "legacy_table_name": "page_settings",
+    "target_table": "page_settings",
+    "migration_priority": "P1",
+    "planned_batch08_action": "stage_all_then_operational_register",
+    "count": 7
+  },
+  {
+    "legacy_table_name": "permissions",
+    "target_table": "",
+    "migration_priority": "Domain-mapped / no direct assistant ownership",
+    "planned_batch08_action": "stage_only_review_or_domain_mapped",
+    "count": 10
+  },
+  {
+    "legacy_table_name": "roles",
+    "target_table": "",
+    "migration_priority": "Domain-mapped / no direct assistant ownership",
+    "planned_batch08_action": "stage_only_review_or_domain_mapped",
+    "count": 4
+  }
+]

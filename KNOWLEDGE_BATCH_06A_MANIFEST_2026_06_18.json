@@ -1,0 +1,33 @@
+{
+  "batch": "Knowledge Batch 06A — Browser Runtime Evidence Intake + Chat Citation Acceptance Gate",
+  "date": "2026-06-18",
+  "previous_baseline": "v48",
+  "current_baseline": "v49",
+  "decision": "KNOWLEDGE_BATCH_06A_TYPESCRIPT_EVIDENCE_ACCEPTED_BROWSER_CHAT_CITATION_EVIDENCE_PENDING",
+  "changed_files": [
+    "KNOWLEDGE_BATCH_06A_RUNTIME_EVIDENCE_INTAKE_2026_06_18.md",
+    "KNOWLEDGE_BATCH_06A_VERIFICATION_NOTES_2026_06_18.md",
+    "KNOWLEDGE_BATCH_06A_BROWSER_EVIDENCE_CAPTURE_RUNBOOK_2026_06_18.md",
+    "ERROR_RECORD_KNOWLEDGE_BATCH_06A_2026_06_18.md",
+    "KNOWLEDGE_BATCH_06A_CHANGELOG_2026_06_18.md",
+    "KNOWLEDGE_BATCH_06A_CHANGED_FILES_2026_06_18.md",
+    "KNOWLEDGE_BATCH_06A_MANIFEST_2026_06_18.json",
+    "knowledge_batch_06a_runtime_evidence/knowledge_batch_06a_evidence_acceptance_matrix.csv",
+    "knowledge_batch_06a_runtime_evidence/knowledge_batch_06a_evidence_summary.json",
+    "SESSION_HANDOFF_KNOWLEDGE_BATCH_06A_TO_BROWSER_EVIDENCE_OR_29A_2026_06_18.md",
+    "LATEST_BASELINE_KNOWLEDGE_BATCH_06A_2026_06_18.md",
+    "PALWAKF_PLATFORM_COMPREHENSIVE_GUIDE.md"
+  ],
+  "accepted": {
+    "typescript_check": true
+  },
+  "pending": {
+    "chat_retrieval_browser_evidence": true,
+    "citation_runtime_evidence": true,
+    "admin_knowledge_search_browser_evidence": true,
+    "remote_staging_evidence": true,
+    "rbac_rls_negative_uat": true
+  },
+  "production_approved": false,
+  "mega_batch_30_allowed": false
+}

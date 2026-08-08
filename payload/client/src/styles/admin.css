@@ -1,0 +1,1873 @@
+/* =========================================================
+   PalWakf Admin Identity (STRICT)
+   Applies ONLY under body.admin-scope
+   ========================================================= */
+
+body.admin-scope {
+  background: hsl(0 0% 8%) !important; /* Dark background for admin */
+  min-height: 100vh;
+  /* Use a single, predictable scroll container inside Admin (admin-content). */
+  overflow: hidden;
+}
+
+/* CRITICAL:
+   index.css forces background on html/body/#root with !important.
+   Make #root transparent in admin so the admin gradient shows.
+*/
+body.admin-scope #root{
+  background: transparent !important;
+}
+
+/* Layout scaffolding (AdminLayoutV2 uses these classnames) */
+body.admin-scope .admin-layout {
+  display: flex;
+  height: 100vh;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+body.admin-scope .admin-content {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+body.admin-scope .admin-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  background: rgba(17, 24, 39, 0.72);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.10);
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+body.admin-scope .admin-main {
+  padding: 18px;
+  flex: 1 1 auto;
+}
+
+body.admin-scope .admin-page {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+body.admin-scope .admin-page-title {
+  font-size: 18px;
+  font-weight: 800;
+  margin: 6px 0 0;
+}
+
+body.admin-scope .admin-breadcrumbs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+  font-size: 12px;
+  color: rgba(255,255,255,0.78);
+}
+
+body.admin-scope .admin-sep {
+  opacity: 0.7;
+}
+
+body.admin-scope .admin-path {
+  margin-inline-start: 8px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(0,0,0,0.22);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+body.admin-scope .admin-topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+body.admin-scope .admin-action {
+  padding: 8px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(0,0,0,0.22);
+  color: rgba(255,255,255,0.92);
+  cursor: pointer;
+}
+
+body.admin-scope .admin-action:hover {
+  border-color: rgba(212,175,55,0.35);
+  background: rgba(212,175,55,0.10);
+}
+
+body.admin-scope .admin-action-secondary {
+  background: rgba(255,255,255,0.06);
+}
+
+body.admin-scope .admin-badge-soon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px 10px;
+  font-size: 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(178,34,34,0.35);
+  background: rgba(178,34,34,0.12);
+  color: rgba(255,255,255,0.92);
+}
+
+/* Force admin content surfaces to inherit theme. */
+body.admin-scope main,
+body.admin-scope .admin-content {
+  background: transparent !important;
+  color: hsl(var(--foreground));
+}
+
+/* Cards / panels */
+body.admin-scope [data-admin-card="true"],
+body.admin-scope [data-slot="card"] {
+  background: hsl(var(--card)) !important;
+  border: 1px solid hsl(var(--border)) !important;
+  color: hsl(var(--card-foreground)) !important;
+}
+
+/* Force removal of white backgrounds from all elements in admin-scope */
+body.admin-scope .bg-white {
+  background-color: hsl(var(--card)) !important;
+}
+
+body.admin-scope .text-black {
+  color: hsl(var(--foreground)) !important;
+}
+
+body.admin-scope [class*="border-gray"] {
+  border-color: hsl(var(--border)) !important;
+}
+
+body.admin-scope [class*="bg-gray"] {
+  background-color: hsl(var(--card)) !important;
+}
+
+/* Ensure all cards use proper tokens */
+body.admin-scope .card {
+  background: hsl(var(--card)) !important;
+  border-color: hsl(var(--border)) !important;
+  color: hsl(var(--card-foreground)) !important;
+}
+
+/* Table styling */
+body.admin-scope table,
+body.admin-scope tbody,
+body.admin-scope thead {
+  background: transparent !important;
+}
+
+body.admin-scope th {
+  background: hsl(var(--muted)) !important;
+  color: hsl(var(--foreground)) !important;
+  border-color: hsl(var(--border)) !important;
+}
+
+body.admin-scope td {
+  border-color: hsl(var(--border)) !important;
+  color: hsl(var(--foreground)) !important;
+}
+
+body.admin-scope tr:hover {
+  background: rgba(255,255,255,0.05) !important;
+}
+
+/* Sidebar */
+body.admin-scope .admin-sidebar {
+  width: 320px;
+  flex: 0 0 320px;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  background: hsl(var(--sidebar)) !important;
+  border-left: 1px solid hsl(var(--sidebar-border)) !important;
+  padding: 14px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+body.admin-scope .admin-sidebar-head {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(0,0,0,0.20);
+  margin-bottom: 12px;
+}
+
+body.admin-scope .admin-sidebar-title {
+  font-weight: 800;
+  color: rgba(255,255,255,0.92);
+}
+
+body.admin-scope .admin-sidebar-path {
+  padding: 6px 8px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(0,0,0,0.22);
+  color: rgba(255,255,255,0.90);
+  font-size: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+body.admin-scope .admin-sidebar-search {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.06);
+  color: rgba(255,255,255,0.92);
+  outline: none;
+}
+
+body.admin-scope .admin-sidebar-search::placeholder {
+  color: rgba(255,255,255,0.60);
+}
+
+body.admin-scope .admin-nav-section-title {
+  margin: 14px 10px 8px;
+  font-size: 11px;
+  font-weight: 800;
+  color: rgba(212,175,55,0.95);
+}
+
+body.admin-scope .admin-nav-items {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Nav items */
+body.admin-scope .admin-nav-item,
+body.admin-scope .admin-nav-child {
+  border: 1px solid transparent;
+  background: rgba(0,0,0,0.18);
+  color: rgba(255,255,255,0.92);
+  border-radius: 14px;
+  padding: 10px 10px;
+  transition: 150ms ease;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  text-decoration: none;
+}
+
+body.admin-scope .admin-nav-item:hover,
+body.admin-scope .admin-nav-child:hover{
+  border-color: rgba(212,175,55,0.25);
+  background: rgba(212,175,55,0.10);
+  color: rgba(255,255,255,0.95);
+}
+
+body.admin-scope .admin-nav-item.active,
+body.admin-scope .admin-nav-child.active{
+  border-color: rgba(31,90,166,0.45);
+  background: rgba(31,90,166,0.18);
+}
+
+body.admin-scope .admin-nav-item.disabled,
+body.admin-scope .admin-nav-child.disabled{
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+body.admin-scope .admin-nav-item.disabled:hover,
+body.admin-scope .admin-nav-child.disabled:hover{
+  border-color: rgba(178,34,34,0.30);
+  background: rgba(178,34,34,0.12);
+}
+
+body.admin-scope .admin-nav-item-col {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+body.admin-scope .admin-nav-item-text {
+  font-weight: 800;
+  font-size: 13px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+body.admin-scope .admin-nav-meta{
+  margin-top: 2px;
+  font-size: 11px;
+  color: rgba(255,255,255,0.65);
+  direction: rtl;
+  text-align: right;
+  overflow:hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+body.admin-scope .admin-nav-children {
+  margin-top: 8px;
+  margin-right: 10px;
+  padding-right: 10px;
+  border-right: 1px dashed rgba(255,255,255,0.16);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* Light mode adjustments (keep readable) */
+html:not(.dark) body.admin-scope{
+  background: hsl(var(--background)) !important;
+}
+
+html:not(.dark) body.admin-scope .admin-topbar{
+  background: rgba(255,255,255,0.70);
+  border-bottom: 1px solid rgba(15,26,46,0.10);
+}
+
+html:not(.dark) body.admin-scope .admin-breadcrumbs{
+  color: rgba(15,26,46,0.70);
+}
+
+html:not(.dark) body.admin-scope .admin-action{
+  border: 1px solid rgba(15,26,46,0.10);
+  background: rgba(255,255,255,0.80);
+  color: rgba(15,26,46,0.92);
+}
+
+html:not(.dark) body.admin-scope [data-admin-card="true"],
+html:not(.dark) body.admin-scope [data-slot="card"]{
+  background: hsl(var(--card)) !important;
+  border: 1px solid hsl(var(--border)) !important;
+  color: hsl(var(--card-foreground)) !important;
+}
+
+html:not(.dark) body.admin-scope .bg-white {
+  background-color: hsl(var(--card)) !important;
+}
+
+html:not(.dark) body.admin-scope .text-black {
+  color: hsl(var(--foreground)) !important;
+}
+
+html:not(.dark) body.admin-scope [class*="border-gray"] {
+  border-color: hsl(var(--border)) !important;
+}
+
+html:not(.dark) body.admin-scope [class*="bg-gray"] {
+  background-color: hsl(var(--card)) !important;
+}
+
+html:not(.dark) body.admin-scope .card {
+  background: hsl(var(--card)) !important;
+  border-color: hsl(var(--border)) !important;
+  color: hsl(var(--card-foreground)) !important;
+}
+
+html:not(.dark) body.admin-scope th {
+  background: hsl(var(--muted)) !important;
+  color: hsl(var(--foreground)) !important;
+  border-color: hsl(var(--border)) !important;
+}
+
+html:not(.dark) body.admin-scope td {
+  border-color: hsl(var(--border)) !important;
+  color: hsl(var(--foreground)) !important;
+}
+
+html:not(.dark) body.admin-scope tr:hover {
+  background: rgba(15,26,46,0.05) !important;
+}
+
+html:not(.dark) body.admin-scope .admin-sidebar{
+  background: hsl(var(--sidebar)) !important;
+  border-left: 1px solid hsl(var(--sidebar-border)) !important;
+}
+
+html:not(.dark) body.admin-scope .admin-nav-item,
+html:not(.dark) body.admin-scope .admin-nav-child{
+  background: rgba(255,255,255,0.85);
+  color: rgba(15,26,46,0.92);
+  border: 1px solid rgba(15,26,46,0.10);
+}
+
+html:not(.dark) body.admin-scope .admin-nav-meta{
+  color: rgba(15,26,46,0.65);
+}
+
+
+/* =========================================================
+   V25 dashboard/sidebar refinement
+   ========================================================= */
+body.admin-scope {
+  background:
+    radial-gradient(circle at top right, color-mix(in srgb, hsl(var(--primary)) 18%, transparent), transparent 24%),
+    linear-gradient(180deg, color-mix(in srgb, hsl(var(--background)) 8%, white 92%) 0%, color-mix(in srgb, hsl(var(--background)) 5%, white 95%) 45%, color-mix(in srgb, hsl(var(--background)) 10%, white 90%) 100%) !important;
+}
+
+body.admin-scope .admin-sidebar {
+  width: 340px;
+  flex: 0 0 340px;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  background: linear-gradient(180deg, hsl(var(--sidebar)) 0%, color-mix(in srgb, hsl(var(--sidebar)) 72%, hsl(var(--primary)) 28%) 28%, color-mix(in srgb, hsl(var(--sidebar)) 82%, black 18%) 60%, color-mix(in srgb, hsl(var(--sidebar)) 68%, hsl(var(--background)) 32%) 100%) !important;
+  border-left: 0 !important;
+  box-shadow: -20px 0 50px rgba(15, 23, 42, 0.16);
+  padding: 22px 18px;
+}
+
+body.admin-scope .admin-sidebar-glow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at top right, rgba(255,255,255,0.18), transparent 24%);
+}
+
+body.admin-scope .admin-sidebar-head {
+  position: relative;
+  z-index: 1;
+  gap: 12px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+body.admin-scope .admin-user-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 10px 4px 14px;
+}
+
+body.admin-scope .admin-user-kicker {
+  display: block;
+  font-size: 12px;
+  color: rgba(255,255,255,0.72);
+  margin-bottom: 4px;
+}
+
+body.admin-scope .admin-user-name {
+  display: block;
+  font-size: 28px;
+  font-weight: 800;
+  color: hsl(var(--sidebar-foreground));
+}
+
+body.admin-scope .admin-user-avatar {
+  width: 52px;
+  height: 52px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(180deg, color-mix(in srgb, hsl(var(--secondary)) 12%, white 88%), color-mix(in srgb, hsl(var(--primary)) 18%, white 82%));
+  color: hsl(var(--primary));
+  box-shadow: 0 8px 18px rgba(15,23,42,0.2);
+}
+
+body.admin-scope .admin-sidebar-path {
+  background: rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.09);
+  color: rgba(255,255,255,0.86);
+  border-radius: 16px;
+  font-size: 12px;
+}
+
+body.admin-scope .admin-sidebar-search-wrap {
+  position: relative;
+}
+
+body.admin-scope .admin-sidebar-search-icon {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: rgba(255,255,255,0.62);
+}
+
+body.admin-scope .admin-sidebar-search {
+  padding-right: 38px;
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(255,255,255,0.10);
+  color: hsl(var(--sidebar-foreground));
+}
+
+body.admin-scope .admin-nav {
+  position: relative;
+  z-index: 1;
+  margin-top: 18px;
+}
+
+body.admin-scope .admin-nav-section-title {
+  display: none;
+}
+
+body.admin-scope .admin-nav-items {
+  gap: 10px;
+}
+
+body.admin-scope .admin-nav-item.modern,
+body.admin-scope .admin-nav-child.modern {
+  border-radius: 18px;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.08);
+  padding: 13px 15px;
+  color: rgba(255,255,255,0.92);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  min-height: 54px;
+}
+
+body.admin-scope .admin-nav-item.modern:hover,
+body.admin-scope .admin-nav-child.modern:hover {
+  background: rgba(255,255,255,0.09);
+  border-color: rgba(255,255,255,0.18);
+}
+
+body.admin-scope .admin-nav-item.modern.active,
+body.admin-scope .admin-nav-child.modern.active {
+  background: linear-gradient(180deg, rgba(173,199,255,0.18), rgba(147, 197, 253, 0.12));
+  border-color: rgba(255,255,255,0.20);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.08);
+}
+
+body.admin-scope .admin-nav-leading {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+body.admin-scope .admin-nav-glyph {
+  width: 30px;
+  height: 30px;
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255,255,255,0.95);
+  background: rgba(255,255,255,0.10);
+}
+
+body.admin-scope .admin-nav-item-icon {
+  color: rgba(255,255,255,0.70);
+}
+
+body.admin-scope .admin-nav-item-text {
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+body.admin-scope .admin-nav-children {
+  margin-top: 8px;
+  margin-inline-start: 14px;
+  padding-inline-start: 10px;
+  border-inline-start: 1px dashed rgba(255,255,255,0.14);
+  display: grid;
+  gap: 8px;
+}
+
+body.admin-scope .admin-topbar {
+  background: rgba(255,255,255,0.68);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(148, 163, 184, 0.18);
+  padding: 18px 20px;
+}
+
+body.admin-scope .admin-topbar .admin-crumb,
+body.admin-scope .admin-page-title,
+body.admin-scope .admin-breadcrumbs,
+body.admin-scope .admin-path {
+  color: hsl(var(--foreground)) !important;
+}
+
+body.admin-scope .admin-action,
+body.admin-scope .admin-action-secondary {
+  background: hsl(var(--card));
+  border-color: color-mix(in srgb, hsl(var(--border)) 86%, transparent);
+  color: hsl(var(--foreground));
+}
+
+body.admin-scope .admin-main {
+  padding: 24px;
+}
+
+body.admin-scope .admin-page {
+  max-width: 1440px;
+}
+
+
+/* Theme Freeze + Surface Consolidation */
+html[data-theme="pwf-core"] body.admin-scope,
+html[data-theme="pwf-core"] body.admin-scope .admin-root,
+html[data-theme="pwf-core"] body.admin-scope [data-slot="dialog-content"],
+html[data-theme="pwf-core"] body.admin-scope [role="dialog"] {
+  color: hsl(var(--foreground));
+}
+
+html[data-theme="pwf-core"] body.admin-scope [data-slot="dialog-content"],
+html[data-theme="pwf-core"] body.admin-scope .dialog-content,
+html[data-theme="pwf-core"] body.admin-scope .modal-content {
+  background: hsl(var(--card)) !important;
+  border: 1px solid hsl(var(--border)) !important;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35) !important;
+}
+
+html[data-theme="pwf-core"] body.admin-scope input,
+html[data-theme="pwf-core"] body.admin-scope textarea,
+html[data-theme="pwf-core"] body.admin-scope button[data-slot="select-trigger"],
+html[data-theme="pwf-core"] body.admin-scope [data-slot="input"],
+html[data-theme="pwf-core"] body.admin-scope [data-slot="textarea"] {
+  background: hsl(var(--input)) !important;
+  color: hsl(var(--foreground)) !important;
+  border-color: hsl(var(--border)) !important;
+}
+
+html[data-theme="pwf-core"] body.admin-scope input::placeholder,
+html[data-theme="pwf-core"] body.admin-scope textarea::placeholder {
+  color: hsl(var(--muted-foreground)) !important;
+}
+
+
+/* Page cleanup pass surfaces */
+body.admin-scope .admin-page-cleanup [data-slot="card"],
+body.admin-scope .admin-page-cleanup .cleanup-card {
+  background: hsl(var(--card)) !important;
+  border-color: hsl(var(--border)) !important;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08) !important;
+}
+
+body.admin-scope .admin-page-cleanup [data-slot="dialog-content"] {
+  background: hsl(var(--card)) !important;
+  border-color: hsl(var(--border)) !important;
+  color: hsl(var(--foreground)) !important;
+}
+
+body.admin-scope .admin-page-cleanup input,
+body.admin-scope .admin-page-cleanup textarea,
+body.admin-scope .admin-page-cleanup select,
+body.admin-scope .admin-page-cleanup button[data-slot="select-trigger"] {
+  background: hsl(var(--background)) !important;
+  border-color: hsl(var(--border)) !important;
+  color: hsl(var(--foreground)) !important;
+}
+
+body.admin-scope .admin-page-cleanup ::placeholder {
+  color: hsl(var(--muted-foreground)) !important;
+  opacity: 1;
+}
+
+
+/* Page cleanup pass 2 */
+body.admin-scope .admin-page-cleanup .cleanup-surface-muted {
+  background: hsl(var(--muted) / 0.45) !important;
+  border: 1px solid hsl(var(--border)) !important;
+  color: hsl(var(--foreground)) !important;
+}
+
+body.admin-scope .admin-page-cleanup .cleanup-surface-info {
+  background: hsl(var(--primary) / 0.08) !important;
+  border: 1px solid hsl(var(--primary) / 0.18) !important;
+  color: hsl(var(--foreground)) !important;
+}
+
+body.admin-scope .admin-page-cleanup .cleanup-surface-success {
+  background: hsl(var(--primary) / 0.07) !important;
+  border: 1px solid hsl(var(--border)) !important;
+  color: hsl(var(--foreground)) !important;
+}
+
+body.admin-scope .admin-page-cleanup .cleanup-surface-warning {
+  background: hsl(var(--muted) / 0.65) !important;
+  border: 1px solid hsl(var(--border)) !important;
+  color: hsl(var(--foreground)) !important;
+}
+
+body.admin-scope .admin-page-cleanup .cleanup-surface-danger {
+  background: hsl(var(--destructive) / 0.08) !important;
+  border: 1px solid hsl(var(--destructive) / 0.22) !important;
+  color: hsl(var(--foreground)) !important;
+}
+
+body.admin-scope .admin-page-cleanup .cleanup-file-preview {
+  background: hsl(var(--background)) !important;
+  border: 1px solid hsl(var(--border)) !important;
+}
+
+body.admin-scope .admin-page-cleanup .cleanup-empty-state {
+  color: hsl(var(--muted-foreground)) !important;
+}
+
+/* =========================================================
+   Pass 6 — Admin hard-stop overrides from central tokens only
+   ========================================================= */
+
+body.admin-scope {
+  direction: rtl;
+  background:
+    radial-gradient(circle at top right, color-mix(in srgb, hsl(var(--primary)) 16%, transparent), transparent 24%),
+    linear-gradient(180deg, color-mix(in srgb, hsl(var(--background)) 10%, hsl(var(--card)) 90%) 0%, color-mix(in srgb, hsl(var(--background)) 6%, hsl(var(--card)) 94%) 45%, color-mix(in srgb, hsl(var(--background)) 12%, hsl(var(--card)) 88%) 100%) !important;
+}
+
+body.admin-scope .admin-topbar,
+body.admin-scope .admin-action,
+body.admin-scope .admin-action-secondary,
+body.admin-scope .admin-path,
+body.admin-scope .admin-sidebar-head,
+body.admin-scope .admin-sidebar-path,
+body.admin-scope .admin-sidebar-search,
+body.admin-scope .admin-nav-item,
+body.admin-scope .admin-nav-child,
+body.admin-scope .admin-badge-soon {
+  color: hsl(var(--sidebar-foreground)) !important;
+  border-color: color-mix(in srgb, hsl(var(--sidebar-foreground)) 12%, transparent) !important;
+}
+
+body.admin-scope .admin-topbar {
+  background: color-mix(in srgb, hsl(var(--sidebar)) 82%, transparent) !important;
+  border-bottom-color: color-mix(in srgb, hsl(var(--sidebar-foreground)) 10%, transparent) !important;
+}
+
+body.admin-scope .admin-action,
+body.admin-scope .admin-path,
+body.admin-scope .admin-sidebar-path,
+body.admin-scope .admin-nav-item,
+body.admin-scope .admin-nav-child {
+  background: color-mix(in srgb, hsl(var(--background)) 20%, transparent) !important;
+}
+
+body.admin-scope .admin-action:hover,
+body.admin-scope .admin-nav-item:hover,
+body.admin-scope .admin-nav-child:hover {
+  background: color-mix(in srgb, hsl(var(--secondary)) 10%, transparent) !important;
+  border-color: color-mix(in srgb, hsl(var(--secondary)) 28%, transparent) !important;
+}
+
+body.admin-scope .admin-nav-item.active,
+body.admin-scope .admin-nav-child.active {
+  background: color-mix(in srgb, hsl(var(--primary)) 16%, transparent) !important;
+  border-color: color-mix(in srgb, hsl(var(--primary)) 36%, transparent) !important;
+}
+
+body.admin-scope .admin-nav-item.disabled:hover,
+body.admin-scope .admin-nav-child.disabled:hover,
+body.admin-scope .admin-badge-soon {
+  background: color-mix(in srgb, hsl(var(--destructive)) 12%, transparent) !important;
+  border-color: color-mix(in srgb, hsl(var(--destructive)) 30%, transparent) !important;
+}
+
+body.admin-scope .admin-nav-meta,
+body.admin-scope .admin-user-kicker,
+body.admin-scope .admin-breadcrumbs {
+  color: hsl(var(--muted-foreground)) !important;
+  direction: rtl !important;
+  text-align: start !important;
+}
+
+body.admin-scope .admin-nav-section-title,
+body.admin-scope .admin-user-name,
+body.admin-scope .admin-sidebar-title {
+  color: hsl(var(--secondary)) !important;
+}
+
+body.admin-scope .admin-user-avatar {
+  background: linear-gradient(180deg, color-mix(in srgb, hsl(var(--secondary)) 14%, hsl(var(--card)) 86%), color-mix(in srgb, hsl(var(--primary)) 18%, hsl(var(--card)) 82%)) !important;
+  color: hsl(var(--primary)) !important;
+}
+
+body.admin-scope .admin-sidebar-glow {
+  background: radial-gradient(circle at top right, color-mix(in srgb, hsl(var(--sidebar-foreground)) 18%, transparent), transparent 24%) !important;
+}
+
+/* =========================================================
+   Pass 7 — Admin RTL hardening for cards, tables, dialogs,
+   forms, and all admin inner surfaces.
+   ========================================================= */
+
+body.admin-scope,
+body.admin-scope .admin-layout,
+body.admin-scope .admin-content,
+body.admin-scope .admin-main,
+body.admin-scope .admin-page,
+body.admin-scope .admin-page-cleanup,
+body.admin-scope main,
+body.admin-scope section,
+body.admin-scope article,
+body.admin-scope form,
+body.admin-scope [data-slot="card"],
+body.admin-scope .card,
+body.admin-scope [role="dialog"],
+body.admin-scope [data-slot="dialog-content"],
+body.admin-scope [data-slot="alert-dialog-content"],
+body.admin-scope [data-slot="drawer-content"],
+body.admin-scope [data-slot="sheet-content"] {
+  direction: rtl !important;
+  text-align: right !important;
+}
+
+body.admin-scope table,
+body.admin-scope [data-slot="table"] {
+  direction: rtl !important;
+}
+
+body.admin-scope th,
+body.admin-scope td,
+body.admin-scope [data-slot="table-head"],
+body.admin-scope [data-slot="table-cell"] {
+  text-align: right !important;
+}
+
+body.admin-scope input,
+body.admin-scope textarea,
+body.admin-scope select,
+body.admin-scope [role="textbox"] {
+  direction: rtl !important;
+  text-align: right !important;
+}
+
+
+/* Pass 8 — Admin visual QA polish */
+body.admin-scope,
+body.admin-scope .admin-content,
+body.admin-scope .admin-main,
+body.admin-scope .admin-page,
+body.admin-scope .admin-table-wrapper,
+body.admin-scope .admin-card,
+body.admin-scope .admin-sidebar,
+body.admin-scope .admin-topbar,
+body.admin-scope .admin-breadcrumbs,
+body.admin-scope .admin-topbar-actions {
+  direction: rtl;
+  text-align: right;
+}
+
+body.admin-scope .admin-table-wrapper th,
+body.admin-scope .admin-table-wrapper td,
+body.admin-scope .admin-table-wrapper caption,
+body.admin-scope .admin-card [data-slot="card-title"],
+body.admin-scope .admin-card [data-slot="card-description"],
+body.admin-scope .admin-card [data-slot="card-content"] {
+  text-align: right !important;
+}
+
+/* =========================================================
+   Mega Batch UI/UX 01 / v52 — Comfort Light Visual System
+   Scope: Assistant React only. No DB / governance / production changes.
+   Goal: replace black-heavy operating surfaces with warm, official, light-first UI.
+   ========================================================= */
+
+html[data-theme="pwf-comfort-light"],
+html[data-theme="pwf-core"]:not(.dark) {
+  color-scheme: light;
+}
+
+html[data-theme="pwf-comfort-light"] body,
+html[data-theme="pwf-core"]:not(.dark) body {
+  background:
+    radial-gradient(circle at 92% 0%, color-mix(in srgb, hsl(var(--primary)) 10%, transparent) 0%, transparent 30%),
+    radial-gradient(circle at 8% 10%, color-mix(in srgb, hsl(var(--secondary)) 14%, transparent) 0%, transparent 28%),
+    linear-gradient(180deg, hsl(42 56% 98%) 0%, hsl(42 42% 95%) 100%) !important;
+  color: hsl(var(--foreground)) !important;
+}
+
+/* Admin workspace comfort */
+html[data-theme="pwf-comfort-light"] body.admin-scope,
+html[data-theme="pwf-core"]:not(.dark) body.admin-scope {
+  background:
+    radial-gradient(circle at top right, color-mix(in srgb, hsl(var(--primary)) 12%, transparent), transparent 30%),
+    radial-gradient(circle at bottom left, color-mix(in srgb, hsl(var(--secondary)) 12%, transparent), transparent 28%),
+    linear-gradient(180deg, hsl(42 56% 98%) 0%, hsl(42 38% 94%) 100%) !important;
+  color: hsl(var(--foreground)) !important;
+}
+
+html[data-theme="pwf-comfort-light"] body.admin-scope #root,
+html[data-theme="pwf-core"]:not(.dark) body.admin-scope #root {
+  background: transparent !important;
+}
+
+html[data-theme="pwf-comfort-light"] body.admin-scope .admin-sidebar,
+html[data-theme="pwf-core"]:not(.dark) body.admin-scope .admin-sidebar {
+  background:
+    linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(43 65% 97%) 42%, hsl(214 55% 96%) 100%) !important;
+  color: hsl(var(--sidebar-foreground)) !important;
+  border-left: 1px solid hsl(var(--sidebar-border)) !important;
+  box-shadow: -16px 0 38px rgba(31, 41, 55, 0.08) !important;
+}
+
+html[data-theme="pwf-comfort-light"] body.admin-scope .admin-sidebar-glow,
+html[data-theme="pwf-core"]:not(.dark) body.admin-scope .admin-sidebar-glow {
+  background: radial-gradient(circle at top right, color-mix(in srgb, hsl(var(--secondary)) 18%, transparent), transparent 32%) !important;
+}
+
+html[data-theme="pwf-comfort-light"] body.admin-scope .admin-topbar,
+html[data-theme="pwf-core"]:not(.dark) body.admin-scope .admin-topbar {
+  background: color-mix(in srgb, hsl(0 0% 100%) 84%, transparent) !important;
+  border-bottom: 1px solid hsl(var(--border)) !important;
+  box-shadow: 0 10px 30px rgba(31, 41, 55, 0.05) !important;
+  color: hsl(var(--foreground)) !important;
+}
+
+html[data-theme="pwf-comfort-light"] body.admin-scope .admin-user-name,
+html[data-theme="pwf-comfort-light"] body.admin-scope .admin-sidebar-title,
+html[data-theme="pwf-core"]:not(.dark) body.admin-scope .admin-user-name,
+html[data-theme="pwf-core"]:not(.dark) body.admin-scope .admin-sidebar-title {
+  color: hsl(var(--foreground)) !important;
+}
+
+html[data-theme="pwf-comfort-light"] body.admin-scope .admin-user-kicker,
+html[data-theme="pwf-comfort-light"] body.admin-scope .admin-nav-meta,
+html[data-theme="pwf-comfort-light"] body.admin-scope .admin-breadcrumbs,
+html[data-theme="pwf-core"]:not(.dark) body.admin-scope .admin-user-kicker,
+html[data-theme="pwf-core"]:not(.dark) body.admin-scope .admin-nav-meta,
+html[data-theme="pwf-core"]:not(.dark) body.admin-scope .admin-breadcrumbs {
+  color: hsl(var(--muted-foreground)) !important;
+}
+
+html[data-theme="pwf-comfort-light"] body.admin-scope .admin-sidebar-path,
+html[data-theme="pwf-comfort-light"] body.admin-scope .admin-sidebar-search,
+html[data-theme="pwf-comfort-light"] body.admin-scope .admin-action,
+html[data-theme="pwf-comfort-light"] body.admin-scope .admin-action-secondary,
+html[data-theme="pwf-comfort-light"] body.admin-scope .admin-path,
+html[data-theme="pwf-core"]:not(.dark) body.admin-scope .admin-sidebar-path,
+html[data-theme="pwf-core"]:not(.dark) body.admin-scope .admin-sidebar-search,
+html[data-theme="pwf-core"]:not(.dark) body.admin-scope .admin-action,
+html[data-theme="pwf-core"]:not(.dark) body.admin-scope .admin-action-secondary,
+html[data-theme="pwf-core"]:not(.dark) body.admin-scope .admin-path {
+  background: hsl(0 0% 100%) !important;
+  border-color: hsl(var(--border)) !important;
+  color: hsl(var(--foreground)) !important;
+  box-shadow: 0 8px 22px rgba(31, 41, 55, 0.05) !important;
+}
+
+html[data-theme="pwf-comfort-light"] body.admin-scope .admin-nav-item,
+html[data-theme="pwf-comfort-light"] body.admin-scope .admin-nav-child,
+html[data-theme="pwf-comfort-light"] body.admin-scope .admin-nav-item.modern,
+html[data-theme="pwf-comfort-light"] body.admin-scope .admin-nav-child.modern,
+html[data-theme="pwf-core"]:not(.dark) body.admin-scope .admin-nav-item,
+html[data-theme="pwf-core"]:not(.dark) body.admin-scope .admin-nav-child,
+html[data-theme="pwf-core"]:not(.dark) body.admin-scope .admin-nav-item.modern,
+html[data-theme="pwf-core"]:not(.dark) body.admin-scope .admin-nav-child.modern {
+  background: hsl(0 0% 100% / 0.88) !important;
+  border-color: hsl(var(--border)) !important;
+  color: hsl(var(--foreground)) !important;
+  box-shadow: 0 8px 18px rgba(31, 41, 55, 0.04) !important;
+}
+
+html[data-theme="pwf-comfort-light"] body.admin-scope .admin-nav-item:hover,
+html[data-theme="pwf-comfort-light"] body.admin-scope .admin-nav-child:hover,
+html[data-theme="pwf-core"]:not(.dark) body.admin-scope .admin-nav-item:hover,
+html[data-theme="pwf-core"]:not(.dark) body.admin-scope .admin-nav-child:hover {
+  background: color-mix(in srgb, hsl(var(--primary)) 8%, white 92%) !important;
+  border-color: color-mix(in srgb, hsl(var(--primary)) 32%, hsl(var(--border)) 68%) !important;
+}
+
+html[data-theme="pwf-comfort-light"] body.admin-scope .admin-nav-item.active,
+html[data-theme="pwf-comfort-light"] body.admin-scope .admin-nav-child.active,
+html[data-theme="pwf-core"]:not(.dark) body.admin-scope .admin-nav-item.active,
+html[data-theme="pwf-core"]:not(.dark) body.admin-scope .admin-nav-child.active {
+  background: linear-gradient(180deg, color-mix(in srgb, hsl(var(--primary)) 13%, white 87%), color-mix(in srgb, hsl(var(--secondary)) 10%, white 90%)) !important;
+  border-color: color-mix(in srgb, hsl(var(--primary)) 38%, hsl(var(--border)) 62%) !important;
+  color: hsl(var(--primary)) !important;
+}
+
+html[data-theme="pwf-comfort-light"] body.admin-scope .admin-nav-glyph,
+html[data-theme="pwf-core"]:not(.dark) body.admin-scope .admin-nav-glyph {
+  background: color-mix(in srgb, hsl(var(--primary)) 10%, white 90%) !important;
+  color: hsl(var(--primary)) !important;
+}
+
+html[data-theme="pwf-comfort-light"] body.admin-scope [data-slot="card"],
+html[data-theme="pwf-comfort-light"] body.admin-scope [data-admin-card="true"],
+html[data-theme="pwf-comfort-light"] body.admin-scope .card,
+html[data-theme="pwf-comfort-light"] body.admin-scope .admin-card,
+html[data-theme="pwf-comfort-light"] body.admin-scope .cleanup-card,
+html[data-theme="pwf-core"]:not(.dark) body.admin-scope [data-slot="card"],
+html[data-theme="pwf-core"]:not(.dark) body.admin-scope [data-admin-card="true"],
+html[data-theme="pwf-core"]:not(.dark) body.admin-scope .card,
+html[data-theme="pwf-core"]:not(.dark) body.admin-scope .admin-card,
+html[data-theme="pwf-core"]:not(.dark) body.admin-scope .cleanup-card {
+  background: hsl(var(--card)) !important;
+  border-color: hsl(var(--border)) !important;
+  color: hsl(var(--card-foreground)) !important;
+  box-shadow: 0 18px 38px rgba(31, 41, 55, 0.07) !important;
+}
+
+html[data-theme="pwf-comfort-light"] body.admin-scope input,
+html[data-theme="pwf-comfort-light"] body.admin-scope textarea,
+html[data-theme="pwf-comfort-light"] body.admin-scope select,
+html[data-theme="pwf-comfort-light"] body.admin-scope button[data-slot="select-trigger"],
+html[data-theme="pwf-core"]:not(.dark) body.admin-scope input,
+html[data-theme="pwf-core"]:not(.dark) body.admin-scope textarea,
+html[data-theme="pwf-core"]:not(.dark) body.admin-scope select,
+html[data-theme="pwf-core"]:not(.dark) body.admin-scope button[data-slot="select-trigger"] {
+  background: hsl(0 0% 100%) !important;
+  color: hsl(var(--foreground)) !important;
+  border-color: hsl(var(--border)) !important;
+}
+
+html[data-theme="pwf-comfort-light"] body.admin-scope th,
+html[data-theme="pwf-core"]:not(.dark) body.admin-scope th {
+  background: color-mix(in srgb, hsl(var(--primary)) 7%, white 93%) !important;
+  color: hsl(var(--foreground)) !important;
+}
+
+html[data-theme="pwf-comfort-light"] body.admin-scope tr:hover,
+html[data-theme="pwf-core"]:not(.dark) body.admin-scope tr:hover {
+  background: color-mix(in srgb, hsl(var(--primary)) 5%, white 95%) !important;
+}
+
+/* Public chat comfort layer */
+html[data-theme="pwf-comfort-light"] .assistant-comfort-shell,
+html[data-theme="pwf-core"]:not(.dark) .assistant-comfort-shell {
+  background:
+    radial-gradient(circle at top right, color-mix(in srgb, hsl(var(--primary)) 10%, transparent), transparent 32%),
+    radial-gradient(circle at bottom left, color-mix(in srgb, hsl(var(--secondary)) 14%, transparent), transparent 30%),
+    linear-gradient(180deg, hsl(42 56% 98%) 0%, hsl(42 38% 95%) 100%) !important;
+}
+
+html[data-theme="pwf-comfort-light"] .assistant-comfort-shell aside,
+html[data-theme="pwf-comfort-light"] .assistant-comfort-shell main,
+html[data-theme="pwf-core"]:not(.dark) .assistant-comfort-shell aside,
+html[data-theme="pwf-core"]:not(.dark) .assistant-comfort-shell main {
+  background: hsl(0 0% 100% / 0.92) !important;
+  border-color: hsl(var(--border)) !important;
+  box-shadow: 0 22px 45px rgba(31, 41, 55, 0.08) !important;
+}
+
+html[data-theme="pwf-comfort-light"] .assistant-comfort-shell header,
+html[data-theme="pwf-core"]:not(.dark) .assistant-comfort-shell header {
+  background: linear-gradient(180deg, hsl(0 0% 100% / 0.82), hsl(43 65% 98% / 0.78)) !important;
+}
+
+html[data-theme="pwf-comfort-light"] .assistant-comfort-shell .bg-muted\/20,
+html[data-theme="pwf-comfort-light"] .assistant-comfort-shell .bg-muted\/10,
+html[data-theme="pwf-core"]:not(.dark) .assistant-comfort-shell .bg-muted\/20,
+html[data-theme="pwf-core"]:not(.dark) .assistant-comfort-shell .bg-muted\/10 {
+  background: color-mix(in srgb, hsl(var(--primary)) 5%, white 95%) !important;
+}
+
+html[data-theme="pwf-comfort-light"] .assistant-comfort-shell .prose pre,
+html[data-theme="pwf-core"]:not(.dark) .assistant-comfort-shell .prose pre {
+  background: hsl(214 35% 94%) !important;
+  color: hsl(220 35% 18%) !important;
+  border: 1px solid hsl(var(--border));
+}
+
+html[data-theme="pwf-comfort-light"] [data-slot="dialog-overlay"],
+html[data-theme="pwf-comfort-light"] [data-slot="sheet-overlay"],
+html[data-theme="pwf-core"]:not(.dark) [data-slot="dialog-overlay"],
+html[data-theme="pwf-core"]:not(.dark) [data-slot="sheet-overlay"] {
+  background: rgba(31, 41, 55, 0.26) !important;
+}
+
+/* =========================================================
+   Mega Batch UI/UX 01B / v54 — Comfort Polish Layer
+   Scope: Assistant-only UI/UX. No DB, no governance, no production gate.
+   Goal: reduce visual harshness after v52/v53, improve hierarchy, spacing,
+   chat readability, nav/footer integration, and route cards.
+   ========================================================= */
+
+html[data-theme="pwf-comfort-light"],
+html[data-theme="pwf-core"]:not(.dark) {
+  --border: 216 24% 89%;
+  --muted: 42 34% 94%;
+  --muted-foreground: 220 15% 45%;
+  --card: 0 0% 100%;
+  --input: 42 28% 98%;
+}
+
+html[data-theme="pwf-comfort-light"] body:has(.assistant-polish-v54),
+html[data-theme="pwf-core"]:not(.dark) body:has(.assistant-polish-v54) {
+  background:
+    radial-gradient(circle at 84% 0%, color-mix(in srgb, hsl(var(--primary)) 7%, transparent), transparent 24%),
+    radial-gradient(circle at 14% 12%, color-mix(in srgb, hsl(var(--secondary)) 11%, transparent), transparent 24%),
+    linear-gradient(180deg, hsl(43 60% 98%) 0%, hsl(42 44% 96%) 58%, hsl(42 36% 95%) 100%) !important;
+}
+
+html[data-theme="pwf-comfort-light"] body:has(.assistant-polish-v54) nav,
+html[data-theme="pwf-core"]:not(.dark) body:has(.assistant-polish-v54) nav {
+  background: color-mix(in srgb, white 92%, hsl(var(--background)) 8%) !important;
+  border-bottom-color: color-mix(in srgb, hsl(var(--border)) 72%, transparent) !important;
+  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.045) !important;
+}
+
+html[data-theme="pwf-comfort-light"] body:has(.assistant-polish-v54) nav .container,
+html[data-theme="pwf-core"]:not(.dark) body:has(.assistant-polish-v54) nav .container {
+  max-width: 1500px;
+}
+
+html[data-theme="pwf-comfort-light"] body:has(.assistant-polish-v54) nav a,
+html[data-theme="pwf-comfort-light"] body:has(.assistant-polish-v54) nav button,
+html[data-theme="pwf-core"]:not(.dark) body:has(.assistant-polish-v54) nav a,
+html[data-theme="pwf-core"]:not(.dark) body:has(.assistant-polish-v54) nav button {
+  border-radius: 999px;
+}
+
+html[data-theme="pwf-comfort-light"] .assistant-polish-v54,
+html[data-theme="pwf-core"]:not(.dark) .assistant-polish-v54 {
+  background:
+    linear-gradient(180deg, hsl(43 60% 98%) 0%, hsl(42 40% 96%) 100%) !important;
+  color: hsl(var(--foreground)) !important;
+}
+
+html[data-theme="pwf-comfort-light"] .assistant-workspace-v54,
+html[data-theme="pwf-core"]:not(.dark) .assistant-workspace-v54 {
+  align-items: stretch;
+  gap: 1rem !important;
+}
+
+html[data-theme="pwf-comfort-light"] .assistant-history-panel-v54,
+html[data-theme="pwf-comfort-light"] .assistant-main-panel-v54,
+html[data-theme="pwf-core"]:not(.dark) .assistant-history-panel-v54,
+html[data-theme="pwf-core"]:not(.dark) .assistant-main-panel-v54 {
+  background: color-mix(in srgb, white 94%, hsl(var(--background)) 6%) !important;
+  border: 1px solid color-mix(in srgb, hsl(var(--border)) 74%, transparent) !important;
+  box-shadow: 0 16px 36px rgba(15, 23, 42, 0.055) !important;
+}
+
+html[data-theme="pwf-comfort-light"] .assistant-history-panel-v54,
+html[data-theme="pwf-core"]:not(.dark) .assistant-history-panel-v54 {
+  width: min(300px, 22vw) !important;
+}
+
+html[data-theme="pwf-comfort-light"] .assistant-side-header-v54,
+html[data-theme="pwf-comfort-light"] .assistant-chat-header-v54,
+html[data-theme="pwf-core"]:not(.dark) .assistant-side-header-v54,
+html[data-theme="pwf-core"]:not(.dark) .assistant-chat-header-v54 {
+  background:
+    linear-gradient(180deg, color-mix(in srgb, white 90%, hsl(var(--secondary)) 10%), color-mix(in srgb, white 96%, hsl(var(--primary)) 4%)) !important;
+  border-bottom-color: color-mix(in srgb, hsl(var(--border)) 68%, transparent) !important;
+}
+
+html[data-theme="pwf-comfort-light"] .assistant-chat-header-v54 h2,
+html[data-theme="pwf-core"]:not(.dark) .assistant-chat-header-v54 h2 {
+  font-size: clamp(1.35rem, 1.4vw, 1.75rem) !important;
+  letter-spacing: -0.02em;
+}
+
+html[data-theme="pwf-comfort-light"] .assistant-polish-v54 [data-slot="card"],
+html[data-theme="pwf-comfort-light"] .assistant-polish-v54 .assistant-start-card-v54,
+html[data-theme="pwf-core"]:not(.dark) .assistant-polish-v54 [data-slot="card"],
+html[data-theme="pwf-core"]:not(.dark) .assistant-polish-v54 .assistant-start-card-v54 {
+  background: color-mix(in srgb, white 96%, hsl(var(--background)) 4%) !important;
+  border-color: color-mix(in srgb, hsl(var(--border)) 72%, transparent) !important;
+  box-shadow: 0 14px 30px rgba(15, 23, 42, 0.048) !important;
+}
+
+html[data-theme="pwf-comfort-light"] .assistant-start-grid-v54,
+html[data-theme="pwf-core"]:not(.dark) .assistant-start-grid-v54 {
+  align-content: start;
+}
+
+html[data-theme="pwf-comfort-light"] .assistant-start-card-v54 [data-slot="card-header"],
+html[data-theme="pwf-core"]:not(.dark) .assistant-start-card-v54 [data-slot="card-header"] {
+  padding: 1.25rem 1.35rem 1rem !important;
+}
+
+html[data-theme="pwf-comfort-light"] .assistant-start-card-v54 [data-slot="card-content"],
+html[data-theme="pwf-core"]:not(.dark) .assistant-start-card-v54 [data-slot="card-content"] {
+  padding: 0 1.35rem 1.35rem !important;
+}
+
+html[data-theme="pwf-comfort-light"] .assistant-start-card-v54 h2,
+html[data-theme="pwf-comfort-light"] .assistant-start-card-v54 h3,
+html[data-theme="pwf-core"]:not(.dark) .assistant-start-card-v54 h2,
+html[data-theme="pwf-core"]:not(.dark) .assistant-start-card-v54 h3 {
+  line-height: 1.35 !important;
+  letter-spacing: -0.02em;
+}
+
+html[data-theme="pwf-comfort-light"] .assistant-playbook-card-v54,
+html[data-theme="pwf-core"]:not(.dark) .assistant-playbook-card-v54 {
+  background: linear-gradient(180deg, white 0%, color-mix(in srgb, white 92%, hsl(var(--primary)) 8%) 100%) !important;
+  border-color: color-mix(in srgb, hsl(var(--border)) 78%, transparent) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.74), 0 8px 18px rgba(15,23,42,0.035) !important;
+}
+
+html[data-theme="pwf-comfort-light"] .assistant-playbook-card-v54:hover,
+html[data-theme="pwf-core"]:not(.dark) .assistant-playbook-card-v54:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 24px rgba(37, 99, 235, 0.09) !important;
+}
+
+html[data-theme="pwf-comfort-light"] .assistant-route-link-v54,
+html[data-theme="pwf-core"]:not(.dark) .assistant-route-link-v54 {
+  gap: .75rem;
+  background: color-mix(in srgb, white 95%, hsl(var(--background)) 5%) !important;
+  border-color: color-mix(in srgb, hsl(var(--border)) 78%, transparent) !important;
+  overflow: hidden;
+}
+
+html[data-theme="pwf-comfort-light"] .assistant-route-link-v54 span:last-child,
+html[data-theme="pwf-core"]:not(.dark) .assistant-route-link-v54 span:last-child {
+  direction: ltr;
+  max-width: 58%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: left;
+}
+
+html[data-theme="pwf-comfort-light"] .assistant-composer-v54,
+html[data-theme="pwf-core"]:not(.dark) .assistant-composer-v54 {
+  background: color-mix(in srgb, white 92%, hsl(var(--secondary)) 8%) !important;
+  border-color: color-mix(in srgb, hsl(var(--border)) 72%, transparent) !important;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.05) !important;
+}
+
+html[data-theme="pwf-comfort-light"] .assistant-polish-v54 input,
+html[data-theme="pwf-comfort-light"] .assistant-polish-v54 textarea,
+html[data-theme="pwf-core"]:not(.dark) .assistant-polish-v54 input,
+html[data-theme="pwf-core"]:not(.dark) .assistant-polish-v54 textarea {
+  border-color: color-mix(in srgb, hsl(var(--border)) 78%, transparent) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.75) !important;
+}
+
+html[data-theme="pwf-comfort-light"] .assistant-polish-v54 button,
+html[data-theme="pwf-core"]:not(.dark) .assistant-polish-v54 button {
+  border-color: color-mix(in srgb, hsl(var(--border)) 78%, transparent) !important;
+}
+
+html[data-theme="pwf-comfort-light"] .assistant-polish-v54 .prose,
+html[data-theme="pwf-core"]:not(.dark) .assistant-polish-v54 .prose {
+  line-height: 1.9;
+}
+
+html[data-theme="pwf-comfort-light"] .suggested-questions-polish-v54,
+html[data-theme="pwf-core"]:not(.dark) .suggested-questions-polish-v54 {
+  padding-block: 1rem !important;
+}
+
+html[data-theme="pwf-comfort-light"] .suggested-questions-polish-v54 button,
+html[data-theme="pwf-core"]:not(.dark) .suggested-questions-polish-v54 button {
+  justify-content: flex-start !important;
+  align-items: flex-start !important;
+  gap: .6rem;
+  white-space: normal !important;
+  min-height: 3rem;
+  border-color: color-mix(in srgb, currentColor 20%, transparent) !important;
+  box-shadow: 0 6px 14px rgba(15, 23, 42, 0.035) !important;
+}
+
+html[data-theme="pwf-comfort-light"] .assistant-floating-action-v54,
+html[data-theme="pwf-core"]:not(.dark) .assistant-floating-action-v54 {
+  background: color-mix(in srgb, white 94%, hsl(var(--primary)) 6%) !important;
+  box-shadow: 0 16px 30px rgba(15,23,42,.09) !important;
+}
+
+html[data-theme="pwf-comfort-light"] body:has(.assistant-polish-v54) .rebuild-footer,
+html[data-theme="pwf-core"]:not(.dark) body:has(.assistant-polish-v54) .rebuild-footer {
+  border-top-color: color-mix(in srgb, hsl(var(--border)) 64%, transparent) !important;
+  background: transparent !important;
+}
+
+html[data-theme="pwf-comfort-light"] body:has(.assistant-polish-v54) .rebuild-footer-shell,
+html[data-theme="pwf-core"]:not(.dark) body:has(.assistant-polish-v54) .rebuild-footer-shell {
+  max-width: 1120px;
+  background: color-mix(in srgb, white 90%, hsl(var(--background)) 10%) !important;
+  border: 1px solid color-mix(in srgb, hsl(var(--border)) 70%, transparent) !important;
+  box-shadow: 0 10px 24px rgba(15,23,42,.045) !important;
+}
+
+@media (max-width: 1280px) {
+  html[data-theme="pwf-comfort-light"] .assistant-workspace-v54,
+  html[data-theme="pwf-core"]:not(.dark) .assistant-workspace-v54 {
+    max-width: 1180px !important;
+  }
+
+  html[data-theme="pwf-comfort-light"] .assistant-start-grid-v54,
+  html[data-theme="pwf-core"]:not(.dark) .assistant-start-grid-v54 {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (max-width: 1024px) {
+  html[data-theme="pwf-comfort-light"] .assistant-workspace-v54,
+  html[data-theme="pwf-core"]:not(.dark) .assistant-workspace-v54 {
+    min-height: auto !important;
+    padding-inline: .75rem !important;
+  }
+}
+
+/* Mega Batch UI/UX 01C — Suggested Questions Contrast + Click Response Hotfix */
+html[data-theme="pwf-comfort-light"] .suggested-questions-polish-v54 .suggested-question-button-v55,
+html[data-theme="pwf-core"]:not(.dark) .suggested-questions-polish-v54 .suggested-question-button-v55 {
+  position: relative;
+  isolation: isolate;
+  align-items: center !important;
+  gap: .7rem !important;
+  border-width: 1px !important;
+  border-style: solid !important;
+  color: #172033 !important;
+  opacity: 1 !important;
+  cursor: pointer !important;
+  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.055), inset 0 1px 0 rgba(255,255,255,.74) !important;
+  transition: transform .16s ease, box-shadow .16s ease, border-color .16s ease, background .16s ease !important;
+}
+
+html[data-theme="pwf-comfort-light"] .suggested-questions-polish-v54 .suggested-question-button-v55:hover,
+html[data-theme="pwf-core"]:not(.dark) .suggested-questions-polish-v54 .suggested-question-button-v55:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 13px 26px rgba(15, 23, 42, 0.09), inset 0 1px 0 rgba(255,255,255,.85) !important;
+}
+
+html[data-theme="pwf-comfort-light"] .suggested-questions-polish-v54 .suggested-question-button-v55:active,
+html[data-theme="pwf-core"]:not(.dark) .suggested-questions-polish-v54 .suggested-question-button-v55:active {
+  transform: translateY(0);
+  box-shadow: 0 5px 12px rgba(15, 23, 42, 0.06) !important;
+}
+
+html[data-theme="pwf-comfort-light"] .suggested-questions-polish-v54 .suggested-question-button-v55:focus-visible,
+html[data-theme="pwf-core"]:not(.dark) .suggested-questions-polish-v54 .suggested-question-button-v55:focus-visible {
+  outline: 3px solid rgba(37, 99, 235, .22) !important;
+  outline-offset: 2px !important;
+}
+
+html[data-theme="pwf-comfort-light"] .suggested-question-button-v55[data-suggested-category="legal"],
+html[data-theme="pwf-core"]:not(.dark) .suggested-question-button-v55[data-suggested-category="legal"] {
+  background: linear-gradient(180deg, #eef6ff 0%, #dbeafe 100%) !important;
+  border-color: #93c5fd !important;
+  color: #1d4ed8 !important;
+}
+
+html[data-theme="pwf-comfort-light"] .suggested-question-button-v55[data-suggested-category="jurisprudence"],
+html[data-theme="pwf-core"]:not(.dark) .suggested-question-button-v55[data-suggested-category="jurisprudence"] {
+  background: linear-gradient(180deg, #fff7e6 0%, #fdecc8 100%) !important;
+  border-color: #f3c46d !important;
+  color: #9a5b00 !important;
+}
+
+html[data-theme="pwf-comfort-light"] .suggested-question-button-v55[data-suggested-category="administrative"],
+html[data-theme="pwf-core"]:not(.dark) .suggested-question-button-v55[data-suggested-category="administrative"] {
+  background: linear-gradient(180deg, #f3f7ff 0%, #e4ecff 100%) !important;
+  border-color: #b4c6ee !important;
+  color: #244a8f !important;
+}
+
+html[data-theme="pwf-comfort-light"] .suggested-question-button-v55[data-suggested-category="historical"],
+html[data-theme="pwf-core"]:not(.dark) .suggested-question-button-v55[data-suggested-category="historical"] {
+  background: linear-gradient(180deg, #fff8ec 0%, #f8ead0 100%) !important;
+  border-color: #e2bd7c !important;
+  color: #8a5a13 !important;
+}
+
+html[data-theme="pwf-comfort-light"] .suggested-question-icon-v55,
+html[data-theme="pwf-core"]:not(.dark) .suggested-question-icon-v55 {
+  display: inline-flex;
+  width: 2rem;
+  height: 2rem;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  border-radius: .9rem;
+  background: rgba(255,255,255,.72);
+  border: 1px solid rgba(15,23,42,.08);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.85);
+}
+
+
+/* =========================================================
+   Mega Batch Admin Shell Mobile Responsiveness Closure
+   Scope: global admin shell only. No knowledge workflow mutation.
+   ========================================================= */
+body.admin-scope .admin-mobile-menu-button,
+body.admin-scope .admin-sidebar-mobile-close,
+body.admin-scope .admin-mobile-sidebar-scrim {
+  display: none;
+}
+
+body.admin-scope .admin-topbar-left {
+  min-width: 0;
+}
+
+@media (max-width: 900px) {
+  body.admin-scope {
+    overflow: hidden;
+  }
+
+  body.admin-scope .admin-layout {
+    display: block !important;
+    position: relative !important;
+    /* Percent sizing avoids the desktop scrollbar width that 100dvw can include. */
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    height: 100dvh;
+    min-height: 100dvh;
+    overflow: hidden;
+  }
+
+  body.admin-scope .admin-content {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+    height: 100dvh !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+  }
+
+  body.admin-scope .admin-topbar {
+    gap: 10px !important;
+    padding: 12px !important;
+    align-items: flex-start !important;
+  }
+
+  body.admin-scope .admin-topbar-left {
+    flex: 1 1 auto;
+    min-width: 0;
+    display: grid;
+    gap: 8px;
+  }
+
+  body.admin-scope .admin-breadcrumbs,
+  body.admin-scope .admin-title-row {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  body.admin-scope .admin-page-title {
+    font-size: clamp(1rem, 4vw, 1.25rem) !important;
+    line-height: 1.35 !important;
+  }
+
+  body.admin-scope .admin-topbar-actions {
+    flex: 0 0 auto;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    max-width: 42vw;
+  }
+
+  body.admin-scope .admin-action {
+    min-height: 40px;
+    white-space: nowrap;
+  }
+
+  body.admin-scope .admin-mobile-menu-button {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: fit-content;
+    min-height: 40px;
+    padding: 8px 12px;
+    border-radius: 14px;
+    border: 1px solid hsl(var(--border));
+    background: hsl(var(--card));
+    color: hsl(var(--foreground));
+    box-shadow: 0 8px 22px rgba(31, 41, 55, 0.06);
+    cursor: pointer;
+  }
+
+  body.admin-scope .admin-mobile-menu-icon {
+    font-size: 18px;
+    line-height: 1;
+  }
+
+  /*
+   * Physical RTL drawer contract:
+   * - use right/left instead of logical inset aliases so browser direction cannot
+   *   reverse the off-canvas edge;
+   * - closed state is fully outside the viewport and non-interactive;
+   * - opened state returns to the physical right edge without occupying document flow.
+   */
+  body.admin-scope .admin-sidebar {
+    display: flex !important;
+    position: fixed !important;
+    top: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    left: auto !important;
+    margin: 0 !important;
+    flex: none !important;
+    /* Keep the Drawer constrained by the actual containing viewport, not the scrollbar-inclusive vw unit. */
+    width: min(86%, 340px) !important;
+    min-width: 0 !important;
+    max-width: calc(100% - 24px) !important;
+    height: 100dvh !important;
+    max-height: 100dvh !important;
+    z-index: 60 !important;
+    transform: translate3d(calc(100% + 1px), 0, 0) !important;
+    visibility: hidden;
+    pointer-events: none;
+    transition: transform 180ms ease-out, visibility 0s linear 180ms !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    overscroll-behavior: contain;
+    box-shadow: -22px 0 46px rgba(15, 23, 42, 0.22) !important;
+  }
+
+  body.admin-scope .admin-sidebar.mobile-open,
+  body.admin-scope .admin-sidebar[data-mobile-open="true"] {
+    transform: translate3d(0, 0, 0) !important;
+    visibility: visible;
+    pointer-events: auto;
+    transition: transform 180ms ease-out !important;
+  }
+
+  body.admin-scope .admin-mobile-sidebar-scrim {
+    display: block !important;
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    border: 0;
+    background: rgba(15, 23, 42, 0.34);
+    cursor: pointer;
+  }
+
+  body.admin-scope .admin-sidebar-mobile-close {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    align-self: flex-start;
+    min-height: 36px;
+    padding: 6px 10px;
+    border-radius: 999px;
+    border: 1px solid color-mix(in srgb, hsl(var(--border)) 80%, transparent);
+    background: hsl(var(--card));
+    color: hsl(var(--foreground));
+    cursor: pointer;
+  }
+
+  body.admin-scope .admin-main {
+    padding: 12px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+  }
+
+  body.admin-scope .admin-page {
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    overflow-x: hidden !important;
+  }
+
+  body.admin-scope [data-slot="card"],
+  body.admin-scope [data-admin-card="true"],
+  body.admin-scope .card,
+  body.admin-scope .admin-card {
+    max-width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  body.admin-scope table,
+  body.admin-scope .admin-table-wrapper {
+    max-width: 100%;
+    overflow-x: auto;
+  }
+}
+
+@media (max-width: 430px) {
+  body.admin-scope .admin-topbar {
+    flex-direction: column;
+    align-items: stretch !important;
+  }
+
+  body.admin-scope .admin-topbar-actions {
+    max-width: 100%;
+    justify-content: flex-start;
+  }
+
+  body.admin-scope .admin-breadcrumbs {
+    font-size: 11px;
+  }
+
+  body.admin-scope .admin-path {
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+
+/* =========================================================
+   Global Mobile Rail Viewport Containment Closure
+   Scope: eliminate scrollbar-inclusive viewport sizing and legacy
+   sidebar rail/resizer residues inside the modern Admin shell only.
+   ========================================================= */
+@media (max-width: 900px) {
+  html[data-admin-root="1"],
+  html[data-admin-root="1"] body,
+  html[data-admin-root="1"] body.admin-scope,
+  html[data-admin-root="1"] body.admin-scope #root {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    overflow-x: clip !important;
+  }
+
+  body.admin-scope .admin-layout[data-mobile-rail-guard="true"] {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    overflow: clip !important;
+    isolation: isolate;
+  }
+
+  body.admin-scope .admin-layout[data-mobile-rail-guard="true"] .admin-content,
+  body.admin-scope .admin-layout[data-mobile-rail-guard="true"] .admin-main,
+  body.admin-scope .admin-layout[data-mobile-rail-guard="true"] .admin-page {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    margin-inline: 0 !important;
+  }
+
+  /* Legacy Shadcn sidebar rails and column resize handles cannot coexist with the mobile Admin Drawer. */
+  body.admin-scope .admin-layout[data-mobile-rail-guard="true"] [data-slot="sidebar-rail"],
+  body.admin-scope .admin-layout[data-mobile-rail-guard="true"] [data-sidebar="rail"],
+  body.admin-scope .admin-layout[data-mobile-rail-guard="true"] [data-slot="sidebar-gap"],
+  body.admin-scope .admin-layout[data-mobile-rail-guard="true"] .cursor-col-resize {
+    display: none !important;
+  }
+
+  body.admin-scope .admin-layout[data-mobile-rail-guard="true"] .admin-sidebar {
+    box-sizing: border-box !important;
+  }
+}
+
+
+/* =========================================================
+   Admin Mobile Single Sidebar Render & Nav Containment Closure
+   Scope: a mobile viewport has one mounted navigation sidebar only.
+   The drawer is a vertical, internally scrollable column.
+   ========================================================= */
+@media (max-width: 900px) {
+  body.admin-scope .admin-sidebar[data-sidebar-variant="desktop"] {
+    display: none !important;
+  }
+
+  body.admin-scope .admin-sidebar[data-sidebar-variant="mobile"] {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    justify-content: flex-start !important;
+    box-sizing: border-box !important;
+    contain: layout paint !important;
+    padding: 16px !important;
+    gap: 12px !important;
+    overflow: hidden !important;
+  }
+
+  body.admin-scope .admin-sidebar[data-sidebar-variant="mobile"] .admin-sidebar-head,
+  body.admin-scope .admin-sidebar[data-sidebar-variant="mobile"] .admin-governance-toggle {
+    width: 100% !important;
+    min-width: 0 !important;
+    flex: 0 0 auto !important;
+    box-sizing: border-box !important;
+  }
+
+  body.admin-scope .admin-sidebar[data-sidebar-variant="mobile"] .admin-nav {
+    display: block !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    flex: 1 1 auto !important;
+    align-self: stretch !important;
+    margin-top: 0 !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    overscroll-behavior: contain;
+    padding-inline-end: 2px;
+    box-sizing: border-box !important;
+  }
+
+  body.admin-scope .admin-sidebar[data-sidebar-variant="mobile"] .admin-nav-section,
+  body.admin-scope .admin-sidebar[data-sidebar-variant="mobile"] .admin-nav-items,
+  body.admin-scope .admin-sidebar[data-sidebar-variant="mobile"] .admin-nav-item-wrap {
+    width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  body.admin-scope .admin-sidebar[data-sidebar-variant="mobile"] .admin-nav-item,
+  body.admin-scope .admin-sidebar[data-sidebar-variant="mobile"] .admin-nav-child {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+    transform: none !important;
+    margin-inline: 0 !important;
+  }
+}
+
+@media (min-width: 901px) {
+  body.admin-scope .admin-sidebar[data-sidebar-variant="mobile"] {
+    display: none !important;
+  }
+}
+
+/* =========================================================
+   Admin Sidebar Usage-Category Accordion Closure
+   Scope: group the Admin registry by usage category without mutating
+   routes, permissions, governance gates, or backend behavior.
+   ========================================================= */
+body.admin-scope .admin-nav {
+  display: grid;
+  gap: 10px;
+}
+
+body.admin-scope .admin-nav-section {
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.025);
+  overflow: clip;
+}
+
+body.admin-scope .admin-nav-section.is-active {
+  border-color: rgba(173, 199, 255, 0.34);
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.10);
+}
+
+body.admin-scope .admin-nav-category-toggle {
+  width: 100%;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 12px 13px;
+  border: 0;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.94);
+  cursor: pointer;
+  text-align: right;
+}
+
+body.admin-scope .admin-nav-category-toggle:hover,
+body.admin-scope .admin-nav-section.is-active .admin-nav-category-toggle {
+  background: rgba(255, 255, 255, 0.075);
+}
+
+body.admin-scope .admin-nav-category-leading {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+body.admin-scope .admin-nav-category-icon {
+  width: 34px;
+  height: 34px;
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.10);
+  color: rgba(255, 255, 255, 0.96);
+}
+
+body.admin-scope .admin-nav-category-copy {
+  min-width: 0;
+  display: grid;
+  gap: 2px;
+}
+
+body.admin-scope .admin-nav-category-copy strong {
+  overflow: hidden;
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 1.35;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+body.admin-scope .admin-nav-category-copy small {
+  color: rgba(255, 255, 255, 0.64);
+  font-size: 11px;
+  line-height: 1.25;
+}
+
+body.admin-scope .admin-nav-category-state {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  flex: 0 0 auto;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+body.admin-scope .admin-nav-section > .admin-nav-items {
+  padding: 0 10px 10px;
+  gap: 8px;
+}
+
+html[data-theme="pwf-comfort-light"] body.admin-scope .admin-nav-section,
+html[data-theme="pwf-core"]:not(.dark) body.admin-scope .admin-nav-section {
+  background: hsl(0 0% 100% / 0.78) !important;
+  border-color: hsl(var(--border)) !important;
+  box-shadow: 0 8px 18px rgba(31, 41, 55, 0.035);
+}
+
+html[data-theme="pwf-comfort-light"] body.admin-scope .admin-nav-section.is-active,
+html[data-theme="pwf-core"]:not(.dark) body.admin-scope .admin-nav-section.is-active {
+  border-color: color-mix(in srgb, hsl(var(--primary)) 32%, hsl(var(--border)) 68%) !important;
+}
+
+html[data-theme="pwf-comfort-light"] body.admin-scope .admin-nav-category-toggle,
+html[data-theme="pwf-core"]:not(.dark) body.admin-scope .admin-nav-category-toggle {
+  color: hsl(var(--foreground)) !important;
+}
+
+html[data-theme="pwf-comfort-light"] body.admin-scope .admin-nav-category-toggle:hover,
+html[data-theme="pwf-comfort-light"] body.admin-scope .admin-nav-section.is-active .admin-nav-category-toggle,
+html[data-theme="pwf-core"]:not(.dark) body.admin-scope .admin-nav-category-toggle:hover,
+html[data-theme="pwf-core"]:not(.dark) body.admin-scope .admin-nav-section.is-active .admin-nav-category-toggle {
+  background: color-mix(in srgb, hsl(var(--primary)) 7%, white 93%) !important;
+}
+
+html[data-theme="pwf-comfort-light"] body.admin-scope .admin-nav-category-icon,
+html[data-theme="pwf-core"]:not(.dark) body.admin-scope .admin-nav-category-icon {
+  background: color-mix(in srgb, hsl(var(--primary)) 10%, white 90%) !important;
+  color: hsl(var(--primary)) !important;
+}
+
+html[data-theme="pwf-comfort-light"] body.admin-scope .admin-nav-category-copy small,
+html[data-theme="pwf-core"]:not(.dark) body.admin-scope .admin-nav-category-copy small,
+html[data-theme="pwf-comfort-light"] body.admin-scope .admin-nav-category-state,
+html[data-theme="pwf-core"]:not(.dark) body.admin-scope .admin-nav-category-state {
+  color: hsl(var(--muted-foreground)) !important;
+}
+
+@media (max-width: 900px) {
+  body.admin-scope .admin-sidebar[data-sidebar-variant="mobile"] .admin-nav {
+    display: grid !important;
+    gap: 10px !important;
+    padding-inline-end: 0 !important;
+  }
+
+  body.admin-scope .admin-sidebar[data-sidebar-variant="mobile"] .admin-nav-section,
+  body.admin-scope .admin-sidebar[data-sidebar-variant="mobile"] .admin-nav-category-toggle,
+  body.admin-scope .admin-sidebar[data-sidebar-variant="mobile"] .admin-nav-section > .admin-nav-items {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "batch": "Knowledge Batch 06A",
+  "date": "2026-06-18",
+  "previous_baseline": "v48",
+  "current_baseline": "v49",
+  "decision": "KNOWLEDGE_BATCH_06A_TYPESCRIPT_EVIDENCE_ACCEPTED_BROWSER_CHAT_CITATION_EVIDENCE_PENDING",
+  "evidence": {
+    "typescript_check": {
+      "status": "accepted",
+      "command": "pnpm.cmd run check",
+      "tsc_no_emit": "passed",
+      "pnpm_warning": "non_blocking"
+    },
+    "chat_retrieval": {
+      "status": "pending",
+      "reason": "no chat browser/API output supplied"
+    },
+    "citation_runtime": {
+      "status": "pending",
+      "reason": "no citation-bearing response supplied"
+    },
+    "admin_knowledge_search": {
+      "status": "pending",
+      "reason": "no admin search browser/API output supplied"
+    }
+  },
+  "production_approved": false,
+  "mega_batch_30_allowed": false
+}

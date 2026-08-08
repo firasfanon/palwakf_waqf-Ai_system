@@ -1,0 +1,55 @@
+{
+  "acceptance_id": "MEGA_BATCH_AR1_C4_DIRECT_KNOWLEDGE_DOCUMENT_METADATA_EXACT_LOOKUP_REPAIR_V1_RUNTIME_UAT_ACCEPTED_LOCAL_20260712",
+  "status": "PASS",
+  "scope": "LOCAL_READ_ONLY_SINGLE_FLOW",
+  "observed_at_utc": "2026-07-11T23:40:37.067Z",
+  "c3": {
+    "status": "completed",
+    "requestedChecks": 30,
+    "externalCandidates": 30,
+    "noDatabaseWrite": true
+  },
+  "c4": {
+    "status": "READY_FOR_OPERATOR_BINDING",
+    "candidateCount": 2,
+    "directC4MaterialReferences": 2,
+    "directReferenceDocumentAssociations": 0,
+    "deterministicExactMatches": 0,
+    "rejectedFuzzyOrAmbiguousMatches": 0,
+    "reason": null
+  },
+  "ar1": {
+    "activeSessions": 0,
+    "automaticSessionStart": false,
+    "availableCandidateDocuments": 2,
+    "nextAction": "REVIEW_ONE_DETERMINISTIC_CANDIDATE",
+    "operatorConfirmationRequired": true,
+    "llmGenerationEnabled": false
+  },
+  "resolution": {
+    "method": "C4_DIRECT_MATERIAL_REFERENCE",
+    "evidence": [
+      "candidateMaterials.id_field_normalized_to_knowledge_document_uuid",
+      "candidateMaterials.knowledge_document_id_exact",
+      "runtimeRepository.assistant_knowledge_documents_uuid_exact_lookup",
+      "runtimeRepository.uuid_or_numeric_id_resolution",
+      "C4_SELECTED_COHORT_CURRENT_PROCESS_ONLY"
+    ]
+  },
+  "invariants_confirmed": [
+    "NO_EXTERNAL_WEB_AGENT",
+    "NO_DATABASE_WRITE",
+    "NO_SOURCE_LINK_WRITE",
+    "NO_RIGHTS_ASSIGNMENT",
+    "NO_DOCUMENT_COPY",
+    "NO_CHUNK_OR_EMBEDDING_WRITE",
+    "NO_VECTOR_INDEXING",
+    "NO_FUZZY_OR_SEMANTIC_CORPUS_LINKING",
+    "NO_PUBLIC_CHAT_RELEASE",
+    "NO_PUBLIC_RELEASE",
+    "NO_PRODUCTION"
+  ],
+  "c3_evidence_expires_at": "2026-07-12T00:10:09.265Z",
+  "note": "Runtime acceptance proves the repair path. Fresh C3 evidence must be regenerated for any later operator session after expiry or process restart.",
+  "production": "NOT_APPROVED"
+}

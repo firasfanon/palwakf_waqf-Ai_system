@@ -1,0 +1,69 @@
+{
+  "batch": "Knowledge Batch 06B-1 — Admin Knowledge Search Evidence Intake + SQL Verification Fix",
+  "date": "2026-06-18",
+  "baseline": "v51",
+  "based_on": "v50",
+  "decision": "KNOWLEDGE_BATCH_06B1_ADMIN_KNOWLEDGE_SEARCH_EVIDENCE_ACCEPTED_SQL_VERIFICATION_CTE_FIX_PREPARED_CHAT_ANSWER_CITATION_BROWSER_EVIDENCE_PENDING",
+  "changed_files": [
+    {
+      "path": "KNOWLEDGE_BATCH_06B1_ADMIN_SEARCH_EVIDENCE_SQL_VERIFICATION_FIX_2026_06_18.md",
+      "sha256": "28262b945909c7b264167478929afbaba093017a4a482a0a8da48f7b61454950",
+      "bytes": 3866
+    },
+    {
+      "path": "KNOWLEDGE_BATCH_06B1_VERIFICATION_NOTES_2026_06_18.md",
+      "sha256": "1ae582fd538e2e41fa3e73be201d83ec8cc74aa6184c004375b0f9bdc810dda6",
+      "bytes": 753
+    },
+    {
+      "path": "KNOWLEDGE_BATCH_06B1_CHANGELOG_2026_06_18.md",
+      "sha256": "616bf518d6e1af8165633cf13228bffcc288353719c57cc9c46b9e30d33fc558",
+      "bytes": 1049
+    },
+    {
+      "path": "ERROR_RECORD_KNOWLEDGE_BATCH_06B1_SQL_CTE_SCOPE_42P01_2026_06_18.md",
+      "sha256": "6a99ce1fc6efc3c75c645bd567c0108318789a13e8a6cff42538c94ae53ffef1",
+      "bytes": 1418
+    },
+    {
+      "path": "SESSION_HANDOFF_KNOWLEDGE_BATCH_06B1_TO_06C_OR_29A_2026_06_18.md",
+      "sha256": "5ae63d5eaa767655f6885216c8efc15b1686d89e6602fadcf0740f32b908877d",
+      "bytes": 1563
+    },
+    {
+      "path": "knowledge_batch_06b1_evidence/admin_knowledge_search_evidence_sample_2026_06_18.csv",
+      "sha256": "2fadae6ddb18a7bf5774d8bcb55ac216cc25bbcb03a8c9326dd1e76574d2564a",
+      "bytes": 2458
+    },
+    {
+      "path": "knowledge_batch_06b1_evidence/knowledge_batch_06b1_evidence_summary.json",
+      "sha256": "e33231b7364524a81c8d79e6d61d804c7a32c6298f347aa41aa42c3a7f29b36c",
+      "bytes": 1085
+    },
+    {
+      "path": "sql_sandbox/knowledge_batch_06b1_admin_search_evidence_sql_fix/knowledge_batch_06b1_read_only_db_visibility_helper_cte_scope_fixed.sql",
+      "sha256": "bdd714a292243fc544d92a2931ce1be875bb45b3788a1e0694f021cfedddb3b3",
+      "bytes": 4114
+    },
+    {
+      "path": "sql_sandbox/knowledge_batch_06b_chat_citation_browser_evidence_gate/knowledge_batch_06b_optional_read_only_db_visibility_helper.sql",
+      "sha256": "bdd714a292243fc544d92a2931ce1be875bb45b3788a1e0694f021cfedddb3b3",
+      "bytes": 4114
+    },
+    {
+      "path": "PALWAKF_PLATFORM_COMPREHENSIVE_GUIDE.md",
+      "sha256": "2993ed3e20da451b132779b8f027e8da878b65fb75e8fccbf171b53d153ca464",
+      "bytes": 29536
+    },
+    {
+      "path": "LATEST_BASELINE_FINAL_HANDOFF_2026_06_18.md",
+      "sha256": "81e357f77ec615e4d0ae789c97b94af3a760f55d30b23f89a5932b22e0e539f3",
+      "bytes": 1194
+    },
+    {
+      "path": "KNOWLEDGE_BATCH_06B1_CHANGED_FILES_2026_06_18.md",
+      "sha256": "b156a618057011814ffeede2a2f1b4af8f1776992e26bfbd937595a5e7dec1c4",
+      "bytes": 968
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "baseline": "v63",
+  "previous_baseline": "v62",
+  "decision": "KNOWLEDGE_BATCH_08A_STAGING_AND_TRUST_ALIGNED_REVIEW_ONLY_P1_PROMOTION_ACCEPTED",
+  "live_evidence": {
+    "main_stage_rows": 929,
+    "observed_stage_rows": 66,
+    "staged_p1_rows_considered": 896,
+    "valid_review_candidates": 600,
+    "needs_mapping_rows": 296,
+    "reference_documents_mapped": 600,
+    "knowledge_documents_mapped": 600,
+    "linked_review_citations_total": 600,
+    "register_rows_marked_promoted": 600,
+    "approved_on_promotion": 0,
+    "chat_visible_on_promotion": 0,
+    "legacy_in_review_new_slice": 462,
+    "linked_citations_current_slice": 600
+  },
+  "open_backlog": {
+    "needs_mapping": 296,
+    "human_review": "pending",
+    "public_chat_release": "blocked"
+  }
+}

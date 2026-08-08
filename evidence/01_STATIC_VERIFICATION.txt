@@ -1,0 +1,27 @@
+PASS :: required artifact present :: server/runtimeRepository.ts
+PASS :: required artifact present :: server/governedAgenticRagPilot.ts
+PASS :: required artifact present :: package.json
+PASS :: required artifact present :: docs/ai/governed_agentic_rag/AR1_C4_DIRECT_KNOWLEDGE_DOCUMENT_METADATA_EXACT_LOOKUP_REPAIR_V1_AR.md
+PASS :: required artifact present :: docs/ai/governed_agentic_rag/STATE_MEGA_BATCH_AR1_C4_DIRECT_KNOWLEDGE_DOCUMENT_METADATA_EXACT_LOOKUP_REPAIR_V1.md
+PASS :: required artifact present :: docs/ai/governed_agentic_rag/AR1_C4_DIRECT_KNOWLEDGE_DOCUMENT_METADATA_EXACT_LOOKUP_REPAIR_V1_UAT_AR.md
+PASS :: required artifact present :: ERROR_RECORD_MEGA_BATCH_AR1_C4_DIRECT_KNOWLEDGE_DOCUMENT_METADATA_EXACT_LOOKUP_REPAIR_V1_2026_07_12.md
+PASS :: runtime repository exposes the bounded exact UUID lookup before the composite bundle
+PASS :: exact lookup reads only assistant.knowledge_documents
+PASS :: exact lookup uses an equality predicate and at-most-one row
+PASS :: invalid and non-UUID identifiers are rejected before the remote query
+PASS :: exact lookup does not depend on companion knowledge tables
+PASS :: exact lookup contains no title, URL, fuzzy, semantic, vector, or embedding resolver
+PASS :: exact lookup contains no mutation path
+PASS :: exact lookup is not blocked by the composite companion-table circuit breaker
+PASS :: exact lookup preserves the sovereign UUID as the primary AR1 session identifier
+PASS :: AR1 imports the direct exact UUID lookup
+PASS :: AR1 tries the exact assistant UUID row before legacy/composite fallback
+PASS :: AR1 records the exact lookup in candidate resolution evidence
+PASS :: AR1 remains bounded to the current C4-selected cohort
+PASS :: AR1 still contains no semantic or vector resolution path
+PASS :: package registers the repair verifier
+PASS :: contract preserves no-write, deterministic-only, and fail-closed boundaries
+PASS :: state distinguishes static success from pending runtime UAT
+PASS :: UAT defines the required runtime closure and no-auto-start condition
+PASS :: Error Record documents cause, failed attempts, and last stable baseline
+MEGA_BATCH_AR1_C4_DIRECT_KNOWLEDGE_DOCUMENT_METADATA_EXACT_LOOKUP_REPAIR_V1_STATIC_VERIFICATION=PASS

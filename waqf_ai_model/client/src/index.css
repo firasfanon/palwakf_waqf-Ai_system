@@ -1,0 +1,190 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* STRICT SAFETY: Force app surfaces to respect tokens (prevents white fallback) */
+html, body, #root {
+  min-height: 100%;
+  background: hsl(var(--background)) !important;
+  color: hsl(var(--foreground)) !important;
+}
+
+/* If any legacy CSS injects white backgrounds, neutralize at root level */
+body {
+  background: hsl(var(--background)) !important;
+  color: hsl(var(--foreground)) !important;
+}
+
+/* Admin scope inherits same tokens; no extra whites */
+body [data-admin-root="true"] {
+  background: transparent !important;
+}
+
+/* =========================
+   PalWaqf Unified Tokens (HSL triplets)
+   Works with: hsl(var(--token))
+   ========================= */
+
+:root {
+  /* Brand (HSL triplets) */
+  --pwf-blue: 214 68% 39%;     /* ~ #1F5AA6 */
+  --pwf-gold: 46 65% 53%;      /* ~ #D4AF37 */
+  --pwf-red: 0 68% 42%;        /* ~ #B22222 */
+
+  /* Light surfaces */
+  --background: 220 33% 96%;
+  --foreground: 222 47% 11%;
+
+  --card: 0 0% 100%;
+  --card-foreground: 222 47% 11%;
+
+  --popover: 0 0% 100%;
+  --popover-foreground: 222 47% 11%;
+
+  --primary: var(--pwf-blue);
+  --primary-foreground: 0 0% 100%;
+
+  --secondary: var(--pwf-gold);
+  --secondary-foreground: 222 47% 11%;
+
+  --accent: 210 40% 96%;
+  --accent-foreground: 222 47% 11%;
+
+  --muted: 210 40% 96%;
+  --muted-foreground: 215 16% 47%;
+
+  --destructive: var(--pwf-red);
+  --destructive-foreground: 0 0% 100%;
+
+  --border: 214 32% 91%;
+  --input: 214 32% 91%;
+  --ring: var(--pwf-blue);
+
+  /* Sidebar tokens */
+  --sidebar: 210 40% 98%;
+  --sidebar-foreground: 222 47% 11%;
+  --sidebar-accent: 210 40% 96%;
+  --sidebar-accent-foreground: 222 47% 11%;
+  --sidebar-border: 214 32% 91%;
+  --sidebar-ring: var(--pwf-blue);
+
+  /* Charts */
+  --chart-1: var(--pwf-blue);
+  --chart-2: var(--pwf-gold);
+  --chart-3: 199 89% 48%;
+  --chart-4: 221 83% 53%;
+  --chart-5: var(--pwf-red);
+
+  --radius: 1rem;
+
+  --font-heading: "Cairo", "Tajawal", "Noto Sans Arabic", system-ui, sans-serif;
+  --font-body: "Tajawal", "Cairo", "Noto Sans Arabic", system-ui, sans-serif;
+  --font-size-base: 16px;
+
+  /* Semantic aliases (aligned with the visual identity document) */
+  --primary-color: var(--primary);
+  --secondary-color: var(--secondary);
+  --accent-color: var(--accent);
+  --bg-color: var(--background);
+  --card-bg: var(--card);
+  --text-color: var(--foreground);
+  --gray-color: var(--muted-foreground);
+
+  /* Motion + elevation */
+  --transition: all 0.2s ease;
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-hover: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.dark {
+  /* Dark TRUE surfaces */
+  --background: 222 47% 8%;    /* ~ #0B1220 */
+  --foreground: 210 40% 96%;
+
+  --card: 215 28% 12%;         /* ~ #111827 */
+  --card-foreground: 210 40% 96%;
+
+  --popover: 215 28% 12%;
+  --popover-foreground: 210 40% 96%;
+
+  --primary: var(--pwf-blue);
+  --primary-foreground: 0 0% 100%;
+
+  --secondary: var(--pwf-gold);
+  --secondary-foreground: 222 47% 11%;
+
+  --accent: 215 28% 16%;
+  --accent-foreground: 210 40% 96%;
+
+  --muted: 215 28% 16%;
+  --muted-foreground: 215 20% 70%;
+
+  --destructive: var(--pwf-red);
+  --destructive-foreground: 0 0% 100%;
+
+  --border: 215 28% 18%;
+  --input: 215 28% 18%;
+  --ring: var(--pwf-gold);
+
+  --sidebar: 215 28% 10%;
+  --sidebar-foreground: 210 40% 96%;
+  --sidebar-accent: 215 28% 16%;
+  --sidebar-accent-foreground: 210 40% 96%;
+  --sidebar-border: 215 28% 18%;
+  --sidebar-ring: var(--pwf-gold);
+}
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * { @apply border-border; }
+  html, body { height: 100%; }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: var(--font-body);
+    font-size: var(--font-size-base);
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+  h1,h2,h3,h4,h5,h6 {
+    font-family: var(--font-heading);
+    @apply font-bold;
+  }
+
+  /* Tables: RTL + centering headers & cells */
+  table { direction: rtl; }
+  th { @apply text-center; }
+  td { @apply text-center; }
+}

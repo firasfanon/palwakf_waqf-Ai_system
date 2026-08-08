@@ -1,0 +1,34 @@
+# State — Mega Batch C4 Reconciliation
+
+## Status
+```text
+PACKAGE_PREPARED_FROM_ACTUAL_C3_BASELINE_CAPTURE=YES
+LOCAL_APPLY=NOT_EXECUTED
+C4_RECONCILIATION=PREPARED
+```
+
+## Preserved prior surface
+```text
+C4_CONTROLLED_SOURCE_REGISTRY_DESIGN=PRESERVED
+```
+
+## Added surface
+```text
+C4_VERIFIED_SOURCE_SELECTION_AND_CONTROLLED_RELEASE_PLAN=READ_ONLY_PLAN_ONLY
+```
+
+## Invariants
+```text
+NO_SQL_OPERATOR_APPLY
+NO_DATABASE_WRITE
+NO_SOURCE_LINK_WRITE
+NO_RIGHTS_ASSIGNMENT
+NO_FULL_TEXT_RETENTION
+NO_PUBLIC_DISPLAY_RELEASE
+NO_AUTOMATIC_PROMOTION
+NO_AUTOMATIC_CHAT_RELEASE
+NO_PRODUCTION
+```
+
+## Runtime dependency
+C4 needs a fresh C3 evidence snapshot in the same server process. The snapshot expires after 30 minutes and is intentionally not persisted.

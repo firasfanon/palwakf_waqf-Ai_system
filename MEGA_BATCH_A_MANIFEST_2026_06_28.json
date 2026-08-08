@@ -1,0 +1,56 @@
+{
+  "batch": "MEGA_BATCH_A",
+  "date": "2026-06-28",
+  "files": [
+    {
+      "path": "client/src/pages/admin/KnowledgeReviewOperations.tsx",
+      "sha256": "db8b8d0184afec63e04b20c474bf9e6472bc7d620fe90fd171fb645647569c0a",
+      "bytes": 29109
+    },
+    {
+      "path": "client/src/components/ui/dialog.tsx",
+      "sha256": "25a3bf2aebff329d505d75a028a35ce6cb557ec422a8081213843bc822cafbf2",
+      "bytes": 6253
+    },
+    {
+      "path": "server/runtimeRepository.ts",
+      "sha256": "40abf3440c0aa28c0fd4813b40d6c1a96c7a296a740cca43d743bed7a0a184a8",
+      "bytes": 60312
+    },
+    {
+      "path": "server/knowledgeOperations.ts",
+      "sha256": "747ebd0516b67741a5c79f54746f1a94467cd0b0b4399a96ef3c3f119c46aed5",
+      "bytes": 25191
+    },
+    {
+      "path": "server/routers.ts",
+      "sha256": "c71351cb762ff0406160225d68d368abd09ebd362928fffe450d7a6c294639ea",
+      "bytes": 172662
+    },
+    {
+      "path": "server/assistantMaturityPolicy.ts",
+      "sha256": "8e46aabce2e95d31446590850411a6253e11f4046b575a534c92b1fa43143776",
+      "bytes": 1918
+    },
+    {
+      "path": "server/_core/siteSettingsRouter.ts",
+      "sha256": "4223c0feec54689f1630202f5c69870b4493bbc8896250508d92ff5ce1ee5e4d",
+      "bytes": 3497
+    },
+    {
+      "path": "sql_sandbox/mega_batch_a_operational_reliability_and_human_review_closure/00_MEGA_BATCH_A_PREFLIGHT_READ_ONLY.sql",
+      "sha256": "7c83595326c5e07f4f93bcf9f95ed0c41e13aedc037bf15c3f5115f93700382d",
+      "bytes": 2590
+    },
+    {
+      "path": "sql_sandbox/mega_batch_a_operational_reliability_and_human_review_closure/01_CONTROLLED_HUMAN_REVIEW_TASK_CLAIM_AND_CONTAINMENT_OPERATOR_APPLY.sql",
+      "sha256": "a5376a24e098156ea751897a8da0acc02ad8bbdb2dbbdb65fbfa5ed2554f12f4",
+      "bytes": 15609
+    },
+    {
+      "path": "sql_sandbox/mega_batch_a_operational_reliability_and_human_review_closure/02_MEGA_BATCH_A_POST_APPLY_READ_ONLY_VERIFICATION.sql",
+      "sha256": "99eb55dcf9e888bae59143d80bce3dbe886538c60a9cab8ffce687d49f6c3779",
+      "bytes": 2183
+    }
+  ]
+}

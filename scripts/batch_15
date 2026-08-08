@@ -1,0 +1,10 @@
+INSERT INTO knowledge_documents (title, content, source, category, tags, isActive, createdAt, updatedAt) VALUES ('الحاج أمين الحسيني - رئيس المجلس الإسلامي', 'ترأس الحاج أمين الحسيني المجلس الإسلامي الأعلى وعمل على تطوير الأوقاف وترميم المسجد الأقصى.', 'سيرة الحاج أمين الحسيني', 'historical', 'الحاج أمين، المجلس الإسلامي، الأقصى', 1, FROM_UNIXTIME(1767919372), FROM_UNIXTIME(1767919372));
+
+INSERT INTO knowledge_documents (title, content, source, category, tags, isActive, createdAt, updatedAt) VALUES ('ترميم المسجد الأقصى - الفترة البريطانية', 'قام المجلس الإسلامي الأعلى بترميمات واسعة للمسجد الأقصى في الثلاثينيات، ممولة من تبرعات المسلمين وريع الأوقاف.', 'تاريخ ترميم الأقصى', 'historical', 'ترميم الأقصى، المجلس الإسلامي، التبرعات', 1, FROM_UNIXTIME(1767919372), FROM_UNIXTIME(1767919372));
+
+INSERT INTO knowledge_documents (title, content, source, category, tags, isActive, createdAt, updatedAt) VALUES ('الأوقاف في الضفة الغربية - الإدارة الأردنية', 'أدارت الأردن الأوقاف في الضفة الغربية من 1948 إلى 1967 وفق قانون الأوقاف الأردني رقم 23 لسنة 1964.', 'تاريخ الأوقاف في الضفة الغربية', 'historical', 'الإدارة الأردنية، الضفة الغربية، الأوقاف', 1, FROM_UNIXTIME(1767919372), FROM_UNIXTIME(1767919372));
+
+INSERT INTO knowledge_documents (title, content, source, category, tags, isActive, createdAt, updatedAt) VALUES ('الأوقاف بعد 1967 - الاحتلال الإسرائيلي', 'استولت إسرائيل على العديد من الأوقاف في القدس والضفة الغربية بعد 1967، وفرضت قيوداً على إدارتها.', 'الأوقاف تحت الاحتلال', 'historical', 'الاحتلال، الاستيلاء، القدس', 1, FROM_UNIXTIME(1767919372), FROM_UNIXTIME(1767919372));
+
+INSERT INTO knowledge_documents (title, content, source, category, tags, isActive, createdAt, updatedAt) VALUES ('حارة المغاربة - الهدم', 'هدمت إسرائيل حارة المغاربة الوقفية بالكامل عام 1967، وشردت سكانها لإنشاء ساحة البراق.', 'تاريخ حارة المغاربة', 'historical', 'حارة المغاربة، الهدم، الاحتلال', 1, FROM_UNIXTIME(1767919372), FROM_UNIXTIME(1767919372));
+

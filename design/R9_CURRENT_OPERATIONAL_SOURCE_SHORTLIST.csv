@@ -1,0 +1,14 @@
+﻿relative_path,semantic_hit_count,categories,classification
+server\routers.ts,90,activation|audit|review|source_rights,CURRENT_OPERATIONAL_CANDIDATE
+server\knowledgeOperations.ts,22,activation|audit|review|source_rights,CURRENT_OPERATIONAL_CANDIDATE
+server\sourceProvenanceRights.ts,32,activation|source_rights,CURRENT_OPERATIONAL_CANDIDATE
+server\verifiedSourceSelection.ts,14,activation|review|source_rights,CURRENT_OPERATIONAL_CANDIDATE
+server\externalSourceVerification.ts,6,review|source_rights,CURRENT_OPERATIONAL_CANDIDATE
+server\assistantTrust.ts,12,review|source_rights,CURRENT_OPERATIONAL_CANDIDATE
+server\governedAgenticRagPilot.ts,33,activation|review|source_rights,CURRENT_OPERATIONAL_CANDIDATE
+client\src\pages\admin\KnowledgeReviewOperations.tsx,23,activation|audit|review|source_rights,CURRENT_OPERATIONAL_CANDIDATE
+client\src\pages\admin\SourceProvenanceRightsRegistry.tsx,80,activation|audit|review|source_rights,CURRENT_OPERATIONAL_CANDIDATE
+client\src\pages\admin\KnowledgeActivationCenter.tsx,5,audit|review,CURRENT_OPERATIONAL_CANDIDATE
+client\src\pages\admin\KnowledgeOperationsWorkspace.tsx,5,activation|review,CURRENT_OPERATIONAL_CANDIDATE
+client\src\pages\admin\SourceInventoryPreview.tsx,14,audit|source_rights,CURRENT_OPERATIONAL_CANDIDATE
+PALWAKF_PLATFORM_COMPREHENSIVE_GUIDE.md,121,activation|audit|review|source_rights,CURRENT_OPERATIONAL_CANDIDATE

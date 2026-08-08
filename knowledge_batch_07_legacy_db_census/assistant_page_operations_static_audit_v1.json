@@ -1,0 +1,822 @@
+[
+  {
+    "page_file": "client/src/pages/AIToolRuns.tsx",
+    "component": "AIToolRuns",
+    "routes": "",
+    "area": "public",
+    "api_refs": 16,
+    "has_mutation_or_submit": true,
+    "placeholder_risk": true,
+    "static_audit_status": "unrouted_or_component_only"
+  },
+  {
+    "page_file": "client/src/pages/AITools.tsx",
+    "component": "AITools",
+    "routes": "",
+    "area": "public",
+    "api_refs": 4,
+    "has_mutation_or_submit": false,
+    "placeholder_risk": false,
+    "static_audit_status": "unrouted_or_component_only"
+  },
+  {
+    "page_file": "client/src/pages/AboutUs.tsx",
+    "component": "AboutUs",
+    "routes": "/about",
+    "area": "public",
+    "api_refs": 0,
+    "has_mutation_or_submit": false,
+    "placeholder_risk": true,
+    "static_audit_status": "static_placeholder_risk"
+  },
+  {
+    "page_file": "client/src/pages/AdminActivity.tsx",
+    "component": "AdminActivity",
+    "routes": "",
+    "area": "public",
+    "api_refs": 3,
+    "has_mutation_or_submit": true,
+    "placeholder_risk": false,
+    "static_audit_status": "unrouted_or_component_only"
+  },
+  {
+    "page_file": "client/src/pages/AdminContent.tsx",
+    "component": "AdminContent",
+    "routes": "",
+    "area": "public",
+    "api_refs": 12,
+    "has_mutation_or_submit": true,
+    "placeholder_risk": true,
+    "static_audit_status": "unrouted_or_component_only"
+  },
+  {
+    "page_file": "client/src/pages/AdminDashboard.tsx",
+    "component": "AdminDashboard",
+    "routes": "/admin",
+    "area": "admin",
+    "api_refs": 10,
+    "has_mutation_or_submit": false,
+    "placeholder_risk": false,
+    "static_audit_status": "has_runtime_contract_static_check_only"
+  },
+  {
+    "page_file": "client/src/pages/AdminSystemSettings.tsx",
+    "component": "AdminSystemSettings",
+    "routes": "",
+    "area": "public",
+    "api_refs": 10,
+    "has_mutation_or_submit": true,
+    "placeholder_risk": true,
+    "static_audit_status": "unrouted_or_component_only"
+  },
+  {
+    "page_file": "client/src/pages/AdminUsers.tsx",
+    "component": "AdminUsers",
+    "routes": "/admin/users-old",
+    "area": "admin",
+    "api_refs": 8,
+    "has_mutation_or_submit": true,
+    "placeholder_risk": true,
+    "static_audit_status": "mixed_needs_browser_uat"
+  },
+  {
+    "page_file": "client/src/pages/AdvancedSearch.tsx",
+    "component": "AdvancedSearch",
+    "routes": "/advanced-search",
+    "area": "public",
+    "api_refs": 4,
+    "has_mutation_or_submit": true,
+    "placeholder_risk": true,
+    "static_audit_status": "mixed_needs_browser_uat"
+  },
+  {
+    "page_file": "client/src/pages/AnalyticsDashboard.tsx",
+    "component": "AnalyticsDashboard",
+    "routes": "",
+    "area": "public",
+    "api_refs": 10,
+    "has_mutation_or_submit": false,
+    "placeholder_risk": false,
+    "static_audit_status": "unrouted_or_component_only"
+  },
+  {
+    "page_file": "client/src/pages/Bookmarks.tsx",
+    "component": "Bookmarks",
+    "routes": "/bookmarks",
+    "area": "public",
+    "api_refs": 7,
+    "has_mutation_or_submit": true,
+    "placeholder_risk": true,
+    "static_audit_status": "mixed_needs_browser_uat"
+  },
+  {
+    "page_file": "client/src/pages/CacheAnalytics.tsx",
+    "component": "CacheAnalytics",
+    "routes": "",
+    "area": "public",
+    "api_refs": 8,
+    "has_mutation_or_submit": true,
+    "placeholder_risk": false,
+    "static_audit_status": "unrouted_or_component_only"
+  },
+  {
+    "page_file": "client/src/pages/CaseDetails.tsx",
+    "component": "CaseDetails",
+    "routes": "/admin/cases/:id",
+    "area": "admin",
+    "api_refs": 2,
+    "has_mutation_or_submit": false,
+    "placeholder_risk": false,
+    "static_audit_status": "has_runtime_contract_static_check_only"
+  },
+  {
+    "page_file": "client/src/pages/CasesManagement.tsx",
+    "component": "CasesManagement",
+    "routes": "",
+    "area": "public",
+    "api_refs": 11,
+    "has_mutation_or_submit": true,
+    "placeholder_risk": true,
+    "static_audit_status": "unrouted_or_component_only"
+  },
+  {
+    "page_file": "client/src/pages/Chat.tsx",
+    "component": "Chat",
+    "routes": "/chat",
+    "area": "public",
+    "api_refs": 22,
+    "has_mutation_or_submit": true,
+    "placeholder_risk": true,
+    "static_audit_status": "mixed_needs_browser_uat"
+  },
+  {
+    "page_file": "client/src/pages/ClassifyTool.tsx",
+    "component": "ClassifyTool",
+    "routes": "",
+    "area": "public",
+    "api_refs": 4,
+    "has_mutation_or_submit": true,
+    "placeholder_risk": true,
+    "static_audit_status": "unrouted_or_component_only"
+  },
+  {
+    "page_file": "client/src/pages/ComingSoon.tsx",
+    "component": "ComingSoon",
+    "routes": "",
+    "area": "public",
+    "api_refs": 0,
+    "has_mutation_or_submit": false,
+    "placeholder_risk": true,
+    "static_audit_status": "unrouted_or_component_only"
+  },
+  {
+    "page_file": "client/src/pages/CompareTool.tsx",
+    "component": "CompareTool",
+    "routes": "",
+    "area": "public",
+    "api_refs": 4,
+    "has_mutation_or_submit": true,
+    "placeholder_risk": true,
+    "static_audit_status": "unrouted_or_component_only"
+  },
+  {
+    "page_file": "client/src/pages/ComponentShowcase.tsx",
+    "component": "ComponentShowcase",
+    "routes": "",
+    "area": "public",
+    "api_refs": 2,
+    "has_mutation_or_submit": true,
+    "placeholder_risk": true,
+    "static_audit_status": "unrouted_or_component_only"
+  },
+  {
+    "page_file": "client/src/pages/ContactUs.tsx",
+    "component": "ContactUs",
+    "routes": "/contact",
+    "area": "public",
+    "api_refs": 2,
+    "has_mutation_or_submit": true,
+    "placeholder_risk": true,
+    "static_audit_status": "mixed_needs_browser_uat"
+  },
+  {
+    "page_file": "client/src/pages/Dashboard.tsx",
+    "component": "Dashboard",
+    "routes": "/admin/old-dashboard",
+    "area": "admin",
+    "api_refs": 2,
+    "has_mutation_or_submit": false,
+    "placeholder_risk": false,
+    "static_audit_status": "has_runtime_contract_static_check_only"
+  },
+  {
+    "page_file": "client/src/pages/DeedsManagement.tsx",
+    "component": "DeedsManagement",
+    "routes": "",
+    "area": "public",
+    "api_refs": 11,
+    "has_mutation_or_submit": true,
+    "placeholder_risk": true,
+    "static_audit_status": "unrouted_or_component_only"
+  },
+  {
+    "page_file": "client/src/pages/DigitalLibrary.tsx",
+    "component": "DigitalLibrary",
+    "routes": "",
+    "area": "public",
+    "api_refs": 2,
+    "has_mutation_or_submit": false,
+    "placeholder_risk": true,
+    "static_audit_status": "unrouted_or_component_only"
+  },
+  {
+    "page_file": "client/src/pages/ExportData.tsx",
+    "component": "ExportData",
+    "routes": "/export",
+    "area": "public",
+    "api_refs": 8,
+    "has_mutation_or_submit": true,
+    "placeholder_risk": false,
+    "static_audit_status": "has_runtime_contract_static_check_only"
+  },
+  {
+    "page_file": "client/src/pages/ExtractTool.tsx",
+    "component": "ExtractTool",
+    "routes": "",
+    "area": "public",
+    "api_refs": 4,
+    "has_mutation_or_submit": true,
+    "placeholder_risk": true,
+    "static_audit_status": "unrouted_or_component_only"
+  },
+  {
+    "page_file": "client/src/pages/FAQs.tsx",
+    "component": "FAQs",
+    "routes": "/faqs",
+    "area": "public",
+    "api_refs": 6,
+    "has_mutation_or_submit": true,
+    "placeholder_risk": false,
+    "static_audit_status": "has_runtime_contract_static_check_only"
+  },
+  {
+    "page_file": "client/src/pages/FavoriteConversations.tsx",
+    "component": "FavoriteConversations",
+    "routes": "/favorites",
+    "area": "public",
+    "api_refs": 5,
+    "has_mutation_or_submit": true,
+    "placeholder_risk": true,
+    "static_audit_status": "mixed_needs_browser_uat"
+  },
+  {
+    "page_file": "client/src/pages/FetchedContentReview.tsx",
+    "component": "FetchedContentReview",
+    "routes": "",
+    "area": "public",
+    "api_refs": 44,
+    "has_mutation_or_submit": true,
+    "placeholder_risk": true,
+    "static_audit_status": "unrouted_or_component_only"
+  },
+  {
+    "page_file": "client/src/pages/FilesManagement.tsx",
+    "component": "FilesManagement",
+    "routes": "",
+    "area": "public",
+    "api_refs": 11,
+    "has_mutation_or_submit": true,
+    "placeholder_risk": true,
+    "static_audit_status": "unrouted_or_component_only"
+  },
+  {
+    "page_file": "client/src/pages/Home.tsx",
+    "component": "Home",
+    "routes": "/",
+    "area": "public",
+    "api_refs": 6,
+    "has_mutation_or_submit": true,
+    "placeholder_risk": true,
+    "static_audit_status": "mixed_needs_browser_uat"
+  },
+  {
+    "page_file": "client/src/pages/HomeSectionsManagement.tsx",
+    "component": "HomeSectionsManagement",
+    "routes": "",
+    "area": "public",
+    "api_refs": 13,
+    "has_mutation_or_submit": true,
+    "placeholder_risk": true,
+    "static_audit_status": "unrouted_or_component_only"
+  },
+  {
+    "page_file": "client/src/pages/InstructionsManagement.tsx",
+    "component": "InstructionsManagement",
+    "routes": "",
+    "area": "public",
+    "api_refs": 11,
+    "has_mutation_or_submit": true,
+    "placeholder_risk": true,
+    "static_audit_status": "unrouted_or_component_only"
+  },
+  {
+    "page_file": "client/src/pages/InteractionAnalytics.tsx",
+    "component": "InteractionAnalytics",
+    "routes": "",
+    "area": "public",
+    "api_refs": 14,
+    "has_mutation_or_submit": false,
+    "placeholder_risk": false,
+    "static_audit_status": "unrouted_or_component_only"
+  },
+  {
+    "page_file": "client/src/pages/Knowledge.tsx",
+    "component": "Knowledge",
+    "routes": "/knowledge-base | /knowledge",
+    "area": "public",
+    "api_refs": 4,
+    "has_mutation_or_submit": false,
+    "placeholder_risk": true,
+    "static_audit_status": "mixed_needs_browser_uat"
+  },
+  {
+    "page_file": "client/src/pages/KnowledgeDetails.tsx",
+    "component": "KnowledgeDetails",
+    "routes": "/knowledge-base/:id | /knowledge/:id",
+    "area": "public",
+    "api_refs": 4,
+    "has_mutation_or_submit": false,
+    "placeholder_risk": true,
+    "static_audit_status": "mixed_needs_browser_uat"
+  },
+  {
+    "page_file": "client/src/pages/KnowledgeManagement.tsx",
+    "component": "KnowledgeManagement",
+    "routes": "",
+    "area": "public",
+    "api_refs": 16,
+    "has_mutation_or_submit": true,
+    "placeholder_risk": true,
+    "static_audit_status": "unrouted_or_component_only"
+  },
+  {
+    "page_file": "client/src/pages/ManageKnowledge.tsx",
+    "component": "ManageKnowledge",
+    "routes": "",
+    "area": "public",
+    "api_refs": 13,
+    "has_mutation_or_submit": true,
+    "placeholder_risk": true,
+    "static_audit_status": "unrouted_or_component_only"
+  },
+  {
+    "page_file": "client/src/pages/ManageKnowledge_old.tsx",
+    "component": "ManageKnowledge_old",
+    "routes": "",
+    "area": "public",
+    "api_refs": 11,
+    "has_mutation_or_submit": true,
+    "placeholder_risk": true,
+    "static_audit_status": "unrouted_or_component_only"
+  },
+  {
+    "page_file": "client/src/pages/ManageUsers.tsx",
+    "component": "ManageUsers",
+    "routes": "",
+    "area": "public",
+    "api_refs": 22,
+    "has_mutation_or_submit": true,
+    "placeholder_risk": true,
+    "static_audit_status": "unrouted_or_component_only"
+  },
+  {
+    "page_file": "client/src/pages/ManageUsers_Old.tsx",
+    "component": "ManageUsers_Old",
+    "routes": "",
+    "area": "public",
+    "api_refs": 8,
+    "has_mutation_or_submit": true,
+    "placeholder_risk": true,
+    "static_audit_status": "unrouted_or_component_only"
+  },
+  {
+    "page_file": "client/src/pages/NotFound.tsx",
+    "component": "NotFound",
+    "routes": "/404",
+    "area": "public",
+    "api_refs": 0,
+    "has_mutation_or_submit": false,
+    "placeholder_risk": false,
+    "static_audit_status": "static_display_or_missing_backend_risk"
+  },
+  {
+    "page_file": "client/src/pages/PrecedentsTool.tsx",
+    "component": "PrecedentsTool",
+    "routes": "",
+    "area": "public",
+    "api_refs": 4,
+    "has_mutation_or_submit": true,
+    "placeholder_risk": true,
+    "static_audit_status": "unrouted_or_component_only"
+  },
+  {
+    "page_file": "client/src/pages/PredictTool.tsx",
+    "component": "PredictTool",
+    "routes": "",
+    "area": "public",
+    "api_refs": 4,
+    "has_mutation_or_submit": true,
+    "placeholder_risk": true,
+    "static_audit_status": "unrouted_or_component_only"
+  },
+  {
+    "page_file": "client/src/pages/PropertiesManagement.tsx",
+    "component": "PropertiesManagement",
+    "routes": "",
+    "area": "public",
+    "api_refs": 13,
+    "has_mutation_or_submit": true,
+    "placeholder_risk": true,
+    "static_audit_status": "unrouted_or_component_only"
+  },
+  {
+    "page_file": "client/src/pages/PropertyDetails.tsx",
+    "component": "PropertyDetails",
+    "routes": "/admin/properties/:id",
+    "area": "admin",
+    "api_refs": 2,
+    "has_mutation_or_submit": false,
+    "placeholder_risk": false,
+    "static_audit_status": "has_runtime_contract_static_check_only"
+  },
+  {
+    "page_file": "client/src/pages/References.tsx",
+    "component": "References",
+    "routes": "/references",
+    "area": "public",
+    "api_refs": 2,
+    "has_mutation_or_submit": false,
+    "placeholder_risk": true,
+    "static_audit_status": "mixed_needs_browser_uat"
+  },
+  {
+    "page_file": "client/src/pages/RulingDetails.tsx",
+    "component": "RulingDetails",
+    "routes": "/admin/rulings/:id",
+    "area": "admin",
+    "api_refs": 2,
+    "has_mutation_or_submit": false,
+    "placeholder_risk": false,
+    "static_audit_status": "has_runtime_contract_static_check_only"
+  },
+  {
+    "page_file": "client/src/pages/RulingsManagement.tsx",
+    "component": "RulingsManagement",
+    "routes": "",
+    "area": "public",
+    "api_refs": 11,
+    "has_mutation_or_submit": true,
+    "placeholder_risk": true,
+    "static_audit_status": "unrouted_or_component_only"
+  },
+  {
+    "page_file": "client/src/pages/Search.tsx",
+    "component": "Search",
+    "routes": "/search",
+    "area": "public",
+    "api_refs": 3,
+    "has_mutation_or_submit": true,
+    "placeholder_risk": true,
+    "static_audit_status": "mixed_needs_browser_uat"
+  },
+  {
+    "page_file": "client/src/pages/SiteSettings.tsx",
+    "component": "SiteSettings",
+    "routes": "",
+    "area": "public",
+    "api_refs": 5,
+    "has_mutation_or_submit": true,
+    "placeholder_risk": true,
+    "static_audit_status": "unrouted_or_component_only"
+  },
+  {
+    "page_file": "client/src/pages/Stats.tsx",
+    "component": "Stats",
+    "routes": "/stats",
+    "area": "public",
+    "api_refs": 2,
+    "has_mutation_or_submit": false,
+    "placeholder_risk": false,
+    "static_audit_status": "has_runtime_contract_static_check_only"
+  },
+  {
+    "page_file": "client/src/pages/SummarizeTool.tsx",
+    "component": "SummarizeTool",
+    "routes": "",
+    "area": "public",
+    "api_refs": 4,
+    "has_mutation_or_submit": true,
+    "placeholder_risk": true,
+    "static_audit_status": "unrouted_or_component_only"
+  },
+  {
+    "page_file": "client/src/pages/ToolsGuide.tsx",
+    "component": "ToolsGuide",
+    "routes": "",
+    "area": "public",
+    "api_refs": 0,
+    "has_mutation_or_submit": false,
+    "placeholder_risk": false,
+    "static_audit_status": "unrouted_or_component_only"
+  },
+  {
+    "page_file": "client/src/pages/WaqfAnalytics.tsx",
+    "component": "WaqfAnalytics",
+    "routes": "",
+    "area": "public",
+    "api_refs": 2,
+    "has_mutation_or_submit": false,
+    "placeholder_risk": false,
+    "static_audit_status": "unrouted_or_component_only"
+  },
+  {
+    "page_file": "client/src/pages/WaqfCategoriesManagement.tsx",
+    "component": "WaqfCategoriesManagement",
+    "routes": "",
+    "area": "public",
+    "api_refs": 13,
+    "has_mutation_or_submit": true,
+    "placeholder_risk": true,
+    "static_audit_status": "unrouted_or_component_only"
+  },
+  {
+    "page_file": "client/src/pages/admin/AdminMustakshifAi.tsx",
+    "component": "AdminMustakshifAi",
+    "routes": "",
+    "area": "admin",
+    "api_refs": 0,
+    "has_mutation_or_submit": false,
+    "placeholder_risk": true,
+    "static_audit_status": "unrouted_or_component_only"
+  },
+  {
+    "page_file": "client/src/pages/admin/AdminPagesClassification.tsx",
+    "component": "AdminPagesClassification",
+    "routes": "",
+    "area": "admin",
+    "api_refs": 2,
+    "has_mutation_or_submit": false,
+    "placeholder_risk": true,
+    "static_audit_status": "unrouted_or_component_only"
+  },
+  {
+    "page_file": "client/src/pages/admin/AlertsCenter.tsx",
+    "component": "AlertsCenter",
+    "routes": "",
+    "area": "admin",
+    "api_refs": 46,
+    "has_mutation_or_submit": true,
+    "placeholder_risk": true,
+    "static_audit_status": "unrouted_or_component_only"
+  },
+  {
+    "page_file": "client/src/pages/admin/ApiKeys.tsx",
+    "component": "ApiKeys",
+    "routes": "",
+    "area": "admin",
+    "api_refs": 2,
+    "has_mutation_or_submit": false,
+    "placeholder_risk": false,
+    "static_audit_status": "unrouted_or_component_only"
+  },
+  {
+    "page_file": "client/src/pages/admin/AuditLogs.tsx",
+    "component": "AuditLogs",
+    "routes": "",
+    "area": "admin",
+    "api_refs": 3,
+    "has_mutation_or_submit": true,
+    "placeholder_risk": false,
+    "static_audit_status": "unrouted_or_component_only"
+  },
+  {
+    "page_file": "client/src/pages/admin/Backup.tsx",
+    "component": "Backup",
+    "routes": "",
+    "area": "admin",
+    "api_refs": 5,
+    "has_mutation_or_submit": true,
+    "placeholder_risk": false,
+    "static_audit_status": "unrouted_or_component_only"
+  },
+  {
+    "page_file": "client/src/pages/admin/Billing.tsx",
+    "component": "Billing",
+    "routes": "/admin/billing",
+    "area": "admin",
+    "api_refs": 0,
+    "has_mutation_or_submit": false,
+    "placeholder_risk": false,
+    "static_audit_status": "static_display_or_missing_backend_risk"
+  },
+  {
+    "page_file": "client/src/pages/admin/Cache.tsx",
+    "component": "Cache",
+    "routes": "",
+    "area": "admin",
+    "api_refs": 3,
+    "has_mutation_or_submit": true,
+    "placeholder_risk": false,
+    "static_audit_status": "unrouted_or_component_only"
+  },
+  {
+    "page_file": "client/src/pages/admin/CommentsManagement.tsx",
+    "component": "CommentsManagement",
+    "routes": "",
+    "area": "admin",
+    "api_refs": 11,
+    "has_mutation_or_submit": true,
+    "placeholder_risk": true,
+    "static_audit_status": "unrouted_or_component_only"
+  },
+  {
+    "page_file": "client/src/pages/admin/ContentTemplates.tsx",
+    "component": "ContentTemplates",
+    "routes": "",
+    "area": "admin",
+    "api_refs": 16,
+    "has_mutation_or_submit": true,
+    "placeholder_risk": true,
+    "static_audit_status": "unrouted_or_component_only"
+  },
+  {
+    "page_file": "client/src/pages/admin/DataFetching.tsx",
+    "component": "DataFetching",
+    "routes": "",
+    "area": "admin",
+    "api_refs": 12,
+    "has_mutation_or_submit": true,
+    "placeholder_risk": true,
+    "static_audit_status": "unrouted_or_component_only"
+  },
+  {
+    "page_file": "client/src/pages/admin/FetchLogsManagement.tsx",
+    "component": "FetchLogsManagement",
+    "routes": "",
+    "area": "admin",
+    "api_refs": 7,
+    "has_mutation_or_submit": true,
+    "placeholder_risk": true,
+    "static_audit_status": "unrouted_or_component_only"
+  },
+  {
+    "page_file": "client/src/pages/admin/Integrations.tsx",
+    "component": "Integrations",
+    "routes": "",
+    "area": "admin",
+    "api_refs": 3,
+    "has_mutation_or_submit": true,
+    "placeholder_risk": false,
+    "static_audit_status": "unrouted_or_component_only"
+  },
+  {
+    "page_file": "client/src/pages/admin/KnowledgeDashboard.tsx",
+    "component": "KnowledgeDashboard",
+    "routes": "",
+    "area": "admin",
+    "api_refs": 6,
+    "has_mutation_or_submit": false,
+    "placeholder_risk": false,
+    "static_audit_status": "unrouted_or_component_only"
+  },
+  {
+    "page_file": "client/src/pages/admin/KnowledgeSearch.tsx",
+    "component": "KnowledgeSearch",
+    "routes": "",
+    "area": "admin",
+    "api_refs": 4,
+    "has_mutation_or_submit": true,
+    "placeholder_risk": true,
+    "static_audit_status": "unrouted_or_component_only"
+  },
+  {
+    "page_file": "client/src/pages/admin/KnowledgeSourcesManagement.tsx",
+    "component": "KnowledgeSourcesManagement",
+    "routes": "",
+    "area": "admin",
+    "api_refs": 17,
+    "has_mutation_or_submit": true,
+    "placeholder_risk": true,
+    "static_audit_status": "unrouted_or_component_only"
+  },
+  {
+    "page_file": "client/src/pages/admin/Maintenance.tsx",
+    "component": "Maintenance",
+    "routes": "",
+    "area": "admin",
+    "api_refs": 3,
+    "has_mutation_or_submit": true,
+    "placeholder_risk": false,
+    "static_audit_status": "unrouted_or_component_only"
+  },
+  {
+    "page_file": "client/src/pages/admin/MustakshifAiPage.tsx",
+    "component": "MustakshifAiPage",
+    "routes": "",
+    "area": "admin",
+    "api_refs": 0,
+    "has_mutation_or_submit": false,
+    "placeholder_risk": true,
+    "static_audit_status": "unrouted_or_component_only"
+  },
+  {
+    "page_file": "client/src/pages/admin/NotificationsManagement.tsx",
+    "component": "NotificationsManagement",
+    "routes": "",
+    "area": "admin",
+    "api_refs": 8,
+    "has_mutation_or_submit": true,
+    "placeholder_risk": true,
+    "static_audit_status": "unrouted_or_component_only"
+  },
+  {
+    "page_file": "client/src/pages/admin/PageSettings.tsx",
+    "component": "PageSettings",
+    "routes": "/admin/page-settings",
+    "area": "admin",
+    "api_refs": 6,
+    "has_mutation_or_submit": true,
+    "placeholder_risk": true,
+    "static_audit_status": "mixed_needs_browser_uat"
+  },
+  {
+    "page_file": "client/src/pages/admin/Permissions.tsx",
+    "component": "Permissions",
+    "routes": "",
+    "area": "admin",
+    "api_refs": 9,
+    "has_mutation_or_submit": true,
+    "placeholder_risk": true,
+    "static_audit_status": "unrouted_or_component_only"
+  },
+  {
+    "page_file": "client/src/pages/admin/PlatformBridgePage.tsx",
+    "component": "PlatformBridgePage",
+    "routes": "",
+    "area": "admin",
+    "api_refs": 14,
+    "has_mutation_or_submit": false,
+    "placeholder_risk": true,
+    "static_audit_status": "unrouted_or_component_only"
+  },
+  {
+    "page_file": "client/src/pages/admin/Reports.tsx",
+    "component": "Reports",
+    "routes": "",
+    "area": "admin",
+    "api_refs": 4,
+    "has_mutation_or_submit": false,
+    "placeholder_risk": false,
+    "static_audit_status": "unrouted_or_component_only"
+  },
+  {
+    "page_file": "client/src/pages/admin/RolePermissions.tsx",
+    "component": "RolePermissions",
+    "routes": "/admin/role-permissions",
+    "area": "admin",
+    "api_refs": 11,
+    "has_mutation_or_submit": true,
+    "placeholder_risk": false,
+    "static_audit_status": "has_runtime_contract_static_check_only"
+  },
+  {
+    "page_file": "client/src/pages/admin/Roles.tsx",
+    "component": "Roles",
+    "routes": "",
+    "area": "admin",
+    "api_refs": 9,
+    "has_mutation_or_submit": true,
+    "placeholder_risk": true,
+    "static_audit_status": "unrouted_or_component_only"
+  },
+  {
+    "page_file": "client/src/pages/admin/Security.tsx",
+    "component": "Security",
+    "routes": "",
+    "area": "admin",
+    "api_refs": 2,
+    "has_mutation_or_submit": false,
+    "placeholder_risk": false,
+    "static_audit_status": "unrouted_or_component_only"
+  },
+  {
+    "page_file": "client/src/pages/admin/Webhooks.tsx",
+    "component": "Webhooks",
+    "routes": "",
+    "area": "admin",
+    "api_refs": 3,
+    "has_mutation_or_submit": true,
+    "placeholder_risk": false,
+    "static_audit_status": "unrouted_or_component_only"
+  }
+]

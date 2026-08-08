@@ -1,0 +1,7 @@
+test_id,surface,input,expected_result,technical_signal,evidence_supplied,acceptance_status
+KB06B-CHAT-01,/knowledge#/chat,ما هو الوقف الذري؟,Grounded answer with citation to imported waqf-dhurri/وقف ذري source,answer_present=true; citations.length>=1; source_title non-empty,false,pending
+KB06B-CHAT-02,/knowledge#/chat,اشرح حق التصرف في الأراضي الأميرية في فلسطين,Grounded answer with citation to الأراضي الأميرية/legal land source,answer_present=true; citations.length>=1; source_title mentions الأراضي الأميرية or حق التصرف,false,pending
+KB06B-CHAT-03,/knowledge#/chat,ما هي تعليمات لجان رعاية المساجد لسنة 2023؟,Grounded answer cites imported 2023 committee instructions,answer_present=true; citations.length>=1; source_title contains تعليمات لجان رعاية المساجد,false,pending
+KB06B-CHAT-04,/knowledge#/chat,ماذا تقول المراجع عن إدارة الأوقاف في عهد الانتداب البريطاني؟,Grounded answer cites British mandate awqaf management source,answer_present=true; citations.length>=1; source_title contains الانتداب البريطاني or إدارة الأوقاف,false,pending
+KB06B-ADMIN-01,/admin/knowledge-search,q=الأراضي الأميرية,Rows visible with approved + chat-visible + citation count,result_count>0; approved_count>0; chat_visible_count>0; citation_count>0,false,pending
+KB06B-ADMIN-02,/admin/knowledge-search,q=تعليمات لجان رعاية المساجد,Rows visible with approved + chat-visible + citation count,result_count>0; approved_count>0; chat_visible_count>0; citation_count>0,false,pending

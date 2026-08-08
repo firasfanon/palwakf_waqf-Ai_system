@@ -1,0 +1,13 @@
+# Latest Baseline Pointer — Mega Batch 28A
+
+Current baseline:
+
+`waqf_ai_model_hybrid_llm_admin_v40a_mb28a_database_connectivity_remediation_2026_06_18.zip`
+
+Updates-only:
+
+`mega_batch_28a_database_connectivity_remediation_updates_only_2026_06_18.zip`
+
+Decision:
+
+`MEGA_BATCH_28A_DATABASE_CONNECTIVITY_REMEDIATION_APPLIED_STATIC_CHECKS_PASSED_LOCAL_PNPM_BROWSER_DB_RETEST_REQUIRED`

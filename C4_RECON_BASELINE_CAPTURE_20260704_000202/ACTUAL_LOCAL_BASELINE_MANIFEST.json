@@ -1,0 +1,57 @@
+﻿[
+    {
+        "path":  "client\\src\\pages\\admin\\SourceProvenanceRightsRegistry.tsx",
+        "sha256":  "9a4c267bdada2970659dcea0f102a59e1d3c3c286c85a59b60a157efd53146c9",
+        "status":  "PRESENT"
+    },
+    {
+        "path":  "server\\routers.ts",
+        "sha256":  "853ee0dbb30136cb0e29c41b9650d409cc71a0979466bdad23d051393374d9ba",
+        "status":  "PRESENT"
+    },
+    {
+        "path":  "server\\externalSourceVerification.ts",
+        "sha256":  "db216fc0d2ff051cdd73f543af6d8d62b82c713afae2cf80afc113e25eb89c4b",
+        "status":  "PRESENT"
+    },
+    {
+        "path":  "package.json",
+        "sha256":  "00fc6c95ef70bdaa6f2c424989e75578a68bba00dedbbe6240191527512838e4",
+        "status":  "PRESENT"
+    },
+    {
+        "path":  "CHANGELOG.md",
+        "sha256":  "8df0b64f7f1438a1ac9f8961ead80fdf5d655a26fa7c9db09ee7b197aaed398d",
+        "status":  "PRESENT"
+    },
+    {
+        "path":  "scripts\\verify-mega-batch-c1-legacy-manus-provenance.mjs",
+        "sha256":  "4f087a54728e2a7c411e29199746dcc5d8fcd96096c03683c5725ec726800229",
+        "status":  "PRESENT"
+    },
+    {
+        "path":  "scripts\\verify-mega-batch-c2-autonomous-provenance-audit.mjs",
+        "sha256":  "84d51f59892131933f6df2046f872e5384cc46461667a164cf097afa863afe4d",
+        "status":  "PRESENT"
+    },
+    {
+        "path":  "scripts\\verify-mega-batch-c3-external-source-verification.mjs",
+        "sha256":  "ab62542315d236f571c40679b2d2b5e43af46093530f4890109b400ee638c1eb",
+        "status":  "PRESENT"
+    },
+    {
+        "path":  "server\\autonomousProvenanceAudit.ts",
+        "sha256":  "64bc44d57f94500b1ae53ecd05bf3dcba0310884c417b844842e3e09bc5bf8c4",
+        "status":  "PRESENT"
+    },
+    {
+        "path":  "README_MEGA_BATCH_C3_EXTERNAL_SOURCE_VERIFICATION_AR.md",
+        "sha256":  "a01b4e76f03477a91ab06ece9f08457722fb6e54ff2fffa136544ebca60a072c",
+        "status":  "PRESENT"
+    },
+    {
+        "path":  "STATE_MEGA_BATCH_C3_EXTERNAL_SOURCE_VERIFICATION.md",
+        "sha256":  "59e2798c4446179246e6aa684ccdac22c171312d377d3bc31f6a6eeb6507699f",
+        "status":  "PRESENT"
+    }
+]

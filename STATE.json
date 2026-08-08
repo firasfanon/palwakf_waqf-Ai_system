@@ -1,0 +1,37 @@
+{
+  "package": "PALWAKF_ASSISTANT_R9_DISCOVERY_EVIDENCE_ACCEPTANCE_AND_GOVERNING_DESIGN_DECISION_V1_20260720",
+  "inputEvidence": {
+    "filename": "R9_DISCOVERY_AND_DESIGN_20260719_232014(1).zip",
+    "sha256": "B4E4B6836175FBA3DDD7687734B60B192736D913C4CDE54C8C64BEC6F543D66C",
+    "zipIntegrity": "PASS",
+    "itemCount": 42
+  },
+  "evidenceDecision": "ACCEPTED_WITH_EVIDENCE_QUALITY_HOLDS",
+  "sourceDiscovery": "PASS_BROAD_RECALL",
+  "databaseCatalogDiscovery": "PASS",
+  "designSynthesis": "PASS_AS_DRAFT",
+  "transactionReadOnlyObserved": "off",
+  "querySetSelectOnly": true,
+  "projectSourceWrite": "NO",
+  "databaseWrite": "NO",
+  "liveApplyAuthorized": false,
+  "targetBaselineAccepted": false,
+  "metrics": {
+    "assistantObjects": 186,
+    "tables": 47,
+    "views": 3,
+    "columns": 563,
+    "rlsPolicyRows": 65,
+    "rawGrantRows": 1288,
+    "clientGrantRows": 588,
+    "clientGrantedTables": 42,
+    "clientGrantedTablesWithPolicyRows": 25,
+    "clientGrantedTablesWithoutPolicyRows": 17,
+    "routines": 30,
+    "broadExecuteRoutines": 16,
+    "broadSecurityDefinerRoutines": 7,
+    "broadMutationRpcCandidates": 3,
+    "correctedGapCount": 8
+  },
+  "nextAuthorization": "AUTHORIZE_PALWAKF_ASSISTANT_R9_TARGETED_SECURITY_AND_WORKFLOW_CONTRACT_READ_ONLY_CLOSURE_V1"
+}

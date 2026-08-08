@@ -1,0 +1,65 @@
+{
+  "package": "ADMIN_MOBILE_SINGLE_SIDEBAR_RENDER_AND_NAV_CONTAINMENT_APPLY_PARSER_FIX",
+  "files": [
+    {
+      "path": "CHANGELOG.md",
+      "sha256": "3c16b6c93b96ab0dfeb5174fc59150946d47a7325390a97bedc3affa8a781718"
+    },
+    {
+      "path": "HASH_MANIFEST.json",
+      "sha256": "ee67508a1593eb4efb30549135b873f274577e8c3346fe211d64bcd04604081f"
+    },
+    {
+      "path": "PARSER_FIX_NOTE_AR.md",
+      "sha256": "431921fc272d8ba0f51a9ff604ff4a79b2b8b9d7a7377b5f1ca2860f31c1a462"
+    },
+    {
+      "path": "README_AR.md",
+      "sha256": "107ef09888a2bb90cfd100f918cc04dca938f8b8e3247e6e234d50849bf86ee1"
+    },
+    {
+      "path": "STATE.md",
+      "sha256": "1ca5fa60c73abfd4d7742d9d873eb47b237ca32f4ce1b96d6838ccba774061d6"
+    },
+    {
+      "path": "UAT_AR.md",
+      "sha256": "2821043c207e8d2b31c420e02b4202e9dfa796916323ffda8e3a32e78574ad6c"
+    },
+    {
+      "path": "VALIDATION_REPORT.md",
+      "sha256": "79f8d0b939cd23ae41f463a48acf83fb5ab58e4339af348d8ea3bedefb9770d9"
+    },
+    {
+      "path": "apply.ps1",
+      "sha256": "94ad0efcd97ba148f3f7f3f9902d36512e9993e74f712bac5d2c5869c0b6a5a7"
+    },
+    {
+      "path": "files/client/src/components/admin/AdminLayoutV2.tsx",
+      "sha256": "0664d847e1977b0b2ecfa15ccb02719cbe0b61b8bb4b602f9352dfe364b5bfd4"
+    },
+    {
+      "path": "files/client/src/components/admin/AdminSidebarV2.tsx",
+      "sha256": "433234a6a5bd43f6d79957fcc2528e44256ac43f15c1e72837624930755b1a66"
+    },
+    {
+      "path": "files/client/src/styles/admin.css",
+      "sha256": "bdf56bad1019bcdd1d90c247d90a0b503484691728d38194ab59e7589f688566"
+    },
+    {
+      "path": "files/package.json",
+      "sha256": "1b18e2264094aed7fb4c1f58ddd6b1e376f5b4eff9b3420a90e7d5794d404c34"
+    },
+    {
+      "path": "files/scripts/verify-admin-mobile-drawer-portal.mjs",
+      "sha256": "03d593ef10c887b2870bf3bf23162e6ae197a907db8634145c2676f877829b76"
+    },
+    {
+      "path": "files/scripts/verify-admin-mobile-single-sidebar.mjs",
+      "sha256": "7920ef1f484dbeb9834b109a980251265f5db58dacc3c19f98ce979deee09582"
+    },
+    {
+      "path": "files/scripts/verify-admin-shell-mobile-closure.mjs",
+      "sha256": "d774e182e37dab7f65382b8ced136932f60f829657ce4f8c3a445c8114c1cb6d"
+    }
+  ]
+}

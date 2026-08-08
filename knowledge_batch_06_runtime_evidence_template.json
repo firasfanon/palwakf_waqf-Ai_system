@@ -1,0 +1,25 @@
+{
+  "batch": "knowledge_batch_06",
+  "decision": "KNOWLEDGE_BATCH_06_CHAT_RETRIEVAL_CITATION_AND_ADMIN_SEARCH_VERIFICATION_PACK_PREPARED_TARGETED_ADMIN_SEARCH_FIX_APPLIED_RUNTIME_BROWSER_EVIDENCE_PENDING",
+  "accepted_previous_evidence": {
+    "kb05a_reference_documents": 138,
+    "kb05a_knowledge_documents": 138,
+    "kb05a_citations": 138,
+    "approved_on_import": true,
+    "chat_visible_on_import": true
+  },
+  "runtime_evidence_required": {
+    "chat_retrieval_citation": [
+      "browser screenshot or JSON output for /knowledge#/chat answers",
+      "groundingReferences non-empty for each probe",
+      "assistant message sources field stores the citations JSON"
+    ],
+    "admin_knowledge_search": [
+      "screenshot or API response showing /admin/knowledge-search result rows",
+      "result rows show status=approved and chat=ظاهر",
+      "citationsCount is visible or technically present"
+    ],
+    "sql_read_only_verification": "sql_sandbox/knowledge_batch_06_chat_retrieval_citation_admin_search_verification/knowledge_batch_06_post_apply_runtime_read_only_verification.sql"
+  },
+  "browser_runtime_evidence_status": "pending_not_supplied_in_this_message"
+}

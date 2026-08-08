@@ -1,0 +1,10 @@
+INSERT INTO knowledge_documents (title, content, source, category, tags, isActive, createdAt, updatedAt) VALUES ('مجلة الأحكام العدلية - المادة 6: استبدال الوقف', 'لا يجوز استبدال الوقف إلا إذا تعطلت منافعه بالكلية، أو كان في الاستبدال مصلحة ظاهرة للوقف، وبإذن القاضي.', 'مجلة الأحكام العدلية', 'reference', 'استبدال الوقف، المصلحة، القاضي', 1, FROM_UNIXTIME(1767919372), FROM_UNIXTIME(1767919372));
+
+INSERT INTO knowledge_documents (title, content, source, category, tags, isActive, createdAt, updatedAt) VALUES ('قانون الأوقاف الأردني - المادة 2: تعريف الوقف الخيري', 'الوقف الخيري هو ما وقف على جهة بر وخير ابتداءً كالمساجد والمدارس والمستشفيات ودور الأيتام.', 'قانون الأوقاف الأردني رقم 23 لسنة 1964', 'law', 'الوقف الخيري، جهات البر، المساجد', 1, FROM_UNIXTIME(1767919372), FROM_UNIXTIME(1767919372));
+
+INSERT INTO knowledge_documents (title, content, source, category, tags, isActive, createdAt, updatedAt) VALUES ('قانون الأوقاف الأردني - المادة 3: الوقف الذري', 'الوقف الذري هو ما وقف على الذرية ابتداءً ثم على جهة بر وخير انتهاءً.', 'قانون الأوقاف الأردني رقم 23 لسنة 1964', 'law', 'الوقف الذري، الذرية، الوقف الأهلي', 1, FROM_UNIXTIME(1767919372), FROM_UNIXTIME(1767919372));
+
+INSERT INTO knowledge_documents (title, content, source, category, tags, isActive, createdAt, updatedAt) VALUES ('قانون الأوقاف الأردني - المادة 15: صلاحيات المتولي', 'للمتولي إدارة الوقف وتأجير أعيانه واستثمارها بما يحقق مصلحة الوقف، وله أن يقاضي ويقاضى باسم الوقف.', 'قانون الأوقاف الأردني رقم 23 لسنة 1964', 'law', 'المتولي، الإدارة، التأجير', 1, FROM_UNIXTIME(1767919372), FROM_UNIXTIME(1767919372));
+
+INSERT INTO knowledge_documents (title, content, source, category, tags, isActive, createdAt, updatedAt) VALUES ('قانون الأوقاف الأردني - المادة 20: الإشراف على الأوقاف', 'تشرف وزارة الأوقاف على جميع الأوقاف الخيرية والذرية، ولها حق الرقابة والتفتيش على أعمال المتولين.', 'قانون الأوقاف الأردني رقم 23 لسنة 1964', 'law', 'وزارة الأوقاف، الإشراف، الرقابة', 1, FROM_UNIXTIME(1767919372), FROM_UNIXTIME(1767919372));
+

@@ -1,0 +1,34 @@
+{
+  "batch": "Knowledge Batch 05A",
+  "date": "2026-06-18",
+  "decision": "KNOWLEDGE_BATCH_05A_SUPABASE_APPLY_EVIDENCE_ACCEPTED_APPROVED_CHAT_VISIBLE_138_CONFIRMED",
+  "input_baseline": "waqf_ai_model_hybrid_llm_admin_v46_knowledge_batch_05_full_recovered_records_db_import_approval_chat_pack_2026_06_18.zip",
+  "output_baseline": "waqf_ai_model_hybrid_llm_admin_v47_knowledge_batch_05a_supabase_apply_result_intake_approval_chat_visibility_2026_06_18.zip",
+  "evidence": {
+    "payload_records": 138,
+    "newly_inserted_reference_documents": 138,
+    "newly_inserted_knowledge_documents": 138,
+    "newly_inserted_citations": 138,
+    "chat_visible_on_import": true,
+    "approved_on_import": true,
+    "second_run_new_reference_documents": 0,
+    "second_run_new_knowledge_documents": 0,
+    "second_run_new_citations": 0
+  },
+  "gates": {
+    "live_supabase_apply_evidence_accepted": true,
+    "runtime_chat_retrieval_evidence_pending": true,
+    "remote_staging_evidence_pending": true,
+    "rbac_rls_negative_uat_pending": true,
+    "production_approved": false
+  },
+  "files": [
+    "ERROR_RECORD_KNOWLEDGE_BATCH_05A_2026_06_18.md",
+    "KNOWLEDGE_BATCH_05A_CHANGED_FILES_2026_06_18.md",
+    "KNOWLEDGE_BATCH_05A_CHANGELOG_2026_06_18.md",
+    "KNOWLEDGE_BATCH_05A_SUPABASE_APPLY_RESULT_INTAKE_2026_06_18.md",
+    "KNOWLEDGE_BATCH_05A_VERIFICATION_NOTES_2026_06_18.md",
+    "LATEST_BASELINE_KNOWLEDGE_BATCH_05A_2026_06_18.md",
+    "SESSION_HANDOFF_KNOWLEDGE_BATCH_05A_TO_RUNTIME_CHAT_OR_29A_2026_06_18.md"
+  ]
+}

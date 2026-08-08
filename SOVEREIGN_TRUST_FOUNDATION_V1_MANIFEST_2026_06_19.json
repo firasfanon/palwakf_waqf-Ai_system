@@ -1,0 +1,120 @@
+{
+  "baseline": "v58",
+  "batch": "Sovereign Trust Foundation v1 — Official Sources + Verified Citations + Scoped Permissions + Human Review + Useful Workflows + Calm Usable Interface",
+  "date": "2026-06-19",
+  "parent_baseline": "v57 Knowledge Batch 08",
+  "decision": "SOVEREIGN_TRUST_FOUNDATION_V1_CODE_AND_OPERATOR_APPLY_PACK_IMPLEMENTED_LIVE_SUPABASE_APPLY_PENDING_PRODUCTION_NOT_APPROVED",
+  "live_apply_executed": false,
+  "files": [
+    {
+      "path": "server/assistantTrust.ts",
+      "bytes": 7647,
+      "sha256": "a857f8ce8284f5a23bf1524c3f0d19118702d6b02d9b645969622b18c23220b2"
+    },
+    {
+      "path": "server/assistantTrust.test.ts",
+      "bytes": 2225,
+      "sha256": "d4520d540ca466954977e128c8410203aceae1ca15050ba6fcb6a83b68945aeb"
+    },
+    {
+      "path": "server/rag.ts",
+      "bytes": 22520,
+      "sha256": "38af709f5eacc70827819d2a244e3b922536ab7eac3b3ce4b3ccfb1a1f431a2d"
+    },
+    {
+      "path": "server/runtimeRepository.ts",
+      "bytes": 55481,
+      "sha256": "a58dfda598dafcf562b0d7c1d4e97b8035154259af98547cd69dbd9a5cd204eb"
+    },
+    {
+      "path": "server/routers.ts",
+      "bytes": 162662,
+      "sha256": "39736820424927502027a273eb64598535185f87f4cd07d01cb8c83a4fac383c"
+    },
+    {
+      "path": "client/src/components/ReferencesDisplay.tsx",
+      "bytes": 6808,
+      "sha256": "2bcefe1a7fd9dbc8ea7134e5e8c295665e454e6fe21eeac391f20526ab8cd2f8"
+    },
+    {
+      "path": "sql_sandbox/sovereign_assistant_trust_foundation_v1/00_PRECHECK_READ_ONLY.sql",
+      "bytes": 1387,
+      "sha256": "295d88ef0ba15feef644006f689d4195848ad01e222bedda835644b9b78ef95b"
+    },
+    {
+      "path": "sql_sandbox/sovereign_assistant_trust_foundation_v1/01_SCHEMA_SCOPES_WORKFLOWS_RLS_OPERATOR_APPLY.sql",
+      "bytes": 7307,
+      "sha256": "31185d59069f99ba194a6c4a0de37fd60b8530a05cb9744642a249551845e84a"
+    },
+    {
+      "path": "sql_sandbox/sovereign_assistant_trust_foundation_v1/02_BACKFILL_CLASSIFY_QUARANTINE_AND_CREATE_REVIEW_TASKS_OPERATOR_APPLY.sql",
+      "bytes": 5729,
+      "sha256": "583068a312435f5e78e8a2447f978fa2bcea0a7f6e8855f34d37233f89642966"
+    },
+    {
+      "path": "sql_sandbox/sovereign_assistant_trust_foundation_v1/03_VIEWS_RPC_AND_READ_ONLY_GATES_OPERATOR_APPLY.sql",
+      "bytes": 3230,
+      "sha256": "14c66135fd26b6d9c7b8a8d14c4d0e2e7c101d8b0e4b1b4ebf7837e1f0240297"
+    },
+    {
+      "path": "sql_sandbox/sovereign_assistant_trust_foundation_v1/04_POST_APPLY_READ_ONLY_VERIFICATION.sql",
+      "bytes": 2001,
+      "sha256": "2eb5d4f8586c66b72bd02dfb5d2f6b74f32c2b6d209f8c8f8e88aaa872694760"
+    },
+    {
+      "path": "sql_sandbox/sovereign_assistant_trust_foundation_v1/05_OPERATOR_SEQUENCE.md",
+      "bytes": 1101,
+      "sha256": "7f7a68190ee2dd4d8dc78f2ef687d153fecb162d60182975dabd143dc8b146a3"
+    },
+    {
+      "path": "SOVEREIGN_TRUST_FOUNDATION_V1_OFFICIAL_SOURCES_CITATIONS_SCOPES_REVIEW_WORKFLOWS_UX_2026_06_19.md",
+      "bytes": 4830,
+      "sha256": "aa9ed78873db0f1d37f7c5156c9dc8878205f58939e2920050ef8de6f9aa1afb"
+    },
+    {
+      "path": "SOVEREIGN_TRUST_FOUNDATION_V1_OPERATOR_RUNBOOK_2026_06_19.md",
+      "bytes": 2052,
+      "sha256": "e91296363b39edec96c88180b08b249527adfdb45e9f3a299842df5907da639d"
+    },
+    {
+      "path": "SOVEREIGN_TRUST_FOUNDATION_V1_ACCEPTANCE_MATRIX_2026_06_19.md",
+      "bytes": 1348,
+      "sha256": "ec26847c051a68075225874f8ac953e2e35743a18d937391174e07aac80f8685"
+    },
+    {
+      "path": "SOVEREIGN_TRUST_FOUNDATION_V1_CHANGED_FILES_2026_06_19.md",
+      "bytes": 1143,
+      "sha256": "b4c4726b8c3a6548c4beb19461e8de36e715210887a11d2dd0fe5b246186b718"
+    },
+    {
+      "path": "SOVEREIGN_TRUST_FOUNDATION_V1_VERIFICATION_NOTES_2026_06_19.md",
+      "bytes": 1256,
+      "sha256": "a4e045c5c1f8dd1624ac281f37185d5bb9e62227b4c3a4d8e62ae6f18ce257ca"
+    },
+    {
+      "path": "SOVEREIGN_TRUST_FOUNDATION_V1_CHANGELOG_2026_06_19.md",
+      "bytes": 926,
+      "sha256": "3ecd80dc0fee0a45bf57c201f57b87e36c26786d19f2b41a78564f4bd390584e"
+    },
+    {
+      "path": "ERROR_RECORD_SOVEREIGN_TRUST_FOUNDATION_V1_2026_06_19.md",
+      "bytes": 870,
+      "sha256": "b24e263b3f1338ff652baaafbdb5e14d7c1787cfb736579a677727d3e1ab0096"
+    },
+    {
+      "path": "SESSION_HANDOFF_SOVEREIGN_TRUST_FOUNDATION_V1_TO_KB08A_KB09_2026_06_19.md",
+      "bytes": 1755,
+      "sha256": "a6db2d4b605541d1bd4480ebff859167d512cd5af8e14613cec68e6c6dbf0e01"
+    },
+    {
+      "path": "LATEST_BASELINE_FINAL_HANDOFF_2026_06_19.md",
+      "bytes": 611,
+      "sha256": "c3768a7c65a80918fdf1c3aac267b5365d95aa8b6c117a498ad5c9d5dc0d6a71"
+    },
+    {
+      "path": "PALWAKF_PLATFORM_COMPREHENSIVE_GUIDE.md",
+      "bytes": 39636,
+      "sha256": "9ed0ce95246c55d156f71471187cd453cf29ed454082a2ecf327e905d1a28457"
+    }
+  ]
+}

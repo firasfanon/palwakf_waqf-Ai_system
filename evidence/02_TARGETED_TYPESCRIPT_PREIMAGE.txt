@@ -1,0 +1,2 @@
+server/legacyManusProvenance.ts(316,72): error TS2362: The left-hand side of an arithmetic operation must be of type 'any', 'number', 'bigint' or an enum type.
+server/legacyManusProvenance.ts(316,82): error TS2363: The right-hand side of an arithmetic operation must be of type 'any', 'number', 'bigint' or an enum type.

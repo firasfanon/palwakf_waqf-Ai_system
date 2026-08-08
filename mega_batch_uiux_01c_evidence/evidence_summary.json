@@ -1,0 +1,18 @@
+{
+  "batch": "Mega Batch UI/UX 01C",
+  "decision": "MEGA_BATCH_UIUX_01C_SUGGESTED_QUESTIONS_CLICK_RESPONSE_AND_CONTRAST_FIX_APPLIED_BROWSER_RETEST_REQUIRED",
+  "scope": "Assistant-only UI/UX hotfix",
+  "db_changed": false,
+  "governance_changed": false,
+  "production_approved": false,
+  "changed_files": [
+    "client/src/components/SuggestedQuestions.tsx",
+    "client/src/pages/Chat.tsx",
+    "client/src/styles/admin.css"
+  ],
+  "required_browser_retest": [
+    "/knowledge#/chat suggested questions are readable",
+    "clicking suggested questions sends the prompt immediately",
+    "no hash-routing regression"
+  ]
+}

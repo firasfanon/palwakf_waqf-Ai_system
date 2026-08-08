@@ -1,0 +1,1761 @@
+[
+  {
+    "legacy_batch": "knowledge_batch_08_observed_rows",
+    "source_file": "db-query-1765146517934.json",
+    "legacy_table_name": "messages",
+    "legacy_record_key": "330001",
+    "legacy_dedupe_key": "96651a6507c3e8ac",
+    "migration_priority": "P2",
+    "migration_status": "staged",
+    "payload_json": {
+      "payload_kind": "legacy_select_observed_row",
+      "source_query": "SELECT id, conversationId, role, LEFT(content, 100) as preview, createdAt \nFROM messages \nWHERE conversationId IN (SELECT id FROM conversations ORDER BY updatedAt DESC LIMIT 3)\nORDER BY conversationId, createdAt \nLIMIT 20;",
+      "source_file": "db-query-1765146517934.json",
+      "row_index": 1,
+      "legacy_table": "messages",
+      "row": {
+        "id": "330001",
+        "conversationId": "510001",
+        "role": "user",
+        "preview": "ما هو وقف التخصيصات",
+        "createdAt": "2025-12-07 06:41:16"
+      }
+    },
+    "notes": "supplemental select-row evidence extracted in KB08; may be sample/observed row, not necessarily full table dump"
+  },
+  {
+    "legacy_batch": "knowledge_batch_08_observed_rows",
+    "source_file": "db-query-1765146517934.json",
+    "legacy_table_name": "messages",
+    "legacy_record_key": "330002",
+    "legacy_dedupe_key": "464611e757ac2932",
+    "migration_priority": "P2",
+    "migration_status": "staged",
+    "payload_json": {
+      "payload_kind": "legacy_select_observed_row",
+      "source_query": "SELECT id, conversationId, role, LEFT(content, 100) as preview, createdAt \nFROM messages \nWHERE conversationId IN (SELECT id FROM conversations ORDER BY updatedAt DESC LIMIT 3)\nORDER BY conversationId, createdAt \nLIMIT 20;",
+      "source_file": "db-query-1765146517934.json",
+      "row_index": 2,
+      "legacy_table": "messages",
+      "row": {
+        "id": "330002",
+        "conversationId": "510001",
+        "role": "assistant",
+        "preview": "أهلاً بك، بصفتي مساعداً متخصصاً في الأوقاف الإسلامية في فلسطين، سأجيب على سؤالك بناءً على السياق الم",
+        "createdAt": "2025-12-07 06:41:19"
+      }
+    },
+    "notes": "supplemental select-row evidence extracted in KB08; may be sample/observed row, not necessarily full table dump"
+  },
+  {
+    "legacy_batch": "knowledge_batch_08_observed_rows",
+    "source_file": "db-query-1765146517934.json",
+    "legacy_table_name": "messages",
+    "legacy_record_key": "360001",
+    "legacy_dedupe_key": "d430d590069970c7",
+    "migration_priority": "P2",
+    "migration_status": "staged",
+    "payload_json": {
+      "payload_kind": "legacy_select_observed_row",
+      "source_query": "SELECT id, conversationId, role, LEFT(content, 100) as preview, createdAt \nFROM messages \nWHERE conversationId IN (SELECT id FROM conversations ORDER BY updatedAt DESC LIMIT 3)\nORDER BY conversationId, createdAt \nLIMIT 20;",
+      "source_file": "db-query-1765146517934.json",
+      "row_index": 3,
+      "legacy_table": "messages",
+      "row": {
+        "id": "360001",
+        "conversationId": "540001",
+        "role": "user",
+        "preview": "ماهو الوقف ",
+        "createdAt": "2025-12-07 12:40:55"
+      }
+    },
+    "notes": "supplemental select-row evidence extracted in KB08; may be sample/observed row, not necessarily full table dump"
+  },
+  {
+    "legacy_batch": "knowledge_batch_08_observed_rows",
+    "source_file": "db-query-1765146517934.json",
+    "legacy_table_name": "messages",
+    "legacy_record_key": "360002",
+    "legacy_dedupe_key": "25d7165d97c34b2e",
+    "migration_priority": "P2",
+    "migration_status": "staged",
+    "payload_json": {
+      "payload_kind": "legacy_select_observed_row",
+      "source_query": "SELECT id, conversationId, role, LEFT(content, 100) as preview, createdAt \nFROM messages \nWHERE conversationId IN (SELECT id FROM conversations ORDER BY updatedAt DESC LIMIT 3)\nORDER BY conversationId, createdAt \nLIMIT 20;",
+      "source_file": "db-query-1765146517934.json",
+      "row_index": 4,
+      "legacy_table": "messages",
+      "row": {
+        "id": "360002",
+        "conversationId": "540001",
+        "role": "assistant",
+        "preview": "أهلاً بك. بصفتي مساعداً متخصصاً في الأوقاف الإسلامية في فلسطين، سأقدم لك تعريفاً دقيقاً للوقف بناءً ",
+        "createdAt": "2025-12-07 12:41:00"
+      }
+    },
+    "notes": "supplemental select-row evidence extracted in KB08; may be sample/observed row, not necessarily full table dump"
+  },
+  {
+    "legacy_batch": "knowledge_batch_08_observed_rows",
+    "source_file": "db-query-1765146517934.json",
+    "legacy_table_name": "messages",
+    "legacy_record_key": "390001",
+    "legacy_dedupe_key": "b88e4787bccdc447",
+    "migration_priority": "P2",
+    "migration_status": "staged",
+    "payload_json": {
+      "payload_kind": "legacy_select_observed_row",
+      "source_query": "SELECT id, conversationId, role, LEFT(content, 100) as preview, createdAt \nFROM messages \nWHERE conversationId IN (SELECT id FROM conversations ORDER BY updatedAt DESC LIMIT 3)\nORDER BY conversationId, createdAt \nLIMIT 20;",
+      "source_file": "db-query-1765146517934.json",
+      "row_index": 5,
+      "legacy_table": "messages",
+      "row": {
+        "id": "390001",
+        "conversationId": "570001",
+        "role": "user",
+        "preview": "وقف",
+        "createdAt": "2025-12-07 22:19:44"
+      }
+    },
+    "notes": "supplemental select-row evidence extracted in KB08; may be sample/observed row, not necessarily full table dump"
+  },
+  {
+    "legacy_batch": "knowledge_batch_08_observed_rows",
+    "source_file": "db-query-1765146517934.json",
+    "legacy_table_name": "messages",
+    "legacy_record_key": "390002",
+    "legacy_dedupe_key": "7cf94200d900f1ee",
+    "migration_priority": "P2",
+    "migration_status": "staged",
+    "payload_json": {
+      "payload_kind": "legacy_select_observed_row",
+      "source_query": "SELECT id, conversationId, role, LEFT(content, 100) as preview, createdAt \nFROM messages \nWHERE conversationId IN (SELECT id FROM conversations ORDER BY updatedAt DESC LIMIT 3)\nORDER BY conversationId, createdAt \nLIMIT 20;",
+      "source_file": "db-query-1765146517934.json",
+      "row_index": 6,
+      "legacy_table": "messages",
+      "row": {
+        "id": "390002",
+        "conversationId": "570001",
+        "role": "assistant",
+        "preview": "الوقف (الوقف) هو مفهوم إسلامي يعني حبس الأصل وتسبيل المنفعة، وهو من أهم المؤسسات الخيرية في التاريخ ",
+        "createdAt": "2025-12-07 22:19:52"
+      }
+    },
+    "notes": "supplemental select-row evidence extracted in KB08; may be sample/observed row, not necessarily full table dump"
+  },
+  {
+    "legacy_batch": "knowledge_batch_08_observed_rows",
+    "source_file": "db-query-1765660066955.json",
+    "legacy_table_name": "site_settings",
+    "legacy_record_key": "1",
+    "legacy_dedupe_key": "b03fcd1e0e333e3a",
+    "migration_priority": "P2",
+    "migration_status": "staged",
+    "payload_json": {
+      "payload_kind": "legacy_select_observed_row",
+      "source_query": "SELECT menu_items FROM site_settings LIMIT 1;",
+      "source_file": "db-query-1765660066955.json",
+      "row_index": 1,
+      "legacy_table": "site_settings",
+      "row": {
+        "menu_items": "[{\"label\":\"\",\"href\":\"\",\"order\":0}]"
+      }
+    },
+    "notes": "supplemental select-row evidence extracted in KB08; may be sample/observed row, not necessarily full table dump"
+  },
+  {
+    "legacy_batch": "knowledge_batch_08_observed_rows",
+    "source_file": "db-query-1767917131739.json",
+    "legacy_table_name": "fetched_content",
+    "legacy_record_key": "21",
+    "legacy_dedupe_key": "8fd0bf6b37236cfd",
+    "migration_priority": "P1",
+    "migration_status": "staged",
+    "payload_json": {
+      "payload_kind": "legacy_select_observed_row",
+      "source_query": "SELECT id, title, category, relevance_score, status \nFROM fetched_content \nORDER BY id DESC \nLIMIT 5;",
+      "source_file": "db-query-1767917131739.json",
+      "row_index": 1,
+      "legacy_table": "fetched_content",
+      "row": {
+        "id": "21",
+        "title": "ناظر الوقف",
+        "category": "law",
+        "relevance_score": "35",
+        "status": "pending"
+      }
+    },
+    "notes": "supplemental select-row evidence extracted in KB08; may be sample/observed row, not necessarily full table dump"
+  },
+  {
+    "legacy_batch": "knowledge_batch_08_observed_rows",
+    "source_file": "db-query-1767917131739.json",
+    "legacy_table_name": "fetched_content",
+    "legacy_record_key": "20",
+    "legacy_dedupe_key": "56065e861da8ddf2",
+    "migration_priority": "P1",
+    "migration_status": "staged",
+    "payload_json": {
+      "payload_kind": "legacy_select_observed_row",
+      "source_query": "SELECT id, title, category, relevance_score, status \nFROM fetched_content \nORDER BY id DESC \nLIMIT 5;",
+      "source_file": "db-query-1767917131739.json",
+      "row_index": 2,
+      "legacy_table": "fetched_content",
+      "row": {
+        "id": "20",
+        "title": "مجلة الأحكام العدلية",
+        "category": "law",
+        "relevance_score": "25",
+        "status": "pending"
+      }
+    },
+    "notes": "supplemental select-row evidence extracted in KB08; may be sample/observed row, not necessarily full table dump"
+  },
+  {
+    "legacy_batch": "knowledge_batch_08_observed_rows",
+    "source_file": "db-query-1767917131739.json",
+    "legacy_table_name": "fetched_content",
+    "legacy_record_key": "19",
+    "legacy_dedupe_key": "9ed5552f09d9c143",
+    "migration_priority": "P1",
+    "migration_status": "staged",
+    "payload_json": {
+      "payload_kind": "legacy_select_observed_row",
+      "source_query": "SELECT id, title, category, relevance_score, status \nFROM fetched_content \nORDER BY id DESC \nLIMIT 5;",
+      "source_file": "db-query-1767917131739.json",
+      "row_index": 3,
+      "legacy_table": "fetched_content",
+      "row": {
+        "id": "19",
+        "title": "الأوقاف في الدولة العثمانية",
+        "category": "historical",
+        "relevance_score": "25",
+        "status": "pending"
+      }
+    },
+    "notes": "supplemental select-row evidence extracted in KB08; may be sample/observed row, not necessarily full table dump"
+  },
+  {
+    "legacy_batch": "knowledge_batch_08_observed_rows",
+    "source_file": "db-query-1767917131739.json",
+    "legacy_table_name": "fetched_content",
+    "legacy_record_key": "18",
+    "legacy_dedupe_key": "7a1692367207e62c",
+    "migration_priority": "P1",
+    "migration_status": "staged",
+    "payload_json": {
+      "payload_kind": "legacy_select_observed_row",
+      "source_query": "SELECT id, title, category, relevance_score, status \nFROM fetched_content \nORDER BY id DESC \nLIMIT 5;",
+      "source_file": "db-query-1767917131739.json",
+      "row_index": 4,
+      "legacy_table": "fetched_content",
+      "row": {
+        "id": "18",
+        "title": "المجلس الإسلامي الأعلى (فلسطين)",
+        "category": "historical",
+        "relevance_score": "15",
+        "status": "pending"
+      }
+    },
+    "notes": "supplemental select-row evidence extracted in KB08; may be sample/observed row, not necessarily full table dump"
+  },
+  {
+    "legacy_batch": "knowledge_batch_08_observed_rows",
+    "source_file": "db-query-1767917131739.json",
+    "legacy_table_name": "fetched_content",
+    "legacy_record_key": "17",
+    "legacy_dedupe_key": "e9fc65629419fd41",
+    "migration_priority": "P1",
+    "migration_status": "staged",
+    "payload_json": {
+      "payload_kind": "legacy_select_observed_row",
+      "source_query": "SELECT id, title, category, relevance_score, status \nFROM fetched_content \nORDER BY id DESC \nLIMIT 5;",
+      "source_file": "db-query-1767917131739.json",
+      "row_index": 5,
+      "legacy_table": "fetched_content",
+      "row": {
+        "id": "17",
+        "title": "وقف (إسلام)",
+        "category": "law",
+        "relevance_score": "15",
+        "status": "pending"
+      }
+    },
+    "notes": "supplemental select-row evidence extracted in KB08; may be sample/observed row, not necessarily full table dump"
+  },
+  {
+    "legacy_batch": "knowledge_batch_08_observed_rows",
+    "source_file": "db-query-1767917341400.json",
+    "legacy_table_name": "fetched_content",
+    "legacy_record_key": "2",
+    "legacy_dedupe_key": "3bd08bd92795e977",
+    "migration_priority": "P1",
+    "migration_status": "staged",
+    "payload_json": {
+      "payload_kind": "legacy_select_observed_row",
+      "source_query": "SELECT id, title, status, category \nFROM fetched_content \nORDER BY id;",
+      "source_file": "db-query-1767917341400.json",
+      "row_index": 1,
+      "legacy_table": "fetched_content",
+      "row": {
+        "id": "2",
+        "title": "اختبار التصنيف",
+        "status": "processing",
+        "category": "law"
+      }
+    },
+    "notes": "supplemental select-row evidence extracted in KB08; may be sample/observed row, not necessarily full table dump"
+  },
+  {
+    "legacy_batch": "knowledge_batch_08_observed_rows",
+    "source_file": "db-query-1767917341400.json",
+    "legacy_table_name": "fetched_content",
+    "legacy_record_key": "3",
+    "legacy_dedupe_key": "0a937893470422c4",
+    "migration_priority": "P1",
+    "migration_status": "staged",
+    "payload_json": {
+      "payload_kind": "legacy_select_observed_row",
+      "source_query": "SELECT id, title, status, category \nFROM fetched_content \nORDER BY id;",
+      "source_file": "db-query-1767917341400.json",
+      "row_index": 2,
+      "legacy_table": "fetched_content",
+      "row": {
+        "id": "3",
+        "title": "اختبار التصنيف 2",
+        "status": "processing",
+        "category": "jurisprudence"
+      }
+    },
+    "notes": "supplemental select-row evidence extracted in KB08; may be sample/observed row, not necessarily full table dump"
+  },
+  {
+    "legacy_batch": "knowledge_batch_08_observed_rows",
+    "source_file": "db-query-1767917341400.json",
+    "legacy_table_name": "fetched_content",
+    "legacy_record_key": "4",
+    "legacy_dedupe_key": "a23c6dc9460d2b0f",
+    "migration_priority": "P1",
+    "migration_status": "staged",
+    "payload_json": {
+      "payload_kind": "legacy_select_observed_row",
+      "source_query": "SELECT id, title, status, category \nFROM fetched_content \nORDER BY id;",
+      "source_file": "db-query-1767917341400.json",
+      "row_index": 3,
+      "legacy_table": "fetched_content",
+      "row": {
+        "id": "4",
+        "title": "اختبار التصنيف 3",
+        "status": "processing",
+        "category": "administrative"
+      }
+    },
+    "notes": "supplemental select-row evidence extracted in KB08; may be sample/observed row, not necessarily full table dump"
+  },
+  {
+    "legacy_batch": "knowledge_batch_08_observed_rows",
+    "source_file": "db-query-1767917341400.json",
+    "legacy_table_name": "fetched_content",
+    "legacy_record_key": "5",
+    "legacy_dedupe_key": "a9ae34b275721d99",
+    "migration_priority": "P1",
+    "migration_status": "staged",
+    "payload_json": {
+      "payload_kind": "legacy_select_observed_row",
+      "source_query": "SELECT id, title, status, category \nFROM fetched_content \nORDER BY id;",
+      "source_file": "db-query-1767917341400.json",
+      "row_index": 4,
+      "legacy_table": "fetched_content",
+      "row": {
+        "id": "5",
+        "title": "اختبار timestamp",
+        "status": "processing",
+        "category": "historical"
+      }
+    },
+    "notes": "supplemental select-row evidence extracted in KB08; may be sample/observed row, not necessarily full table dump"
+  },
+  {
+    "legacy_batch": "knowledge_batch_08_observed_rows",
+    "source_file": "db-query-1767917341400.json",
+    "legacy_table_name": "fetched_content",
+    "legacy_record_key": "6",
+    "legacy_dedupe_key": "0e857f0e4f1b0f22",
+    "migration_priority": "P1",
+    "migration_status": "staged",
+    "payload_json": {
+      "payload_kind": "legacy_select_observed_row",
+      "source_query": "SELECT id, title, status, category \nFROM fetched_content \nORDER BY id;",
+      "source_file": "db-query-1767917341400.json",
+      "row_index": 5,
+      "legacy_table": "fetched_content",
+      "row": {
+        "id": "6",
+        "title": "اختبار المستخدم",
+        "status": "processing",
+        "category": "reference"
+      }
+    },
+    "notes": "supplemental select-row evidence extracted in KB08; may be sample/observed row, not necessarily full table dump"
+  },
+  {
+    "legacy_batch": "knowledge_batch_08_observed_rows",
+    "source_file": "db-query-1767917341400.json",
+    "legacy_table_name": "fetched_content",
+    "legacy_record_key": "7",
+    "legacy_dedupe_key": "18a1fa8d7cc50856",
+    "migration_priority": "P1",
+    "migration_status": "staged",
+    "payload_json": {
+      "payload_kind": "legacy_select_observed_row",
+      "source_query": "SELECT id, title, status, category \nFROM fetched_content \nORDER BY id;",
+      "source_file": "db-query-1767917341400.json",
+      "row_index": 6,
+      "legacy_table": "fetched_content",
+      "row": {
+        "id": "7",
+        "title": "اختبار التصنيف",
+        "status": "processing",
+        "category": "law"
+      }
+    },
+    "notes": "supplemental select-row evidence extracted in KB08; may be sample/observed row, not necessarily full table dump"
+  },
+  {
+    "legacy_batch": "knowledge_batch_08_observed_rows",
+    "source_file": "db-query-1767917341400.json",
+    "legacy_table_name": "fetched_content",
+    "legacy_record_key": "8",
+    "legacy_dedupe_key": "2ed931bdd1bfc067",
+    "migration_priority": "P1",
+    "migration_status": "staged",
+    "payload_json": {
+      "payload_kind": "legacy_select_observed_row",
+      "source_query": "SELECT id, title, status, category \nFROM fetched_content \nORDER BY id;",
+      "source_file": "db-query-1767917341400.json",
+      "row_index": 7,
+      "legacy_table": "fetched_content",
+      "row": {
+        "id": "8",
+        "title": "اختبار التصنيف 2",
+        "status": "processing",
+        "category": "jurisprudence"
+      }
+    },
+    "notes": "supplemental select-row evidence extracted in KB08; may be sample/observed row, not necessarily full table dump"
+  },
+  {
+    "legacy_batch": "knowledge_batch_08_observed_rows",
+    "source_file": "db-query-1767917341400.json",
+    "legacy_table_name": "fetched_content",
+    "legacy_record_key": "9",
+    "legacy_dedupe_key": "5660ae855db7415c",
+    "migration_priority": "P1",
+    "migration_status": "staged",
+    "payload_json": {
+      "payload_kind": "legacy_select_observed_row",
+      "source_query": "SELECT id, title, status, category \nFROM fetched_content \nORDER BY id;",
+      "source_file": "db-query-1767917341400.json",
+      "row_index": 8,
+      "legacy_table": "fetched_content",
+      "row": {
+        "id": "9",
+        "title": "اختبار التصنيف 3",
+        "status": "processing",
+        "category": "administrative"
+      }
+    },
+    "notes": "supplemental select-row evidence extracted in KB08; may be sample/observed row, not necessarily full table dump"
+  },
+  {
+    "legacy_batch": "knowledge_batch_08_observed_rows",
+    "source_file": "db-query-1767917341400.json",
+    "legacy_table_name": "fetched_content",
+    "legacy_record_key": "10",
+    "legacy_dedupe_key": "a7d8b3c3f3a05864",
+    "migration_priority": "P1",
+    "migration_status": "staged",
+    "payload_json": {
+      "payload_kind": "legacy_select_observed_row",
+      "source_query": "SELECT id, title, status, category \nFROM fetched_content \nORDER BY id;",
+      "source_file": "db-query-1767917341400.json",
+      "row_index": 9,
+      "legacy_table": "fetched_content",
+      "row": {
+        "id": "10",
+        "title": "اختبار timestamp",
+        "status": "processing",
+        "category": "historical"
+      }
+    },
+    "notes": "supplemental select-row evidence extracted in KB08; may be sample/observed row, not necessarily full table dump"
+  },
+  {
+    "legacy_batch": "knowledge_batch_08_observed_rows",
+    "source_file": "db-query-1767917341400.json",
+    "legacy_table_name": "fetched_content",
+    "legacy_record_key": "11",
+    "legacy_dedupe_key": "049f74122d308a86",
+    "migration_priority": "P1",
+    "migration_status": "staged",
+    "payload_json": {
+      "payload_kind": "legacy_select_observed_row",
+      "source_query": "SELECT id, title, status, category \nFROM fetched_content \nORDER BY id;",
+      "source_file": "db-query-1767917341400.json",
+      "row_index": 10,
+      "legacy_table": "fetched_content",
+      "row": {
+        "id": "11",
+        "title": "اختبار المستخدم",
+        "status": "processing",
+        "category": "reference"
+      }
+    },
+    "notes": "supplemental select-row evidence extracted in KB08; may be sample/observed row, not necessarily full table dump"
+  },
+  {
+    "legacy_batch": "knowledge_batch_08_observed_rows",
+    "source_file": "db-query-1767917341400.json",
+    "legacy_table_name": "fetched_content",
+    "legacy_record_key": "12",
+    "legacy_dedupe_key": "a62172bf02d0f1d9",
+    "migration_priority": "P1",
+    "migration_status": "staged",
+    "payload_json": {
+      "payload_kind": "legacy_select_observed_row",
+      "source_query": "SELECT id, title, status, category \nFROM fetched_content \nORDER BY id;",
+      "source_file": "db-query-1767917341400.json",
+      "row_index": 11,
+      "legacy_table": "fetched_content",
+      "row": {
+        "id": "12",
+        "title": "اختبار التصنيف",
+        "status": "processing",
+        "category": "law"
+      }
+    },
+    "notes": "supplemental select-row evidence extracted in KB08; may be sample/observed row, not necessarily full table dump"
+  },
+  {
+    "legacy_batch": "knowledge_batch_08_observed_rows",
+    "source_file": "db-query-1767917341400.json",
+    "legacy_table_name": "fetched_content",
+    "legacy_record_key": "13",
+    "legacy_dedupe_key": "bf85b71a63e3b4c9",
+    "migration_priority": "P1",
+    "migration_status": "staged",
+    "payload_json": {
+      "payload_kind": "legacy_select_observed_row",
+      "source_query": "SELECT id, title, status, category \nFROM fetched_content \nORDER BY id;",
+      "source_file": "db-query-1767917341400.json",
+      "row_index": 12,
+      "legacy_table": "fetched_content",
+      "row": {
+        "id": "13",
+        "title": "اختبار التصنيف 2",
+        "status": "processing",
+        "category": "jurisprudence"
+      }
+    },
+    "notes": "supplemental select-row evidence extracted in KB08; may be sample/observed row, not necessarily full table dump"
+  },
+  {
+    "legacy_batch": "knowledge_batch_08_observed_rows",
+    "source_file": "db-query-1767917341400.json",
+    "legacy_table_name": "fetched_content",
+    "legacy_record_key": "14",
+    "legacy_dedupe_key": "6b969c3e5de179c3",
+    "migration_priority": "P1",
+    "migration_status": "staged",
+    "payload_json": {
+      "payload_kind": "legacy_select_observed_row",
+      "source_query": "SELECT id, title, status, category \nFROM fetched_content \nORDER BY id;",
+      "source_file": "db-query-1767917341400.json",
+      "row_index": 13,
+      "legacy_table": "fetched_content",
+      "row": {
+        "id": "14",
+        "title": "اختبار التصنيف 3",
+        "status": "processing",
+        "category": "administrative"
+      }
+    },
+    "notes": "supplemental select-row evidence extracted in KB08; may be sample/observed row, not necessarily full table dump"
+  },
+  {
+    "legacy_batch": "knowledge_batch_08_observed_rows",
+    "source_file": "db-query-1767917341400.json",
+    "legacy_table_name": "fetched_content",
+    "legacy_record_key": "15",
+    "legacy_dedupe_key": "016d2c71bfe8bd13",
+    "migration_priority": "P1",
+    "migration_status": "staged",
+    "payload_json": {
+      "payload_kind": "legacy_select_observed_row",
+      "source_query": "SELECT id, title, status, category \nFROM fetched_content \nORDER BY id;",
+      "source_file": "db-query-1767917341400.json",
+      "row_index": 14,
+      "legacy_table": "fetched_content",
+      "row": {
+        "id": "15",
+        "title": "اختبار timestamp",
+        "status": "processing",
+        "category": "historical"
+      }
+    },
+    "notes": "supplemental select-row evidence extracted in KB08; may be sample/observed row, not necessarily full table dump"
+  },
+  {
+    "legacy_batch": "knowledge_batch_08_observed_rows",
+    "source_file": "db-query-1767917341400.json",
+    "legacy_table_name": "fetched_content",
+    "legacy_record_key": "16",
+    "legacy_dedupe_key": "795cc04756acbd3f",
+    "migration_priority": "P1",
+    "migration_status": "staged",
+    "payload_json": {
+      "payload_kind": "legacy_select_observed_row",
+      "source_query": "SELECT id, title, status, category \nFROM fetched_content \nORDER BY id;",
+      "source_file": "db-query-1767917341400.json",
+      "row_index": 15,
+      "legacy_table": "fetched_content",
+      "row": {
+        "id": "16",
+        "title": "اختبار المستخدم",
+        "status": "processing",
+        "category": "reference"
+      }
+    },
+    "notes": "supplemental select-row evidence extracted in KB08; may be sample/observed row, not necessarily full table dump"
+  },
+  {
+    "legacy_batch": "knowledge_batch_08_observed_rows",
+    "source_file": "db-query-1767917341400.json",
+    "legacy_table_name": "fetched_content",
+    "legacy_record_key": "17",
+    "legacy_dedupe_key": "47c974b8fd39f407",
+    "migration_priority": "P1",
+    "migration_status": "staged",
+    "payload_json": {
+      "payload_kind": "legacy_select_observed_row",
+      "source_query": "SELECT id, title, status, category \nFROM fetched_content \nORDER BY id;",
+      "source_file": "db-query-1767917341400.json",
+      "row_index": 16,
+      "legacy_table": "fetched_content",
+      "row": {
+        "id": "17",
+        "title": "وقف (إسلام)",
+        "status": "pending",
+        "category": "law"
+      }
+    },
+    "notes": "supplemental select-row evidence extracted in KB08; may be sample/observed row, not necessarily full table dump"
+  },
+  {
+    "legacy_batch": "knowledge_batch_08_observed_rows",
+    "source_file": "db-query-1767917341400.json",
+    "legacy_table_name": "fetched_content",
+    "legacy_record_key": "18",
+    "legacy_dedupe_key": "2fdaefb7e35cafc0",
+    "migration_priority": "P1",
+    "migration_status": "staged",
+    "payload_json": {
+      "payload_kind": "legacy_select_observed_row",
+      "source_query": "SELECT id, title, status, category \nFROM fetched_content \nORDER BY id;",
+      "source_file": "db-query-1767917341400.json",
+      "row_index": 17,
+      "legacy_table": "fetched_content",
+      "row": {
+        "id": "18",
+        "title": "المجلس الإسلامي الأعلى (فلسطين)",
+        "status": "processing",
+        "category": "historical"
+      }
+    },
+    "notes": "supplemental select-row evidence extracted in KB08; may be sample/observed row, not necessarily full table dump"
+  },
+  {
+    "legacy_batch": "knowledge_batch_08_observed_rows",
+    "source_file": "db-query-1767917341400.json",
+    "legacy_table_name": "fetched_content",
+    "legacy_record_key": "19",
+    "legacy_dedupe_key": "9a1e5c1f8d817929",
+    "migration_priority": "P1",
+    "migration_status": "staged",
+    "payload_json": {
+      "payload_kind": "legacy_select_observed_row",
+      "source_query": "SELECT id, title, status, category \nFROM fetched_content \nORDER BY id;",
+      "source_file": "db-query-1767917341400.json",
+      "row_index": 18,
+      "legacy_table": "fetched_content",
+      "row": {
+        "id": "19",
+        "title": "الأوقاف في الدولة العثمانية",
+        "status": "approved",
+        "category": "historical"
+      }
+    },
+    "notes": "supplemental select-row evidence extracted in KB08; may be sample/observed row, not necessarily full table dump"
+  },
+  {
+    "legacy_batch": "knowledge_batch_08_observed_rows",
+    "source_file": "db-query-1767917341400.json",
+    "legacy_table_name": "fetched_content",
+    "legacy_record_key": "20",
+    "legacy_dedupe_key": "504b9f57d0330b4f",
+    "migration_priority": "P1",
+    "migration_status": "staged",
+    "payload_json": {
+      "payload_kind": "legacy_select_observed_row",
+      "source_query": "SELECT id, title, status, category \nFROM fetched_content \nORDER BY id;",
+      "source_file": "db-query-1767917341400.json",
+      "row_index": 19,
+      "legacy_table": "fetched_content",
+      "row": {
+        "id": "20",
+        "title": "مجلة الأحكام العدلية",
+        "status": "pending",
+        "category": "law"
+      }
+    },
+    "notes": "supplemental select-row evidence extracted in KB08; may be sample/observed row, not necessarily full table dump"
+  },
+  {
+    "legacy_batch": "knowledge_batch_08_observed_rows",
+    "source_file": "db-query-1767917341400.json",
+    "legacy_table_name": "fetched_content",
+    "legacy_record_key": "21",
+    "legacy_dedupe_key": "41cc35677901e552",
+    "migration_priority": "P1",
+    "migration_status": "staged",
+    "payload_json": {
+      "payload_kind": "legacy_select_observed_row",
+      "source_query": "SELECT id, title, status, category \nFROM fetched_content \nORDER BY id;",
+      "source_file": "db-query-1767917341400.json",
+      "row_index": 20,
+      "legacy_table": "fetched_content",
+      "row": {
+        "id": "21",
+        "title": "ناظر الوقف",
+        "status": "pending",
+        "category": "law"
+      }
+    },
+    "notes": "supplemental select-row evidence extracted in KB08; may be sample/observed row, not necessarily full table dump"
+  },
+  {
+    "legacy_batch": "knowledge_batch_08_observed_rows",
+    "source_file": "db-query-1767917356953.json",
+    "legacy_table_name": "knowledge_documents",
+    "legacy_record_key": "300001",
+    "legacy_dedupe_key": "a602e9cc568a4f99",
+    "migration_priority": "P1",
+    "migration_status": "staged",
+    "payload_json": {
+      "payload_kind": "legacy_select_observed_row",
+      "source_query": "SELECT id, title, category, source, createdAt \nFROM knowledge_documents \nORDER BY id DESC \nLIMIT 5;",
+      "source_file": "db-query-1767917356953.json",
+      "row_index": 1,
+      "legacy_table": "knowledge_documents",
+      "row": {
+        "id": "300001",
+        "title": "الأوقاف في الدولة العثمانية",
+        "category": "historical",
+        "source": "NULL",
+        "createdAt": "2026-01-09 00:08:31"
+      }
+    },
+    "notes": "supplemental select-row evidence extracted in KB08; may be sample/observed row, not necessarily full table dump"
+  },
+  {
+    "legacy_batch": "knowledge_batch_08_observed_rows",
+    "source_file": "db-query-1767917356953.json",
+    "legacy_table_name": "knowledge_documents",
+    "legacy_record_key": "270004",
+    "legacy_dedupe_key": "1da793c8439b61df",
+    "migration_priority": "P1",
+    "migration_status": "staged",
+    "payload_json": {
+      "payload_kind": "legacy_select_observed_row",
+      "source_query": "SELECT id, title, category, source, createdAt \nFROM knowledge_documents \nORDER BY id DESC \nLIMIT 5;",
+      "source_file": "db-query-1767917356953.json",
+      "row_index": 2,
+      "legacy_table": "knowledge_documents",
+      "row": {
+        "id": "270004",
+        "title": "Minimal Test Document",
+        "category": "reference",
+        "source": "NULL",
+        "createdAt": "2025-12-08 06:38:21"
+      }
+    },
+    "notes": "supplemental select-row evidence extracted in KB08; may be sample/observed row, not necessarily full table dump"
+  },
+  {
+    "legacy_batch": "knowledge_batch_08_observed_rows",
+    "source_file": "db-query-1767917356953.json",
+    "legacy_table_name": "knowledge_documents",
+    "legacy_record_key": "270002",
+    "legacy_dedupe_key": "9b2832eefa6f86f4",
+    "migration_priority": "P1",
+    "migration_status": "staged",
+    "payload_json": {
+      "payload_kind": "legacy_select_observed_row",
+      "source_query": "SELECT id, title, category, source, createdAt \nFROM knowledge_documents \nORDER BY id DESC \nLIMIT 5;",
+      "source_file": "db-query-1767917356953.json",
+      "row_index": 3,
+      "legacy_table": "knowledge_documents",
+      "row": {
+        "id": "270002",
+        "title": "Minimal Test Document",
+        "category": "reference",
+        "source": "NULL",
+        "createdAt": "2025-12-08 06:37:41"
+      }
+    },
+    "notes": "supplemental select-row evidence extracted in KB08; may be sample/observed row, not necessarily full table dump"
+  },
+  {
+    "legacy_batch": "knowledge_batch_08_observed_rows",
+    "source_file": "db-query-1767917356953.json",
+    "legacy_table_name": "knowledge_documents",
+    "legacy_record_key": "240019",
+    "legacy_dedupe_key": "f955eebc480b25ca",
+    "migration_priority": "P1",
+    "migration_status": "staged",
+    "payload_json": {
+      "payload_kind": "legacy_select_observed_row",
+      "source_query": "SELECT id, title, category, source, createdAt \nFROM knowledge_documents \nORDER BY id DESC \nLIMIT 5;",
+      "source_file": "db-query-1767917356953.json",
+      "row_index": 4,
+      "legacy_table": "knowledge_documents",
+      "row": {
+        "id": "240019",
+        "title": "الإشراف المعاصر على العقارات الوقفية",
+        "category": "administrative",
+        "source": "https://www.palestinecabinet.gov.ps/portal/GovService/Details/129",
+        "createdAt": "2025-12-08 06:19:38"
+      }
+    },
+    "notes": "supplemental select-row evidence extracted in KB08; may be sample/observed row, not necessarily full table dump"
+  },
+  {
+    "legacy_batch": "knowledge_batch_08_observed_rows",
+    "source_file": "db-query-1767917356953.json",
+    "legacy_table_name": "knowledge_documents",
+    "legacy_record_key": "240018",
+    "legacy_dedupe_key": "9a677cef1d1e8266",
+    "migration_priority": "P1",
+    "migration_status": "staged",
+    "payload_json": {
+      "payload_kind": "legacy_select_observed_row",
+      "source_query": "SELECT id, title, category, source, createdAt \nFROM knowledge_documents \nORDER BY id DESC \nLIMIT 5;",
+      "source_file": "db-query-1767917356953.json",
+      "row_index": 5,
+      "legacy_table": "knowledge_documents",
+      "row": {
+        "id": "240018",
+        "title": "إدارة الأوقاف في عهد الانتداب البريطاني",
+        "category": "historical",
+        "source": "https://badil.org/publications/al-majdal/issues/items/409.html",
+        "createdAt": "2025-12-08 06:19:38"
+      }
+    },
+    "notes": "supplemental select-row evidence extracted in KB08; may be sample/observed row, not necessarily full table dump"
+  },
+  {
+    "legacy_batch": "knowledge_batch_08_observed_rows",
+    "source_file": "db-query-1767967445194.json",
+    "legacy_table_name": "knowledge_documents",
+    "legacy_record_key": "390018",
+    "legacy_dedupe_key": "180e2e219d52cce1",
+    "migration_priority": "P1",
+    "migration_status": "staged",
+    "payload_json": {
+      "payload_kind": "legacy_select_observed_row",
+      "source_query": "SELECT id, title, category, source FROM knowledge_documents WHERE title LIKE '%العدل والإنصاف%' OR title LIKE '%المغني%' OR title LIKE '%الأم%' OR title LIKE '%المبسوط%' ORDER BY id DESC LIMIT 10",
+      "source_file": "db-query-1767967445194.json",
+      "row_index": 1,
+      "legacy_table": "knowledge_documents",
+      "row": {
+        "id": "390018",
+        "title": "الوقف الإسلامي بين النظرية والتطبيق - حسن عبد الله الأمين - حسن عبد الله الأمين",
+        "category": "jurisprudence",
+        "source": "حسن عبد الله الأمين"
+      }
+    },
+    "notes": "supplemental select-row evidence extracted in KB08; may be sample/observed row, not necessarily full table dump"
+  },
+  {
+    "legacy_batch": "knowledge_batch_08_observed_rows",
+    "source_file": "db-query-1767967445194.json",
+    "legacy_table_name": "knowledge_documents",
+    "legacy_record_key": "390005",
+    "legacy_dedupe_key": "84de36f7815ec72f",
+    "migration_priority": "P1",
+    "migration_status": "staged",
+    "payload_json": {
+      "payload_kind": "legacy_select_observed_row",
+      "source_query": "SELECT id, title, category, source FROM knowledge_documents WHERE title LIKE '%العدل والإنصاف%' OR title LIKE '%المغني%' OR title LIKE '%الأم%' OR title LIKE '%المبسوط%' ORDER BY id DESC LIMIT 10",
+      "source_file": "db-query-1767967445194.json",
+      "row_index": 2,
+      "legacy_table": "knowledge_documents",
+      "row": {
+        "id": "390005",
+        "title": "المبسوط - السرخسي - شمس الأئمة محمد بن أحمد السرخسي",
+        "category": "jurisprudence",
+        "source": "شمس الأئمة محمد بن أحمد السرخسي"
+      }
+    },
+    "notes": "supplemental select-row evidence extracted in KB08; may be sample/observed row, not necessarily full table dump"
+  },
+  {
+    "legacy_batch": "knowledge_batch_08_observed_rows",
+    "source_file": "db-query-1767967445194.json",
+    "legacy_table_name": "knowledge_documents",
+    "legacy_record_key": "390004",
+    "legacy_dedupe_key": "6759d386421f1acc",
+    "migration_priority": "P1",
+    "migration_status": "staged",
+    "payload_json": {
+      "payload_kind": "legacy_select_observed_row",
+      "source_query": "SELECT id, title, category, source FROM knowledge_documents WHERE title LIKE '%العدل والإنصاف%' OR title LIKE '%المغني%' OR title LIKE '%الأم%' OR title LIKE '%المبسوط%' ORDER BY id DESC LIMIT 10",
+      "source_file": "db-query-1767967445194.json",
+      "row_index": 3,
+      "legacy_table": "knowledge_documents",
+      "row": {
+        "id": "390004",
+        "title": "الأم - الإمام الشافعي - محمد بن إدريس الشافعي",
+        "category": "jurisprudence",
+        "source": "محمد بن إدريس الشافعي"
+      }
+    },
+    "notes": "supplemental select-row evidence extracted in KB08; may be sample/observed row, not necessarily full table dump"
+  },
+  {
+    "legacy_batch": "knowledge_batch_08_observed_rows",
+    "source_file": "db-query-1767967445194.json",
+    "legacy_table_name": "knowledge_documents",
+    "legacy_record_key": "390003",
+    "legacy_dedupe_key": "25e358d255d9efe0",
+    "migration_priority": "P1",
+    "migration_status": "staged",
+    "payload_json": {
+      "payload_kind": "legacy_select_observed_row",
+      "source_query": "SELECT id, title, category, source FROM knowledge_documents WHERE title LIKE '%العدل والإنصاف%' OR title LIKE '%المغني%' OR title LIKE '%الأم%' OR title LIKE '%المبسوط%' ORDER BY id DESC LIMIT 10",
+      "source_file": "db-query-1767967445194.json",
+      "row_index": 4,
+      "legacy_table": "knowledge_documents",
+      "row": {
+        "id": "390003",
+        "title": "المغني - ابن قدامة المقدسي - موفق الدين عبد الله بن أحمد بن قدامة المقدسي",
+        "category": "jurisprudence",
+        "source": "موفق الدين عبد الله بن أحمد بن قدامة المقدسي"
+      }
+    },
+    "notes": "supplemental select-row evidence extracted in KB08; may be sample/observed row, not necessarily full table dump"
+  },
+  {
+    "legacy_batch": "knowledge_batch_08_observed_rows",
+    "source_file": "db-query-1767967445194.json",
+    "legacy_table_name": "knowledge_documents",
+    "legacy_record_key": "390002",
+    "legacy_dedupe_key": "952775a59ba1533a",
+    "migration_priority": "P1",
+    "migration_status": "staged",
+    "payload_json": {
+      "payload_kind": "legacy_select_observed_row",
+      "source_query": "SELECT id, title, category, source FROM knowledge_documents WHERE title LIKE '%العدل والإنصاف%' OR title LIKE '%المغني%' OR title LIKE '%الأم%' OR title LIKE '%المبسوط%' ORDER BY id DESC LIMIT 10",
+      "source_file": "db-query-1767967445194.json",
+      "row_index": 5,
+      "legacy_table": "knowledge_documents",
+      "row": {
+        "id": "390002",
+        "title": "قانون العدل والإنصاف للقضاء على مشكلات الأوقاف - محمد قدري باشا",
+        "category": "law",
+        "source": "محمد قدري باشا"
+      }
+    },
+    "notes": "supplemental select-row evidence extracted in KB08; may be sample/observed row, not necessarily full table dump"
+  },
+  {
+    "legacy_batch": "knowledge_batch_08_observed_rows",
+    "source_file": "db-query-1767967445194.json",
+    "legacy_table_name": "knowledge_documents",
+    "legacy_record_key": "390001",
+    "legacy_dedupe_key": "32de78e5fec378e5",
+    "migration_priority": "P1",
+    "migration_status": "staged",
+    "payload_json": {
+      "payload_kind": "legacy_select_observed_row",
+      "source_query": "SELECT id, title, category, source FROM knowledge_documents WHERE title LIKE '%العدل والإنصاف%' OR title LIKE '%المغني%' OR title LIKE '%الأم%' OR title LIKE '%المبسوط%' ORDER BY id DESC LIMIT 10",
+      "source_file": "db-query-1767967445194.json",
+      "row_index": 6,
+      "legacy_table": "knowledge_documents",
+      "row": {
+        "id": "390001",
+        "title": "العدل والإنصاف في معرفة أصول الفقه والاختلاف - أبو يعقوب يوسف بن إبراهيم الوارجلاني",
+        "category": "jurisprudence",
+        "source": "أبو يعقوب يوسف بن إبراهيم الوارجلاني"
+      }
+    },
+    "notes": "supplemental select-row evidence extracted in KB08; may be sample/observed row, not necessarily full table dump"
+  },
+  {
+    "legacy_batch": "knowledge_batch_08_observed_rows",
+    "source_file": "db-query-1767967445194.json",
+    "legacy_table_name": "knowledge_documents",
+    "legacy_record_key": "330055",
+    "legacy_dedupe_key": "f2ba7302e94a605e",
+    "migration_priority": "P1",
+    "migration_status": "staged",
+    "payload_json": {
+      "payload_kind": "legacy_select_observed_row",
+      "source_query": "SELECT id, title, category, source FROM knowledge_documents WHERE title LIKE '%العدل والإنصاف%' OR title LIKE '%المغني%' OR title LIKE '%الأم%' OR title LIKE '%المبسوط%' ORDER BY id DESC LIMIT 10",
+      "source_file": "db-query-1767967445194.json",
+      "row_index": 7,
+      "legacy_table": "knowledge_documents",
+      "row": {
+        "id": "330055",
+        "title": "المبسوط للسرخسي - كتاب الوقف",
+        "category": "jurisprudence",
+        "source": "https://shamela.ws/book/5423/2508"
+      }
+    },
+    "notes": "supplemental select-row evidence extracted in KB08; may be sample/observed row, not necessarily full table dump"
+  },
+  {
+    "legacy_batch": "knowledge_batch_08_observed_rows",
+    "source_file": "db-query-1767967445194.json",
+    "legacy_table_name": "knowledge_documents",
+    "legacy_record_key": "330004",
+    "legacy_dedupe_key": "09dddf32ae6aa032",
+    "migration_priority": "P1",
+    "migration_status": "staged",
+    "payload_json": {
+      "payload_kind": "legacy_select_observed_row",
+      "source_query": "SELECT id, title, category, source FROM knowledge_documents WHERE title LIKE '%العدل والإنصاف%' OR title LIKE '%المغني%' OR title LIKE '%الأم%' OR title LIKE '%المبسوط%' ORDER BY id DESC LIMIT 10",
+      "source_file": "db-query-1767967445194.json",
+      "row_index": 8,
+      "legacy_table": "knowledge_documents",
+      "row": {
+        "id": "330004",
+        "title": "قانون الأراضي العثماني - المادة 12: وقف الأراضي الأميرية",
+        "category": "law",
+        "source": "قانون الأراضي العثماني 1858"
+      }
+    },
+    "notes": "supplemental select-row evidence extracted in KB08; may be sample/observed row, not necessarily full table dump"
+  },
+  {
+    "legacy_batch": "knowledge_batch_08_observed_rows",
+    "source_file": "db-query-1767967445194.json",
+    "legacy_table_name": "knowledge_documents",
+    "legacy_record_key": "330003",
+    "legacy_dedupe_key": "d82a9e5cd85e5890",
+    "migration_priority": "P1",
+    "migration_status": "staged",
+    "payload_json": {
+      "payload_kind": "legacy_select_observed_row",
+      "source_query": "SELECT id, title, category, source FROM knowledge_documents WHERE title LIKE '%العدل والإنصاف%' OR title LIKE '%المغني%' OR title LIKE '%الأم%' OR title LIKE '%المبسوط%' ORDER BY id DESC LIMIT 10",
+      "source_file": "db-query-1767967445194.json",
+      "row_index": 9,
+      "legacy_table": "knowledge_documents",
+      "row": {
+        "id": "330003",
+        "title": "قانون الأراضي العثماني - المادة 3: الأراضي الأميرية",
+        "category": "law",
+        "source": "قانون الأراضي العثماني 1858"
+      }
+    },
+    "notes": "supplemental select-row evidence extracted in KB08; may be sample/observed row, not necessarily full table dump"
+  },
+  {
+    "legacy_batch": "knowledge_batch_08_observed_rows",
+    "source_file": "db-query-1767967445194.json",
+    "legacy_table_name": "knowledge_documents",
+    "legacy_record_key": "240004",
+    "legacy_dedupe_key": "b38a89fa92d2c309",
+    "migration_priority": "P1",
+    "migration_status": "staged",
+    "payload_json": {
+      "payload_kind": "legacy_select_observed_row",
+      "source_query": "SELECT id, title, category, source FROM knowledge_documents WHERE title LIKE '%العدل والإنصاف%' OR title LIKE '%المغني%' OR title LIKE '%الأم%' OR title LIKE '%المبسوط%' ORDER BY id DESC LIMIT 10",
+      "source_file": "db-query-1767967445194.json",
+      "row_index": 10,
+      "legacy_table": "knowledge_documents",
+      "row": {
+        "id": "240004",
+        "title": "المبسوط للسرخسي - كتاب الوقف",
+        "category": "jurisprudence",
+        "source": "https://shamela.ws/book/5423/2508"
+      }
+    },
+    "notes": "supplemental select-row evidence extracted in KB08; may be sample/observed row, not necessarily full table dump"
+  },
+  {
+    "legacy_batch": "knowledge_batch_08_observed_rows",
+    "source_file": "db-query-1767972509854.json",
+    "legacy_table_name": "knowledge_documents",
+    "legacy_record_key": "390044",
+    "legacy_dedupe_key": "b02d787a4abf333d",
+    "migration_priority": "P1",
+    "migration_status": "staged",
+    "payload_json": {
+      "payload_kind": "legacy_select_observed_row",
+      "source_query": "\nSELECT \n  id,\n  title,\n  category,\n  source,\n  LEFT(content, 100) as content_preview,\n  createdAt\nFROM knowledge_documents\nWHERE title LIKE '%خاصكي%' \n   OR title LIKE '%خليل%' \n   OR title LIKE '%أمين%'\n   OR title LIKE '%Ottoman%'\nORDER BY createdAt DESC\nLIMIT 15;\n",
+      "source_file": "db-query-1767972509854.json",
+      "row_index": 1,
+      "legacy_table": "knowledge_documents",
+      "row": {
+        "id": "390044",
+        "title": "Consequences of the Ottoman land law: Agrarian and privatization processes in Palestine, 1858–1918",
+        "category": "reference",
+        "source": "Springer",
+        "content_preview": "## Consequences of the Ottoman land law: Agrarian and privatization processes in Palestine, 1858–191",
+        "createdAt": "2026-01-09 15:28:22"
+      }
+    },
+    "notes": "supplemental select-row evidence extracted in KB08; may be sample/observed row, not necessarily full table dump"
+  },
+  {
+    "legacy_batch": "knowledge_batch_08_observed_rows",
+    "source_file": "db-query-1767972509854.json",
+    "legacy_table_name": "knowledge_documents",
+    "legacy_record_key": "390025",
+    "legacy_dedupe_key": "58cebe5ef79d47f3",
+    "migration_priority": "P1",
+    "migration_status": "staged",
+    "payload_json": {
+      "payload_kind": "legacy_select_observed_row",
+      "source_query": "\nSELECT \n  id,\n  title,\n  category,\n  source,\n  LEFT(content, 100) as content_preview,\n  createdAt\nFROM knowledge_documents\nWHERE title LIKE '%خاصكي%' \n   OR title LIKE '%خليل%' \n   OR title LIKE '%أمين%'\n   OR title LIKE '%Ottoman%'\nORDER BY createdAt DESC\nLIMIT 15;\n",
+      "source_file": "db-query-1767972509854.json",
+      "row_index": 2,
+      "legacy_table": "knowledge_documents",
+      "row": {
+        "id": "390025",
+        "title": "الوقف كأداة لزيادة القوة السياسية وتعزيزها: نموذج وقف خاصكي سلطان في العهد العثماني خلال أواخر القرن الثامن عشر",
+        "category": "reference",
+        "source": "مركز الملك فيصل للبحوث والدراسات الإسلامية، الرياض",
+        "content_preview": "## الوقف كأداة لزيادة القوة السياسية وتعزيزها: نموذج وقف خاصكي سلطان في العهد العثماني خلال أواخر ال",
+        "createdAt": "2026-01-09 15:28:21"
+      }
+    },
+    "notes": "supplemental select-row evidence extracted in KB08; may be sample/observed row, not necessarily full table dump"
+  },
+  {
+    "legacy_batch": "knowledge_batch_08_observed_rows",
+    "source_file": "db-query-1767972509854.json",
+    "legacy_table_name": "knowledge_documents",
+    "legacy_record_key": "390026",
+    "legacy_dedupe_key": "29991243b650358f",
+    "migration_priority": "P1",
+    "migration_status": "staged",
+    "payload_json": {
+      "payload_kind": "legacy_select_observed_row",
+      "source_query": "\nSELECT \n  id,\n  title,\n  category,\n  source,\n  LEFT(content, 100) as content_preview,\n  createdAt\nFROM knowledge_documents\nWHERE title LIKE '%خاصكي%' \n   OR title LIKE '%خليل%' \n   OR title LIKE '%أمين%'\n   OR title LIKE '%Ottoman%'\nORDER BY createdAt DESC\nLIMIT 15;\n",
+      "source_file": "db-query-1767972509854.json",
+      "row_index": 3,
+      "legacy_table": "knowledge_documents",
+      "row": {
+        "id": "390026",
+        "title": "Mamluk and Ottoman Endowment Deeds as a Source for Geographical-Historical Research: The Waqfiyya of Haseki Sultan (1552 CE)",
+        "category": "reference",
+        "source": "eScholarship, University of California",
+        "content_preview": "## Mamluk and Ottoman Endowment Deeds as a Source for Geographical-Historical Research: The Waqfiyya",
+        "createdAt": "2026-01-09 15:28:21"
+      }
+    },
+    "notes": "supplemental select-row evidence extracted in KB08; may be sample/observed row, not necessarily full table dump"
+  },
+  {
+    "legacy_batch": "knowledge_batch_08_observed_rows",
+    "source_file": "db-query-1767972509854.json",
+    "legacy_table_name": "knowledge_documents",
+    "legacy_record_key": "330033",
+    "legacy_dedupe_key": "d66caaf8d698e754",
+    "migration_priority": "P1",
+    "migration_status": "staged",
+    "payload_json": {
+      "payload_kind": "legacy_select_observed_row",
+      "source_query": "\nSELECT \n  id,\n  title,\n  category,\n  source,\n  LEFT(content, 100) as content_preview,\n  createdAt\nFROM knowledge_documents\nWHERE title LIKE '%خاصكي%' \n   OR title LIKE '%خليل%' \n   OR title LIKE '%أمين%'\n   OR title LIKE '%Ottoman%'\nORDER BY createdAt DESC\nLIMIT 15;\n",
+      "source_file": "db-query-1767972509854.json",
+      "row_index": 4,
+      "legacy_table": "knowledge_documents",
+      "row": {
+        "id": "330033",
+        "title": "الحاج أمين الحسيني - رئيس المجلس الإسلامي",
+        "category": "historical",
+        "source": "سيرة الحاج أمين الحسيني",
+        "content_preview": "ترأس الحاج أمين الحسيني المجلس الإسلامي الأعلى وعمل على تطوير الأوقاف وترميم المسجد الأقصى.",
+        "createdAt": "2026-01-09 00:50:52"
+      }
+    },
+    "notes": "supplemental select-row evidence extracted in KB08; may be sample/observed row, not necessarily full table dump"
+  },
+  {
+    "legacy_batch": "knowledge_batch_08_observed_rows",
+    "source_file": "db-query-1767972509854.json",
+    "legacy_table_name": "knowledge_documents",
+    "legacy_record_key": "120025",
+    "legacy_dedupe_key": "aa61eae6d900d24b",
+    "migration_priority": "P1",
+    "migration_status": "staged",
+    "payload_json": {
+      "payload_kind": "legacy_select_observed_row",
+      "source_query": "\nSELECT \n  id,\n  title,\n  category,\n  source,\n  LEFT(content, 100) as content_preview,\n  createdAt\nFROM knowledge_documents\nWHERE title LIKE '%خاصكي%' \n   OR title LIKE '%خليل%' \n   OR title LIKE '%أمين%'\n   OR title LIKE '%Ottoman%'\nORDER BY createdAt DESC\nLIMIT 15;\n",
+      "source_file": "db-query-1767972509854.json",
+      "row_index": 5,
+      "legacy_table": "knowledge_documents",
+      "row": {
+        "id": "120025",
+        "title": "الحاج أمين الحسيني - رئيس المجلس الإسلامي",
+        "category": "historical",
+        "source": "سيرة الحاج أمين الحسيني",
+        "content_preview": "ترأس الحاج أمين الحسيني المجلس الإسلامي الأعلى وعمل على تطوير الأوقاف وترميم المسجد الأقصى.",
+        "createdAt": "2025-12-04 13:37:35"
+      }
+    },
+    "notes": "supplemental select-row evidence extracted in KB08; may be sample/observed row, not necessarily full table dump"
+  },
+  {
+    "legacy_batch": "knowledge_batch_08_observed_rows",
+    "source_file": "db-query-1772747591146.json",
+    "legacy_table_name": "knowledge_sources",
+    "legacy_record_key": "1",
+    "legacy_dedupe_key": "56e117e33d85ff2a",
+    "migration_priority": "P1",
+    "migration_status": "staged",
+    "payload_json": {
+      "payload_kind": "legacy_select_observed_row",
+      "source_query": "SELECT id, name, type, is_active, config FROM knowledge_sources LIMIT 20;",
+      "source_file": "db-query-1772747591146.json",
+      "row_index": 1,
+      "legacy_table": "knowledge_sources",
+      "row": {
+        "id": "1",
+        "name": "مصدر اختباري",
+        "type": "api",
+        "is_active": "1",
+        "config": "NULL"
+      }
+    },
+    "notes": "supplemental select-row evidence extracted in KB08; may be sample/observed row, not necessarily full table dump"
+  },
+  {
+    "legacy_batch": "knowledge_batch_08_observed_rows",
+    "source_file": "db-query-1772747591146.json",
+    "legacy_table_name": "knowledge_sources",
+    "legacy_record_key": "2",
+    "legacy_dedupe_key": "28b7ddbc0588b644",
+    "migration_priority": "P1",
+    "migration_status": "staged",
+    "payload_json": {
+      "payload_kind": "legacy_select_observed_row",
+      "source_query": "SELECT id, name, type, is_active, config FROM knowledge_sources LIMIT 20;",
+      "source_file": "db-query-1772747591146.json",
+      "row_index": 2,
+      "legacy_table": "knowledge_sources",
+      "row": {
+        "id": "2",
+        "name": "مصدر اختباري",
+        "type": "api",
+        "is_active": "1",
+        "config": "NULL"
+      }
+    },
+    "notes": "supplemental select-row evidence extracted in KB08; may be sample/observed row, not necessarily full table dump"
+  },
+  {
+    "legacy_batch": "knowledge_batch_08_observed_rows",
+    "source_file": "db-query-1772747591146.json",
+    "legacy_table_name": "knowledge_sources",
+    "legacy_record_key": "3",
+    "legacy_dedupe_key": "99917b735000fbba",
+    "migration_priority": "P1",
+    "migration_status": "staged",
+    "payload_json": {
+      "payload_kind": "legacy_select_observed_row",
+      "source_query": "SELECT id, name, type, is_active, config FROM knowledge_sources LIMIT 20;",
+      "source_file": "db-query-1772747591146.json",
+      "row_index": 3,
+      "legacy_table": "knowledge_sources",
+      "row": {
+        "id": "3",
+        "name": "مصدر اختباري",
+        "type": "api",
+        "is_active": "1",
+        "config": "NULL"
+      }
+    },
+    "notes": "supplemental select-row evidence extracted in KB08; may be sample/observed row, not necessarily full table dump"
+  },
+  {
+    "legacy_batch": "knowledge_batch_08_observed_rows",
+    "source_file": "db-query-1772747591146.json",
+    "legacy_table_name": "knowledge_sources",
+    "legacy_record_key": "4",
+    "legacy_dedupe_key": "3251f4268a1a15fd",
+    "migration_priority": "P1",
+    "migration_status": "staged",
+    "payload_json": {
+      "payload_kind": "legacy_select_observed_row",
+      "source_query": "SELECT id, name, type, is_active, config FROM knowledge_sources LIMIT 20;",
+      "source_file": "db-query-1772747591146.json",
+      "row_index": 4,
+      "legacy_table": "knowledge_sources",
+      "row": {
+        "id": "4",
+        "name": "ويكيبيديا العربية",
+        "type": "wikipedia",
+        "is_active": "1",
+        "config": "{\"api\":\"https://ar.wikipedia.org/w/api.php\"}"
+      }
+    },
+    "notes": "supplemental select-row evidence extracted in KB08; may be sample/observed row, not necessarily full table dump"
+  },
+  {
+    "legacy_batch": "knowledge_batch_08_observed_rows",
+    "source_file": "db-query-1772747591146.json",
+    "legacy_table_name": "knowledge_sources",
+    "legacy_record_key": "60001",
+    "legacy_dedupe_key": "f6a73669753b085a",
+    "migration_priority": "P1",
+    "migration_status": "staged",
+    "payload_json": {
+      "payload_kind": "legacy_select_observed_row",
+      "source_query": "SELECT id, name, type, is_active, config FROM knowledge_sources LIMIT 20;",
+      "source_file": "db-query-1772747591146.json",
+      "row_index": 5,
+      "legacy_table": "knowledge_sources",
+      "row": {
+        "id": "60001",
+        "name": "Stats Test Wikipedia",
+        "type": "wikipedia",
+        "is_active": "1",
+        "config": "NULL"
+      }
+    },
+    "notes": "supplemental select-row evidence extracted in KB08; may be sample/observed row, not necessarily full table dump"
+  },
+  {
+    "legacy_batch": "knowledge_batch_08_observed_rows",
+    "source_file": "db-query-1772747591146.json",
+    "legacy_table_name": "knowledge_sources",
+    "legacy_record_key": "60002",
+    "legacy_dedupe_key": "bde97dbc7195d98f",
+    "migration_priority": "P1",
+    "migration_status": "staged",
+    "payload_json": {
+      "payload_kind": "legacy_select_observed_row",
+      "source_query": "SELECT id, name, type, is_active, config FROM knowledge_sources LIMIT 20;",
+      "source_file": "db-query-1772747591146.json",
+      "row_index": 6,
+      "legacy_table": "knowledge_sources",
+      "row": {
+        "id": "60002",
+        "name": "Stats Test RSS",
+        "type": "rss",
+        "is_active": "1",
+        "config": "NULL"
+      }
+    },
+    "notes": "supplemental select-row evidence extracted in KB08; may be sample/observed row, not necessarily full table dump"
+  },
+  {
+    "legacy_batch": "knowledge_batch_08_observed_rows",
+    "source_file": "db-query-1772747591146.json",
+    "legacy_table_name": "knowledge_sources",
+    "legacy_record_key": "60003",
+    "legacy_dedupe_key": "47c92c085a4bea45",
+    "migration_priority": "P1",
+    "migration_status": "staged",
+    "payload_json": {
+      "payload_kind": "legacy_select_observed_row",
+      "source_query": "SELECT id, name, type, is_active, config FROM knowledge_sources LIMIT 20;",
+      "source_file": "db-query-1772747591146.json",
+      "row_index": 7,
+      "legacy_table": "knowledge_sources",
+      "row": {
+        "id": "60003",
+        "name": "Stats Test API",
+        "type": "api",
+        "is_active": "1",
+        "config": "NULL"
+      }
+    },
+    "notes": "supplemental select-row evidence extracted in KB08; may be sample/observed row, not necessarily full table dump"
+  },
+  {
+    "legacy_batch": "knowledge_batch_08_observed_rows",
+    "source_file": "db-query-1772747591146.json",
+    "legacy_table_name": "knowledge_sources",
+    "legacy_record_key": "90001",
+    "legacy_dedupe_key": "d1c73e10ebcca0bf",
+    "migration_priority": "P1",
+    "migration_status": "staged",
+    "payload_json": {
+      "payload_kind": "legacy_select_observed_row",
+      "source_query": "SELECT id, name, type, is_active, config FROM knowledge_sources LIMIT 20;",
+      "source_file": "db-query-1772747591146.json",
+      "row_index": 8,
+      "legacy_table": "knowledge_sources",
+      "row": {
+        "id": "90001",
+        "name": "Pilot Scraper",
+        "type": "scraper",
+        "is_active": "1",
+        "config": "{\"allowedDomains\": [\"example.com\"], \"respectRobots\": true, \"rateLimitMs\": 1000, \"maxPages\": 1, \"urls\": [\"https://example.com/\"]}"
+      }
+    },
+    "notes": "supplemental select-row evidence extracted in KB08; may be sample/observed row, not necessarily full table dump"
+  },
+  {
+    "legacy_batch": "knowledge_batch_08_observed_rows",
+    "source_file": "db-query-1772747596431.json",
+    "legacy_table_name": "knowledge_sources",
+    "legacy_record_key": "1",
+    "legacy_dedupe_key": "56e117e33d85ff2a",
+    "migration_priority": "P1",
+    "migration_status": "staged",
+    "payload_json": {
+      "payload_kind": "legacy_select_observed_row",
+      "source_query": "SELECT id, name, type, is_active, config FROM knowledge_sources;",
+      "source_file": "db-query-1772747596431.json",
+      "row_index": 1,
+      "legacy_table": "knowledge_sources",
+      "row": {
+        "id": "1",
+        "name": "مصدر اختباري",
+        "type": "api",
+        "is_active": "1",
+        "config": "NULL"
+      }
+    },
+    "notes": "supplemental select-row evidence extracted in KB08; may be sample/observed row, not necessarily full table dump"
+  },
+  {
+    "legacy_batch": "knowledge_batch_08_observed_rows",
+    "source_file": "db-query-1772747596431.json",
+    "legacy_table_name": "knowledge_sources",
+    "legacy_record_key": "2",
+    "legacy_dedupe_key": "28b7ddbc0588b644",
+    "migration_priority": "P1",
+    "migration_status": "staged",
+    "payload_json": {
+      "payload_kind": "legacy_select_observed_row",
+      "source_query": "SELECT id, name, type, is_active, config FROM knowledge_sources;",
+      "source_file": "db-query-1772747596431.json",
+      "row_index": 2,
+      "legacy_table": "knowledge_sources",
+      "row": {
+        "id": "2",
+        "name": "مصدر اختباري",
+        "type": "api",
+        "is_active": "1",
+        "config": "NULL"
+      }
+    },
+    "notes": "supplemental select-row evidence extracted in KB08; may be sample/observed row, not necessarily full table dump"
+  },
+  {
+    "legacy_batch": "knowledge_batch_08_observed_rows",
+    "source_file": "db-query-1772747596431.json",
+    "legacy_table_name": "knowledge_sources",
+    "legacy_record_key": "3",
+    "legacy_dedupe_key": "99917b735000fbba",
+    "migration_priority": "P1",
+    "migration_status": "staged",
+    "payload_json": {
+      "payload_kind": "legacy_select_observed_row",
+      "source_query": "SELECT id, name, type, is_active, config FROM knowledge_sources;",
+      "source_file": "db-query-1772747596431.json",
+      "row_index": 3,
+      "legacy_table": "knowledge_sources",
+      "row": {
+        "id": "3",
+        "name": "مصدر اختباري",
+        "type": "api",
+        "is_active": "1",
+        "config": "NULL"
+      }
+    },
+    "notes": "supplemental select-row evidence extracted in KB08; may be sample/observed row, not necessarily full table dump"
+  },
+  {
+    "legacy_batch": "knowledge_batch_08_observed_rows",
+    "source_file": "db-query-1772747596431.json",
+    "legacy_table_name": "knowledge_sources",
+    "legacy_record_key": "4",
+    "legacy_dedupe_key": "3251f4268a1a15fd",
+    "migration_priority": "P1",
+    "migration_status": "staged",
+    "payload_json": {
+      "payload_kind": "legacy_select_observed_row",
+      "source_query": "SELECT id, name, type, is_active, config FROM knowledge_sources;",
+      "source_file": "db-query-1772747596431.json",
+      "row_index": 4,
+      "legacy_table": "knowledge_sources",
+      "row": {
+        "id": "4",
+        "name": "ويكيبيديا العربية",
+        "type": "wikipedia",
+        "is_active": "1",
+        "config": "{\"api\":\"https://ar.wikipedia.org/w/api.php\"}"
+      }
+    },
+    "notes": "supplemental select-row evidence extracted in KB08; may be sample/observed row, not necessarily full table dump"
+  },
+  {
+    "legacy_batch": "knowledge_batch_08_observed_rows",
+    "source_file": "db-query-1772747596431.json",
+    "legacy_table_name": "knowledge_sources",
+    "legacy_record_key": "60001",
+    "legacy_dedupe_key": "f6a73669753b085a",
+    "migration_priority": "P1",
+    "migration_status": "staged",
+    "payload_json": {
+      "payload_kind": "legacy_select_observed_row",
+      "source_query": "SELECT id, name, type, is_active, config FROM knowledge_sources;",
+      "source_file": "db-query-1772747596431.json",
+      "row_index": 5,
+      "legacy_table": "knowledge_sources",
+      "row": {
+        "id": "60001",
+        "name": "Stats Test Wikipedia",
+        "type": "wikipedia",
+        "is_active": "1",
+        "config": "NULL"
+      }
+    },
+    "notes": "supplemental select-row evidence extracted in KB08; may be sample/observed row, not necessarily full table dump"
+  },
+  {
+    "legacy_batch": "knowledge_batch_08_observed_rows",
+    "source_file": "db-query-1772747596431.json",
+    "legacy_table_name": "knowledge_sources",
+    "legacy_record_key": "60002",
+    "legacy_dedupe_key": "bde97dbc7195d98f",
+    "migration_priority": "P1",
+    "migration_status": "staged",
+    "payload_json": {
+      "payload_kind": "legacy_select_observed_row",
+      "source_query": "SELECT id, name, type, is_active, config FROM knowledge_sources;",
+      "source_file": "db-query-1772747596431.json",
+      "row_index": 6,
+      "legacy_table": "knowledge_sources",
+      "row": {
+        "id": "60002",
+        "name": "Stats Test RSS",
+        "type": "rss",
+        "is_active": "1",
+        "config": "NULL"
+      }
+    },
+    "notes": "supplemental select-row evidence extracted in KB08; may be sample/observed row, not necessarily full table dump"
+  },
+  {
+    "legacy_batch": "knowledge_batch_08_observed_rows",
+    "source_file": "db-query-1772747596431.json",
+    "legacy_table_name": "knowledge_sources",
+    "legacy_record_key": "60003",
+    "legacy_dedupe_key": "47c92c085a4bea45",
+    "migration_priority": "P1",
+    "migration_status": "staged",
+    "payload_json": {
+      "payload_kind": "legacy_select_observed_row",
+      "source_query": "SELECT id, name, type, is_active, config FROM knowledge_sources;",
+      "source_file": "db-query-1772747596431.json",
+      "row_index": 7,
+      "legacy_table": "knowledge_sources",
+      "row": {
+        "id": "60003",
+        "name": "Stats Test API",
+        "type": "api",
+        "is_active": "1",
+        "config": "NULL"
+      }
+    },
+    "notes": "supplemental select-row evidence extracted in KB08; may be sample/observed row, not necessarily full table dump"
+  },
+  {
+    "legacy_batch": "knowledge_batch_08_observed_rows",
+    "source_file": "db-query-1772747596431.json",
+    "legacy_table_name": "knowledge_sources",
+    "legacy_record_key": "90001",
+    "legacy_dedupe_key": "d1c73e10ebcca0bf",
+    "migration_priority": "P1",
+    "migration_status": "staged",
+    "payload_json": {
+      "payload_kind": "legacy_select_observed_row",
+      "source_query": "SELECT id, name, type, is_active, config FROM knowledge_sources;",
+      "source_file": "db-query-1772747596431.json",
+      "row_index": 8,
+      "legacy_table": "knowledge_sources",
+      "row": {
+        "id": "90001",
+        "name": "Pilot Scraper",
+        "type": "scraper",
+        "is_active": "1",
+        "config": "{\"allowedDomains\": [\"example.com\"], \"respectRobots\": true, \"rateLimitMs\": 1000, \"maxPages\": 1, \"urls\": [\"https://example.com/\"]}"
+      }
+    },
+    "notes": "supplemental select-row evidence extracted in KB08; may be sample/observed row, not necessarily full table dump"
+  },
+  {
+    "legacy_batch": "knowledge_batch_08_observed_rows",
+    "source_file": "db-query-1772748249783.json",
+    "legacy_table_name": "fetch_logs",
+    "legacy_record_key": "120002",
+    "legacy_dedupe_key": "27cc50e68c04f29b",
+    "migration_priority": "P1",
+    "migration_status": "staged",
+    "payload_json": {
+      "payload_kind": "legacy_select_observed_row",
+      "source_query": "SELECT id, source_id, status, items_fetched, errors, started_at, completed_at FROM fetch_logs ORDER BY started_at DESC LIMIT 10;",
+      "source_file": "db-query-1772748249783.json",
+      "row_index": 1,
+      "legacy_table": "fetch_logs",
+      "row": {
+        "id": "120002",
+        "source_id": "60002",
+        "status": "success",
+        "items_fetched": "0",
+        "errors": "",
+        "started_at": "2026-02-24 21:16:53",
+        "completed_at": "2026-02-24 21:16:54"
+      }
+    },
+    "notes": "supplemental select-row evidence extracted in KB08; may be sample/observed row, not necessarily full table dump"
+  },
+  {
+    "legacy_batch": "knowledge_batch_08_observed_rows",
+    "source_file": "db-query-1772748249783.json",
+    "legacy_table_name": "fetch_logs",
+    "legacy_record_key": "120003",
+    "legacy_dedupe_key": "efc0c3cf3acff4b1",
+    "migration_priority": "P1",
+    "migration_status": "staged",
+    "payload_json": {
+      "payload_kind": "legacy_select_observed_row",
+      "source_query": "SELECT id, source_id, status, items_fetched, errors, started_at, completed_at FROM fetch_logs ORDER BY started_at DESC LIMIT 10;",
+      "source_file": "db-query-1772748249783.json",
+      "row_index": 2,
+      "legacy_table": "fetch_logs",
+      "row": {
+        "id": "120003",
+        "source_id": "4",
+        "status": "success",
+        "items_fetched": "4",
+        "errors": "",
+        "started_at": "2026-02-24 21:16:53",
+        "completed_at": "2026-02-24 21:16:58"
+      }
+    },
+    "notes": "supplemental select-row evidence extracted in KB08; may be sample/observed row, not necessarily full table dump"
+  },
+  {
+    "legacy_batch": "knowledge_batch_08_observed_rows",
+    "source_file": "db-query-1772748249783.json",
+    "legacy_table_name": "fetch_logs",
+    "legacy_record_key": "120001",
+    "legacy_dedupe_key": "a034b1f37e4e5aec",
+    "migration_priority": "P1",
+    "migration_status": "staged",
+    "payload_json": {
+      "payload_kind": "legacy_select_observed_row",
+      "source_query": "SELECT id, source_id, status, items_fetched, errors, started_at, completed_at FROM fetch_logs ORDER BY started_at DESC LIMIT 10;",
+      "source_file": "db-query-1772748249783.json",
+      "row_index": 3,
+      "legacy_table": "fetch_logs",
+      "row": {
+        "id": "120001",
+        "source_id": "60001",
+        "status": "success",
+        "items_fetched": "4",
+        "errors": "",
+        "started_at": "2026-02-24 21:16:47",
+        "completed_at": "2026-02-24 21:16:54"
+      }
+    },
+    "notes": "supplemental select-row evidence extracted in KB08; may be sample/observed row, not necessarily full table dump"
+  },
+  {
+    "legacy_batch": "knowledge_batch_08_observed_rows",
+    "source_file": "db-query-1772748249783.json",
+    "legacy_table_name": "fetch_logs",
+    "legacy_record_key": "60001",
+    "legacy_dedupe_key": "964cd4f28903e575",
+    "migration_priority": "P1",
+    "migration_status": "staged",
+    "payload_json": {
+      "payload_kind": "legacy_select_observed_row",
+      "source_query": "SELECT id, source_id, status, items_fetched, errors, started_at, completed_at FROM fetch_logs ORDER BY started_at DESC LIMIT 10;",
+      "source_file": "db-query-1772748249783.json",
+      "row_index": 4,
+      "legacy_table": "fetch_logs",
+      "row": {
+        "id": "60001",
+        "source_id": "60001",
+        "status": "success",
+        "items_fetched": "5",
+        "errors": "",
+        "started_at": "2026-01-16 22:00:56",
+        "completed_at": "2026-01-16 17:01:03"
+      }
+    },
+    "notes": "supplemental select-row evidence extracted in KB08; may be sample/observed row, not necessarily full table dump"
+  },
+  {
+    "legacy_batch": "knowledge_batch_08_observed_rows",
+    "source_file": "db-query-1772748249783.json",
+    "legacy_table_name": "fetch_logs",
+    "legacy_record_key": "30001",
+    "legacy_dedupe_key": "bd9761a7ef0d2390",
+    "migration_priority": "P1",
+    "migration_status": "staged",
+    "payload_json": {
+      "payload_kind": "legacy_select_observed_row",
+      "source_query": "SELECT id, source_id, status, items_fetched, errors, started_at, completed_at FROM fetch_logs ORDER BY started_at DESC LIMIT 10;",
+      "source_file": "db-query-1772748249783.json",
+      "row_index": 5,
+      "legacy_table": "fetch_logs",
+      "row": {
+        "id": "30001",
+        "source_id": "4",
+        "status": "running",
+        "items_fetched": "0",
+        "errors": "NULL",
+        "started_at": "2026-01-13 21:45:56",
+        "completed_at": "NULL"
+      }
+    },
+    "notes": "supplemental select-row evidence extracted in KB08; may be sample/observed row, not necessarily full table dump"
+  },
+  {
+    "legacy_batch": "knowledge_batch_08_observed_rows",
+    "source_file": "db-query-1772748249783.json",
+    "legacy_table_name": "fetch_logs",
+    "legacy_record_key": "1",
+    "legacy_dedupe_key": "a623e04e1c436bc7",
+    "migration_priority": "P1",
+    "migration_status": "staged",
+    "payload_json": {
+      "payload_kind": "legacy_select_observed_row",
+      "source_query": "SELECT id, source_id, status, items_fetched, errors, started_at, completed_at FROM fetch_logs ORDER BY started_at DESC LIMIT 10;",
+      "source_file": "db-query-1772748249783.json",
+      "row_index": 6,
+      "legacy_table": "fetch_logs",
+      "row": {
+        "id": "1",
+        "source_id": "4",
+        "status": "success",
+        "items_fetched": "5",
+        "errors": "NULL",
+        "started_at": "2026-01-09 00:05:23",
+        "completed_at": "2026-01-09 00:05:23"
+      }
+    },
+    "notes": "supplemental select-row evidence extracted in KB08; may be sample/observed row, not necessarily full table dump"
+  }
+]

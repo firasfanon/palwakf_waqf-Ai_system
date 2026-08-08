@@ -1,0 +1,49 @@
+{
+  "batch": "Knowledge Batch 04 — Review Queue Import Plan + Human Approval Matrix",
+  "date": "2026-06-18",
+  "source_baseline": "waqf_ai_model_hybrid_llm_admin_v44_knowledge_batch_03_old_db_reference_intake_2026_06_18.zip",
+  "source_register": "knowledge_batch_03_old_db_extracted/old_db_knowledge_register_extracted_sanitized.csv",
+  "total_review_queue_candidates": 138,
+  "by_review_bucket": {
+    "HOLD_EXCLUDED_DO_NOT_IMPORT": 2,
+    "P2_MINISTRY_ADMINISTRATIVE_REVIEW": 14,
+    "P1_LEGAL_PRIMARY_REFERENCE_REVIEW": 35,
+    "P2_OFFICIAL_REFERENCE_REVIEW": 4,
+    "P2_FIQH_AUTHORITY_REVIEW": 2,
+    "P4_TRIAGE_REQUIRED": 58,
+    "P4_PUBLIC_WEB_TRIAGE_REQUIRED": 1,
+    "P3_HISTORICAL_SUPPORTING_REVIEW": 5,
+    "P3_SUPPORTING_REFERENCE_REVIEW": 17
+  },
+  "by_planned_import_stage": {
+    "hold_no_import": 2,
+    "stage_02_reference_documents_in_review_after_p1": 20,
+    "stage_01_reference_documents_in_review": 35,
+    "stage_04_triage_only_no_import": 59,
+    "stage_03_reference_documents_in_review_supporting_only": 22
+  },
+  "by_domain_scope": {
+    "other": 1,
+    "public_info": 9,
+    "historical": 31,
+    "administrative": 12,
+    "fiqh": 42,
+    "waqf_law": 43
+  },
+  "by_target_authority_level_if_approved": {
+    "unverified": 61,
+    "semi_official": 14,
+    "official": 41,
+    "reference": 22
+  },
+  "blocking_flags": {
+    "placeholder_source": 1,
+    "non_authoritative_or_test_record": 2,
+    "missing_source": 40,
+    "needs_reclassification_before_import": 59
+  },
+  "supabase_dml_status": "not_applied",
+  "chat_eligibility_default": false,
+  "production_status": "not_approved",
+  "decision": "KNOWLEDGE_BATCH_04_REVIEW_QUEUE_IMPORT_PLAN_AND_HUMAN_APPROVAL_MATRIX_PREPARED_NO_IMPORT_APPLIED"
+}

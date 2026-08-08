@@ -1,0 +1,156 @@
+/* =========================================================
+   PalWakf Admin Identity (STRICT)
+   Applies ONLY under body.admin-scope
+   ========================================================= */
+
+body.admin-scope {
+  background: radial-gradient(900px 500px at 20% 10%, rgba(31,90,166,0.30), transparent 60%),
+              radial-gradient(700px 500px at 90% 30%, rgba(212,175,55,0.22), transparent 55%),
+              radial-gradient(600px 450px at 50% 110%, rgba(178,34,34,0.18), transparent 60%),
+              #0B1220 !important;
+  min-height: 100vh;
+}
+
+/* CRITICAL:
+   index.css forces background on html/body/#root with !important.
+   Make #root transparent in admin so the admin gradient shows.
+*/
+body.admin-scope #root{
+  background: transparent !important;
+}
+
+/* Force admin content surfaces (no more white backgrounds). */
+body.admin-scope .admin-layout,
+body.admin-scope main,
+body.admin-scope .admin-content {
+  background: transparent !important;
+}
+
+/* Cards / panels */
+body.admin-scope .card,
+body.admin-scope .admin-card,
+body.admin-scope .admin-panel,
+body.admin-scope .admin-surface,
+body.admin-scope [data-admin-card="true"] {
+  background: rgba(17, 24, 39, 0.92) !important; /* #111827 */
+  border: 1px solid rgba(255,255,255,0.10) !important;
+}
+
+/* Sidebar background + borders */
+body.admin-scope .admin-sidebar {
+  background: linear-gradient(180deg, rgba(15,26,46,0.96), rgba(13,23,48,0.94)) !important;
+  border-left: 1px solid rgba(255,255,255,0.10) !important;
+}
+
+/* Sidebar path strip */
+.admin-sidebar-path{
+  padding: 10px 12px;
+  margin: 10px 10px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(0,0,0,0.22);
+  display:flex;
+  align-items:center;
+  gap: 8px;
+}
+.admin-sidebar-path-label{
+  font-size: 12px;
+  color: rgba(255,255,255,0.70);
+}
+.admin-sidebar-path-value{
+  font-size: 12px;
+  color: rgba(255,255,255,0.90);
+  overflow:hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Nav items: fix "disappear on hover" by enforcing readable colors */
+.admin-nav-item{
+  border: 1px solid transparent;
+  background: rgba(0,0,0,0.18);
+  color: rgba(255,255,255,0.92);
+  border-radius: 14px;
+  padding: 10px 10px;
+  transition: 150ms ease;
+}
+.admin-nav-item:hover{
+  border-color: rgba(212,175,55,0.25);
+  background: rgba(212,175,55,0.10);
+  color: rgba(255,255,255,0.95);
+}
+.admin-nav-item.active{
+  border-color: rgba(31,90,166,0.45);
+  background: rgba(31,90,166,0.18);
+}
+
+.admin-nav-item.disabled{
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+.admin-nav-item.disabled:hover{
+  border-color: rgba(178,34,34,0.30);
+  background: rgba(178,34,34,0.12);
+}
+
+.admin-soon-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  margin-inline-start: 8px;
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid rgba(178,34,34,0.35);
+  background: rgba(178,34,34,0.16);
+  color: rgba(255,255,255,0.92);
+}
+
+.admin-nav-meta{
+  margin-top: 2px;
+  font-size: 11px;
+  color: rgba(255,255,255,0.65);
+  direction: ltr;
+  text-align: right;
+  overflow:hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Keep icons visible */
+.admin-nav-icon{
+  color: rgba(255,255,255,0.85);
+}
+
+/* Theme toggle should actually show effect */
+html.dark body.admin-scope{
+  background: radial-gradient(900px 500px at 20% 10%, rgba(31,90,166,0.35), transparent 60%),
+              radial-gradient(700px 500px at 90% 30%, rgba(212,175,55,0.25), transparent 55%),
+              radial-gradient(600px 450px at 50% 110%, rgba(178,34,34,0.20), transparent 60%),
+              #0B1220 !important;
+}
+html:not(.dark) body.admin-scope{
+  background: radial-gradient(900px 500px at 20% 10%, rgba(31,90,166,0.14), transparent 60%),
+              radial-gradient(700px 500px at 90% 30%, rgba(212,175,55,0.10), transparent 55%),
+              radial-gradient(600px 450px at 50% 110%, rgba(178,34,34,0.08), transparent 60%),
+              #F7FAFF !important;
+}
+html:not(.dark) body.admin-scope .admin-sidebar{
+  background: linear-gradient(180deg, rgba(15,26,46,0.06), rgba(13,23,48,0.05)) !important;
+  border-left: 1px solid rgba(15,26,46,0.12) !important;
+}
+html:not(.dark) body.admin-scope .admin-nav-item{
+  background: rgba(255,255,255,0.85);
+  color: rgba(15,26,46,0.92);
+  border: 1px solid rgba(15,26,46,0.10);
+}
+html:not(.dark) body.admin-scope .admin-nav-item:hover{
+  background: rgba(212,175,55,0.16);
+  border-color: rgba(212,175,55,0.35);
+}
+html:not(.dark) body.admin-scope .admin-nav-meta{
+  color: rgba(15,26,46,0.65);
+}
+html:not(.dark) body.admin-scope .admin-nav-icon{
+  color: rgba(15,26,46,0.80);
+}

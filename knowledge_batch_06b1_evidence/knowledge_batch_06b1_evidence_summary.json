@@ -1,0 +1,30 @@
+{
+  "batch": "Knowledge Batch 06B-1 — Admin Knowledge Search Evidence Intake + SQL Verification Fix",
+  "date": "2026-06-18",
+  "baseline": "v51",
+  "based_on": "v50",
+  "decision": "KNOWLEDGE_BATCH_06B1_ADMIN_KNOWLEDGE_SEARCH_EVIDENCE_ACCEPTED_SQL_VERIFICATION_CTE_FIX_PREPARED_CHAT_ANSWER_CITATION_BROWSER_EVIDENCE_PENDING",
+  "admin_knowledge_search_evidence": {
+    "displayed_rows_supplied": 25,
+    "all_displayed_rows_status_approved": true,
+    "all_displayed_rows_chat_eligible": true,
+    "all_displayed_rows_citations_count_positive": true,
+    "minimum_citations_count_in_supplied_rows": 1,
+    "evidence_accepted": true
+  },
+  "sql_error": {
+    "error_code": "42P01",
+    "message": "relation \"kb05_docs\" does not exist",
+    "classification": "verification_sql_cte_scope_error_not_data_failure",
+    "fixed_sql_prepared": true
+  },
+  "runtime_chat_acceptance": {
+    "chat_answer_output_supplied": false,
+    "citation_bearing_chat_answer_supplied": false,
+    "accepted": false
+  },
+  "production": {
+    "approved": false,
+    "mega_batch_30_allowed": false
+  }
+}

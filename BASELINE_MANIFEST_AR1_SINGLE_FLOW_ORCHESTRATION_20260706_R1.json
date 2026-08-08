@@ -1,0 +1,86 @@
+﻿{
+    "baseline_id":  "PALWAKF_ASSISTANT_SOURCE_BASELINE_AR1_SINGLE_FLOW_ORCHESTRATION_AND_OPERATOR_CLARITY_V1_20260706_R1",
+    "batch_id":  "MEGA_BATCH_AR1_SINGLE_FLOW_ORCHESTRATION_AND_OPERATOR_CLARITY_V1",
+    "created_at_local":  "2026-07-06T05:32:36.6987223+03:00",
+    "acceptance":  {
+                       "local_only":  true,
+                       "static_verify":  "PASS",
+                       "browser_uat":  "PASS",
+                       "current_c4_candidate_count":  0,
+                       "controlled_internal_pilot":  "NOT_STARTED",
+                       "staging":  "NOT_APPROVED",
+                       "production":  "NOT_APPROVED"
+                   },
+    "exclusions":  [
+                       "node_modules/",
+                       "dist/",
+                       ".vite-dev-cache/",
+                       ".env",
+                       ".env.* except .env.example",
+                       "generated archives",
+                       "temporary files"
+                   ],
+    "tracked_files":  [
+                          {
+                              "path":  "server/governedAgenticRagPilot.ts",
+                              "sha256":  "6F0B15D99679DB3D97089FC76627F814E94F3D598ADDE2FAE5EC396A936B3CD0"
+                          },
+                          {
+                              "path":  "server/routers.ts",
+                              "sha256":  "A8E0CA5B78634D9C169E1D5E7EAB54C0D59C3BD815F5DF6ABAB5020FB7C9E05A"
+                          },
+                          {
+                              "path":  "client/src/pages/admin/SourceProvenanceRightsRegistry.tsx",
+                              "sha256":  "E510C82CD5FA456E293567348BA10B2394AF0D745BAB5A9A273D58BA120600A0"
+                          },
+                          {
+                              "path":  "scripts/verify-mega-batch-ar1-single-flow-orchestration.mjs",
+                              "sha256":  "FA50A445E7671D2A0CA3EE411B0AADB29467591E48923BEBE24EF7A2CA1947E6"
+                          },
+                          {
+                              "path":  "package.json",
+                              "sha256":  "2F56ACEEA4DE162A5BD353183E881F92E308959B2A8B63BF3F7DAAC15521C4AC"
+                          },
+                          {
+                              "path":  "PALWAKF_PLATFORM_COMPREHENSIVE_GUIDE.md",
+                              "sha256":  "D380CC60839CE22ABB63592AB252515A12FE7A944584CEE8EF0219970781F22F"
+                          },
+                          {
+                              "path":  "CHANGELOG.md",
+                              "sha256":  "49936F2505EE53C8E1C1829E7D359548ABB0F9B9E0C2ABD19D546FFC04529BAC"
+                          },
+                          {
+                              "path":  "LATEST_BASELINE_CURRENT.md",
+                              "sha256":  "A69B836604DA57E83F33861452B8E47FC4C5C4FF47D564BC84A0630D23047406"
+                          },
+                          {
+                              "path":  "docs/ai/governed_agentic_rag/AR1_SINGLE_FLOW_ORCHESTRATION_AND_OPERATOR_CLARITY_V1_AR.md",
+                              "sha256":  "7228868BB8133C4204E9DD3FA40EB7C7E1CE81A9E81196084B0BE3320DB9EDC3"
+                          },
+                          {
+                              "path":  "docs/ai/governed_agentic_rag/STATE_MEGA_BATCH_AR1_SINGLE_FLOW_ORCHESTRATION_AND_OPERATOR_CLARITY_V1.md",
+                              "sha256":  "AF3B2E33AF600B7F32D252A84BF84FE999FF728ADBD6BE6FF111D316F2CEC477"
+                          },
+                          {
+                              "path":  "docs/ai/governed_agentic_rag/AR1_SINGLE_FLOW_ORCHESTRATION_AND_OPERATOR_CLARITY_UAT_AR.md",
+                              "sha256":  "4988DF15A0B9640C2F311B8A176E22AA9E3FD620E6CFAE90EAFD680A3A131CBA"
+                          },
+                          {
+                              "path":  "docs/ar1_single_flow_orchestration/BASELINE_ACCEPTANCE_STATE_20260706.md",
+                              "sha256":  "5B794975ACA3A5316D5F099E3303AA8689564CF22F61CEF1AB1CAF26EFD266C7"
+                          },
+                          {
+                              "path":  "docs/ar1_single_flow_orchestration/SESSION_HANDOFF_20260706.md",
+                              "sha256":  "CDBB0C9D861175439946EBEE4DBEAD372512B4A526E88B092B9BC4CE76050C66"
+                          },
+                          {
+                              "path":  "docs/ar1_single_flow_orchestration/EVIDENCE_ACCEPTANCE_20260706.md",
+                              "sha256":  "CC8EF357A9CD1CE52029322E8406F6CAC138E10FA085BBBF2EF110BC7F67F492"
+                          },
+                          {
+                              "path":  "docs/ar1_single_flow_orchestration/ERROR_RECORD_OPERATOR_PACKAGE_PATH_RESOLUTION_20260706.md",
+                              "sha256":  "45DBD7B22D2B117EA9B371A925165F3D7DE568F66EF96BDD9C96973DCF9CD1C5"
+                          }
+                      ],
+    "next_gate":  "A C4 deterministic candidate must exist; the operator selects exactly one candidate; session references for internal-use/rights/T3/T4 are complete; then and only then start the controlled internal pilot."
+}

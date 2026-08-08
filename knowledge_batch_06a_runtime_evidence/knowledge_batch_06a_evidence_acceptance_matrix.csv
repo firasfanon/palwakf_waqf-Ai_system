@@ -1,0 +1,6 @@
+gate,required_evidence,submitted_evidence,status,notes
+typescript_check,pnpm.cmd run check / tsc --noEmit,operator pasted clean tsc output,accepted,pnpm config warning is non-blocking
+chat_retrieval,/knowledge#/chat answer for imported topic,not supplied,pending,requires browser/API output
+citation_runtime,citation-bearing answer/source id/reference link,not supplied,pending,requires visible citation or API payload
+admin_knowledge_search,/admin/knowledge-search shows approved/chat/citation count,not supplied,pending,requires screenshot/API result
+post_apply_sql,read-only verification SQL output,not supplied in this turn,pending,optional but preferred

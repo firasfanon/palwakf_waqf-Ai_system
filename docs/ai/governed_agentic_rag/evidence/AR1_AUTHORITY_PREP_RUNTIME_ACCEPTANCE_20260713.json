@@ -1,0 +1,176 @@
+{
+  "prepare": {
+    "id": "AR1A-92ea2179-e49b-43f1-896d-84ec3654315e",
+    "createdAt": "2026-07-12T21:22:23.734Z",
+    "expiresAt": "2026-07-12T21:32:23.734Z",
+    "c3EvidenceExpiresAt": "2026-07-12T21:51:10.046Z",
+    "status": "prepared",
+    "decision": "APPROVE_EPHEMERAL_INTERNAL_SESSION_PREP",
+    "reviewRationale": "اختيار هذه المادة لإجراء اختبار تشغيلي محكوم للتحقق من إنشاء صلاحية مؤقتة داخل الذاكرة فقط، دون بدء جلسة AR1 أو منح حقوق أو تفعيل نشر.",
+    "rightsApprovalRef": "INTERNAL-METADATA-EVIDENCE-ONLY-20260713-001",
+    "binding": {
+      "clusterKey": "url:https://www.palestinecabinet.gov.ps/portal/OrgStructure/Details/20",
+      "documentId": "c3ebc0f4-fc16-4e49-bb25-4f87b9d63f88",
+      "documentTitle": "مهام وزارة الأوقاف والشؤون الدينية الفلسطينية",
+      "evidenceTier": "T3_CONTROLLED_INTERNAL_EVIDENCE",
+      "internalUseApprovalRef": "UAT-AR1-AUTHORITY-PREP-20260713-001",
+      "resolutionMethod": "C4_DIRECT_MATERIAL_REFERENCE",
+      "resolutionEvidence": [
+        "candidateMaterials.id_field_normalized_to_knowledge_document_uuid",
+        "candidateMaterials.knowledge_document_id_exact",
+        "runtimeRepository.assistant_knowledge_documents_uuid_exact_lookup",
+        "runtimeRepository.uuid_or_numeric_id_resolution",
+        "C4_SELECTED_COHORT_CURRENT_PROCESS_ONLY"
+      ]
+    },
+    "authorityFingerprint": "fbba8962d1b39ca7",
+    "consumedAt": null,
+    "sessionId": null,
+    "authorityStorage": "process_memory_only",
+    "databaseWrites": 0,
+    "sourceOrRightsWrites": 0,
+    "sessionStarted": false,
+    "nextAction": "SEPARATE_EXPLICIT_SESSION_START_AUTHORIZATION_REQUIRED",
+    "contract": "ar1_deterministic_candidate_review_and_ephemeral_session_authority_prep_v1",
+    "activeSessions": 0,
+    "invariants": [
+      "ONE_CURRENT_C4_CANDIDATE_ONLY",
+      "OPERATOR_BOUND_AUTHORITY_PREPARATION",
+      "C3_EXPIRY_BOUNDED",
+      "NO_DATABASE_WRITE",
+      "NO_SOURCE_LINK_OR_RIGHTS_ASSIGNMENT",
+      "NO_SESSION_AUTO_START",
+      "SEPARATE_EXPLICIT_SESSION_START_AUTHORIZATION_REQUIRED"
+    ]
+  },
+  "revoke": {
+    "id": "AR1A-92ea2179-e49b-43f1-896d-84ec3654315e",
+    "createdAt": "2026-07-12T21:22:23.734Z",
+    "expiresAt": "2026-07-12T21:32:23.734Z",
+    "c3EvidenceExpiresAt": "2026-07-12T21:51:10.046Z",
+    "status": "revoked",
+    "decision": "APPROVE_EPHEMERAL_INTERNAL_SESSION_PREP",
+    "reviewRationale": "اختيار هذه المادة لإجراء اختبار تشغيلي محكوم للتحقق من إنشاء صلاحية مؤقتة داخل الذاكرة فقط، دون بدء جلسة AR1 أو منح حقوق أو تفعيل نشر.",
+    "rightsApprovalRef": "INTERNAL-METADATA-EVIDENCE-ONLY-20260713-001",
+    "binding": {
+      "clusterKey": "url:https://www.palestinecabinet.gov.ps/portal/OrgStructure/Details/20",
+      "documentId": "c3ebc0f4-fc16-4e49-bb25-4f87b9d63f88",
+      "documentTitle": "مهام وزارة الأوقاف والشؤون الدينية الفلسطينية",
+      "evidenceTier": "T3_CONTROLLED_INTERNAL_EVIDENCE",
+      "internalUseApprovalRef": "UAT-AR1-AUTHORITY-PREP-20260713-001",
+      "resolutionMethod": "C4_DIRECT_MATERIAL_REFERENCE",
+      "resolutionEvidence": [
+        "candidateMaterials.id_field_normalized_to_knowledge_document_uuid",
+        "candidateMaterials.knowledge_document_id_exact",
+        "runtimeRepository.assistant_knowledge_documents_uuid_exact_lookup",
+        "runtimeRepository.uuid_or_numeric_id_resolution",
+        "C4_SELECTED_COHORT_CURRENT_PROCESS_ONLY"
+      ]
+    },
+    "authorityFingerprint": "fbba8962d1b39ca7",
+    "consumedAt": null,
+    "sessionId": null,
+    "authorityStorage": "process_memory_only",
+    "databaseWrites": 0,
+    "sourceOrRightsWrites": 0,
+    "sessionStarted": false,
+    "nextAction": "NONE",
+    "revoked": true,
+    "activeAuthorityPreparations": 0
+  },
+  "statusAfterRevocation": {
+    "contract": "governed_agentic_rag_internal_pilot_vertical_slice_v1",
+    "mode": "internal_admin_only_ephemeral_session",
+    "status": "READY_FOR_OPERATOR_BINDING",
+    "reason": null,
+    "c3EvidenceExpiresAt": "2026-07-12T21:51:10.046Z",
+    "availableCandidateDocuments": 2,
+    "corpusResolution": {
+      "directC4MaterialReferences": 2,
+      "directReferenceDocumentAssociations": 0,
+      "deterministicExactMatches": 0,
+      "rejectedFuzzyOrAmbiguousMatches": 0,
+      "rejectedAmbiguousDirectAssociations": 0
+    },
+    "activeSessions": 0,
+    "activeAuthorityPreparations": 0,
+    "maxBindings": 5,
+    "maxSessionMinutes": 30,
+    "maxAuthorityPreparations": 16,
+    "authorityPreparationMinutes": 10,
+    "sessionStartRequiresAuthorityPreparation": true,
+    "sessionStartPolicy": "SEPARATE_EXPLICIT_SESSION_START_AUTHORIZATION_REQUIRED",
+    "llmGenerationEnabled": false,
+    "invariants": [
+      "NO_EXTERNAL_WEB_AGENT",
+      "NO_DATABASE_WRITE",
+      "NO_SOURCE_LINK_WRITE",
+      "NO_RIGHTS_ASSIGNMENT",
+      "NO_DOCUMENT_COPY",
+      "NO_CHUNK_OR_EMBEDDING_WRITE",
+      "NO_VECTOR_INDEXING",
+      "NO_FUZZY_OR_SEMANTIC_CORPUS_LINKING",
+      "NO_PUBLIC_CHAT_RELEASE",
+      "NO_PUBLIC_RELEASE",
+      "NO_PRODUCTION"
+    ]
+  },
+  "acceptance": {
+    "acceptanceId": "MEGA_BATCH_AR1_DETERMINISTIC_CANDIDATE_REVIEW_AND_EPHEMERAL_SESSION_AUTHORITY_PREP_V1_RUNTIME_UAT_ACCEPTED_LOCAL_20260713",
+    "status": "PASS",
+    "scope": "LOCAL_INTERNAL_ADMIN_AUTHORITY_PREPARATION_ONLY",
+    "selectedCandidate": {
+      "clusterKey": "url:https://www.palestinecabinet.gov.ps/portal/OrgStructure/Details/20",
+      "documentId": "c3ebc0f4-fc16-4e49-bb25-4f87b9d63f88",
+      "documentTitle": "مهام وزارة الأوقاف والشؤون الدينية الفلسطينية",
+      "evidenceTier": "T3_CONTROLLED_INTERNAL_EVIDENCE",
+      "internalUseApprovalRef": "UAT-AR1-AUTHORITY-PREP-20260713-001",
+      "resolutionMethod": "C4_DIRECT_MATERIAL_REFERENCE",
+      "resolutionEvidence": [
+        "candidateMaterials.id_field_normalized_to_knowledge_document_uuid",
+        "candidateMaterials.knowledge_document_id_exact",
+        "runtimeRepository.assistant_knowledge_documents_uuid_exact_lookup",
+        "runtimeRepository.uuid_or_numeric_id_resolution",
+        "C4_SELECTED_COHORT_CURRENT_PROCESS_ONLY"
+      ]
+    },
+    "preparation": {
+      "id": "AR1A-92ea2179-e49b-43f1-896d-84ec3654315e",
+      "status": "prepared",
+      "storage": "process_memory_only",
+      "ttlMinutes": 10,
+      "createdAt": "2026-07-12T21:22:23.734Z",
+      "expiresAt": "2026-07-12T21:32:23.734Z",
+      "c3EvidenceExpiresAt": "2026-07-12T21:51:10.046Z",
+      "operatorBound": true,
+      "oneTimeConsumption": true,
+      "consumedAt": null,
+      "sessionId": null,
+      "sessionStarted": false,
+      "activeSessions": 0,
+      "databaseWrites": 0,
+      "sourceOrRightsWrites": 0
+    },
+    "revocation": {
+      "status": "revoked",
+      "revoked": true,
+      "activeAuthorityPreparations": 0,
+      "sessionStarted": false,
+      "activeSessions": 0,
+      "consumedAt": null,
+      "sessionId": null,
+      "databaseWrites": 0,
+      "sourceOrRightsWrites": 0
+    },
+    "statusAfterRevocation": {
+      "status": "READY_FOR_OPERATOR_BINDING",
+      "activeSessions": 0,
+      "activeAuthorityPreparations": 0,
+      "sessionStartRequiresAuthorityPreparation": true,
+      "sessionStartPolicy": "SEPARATE_EXPLICIT_SESSION_START_AUTHORIZATION_REQUIRED",
+      "llmGenerationEnabled": false
+    },
+    "production": "NOT_APPROVED",
+    "nextAuthorizationRequired": "SEPARATE_EXPLICIT_SESSION_START_AUTHORIZATION_REQUIRED"
+  }
+}

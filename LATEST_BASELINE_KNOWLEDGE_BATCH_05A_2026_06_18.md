@@ -1,0 +1,25 @@
+# Latest Baseline Pointer — Knowledge Batch 05A — 2026-06-18
+
+Current baseline:
+
+`waqf_ai_model_hybrid_llm_admin_v47_knowledge_batch_05a_supabase_apply_result_intake_approval_chat_visibility_2026_06_18.zip`
+
+Decision:
+
+`KNOWLEDGE_BATCH_05A_SUPABASE_APPLY_EVIDENCE_ACCEPTED_APPROVED_CHAT_VISIBLE_138_CONFIRMED`
+
+Status:
+
+```text
+knowledge_import_primary_apply_accepted=true
+payload_records=138
+reference_documents_inserted=138
+knowledge_documents_inserted=138
+citations_inserted=138
+approved_on_import=true
+chat_visible_on_import=true
+runtime_chat_retrieval_evidence_pending=true
+remote_staging_evidence_pending=true
+rbac_rls_negative_uat_pending=true
+production_not_approved=true
+```

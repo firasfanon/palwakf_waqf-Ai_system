@@ -1,0 +1,31 @@
+{
+  "baseline": "v59",
+  "date": "2026-06-19",
+  "scope": "Sovereign Trust Foundation v1A — Apply Result Intake + Strict Verified Retrieval Gate",
+  "evidence": {
+    "approved_chat_eligible_total": 146,
+    "unverified_authority_chat_eligible": 61,
+    "draft_not_chat_eligible": 6,
+    "open_review_tasks": 304,
+    "citation_verification_tasks": 152,
+    "source_verification_tasks": 146,
+    "content_classification_tasks": 6
+  },
+  "decision": "APPLY_ACCEPTED_STRICT_GATE_REQUIRED_BEFORE_TRUST_CLOSURE",
+  "production_approved": false,
+  "changed_files": [
+    "server/assistantTrust.ts",
+    "server/assistantTrust.test.ts",
+    "sql_sandbox/sovereign_assistant_trust_foundation_v1a_strict_gate/00_READ_ONLY_TRUST_DRIFT_PRECHECK.sql",
+    "sql_sandbox/sovereign_assistant_trust_foundation_v1a_strict_gate/01_STRICT_VERIFIED_RETRIEVAL_GATE_OPERATOR_APPLY.sql",
+    "sql_sandbox/sovereign_assistant_trust_foundation_v1a_strict_gate/02_POST_APPLY_READ_ONLY_VERIFICATION.sql",
+    "sql_sandbox/sovereign_assistant_trust_foundation_v1a_strict_gate/03_HUMAN_REVIEW_RELEASE_RUNBOOK.md",
+    "SOVEREIGN_TRUST_FOUNDATION_V1A_SUPABASE_APPLY_RESULT_INTAKE_STRICT_GATE_2026_06_19.md",
+    "SOVEREIGN_TRUST_FOUNDATION_V1A_CHANGELOG_2026_06_19.md",
+    "SOVEREIGN_TRUST_FOUNDATION_V1A_VERIFICATION_NOTES_2026_06_19.md",
+    "ERROR_RECORD_SOVEREIGN_TRUST_FOUNDATION_V1A_2026_06_19.md",
+    "SESSION_HANDOFF_SOVEREIGN_TRUST_FOUNDATION_V1A_TO_HUMAN_REVIEW_OR_KB08A_2026_06_19.md",
+    "PALWAKF_PLATFORM_COMPREHENSIVE_GUIDE.md",
+    "LATEST_BASELINE_FINAL_HANDOFF_2026_06_19.md"
+  ]
+}

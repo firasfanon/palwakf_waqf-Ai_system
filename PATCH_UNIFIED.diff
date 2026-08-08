@@ -1,0 +1,509 @@
+--- a/server/runtimeRepository.ts
++++ b/server/runtimeRepository.ts
+@@ -288,14 +288,36 @@
+   };
+ }
+ 
++type AssistantKnowledgeDocumentMapContext = {
++  sourceById: Map<string, any>;
++  referenceDocumentById: Map<string, any>;
++  filesByReferenceDocumentId: Map<string, any[]>;
++  citationsByKnowledgeDocumentId: Map<string, any[]>;
++};
++
++const ASSISTANT_KNOWLEDGE_DOCUMENT_SELECT =
++  'id, reference_document_id, source_id, title, category, status, authority_level, domain_scope, source_type, summary, content, tags, is_chat_eligible, chat_priority, grounding_weight, review_notes, review_decision, reviewed_by, reviewed_at, approval_version, metadata_json, created_by, created_at, updated_at';
++
++function emptyAssistantKnowledgeDocumentMapContext(): AssistantKnowledgeDocumentMapContext {
++  return {
++    sourceById: new Map<string, any>(),
++    referenceDocumentById: new Map<string, any>(),
++    filesByReferenceDocumentId: new Map<string, any[]>(),
++    citationsByKnowledgeDocumentId: new Map<string, any[]>(),
++  };
++}
++
++function normalizeExactKnowledgeDocumentUuid(value: unknown): string | null {
++  if (typeof value !== 'string') return null;
++  const normalized = value.trim().toLowerCase();
++  return /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/.test(normalized)
++    ? normalized
++    : null;
++}
++
+ function mapAssistantKnowledgeDocumentRow(
+   row: any,
+-  context: {
+-    sourceById: Map<string, any>;
+-    referenceDocumentById: Map<string, any>;
+-    filesByReferenceDocumentId: Map<string, any[]>;
+-    citationsByKnowledgeDocumentId: Map<string, any[]>;
+-  }
++  context: AssistantKnowledgeDocumentMapContext,
+ ) {
+   const metadata = row?.metadata_json && typeof row.metadata_json === 'object' ? row.metadata_json : {};
+   const source = row?.source_id ? context.sourceById.get(row.source_id) : undefined;
+@@ -353,6 +375,45 @@
+   };
+ }
+ 
++/**
++ * Exact, read-only assistant.knowledge_documents UUID lookup for the current
++ * C4/AR1 cohort. This deliberately bypasses the composite bundle gate because
++ * a companion-table outage must not hide an existing knowledge_document row.
++ * It never infers a link and never falls back to title, URL, semantic or vector
++ * matching. Invalid/non-UUID input is rejected before any remote request.
++ */
++export async function runtimeGetKnowledgeDocumentByExactUuid(id: unknown) {
++  const exactUuid = normalizeExactKnowledgeDocumentUuid(id);
++  if (!exactUuid) return undefined;
++
++  const client = getAssistantSupabaseClient();
++  if (!client) return undefined;
++
++  const { data, error } = await client
++    .from('knowledge_documents')
++    .select(ASSISTANT_KNOWLEDGE_DOCUMENT_SELECT)
++    .eq('id', exactUuid)
++    .maybeSingle();
++
++  if (error) {
++    recordAssistantRuntimeReadFailure('knowledge_documents', error);
++    return undefined;
++  }
++
++  recordAssistantRuntimeReadSuccess('knowledge_documents');
++  if (!data) return undefined;
++
++  const mapped = mapAssistantKnowledgeDocumentRow(
++    data,
++    emptyAssistantKnowledgeDocumentMapContext(),
++  );
++
++  // This resolver is entered with a sovereign C4 UUID. Keep that UUID as the
++  // primary runtime id even when legacy metadata contains a numeric legacy_id,
++  // so the later AR1 session read remains on the same exact, bounded path.
++  return { ...mapped, id: data.id, uuid: data.id };
++}
++
+ async function tryGetAssistantKnowledgeDocumentBundle(filters?: any) {
+   const client = getAssistantSupabaseClient();
+   if (!client) return null;
+@@ -363,7 +424,7 @@
+ 
+   let query = client
+     .from('knowledge_documents')
+-    .select('id, reference_document_id, source_id, title, category, status, authority_level, domain_scope, source_type, summary, content, tags, is_chat_eligible, chat_priority, grounding_weight, review_notes, review_decision, reviewed_by, reviewed_at, approval_version, metadata_json, created_by, created_at, updated_at')
++    .select(ASSISTANT_KNOWLEDGE_DOCUMENT_SELECT)
+     .order('updated_at', { ascending: false })
+     .order('created_at', { ascending: false });
+ 
+--- a/server/governedAgenticRagPilot.ts
++++ b/server/governedAgenticRagPilot.ts
+@@ -1,6 +1,10 @@
+ import { createHash, randomUUID } from 'node:crypto';
+ import { invokeLLM } from './_core/llm';
+-import { runtimeGetKnowledgeDocumentById, runtimeGetKnowledgeDocuments } from './runtimeRepository';
++import {
++  runtimeGetKnowledgeDocumentByExactUuid,
++  runtimeGetKnowledgeDocumentById,
++  runtimeGetKnowledgeDocuments,
++} from './runtimeRepository';
+ import { getVerifiedSourceSelectionAndControlledReleasePlan } from './verifiedSourceSelection';
+ import { getAutonomousExternalSourceVerification } from './externalSourceVerification';
+ 
+@@ -285,8 +289,14 @@
+     : null;
+   if (fromExistingList && isPilotDocumentMetadataUsable(fromExistingList)) return fromExistingList;
+ 
+-  // Legacy local runtimes sometimes resolve numeric ids only; sovereign
+-  // assistant rows expose UUIDs. Try both without creating or inferring links.
++  // Current C4 materials carry the sovereign assistant.knowledge_documents UUID.
++  // Resolve that row directly before the composite knowledge bundle so a
++  // companion-table outage cannot hide an exact current-cohort material.
++  const exactAssistantDocument = await runtimeGetKnowledgeDocumentByExactUuid(stableId).catch(() => undefined);
++  if (isPilotDocumentMetadataUsable(exactAssistantDocument)) return exactAssistantDocument;
++
++  // Legacy local runtimes sometimes resolve numeric ids only. Preserve that
++  // bounded fallback without creating or inferring links.
+   const direct = await (runtimeGetKnowledgeDocumentById as any)(stableId).catch(() => null) as KnowledgeDocumentLike | null;
+   if (isPilotDocumentMetadataUsable(direct)) return direct;
+ 
+@@ -478,6 +488,7 @@
+         resolutionEvidence: [
+           'candidateMaterials.id_field_normalized_to_knowledge_document_uuid',
+           'candidateMaterials.knowledge_document_id_exact',
++          'runtimeRepository.assistant_knowledge_documents_uuid_exact_lookup',
+           'runtimeRepository.uuid_or_numeric_id_resolution',
+           'C4_SELECTED_COHORT_CURRENT_PROCESS_ONLY',
+         ],
+--- a/package.json
++++ b/package.json
+@@ -30,7 +30,8 @@
+     "verify:mega-batch-ar1-single-flow-orchestration": "node scripts/verify-mega-batch-ar1-single-flow-orchestration.mjs",
+     "verify:mega-batch-assistant-knowledge-sovereign-audit-approval-productivity-activation": "node scripts/verify-mega-batch-assistant-knowledge-sovereign-audit-approval-productivity-activation.mjs",
+     "verify:mega-batch-assistant-legacy-provenance-reconstruction-and-official-source-authority-resolution": "node scripts/verify-mega-batch-assistant-legacy-provenance-reconstruction-and-official-source-authority-resolution.mjs",
+-    "verify:mega-batch-assistant-legacy-provenance-reconstruction-v1-1": "node scripts/verify-mega-batch-assistant-legacy-provenance-reconstruction-v1-1.mjs"
++    "verify:mega-batch-assistant-legacy-provenance-reconstruction-v1-1": "node scripts/verify-mega-batch-assistant-legacy-provenance-reconstruction-v1-1.mjs",
++    "verify:mega-batch-ar1-c4-direct-knowledge-document-metadata-exact-lookup-repair-v1": "node scripts/verify-mega-batch-ar1-c4-direct-knowledge-document-metadata-exact-lookup-repair-v1.mjs"
+   },
+   "dependencies": {
+     "@aws-sdk/client-s3": "^3.693.0",
+--- a/PALWAKF_PLATFORM_COMPREHENSIVE_GUIDE.md
++++ b/PALWAKF_PLATFORM_COMPREHENSIVE_GUIDE.md
+@@ -1298,3 +1298,47 @@
+ 
+ لا يشمل القبول تفعيل طبقة الحقوق أو SQL أو Chat/Release أو Staging أو Production. نقطة الاستئناف لا تبدأ إلا عند ظهور مرشح C4 حتمي، ثم اختيار مشغّل صريح لمادة واحدة واعتمادات جلسة داخلية مكتملة.
+ 
++
++## MEGA_BATCH_AR1_C4_DIRECT_KNOWLEDGE_DOCUMENT_METADATA_EXACT_LOOKUP_REPAIR_V1 — 2026-07-12
++
++### الحالة
++
++```text
++AUTHORIZED=YES
++SOURCE_PATCH_BUILT=YES
++STATIC_VERIFICATION=PASS
++TARGETED_TYPESCRIPT_DELTA_CHECK=PASS
++RUNTIME_UAT=PENDING
++USER_WORKSPACE_APPLY=PENDING
++BASELINE=CANDIDATE_NOT_PROMOTED
++PRODUCTION=NOT_APPROVED
++```
++
++### القرار التنفيذي
++
++تم إصلاح فجوة حسم مادة C4 داخل AR1 بإضافة قراءة UUID مباشرة وضيقة من `assistant.knowledge_documents`. القراءة الجديدة لا تعتمد على نجاح `knowledge_sources` أو `reference_documents` أو `reference_files` أو `knowledge_citations`، ولا تتأثر بفتح circuit breaker الخاص بالحزمة المركبة. يبقى المسار العام القديم fallback للتوافق فقط.
++
++يُرفض أي معرف غير UUID قبل الاستعلام، ويُنفذ الحسم عبر `eq('id', exactUuid)` و`maybeSingle()` فقط. لا مطابقة عنوان أو رابط أو fuzzy أو semantic أو vector، ولا إنشاء رابط مصدر أو قرار حقوق أو كتابة وثيقة/Chunk/Embedding. يحافظ resolver على UUID السيادي كمعرف الجلسة الأساسي حتى لا يعود تشغيل السؤال لاحقًا إلى مسار legacy رقمي.
++
++### التحقق المحلي
++
++- verifier الجديد: `PASS`.
++- فحص TypeScript موجّه قبل/بعد التعديل أظهر نفس خطأي baseline غير المرتبطين في `server/legacyManusProvenance.ts`، ولم يضف التعديل أي خطأ في الملفين المستهدفين.
++- لم يُنفذ Runtime UAT متصلًا بقاعدة البيانات داخل بيئة إعداد الحزمة؛ يلزم تطبيق الحزمة محليًا وتشغيل زر دورة التحقق مرة واحدة.
++
++### بوابة القبول
++
++لا تُرقّى الحزمة إلى baseline مقبول قبل إثبات:
++
++```text
++C3.status=completed
++requestedChecks=30
++noDatabaseWrite=true
++C4.status=READY_FOR_OPERATOR_BINDING
++candidateCount>0
++directC4MaterialReferences>0
++nextAction=REVIEW_ONE_DETERMINISTIC_CANDIDATE
++AR1_SESSION_AUTO_START=NO
++```
++
++Chat/RAG والنشر العام وProduction وكتابة الحقوق والمصادر تظل محظورة.
+--- a/CHANGELOG.md
++++ b/CHANGELOG.md
+@@ -106,3 +106,13 @@
+ - حفظ أدلة UAT وSession Handoff وBaseline Acceptance وError Record لمسار حزمة التحقق.
+ - لا SQL، ولا تفعيل حقوق، ولا Chat/Release، ولا Staging أو Production.
+ 
++
++## 2026-07-12 — MEGA_BATCH_AR1_C4_DIRECT_KNOWLEDGE_DOCUMENT_METADATA_EXACT_LOOKUP_REPAIR_V1
++
++- Added an exact, read-only UUID lookup against `assistant.knowledge_documents.id` for current C4 `knowledge_document` materials.
++- The direct resolver bypasses the composite companion-table bundle gate, so a failure in sources, references, files, or citations no longer hides an existing C4 knowledge document row.
++- Invalid or non-UUID identifiers are rejected before a remote query; resolution remains equality-only with no title, URL, fuzzy, semantic, embedding, or vector fallback.
++- AR1 now tries the exact sovereign UUID lookup before legacy/composite fallback and preserves that UUID as the primary session document identifier.
++- Added a dedicated static verifier, Arabic contract/UAT/state documents, and an Error Record.
++- Static verification passed. Targeted TypeScript pre/post comparison introduced no new errors; two unrelated pre-existing errors remain in `server/legacyManusProvenance.ts`.
++- Runtime UAT and baseline promotion remain pending. No SQL, database write, source link, rights assignment, Chat/RAG release, public release, or production action was performed.
+--- a/CURRENT_TASK.md
++++ b/CURRENT_TASK.md
+@@ -1,7 +1,9 @@
+ # CURRENT TASK
+ 
+-MEGA_BATCH_A_REBASELINED_FOUNDATION_AND_REVIEW_CLOSURE_CANDIDATE
++MEGA_BATCH_AR1_C4_DIRECT_KNOWLEDGE_DOCUMENT_METADATA_EXACT_LOOKUP_REPAIR_V1
+ 
+-Status: candidate prepared; local code/build/static verification and browser UAT required before acceptance.
++Status: source repair built and statically verified; user-workspace apply and read-only runtime UAT are pending.
+ 
+-Hard blocks: no SQL operator apply, no KB08B mutation, no official release, no chat eligibility change, no production.
++Acceptance gate: C3 completed with 30 checks/no write, C4 `READY_FOR_OPERATOR_BINDING`, `candidateCount > 0`, `directC4MaterialReferences > 0`, and no automatic AR1 session start.
++
++Hard blocks: no SQL, no database/source/rights/document/chunk/vector write, no Chat/RAG release, no public release, no production.
+--- a/STATE.md
++++ b/STATE.md
+@@ -7,3 +7,21 @@
+ NO_SQL_OPERATOR_APPLY
+ NO_DATA_MUTATION
+ ```
++
++## State — AR1 C4 Direct Knowledge Document Exact Lookup Repair V1
++
++```text
++BATCH=MEGA_BATCH_AR1_C4_DIRECT_KNOWLEDGE_DOCUMENT_METADATA_EXACT_LOOKUP_REPAIR_V1
++AUTHORIZED=YES
++SOURCE_PATCH_BUILT=YES
++STATIC_VERIFICATION=PASS
++TARGETED_TYPESCRIPT_DELTA_CHECK=PASS_WITH_PREEXISTING_UNRELATED_ERRORS
++RUNTIME_UAT=PENDING
++USER_WORKSPACE_APPLY=PENDING
++BASELINE_PROMOTION=PENDING
++NO_SQL
++NO_DATABASE_WRITE
++NO_SOURCE_OR_RIGHTS_WRITE
++NO_CHAT_OR_PUBLIC_RELEASE
++PRODUCTION_NOT_APPROVED
++```
+--- /dev/null
++++ b/scripts/verify-mega-batch-ar1-c4-direct-knowledge-document-metadata-exact-lookup-repair-v1.mjs
+@@ -0,0 +1,62 @@
++import fs from 'node:fs';
++import path from 'node:path';
++import process from 'node:process';
++
++const root = process.cwd();
++const read = (relative) => fs.readFileSync(path.join(root, relative), 'utf8');
++const exists = (relative) => fs.existsSync(path.join(root, relative));
++const assert = (condition, message) => {
++  if (!condition) throw new Error(`FAIL :: ${message}`);
++  console.log(`PASS :: ${message}`);
++};
++
++const repositoryPath = 'server/runtimeRepository.ts';
++const pilotPath = 'server/governedAgenticRagPilot.ts';
++const packagePath = 'package.json';
++const contractPath = 'docs/ai/governed_agentic_rag/AR1_C4_DIRECT_KNOWLEDGE_DOCUMENT_METADATA_EXACT_LOOKUP_REPAIR_V1_AR.md';
++const statePath = 'docs/ai/governed_agentic_rag/STATE_MEGA_BATCH_AR1_C4_DIRECT_KNOWLEDGE_DOCUMENT_METADATA_EXACT_LOOKUP_REPAIR_V1.md';
++const uatPath = 'docs/ai/governed_agentic_rag/AR1_C4_DIRECT_KNOWLEDGE_DOCUMENT_METADATA_EXACT_LOOKUP_REPAIR_V1_UAT_AR.md';
++const errorRecordPath = 'ERROR_RECORD_MEGA_BATCH_AR1_C4_DIRECT_KNOWLEDGE_DOCUMENT_METADATA_EXACT_LOOKUP_REPAIR_V1_2026_07_12.md';
++
++for (const relative of [repositoryPath, pilotPath, packagePath, contractPath, statePath, uatPath, errorRecordPath]) {
++  assert(exists(relative), `required artifact present :: ${relative}`);
++}
++
++const repository = read(repositoryPath);
++const pilot = read(pilotPath);
++const pkg = JSON.parse(read(packagePath));
++const contract = read(contractPath);
++const state = read(statePath);
++const uat = read(uatPath);
++const errorRecord = read(errorRecordPath);
++
++const exactStart = repository.indexOf('export async function runtimeGetKnowledgeDocumentByExactUuid');
++const bundleStart = repository.indexOf('async function tryGetAssistantKnowledgeDocumentBundle', exactStart);
++assert(exactStart >= 0 && bundleStart > exactStart, 'runtime repository exposes the bounded exact UUID lookup before the composite bundle');
++const exactLookup = repository.slice(exactStart, bundleStart);
++
++assert(exactLookup.includes(".from('knowledge_documents')"), 'exact lookup reads only assistant.knowledge_documents');
++assert(exactLookup.includes(".eq('id', exactUuid)") && exactLookup.includes('.maybeSingle()'), 'exact lookup uses an equality predicate and at-most-one row');
++assert(exactLookup.includes('normalizeExactKnowledgeDocumentUuid(id)'), 'invalid and non-UUID identifiers are rejected before the remote query');
++assert(!/knowledge_sources|reference_documents|reference_files|knowledge_citations/.test(exactLookup), 'exact lookup does not depend on companion knowledge tables');
++assert(!/\.or\(|\.ilike\(|title|source_url|semantic|vector|embedding/i.test(exactLookup.replace(/knowledge_document/gi, '')), 'exact lookup contains no title, URL, fuzzy, semantic, vector, or embedding resolver');
++assert(!/\.insert\(|\.update\(|\.delete\(|\.upsert\(|runtime(Create|Update|Delete|Review)/.test(exactLookup), 'exact lookup contains no mutation path');
++assert(!exactLookup.includes('assistantRuntimeBundleCircuitOpen()'), 'exact lookup is not blocked by the composite companion-table circuit breaker');
++assert(exactLookup.includes('return { ...mapped, id: data.id, uuid: data.id };'), 'exact lookup preserves the sovereign UUID as the primary AR1 session identifier');
++
++assert(pilot.includes('runtimeGetKnowledgeDocumentByExactUuid'), 'AR1 imports the direct exact UUID lookup');
++const exactCall = pilot.indexOf('runtimeGetKnowledgeDocumentByExactUuid(stableId)');
++const genericCall = pilot.indexOf('(runtimeGetKnowledgeDocumentById as any)(stableId)');
++assert(exactCall >= 0 && genericCall > exactCall, 'AR1 tries the exact assistant UUID row before legacy/composite fallback');
++assert(pilot.includes('runtimeRepository.assistant_knowledge_documents_uuid_exact_lookup'), 'AR1 records the exact lookup in candidate resolution evidence');
++assert(pilot.includes('C4_SELECTED_COHORT_CURRENT_PROCESS_ONLY'), 'AR1 remains bounded to the current C4-selected cohort');
++assert(!/hybridSearch|similaritySearch|cosineSimilarity|generateEmbeddings|vectorSearch/.test(pilot), 'AR1 still contains no semantic or vector resolution path');
++
++const scriptName = 'verify:mega-batch-ar1-c4-direct-knowledge-document-metadata-exact-lookup-repair-v1';
++assert(pkg.scripts?.[scriptName] === 'node scripts/verify-mega-batch-ar1-c4-direct-knowledge-document-metadata-exact-lookup-repair-v1.mjs', 'package registers the repair verifier');
++assert(contract.includes('NO_DATABASE_WRITE') && contract.includes('NO_FUZZY_OR_SEMANTIC_MATCHING') && contract.includes('FAIL_CLOSED'), 'contract preserves no-write, deterministic-only, and fail-closed boundaries');
++assert(state.includes('LOCAL_STATIC_VERIFICATION=PASS') && state.includes('RUNTIME_UAT=PENDING'), 'state distinguishes static success from pending runtime UAT');
++assert(uat.includes('candidateCount > 0') && uat.includes('directC4MaterialReferences > 0') && uat.includes('AR1_SESSION_AUTO_START=NO'), 'UAT defines the required runtime closure and no-auto-start condition');
++assert(errorRecord.includes('السبب الجذري') && errorRecord.includes('آخر baseline مستقر') && errorRecord.includes('ما فشل'), 'Error Record documents cause, failed attempts, and last stable baseline');
++
++console.log('MEGA_BATCH_AR1_C4_DIRECT_KNOWLEDGE_DOCUMENT_METADATA_EXACT_LOOKUP_REPAIR_V1_STATIC_VERIFICATION=PASS');
+--- /dev/null
++++ b/docs/ai/governed_agentic_rag/AR1_C4_DIRECT_KNOWLEDGE_DOCUMENT_METADATA_EXACT_LOOKUP_REPAIR_V1_AR.md
+@@ -0,0 +1,61 @@
++# MEGA BATCH AR1 — إصلاح القراءة المباشرة الحتمية لوثيقة C4
++
++## النبذة
++
++هذه دفعة **تطوير فعلي موضعي** لمسار `C4 → AR1`. لا تبني مرحلة جديدة ولا تغيّر نموذج الحقوق. تضيف قراءة مباشرة، للقراءة فقط، لمعرف UUID الموجود أصلًا في `assistant.knowledge_documents` عندما تختار C4 مادة من نوع `knowledge_document`.
++
++## المشكلة
++
++كان AR1 يحاول حل UUID عبر `runtimeGetKnowledgeDocuments()`، وهي قراءة مركبة تشترط نجاح جداول مرافقة للمصادر والمراجع والملفات والاستشهادات. فشل أي companion read أو فتح circuit breaker كان يخفي وثيقة C4 الموجودة ويُبقي:
++
++```text
++candidateCount = 0
++directC4MaterialReferences = 0
++C4_CANDIDATE_MATERIAL_NOT_FOUND_HOLD
++```
++
++## الإصلاح
++
++- إضافة `runtimeGetKnowledgeDocumentByExactUuid(id)` في `server/runtimeRepository.ts`.
++- رفض أي قيمة ليست UUID قبل الاتصال البعيد.
++- تنفيذ `eq('id', exactUuid)` و`maybeSingle()` على `assistant.knowledge_documents` فقط.
++- إعادة استعمال mapper الحالي بسياق مرافق فارغ؛ لا إنشاء روابط ولا استنتاج مصدر أو حقوق.
++- استعمال القراءة المباشرة في `server/governedAgenticRagPilot.ts` قبل fallback المركب/المحلي.
++- إبقاء fallback الرقمي القديم للتوافق فقط.
++
++## الحدود السيادية
++
++```text
++READ_ONLY
++EXACT_UUID_ONLY
++CURRENT_C4_SELECTED_COHORT_ONLY
++NO_DATABASE_WRITE
++NO_SQL
++NO_SOURCE_LINK_WRITE
++NO_RIGHTS_ASSIGNMENT
++NO_DOCUMENT_OR_CHUNK_WRITE
++NO_EMBEDDING_OR_VECTOR_WRITE
++NO_FUZZY_OR_SEMANTIC_MATCHING
++NO_TITLE_OR_URL_FALLBACK_IN_DIRECT_LOOKUP
++NO_CHAT_OR_PUBLIC_RELEASE
++NO_PRODUCTION
++FAIL_CLOSED
++```
++
++## الملفات الوظيفية
++
++- `server/runtimeRepository.ts`
++- `server/governedAgenticRagPilot.ts`
++
++## معيار النجاح التشغيلي
++
++```text
++C3.status = completed
++requestedChecks = 30
++noDatabaseWrite = true
++C4.status = READY_FOR_OPERATOR_BINDING
++candidateCount > 0
++directC4MaterialReferences > 0
++nextAction = REVIEW_ONE_DETERMINISTIC_CANDIDATE
++AR1 session = not started automatically
++```
+--- /dev/null
++++ b/docs/ai/governed_agentic_rag/STATE_MEGA_BATCH_AR1_C4_DIRECT_KNOWLEDGE_DOCUMENT_METADATA_EXACT_LOOKUP_REPAIR_V1.md
+@@ -0,0 +1,21 @@
++# State — AR1 C4 Direct Knowledge Document Metadata Exact Lookup Repair V1
++
++```text
++BATCH=MEGA_BATCH_AR1_C4_DIRECT_KNOWLEDGE_DOCUMENT_METADATA_EXACT_LOOKUP_REPAIR_V1
++AUTHORIZED=YES
++SOURCE_PATCH_BUILT=YES
++LOCAL_STATIC_VERIFICATION=PASS
++TARGETED_TYPESCRIPT_DELTA_CHECK=PASS_WITH_PREEXISTING_UNRELATED_BASELINE_ERRORS
++FULL_PROJECT_TYPESCRIPT_CHECK=NOT_CLAIMED
++BUILD_CHECK=PENDING_USER_WORKSPACE
++RUNTIME_UAT=PENDING
++USER_WORKSPACE_APPLY=PENDING
++BASELINE_STATUS=CANDIDATE_NOT_PROMOTED
++DATABASE_WRITE=NO
++SQL=NO
++CHAT_RELEASE=NO
++PUBLIC_RELEASE=NO
++PRODUCTION=NOT_APPROVED
++```
++
++يُحدّث هذا الملف بعد التحقق المحلي وبناء الحزمة. لا يجوز تحويل الحالة إلى Baseline Accepted قبل تطبيق الحزمة على مساحة العمل وتشغيل دورة C3/C4 وإثبات أن المرشح المباشر ظهر دون بدء جلسة AR1 تلقائيًا.
+--- /dev/null
++++ b/docs/ai/governed_agentic_rag/AR1_C4_DIRECT_KNOWLEDGE_DOCUMENT_METADATA_EXACT_LOOKUP_REPAIR_V1_UAT_AR.md
+@@ -0,0 +1,41 @@
++# UAT — إصلاح القراءة المباشرة لوثيقة C4
++
++## طبيعة الاختبار
++
++اختبار تشغيل محلي للقراءة فقط. لا يحتاج SQL ولا ينشئ جلسة AR1 ولا يكتب مصدرًا أو حقوقًا أو وثيقة.
++
++## الخطوات
++
++1. شغّل verifier ثم TypeScript check والبناء.
++2. شغّل التطبيق محليًا وافتح:
++   `/knowledge#/admin/source-provenance-rights`
++3. اضغط **بدء دورة التحقق** مرة واحدة.
++4. لا تفتح C3 أو C4 يدويًا ولا تبدأ جلسة AR1.
++5. التقط لقطة واحدة للبطاقة التشغيلية ولقطة Console واحدة بعد انتهاء الدورة.
++
++## شروط القبول
++
++```text
++C3_STATUS=completed
++C3_REQUESTED_CHECKS=30
++C3_NO_DATABASE_WRITE=true
++C4_STATUS=READY_FOR_OPERATOR_BINDING
++candidateCount > 0
++directC4MaterialReferences > 0
++NEXT_ACTION=REVIEW_ONE_DETERMINISTIC_CANDIDATE
++AR1_SESSION_AUTO_START=NO
++DATABASE_WRITE=NO
++```
++
++## شروط الرفض الآمن
++
++- UUID غير صالح: لا يُرسل استعلام بعيد ولا يظهر مرشح.
++- UUID صحيح لكنه غير موجود: لا يظهر مرشح ولا يجري fallback تقريبي.
++- فشل قراءة `knowledge_documents`: تبقى الحالة Hold ولا تبدأ جلسة.
++- تعطل جدول مرافق مثل `reference_files`: يجب ألا يخفي UUID الموجود عند نجاح القراءة المباشرة لـ`knowledge_documents`.
++
++## Evidence المطلوب
++
++- `01_AR1_C4_DIRECT_LOOKUP_RUNTIME_UI.png`
++- `02_AR1_C4_DIRECT_LOOKUP_CONSOLE.png`
++- مخرجات `02_VERIFY_...ps1` النصية.
+--- /dev/null
++++ b/ERROR_RECORD_MEGA_BATCH_AR1_C4_DIRECT_KNOWLEDGE_DOCUMENT_METADATA_EXACT_LOOKUP_REPAIR_V1_2026_07_12.md
+@@ -0,0 +1,53 @@
++# Error Record — AR1/C4 Direct Knowledge Document Exact Lookup
++
++## العرض
++
++أظهرت دورة Single Flow أن C3 نفّذ 30 فحصًا وأن C4 يملك مواد مرشحة من نوع `knowledge_document`، لكن AR1 بقي عند:
++
++```text
++candidateCount=0
++directC4MaterialReferences=0
++C4_CANDIDATE_MATERIAL_NOT_FOUND_HOLD
++```
++
++## السبب الجذري
++
++`getPilotKnowledgeDocumentById()` كان يمر عبر `runtimeGetKnowledgeDocumentById()` ثم `runtimeGetKnowledgeDocuments()` ثم `tryGetAssistantKnowledgeDocumentBundle()`. الحزمة المركبة تعتمد على نجاح `knowledge_sources` و`reference_documents` و`reference_files` و`knowledge_citations`. فشل أي جدول مرافق أو فتح circuit breaker يعيد `null` للحزمة كلها، فيختفي UUID موجود أصلًا في `assistant.knowledge_documents`.
++
++## الملفات
++
++- `server/runtimeRepository.ts`
++- `server/governedAgenticRagPilot.ts`
++
++## ما فشل
++
++1. إصلاح قراءة `candidateMaterials[].id` نجح ساكنًا لكنه لم يغلق العطل التشغيلي.
++2. إعادة المحاولة عبر resolver العام بقيت مقيدة بالحزمة المركبة.
++3. fallback المحلي/القديم لا يضمن وجود UUID السيادي المحدد في C4.
++
++## الحل
++
++إضافة exact UUID lookup للقراءة فقط على `assistant.knowledge_documents.id` واستدعاؤه قبل resolver العام. لا تُستخدم مطابقة عنوان أو URL أو fuzzy أو semantic أو vector، ولا تُنشأ أي علاقة أو حالة حقوق.
++
++## الوقاية
++
++- لا تربط identity lookup حتميًا بتحميل aggregate كامل.
++- افصل exact entity read عن companion enrichment.
++- اجعل verifier يثبت ترتيب direct exact lookup قبل fallback.
++- احتفظ بالـfail-closed عند فشل صف الوثيقة الأساسي نفسه.
++
++## آخر baseline مستقر
++
++```text
++PALWAKF_ASSISTANT_SOURCE_PROVENANCE_AR1_RESOLUTION_HANDOFF_BASELINE_R2_20260709
++server/governedAgenticRagPilot.ts SHA-256=6C78DAF6D613A10F60AA26CC5E28FBB7DE7CF7A4064BECA72D68CA04E00EF92B
++```
++
++## حالة الإغلاق
++
++```text
++SOURCE_REPAIR_BUILT=YES
++STATIC_VERIFICATION=PASS
++RUNTIME_UAT=PENDING
++BASELINE_PROMOTION=PENDING
++```
