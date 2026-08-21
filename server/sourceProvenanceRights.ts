@@ -1,4 +1,4 @@
-﻿import { createClient, type SupabaseClient } from '@supabase/supabase-js';
+import { createClient, type SupabaseClient } from '@supabase/supabase-js';
 import type { AuthenticatedUser } from './_core/types/authUser';
 
 // Governing invariant: no_automatic_chat_release; provenance changes never alter content lifecycle.

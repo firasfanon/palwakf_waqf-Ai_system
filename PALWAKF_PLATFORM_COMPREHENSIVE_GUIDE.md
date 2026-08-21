@@ -1,4 +1,4 @@
-﻿# PALWAKF PLATFORM COMPREHENSIVE GUIDE
+# PALWAKF PLATFORM COMPREHENSIVE GUIDE
 
 **مرجع مختصر أعلى بعد تحديث Mega Batch 27C — 2026-06-16**
 
@@ -1615,3 +1615,41 @@ PRODUCTION_NOT_APPROVED=YES
 
 - `R9_GITHUB_PROMOTION=PENDING`
 - `R9_CANONICAL_GITHUB_BASELINE=PENDING`
+
+---
+
+## Update — R9 GitHub Promotion + Draft PR Pre-Merge Hygiene — 2026-08-21
+
+### الحالة المثبتة قبل الدمج
+- `R9_GITHUB_PROMOTION=ACCEPTED`
+- `R9_REMOTE_BRANCH=VERIFIED`
+- `R9_PR_CREATION=ACCEPTED_DRAFT`
+- `R9_PR_NUMBER=1`
+- `R9_PR_BASE_BRANCH=main`
+- `R9_PR_HEAD_BRANCH=agent/assistant-local-root-adoption-v1`
+- `R9_PR_PREMERGE_HYGIENE_PATCH=APPLIED_PENDING_FINAL_GITHUB_REVIEW`
+- `R9_MAIN_MERGE=PENDING`
+- `R9_CANONICAL_MAIN_BASELINE=PENDING`
+
+### نطاق Hygiene Patch
+- إزالة UTF-8 BOM غير المقصود من أربعة ملفات tracked فقط.
+- تثبيت UTF-8 بدون BOM.
+- تثبيت نهاية ملف واحدة LF للملفات الأربعة.
+- لا تغيير دلالي مقصود في ملفات TypeScript/TSX.
+- تحديث هذا الدليل فقط بحالة GitHub Promotion وDraft PR الحالية.
+
+### بوابات ما قبل Commit/Push
+- TypeScript check مطلوب.
+- `git diff --check` مطلوب.
+- staged scope يجب أن يساوي الملفات الأربعة فقط.
+- `pnpm-lock.yaml` يجب أن يبقى بلا تغيير.
+
+### الحدود
+- لا Database write.
+- لا PR جديد.
+- لا Merge.
+- لا direct write إلى `main`.
+- لا توسيع للنطاق.
+
+### البوابة التالية
+`R9_PR_FINAL_GITHUB_REVIEW_AND_MERGE_AUTHORIZATION_GATE`
