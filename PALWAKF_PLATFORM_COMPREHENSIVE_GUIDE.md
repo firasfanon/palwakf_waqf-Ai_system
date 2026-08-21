@@ -1653,3 +1653,58 @@ PRODUCTION_NOT_APPROVED=YES
 
 ### البوابة التالية
 `R9_PR_FINAL_GITHUB_REVIEW_AND_MERGE_AUTHORIZATION_GATE`
+
+---
+
+## Update — R9 Final Post-Merge Canonical Closure — 2026-08-21
+
+### الحقيقة النهائية المعتمدة
+- `R9_CONTROLLED_LIVE_REMEDIATION=ACCEPTED`
+- `R9_SOURCE_SYNC=ACCEPTED`
+- `R9_TYPESCRIPT=PASS`
+- `R9_RUNTIME=PASS`
+- `R9_SUPABASE_LIVE=PASS`
+- `R9_LLM_RUNTIME=PASS`
+- `R9_READ_ONLY_BROWSER_UAT=PASS`
+- `R9_ENCODING_HYGIENE=PASS`
+- `R9_GITHUB_PROMOTION=ACCEPTED`
+- `R9_PR_NUMBER=1`
+- `R9_PR_FINAL_STATE=MERGED`
+- `R9_MAIN_MERGE=ACCEPTED`
+- `R9_POST_MERGE_LOCAL_MAIN_RECONCILIATION=PASS`
+
+### GitHub canonical state بعد دمج R9
+- Merge commit / `main`: `31037260daeae3321f974da6cbc414dff2e567ea`
+- Canonical tree: `e5887ab0661d9205dd3e94e09c5bb590bdf3790e`
+- R9 final feature/hygiene head قبل الدمج: `757cc982635b011a89660b8f30eb15403b10f5d3`
+- R9 original promotion commit: `7aab0e4d6ed41a28cd3258909ff550d094dcb828`
+- R9 pre-promotion base: `3976707e203ed37ba18d9b6811a254060ce78ec1`
+- النطاق المدمج: 10 مسارات بالضبط.
+- `pnpm-lock.yaml` لم يتغير.
+
+### Canonical Main Baseline الملتقطة بعد الدمج
+- Baseline: `PALWAKF_ASSISTANT_R9_CANONICAL_MAIN_BASELINE_20260821_231336.zip`
+- SHA-256: `199A342A3D4AABBF7E0CFEC60B176AF8686ABF643193144F06989E177635DCBD`
+- `R9_CANONICAL_MAIN_BASELINE=ACCEPTED`
+- الالتقاط تم من `origin/main` دون تبديل الفرع أثناء الالتقاط ودون Git/DB write.
+
+### تفسير العلامات التاريخية السابقة
+علامات `PENDING` الموجودة في كتل R9 الأقدم تبقى كسجل تاريخي صحيح لحالة تلك اللحظة، ولا تمثل الحالة الحالية. هذه الكتلة هي المرجع الزمني الأحدث لحالة R9.
+
+### الحدود المستمرة
+- لا automatic rights approval.
+- لا automatic knowledge approval.
+- لا automatic public release.
+- أي Live DB mutation جديدة تحتاج تفويضًا صريحًا جديدًا.
+- أي Merge جديد إلى `main` يحتاج بوابة مستقلة.
+- لا تعديل `pnpm-lock.yaml` ضمن هذا الإغلاق.
+
+### وضع هذا التحديث
+- هذا التحديث الوثائقي ينشأ على فرع مستقل بعد مصالحة local `main` مع canonical GitHub `main`.
+- دمج PR الخاصة بهذا التحديث **غير مشمول** في تفويض المصالحة الحالي.
+
+### البوابة التالية
+`R9_POST_MERGE_GUIDE_CLOSURE_PR_REVIEW_AND_MERGE_GATE`
+
+بعد دمج تحديث الدليل وإعادة تثبيت canonical `main`، يبدأ R10 من أحدث `main` معتمدة:
+`MEGA_BATCH_ASSISTANT_PRODUCTION_OPERATIONS_WORKBENCH_AND_UX_R10_V1`
