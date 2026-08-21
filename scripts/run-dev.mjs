@@ -1,13 +1,20 @@
 import { spawn } from "node:child_process";
 import { resolve } from "node:path";
 
-const command = process.platform === "win32"
-  ? resolve("node_modules/.bin/tsx.cmd")
-  : resolve("node_modules/.bin/tsx");
+const tsxCli = resolve("node_modules/tsx/dist/cli.mjs");
 
-const child = spawn(command, ["watch", "server/_core/index.ts"], {
-  stdio: "inherit",
-  env: { ...process.env, NODE_ENV: "development" },
+const child = spawn(
+  process.execPath,
+  [tsxCli, "watch", "server/_core/index.ts"],
+  {
+    stdio: "inherit",
+    env: { ...process.env, NODE_ENV: "development" },
+  }
+);
+
+child.on("error", error => {
+  console.error("[run-dev] Failed to start tsx:", error);
+  process.exit(1);
 });
 
-child.on("exit", (code) => process.exit(code ?? 1));
+child.on("exit", code => process.exit(code ?? 1));

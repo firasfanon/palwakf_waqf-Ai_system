@@ -132,7 +132,7 @@ import { checkLlmProviderHealth } from "./llm/providerHealth";
 import { checkSupabaseHealth } from "./health/supabaseHealth";
 import { getTrustMetrics, applyTrustMetadata } from "./assistantTrust";
 import { buildPublicReadinessHealth } from "./health/readiness";
-import { getSourceProvenanceAccess, getSourceProvenanceRegistry, resolveSourceProvenanceActor, upsertSourceProvenance, archiveSourceProvenance } from "./sourceProvenanceRights";
+import { getSourceProvenanceAccess, getSourceProvenanceRegistry, resolveSourceProvenanceActor, upsertSourceProvenance, reviewSourceRightsProfile, archiveSourceProvenance } from "./sourceProvenanceRights";
 import { getLegacyManusProvenanceReconciliation } from "./legacyManusProvenance";
 import { getAutonomousProvenanceAudit } from "./autonomousProvenanceAudit";
 import { getAutonomousExternalSourceVerification } from "./externalSourceVerification";
@@ -3866,6 +3866,26 @@ const sourceProvenanceRouter = router({
         });
       } catch (error: any) {
         throw new TRPCError({ code: 'FORBIDDEN', message: error?.message || 'تعذر حفظ سجل المصدر والحقوق.' });
+      }
+    }),
+  reviewRights: adminProcedure
+    .input(z.object({
+      sourceId: z.string().uuid(),
+      decision: z.enum(['verified', 'rejected']),
+      reviewNotes: z.string().trim().min(8).max(4000),
+    }))
+    .mutation(async ({ ctx, input }) => {
+      try {
+        const actor = resolveSourceProvenanceActor(ctx.user);
+        return await reviewSourceRightsProfile({
+          actorAuthUserId: actor.authUserId,
+          actorIsSuperAdmin: actor.isSuperAdmin,
+          sourceId: input.sourceId,
+          decision: input.decision,
+          reviewNotes: input.reviewNotes,
+        });
+      } catch (error: any) {
+        throw new TRPCError({ code: 'FORBIDDEN', message: error?.message || 'تعذر حفظ قرار المراجعة البشرية للحقوق.' });
       }
     }),
   archive: adminProcedure

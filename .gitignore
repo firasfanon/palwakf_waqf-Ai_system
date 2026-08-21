@@ -60,3 +60,39 @@ Thumbs.db
 
 # PalWakf local runtime state
 .palwakf/runtime/
+
+# Additional local hygiene
+.pnpm-store/
+*.swp
+*.swo
+*~
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+logs/
+pids/
+*.pid
+*.pid.lock
+*.seed
+*.lcov
+.nyc_output/
+jspm_packages/
+*.tsbuildinfo
+.npm/
+.eslintcache
+.rpt2_cache/
+.rts2_cache_cjs/
+.rts2_cache_es/
+.rts2_cache_umd/
+.node_repl_history
+*.tgz
+.yarn-integrity
+.parcel-cache/
+.next/
+.nuxt/
+.out/
+.storybook-out/
+*.db
+*.sqlite
+*.sqlite3
