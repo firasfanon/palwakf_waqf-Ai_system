@@ -1,4 +1,4 @@
-import { createClient, type SupabaseClient } from '@supabase/supabase-js';
+﻿import { createClient, type SupabaseClient } from '@supabase/supabase-js';
 import type { AuthenticatedUser } from './_core/types/authUser';
 
 // Governing invariant: no_automatic_chat_release; provenance changes never alter content lifecycle.
@@ -235,6 +235,23 @@ export async function archiveSourceProvenance(input: {
   return data;
 }
 
+export async function reviewSourceRightsProfile(input: {
+  actorAuthUserId: string;
+  actorIsSuperAdmin: boolean;
+  sourceId: string;
+  decision: 'verified' | 'rejected';
+  reviewNotes: string;
+}) {
+  const { data, error } = await client().rpc('rpc_source_rights_review_v1', {
+    p_actor_auth_user_id: input.actorAuthUserId,
+    p_actor_is_super_admin: input.actorIsSuperAdmin,
+    p_source_id: input.sourceId,
+    p_decision: input.decision,
+    p_review_notes: input.reviewNotes,
+  });
+  if (error) throwRpc('تعذر حفظ قرار المراجعة البشرية للحقوق', error);
+  return data;
+}
 export async function getSourceProvenanceAccess(user?: Partial<AuthenticatedUser> | null) {
   const isSuperAdmin = isDirectSuperAdmin(user);
   const actorAuthUserId = String(user?.authUserId || user?.platformUserId || '').trim();

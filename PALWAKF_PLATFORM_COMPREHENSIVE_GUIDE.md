@@ -1,4 +1,4 @@
-# PALWAKF PLATFORM COMPREHENSIVE GUIDE
+﻿# PALWAKF PLATFORM COMPREHENSIVE GUIDE
 
 **مرجع مختصر أعلى بعد تحديث Mega Batch 27C — 2026-06-16**
 
@@ -1527,3 +1527,91 @@ PRODUCTION_NOT_APPROVED=YES
 تم تشغيل أول جلسة AR1 فعلية داخلية مؤقتة بسؤال واحد ومادة واحدة من C4. أُعيدت نتيجة Evidence-only مقيدة باستشهاد T3، ثم نُفذ Rollback وأزيلت الجلسة من ذاكرة العملية.
 
 لا يصرح هذا القبول بتفعيل LLM أو Chat/RAG العام أو أي كتابة سيادية أو Production.
+---
+
+## Update — R9 Controlled Live Remediation + Source Sync — 2026-08-21
+
+### الجذر والفرع الحاكمان
+- Canonical local root: `C:\Users\DELL\StudioProjects\palwakf_waqf Ai_system`
+- Branch: `agent/assistant-local-root-adoption-v1`
+- Base HEAD before source sync: `3976707e203ed37ba18d9b6811a254060ce78ec1`
+
+### الأدلة المقبولة
+- R9 Targeted Read-Only Closure: PASS.
+- `transaction_read_only=on` مثبت.
+- R9 Source Usage Census: 63/63 identifiers و10,701 tracked matches.
+- Live migration `palwakf_assistant_r9_controlled_live_remediation_v1`: PASS.
+
+### الإغلاق الحي المنجز
+- `document_can_write_v1()` أصبح fail-closed لدور `authenticated`.
+- الجداول الأربعة P0 أصبحت client SELECT-only.
+- أزيلت `MAINTAIN/TRUNCATE/REFERENCES/TRIGGER` من `anon/authenticated` على مجموعة R9 ذات 42 جدولًا.
+- سبعة Legacy Provenance RPCs أصبحت `postgres/service_role` only.
+- أصبحت `source_rights_profiles`, `source_url_history`, `source_permissions`, `source_takedown_requests`, `source_provenance_events` Live.
+- أصبحت `rpc_source_rights_review_v1` Live.
+- أصبح `rpc_release_official_knowledge_document_v1` fail-closed على verified rights + active official source + source consistency + verified citation + no takedown hold.
+
+### Source Sync
+- أضيف `reviewSourceRightsProfile` إلى backend.
+- أضيف `sourceProvenance.reviewRights` إلى TRPC.
+- أضيفت واجهة Verify / Reject بشرية في سجل المصادر والحقوق.
+- تعديل ملف الحقوق يعيد قرار المراجعة إلى `pending` في العقد الحي.
+- لا يؤدي Rights Review إلى Chat/Public Release تلقائيًا.
+- نُسخت الـMigration المطبقة إلى `sql_sandbox` كسجل مرجعي ولا تعاد من هناك.
+
+### الحدود
+- لا automatic rights approval.
+- لا automatic knowledge approval.
+- لا public production promotion.
+- لا تعديل `pnpm-lock.yaml`.
+- لا Git commit/push/PR حتى نجاح TypeScript + Runtime UAT + Final Diff.
+
+### البوابة التالية
+`R9_SOURCE_SYNC_TYPESCRIPT_RUNTIME_UAT_AND_FINAL_DIFF_GATE`
+
+---
+
+## Update — R9 Runtime + Final Diff Local Closure — 2026-08-21
+
+### حالة القبول المحلي
+- `R9_CONTROLLED_LIVE_REMEDIATION=ACCEPTED_LIVE`
+- `R9_SOURCE_SYNC=ACCEPTED_LOCAL`
+- `R9_SOURCE_SYNC_TYPESCRIPT=PASS`
+- `R9_RUNTIME_SERVER=PASS`
+- `R9_HTTP_SMOKE=PASS`
+- `R9_SUPABASE_LIVE_CONNECTION=PASS`
+- `R9_LIVE_DATA_BINDING=PROVEN`
+- `R9_LLM_RUNTIME=PASS`
+- `R9_READ_ONLY_BROWSER_UAT=PASS`
+- `R9_BROWSER_CONSOLE_ERRORS=0`
+- `R9_FINAL_DIFF_CODE_SCOPE=PASS`
+- `PNPM_LOCK_CHANGED=NO`
+
+### Runtime المثبت
+- Database provider: `supabase_postgresql`.
+- Database mode: `connected`.
+- Live probe: `assistant.ai_tool_runs`.
+- LLM provider: `ollama`.
+- LLM model: `qwen2.5:3b`.
+- Readiness: `server=true`, `database=true`, `llm=true`, `ready=true`.
+- Production blockers reported by readiness: `0`.
+
+### Git baseline قبل الترقية
+- Branch: `agent/assistant-local-root-adoption-v1`
+- Base HEAD: `3976707e203ed37ba18d9b6811a254060ce78ec1`
+- `origin/main`: `3976707e203ed37ba18d9b6811a254060ce78ec1`
+- Ahead/Behind before promotion: `0/0`.
+
+### حدود القبول
+- لا automatic rights approval.
+- لا automatic knowledge approval.
+- لم ينفذ Rights Review mutation أثناء Browser UAT.
+- لا Public Release تلقائي.
+- لا تعديل `pnpm-lock.yaml`.
+- رسائل Legacy local DB fallback تبقى دينًا تشغيليًا غير حاجب لأن Supabase health/readiness المثبتين Passed.
+
+### البوابة التالية
+`R9_GITHUB_PROMOTION_AND_CANONICAL_BASELINE_GATE`
+
+- `R9_GITHUB_PROMOTION=PENDING`
+- `R9_CANONICAL_GITHUB_BASELINE=PENDING`

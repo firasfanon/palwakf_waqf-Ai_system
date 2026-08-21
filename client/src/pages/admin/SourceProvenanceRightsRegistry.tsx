@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+﻿import { useMemo, useState } from 'react';
 import { toast } from 'sonner';
 import {
   Archive,
@@ -153,6 +153,9 @@ export default function SourceProvenanceRightsRegistry() {
   const [expanded, setExpanded] = useState<Set<string>>(new Set());
   const [dialogOpen, setDialogOpen] = useState(false);
   const [archiveTarget, setArchiveTarget] = useState<RegistrySource | null>(null);
+  const [rightsReviewTarget, setRightsReviewTarget] = useState<RegistrySource | null>(null);
+  const [rightsReviewDecision, setRightsReviewDecision] = useState<'verified' | 'rejected'>('verified');
+  const [rightsReviewNotes, setRightsReviewNotes] = useState('');
   const [archiveReason, setArchiveReason] = useState('');
   const [form, setForm] = useState(initialForm);
   const [legacyOpen, setLegacyOpen] = useState(false);
@@ -323,6 +326,16 @@ export default function SourceProvenanceRightsRegistry() {
     onError: (error) => toast.error('تعذرت أرشفة المصدر', { description: error.message }),
   });
 
+  const reviewRights = trpc.sourceProvenance.reviewRights.useMutation({
+    onSuccess: async (data) => {
+      const status = data?.review_status || rightsReviewDecision;
+      toast.success(status === 'verified' ? 'تم اعتماد ملف الحقوق بعد المراجعة البشرية.' : 'تم رفض ملف الحقوق بعد المراجعة البشرية.');
+      setRightsReviewTarget(null);
+      setRightsReviewNotes('');
+      await utils.sourceProvenance.registry.invalidate();
+    },
+    onError: (error) => toast.error('تعذر حفظ مراجعة الحقوق', { description: error.message }),
+  });
   const preparePilotSessionAuthority = trpc.agenticRagPilot.prepareSessionAuthority.useMutation({
     onSuccess: (data) => {
       setPilotAuthorityPreparation(data);
@@ -471,6 +484,11 @@ export default function SourceProvenanceRightsRegistry() {
     archive.mutate({ sourceId: archiveTarget.id, reason: archiveReason.trim() });
   };
 
+  const confirmRightsReview = () => {
+    if (!rightsReviewTarget) { toast.error('لم يتم اختيار مصدر لمراجعة الحقوق.'); return; }
+    if (rightsReviewNotes.trim().length < 8) { toast.error('ملاحظة المراجعة البشرية مطلوبة ويجب ألا تقل عن 8 محارف.'); return; }
+    reviewRights.mutate({ sourceId: rightsReviewTarget.id, decision: rightsReviewDecision, reviewNotes: rightsReviewNotes.trim() });
+  };
   if (registry.isLoading) {
     return <AdminPage><p className="text-sm text-muted-foreground">جارٍ تحميل سجل المصادر والحقوق…</p></AdminPage>;
   }
@@ -809,6 +827,7 @@ export default function SourceProvenanceRightsRegistry() {
                     <Badge variant={source.isActive ? 'secondary' : 'outline'}>{source.isActive ? 'نشط' : 'مؤرشف / غير نشط'}</Badge>
                     <Badge variant="outline">توثيق المصدر: {source.verificationStatus}</Badge>
                     <Badge variant={riskVariant(rightsStatus)}>الحقوق: {RIGHTS_LABELS[rightsStatus] || rightsStatus}</Badge>
+                    <Badge variant={source.rights?.review_status === 'verified' ? 'secondary' : source.rights?.review_status === 'rejected' ? 'destructive' : 'outline'}>مراجعة الحقوق: {source.rights?.review_status || 'غير مسجلة'}</Badge>
                     <Badge variant="outline">RAG: {RAG_LABELS[source.rights?.rag_eligibility] || 'مراجعة فقط'}</Badge>
                     <Badge variant="outline">{source.materialCounts.total} مادة مرتبطة</Badge>
                   </div>
@@ -816,6 +835,8 @@ export default function SourceProvenanceRightsRegistry() {
                     {source.baseUrl ? <Button variant="outline" size="sm" asChild><a href={source.baseUrl} target="_blank" rel="noopener noreferrer">فتح المصدر <ExternalLink className="mr-2 h-4 w-4" /></a></Button> : null}
                     <Button variant="outline" size="sm" onClick={() => toggle(source.id)}>{isOpen ? 'إخفاء المواد' : 'عرض المواد'} {isOpen ? <ChevronUp className="mr-2 h-4 w-4" /> : <ChevronDown className="mr-2 h-4 w-4" />}</Button>
                     <Button variant="outline" size="sm" onClick={() => openEdit(source)} disabled={!canManage}><Pencil className="ml-2 h-4 w-4" /> تعديل</Button>
+                    <Button variant="outline" size="sm" onClick={() => { setRightsReviewTarget(source); setRightsReviewDecision('verified'); setRightsReviewNotes(''); }} disabled={!canManage || !source.rights || source.rights.review_status === 'verified'}><ShieldCheck className="ml-2 h-4 w-4" /> اعتماد الحقوق</Button>
+                    <Button variant="outline" size="sm" onClick={() => { setRightsReviewTarget(source); setRightsReviewDecision('rejected'); setRightsReviewNotes(''); }} disabled={!canManage || !source.rights || source.rights.review_status === 'rejected'}><ShieldAlert className="ml-2 h-4 w-4" /> رفض الحقوق</Button>
                     <Button variant="outline" size="sm" onClick={() => setArchiveTarget(source)} disabled={!canManage || !source.isActive}><Archive className="ml-2 h-4 w-4" /> أرشفة</Button>
                   </div>
                 </div>
@@ -884,6 +905,19 @@ export default function SourceProvenanceRightsRegistry() {
         </DialogContent>
       </Dialog>
 
+      <Dialog open={Boolean(rightsReviewTarget)} onOpenChange={(open) => { if (!open) { setRightsReviewTarget(null); setRightsReviewNotes(''); } }}>
+        <DialogContent dir="rtl">
+          <DialogHeader>
+            <DialogTitle>{rightsReviewDecision === 'verified' ? 'اعتماد ملف الحقوق' : 'رفض ملف الحقوق'}</DialogTitle>
+            <DialogDescription>قرار بشري محكوم على ملف حقوق المصدر فقط، ولا يطلق المعرفة إلى Chat أو Production تلقائيًا.</DialogDescription>
+          </DialogHeader>
+          <div className="space-y-3">
+            <div className="rounded-lg border bg-muted/20 p-3 text-sm"><div className="font-medium">{rightsReviewTarget?.name || 'مصدر غير محدد'}</div><div className="mt-1 text-xs text-muted-foreground">الحالة الحالية: {rightsReviewTarget?.rights?.review_status || 'pending'} · الحقوق: {RIGHTS_LABELS[rightsReviewTarget?.rights?.rights_status] || rightsReviewTarget?.rights?.rights_status || 'غير محددة'}</div></div>
+            <div className="space-y-2"><Label>ملاحظة المراجع *</Label><Textarea value={rightsReviewNotes} onChange={(event) => setRightsReviewNotes(event.target.value)} placeholder="وثّق أساس قرار الاعتماد أو الرفض والمرجع الذي راجعته." /><p className="text-xs text-muted-foreground">الحد الأدنى 8 محارف.</p></div>
+          </div>
+          <DialogFooter><Button variant="outline" onClick={() => setRightsReviewTarget(null)}>إلغاء</Button><Button variant={rightsReviewDecision === 'rejected' ? 'destructive' : 'default'} onClick={confirmRightsReview} disabled={reviewRights.isPending}>{reviewRights.isPending ? 'جارٍ حفظ قرار المراجعة…' : rightsReviewDecision === 'verified' ? 'اعتماد الحقوق' : 'رفض الحقوق'}</Button></DialogFooter>
+        </DialogContent>
+      </Dialog>
       <Dialog open={Boolean(archiveTarget)} onOpenChange={(open) => { if (!open) setArchiveTarget(null); }}>
         <DialogContent dir="rtl"><DialogHeader><DialogTitle>أرشفة المصدر بدل حذفه</DialogTitle><DialogDescription>الأرشفة توقف المصدر وتحافظ على تاريخ الروابط والمواد المرتبطة لأغراض الإسناد والتدقيق.</DialogDescription></DialogHeader><div className="space-y-2"><Label>سبب الأرشفة *</Label><Textarea value={archiveReason} onChange={(event) => setArchiveReason(event.target.value)} /></div><DialogFooter><Button variant="outline" onClick={() => setArchiveTarget(null)}>إلغاء</Button><Button variant="destructive" onClick={confirmArchive} disabled={archive.isPending}><AlertTriangle className="ml-2 h-4 w-4" /> أرشفة المصدر</Button></DialogFooter></DialogContent>
       </Dialog>
