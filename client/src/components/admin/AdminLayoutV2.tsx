@@ -89,12 +89,31 @@ function useMediaQuery(query: string) {
 }
 
 export default function AdminLayoutV2({ children }: AdminLayoutV2Props) {
-  const [location] = useLocation();
+  const [location, navigate] = useLocation();
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
   const isMobileShell = useMediaQuery("(max-width: 900px)");
   const contentRef = useRef<HTMLDivElement | null>(null);
   const { user, loading: authLoading } = useAuth({ redirectOnUnauthenticated: false });
   const isAdmin = hasAdminToolsAccess(user);
+  const [lastOperationalHref, setLastOperationalHref] = useState<string | null>(() => {
+    if (typeof window === "undefined") return null;
+    return window.localStorage.getItem("palwakf-last-operational-route");
+  });
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const pathOnly = normalizeAdminPath(String(location || "").split("?")[0] || "/admin/dashboard");
+    if (getAdminWorkspaceKind(pathOnly) !== "daily") return;
+
+    if (pathOnly === APP_ROUTES.adminDashboard) {
+      setLastOperationalHref(window.localStorage.getItem("palwakf-last-operational-route"));
+      return;
+    }
+
+    const href = String(location || pathOnly);
+    window.localStorage.setItem("palwakf-last-operational-route", href);
+    setLastOperationalHref(href);
+  }, [location]);
 
   // ✅ RTL only inside Admin + enforce admin scope styling.
   useEffect(() => {
@@ -196,6 +215,15 @@ export default function AdminLayoutV2({ children }: AdminLayoutV2Props) {
           </div>
 
           <div className="admin-topbar-actions">
+            {normalizeAdminPath(String(location || "").split("?")[0]) === APP_ROUTES.adminDashboard && lastOperationalHref ? (
+              <button
+                type="button"
+                className="admin-action admin-action-secondary"
+                onClick={() => navigate(lastOperationalHref)}
+              >
+                متابعة آخر عمل
+              </button>
+            ) : null}
             {showBack ? (
               <button type="button" className="admin-action admin-action-secondary" onClick={() => window.history.back()}>
                 رجوع

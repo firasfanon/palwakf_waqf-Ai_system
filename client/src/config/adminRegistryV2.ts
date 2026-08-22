@@ -47,6 +47,7 @@ import {
   Shield,
   KeyRound,
   FileSearch,
+  Search,
   ShieldCheck,
   Key,
   Sliders,
@@ -103,6 +104,8 @@ import DeferredMegaBatchAAudit from "@/pages/admin/DeferredMegaBatchAAudit";
 import ToolOutputIntake from "@/pages/admin/ToolOutputIntake";
 import SourceInventoryPreview from "@/pages/admin/SourceInventoryPreview";
 import RemoteStagingEvidence from "@/pages/admin/RemoteStagingEvidence";
+import OperationsSearch from "@/pages/admin/OperationsSearch";
+import Chat from "@/pages/Chat";
 
 import AITools from "@/pages/AITools";
 import ClassifyTool from "@/pages/ClassifyTool";
@@ -199,7 +202,9 @@ export const adminRegistrySections: RegistryNavSection[] = [
     title: "لوحة القيادة",
     icon: LayoutDashboard,
     items: [
-      { title: "لوحة التحكم الرئيسية", href: APP_ROUTES.adminDashboard, icon: LayoutDashboard, component: AdminDashboard, lifecycle: "operational", dataState: "connected", note: "تم تفعيل admin.systemStats وadmin.charts ضمن Mega Batch 27B مع Empty State آمن عند غياب قاعدة البيانات." },
+      { title: "مركز العمل", href: APP_ROUTES.adminDashboard, icon: LayoutDashboard, component: AdminDashboard, lifecycle: "operational", dataState: "connected", note: "R10: الصفحة الرئيسية التشغيلية؛ تعرض العمل المفتوح وتشغيلات الأدوات والمسارات اليومية بدل الإحصاءات التقنية." },
+      { title: "المساعد", href: APP_ROUTES.adminAssistant, icon: MessageSquare, component: Chat, lifecycle: "operational", dataState: "connected", note: "R10: المساعد الحقيقي داخل Admin Workspace بدل فصل Chat عن العمل اليومي." },
+      { title: "البحث الموحد", href: APP_ROUTES.adminOperationsSearch, icon: Search, component: OperationsSearch, lifecycle: "operational", dataState: "connected", note: "R10: بحث موحد في المعرفة والمصادر وتشغيلات الأدوات." },
       { title: "سجل النشاط", href: "/admin/activity", icon: Activity, component: AdminActivity, lifecycle: "operational", dataState: "connected", note: "تم ربطه بـ admin.activityLog لقراءة المحادثات والرسائل والأسئلة أو تشغيلات الأدوات ك fallback." },
       { title: "التحليلات والتقييمات", href: "/admin/analytics", icon: BarChart3, component: AnalyticsDashboard, lifecycle: "operational", dataState: "connected", note: "تم تفعيل analytics.* لقراءة التقييمات والأسئلة المتكررة وأفضل الإجابات واقتراحات التحسين." },
 { title: "أدلة Staging وRBAC/RLS", href: "/admin/staging-evidence", icon: ShieldCheck, component: RemoteStagingEvidence, lifecycle: "operational", dataState: "connected", note: "لقطة server-side آمنة لبوابة Mega Batch 29A؛ لا تمنح اعتماد إنتاج ولا تعرض أسرارًا." },

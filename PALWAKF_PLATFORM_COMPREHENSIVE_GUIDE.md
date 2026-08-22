@@ -1708,3 +1708,43 @@ PRODUCTION_NOT_APPROVED=YES
 
 بعد دمج تحديث الدليل وإعادة تثبيت canonical `main`، يبدأ R10 من أحدث `main` معتمدة:
 `MEGA_BATCH_ASSISTANT_PRODUCTION_OPERATIONS_WORKBENCH_AND_UX_R10_V1`
+
+---
+
+## Update — R10 Production Operations Workbench & UX — 2026-08-21
+
+### نقطة الانطلاق
+- Canonical GitHub `main`: `3b2d0fd8902dde3bc46914ecfd8d06e6af12af87`
+- Canonical tree: `5d8200a4213ab91a5d06b97930065d90fda375b1`
+- Branch: `agent/assistant-r10-production-operations-v1`
+- `R9=FUNCTIONALLY_AND_CANONICALLY_CLOSED`
+
+### القرار
+`R10_PRODUCTION_OPERATIONS_WORKBENCH=SOURCE_APPLIED_PENDING_TYPESCRIPT_RUNTIME_READ_ONLY_BROWSER_UAT`
+
+### التحول المنتجّي
+- أصبحت `/admin/dashboard` مركز عمل يومي بدل Dashboard إحصائية.
+- أضيف `/admin/assistant` لتشغيل Chat الحقيقي داخل Admin shell.
+- أضيف `/admin/operations-search` للبحث في المعرفة والمصادر وتشغيلات الأدوات.
+- أعيد بناء `/admin/knowledge-workspace` كطابور عمل متصل مع `claimReviewTask`.
+- أعيد بناء `/admin/tools` كاستوديو أدوات، ونقلت تفاصيل Backend/الحوكمة إلى جزء ثانوي قابل للفتح.
+- أصبحت القائمة اليومية موجهة إلى: العمل اليومي، المعرفة، الأدوات الذكية، البيانات الوقفية.
+- بقية الأسطح تبقى متاحة تحت `الحوكمة والإدارة المتقدمة`.
+- أضيف حفظ آخر route يومي وزر `متابعة آخر عمل`.
+
+### حدود UAT الحالية
+- Runtime Smoke = Read-Only.
+- Browser UAT = Read-Only.
+- لا `claimReviewTask` أثناء UAT الحالية.
+- لا تشغيل أداة جديدة أثناء UAT الحالية.
+- لا إرسال Chat أثناء UAT الحالية.
+- لا Review/Approve/Reject أو أي mutation حية.
+- أي Live mutating UAT تحتاج تفويضًا منفصلًا.
+
+### حدود Git والبيانات
+- لا DB migration أو DB write في R10 V1.0.1.
+- لا تعديل `pnpm-lock.yaml`.
+- لا Git commit/push/PR/merge ضمن بوابة التطبيق الحالية.
+
+### البوابة التالية
+`R10_TYPESCRIPT_RUNTIME_READ_ONLY_BROWSER_UAT_AND_FINAL_DIFF_GATE`
