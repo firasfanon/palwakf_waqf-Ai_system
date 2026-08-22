@@ -1708,3 +1708,101 @@ PRODUCTION_NOT_APPROVED=YES
 
 بعد دمج تحديث الدليل وإعادة تثبيت canonical `main`، يبدأ R10 من أحدث `main` معتمدة:
 `MEGA_BATCH_ASSISTANT_PRODUCTION_OPERATIONS_WORKBENCH_AND_UX_R10_V1`
+
+---
+
+## Update — R10 Production Operations Workbench & UX — 2026-08-21
+
+### نقطة الانطلاق
+- Canonical GitHub `main`: `3b2d0fd8902dde3bc46914ecfd8d06e6af12af87`
+- Canonical tree: `5d8200a4213ab91a5d06b97930065d90fda375b1`
+- Branch: `agent/assistant-r10-production-operations-v1`
+- `R9=FUNCTIONALLY_AND_CANONICALLY_CLOSED`
+
+### القرار
+`R10_PRODUCTION_OPERATIONS_WORKBENCH=SOURCE_APPLIED_PENDING_TYPESCRIPT_RUNTIME_READ_ONLY_BROWSER_UAT`
+
+### التحول المنتجّي
+- أصبحت `/admin/dashboard` مركز عمل يومي بدل Dashboard إحصائية.
+- أضيف `/admin/assistant` لتشغيل Chat الحقيقي داخل Admin shell.
+- أضيف `/admin/operations-search` للبحث في المعرفة والمصادر وتشغيلات الأدوات.
+- أعيد بناء `/admin/knowledge-workspace` كطابور عمل متصل مع `claimReviewTask`.
+- أعيد بناء `/admin/tools` كاستوديو أدوات، ونقلت تفاصيل Backend/الحوكمة إلى جزء ثانوي قابل للفتح.
+- أصبحت القائمة اليومية موجهة إلى: العمل اليومي، المعرفة، الأدوات الذكية، البيانات الوقفية.
+- بقية الأسطح تبقى متاحة تحت `الحوكمة والإدارة المتقدمة`.
+- أضيف حفظ آخر route يومي وزر `متابعة آخر عمل`.
+
+### حدود UAT الحالية
+- Runtime Smoke = Read-Only.
+- Browser UAT = Read-Only.
+- لا `claimReviewTask` أثناء UAT الحالية.
+- لا تشغيل أداة جديدة أثناء UAT الحالية.
+- لا إرسال Chat أثناء UAT الحالية.
+- لا Review/Approve/Reject أو أي mutation حية.
+- أي Live mutating UAT تحتاج تفويضًا منفصلًا.
+
+### حدود Git والبيانات
+- لا DB migration أو DB write في R10 V1.0.1.
+- لا تعديل `pnpm-lock.yaml`.
+- لا Git commit/push/PR/merge ضمن بوابة التطبيق الحالية.
+
+### البوابة التالية
+`R10_TYPESCRIPT_RUNTIME_READ_ONLY_BROWSER_UAT_AND_FINAL_DIFF_GATE`
+
+---
+## Update — R10 PR Final State Closure — 2026-08-22
+
+### الحالة الوظيفية المثبتة
+- `R10_SOURCE_APPLY=PASS`
+- `R10_STATIC_VERIFY=PASS`
+- `R10_TYPESCRIPT=PASS`
+- `R10_RUNTIME_SMOKE_READ_ONLY=PASS`
+- `R10_BROWSER_UAT_READ_ONLY=PASS`
+- `R10_RESUME_LAST_WORK=PASS`
+- `R10_NETWORK_404=0`
+- `R10_NETWORK_500=0`
+- `R10_FINAL_DIFF=PASS`
+- `R10_LIVE_MUTATING_UAT_ACTIONS_EXECUTED=NO`
+
+### Baseline المحلية المقبولة
+- `R10_LOCAL_CANDIDATE_BASELINE=ACCEPTED`
+- Baseline: `PALWAKF_ASSISTANT_R10_LOCAL_CANDIDATE_BASELINE_20260822_145701.zip`
+- SHA-256: `1BD3CB37189A964F694DB783CD946D77352A04607D5B75A61A6AB4D2063D5CC5`
+- الالتقاط تم بعد قبول Browser UAT وFinal Diff، ودون Git/DB write.
+
+### GitHub Promotion
+- `R10_GITHUB_PROMOTION=ACCEPTED`
+- Feature commit: `ed9783f20567b7929fa08b4f86558dd180f66f71`
+- Parent / canonical base: `3b2d0fd8902dde3bc46914ecfd8d06e6af12af87`
+- Branch: `agent/assistant-r10-production-operations-v1`
+- نطاق Feature commit: 11 مسارًا بالضبط.
+- `pnpm-lock.yaml` لم يتغير.
+- لا direct main write.
+
+### Pull Request
+- `R10_PR_NUMBER=3`
+- Title: `R10: Production Operations Workbench & UX`
+- Base: `main`
+- Head: `agent/assistant-r10-production-operations-v1`
+- `R10_PR_STATE=OPEN`
+- `R10_PR_DRAFT=YES`
+- `R10_PR_MERGEABLE=YES`
+- `R10_PR_CHANGED_FILES=11`
+- هذه الكتلة الوثائقية تضيف Commit ثانيًا إلى نفس PR دون توسيع قائمة الملفات، لأن الدليل نفسه موجود أصلًا ضمن نطاق الـ11.
+- `CI=NOT_CONFIGURED_OR_NOT_RUN` ما لم تظهر Checks لاحقًا؛ لا يجوز تسجيل CI=PASS بلا دليل.
+
+### تفسير حالة R10 السابقة في هذا الدليل
+القيم السابقة التي تصف R10 بأنها `SOURCE_APPLIED_PENDING_TYPESCRIPT_RUNTIME_READ_ONLY_BROWSER_UAT`
+وتحدد `R10_TYPESCRIPT_RUNTIME_READ_ONLY_BROWSER_UAT_AND_FINAL_DIFF_GATE` تبقى سجلًا تاريخيًا صحيحًا لحالة تلك اللحظة فقط.
+هذه الكتلة هي المرجع الزمني الأحدث لحالة R10 قبل Ready/Merge.
+
+### الحدود المستمرة
+- لا Live DB mutation ضمن R10 الحالية.
+- لا live mutating UAT ضمن هذا الإغلاق.
+- لا تعديل `pnpm-lock.yaml`.
+- لا Ready for Review ضمن بوابة الإغلاق الوثائقي الحالية.
+- لا Merge إلى `main` ضمن بوابة الإغلاق الوثائقي الحالية.
+- أي Merge إلى `main` يحتاج تفويضًا مستقلًا جديدًا.
+
+### البوابة التالية
+`R10_PR_FINAL_READY_REVIEW_AND_MAIN_MERGE_AUTHORIZATION_GATE`

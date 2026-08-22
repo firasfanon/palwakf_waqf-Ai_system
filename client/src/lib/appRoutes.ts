@@ -14,6 +14,8 @@ export const APP_ROUTES = {
   knowledgeLegacy: "/knowledge",
   advancedSearch: "/advanced-search",
   adminDashboard: "/admin/dashboard",
+  adminAssistant: "/admin/assistant",
+  adminOperationsSearch: "/admin/operations-search",
   adminTools: "/admin/tools",
   adminToolsClassify: "/admin/tools/classify",
   adminToolsExtract: "/admin/tools/extract",
