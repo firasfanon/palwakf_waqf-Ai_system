@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { dedupeResearchSources, type ResearchSourceResult } from "./researchSources";
+import { dedupeResearchSources, filterRelevantResearchSources, researchRelevanceScore, type ResearchSourceResult } from "./researchSources";
 
 const row = (url: string, title = "بحث وقفي", doi?: string): ResearchSourceResult => ({
   id: url, provider: "test", kind: "academic", title, url, content: title,
@@ -15,5 +15,11 @@ describe("research source normalization", () => {
   });
   it("preserves distinct evidence", () => {
     expect(dedupeResearchSources([row("https://a.test"), row("https://b.test")])).toHaveLength(2);
+  });
+  it("rejects academically indexed but irrelevant results", () => {
+    const relevant = row("https://a.test", "قانون الأراضي العثماني ووقف التخصيصات");
+    const irrelevant = row("https://b.test", "المادة السادسة من قانون الإجراءات الجزائية الجزائرية");
+    expect(researchRelevanceScore("قانون الأراضي العثماني وقف تخصيصات", relevant)).toBeGreaterThan(researchRelevanceScore("قانون الأراضي العثماني وقف تخصيصات", irrelevant));
+    expect(filterRelevantResearchSources("قانون الأراضي العثماني وقف تخصيصات", [irrelevant, relevant])).toEqual([relevant]);
   });
 });

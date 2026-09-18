@@ -54,6 +54,25 @@ export async function searchWikipedia(query: string, limit = 4): Promise<Researc
   })).filter((row: ResearchSourceResult) => row.title && row.url);
 }
 
+function tokens(value: string): string[] {
+  return text(value).toLowerCase().replace(/[^\p{L}\p{N}\s]/gu, " ").split(/\s+/).filter(token => token.length >= 3);
+}
+export function researchRelevanceScore(query: string, row: ResearchSourceResult): number {
+  const q = [...new Set(tokens(query))];
+  if (!q.length) return 0;
+  const haystack = new Set(tokens(`${row.title} ${row.content}`));
+  const matches = q.filter(token => haystack.has(token)).length;
+  const title = new Set(tokens(row.title));
+  const titleMatches = q.filter(token => title.has(token)).length;
+  return (matches / q.length) + (titleMatches / q.length);
+}
+export function filterRelevantResearchSources(query: string, rows: ResearchSourceResult[], minScore = 0.5): ResearchSourceResult[] {
+  return rows.map(row => ({ row, score: researchRelevanceScore(query, row) }))
+    .filter(item => item.score >= minScore)
+    .sort((a, b) => b.score - a.score)
+    .map(item => item.row);
+}
+
 export function dedupeResearchSources(rows: ResearchSourceResult[]): ResearchSourceResult[] {
   const seen = new Set<string>();
   return rows.filter(row => {
@@ -65,7 +84,7 @@ export async function searchExternalResearch(query: string, deep = false): Promi
   const jobs = [searchWikipedia(query, deep ? 4 : 2)];
   if (deep) jobs.push(searchOpenAlex(query, 5), searchCrossref(query, 5));
   const settled = await Promise.allSettled(jobs);
-  return dedupeResearchSources(settled.flatMap(x => x.status === "fulfilled" ? x.value : [])).slice(0, deep ? 10 : 4);
+  return filterRelevantResearchSources(query, dedupeResearchSources(settled.flatMap(x => x.status === "fulfilled" ? x.value : []))).slice(0, deep ? 10 : 4);
 }
 
 export async function searchExternalResearchMany(queries: string[], deep = true): Promise<ResearchSourceResult[]> {
