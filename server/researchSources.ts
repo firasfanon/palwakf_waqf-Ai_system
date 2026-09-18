@@ -68,8 +68,11 @@ export function researchRelevanceScore(query: string, row: ResearchSourceResult)
 }
 export function filterRelevantResearchSources(query: string, rows: ResearchSourceResult[], minScore = 0.5): ResearchSourceResult[] {
   return rows.map(row => ({ row, score: researchRelevanceScore(query, row) }))
-    .filter(item => item.score >= minScore)
-    .sort((a, b) => b.score - a.score)
+    .filter(item => item.score >= (item.row.kind === "academic" ? Math.max(minScore, 0.75) : minScore))
+    .sort((a, b) => {
+      const authorityRank = (value: ResearchSourceResult["authority"]) => value === "primary" ? 4 : value === "reference" ? 3 : value === "scholarly" ? 2 : 1;
+      return authorityRank(b.row.authority) - authorityRank(a.row.authority) || b.score - a.score;
+    })
     .map(item => item.row);
 }
 
@@ -81,7 +84,7 @@ export function dedupeResearchSources(rows: ResearchSourceResult[]): ResearchSou
   });
 }
 export async function searchExternalResearch(query: string, deep = false): Promise<ResearchSourceResult[]> {
-  const jobs = [searchWikipedia(query, deep ? 4 : 2)];
+  const jobs = [searchAuthoritativeCatalog(query, deep ? 6 : 4), searchWikipedia(query, deep ? 4 : 2)];
   if (deep) jobs.push(searchOpenAlex(query, 5), searchCrossref(query, 5));
   const settled = await Promise.allSettled(jobs);
   return filterRelevantResearchSources(query, dedupeResearchSources(settled.flatMap(x => x.status === "fulfilled" ? x.value : []))).slice(0, deep ? 10 : 4);
@@ -90,5 +93,40 @@ export async function searchExternalResearch(query: string, deep = false): Promi
 export async function searchExternalResearchMany(queries: string[], deep = true): Promise<ResearchSourceResult[]> {
   const unique = [...new Set(queries.map(q => q.trim()).filter(Boolean))].slice(0, 4);
   const settled = await Promise.allSettled(unique.map(q => searchExternalResearch(q, deep)));
-  return dedupeResearchSources(settled.flatMap(x => x.status === "fulfilled" ? x.value : [])).slice(0, 16);
+  return dedupeResearchSources(settled.flatMap(x => x.status === "fulfilled" ? x.value : [])).slice(0, 10);
+}
+
+
+type AuthoritativeCatalogEntry = {
+  id: string; provider: string; kind: ResearchSourceKind; title: string; url: string;
+  authority: ResearchSourceResult["authority"]; keywords: string[];
+};
+const AUTHORITATIVE_CATALOG: AuthoritativeCatalogEntry[] = [
+  { id: "maqam:ottoman-land-code-1858", provider: "مقام - جامعة النجاح", kind: "legal", title: "قانون الأراضي العثماني 1858", url: "https://maqam.najah.edu/legislation/169/", authority: "reference", keywords: ["قانون الأراضي العثماني","الأراضي الموقوفة","وقف تخصيصات","الوقف غير الصحيح","المادة 4","المادة 121","تمليك","ملكنامه"] },
+  { id: "maqam:appeal-96-2017", provider: "مقام - جامعة النجاح", kind: "legal", title: "استئناف القدس 96/2017 - وقف خاصكي سلطان ووقف التخصيصات", url: "https://maqam.najah.edu/judgments/1780/", authority: "reference", keywords: ["خاصكي سلطان","وقف تخصيصات","وقف غير صحيح","الأراضي العثماني","بيت لحم","بيت جالا"] },
+  { id: "maqam:cassation-1543-2016", provider: "مقام - جامعة النجاح", kind: "legal", title: "نقض 1543/2016 - الفرق بين الوقف الصحيح ووقف التخصيصات", url: "https://maqam.najah.edu/judgments/7543/", authority: "reference", keywords: ["وقف تخصيصات","وقف غير صحيح","المادة 4","الأراضي العثماني","رقبة العقار","بيت المال"] },
+  { id: "openjerusalem:haseki-ottoman-archive", provider: "OpenJerusalem Archives", kind: "archival", title: "Ottoman archival records concerning the Waqf of Haseki Sultan in Jerusalem", url: "https://archives.openjerusalem.org/index.php/informationobject/browse?collection=31098&media=print&repos=739&sf_culture=en&sort=identifier&sortDir=asc&topLod=0&view=table", authority: "primary", keywords: ["Haseki Sultan","خاصكي سلطان","Jerusalem","وقف","waqf","Ottoman","برات","حجة","سند","أرشيف"] },
+  { id: "escholarship:haseki-deed-1552", provider: "University of California eScholarship", kind: "academic", title: "Early-Ottoman Palestinian Toponymy: Haseki Sultan's Endowment Deed (1552)", url: "https://escholarship.org/uc/item/0cs6f5k5", authority: "scholarly", keywords: ["Haseki Sultan","خاصكي سلطان","waqfiyya","وقفية","endowment deed","1552","Jerusalem","العمارة العامرة"] }
+];
+async function getHtmlText(url: string, timeoutMs = 10000): Promise<string> {
+  const controller = new AbortController(); const timer = setTimeout(() => controller.abort(), timeoutMs);
+  try {
+    const res = await fetch(url, { headers: { Accept: "text/html,application/xhtml+xml", "User-Agent": UA }, signal: controller.signal });
+    if (!res.ok) throw new Error("HTTP_" + res.status);
+    const html = await res.text();
+    return text(html.replace(/<script[\s\S]*?<\/script>/gi, " ").replace(/<style[\s\S]*?<\/style>/gi, " "));
+  } finally { clearTimeout(timer); }
+}
+export async function searchAuthoritativeCatalog(query: string, limit = 6): Promise<ResearchSourceResult[]> {
+  const qTokens = new Set(tokens(query));
+  const ranked = AUTHORITATIVE_CATALOG.map(entry => {
+    const keyTokens = tokens([entry.title, ...entry.keywords].join(" "));
+    const hits = keyTokens.filter(token => qTokens.has(token)).length;
+    return { entry, score: hits / Math.max(1, Math.min(qTokens.size, 8)) };
+  }).filter(item => item.score >= 0.2).sort((a,b) => b.score - a.score).slice(0, limit);
+  const settled = await Promise.allSettled(ranked.map(async ({ entry }) => ({
+    id: entry.id, provider: entry.provider, kind: entry.kind, title: entry.title, url: entry.url,
+    content: `${entry.keywords.join(" ")}\n${(await getHtmlText(entry.url)).slice(0, 4500)}`, authority: entry.authority, reviewed: false,
+  } satisfies ResearchSourceResult)));
+  return settled.flatMap(result => result.status === "fulfilled" ? [result.value] : []);
 }
