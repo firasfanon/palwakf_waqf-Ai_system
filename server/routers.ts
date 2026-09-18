@@ -3161,9 +3161,15 @@ const pageSettingsRouter = router({
 });
 
 const aiRouter = router({
-  chat: publicProcedure.input(z.any()).mutation(async ({ input }) => {
-    const prompt = String(input?.message || input?.prompt || input?.query || '');
-    return { answer: prompt ? `تم استلام الطلب: ${prompt.slice(0, 120)}` : 'تم استلام الطلب.', sources: [], mode: 'local_stub_connected' };
+  chat: protectedProcedure.input(z.object({
+    message: z.string().min(1).optional(), prompt: z.string().min(1).optional(), query: z.string().min(1).optional(),
+    mode: z.enum(['answer', 'deep_research']).optional(),
+  }).refine(value => !!(value.message || value.prompt || value.query), { message: 'يلزم إدخال سؤال' }))
+  .mutation(async ({ input, ctx }) => {
+    const question = String(input.message || input.prompt || input.query || '').trim();
+    const scopeCodes = await runtimeGetKnowledgeScopeCodes(ctx.user).catch(() => []);
+    const research = await runResearchAnswer({ question, mode: input.mode || 'answer', actor: ctx.user, scopeCodes });
+    return { answer: research.answer, sources: research.references, mode: research.mode, research };
   }),
 });
 

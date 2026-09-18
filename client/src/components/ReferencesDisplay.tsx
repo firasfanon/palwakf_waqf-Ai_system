@@ -25,6 +25,11 @@ interface Reference {
   visibilityScope?: 'public' | 'internal' | 'restricted';
   contentStatus?: string | null;
   trustEligible?: boolean;
+  provider?: string;
+  external?: boolean;
+  sourceKind?: string;
+  authority?: string;
+  reviewed?: boolean;
 }
 
 interface ReferencesDisplayProps {
@@ -44,13 +49,13 @@ export const ReferencesDisplay: React.FC<ReferencesDisplayProps> = ({ references
       <div className="flex items-center gap-2 mb-2">
         <BookOpen size={16} className="text-emerald-600" />
         <span className="text-sm font-semibold text-emerald-700">
-          المراجع المعتمدة ({references.length})
+          المصادر والأدلة ({references.length})
         </span>
       </div>
 
       <div className="space-y-2">
         {references.map((ref, index) => {
-          const detailsHref = `/knowledge-base/${ref.id}`;
+          const detailsHref = ref.external && ref.sourceUrl ? ref.sourceUrl : `/knowledge-base/${ref.id}`;
           return (
             <div
               key={ref.uuid || ref.id || index}
@@ -60,7 +65,7 @@ export const ReferencesDisplay: React.FC<ReferencesDisplayProps> = ({ references
                 <div className="flex-1">
                   <div className="flex flex-wrap items-center gap-2 mb-1">
                     <span className="bg-emerald-600 text-white px-2 py-0.5 rounded text-xs font-semibold">
-                      مرجع {index + 1}
+                      {ref.external ? `مصدر خارجي ${index + 1}` : `مرجع ${index + 1}`}
                     </span>
                     {ref.category && (
                       <span className="bg-emerald-200 text-emerald-800 px-2 py-0.5 rounded text-xs">
@@ -71,6 +76,12 @@ export const ReferencesDisplay: React.FC<ReferencesDisplayProps> = ({ references
                       <span className="text-xs text-emerald-800 font-medium">
                         اقتباسات: {ref.citationsCount}
                       </span>
+                    )}
+                    {ref.external && ref.provider && (
+                      <span className="rounded-full border border-sky-200 bg-sky-50 px-2 py-0.5 text-xs text-sky-800">{ref.provider}</span>
+                    )}
+                    {ref.external && ref.authority && (
+                      <span className="rounded-full border border-violet-200 bg-violet-50 px-2 py-0.5 text-xs text-violet-800">{ref.authority}</span>
                     )}
                     {ref.authorityLevel && (
                       <span className="rounded-full border border-slate-200 bg-white px-2 py-0.5 text-xs text-slate-700">
