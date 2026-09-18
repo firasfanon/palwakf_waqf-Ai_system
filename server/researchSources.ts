@@ -117,6 +117,26 @@ async function getHtmlText(url: string, timeoutMs = 10000): Promise<string> {
     return text(html.replace(/<script[\s\S]*?<\/script>/gi, " ").replace(/<style[\s\S]*?<\/style>/gi, " "));
   } finally { clearTimeout(timer); }
 }
+export function buildEvidenceSnippet(query: string, content: string, maxChars = 1800): string {
+  const normalized = text(content);
+  if (!normalized || normalized.length <= maxChars) return normalized;
+  const qTokens = [...new Set(tokens(query))].filter(token => token.length >= 3);
+  const lower = normalized.toLowerCase();
+  const positions = qTokens
+    .map(token => lower.indexOf(token.toLowerCase()))
+    .filter(position => position >= 0)
+    .sort((a, b) => a - b);
+  if (positions.length === 0) return normalized.slice(0, maxChars);
+  const windows: string[] = [];
+  const radius = Math.max(220, Math.floor(maxChars / Math.min(positions.length, 3) / 2));
+  for (const position of positions.slice(0, 3)) {
+    const start = Math.max(0, position - radius);
+    const end = Math.min(normalized.length, position + radius);
+    windows.push(normalized.slice(start, end));
+  }
+  return [...new Set(windows)].join(" … ").slice(0, maxChars);
+}
+
 export async function searchAuthoritativeCatalog(query: string, limit = 6): Promise<ResearchSourceResult[]> {
   const qTokens = new Set(tokens(query));
   const ranked = AUTHORITATIVE_CATALOG.map(entry => {
@@ -126,7 +146,7 @@ export async function searchAuthoritativeCatalog(query: string, limit = 6): Prom
   }).filter(item => item.score >= 0.2).sort((a,b) => b.score - a.score).slice(0, limit);
   const settled = await Promise.allSettled(ranked.map(async ({ entry }) => ({
     id: entry.id, provider: entry.provider, kind: entry.kind, title: entry.title, url: entry.url,
-    content: `${entry.keywords.join(" ")}\n${(await getHtmlText(entry.url)).slice(0, 4500)}`, authority: entry.authority, reviewed: false,
+    content: buildEvidenceSnippet(query, await getHtmlText(entry.url), 1800), authority: entry.authority, reviewed: false,
   } satisfies ResearchSourceResult)));
   return settled.flatMap(result => result.status === "fulfilled" ? [result.value] : []);
 }
