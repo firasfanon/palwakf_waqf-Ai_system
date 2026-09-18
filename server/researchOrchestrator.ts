@@ -91,11 +91,36 @@ OpenAlex وCrossref فهارس اكتشاف أكاديمية، وWikipedia مص�
   const response = await invokeLLM({ messages: [
     { role: "system", content: systemPrompt }, { role: "user", content: input.question },
   ] });
-  const answer = contentOf(response) || "تعذر توليد إجابة موثقة من الأدلة المتاحة.";
+  let answer = contentOf(response) || "تعذر توليد إجابة موثقة من الأدلة المتاحة.";
+  const citationAudit = auditResearchAnswer(answer, internalReferences.length, extReferences.length);
+  if (!citationAudit.valid) {
+    answer += `\n\n[غير محسوم] تم اكتشاف إحالة غير صالحة في الإجابة: ${citationAudit.invalidTokens.join("، ")}. لا تعتمد هذه الإحالة قبل المراجعة.`;
+  }
   return {
-    answer, references, mode: input.mode, internalEvidenceCount: internalReferences.length,
+    answer, references, citationAudit, mode: input.mode, internalEvidenceCount: internalReferences.length,
     externalEvidenceCount: extReferences.length, externalResearchUsed: extReferences.length > 0,
     externalProviders: [...new Set(externalRows.map(row => row.provider))], researchQueries,
     learningCandidate: { eligible: references.length > 0, status: "pending_verification" as const, promotionPolicy: "human_verified_only" as const, sourceCount: references.length },
   };
+}
+
+export type CitationAudit = {
+  valid: boolean; citedInternal: number[]; citedExternal: number[]; invalidTokens: string[];
+  uncitedSourceCount: number; evidenceStateCounts: Record<ResearchEvidenceState, number>;
+};
+export function auditResearchAnswer(answer: string, internalCount: number, externalCount: number): CitationAudit {
+  const internal = [...answer.matchAll(/\[مرجع\s+(\d+)\]/g)].map(m => Number(m[1]));
+  const external = [...answer.matchAll(/\[مصدر خارجي\s+(\d+)\]/g)].map(m => Number(m[1]));
+  const invalidTokens = [
+    ...internal.filter(n => n < 1 || n > internalCount).map(n => `[مرجع ${n}]`),
+    ...external.filter(n => n < 1 || n > externalCount).map(n => `[مصدر خارجي ${n}]`),
+  ];
+  const evidenceStateCounts: Record<ResearchEvidenceState, number> = {
+    established: (answer.match(/\[ثابت بالمصدر\]/g) || []).length,
+    inference: (answer.match(/\[استنتاج تحليلي\]/g) || []).length,
+    contested: (answer.match(/\[مختلف فيه\]/g) || []).length,
+    unresolved: (answer.match(/\[غير محسوم\]/g) || []).length,
+  };
+  const cited = new Set([...internal.map(n => `i:${n}`), ...external.map(n => `e:${n}`)]).size;
+  return { valid: invalidTokens.length === 0, citedInternal: [...new Set(internal)], citedExternal: [...new Set(external)], invalidTokens, uncitedSourceCount: Math.max(0, internalCount + externalCount - cited), evidenceStateCounts };
 }
