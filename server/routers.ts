@@ -125,6 +125,7 @@ import { classifyDocument, extractInformation, summarizeText } from "./ai-advanc
 import { compareRulings as runCompareRulings, analyzePrecedents as runAnalyzePrecedents, predictCaseOutcome } from "./legal-analysis";
 import { retrieveRelevantDocuments, extractRelevantContext, generateSystemPrompt, buildGroundingReferences, ensureGroundedAnswer } from "./rag";
 import { invokeLLM } from "./_core/llm";
+import { runResearchAnswer } from "./researchOrchestrator";
 import { getPlatformBridgeStatus, checkPlatformBridgeConnectivity, previewPlatformSourceOfTruth, previewMappedPlatformSourceOfTruth, getPlatformSourceOfTruthMatrix, listPlatformAdminUsers, listPlatformOrgUnits, listPlatformWaqfAssets, listPlatformEndowments } from "./platform/bridge";
 import { buildPlatformAssistantContext, formatPlatformAssistantContext } from "./platform/assistantContext";
 import { checkDatabaseHealth } from "./health/databaseHealth";
@@ -1284,7 +1285,7 @@ const chatRouter = router({
       return { success: true };
     }),
   sendMessage: protectedProcedure
-    .input(z.object({ conversationId: z.number(), message: z.string() }))
+    .input(z.object({ conversationId: z.number(), message: z.string(), mode: z.enum(["answer", "deep_research"]).optional() }))
     .mutation(async ({ input, ctx }) => {
       try {
         console.log('[chat.sendMessage] start', {
@@ -1298,41 +1299,24 @@ const chatRouter = router({
         }
         const userMessage = await runtimeCreateMessage({ conversationId: input.conversationId, role: 'user', content: input.message } as any);
         const scopeCodes = await runtimeGetKnowledgeScopeCodes(ctx.user).catch(() => []);
-        const docs = await retrieveRelevantDocuments(input.message, { limit: 5, minScore: 1, actor: ctx.user, scopeCodes });
-        const groundingReferences = buildGroundingReferences(docs as any);
-        const context = extractRelevantContext(input.message, docs as any, 2500);
         const platformContext = await buildPlatformAssistantContext({
           query: input.message,
           user: ctx.user,
           hints: [conversation.title],
           limit: 3,
         });
-        const systemPrompt = generateSystemPrompt(context, {
-          platformContext: formatPlatformAssistantContext(platformContext),
+        const research = await runResearchAnswer({
+          question: input.message,
+          mode: input.mode || "answer",
+          actor: ctx.user,
+          scopeCodes,
         });
-        let content = 'تعذر توليد الرد.';
-        try {
-          const response = await invokeLLM({ messages: [{ role: 'system', content: systemPrompt }, { role: 'user', content: input.message }] });
-          content = typeof response.choices?.[0]?.message?.content === 'string'
-            ? response.choices[0].message.content
-            : Array.isArray(response.choices?.[0]?.message?.content)
-            ? response.choices[0].message.content.map((part: any) => typeof part === 'string' ? part : part?.text || '').join('\n')
-            : 'تعذر توليد الرد.';
-        } catch (llmError) {
-          if (!isLocalLlmProviderUnavailable(llmError)) {
-            throw llmError;
-          }
-          console.warn('[MB27F2] Chat local LLM provider unavailable; returning safe assistant fallback.', {
-            conversationId: input.conversationId,
-            providerHint: 'ollama-local-11434',
-            docsCount: docs.length,
-          });
-          content = buildLocalLlmUnavailableMessage(input.message, docs.length);
-        }
+        const groundingReferences = research.references;
+        const content = research.answer || 'تعذر توليد إجابة موثقة من الأدلة المتاحة.';
         const assistantMessage = await runtimeCreateMessage({ conversationId: input.conversationId, role: 'assistant', content, sources: JSON.stringify(groundingReferences) } as any);
         await runtimeUpdateConversation(input.conversationId, { updatedAt: new Date().toISOString().slice(0, 19).replace('T', ' ') } as any);
-        console.log('[chat.sendMessage] success', { conversationId: input.conversationId, assistantMessageId: assistantMessage?.id, docsCount: docs.length });
-        return { userMessage, assistantMessage, groundingReferences, platformContextUsed: platformContext, knowledgeScopeCodesApplied: scopeCodes };
+        console.log('[chat.sendMessage] success', { conversationId: input.conversationId, assistantMessageId: assistantMessage?.id, docsCount: research.internalEvidenceCount });
+        return { userMessage, assistantMessage, groundingReferences, platformContextUsed: platformContext, knowledgeScopeCodesApplied: scopeCodes, research };
       } catch (error: any) {
         console.error('[chat.sendMessage] failed', error);
         if (error instanceof TRPCError) {
