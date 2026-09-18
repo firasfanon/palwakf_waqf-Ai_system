@@ -1315,6 +1315,14 @@ const chatRouter = router({
         const content = research.answer || 'تعذر توليد إجابة موثقة من الأدلة المتاحة.';
         const assistantMessage = await runtimeCreateMessage({ conversationId: input.conversationId, role: 'assistant', content, sources: JSON.stringify(groundingReferences) } as any);
         await runtimeUpdateConversation(input.conversationId, { updatedAt: new Date().toISOString().slice(0, 19).replace('T', ' ') } as any);
+        void runtimeCreateAiToolRun({
+          toolKey: 'waqf_research_answer', runStatus: 'completed', approvalStatus: 'pending',
+          title: input.mode === 'deep_research' ? 'بحث وقفي معمق' : 'إجابة وقفية موثقة',
+          inputText: input.message, outputText: content,
+          inputJson: { conversationId: input.conversationId, mode: input.mode || 'answer' },
+          outputJson: { internalEvidenceCount: research.internalEvidenceCount, externalEvidenceCount: research.externalEvidenceCount, externalProviders: research.externalProviders, researchQueries: research.researchQueries, learningCandidate: research.learningCandidate },
+          sourceContextJson: { references: groundingReferences },
+        }).catch(() => undefined);
         console.log('[chat.sendMessage] success', { conversationId: input.conversationId, assistantMessageId: assistantMessage?.id, docsCount: research.internalEvidenceCount });
         return { userMessage, assistantMessage, groundingReferences, platformContextUsed: platformContext, knowledgeScopeCodesApplied: scopeCodes, research };
       } catch (error: any) {
