@@ -46,7 +46,7 @@ export function registerOAuthRoutes(app: Express) {
           name: ENV.localAuthName,
           expiresInMs: ONE_YEAR_MS,
           email: ENV.localAuthEmail,
-          role: ENV.localAuthRole,
+          role: ENV.localAuthRole === "admin" ? "admin" : "user",
           source: "local_users",
         });
         const cookieOptions = getSessionCookieOptions(req);
