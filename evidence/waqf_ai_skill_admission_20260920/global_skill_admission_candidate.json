@@ -1,0 +1,46 @@
+{
+  "schema": "PALWAKF_WAQF_LEGAL_EVIDENCE_ASSURANCE_ADMISSION_CANDIDATE_V1",
+  "candidate_id": "PALWAKF_WAQF_LEGAL_EVIDENCE_ASSURANCE_V1",
+  "origin_project": "WAQF_AI",
+  "package_path": "skills/waqf-legal-evidence-assurance",
+  "standard": "AGENT_SKILLS",
+  "requested_scope": "WAQF_LEGAL_RESEARCH_HIGH_ASSURANCE",
+  "universal_cross_domain": false,
+  "self_promotion": false,
+  "external_execution_authority": false,
+  "network_authority": false,
+  "filesystem_authority": false,
+  "database_authority": false,
+  "production_authority": false,
+  "source_provenance": {
+    "repository": "tynbtynb/agentcounsel",
+    "commit_sha": "685f92a98395f3764fc4c734db57f43dd1f8e678",
+    "license": "MIT",
+    "raw_installation": false,
+    "adapted": true
+  },
+  "package_hashes": {
+    "SKILL.md": "658D952DCAA02E81294266EDCA629F17EBA12F463575893F2C49A7684D9951E7",
+    "references/PROVENANCE_AND_AUTHORITY_POLICY.md": "6542CE6C824F8659E603042EFCF571A81379EFEC4F9E2F2AB951FF1659E86CEE",
+    "evals/ADMISSION_EVIDENCE.md": "1B0BFC84A9D02FAC879EEADB618D242100B1BD1D3E6E5B06395C3BA0F91F1320",
+    "knowledge_candidate": "6C7B9E51AC4E2239BDB400E09E4D9BB60F87D84E5DC8F4A40A895BC7FDAB1234"
+  },
+  "verification": {
+    "targeted_test_files": 5,
+    "targeted_tests_passed": 31,
+    "typescript_check": "PASS",
+    "git_diff_check": "PASS",
+    "seeded_ab_precision": 1.0,
+    "seeded_ab_recall": 1.0,
+    "seeded_ab_f1": 1.0,
+    "clean_false_positives": 0,
+    "broader_live_e2e": "PASS_3_OF_3",
+    "haseki_rerun": "PASS",
+    "citation_audits": "PASS",
+    "semantic_audits": "PASS",
+    "legal_skill_audits": "PASS"
+  },
+  "requested_mind_review": "RECOMMEND_DOMAIN_SCOPED_CANONICAL_OR_STRICTER",
+  "requested_workspace_decision": "APPROVE_DOMAIN_SCOPED_CANONICAL_SKILL_OR_STRICTER",
+  "runtime_enablement": "SEPARATE_AUTHORIZATION_REQUIRED"
+}
