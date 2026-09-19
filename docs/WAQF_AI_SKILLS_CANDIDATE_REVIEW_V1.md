@@ -131,9 +131,45 @@ External skills do not replace the PalWakf-specific layer:
 
 These remain PalWakf-native capabilities.
 
+## Minimal set selected for A/B evaluation
+
+Selected from AgentCounsel at pinned review commit `685f92a98395f3764fc4c734db57f43dd1f8e678`:
+
+1. `source-validation` — selected.
+   - Purpose in Waqf AI: claim/source support classification.
+   - Expected relationship to current code: complements deterministic `verifyEvidenceClaims` and semantic retention gates; does not replace them.
+
+2. `citation-integrity-check` — selected.
+   - Purpose in Waqf AI: post-synthesis authority/citation integrity review.
+   - Expected relationship to current code: advisory/methodology layer over deterministic citation audit.
+
+3. `case-brief` — selected.
+   - Purpose in Waqf AI: opinion segmentation and Holding / Reasoning / Dicta discipline.
+   - Expected relationship to current code: methodological reinforcement for judgment structural extraction.
+
+4. `statutory-interpretation` — selected.
+   - Purpose in Waqf AI: disciplined provision parsing and competing-reading framing.
+   - Expected relationship to current code: supports Article/provision analysis without injecting jurisdiction-specific law.
+
+5. `hallucination-red-team` — selected.
+   - Purpose in Waqf AI: adversarial post-answer check for unsupported or overbroad legal claims.
+   - Expected relationship to current code: second-line review after deterministic semantic audit.
+
+Deferred:
+- `authority-synthesis` — useful for larger multi-authority questions, but not needed to prove the current benchmark path. Defer until the first five skills pass admission.
+
+Supporting rule candidate:
+- `core/source-and-citation-discipline.md` — selected as a policy reference, not as executable truth.
+
+Evaluation tooling:
+- NVIDIA SkillEvaluator — selected for later local/keyless deterministic validation and A/B evaluation.
+- SlowMist Agent Security Skill — selected as pre-install static review methodology.
+- SkillsBench — deferred to avoid duplicate evaluation infrastructure.
+
 ## Current decision
 
 SKILLS_INSTALLATION = NO
-SKILLS_CANDIDATE_REVIEW = ACTIVE
+SKILLS_CANDIDATE_REVIEW = MINIMAL_SET_SELECTED
 BENCHMARK_AUTHORITY = PRIMARY
-NEXT_SKILLS_ACTION = SELECT_MINIMAL_AGENTCOUNSEL_SET + STATIC_REVIEW + A/B_EVAL_AFTER_CURRENT_BATCH
+HASEKI_BENCHMARK = PASS
+NEXT_SKILLS_ACTION = STATIC_REVIEW_OF_SELECTED_FILES -> LOCAL_ADAPTATION_PLAN -> WITH_SKILL_VS_WITHOUT_SKILL_A_B_EVAL
