@@ -1,6 +1,7 @@
 import { invokeLLM } from "./_core/llm";
 import type { AuthenticatedUser } from "./_core/types/authUser";
 import { searchExternalResearch, searchExternalResearchMany, type ResearchSourceResult } from "./researchSources";
+import { detectHardwareAdaptiveProfile } from "./hardwareAdaptiveRuntime";
 import {
   buildGroundingReferences,
   extractRelevantContext,
@@ -41,12 +42,12 @@ async function planResearchQueries(question: string): Promise<string[]> {
   ] });
   return parseQueryPlan(contentOf(response), question);
 }
-function externalContext(rows: ResearchSourceResult[]): string {
+function externalContext(rows: ResearchSourceResult[], charsPerSource: number): string {
   return rows.slice(0, 4).map((row, index) => [
     `## [مصدر خارجي ${index + 1}] ${row.title}`,
     `المزود: ${row.provider} | النوع: ${row.kind}`,
     `الرابط: ${row.url}`,
-    row.content.slice(0, 1800),
+    row.content.slice(0, charsPerSource),
   ].join("\n")).join("\n\n");
 }
 
@@ -62,9 +63,12 @@ function externalReferences(rows: ResearchSourceResult[]): ExternalResearchRefer
 export async function runResearchAnswer(input: {
   question: string; mode: ResearchMode; actor: Partial<AuthenticatedUser> | null; scopeCodes: string[];
 }) {
+  const startedAt = Date.now();
+  console.log("[research] start", { mode: input.mode, questionChars: input.question.length });
   const docs = await retrieveRelevantDocuments(input.question, {
     limit: input.mode === "deep_research" ? 8 : 5, minScore: 1, actor: input.actor, scopeCodes: input.scopeCodes,
   });
+  console.log("[research] internal-ready", { elapsedMs: Date.now() - startedAt, docs: docs.length });
   const internalReferences = buildGroundingReferences(docs as any);
   const internalContext = extractRelevantContext(input.question, docs as any, input.mode === "deep_research" ? 6500 : 3000);
   const deep = input.mode === "deep_research";
@@ -72,9 +76,16 @@ export async function runResearchAnswer(input: {
   let researchQueries = [input.question];
   if (deep) researchQueries = await planResearchQueries(input.question).catch(() => [input.question]);
   if (deep || docs.length < 2) {
-    externalRows = deep ? await searchExternalResearchMany(researchQueries, true).catch(() => []) : await searchExternalResearch(input.question, false).catch(() => []);
+    externalRows = deep
+      ? await searchExternalResearchMany(researchQueries, true).catch(() => [])
+      : await searchExternalResearch(input.question, false).catch(() => []);
+    if (!deep && externalRows.length === 0) {
+      externalRows = await searchExternalResearch(input.question, true).catch(() => []);
+    }
   }
-  const extContext = externalContext(externalRows);
+  console.log("[research] external-ready", { elapsedMs: Date.now() - startedAt, external: externalRows.length });
+  const hardwareProfile = await detectHardwareAdaptiveProfile();
+  const extContext = externalContext(externalRows, hardwareProfile.budgets.evidenceCharsPerSource);
   const extReferences = externalReferences(externalRows);
   const references = [...internalReferences, ...extReferences];
   const evidenceInstructions = `
@@ -88,6 +99,7 @@ OpenAlex وCrossref فهارس اكتشاف أكاديمية، وWikipedia مص�
   const systemPrompt = generateSystemPrompt(internalContext, {
     platformContext: [evidenceInstructions, extContext].filter(Boolean).join("\n\n"),
   });
+  console.log("[research] evidence-pack-ready", { elapsedMs: Date.now() - startedAt, internalChars: internalContext.length, externalChars: extContext.length, references: references.length });
   const response = await invokeLLM({ messages: [
     { role: "system", content: systemPrompt }, { role: "user", content: input.question },
   ] });

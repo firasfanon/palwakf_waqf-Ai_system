@@ -6,7 +6,7 @@ export type ResearchSourceResult = {
 };
 
 const UA = "PalWakf-WaqfAI/1.0 research-orchestrator";
-async function getJson(url: string, timeoutMs = 9000): Promise<any> {
+async function getJson(url: string, timeoutMs = 5000): Promise<any> {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), timeoutMs);
   try {
@@ -84,10 +84,20 @@ export function dedupeResearchSources(rows: ResearchSourceResult[]): ResearchSou
   });
 }
 export async function searchExternalResearch(query: string, deep = false): Promise<ResearchSourceResult[]> {
-  const jobs = [searchAuthoritativeCatalog(query, deep ? 6 : 4), searchWikipedia(query, deep ? 4 : 2)];
-  if (deep) jobs.push(searchOpenAlex(query, 5), searchCrossref(query, 5));
-  const settled = await Promise.allSettled(jobs);
-  return filterRelevantResearchSources(query, dedupeResearchSources(settled.flatMap(x => x.status === "fulfilled" ? x.value : []))).slice(0, deep ? 10 : 4);
+  const authoritative = await searchAuthoritativeCatalog(query, deep ? 6 : 4).catch(() => []);
+  const authoritativeRelevant = authoritative.filter(row =>
+    row.authority === "primary" || row.authority === "reference" || researchRelevanceScore(query, row) >= 0.5
+  );
+  if (authoritativeRelevant.length >= 2) return authoritativeRelevant.slice(0, deep ? 6 : 4);
+
+  const secondaryJobs = [searchWikipedia(query, deep ? 4 : 2)];
+  if (deep) secondaryJobs.push(searchOpenAlex(query, 5), searchCrossref(query, 5));
+  const settled = await Promise.allSettled(secondaryJobs);
+  const secondaryRelevant = filterRelevantResearchSources(
+    query,
+    dedupeResearchSources(settled.flatMap(x => x.status === "fulfilled" ? x.value : []))
+  );
+  return dedupeResearchSources([...authoritativeRelevant, ...secondaryRelevant]).slice(0, deep ? 10 : 4);
 }
 
 export async function searchExternalResearchMany(queries: string[], deep = true): Promise<ResearchSourceResult[]> {
@@ -108,7 +118,7 @@ const AUTHORITATIVE_CATALOG: AuthoritativeCatalogEntry[] = [
   { id: "openjerusalem:haseki-ottoman-archive", provider: "OpenJerusalem Archives", kind: "archival", title: "Ottoman archival records concerning the Waqf of Haseki Sultan in Jerusalem", url: "https://archives.openjerusalem.org/index.php/informationobject/browse?collection=31098&media=print&repos=739&sf_culture=en&sort=identifier&sortDir=asc&topLod=0&view=table", authority: "primary", keywords: ["Haseki Sultan","خاصكي سلطان","Jerusalem","وقف","waqf","Ottoman","برات","حجة","سند","أرشيف"] },
   { id: "escholarship:haseki-deed-1552", provider: "University of California eScholarship", kind: "academic", title: "Early-Ottoman Palestinian Toponymy: Haseki Sultan's Endowment Deed (1552)", url: "https://escholarship.org/uc/item/0cs6f5k5", authority: "scholarly", keywords: ["Haseki Sultan","خاصكي سلطان","waqfiyya","وقفية","endowment deed","1552","Jerusalem","العمارة العامرة"] }
 ];
-async function getHtmlText(url: string, timeoutMs = 10000): Promise<string> {
+async function getHtmlText(url: string, timeoutMs = 5000): Promise<string> {
   const controller = new AbortController(); const timer = setTimeout(() => controller.abort(), timeoutMs);
   try {
     const res = await fetch(url, { headers: { Accept: "text/html,application/xhtml+xml", "User-Agent": UA }, signal: controller.signal });
@@ -148,5 +158,13 @@ export async function searchAuthoritativeCatalog(query: string, limit = 6): Prom
     id: entry.id, provider: entry.provider, kind: entry.kind, title: entry.title, url: entry.url,
     content: buildEvidenceSnippet(query, await getHtmlText(entry.url), 1800), authority: entry.authority, reviewed: false,
   } satisfies ResearchSourceResult)));
-  return settled.flatMap(result => result.status === "fulfilled" ? [result.value] : []);
+  return settled.flatMap((result, index) => {
+    if (result.status === "fulfilled" && result.value.content) return [result.value];
+    const fallback = ranked[index]?.entry;
+    if (!fallback) return [];
+    return [{
+      id: fallback.id, provider: fallback.provider, kind: fallback.kind, title: fallback.title, url: fallback.url,
+      content: "", authority: fallback.authority, reviewed: false,
+    } satisfies ResearchSourceResult];
+  });
 }

@@ -1,5 +1,6 @@
 import { ENV } from "./env";
 import { runtimeGetSystemSettings } from "../runtimeRepository";
+import { detectHardwareAdaptiveProfile } from "../hardwareAdaptiveRuntime";
 
 export type Role = "system" | "user" | "assistant" | "tool" | "function";
 
@@ -223,7 +224,8 @@ type RuntimeLlmConfig = {
 };
 
 const trim = (value: unknown) => (typeof value === 'string' ? value.trim() : '');
-const OLLAMA_LOCAL_FALLBACK_MODELS = ['qwen2.5:3b', 'qwen2.5:7b'];
+const OLLAMA_LOCAL_FALLBACK_MODELS = ['qwen2.5:3b', 'palwakf-llama3.2-3b-64k:local', 'llama3.2:3b'];
+const OLLAMA_RESEARCH_FALLBACK_MODELS = ['qwen2.5:3b', 'deepseek-r1:latest', 'deepseek-v4-flash:cloud', 'glm-5.2:cloud'];
 
 type OllamaTagResponse = {
   models?: Array<{ name?: string | null; model?: string | null }>;
@@ -274,8 +276,18 @@ function shouldRetryWithFallback(error: unknown) {
     message.includes('model not found') ||
     message.includes('not_found_error') ||
     message.includes('404 Not Found') ||
+    message.includes('402 Payment Required') ||
+    message.includes('not included in your free usage') ||
     message.includes('انتهت مهلة انتظار مزود الذكاء قبل وصول الرد')
   );
+}
+
+function routeModelsForPrompt(configured: string[], availableModels: string[] | null, estimatedPromptTokens: number): string[] {
+  const available = availableModels ? new Set(availableModels) : null;
+  const candidates = estimatedPromptTokens >= 900
+    ? [...OLLAMA_RESEARCH_FALLBACK_MODELS, ...configured, ...OLLAMA_LOCAL_FALLBACK_MODELS]
+    : [...configured, ...OLLAMA_LOCAL_FALLBACK_MODELS];
+  return Array.from(new Set(candidates)).filter(model => !available || available.has(model));
 }
 
 async function resolveRuntimeLlmConfig(): Promise<RuntimeLlmConfig> {
@@ -383,6 +395,9 @@ export async function invokeLLM(params: InvokeParams): Promise<InvokeResult> {
   } = params;
 
   const runtimeConfig = await resolveRuntimeLlmConfig();
+  const hardwareProfile = runtimeConfig.provider === 'ollama'
+    ? await detectHardwareAdaptiveProfile()
+    : null;
 
   const payloadBase: Record<string, unknown> = {
     messages: messages.map(normalizeMessage),
@@ -400,7 +415,10 @@ export async function invokeLLM(params: InvokeParams): Promise<InvokeResult> {
     payloadBase.tool_choice = normalizedToolChoice;
   }
 
-  payloadBase.max_tokens = 2048;
+  payloadBase.max_tokens = params.maxTokens ?? params.max_tokens ?? hardwareProfile?.budgets.outputTokens ?? 768;
+  if (runtimeConfig.provider === 'ollama') {
+    payloadBase.options = { num_ctx: hardwareProfile?.budgets.contextTokens ?? 4096 };
+  }
 
   const normalizedResponseFormat = normalizeResponseFormat({
     responseFormat,
@@ -414,7 +432,14 @@ export async function invokeLLM(params: InvokeParams): Promise<InvokeResult> {
   }
 
   const apiUrl = runtimeConfig.apiUrl;
-  const modelsToTry = Array.from(new Set(runtimeConfig.fallbackModels?.length ? runtimeConfig.fallbackModels : [runtimeConfig.model]));
+  const promptChars = messages.reduce((sum, message) => sum + (typeof message.content === 'string' ? message.content.length : JSON.stringify(message.content ?? '').length), 0);
+  const estimatedPromptTokens = Math.ceil(promptChars / 3.5);
+  const availableModels = runtimeConfig.provider === 'ollama'
+    ? await tryListOllamaModels(runtimeConfig.baseUrl, 5000)
+    : null;
+  const modelsToTry = runtimeConfig.provider === 'ollama'
+    ? routeModelsForPrompt(runtimeConfig.fallbackModels?.length ? runtimeConfig.fallbackModels : [runtimeConfig.model], availableModels, estimatedPromptTokens)
+    : [runtimeConfig.model];
   let lastError: Error | null = null;
   let json: InvokeResult | null = null;
 
@@ -426,7 +451,9 @@ export async function invokeLLM(params: InvokeParams): Promise<InvokeResult> {
     };
 
     const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), runtimeConfig.timeoutMs);
+    const hardTimeoutMs = Math.min(runtimeConfig.timeoutMs, hardwareProfile?.budgets.attemptTimeoutMs ?? 45000);
+    const timeout = setTimeout(() => controller.abort(), hardTimeoutMs);
+    const startedAt = Date.now();
     console.log('[invokeLLM] request', {
       apiUrl,
       configuredModel: runtimeConfig.configuredModel,
@@ -434,6 +461,10 @@ export async function invokeLLM(params: InvokeParams): Promise<InvokeResult> {
       messageCount: messages.length,
       hasTools: Boolean(tools?.length),
       fallbackAttempt: index,
+      promptChars,
+      estimatedPromptTokens,
+      maxTokens: payloadBase.max_tokens,
+      hardTimeoutMs,
     });
 
     try {
@@ -478,6 +509,7 @@ export async function invokeLLM(params: InvokeParams): Promise<InvokeResult> {
         fallbackHappened: effectiveModel !== runtimeConfig.configuredModel,
         finishReason: json?.choices?.[0]?.finish_reason,
         usage: json?.usage,
+        elapsedMs: Date.now() - startedAt,
       });
       break;
     } catch (error: any) {
