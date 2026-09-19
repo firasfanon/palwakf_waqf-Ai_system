@@ -1,6 +1,6 @@
 import { ENV } from "./env";
 import { runtimeGetSystemSettings } from "../runtimeRepository";
-import { detectHardwareAdaptiveProfile } from "../hardwareAdaptiveRuntime";
+import { benchmarkInstalledModels, detectHardwareAdaptiveProfile, orderModelsByCapability } from "../hardwareAdaptiveRuntime";
 
 export type Role = "system" | "user" | "assistant" | "tool" | "function";
 
@@ -68,6 +68,7 @@ export type InvokeParams = {
   output_schema?: OutputSchema;
   responseFormat?: ResponseFormat;
   response_format?: ResponseFormat;
+  preferredModels?: string[];
 };
 
 export type ToolCall = {
@@ -225,7 +226,7 @@ type RuntimeLlmConfig = {
 
 const trim = (value: unknown) => (typeof value === 'string' ? value.trim() : '');
 const OLLAMA_LOCAL_FALLBACK_MODELS = ['qwen2.5:3b', 'palwakf-llama3.2-3b-64k:local', 'llama3.2:3b'];
-const OLLAMA_RESEARCH_FALLBACK_MODELS = ['qwen2.5:3b', 'deepseek-r1:latest', 'deepseek-v4-flash:cloud', 'glm-5.2:cloud'];
+const OLLAMA_RESEARCH_FALLBACK_MODELS = ['qwen2.5:3b', 'deepseek-r1:latest', 'palwakf-llama3.2-3b-64k:ctx64k', 'palwakf-llama3.2-3b-64k:local', 'llama3.2:3b'];
 
 type OllamaTagResponse = {
   models?: Array<{ name?: string | null; model?: string | null }>;
@@ -437,9 +438,30 @@ export async function invokeLLM(params: InvokeParams): Promise<InvokeResult> {
   const availableModels = runtimeConfig.provider === 'ollama'
     ? await tryListOllamaModels(runtimeConfig.baseUrl, 5000)
     : null;
-  const modelsToTry = runtimeConfig.provider === 'ollama'
-    ? routeModelsForPrompt(runtimeConfig.fallbackModels?.length ? runtimeConfig.fallbackModels : [runtimeConfig.model], availableModels, estimatedPromptTokens)
+  const explicitModelCandidates = (params.preferredModels || []).map(trim).filter(Boolean);
+  let modelsToTry = runtimeConfig.provider === 'ollama'
+    ? explicitModelCandidates.length
+      ? Array.from(new Set(explicitModelCandidates)).filter(model => !availableModels || availableModels.includes(model))
+      : routeModelsForPrompt(runtimeConfig.fallbackModels?.length ? runtimeConfig.fallbackModels : [runtimeConfig.model], availableModels, estimatedPromptTokens)
     : [runtimeConfig.model];
+  if (runtimeConfig.provider === 'ollama' && hardwareProfile) {
+    const workloadTokens = Math.min(1800, Math.max(300, estimatedPromptTokens));
+    const matchingCapabilities = () => (hardwareProfile.modelCapabilities || [])
+      .filter(item => Math.abs(item.workloadTokens - workloadTokens) <= Math.max(256, workloadTokens * 0.25));
+    if (matchingCapabilities().length === 0) {
+      await benchmarkInstalledModels(hardwareProfile, workloadTokens);
+    }
+    const measured = new Map(matchingCapabilities().map(item => [item.model, item]));
+    modelsToTry = orderModelsByCapability(modelsToTry, hardwareProfile)
+      .filter(model => !model.endsWith(":cloud"))
+      .filter(model => measured.get(model)?.usable === true);
+    if (estimatedPromptTokens >= 900 && modelsToTry.length === 0) {
+      throw new Error("UNRESOLVED_PROVIDER_CAPABILITY: NO_LOCAL_MODEL_CERTIFIED_FOR_WORKLOAD");
+    }
+  }
+  const perAttemptBudgetMs = hardwareProfile?.budgets.attemptTimeoutMs ?? 45000;
+  const totalDeadlineMs = Math.min(runtimeConfig.timeoutMs, perAttemptBudgetMs * Math.max(1, Math.min(2, modelsToTry.length)));
+  const requestDeadlineAt = Date.now() + totalDeadlineMs;
   let lastError: Error | null = null;
   let json: InvokeResult | null = null;
 
@@ -450,8 +472,12 @@ export async function invokeLLM(params: InvokeParams): Promise<InvokeResult> {
       model: effectiveModel,
     };
 
+    const remainingMs = requestDeadlineAt - Date.now();
+    if (remainingMs <= 0) {
+      throw new Error("UNRESOLVED_PROVIDER_CAPABILITY: TOTAL_REQUEST_DEADLINE_EXCEEDED");
+    }
     const controller = new AbortController();
-    const hardTimeoutMs = Math.min(runtimeConfig.timeoutMs, hardwareProfile?.budgets.attemptTimeoutMs ?? 45000);
+    const hardTimeoutMs = Math.max(1000, Math.min(remainingMs, runtimeConfig.timeoutMs, hardwareProfile?.budgets.attemptTimeoutMs ?? 45000));
     const timeout = setTimeout(() => controller.abort(), hardTimeoutMs);
     const startedAt = Date.now();
     console.log('[invokeLLM] request', {

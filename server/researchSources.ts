@@ -84,11 +84,13 @@ export function dedupeResearchSources(rows: ResearchSourceResult[]): ResearchSou
   });
 }
 export async function searchExternalResearch(query: string, deep = false): Promise<ResearchSourceResult[]> {
-  const authoritative = await searchAuthoritativeCatalog(query, deep ? 6 : 4).catch(() => []);
-  const authoritativeRelevant = authoritative.filter(row =>
-    row.authority === "primary" || row.authority === "reference" || researchRelevanceScore(query, row) >= 0.5
-  );
-  if (authoritativeRelevant.length >= 2) return authoritativeRelevant.slice(0, deep ? 6 : 4);
+  const target = deep ? 6 : 4;
+  const authoritative = await searchAuthoritativeCatalog(query, Math.max(target, 6)).catch(() => []);
+  // searchAuthoritativeCatalog already applies curated keyword/topic relevance before fetching.
+  // Do not re-reject scholarly catalog evidence merely because the user's Arabic wording
+  // differs from an English title/abstract.
+  const authoritativeEvidence = authoritative.filter(row => Boolean(row.content?.trim()));
+  if (authoritativeEvidence.length >= target) return authoritativeEvidence.slice(0, target);
 
   const secondaryJobs = [searchWikipedia(query, deep ? 4 : 2)];
   if (deep) secondaryJobs.push(searchOpenAlex(query, 5), searchCrossref(query, 5));
@@ -97,7 +99,9 @@ export async function searchExternalResearch(query: string, deep = false): Promi
     query,
     dedupeResearchSources(settled.flatMap(x => x.status === "fulfilled" ? x.value : []))
   );
-  return dedupeResearchSources([...authoritativeRelevant, ...secondaryRelevant]).slice(0, deep ? 10 : 4);
+  const contentBearing = dedupeResearchSources([...authoritativeEvidence, ...secondaryRelevant])
+    .filter(row => Boolean(row.content?.trim()));
+  return contentBearing.slice(0, deep ? 10 : 4);
 }
 
 export async function searchExternalResearchMany(queries: string[], deep = true): Promise<ResearchSourceResult[]> {
@@ -109,20 +113,23 @@ export async function searchExternalResearchMany(queries: string[], deep = true)
 
 type AuthoritativeCatalogEntry = {
   id: string; provider: string; kind: ResearchSourceKind; title: string; url: string;
-  authority: ResearchSourceResult["authority"]; keywords: string[];
+  authority: ResearchSourceResult["authority"]; keywords: string[]; evidenceUrl?: string;
 };
 const AUTHORITATIVE_CATALOG: AuthoritativeCatalogEntry[] = [
   { id: "maqam:ottoman-land-code-1858", provider: "مقام - جامعة النجاح", kind: "legal", title: "قانون الأراضي العثماني 1858", url: "https://maqam.najah.edu/legislation/169/", authority: "reference", keywords: ["قانون الأراضي العثماني","الأراضي الموقوفة","وقف تخصيصات","الوقف غير الصحيح","المادة 4","المادة 121","تمليك","ملكنامه"] },
   { id: "maqam:appeal-96-2017", provider: "مقام - جامعة النجاح", kind: "legal", title: "استئناف القدس 96/2017 - وقف خاصكي سلطان ووقف التخصيصات", url: "https://maqam.najah.edu/judgments/1780/", authority: "reference", keywords: ["خاصكي سلطان","وقف تخصيصات","وقف غير صحيح","الأراضي العثماني","بيت لحم","بيت جالا"] },
   { id: "maqam:cassation-1543-2016", provider: "مقام - جامعة النجاح", kind: "legal", title: "نقض 1543/2016 - الفرق بين الوقف الصحيح ووقف التخصيصات", url: "https://maqam.najah.edu/judgments/7543/", authority: "reference", keywords: ["وقف تخصيصات","وقف غير صحيح","المادة 4","الأراضي العثماني","رقبة العقار","بيت المال"] },
   { id: "openjerusalem:haseki-ottoman-archive", provider: "OpenJerusalem Archives", kind: "archival", title: "Ottoman archival records concerning the Waqf of Haseki Sultan in Jerusalem", url: "https://archives.openjerusalem.org/index.php/informationobject/browse?collection=31098&media=print&repos=739&sf_culture=en&sort=identifier&sortDir=asc&topLod=0&view=table", authority: "primary", keywords: ["Haseki Sultan","خاصكي سلطان","Jerusalem","وقف","waqf","Ottoman","برات","حجة","سند","أرشيف"] },
-  { id: "escholarship:haseki-deed-1552", provider: "University of California eScholarship", kind: "academic", title: "Early-Ottoman Palestinian Toponymy: Haseki Sultan's Endowment Deed (1552)", url: "https://escholarship.org/uc/item/0cs6f5k5", authority: "scholarly", keywords: ["Haseki Sultan","خاصكي سلطان","waqfiyya","وقفية","endowment deed","1552","Jerusalem","العمارة العامرة"] }
+  { id: "escholarship:haseki-deed-1552", provider: "University of California eScholarship", kind: "academic", title: "Early-Ottoman Palestinian Toponymy: Haseki Sultan's Endowment Deed (1552)", url: "https://escholarship.org/uc/item/0cs6f5k5", evidenceUrl: "https://escholarship.org/oai?verb=GetRecord&metadataPrefix=oai_dc&identifier=ark:/13030/qt0cs6f5k5", authority: "scholarly", keywords: ["Haseki Sultan","خاصكي سلطان","waqfiyya","وقفية","endowment deed","1552","Jerusalem","العمارة العامرة"] },
+  { id: "escholarship:haseki-waqfiyya-geography-1552", provider: "University of California eScholarship", kind: "academic", title: "Mamluk and Ottoman Endowment Deeds as a Source for Geographical-Historical Research: The Waqfiyya of Haseki Sultan (1552 CE)", url: "https://escholarship.org/uc/item/0sg1x015", authority: "scholarly", keywords: ["Haseki Sultan","خاصكي سلطان","waqfiyya","وقفية","endowment deed","1552","historical geography","Jerusalem"] }
 ];
-async function getHtmlText(url: string, timeoutMs = 5000): Promise<string> {
+async function getHtmlText(url: string, timeoutMs = 8000): Promise<string> {
   const controller = new AbortController(); const timer = setTimeout(() => controller.abort(), timeoutMs);
   try {
-    const res = await fetch(url, { headers: { Accept: "text/html,application/xhtml+xml", "User-Agent": UA }, signal: controller.signal });
+    const res = await fetch(url, { headers: { Accept: "text/html,application/xhtml+xml,text/plain;q=0.9,application/pdf;q=0.8", "User-Agent": UA }, signal: controller.signal });
     if (!res.ok) throw new Error("HTTP_" + res.status);
+    const contentType = res.headers.get("content-type") || "";
+    if (contentType.includes("application/pdf") || url.toLowerCase().includes(".pdf")) return "";
     const html = await res.text();
     return text(html.replace(/<script[\s\S]*?<\/script>/gi, " ").replace(/<style[\s\S]*?<\/style>/gi, " "));
   } finally { clearTimeout(timer); }
@@ -156,7 +163,7 @@ export async function searchAuthoritativeCatalog(query: string, limit = 6): Prom
   }).filter(item => item.score >= 0.2).sort((a,b) => b.score - a.score).slice(0, limit);
   const settled = await Promise.allSettled(ranked.map(async ({ entry }) => ({
     id: entry.id, provider: entry.provider, kind: entry.kind, title: entry.title, url: entry.url,
-    content: buildEvidenceSnippet(query, await getHtmlText(entry.url), 1800), authority: entry.authority, reviewed: false,
+    content: await getHtmlText(entry.evidenceUrl || entry.url), authority: entry.authority, reviewed: false,
   } satisfies ResearchSourceResult)));
   return settled.flatMap((result, index) => {
     if (result.status === "fulfilled" && result.value.content) return [result.value];
