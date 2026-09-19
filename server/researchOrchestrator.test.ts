@@ -54,4 +54,15 @@ describe("research evidence audit", () => {
     expect(audit.valid).toBe(false);
     expect(audit.conflations).toContain("ARTICLE_2_WITH_ARTICLE_4_RULE");
   });
+
+  it("does not impose Ottoman Land Code scope on article 2 of a different statute", () => {
+    const shariaQuestion = "ما سند اختصاص المحاكم الشرعية في إنشاء الوقف وصحته وفق المادة 2 من قانون أصول المحاكمات الشرعية؟";
+    const shariaClaims: EvidenceClaim[] = [{
+      claimId:"S1",sourceId:"maqam:sharia-procedure-art2",sourceIndex:1,sourceType:"legal",authorityClass:"reference",legalRole:"statute",
+      exactQuote:"اختصاصات المحاكم الشرعية تنظر المحاكم الشرعية وتفصل في الوقف وإنشاؤه والدعاوى المتعلقة بصحة الوقف.",
+      citationPointer:"المادة (2)",qualifiers:[],applicabilityStatus:"direct",verificationStatus:"verbatim_match",
+    }];
+    const answer = "المادة (2) تجعل من اختصاص المحاكم الشرعية مسائل الوقف وإنشائه وصحته. [مصدر خارجي 1]";
+    expect(auditResearchSemantics(shariaQuestion, answer, shariaClaims)).toEqual({valid:true,missing:[],conflations:[]});
+  });
 });

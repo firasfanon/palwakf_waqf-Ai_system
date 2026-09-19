@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { auditCompactEvidencePack, auditSemanticRetention, compactClaimFragments, compactEvidencePack, distillEvidenceClaims, verifyEvidenceClaims } from "./evidenceDistillation";
+import { auditCompactEvidencePack, auditSemanticRetention, compactClaimFragments, compactEvidencePack, distillEvidenceClaims, requiredEvidenceSourceIndexes, verifyEvidenceClaims } from "./evidenceDistillation";
 
 const question = "هل تنطبق المادة الثانية من قانون الأراضي العثماني على وقف خاصكي سلطان إذا اعتُبر وقف تخصيصات؟ وما الدليل على طبيعة إنشائه؟";
 const rows = [
@@ -50,5 +50,34 @@ describe("legal evidence distillation", () => {
     expect(audit.missing).toContain("LEGAL_QUALIFIER");
     expect(compactAudit.valid).toBe(false);
     expect(compactAudit.missing).toContain("LEGAL_QUALIFIER");
+  });
+
+  it("selects only semantically required evidence sources for a focused legal question", () => {
+    const claims = [
+      {claimId:"R1",sourceId:"maqam:cassation-1383-2019",sourceIndex:1,sourceType:"legal",authorityClass:"reference",legalRole:"court_reasoning" as const,exactQuote:"تقضي بتسجيل رقبة العقار للوقف وملكية حق المنفعة بمقتضى التحكير للمدعي",qualifiers:[],applicabilityStatus:"case_specific" as const,verificationStatus:"verbatim_match" as const},
+      {claimId:"R2",sourceId:"other-case",sourceIndex:2,sourceType:"legal",authorityClass:"reference",legalRole:"court_reasoning" as const,exactQuote:"نص قانوني غير لازم للسؤال",qualifiers:[],applicabilityStatus:"case_specific" as const,verificationStatus:"verbatim_match" as const},
+    ];
+    expect(requiredEvidenceSourceIndexes(
+      "ما أثر الحكر على رقبة العقار وحق المنفعة وفق نقض 1383/2019؟",
+      claims,
+    )).toEqual([1]);
+  });
+
+  it("extracts article 2 from the correct legal instrument rather than by article number alone", () => {
+    const shariaRows = [{
+      id:"maqam:sharia-procedure-art2",
+      kind:"legal",
+      authority:"reference",
+      content:"المادة رقم 2 من قانون أصول المحاكمات الشرعية رقم (31) لسنة 1959م اختصاصات المحاكم الشرعية تنظر المحاكم الشرعية وتفصل في المواد التالية: 1- الوقف وإنشاؤه من قبل المسلمين وشروطه والتولية عليه واستبداله. 2- الدعاوى المتعلقة بالنزاع بين وقفين أو بصحة الوقف وما يترتب عليه من حقوق.",
+    }];
+    const q2 = "ما سند اختصاص المحاكم الشرعية في إنشاء الوقف وصحته وفق المادة 2 من قانون أصول المحاكمات الشرعية؟";
+    const claims = distillEvidenceClaims(q2, shariaRows, 2000);
+    expect(claims).toHaveLength(1);
+    expect(claims[0].legalRole).toBe("statute");
+    expect(claims[0].citationPointer).toBe("المادة (2)");
+    expect(claims[0].exactQuote).toContain("اختصاصات المحاكم الشرعية");
+    expect(claims[0].exactQuote).toContain("الوقف وإنشاؤه");
+    expect(claims[0].exactQuote).toContain("بصحة الوقف");
+    expect(claims[0].exactQuote).not.toContain("الأراضي المملوكة");
   });
 });

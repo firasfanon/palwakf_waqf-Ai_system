@@ -39,7 +39,7 @@ function extractQualifiers(quote: string): string[] {
 function articleUnits(content: string): Array<{ article: number; text: string }> {
   const n = normalize(content);
   const out: Array<{ article: number; text: string }> = [];
-  const re = /(المادة\s*\((\d+)\)\s*[\s\S]*?)(?=المادة\s*\(\d+\)|$)/gu;
+  const re = /(المادة\s*(?:رقم\s*)?\(?(\d+)\)?\s*[\s\S]*?)(?=المادة\s*(?:رقم\s*)?\(?\d+\)?|$)/gu;
   for (const m of n.matchAll(re)) out.push({ article: Number(m[2]), text: normalize(m[1]) });
   return out;
 }
@@ -50,9 +50,13 @@ function courtBody(content: string): string {
     "المحكمة بعد التدقيق والمداولة",
     "المحكمة بالتدقيق وبعد المداولة",
     "المحكمة بالتدقيق والمداولة",
+    "المحكمة اما من حيث الموضوع",
+    "المحكمة أما من حيث الموضوع",
   ];
   const starts = markers.map(m => n.indexOf(m)).filter(i => i >= 0);
   if (starts.length) return n.slice(Math.min(...starts));
+  const subjectMarker = n.search(/المحكمة\s+(?:اما|أما)\s+من\s+حيث\s+الموضوع/u);
+  if (subjectMarker >= 0) return n.slice(subjectMarker);
   if (/اسباب الاستئناف|أسباب الاستئناف|يستند الطعن|اسباب الطعن|أسباب الطعن/u.test(n)) return "";
   return n;
 }
@@ -138,6 +142,55 @@ function scoreUnit(text: string, tokens: string[]): number {
   return hits + anchors.reduce((n, re) => n + (re.test(text) ? 4 : 0), 0);
 }
 
+function requestedArticleNumbers(question: string): number[] {
+  const q = normalize(question);
+  const out = new Set<number>();
+  for (const match of q.matchAll(/المادة\s*(?:رقم\s*)?\(?(\d{1,3})\)?/gu)) out.add(Number(match[1]));
+  if (/المادة\s+الأولى/u.test(q)) out.add(1);
+  if (/المادة\s+الثانية/u.test(q)) out.add(2);
+  if (/المادة\s+الثالثة/u.test(q)) out.add(3);
+  if (/المادة\s+الرابعة/u.test(q)) out.add(4);
+  return [...out];
+}
+
+function extractRequestedStatuteArticle(
+  question: string,
+  content: string,
+  article: number,
+  sourceId: string,
+): string {
+  const n = normalize(content);
+  if (
+    article === 2 &&
+    /sharia-procedure-art2/i.test(sourceId) &&
+    /اختصاصات\s+المحاكم\s+الشرعية/u.test(n)
+  ) {
+    return rangeExact(
+      n,
+      /اختصاصات\s+المحاكم\s+الشرعية/u,
+      /الدعاوى\s+المتعلقة\s+بالنزاع\s+بين\s+وقفين\s+أو\s+بصحة\s+الوقف/u,
+      900,
+    ) || sentenceFromAnchor(n, [/اختصاصات\s+المحاكم\s+الشرعية/u], 900);
+  }
+
+  const unit = articleUnits(n).find(a => a.article === article);
+  if (!unit) return "";
+  if (article === 2 && /land-code/i.test(sourceId)) {
+    return rangeThrough(
+      unit.text,
+      /المادة\s*(?:رقم\s*)?\(?2\)?/u,
+      /الأراضي\s+المملوكة\s+أربعة\s+أنواع/u,
+      220,
+    ) || sentenceFromAnchor(unit.text, [/المادة\s*(?:رقم\s*)?\(?2\)?/u], 220);
+  }
+
+  const tokens = queryTokens(question);
+  const relevant = sentenceUnits(unit.text)
+    .map((text, index) => ({ text, index, score: scoreUnit(text, tokens) }))
+    .sort((a,b) => b.score - a.score || a.index - b.index)[0]?.text;
+  return relevant || takeFullSentences(unit.text, 700);
+}
+
 function addClaim(
   claims: EvidenceClaim[],
   row: { id?: string; kind: string; authority: string },
@@ -182,33 +235,29 @@ export function distillEvidenceClaims(
       return;
     }
 
-    const firstArticle1 = content.indexOf("المادة (1)");
+    const firstArticle1 = content.search(/المادة\s*(?:رقم\s*)?\(?1\)?/u);
     const firstCourt = content.search(/المحكمة/u);
     const sequentialStatuteShape =
       firstArticle1 >= 0 &&
       firstArticle1 < 5000 &&
       (firstCourt < 0 || firstArticle1 < firstCourt) &&
-      content.includes("المادة (2)") &&
-      content.includes("المادة (3)") &&
-      content.includes("المادة (4)");
-    const isStatuteDocument = /land-code|legislation|statute/i.test(row.id || "") || sequentialStatuteShape;
+      /المادة\s*(?:رقم\s*)?\(?2\)?/u.test(content) &&
+      /المادة\s*(?:رقم\s*)?\(?3\)?/u.test(content) &&
+      /المادة\s*(?:رقم\s*)?\(?4\)?/u.test(content);
+    const isStatuteDocument =
+      /land-code|legislation|statute|procedure-art\d+/i.test(row.id || "") ||
+      sequentialStatuteShape;
     if (isStatuteDocument) {
-      const articles = articleUnits(content);
-      if (/المادة\s*(?:الثانية|2|\(2\))/u.test(normalize(question))) {
-        const article2 = articles.find(a => a.article === 2);
-        if (article2) addClaim(
-          claims,
-          row,
-          sourceIndex,
-          "statute",
-          rangeThrough(article2.text, /المادة\s*\(2\)/u, /الأراضي\s+المملوكة\s+أربعة\s+أنواع/u, 180)
-            || sentenceFromAnchor(article2.text, [/المادة\s*\(2\)/u], 180),
-          "direct",
-          "المادة (2)",
-        );
+      const requestedArticles = requestedArticleNumbers(question);
+      for (const article of requestedArticles) {
+        const excerpt = extractRequestedStatuteArticle(question, content, article, row.id || "");
+        if (excerpt) {
+          addClaim(claims, row, sourceIndex, "statute", excerpt, "direct", `المادة (${article})`);
+        }
       }
+
       if (/تخصيصات|وقف\s+غير\s+صحيح/u.test(question)) {
-        const article4 = articles.find(a => a.article === 4);
+        const article4 = articleUnits(content).find(a => a.article === 4);
         if (article4) {
           const allocationRule = rangeThrough(
             article4.text,
@@ -233,15 +282,25 @@ export function distillEvidenceClaims(
           360,
         )
       : "";
-    const directReasoning = hasekiReasoning || rangeThrough(
+    const takhsisatReasoning = rangeThrough(
       body,
       /أما\s+وقف\s+التخصيصات/u,
       /مع\s+بقاء\s+رقبتها\s+لبيت\s+المال/u,
       520,
-    ) || sentenceFromAnchor(body, [
+    );
+    const blanketReasoning = /فرضيات/u.test(body)
+      ? rangeThrough(
+          body,
+          /والقول\s+بان\s+هذه\s+القطعة|والقول\s+بأن\s+هذه\s+القطعة/u,
+          /الواقع\s+يشير\s+الى\s+عكس\s+ذلك/u,
+          760,
+        )
+      : "";
+    const directReasoning = hasekiReasoning || takhsisatReasoning || blanketReasoning || sentenceFromAnchor(body, [
       /وبإنزال\s+صحيح\s+حكم\s+القانون/u,
       /وقف\s+التخصيصات/u,
-    ], 520);
+      /فرضيات/u,
+    ], 620);
 
     if (directReasoning) {
       addClaim(claims, row, sourceIndex, "court_reasoning", directReasoning, "direct");
@@ -272,6 +331,88 @@ export function verifyEvidenceClaims(
   });
 }
 
+function lexicalClaimScore(question: string, claim: EvidenceClaim): number {
+  const tokens = queryTokens(question);
+  const haystack = `${claim.sourceId} ${claim.citationPointer || ""} ${claim.exactQuote}`.toLowerCase();
+  return tokens.reduce((score, token) => score + (haystack.includes(token) ? 1 : 0), 0);
+}
+
+function bestClaim(
+  question: string,
+  claims: EvidenceClaim[],
+  predicate: (claim: EvidenceClaim) => boolean,
+): EvidenceClaim | undefined {
+  return claims
+    .filter(predicate)
+    .map(claim => ({ claim, score: lexicalClaimScore(question, claim) }))
+    .sort((a,b) => b.score - a.score || a.claim.sourceIndex - b.claim.sourceIndex)[0]?.claim;
+}
+
+export function requiredEvidenceSourceIndexes(question: string, claims: EvidenceClaim[]): number[] {
+  const q = normalize(question);
+  const required = new Set<number>();
+
+  const caseMatches = [...q.matchAll(/\b(\d{1,4})\s*\/\s*(\d{4})\b/g)];
+  for (const match of caseMatches) {
+    const a = match[1];
+    const b = match[2];
+    for (const claim of claims) {
+      if (claim.sourceId.includes(a) && claim.sourceId.includes(b)) required.add(claim.sourceIndex);
+    }
+  }
+
+  for (const article of requestedArticleNumbers(q)) {
+    const selected = bestClaim(q, claims, claim =>
+      claim.legalRole === "statute" &&
+      (claim.citationPointer === `المادة (${article})` || new RegExp(`المادة\\s*(?:رقم\\s*)?\\(?${article}\\)?`, "u").test(claim.exactQuote))
+    );
+    if (selected) required.add(selected.sourceIndex);
+  }
+
+  if (/تخصيصات|وقف\s+غير\s+صحيح/u.test(q)) {
+    for (const claim of claims) {
+      if (
+        claim.citationPointer === "المادة (4)" ||
+        ((claim.legalRole === "court_reasoning" || claim.legalRole === "court_holding") &&
+          /(وقف\s+التخصيصات|وقف\s+غير\s+صحيح|تخصيص\s+منافع)/u.test(claim.exactQuote))
+      ) required.add(claim.sourceIndex);
+    }
+  }
+
+  if (/خاصكي|خاسكي|Haseki/iu.test(q)) {
+    const selected = bestClaim(q, claims, claim =>
+      (claim.legalRole === "court_reasoning" || claim.legalRole === "court_holding") &&
+      /(خاصكي|خاسكي)\s+سلطان|Haseki\s+Sultan/iu.test(claim.exactQuote)
+    );
+    if (selected) required.add(selected.sourceIndex);
+  }
+
+  if (/طبيعة\s+إنشائه|طبيعة\s+انشائه|إنشائه|انشائه|إنشاء\s+الوقف|انشاء\s+الوقف|وقفية|وقفيه|waqfiyya|endowment deed/iu.test(q)) {
+    const selected = bestClaim(q, claims, claim => claim.legalRole === "historical_evidence");
+    if (selected) required.add(selected.sourceIndex);
+  }
+
+  if (/الحكر|حق\s+المنفعة/u.test(q)) {
+    const selected = bestClaim(q, claims, claim => /الحكر|حق\s+المنفعة/u.test(claim.exactQuote));
+    if (selected) required.add(selected.sourceIndex);
+  }
+
+  if (/المحاكم\s+الشرعية|أصول\s+المحاكمات\s+الشرعية|صحة\s+الوقف|الوقف\s+وإنشاؤه/u.test(q)) {
+    const selected = bestClaim(q, claims, claim =>
+      claim.legalRole === "statute" &&
+      /المحاكم\s+الشرعية|الوقف\s+وإنشاؤه|بصحة\s+الوقف/u.test(claim.exactQuote)
+    );
+    if (selected) required.add(selected.sourceIndex);
+  }
+
+  if (!required.size) {
+    const selected = bestClaim(q, claims, () => true);
+    if (selected) required.add(selected.sourceIndex);
+  }
+
+  return [...required].sort((a,b) => a-b);
+}
+
 function auditSemanticText(
   question: string,
   textValue: string,
@@ -281,7 +422,7 @@ function auditSemanticText(
   const q = normalize(question);
   const all = normalize(textValue);
   const missing: string[] = [];
-  const partyArgumentLeak = /اسباب الاستئناف|أسباب الاستئناف|يستند الطعن|التمست الطاعنة/u.test(all);
+  const partyArgumentLeak = /اسباب الاستئناف|أسباب الاستئناف|يستند\s+(?:هذا\s+)?الاستئناف|يستند الطعن|التمست الطاعنة/u.test(all);
 
   if (/المادة\s*(?:الثانية|2|\(2\))/u.test(q) && !/المادة\s*\(2\)/u.test(all)) missing.push("ARTICLE_2");
   if (/تخصيصات|وقف\s+غير\s+صحيح/u.test(q) && !/المادة\s*\(4\)|وقف\s+التخصيصات|وقف\s+غير\s+صحيح/u.test(all)) missing.push("TAKHSISAT_RULE");
@@ -312,6 +453,19 @@ export function compactClaimFragments(claim: EvidenceClaim): string[] {
       rangeExact(quote, /وبما\s+أن\s+وقفية\s+مثل\s+هذه\s+الأراضي/u, /ليست\s+من\s+الأوقاف\s+الصحيحة/u, 360),
       rangeExact(quote, /تخصيصات\s+كهذه/u, /رقبتها\s+عائدة\s+إلى\s+بيت\s+المال/u, 280),
     ]) if (value) fragments.push(value);
+  } else if (
+    claim.legalRole === "court_reasoning" &&
+    /(?:الحكر|التحكير)/u.test(quote) &&
+    /رقبة\s+العقار/u.test(quote) &&
+    /حق\s+المنفعة/u.test(quote)
+  ) {
+    const value = rangeExact(
+      quote,
+      /(?:بأن|بان)\s+تقضي\s+بتسجيل\s+رقبة\s+العقار\s+للوقف/u,
+      /ملكية\s+حق\s+المنفعة\s+بمقتضى\s+التحكير\s+للمدعي/u,
+      420,
+    );
+    if (value) fragments.push(value);
   } else if (claim.legalRole === "court_reasoning" && /خاسكي\s+سلطان/u.test(quote)) {
     const value = rangeExact(
       quote,

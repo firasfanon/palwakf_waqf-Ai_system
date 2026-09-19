@@ -2,8 +2,9 @@ import { invokeLLM } from "./_core/llm";
 import type { AuthenticatedUser } from "./_core/types/authUser";
 import { searchExternalResearch, searchExternalResearchMany, type ResearchSourceResult } from "./researchSources";
 import { detectHardwareAdaptiveProfile } from "./hardwareAdaptiveRuntime";
-import { auditCompactEvidencePack, compactEvidencePack, distillEvidenceClaims, verifyEvidenceClaims, type EvidenceClaim } from "./evidenceDistillation";
-import { synthesizeStructuredLegalEvidence } from "./legalEvidenceSynthesis";
+import { auditCompactEvidencePack, compactEvidencePack, distillEvidenceClaims, requiredEvidenceSourceIndexes, verifyEvidenceClaims, type EvidenceClaim } from "./evidenceDistillation";
+import { synthesizeDeterministicGroundedClaims, synthesizeStructuredLegalEvidence } from "./legalEvidenceSynthesis";
+import { auditLegalDraftWithSkillRules, type LegalSkillAudit } from "./legalSkillAdapter";
 import {
   buildGroundingReferences,
   extractRelevantContext,
@@ -93,11 +94,21 @@ export async function runResearchAnswer(input: {
     evidenceClaims.length > 0 &&
     evidenceRows.some(row => row.kind === "legal" || row.kind === "academic" || row.kind === "archival");
   const evidenceVerified = !strictEvidenceDistillation || verifyEvidenceClaims(evidenceClaims, evidenceRows);
+  const requiredEvidenceIndexes = strictEvidenceDistillation
+    ? requiredEvidenceSourceIndexes(input.question, evidenceClaims)
+    : [];
   const retentionAudit = strictEvidenceDistillation
-    ? auditCompactEvidencePack(input.question, evidenceClaims, Math.min(4, evidenceRows.length))
+    ? auditCompactEvidencePack(input.question, evidenceClaims)
     : { valid: true, missing: [] as string[], partyArgumentLeak: false, sourceCoverage: [] as number[] };
-  if (strictEvidenceDistillation && (!evidenceVerified || !retentionAudit.valid)) {
-    throw new Error("UNRESOLVED_EVIDENCE_DISTILLATION");
+  const missingRequiredEvidence = requiredEvidenceIndexes
+    .filter(index => !retentionAudit.sourceCoverage.includes(index));
+  if (
+    strictEvidenceDistillation &&
+    (!evidenceVerified || !retentionAudit.valid || missingRequiredEvidence.length > 0)
+  ) {
+    throw new Error(
+      `UNRESOLVED_EVIDENCE_DISTILLATION${missingRequiredEvidence.length ? `: missing_sources=${missingRequiredEvidence.join(",")}` : ""}`
+    );
   }
   const extContext = strictEvidenceDistillation
     ? compactEvidencePack(evidenceClaims)
@@ -125,7 +136,7 @@ OpenAlex وCrossref فهارس اكتشاف أكاديمية، وWikipedia مص�
   });
   console.log("[research] evidence-pack-ready", { elapsedMs: Date.now() - startedAt, internalChars: internalContext.length, externalChars: extContext.length, references: references.length });
 
-  let synthesisMode: "structured_legal_sections" | "monolithic" = "monolithic";
+  let synthesisMode: "structured_legal_sections" | "deterministic_grounded_claims" | "monolithic" = "monolithic";
   let sectionModels: string[] = [];
   let answer = "";
   if (strictEvidenceDistillation) {
@@ -134,6 +145,17 @@ OpenAlex وCrossref فهارس اكتشاف أكاديمية، وWikipedia مص�
       synthesisMode = "structured_legal_sections";
       sectionModels = structured.sections.map(section => section.model);
       answer = structured.answer;
+    } else {
+      const deterministic = synthesizeDeterministicGroundedClaims(
+        input.question,
+        evidenceClaims,
+        requiredEvidenceIndexes,
+      );
+      if (deterministic) {
+        synthesisMode = "deterministic_grounded_claims";
+        sectionModels = deterministic.sourceIndexes.map(() => "deterministic_evidence");
+        answer = deterministic.answer;
+      }
     }
   }
   if (!answer) {
@@ -147,7 +169,7 @@ OpenAlex وCrossref فهارس اكتشاف أكاديمية، وWikipedia مص�
     answer = contentOf(response) || "تعذر توليد إجابة موثقة من الأدلة المتاحة.";
   }
   const requiredExternalCitations = strictEvidenceDistillation
-    ? [...new Set(evidenceClaims.map(claim => claim.sourceIndex))]
+    ? requiredEvidenceIndexes
     : [];
   const citationAudit = auditResearchAnswer(
     answer,
@@ -158,6 +180,9 @@ OpenAlex وCrossref فهارس اكتشاف أكاديمية، وWikipedia مص�
   const semanticAudit = strictEvidenceDistillation
     ? auditResearchSemantics(input.question, answer, evidenceClaims)
     : { valid: true, missing: [] as string[], conflations: [] as string[] };
+  const legalSkillAudit: LegalSkillAudit = strictEvidenceDistillation
+    ? auditLegalDraftWithSkillRules(answer, evidenceClaims, evidenceRows)
+    : { valid: true, defects: [], details: [] };
   if (!citationAudit.valid) {
     const reason = citationAudit.invalidTokens.length
       ? `INVALID_CITATIONS: ${citationAudit.invalidTokens.join("، ")}`
@@ -167,9 +192,11 @@ OpenAlex وCrossref فهارس اكتشاف أكاديمية، وWikipedia مص�
     answer = `[غير محسوم] UNRESOLVED_CITATION_VALIDATION_FAILURE: ${reason}. لم تُعتمد الإجابة لأن بوابة الإحالات لم تنجح.`;
   } else if (!semanticAudit.valid) {
     answer = `[غير محسوم] UNRESOLVED_SEMANTIC_ANSWER_FAILURE: missing=${semanticAudit.missing.join(",") || "none"}; conflations=${semanticAudit.conflations.join(",") || "none"}. لم تُعتمد الإجابة لأن بوابة المطابقة الدلالية لم تنجح.`;
+  } else if (!legalSkillAudit.valid) {
+    answer = `[غير محسوم] UNRESOLVED_LEGAL_SKILL_AUDIT_FAILURE: defects=${legalSkillAudit.defects.join(",") || "none"}. لم تُعتمد الإجابة لأن بوابة المراجعة القانونية الحتمية لم تنجح.`;
   }
   return {
-    answer, references, citationAudit, semanticAudit, synthesisMode, sectionModels, mode: input.mode, internalEvidenceCount: internalReferences.length,
+    answer, references, citationAudit, semanticAudit, legalSkillAudit, synthesisMode, sectionModels, mode: input.mode, internalEvidenceCount: internalReferences.length,
     externalEvidenceCount: extReferences.length, externalResearchUsed: extReferences.length > 0,
     externalProviders: [...new Set(externalRows.map(row => row.provider))], researchQueries,
     learningCandidate: { eligible: references.length > 0, status: "pending_verification" as const, promotionPolicy: "human_verified_only" as const, sourceCount: references.length },
@@ -199,9 +226,32 @@ export function auditResearchSemantics(
 
   if (/المادة\s*(?:الثانية|2|\(2\))/u.test(q)) {
     if (!/المادة\s*(?:الثانية|2|\(2\))/u.test(a)) missing.push("ARTICLE_2");
-    if (!/الأراضي\s+المملوكة/u.test(a)) missing.push("ARTICLE_2_SCOPE");
+
+    const article2Claims = claims.filter(c =>
+      c.legalRole === "statute" &&
+      (c.citationPointer === "المادة (2)" || /المادة\s*(?:رقم\s*)?\(?2\)?/u.test(c.exactQuote))
+    );
+    const asksLandCode = /قانون\s+الأراضي\s+العثماني/u.test(q);
+    const asksShariaProcedure = /أصول\s+المحاكمات\s+الشرعية|اختصاص\s+المحاكم\s+الشرعية/u.test(q);
+    const hasLandScopeEvidence = article2Claims.some(c => /الأراضي\s+المملوكة/u.test(c.exactQuote));
+    const hasShariaScopeEvidence = article2Claims.some(c =>
+      /المحاكم\s+الشرعية|الوقف\s+وإنشاؤه|بصحة\s+الوقف/u.test(c.exactQuote)
+    );
+
+    if ((asksLandCode || (!asksShariaProcedure && hasLandScopeEvidence)) && !/الأراضي\s+المملوكة/u.test(a)) {
+      missing.push("ARTICLE_2_SCOPE");
+    }
+    if (asksShariaProcedure && hasShariaScopeEvidence) {
+      if (!/المحاكم\s+الشرعية/u.test(a)) missing.push("SHARIA_COURT_SCOPE");
+      if (!/الوقف/u.test(a)) missing.push("WAQF_JURISDICTION_SCOPE");
+    }
+
     const article2Sentence = sentences.find(s => /المادة\s*(?:الثانية|2|\(2\))/u.test(s));
-    if (article2Sentence && /(وقف\s+التخصيصات|تخصيص\s+منافع|بيت\s+المال|أوقفها\s+حضرات?\s+السلاطين)/u.test(article2Sentence)) {
+    if (
+      (asksLandCode || (!asksShariaProcedure && hasLandScopeEvidence)) &&
+      article2Sentence &&
+      /(وقف\s+التخصيصات|تخصيص\s+منافع|بيت\s+المال|أوقفها\s+حضرات?\s+السلاطين)/u.test(article2Sentence)
+    ) {
       conflations.push("ARTICLE_2_WITH_ARTICLE_4_RULE");
     }
   }

@@ -114,14 +114,18 @@ export async function searchExternalResearchMany(queries: string[], deep = true)
 type AuthoritativeCatalogEntry = {
   id: string; provider: string; kind: ResearchSourceKind; title: string; url: string;
   authority: ResearchSourceResult["authority"]; keywords: string[]; evidenceUrl?: string;
+  requiredAny?: string[];
 };
 const AUTHORITATIVE_CATALOG: AuthoritativeCatalogEntry[] = [
-  { id: "maqam:ottoman-land-code-1858", provider: "مقام - جامعة النجاح", kind: "legal", title: "قانون الأراضي العثماني 1858", url: "https://maqam.najah.edu/legislation/169/", authority: "reference", keywords: ["قانون الأراضي العثماني","الأراضي الموقوفة","وقف تخصيصات","الوقف غير الصحيح","المادة 4","المادة 121","تمليك","ملكنامه"] },
-  { id: "maqam:appeal-96-2017", provider: "مقام - جامعة النجاح", kind: "legal", title: "استئناف القدس 96/2017 - وقف خاصكي سلطان ووقف التخصيصات", url: "https://maqam.najah.edu/judgments/1780/", authority: "reference", keywords: ["خاصكي سلطان","وقف تخصيصات","وقف غير صحيح","الأراضي العثماني","بيت لحم","بيت جالا"] },
-  { id: "maqam:cassation-1543-2016", provider: "مقام - جامعة النجاح", kind: "legal", title: "نقض 1543/2016 - الفرق بين الوقف الصحيح ووقف التخصيصات", url: "https://maqam.najah.edu/judgments/7543/", authority: "reference", keywords: ["وقف تخصيصات","وقف غير صحيح","المادة 4","الأراضي العثماني","رقبة العقار","بيت المال"] },
-  { id: "openjerusalem:haseki-ottoman-archive", provider: "OpenJerusalem Archives", kind: "archival", title: "Ottoman archival records concerning the Waqf of Haseki Sultan in Jerusalem", url: "https://archives.openjerusalem.org/index.php/informationobject/browse?collection=31098&media=print&repos=739&sf_culture=en&sort=identifier&sortDir=asc&topLod=0&view=table", authority: "primary", keywords: ["Haseki Sultan","خاصكي سلطان","Jerusalem","وقف","waqf","Ottoman","برات","حجة","سند","أرشيف"] },
-  { id: "escholarship:haseki-deed-1552", provider: "University of California eScholarship", kind: "academic", title: "Early-Ottoman Palestinian Toponymy: Haseki Sultan's Endowment Deed (1552)", url: "https://escholarship.org/uc/item/0cs6f5k5", evidenceUrl: "https://escholarship.org/oai?verb=GetRecord&metadataPrefix=oai_dc&identifier=ark:/13030/qt0cs6f5k5", authority: "scholarly", keywords: ["Haseki Sultan","خاصكي سلطان","waqfiyya","وقفية","endowment deed","1552","Jerusalem","العمارة العامرة"] },
-  { id: "escholarship:haseki-waqfiyya-geography-1552", provider: "University of California eScholarship", kind: "academic", title: "Mamluk and Ottoman Endowment Deeds as a Source for Geographical-Historical Research: The Waqfiyya of Haseki Sultan (1552 CE)", url: "https://escholarship.org/uc/item/0sg1x015", authority: "scholarly", keywords: ["Haseki Sultan","خاصكي سلطان","waqfiyya","وقفية","endowment deed","1552","historical geography","Jerusalem"] }
+  { id: "maqam:ottoman-land-code-1858", provider: "مقام - جامعة النجاح", kind: "legal", title: "قانون الأراضي العثماني 1858", url: "https://maqam.najah.edu/legislation/169/", authority: "reference", keywords: ["قانون الأراضي العثماني","الأراضي الموقوفة","وقف تخصيصات","الوقف غير الصحيح","المادة 4","المادة 121","تمليك","ملكنامه"], requiredAny: ["قانون الأراضي العثماني","الأراضي الموقوفة","وقف تخصيصات","وقف غير صحيح","المادة 4","ملكنامه"] },
+  { id: "maqam:appeal-96-2017", provider: "مقام - جامعة النجاح", kind: "legal", title: "استئناف القدس 96/2017 - وقف خاصكي سلطان ووقف التخصيصات", url: "https://maqam.najah.edu/judgments/1780/", authority: "reference", keywords: ["خاصكي سلطان","وقف تخصيصات","وقف غير صحيح","الأراضي العثماني","بيت لحم","بيت جالا"], requiredAny: ["96/2017","خاصكي سلطان","خاسكي سلطان"] },
+  { id: "maqam:cassation-1543-2016", provider: "مقام - جامعة النجاح", kind: "legal", title: "نقض 1543/2016 - الفرق بين الوقف الصحيح ووقف التخصيصات", url: "https://maqam.najah.edu/judgments/7543/", authority: "reference", keywords: ["وقف تخصيصات","وقف غير صحيح","المادة 4","الأراضي العثماني","رقبة العقار","بيت المال"], requiredAny: ["1543/2016","وقف تخصيصات","وقف غير صحيح","المادة 4","بيت المال"] },
+  { id: "maqam:appeal-91-2017", provider: "مقام - جامعة النجاح", kind: "legal", title: "استئناف القدس 91/2017 - رفض التعميم بأن جميع أراضي بيت لحم وبيت جالا وقف خاصكي سلطان", url: "https://maqam.najah.edu/judgments/1531/", authority: "reference", keywords: ["بيت لحم","بيت جالا","خاصكي سلطان","جميع الأراضي","فرضيات","نوع الأرض","ملك","وقف"], requiredAny: ["بيت لحم","بيت جالا","جميع الأراضي","فرضيات"] },
+  { id: "maqam:cassation-1383-2019", provider: "مقام - جامعة النجاح", kind: "legal", title: "نقض 1383/2019 - الحكر وحق المنفعة ورقبة العقار الوقفي", url: "https://maqam.najah.edu/judgments/7576/", authority: "reference", keywords: ["الحكر","حق المنفعة","رقبة العقار","الوقف","تسجيل الحكر","تسوية الأراضي","المادة 3","تميم الداري"], requiredAny: ["الحكر","حق المنفعة","تسجيل الحكر","تميم الداري"] },
+  { id: "maqam:sharia-procedure-art2", provider: "مقام - جامعة النجاح", kind: "legal", title: "المادة 2 من قانون أصول المحاكمات الشرعية رقم 31 لسنة 1959 - اختصاصات المحاكم الشرعية في الوقف", url: "https://maqam.najah.edu/legislation/164/item/9569/", authority: "reference", keywords: ["اختصاص المحاكم الشرعية","الوقف وإنشاؤه","صحة الوقف","التولية","المادة 2","أصول المحاكمات الشرعية"], requiredAny: ["اختصاص المحاكم الشرعية","صحة الوقف","التولية","أصول المحاكمات الشرعية"] },
+  { id: "openjerusalem:haseki-ottoman-archive", provider: "OpenJerusalem Archives", kind: "archival", title: "Ottoman archival records concerning the Waqf of Haseki Sultan in Jerusalem", url: "https://archives.openjerusalem.org/index.php/informationobject/browse?collection=31098&media=print&repos=739&sf_culture=en&sort=identifier&sortDir=asc&topLod=0&view=table", authority: "primary", keywords: ["Haseki Sultan","خاصكي سلطان","Jerusalem","وقف","waqf","Ottoman","برات","حجة","سند","أرشيف"], requiredAny: ["Haseki Sultan","خاصكي سلطان","خاسكي سلطان","برات","حجة","أرشيف"] },
+  { id: "escholarship:haseki-deed-1552", provider: "University of California eScholarship", kind: "academic", title: "Early-Ottoman Palestinian Toponymy: Haseki Sultan's Endowment Deed (1552)", url: "https://escholarship.org/uc/item/0cs6f5k5", evidenceUrl: "https://escholarship.org/oai?verb=GetRecord&metadataPrefix=oai_dc&identifier=ark:/13030/qt0cs6f5k5", authority: "scholarly", keywords: ["Haseki Sultan","خاصكي سلطان","waqfiyya","وقفية","endowment deed","1552","Jerusalem","العمارة العامرة"], requiredAny: ["Haseki Sultan","خاصكي سلطان","خاسكي سلطان","وقفية","وقفيه","waqfiyya","endowment deed","1552","إنشائه","انشائه"] },
+  { id: "escholarship:haseki-waqfiyya-geography-1552", provider: "University of California eScholarship", kind: "academic", title: "Mamluk and Ottoman Endowment Deeds as a Source for Geographical-Historical Research: The Waqfiyya of Haseki Sultan (1552 CE)", url: "https://escholarship.org/uc/item/0sg1x015", authority: "scholarly", keywords: ["Haseki Sultan","خاصكي سلطان","waqfiyya","وقفية","endowment deed","1552","historical geography","Jerusalem"], requiredAny: ["Haseki Sultan","خاصكي سلطان","خاسكي سلطان","وقفية","وقفيه","waqfiyya","endowment deed","1552","إنشائه","انشائه"] }
 ];
 async function getHtmlText(url: string, timeoutMs = 8000): Promise<string> {
   const controller = new AbortController(); const timer = setTimeout(() => controller.abort(), timeoutMs);
@@ -156,10 +160,21 @@ export function buildEvidenceSnippet(query: string, content: string, maxChars = 
 
 export async function searchAuthoritativeCatalog(query: string, limit = 6): Promise<ResearchSourceResult[]> {
   const qTokens = new Set(tokens(query));
+  const normalizedQuery = text(query).toLowerCase();
   const ranked = AUTHORITATIVE_CATALOG.map(entry => {
+    if (entry.requiredAny?.length && !entry.requiredAny.some(phrase => normalizedQuery.includes(phrase.toLowerCase()))) {
+      return { entry, score: 0 };
+    }
     const keyTokens = tokens([entry.title, ...entry.keywords].join(" "));
     const hits = keyTokens.filter(token => qTokens.has(token)).length;
-    return { entry, score: hits / Math.max(1, Math.min(qTokens.size, 8)) };
+    const historicalBoost =
+      entry.id.startsWith("escholarship:") &&
+      /(إنشائه|انشائه|إنشاء|انشاء|وقفية|وقفيه|waqfiyya|endowment deed)/iu.test(query)
+        ? 0.5
+        : 0;
+    const caseMatch = query.match(/\b(\d{1,4})\s*\/\s*(\d{4})\b/);
+    const caseBoost = caseMatch && (entry.title.includes(`${caseMatch[1]}/${caseMatch[2]}`) || (entry.id.includes(caseMatch[1]) && entry.id.includes(caseMatch[2]))) ? 1 : 0;
+    return { entry, score: (hits / Math.max(1, Math.min(qTokens.size, 8))) + historicalBoost + caseBoost };
   }).filter(item => item.score >= 0.2).sort((a,b) => b.score - a.score).slice(0, limit);
   const settled = await Promise.allSettled(ranked.map(async ({ entry }) => ({
     id: entry.id, provider: entry.provider, kind: entry.kind, title: entry.title, url: entry.url,

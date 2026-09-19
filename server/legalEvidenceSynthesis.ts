@@ -1,5 +1,5 @@
 import { invokeLLM } from "./_core/llm";
-import type { EvidenceClaim } from "./evidenceDistillation";
+import { compactClaimFragments, type EvidenceClaim } from "./evidenceDistillation";
 
 export type LegalSynthesisSectionKind = "statute_scope" | "controlling_rule" | "entity_application" | "historical_creation";
 
@@ -146,6 +146,47 @@ export function renderLegalSections(sections: LegalSectionSynthesis[]) {
     const citations = section.citations.map(n => `[مصدر خارجي ${n}]`).join(" ");
     return `${label}: ${section.text} ${citations}`.trim();
   }).filter(Boolean).join("\n");
+}
+
+export function synthesizeDeterministicGroundedClaims(
+  question: string,
+  claims: EvidenceClaim[],
+  requiredSourceIndexes: number[],
+): { answer: string; sourceIndexes: number[] } | null {
+  if (!requiredSourceIndexes.length) return null;
+  const tokens = questionTokens(question);
+
+  const selected = requiredSourceIndexes.map(sourceIndex => {
+    const candidates = claims
+      .filter(claim => claim.sourceIndex === sourceIndex)
+      .map(claim => ({
+        claim,
+        score: scoreAgainstQuestion(
+          `${claim.sourceId} ${claim.citationPointer || ""} ${claim.exactQuote}`,
+          tokens,
+        ),
+      }))
+      .sort((a,b) => b.score - a.score || a.claim.claimId.localeCompare(b.claim.claimId));
+    return candidates[0]?.claim;
+  }).filter((claim): claim is EvidenceClaim => Boolean(claim));
+
+  if (selected.length !== requiredSourceIndexes.length) return null;
+
+  const lines = selected.map(claim => {
+    const body = compactClaimFragments(claim).join(" ");
+    if (!body) return "";
+    const label = claim.citationPointer
+      ? claim.citationPointer
+      : claim.legalRole === "court_reasoning" || claim.legalRole === "court_holding"
+        ? "المحكمة"
+        : claim.legalRole === "historical_evidence"
+          ? "الدليل التاريخي"
+          : "الدليل";
+    return `${label}: ${body} [مصدر خارجي ${claim.sourceIndex}]`;
+  }).filter(Boolean);
+
+  if (lines.length !== requiredSourceIndexes.length) return null;
+  return { answer: lines.join("\n"), sourceIndexes: [...requiredSourceIndexes] };
 }
 
 function deterministicSectionText(section: LegalSynthesisSectionPlan): string | null {

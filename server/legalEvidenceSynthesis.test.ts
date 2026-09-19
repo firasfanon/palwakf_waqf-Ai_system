@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import type { EvidenceClaim } from "./evidenceDistillation";
-import { buildLegalSynthesisPlan, renderLegalSections, type LegalSectionSynthesis } from "./legalEvidenceSynthesis";
+import { buildLegalSynthesisPlan, renderLegalSections, synthesizeDeterministicGroundedClaims, type LegalSectionSynthesis } from "./legalEvidenceSynthesis";
 
 const q = "هل تنطبق المادة الثانية من قانون الأراضي العثماني على وقف خاصكي سلطان إذا اعتُبر وقف تخصيصات؟ وما الدليل على طبيعة إنشائه؟";
 const claims: EvidenceClaim[] = [
@@ -34,5 +34,22 @@ describe("structured legal evidence synthesis", () => {
     expect(answer).toContain("[مصدر خارجي 1] [مصدر خارجي 3]");
     expect(answer).toContain("[مصدر خارجي 2]");
     expect(answer).toContain("[مصدر خارجي 4]");
+  });
+
+  it("renders a generic legal answer from only the required grounded source", () => {
+    const genericClaims: EvidenceClaim[] = [
+      {claimId:"G1",sourceId:"maqam:cassation-1383-2019",sourceIndex:1,sourceType:"legal",authorityClass:"reference",legalRole:"court_reasoning",exactQuote:"كان على المحكمة أن تقضي بتسجيل رقبة العقار للوقف وملكية حق المنفعة بمقتضى التحكير للمدعي.",qualifiers:[],applicabilityStatus:"case_specific",verificationStatus:"verbatim_match"},
+      {claimId:"G2",sourceId:"other",sourceIndex:2,sourceType:"legal",authorityClass:"reference",legalRole:"court_reasoning",exactQuote:"نص آخر غير لازم للسؤال.",qualifiers:[],applicabilityStatus:"case_specific",verificationStatus:"verbatim_match"},
+    ];
+    const result = synthesizeDeterministicGroundedClaims(
+      "ما أثر الحكر على رقبة العقار وحق المنفعة وفق نقض 1383/2019؟",
+      genericClaims,
+      [1],
+    );
+    expect(result?.sourceIndexes).toEqual([1]);
+    expect(result?.answer).toContain("رقبة العقار للوقف");
+    expect(result?.answer).toContain("حق المنفعة");
+    expect(result?.answer).toContain("[مصدر خارجي 1]");
+    expect(result?.answer).not.toContain("[مصدر خارجي 2]");
   });
 });
