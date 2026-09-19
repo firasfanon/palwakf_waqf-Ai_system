@@ -83,3 +83,18 @@ Recommended scope:
 
 Next:
 `GLOBAL_SKILL_ADMISSION_DECISION_PACKAGE -> MIND_REVIEW -> WORKSPACE_DECISION`
+
+
+## Sovereign promotion closeout
+
+The verified learning was routed through the approved authority chain.
+
+- Mind review: `1OjHcOX_BYf-Y2PvgGPm8cTMeuWcdyEIeVAdkDkLAqs4`
+- Mind recommendation: `RECOMMEND_DOMAIN_SCOPED_CANONICAL_PROMOTION`
+- Workspace decision: `1MbfUhYQ5NMEOg0g66HHIUJDjgX5YoEFzbHEvR4zlAyE`
+- Workspace result: `APPROVE_DOMAIN_SCOPED_CANONICAL_SKILL`
+- Domain: `WAQF_LEGAL_RESEARCH_HIGH_ASSURANCE`
+- Universal cross-domain admission: `NO`
+- Runtime authority from promotion: `NONE`
+
+`WAQF_AI_SELF_PROMOTION = FALSE`

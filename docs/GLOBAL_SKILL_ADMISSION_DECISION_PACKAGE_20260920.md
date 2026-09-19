@@ -163,3 +163,39 @@ CANONICAL_PROMOTION = NO_YET
 GLOBAL_RUNTIME_ENABLEMENT = NO
 PRODUCTION = NO
 MAIN_MERGE = NO
+
+
+## FINAL SOVEREIGN CLOSEOUT — 2026-09-20
+
+`MIND_REVIEW = PASS`
+
+- Mind review document: `1OjHcOX_BYf-Y2PvgGPm8cTMeuWcdyEIeVAdkDkLAqs4`
+- Automated Mind review result: `RECOMMEND_PROJECT_PROVEN`
+- Knowledge-plane promotion recommendation: `RECOMMEND_DOMAIN_SCOPED_CANONICAL_PROMOTION`
+- `CANONICAL_WRITE_ALLOWED_BY_MIND = FALSE`
+- `EXECUTION_AUTHORITY_GRANTED_BY_MIND = FALSE`
+
+`WORKSPACE_DECISION = APPROVE_DOMAIN_SCOPED_CANONICAL_SKILL`
+
+- Workspace decision document: `1MbfUhYQ5NMEOg0g66HHIUJDjgX5YoEFzbHEvR4zlAyE`
+- Canonical class: `DOMAIN`
+- Owner scope: `DOMAIN:WAQF_LEGAL_RESEARCH_HIGH_ASSURANCE`
+- Portfolio universal: `FALSE`
+- Auto promotion: `FALSE`
+- Runtime enablement: `SEPARATE_PROJECT_TASK_AUTHORIZATION_REQUIRED`
+- Execution/network/filesystem/Git/database/secret/production authority granted by this decision: `NONE`
+
+Sovereign Drive records:
+
+- Global admission package: `15Q5rKEGAV3OOTJaIe9si2Gkipn8tsDvrj8_EO2hfxR4`
+- Skills/knowledge/lessons update: `17xlAHASMg8Mv1PQvBiqtox5guo3JT3bn6nFdX5AbuOs`
+- Cross-project skills/lessons register: `1Wx9p-ZZEkMfQTpnZc7kMwSPhSENeuix72P241Tbt-v0`
+- Mind current-state checkpoint: `1kb5As0ySDatQXC25LjCiNdAkqTi8Jy2Y8T56niK_qYo`
+- Workspace current-state checkpoint: `1lOc_RR65oZXFIEkt92Fb4glYnuEbz1iqDiNeeawcics`
+- Waqf AI activation checkpoint: `1dY7ZD97sayUg2WsxMEgAg0aYOvTjQ90S648Zd80yVbs`
+
+Final classification:
+
+`GLOBAL_SKILL_ADMISSION_DECISION_PACKAGE = CLOSED_PASS_DOMAIN_SCOPED_CANONICAL`
+
+This does **not** mean universal portfolio runtime activation. Waqf AI did not self-promote; promotion was recorded through Mind review and Workspace sovereign decision.
