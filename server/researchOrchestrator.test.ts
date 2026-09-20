@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { auditResearchAnswer, auditResearchSemantics } from "./researchOrchestrator";
+import { auditResearchAnswer, auditResearchSemantics, recoverEvidenceSynthesisAfterSemanticFailure } from "./researchOrchestrator";
 import type { EvidenceClaim } from "./evidenceDistillation";
 
 const claims: EvidenceClaim[] = [
@@ -46,6 +46,29 @@ describe("research evidence audit", () => {
       "والدليل التاريخي هو وقفية waqfiyya مؤرخة 958 AH / 1552 C.E. [مصدر خارجي 4]",
     ].join("\n");
     expect(auditResearchSemantics(question, answer, claims)).toEqual({ valid:true, missing:[], conflations:[] });
+  });
+
+  it("recovers deterministically when structured synthesis misses required semantic coverage", () => {
+    const incompleteStructuredAnswer =
+      "المادة (2) تتناول الأراضي المملوكة. [مصدر خارجي 1]";
+
+    const recovered = recoverEvidenceSynthesisAfterSemanticFailure({
+      question,
+      answer: incompleteStructuredAnswer,
+      synthesisMode: "structured_legal_sections",
+      sectionModels: ["qwen2.5:3b"],
+      evidenceClaims: claims,
+      requiredEvidenceIndexes: [1, 2, 3, 4],
+    });
+
+    expect(recovered.synthesisMode).toBe("deterministic_grounded_claims");
+    expect(recovered.sectionModels.every(model => model === "deterministic_evidence")).toBe(true);
+    expect(auditResearchSemantics(question, recovered.answer, claims)).toEqual({
+      valid: true,
+      missing: [],
+      conflations: [],
+    });
+    expect(recovered.answer).toContain("[مصدر خارجي 4]");
   });
 
   it("rejects article-2/article-4 conflation", () => {

@@ -228,6 +228,40 @@ export function synthesizeDeterministicGroundedClaims(
     }
   }
 
+  const q = normalize(question);
+  const asksArticle2 = /المادة\s*(?:الثانية|2|\(2\))/u.test(q);
+  const needsArticle4 =
+    /المادة\s*(?:الرابعة|4|\(4\))/u.test(q) ||
+    (asksArticle2 && /(تخصيصات|وقف\s+غير\s+صحيح)/u.test(q));
+
+  const ensureProvisionClaim = (article: 2 | 4) => {
+    const existing = selected.some(claim =>
+      claim.legalRole === "statute" &&
+      (claim.citationPointer === `المادة (${article})` ||
+        new RegExp(`المادة\\s*(?:رقم\\s*)?\\(?${article}\\)?`, "u").test(claim.exactQuote))
+    );
+    if (existing) return;
+
+    const requiredClaim = claims.find(claim =>
+      requiredSourceIndexes.includes(claim.sourceIndex) &&
+      claim.legalRole === "statute" &&
+      (claim.citationPointer === `المادة (${article})` ||
+        new RegExp(`المادة\\s*(?:رقم\\s*)?\\(?${article}\\)?`, "u").test(claim.exactQuote))
+    );
+    if (requiredClaim) selected.push(requiredClaim);
+  };
+
+  if (asksArticle2) ensureProvisionClaim(2);
+  if (needsArticle4) ensureProvisionClaim(4);
+
+  selected.sort((a, b) => {
+    if (a.sourceIndex !== b.sourceIndex) return a.sourceIndex - b.sourceIndex;
+    const rank = (claim: EvidenceClaim) =>
+      claim.citationPointer === "المادة (2)" ? 0 :
+      claim.citationPointer === "المادة (4)" ? 1 : 2;
+    return rank(a) - rank(b) || a.claimId.localeCompare(b.claimId);
+  });
+
   const lines = selected.map(claim => {
     const body = compactClaimFragments(claim, question).join(" ");
     if (!body) return "";
@@ -238,12 +272,10 @@ export function synthesizeDeterministicGroundedClaims(
         : claim.legalRole === "historical_evidence"
           ? "الدليل التاريخي"
           : "الدليل";
-    return `${label}: ${body} [مصدر خارجي ${claim.sourceIndex}]`;
+    return `${label}: ${body} [مصدر خارجي ${claim.sourceIndex}].`;
   }).filter(Boolean);
 
   if (lines.length !== selected.length) return null;
-
-  const q = normalize(question);
   const citationList = [...new Set(requiredSourceIndexes)]
     .map(index => `[مصدر خارجي ${index}]`)
     .join(" ");

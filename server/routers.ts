@@ -199,6 +199,7 @@ import {
   runtimeDeleteDocumentFile,
   runtimeGetAssistantKnowledgeReadDiagnostics,
   runtimeCreateKnowledgeDocumentFromTool,
+  runtimeCaptureLocalLearningCandidate,
   runtimeCreateAiToolRun,
   runtimeListAiToolRuns,
   runtimeGetAiToolRunDetails,
@@ -1315,16 +1316,46 @@ const chatRouter = router({
         const content = research.answer || 'تعذر توليد إجابة موثقة من الأدلة المتاحة.';
         const assistantMessage = await runtimeCreateMessage({ conversationId: input.conversationId, role: 'assistant', content, sources: JSON.stringify(groundingReferences) } as any);
         await runtimeUpdateConversation(input.conversationId, { updatedAt: new Date().toISOString().slice(0, 19).replace('T', ' ') } as any);
+
+        const learningCandidateEligible =
+          research.learningCandidate.eligible &&
+          research.citationAudit.valid &&
+          research.semanticAudit.valid &&
+          research.legalSkillAudit.valid &&
+          research.skillRuntime.status !== "fail_closed_missing_verified_legal_evidence" &&
+          !content.startsWith("[غير محسوم] UNRESOLVED_");
+        const learningCapture = learningCandidateEligible
+          ? await runtimeCaptureLocalLearningCandidate({
+              question: input.message,
+              answer: content,
+              references: groundingReferences,
+              synthesisMode: research.synthesisMode,
+              skillRuntime: research.skillRuntime,
+              citationAudit: research.citationAudit,
+              semanticAudit: research.semanticAudit,
+              legalSkillAudit: research.legalSkillAudit,
+              createdBy: ctx.user!.id,
+            }).catch(() => ({
+              captured: false as const,
+              storage: "local_review_only" as const,
+              reason: "local_learning_candidate_capture_failed" as const,
+            }))
+          : {
+              captured: false as const,
+              storage: "none" as const,
+              reason: "research_result_not_eligible_for_learning_candidate" as const,
+            };
+
         void runtimeCreateAiToolRun({
           toolKey: 'waqf_research_answer', runStatus: 'completed', approvalStatus: 'pending',
           title: input.mode === 'deep_research' ? 'بحث وقفي معمق' : 'إجابة وقفية موثقة',
           inputText: input.message, outputText: content,
           inputJson: { conversationId: input.conversationId, mode: input.mode || 'answer' },
-          outputJson: { internalEvidenceCount: research.internalEvidenceCount, externalEvidenceCount: research.externalEvidenceCount, externalProviders: research.externalProviders, researchQueries: research.researchQueries, learningCandidate: research.learningCandidate },
+          outputJson: { internalEvidenceCount: research.internalEvidenceCount, externalEvidenceCount: research.externalEvidenceCount, externalProviders: research.externalProviders, researchQueries: research.researchQueries, learningCandidate: { ...research.learningCandidate, capture: learningCapture } },
           sourceContextJson: { references: groundingReferences },
         }).catch(() => undefined);
-        console.log('[chat.sendMessage] success', { conversationId: input.conversationId, assistantMessageId: assistantMessage?.id, docsCount: research.internalEvidenceCount });
-        return { userMessage, assistantMessage, groundingReferences, platformContextUsed: platformContext, knowledgeScopeCodesApplied: scopeCodes, research };
+        console.log('[chat.sendMessage] success', { conversationId: input.conversationId, assistantMessageId: assistantMessage?.id, docsCount: research.internalEvidenceCount, learningCandidateCaptured: learningCapture.captured });
+        return { userMessage, assistantMessage, groundingReferences, platformContextUsed: platformContext, knowledgeScopeCodesApplied: scopeCodes, research: { ...research, learningCapture } };
       } catch (error: any) {
         console.error('[chat.sendMessage] failed', error);
         if (error instanceof TRPCError) {

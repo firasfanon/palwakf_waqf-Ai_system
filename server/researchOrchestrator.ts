@@ -64,6 +64,57 @@ function externalReferences(rows: ResearchSourceResult[]): ExternalResearchRefer
   }));
 }
 
+export function recoverEvidenceSynthesisAfterSemanticFailure(input: {
+  question: string;
+  answer: string;
+  synthesisMode: "structured_legal_sections" | "deterministic_grounded_claims";
+  sectionModels: string[];
+  evidenceClaims: EvidenceClaim[];
+  requiredEvidenceIndexes: number[];
+}) {
+  const currentAudit = auditResearchSemantics(
+    input.question,
+    input.answer,
+    input.evidenceClaims,
+  );
+  if (currentAudit.valid) {
+    return {
+      answer: input.answer,
+      synthesisMode: input.synthesisMode,
+      sectionModels: input.sectionModels,
+    };
+  }
+
+  const deterministicFallback = synthesizeDeterministicGroundedClaims(
+    input.question,
+    input.evidenceClaims,
+    input.requiredEvidenceIndexes,
+  );
+  const deterministicAudit = deterministicFallback
+    ? auditResearchSemantics(
+        input.question,
+        deterministicFallback.answer,
+        input.evidenceClaims,
+      )
+    : null;
+
+  if (deterministicFallback && deterministicAudit?.valid) {
+    return {
+      answer: deterministicFallback.answer,
+      synthesisMode: "deterministic_grounded_claims" as const,
+      sectionModels: deterministicFallback.sourceIndexes.map(
+        () => "deterministic_evidence",
+      ),
+    };
+  }
+
+  return {
+    answer: "",
+    synthesisMode: "monolithic" as const,
+    sectionModels: [] as string[],
+  };
+}
+
 export async function runResearchAnswer(input: {
   question: string; mode: ResearchMode; actor: Partial<AuthenticatedUser> | null; scopeCodes: string[];
 }) {
@@ -167,13 +218,17 @@ OpenAlex وCrossref فهارس اكتشاف أكاديمية، وWikipedia مص�
     }
   }
   if (answer && strictEvidenceDistillation && synthesisMode !== "monolithic") {
-    const preSynthesisSemanticAudit =
-      auditResearchSemantics(input.question, answer, evidenceClaims);
-    if (!preSynthesisSemanticAudit.valid) {
-      answer = "";
-      synthesisMode = "monolithic";
-      sectionModels = [];
-    }
+    const auditedSynthesis = recoverEvidenceSynthesisAfterSemanticFailure({
+      question: input.question,
+      answer,
+      synthesisMode,
+      sectionModels,
+      evidenceClaims,
+      requiredEvidenceIndexes,
+    });
+    answer = auditedSynthesis.answer;
+    synthesisMode = auditedSynthesis.synthesisMode;
+    sectionModels = auditedSynthesis.sectionModels;
   }
   if (!answer) {
     const response = await invokeLLM({

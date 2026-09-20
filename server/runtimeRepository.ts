@@ -43,6 +43,11 @@ import {
   getDb,
 } from './db';
 import * as local from './localRuntimeStore';
+import {
+  buildLearningCandidateKey,
+  buildLearningCandidateKnowledgeDraft,
+  WAQF_RESEARCH_LEARNING_CANDIDATE_ORIGIN,
+} from './learningCandidate';
 import { createClient, type SupabaseClient } from '@supabase/supabase-js';
 
 
@@ -655,6 +660,55 @@ function requireAssistantSupabaseClient() {
     throw new Error('Assistant Supabase client is not configured');
   }
   return client;
+}
+
+export async function runtimeCaptureLocalLearningCandidate(input: {
+  question: string;
+  answer: string;
+  references: any[];
+  synthesisMode?: string | null;
+  skillRuntime?: any;
+  citationAudit?: any;
+  semanticAudit?: any;
+  legalSkillAudit?: any;
+  createdBy?: number | null;
+}) {
+  if (getAssistantSupabaseClient()) {
+    return {
+      captured: false,
+      storage: "shared_runtime",
+      reason: "shared_runtime_configured_use_governed_ai_tool_run_path",
+    } as const;
+  }
+
+  const draft = buildLearningCandidateKnowledgeDraft(input);
+  const candidateKey = buildLearningCandidateKey(input.question);
+  const existing = (await local.listKnowledgeDocuments()).find((document: any) => {
+    const metadata = document?.metadataJson && typeof document.metadataJson === "object"
+      ? document.metadataJson
+      : {};
+    return (
+      document?.toolOrigin === WAQF_RESEARCH_LEARNING_CANDIDATE_ORIGIN &&
+      metadata.candidate_key === candidateKey &&
+      (document?.status === "review_only" || document?.status === "draft")
+    );
+  });
+
+  const document = existing
+    ? await local.updateKnowledgeDocument(existing.id, draft)
+    : await local.createKnowledgeDocument(draft);
+
+  return {
+    captured: true,
+    storage: "local_review_only",
+    documentId: document?.id ?? null,
+    status: document?.status ?? "review_only",
+    isChatEligible: Number(document?.isChatEligible ?? 0),
+    sourceVerificationStatus: document?.metadataJson?.source_verification_status ?? "pending",
+    citationVerificationStatus: document?.metadataJson?.citation_verification_status ?? "linked",
+    reusedExistingCandidate: Boolean(existing),
+    promotionPolicy: "human_verified_only",
+  } as const;
 }
 
 export async function runtimeCreateAiToolRun(input: any) {

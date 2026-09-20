@@ -1,4 +1,5 @@
 export { COOKIE_NAME, ONE_YEAR_MS } from "@shared/const";
+import { redirectTargetFromHybridAddress } from "@/lib/hybridLocationPath";
 
 const isExternalOAuthEnabled = () => {
   const explicit = import.meta.env.VITE_EXTERNAL_OAUTH_ENABLED;
@@ -59,12 +60,16 @@ export const getAppHref = (path: string) => {
 export const getAppRedirectTarget = (path?: string) => {
   if (typeof window === "undefined") return path || "/";
 
-  const currentHashPath = (window.location.hash || "").startsWith("#/")
-    ? normalizeAppPath(window.location.hash.slice(1))
-    : "/";
+  const hashRoutingEnabled = isHashRoutingEnabled();
+  const currentTarget = redirectTargetFromHybridAddress(
+    window.location.hash || "",
+    window.location.pathname || "/",
+    window.location.search || "",
+    hashRoutingEnabled,
+  );
+  const normalized = normalizeAppPath(path || currentTarget || "/");
 
-  const normalized = normalizeAppPath(path || currentHashPath || "/");
-  if (!isHashRoutingEnabled()) return normalized;
+  if (!hashRoutingEnabled) return normalized;
   return `${getHashRoutingBasePath()}#${normalized}`;
 };
 
