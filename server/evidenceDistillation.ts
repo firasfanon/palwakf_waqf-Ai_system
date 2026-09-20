@@ -114,6 +114,35 @@ function sentenceFromAnchor(content: string, anchors: RegExp[], maxChars = 850):
   return "";
 }
 
+function questionDirectedWindow(content: string, tokens: string[], maxChars = 700): string {
+  const n = normalize(content);
+  const semanticTokens = tokens.filter(token => /\p{L}/u.test(token));
+  if (!n || !semanticTokens.length) return "";
+  const lower = n.toLowerCase();
+  const positions = semanticTokens
+    .map(token => lower.indexOf(token.toLowerCase()))
+    .filter(position => position >= 0);
+  if (!positions.length) return "";
+
+  let bestPosition = positions[0];
+  let bestScore = -1;
+  for (const position of positions) {
+    const start = Math.max(0, position - 180);
+    const window = lower.slice(start, Math.min(lower.length, start + maxChars));
+    const score = semanticTokens.reduce(
+      (count, token) => count + (window.includes(token.toLowerCase()) ? 1 : 0),
+      0,
+    );
+    if (score > bestScore) {
+      bestScore = score;
+      bestPosition = position;
+    }
+  }
+
+  const start = Math.max(0, bestPosition - 180);
+  return normalize(n.slice(start, Math.min(n.length, start + maxChars)));
+}
+
 function historicalSentence(content: string): string {
   const n = normalize(content);
   const compact = rangeExact(
@@ -296,22 +325,45 @@ export function distillEvidenceClaims(
           760,
         )
       : "";
-    const directReasoning = hasekiReasoning || takhsisatReasoning || blanketReasoning || sentenceFromAnchor(body, [
-      /وبإنزال\s+صحيح\s+حكم\s+القانون/u,
-      /وقف\s+التخصيصات/u,
-      /فرضيات/u,
-    ], 620);
+    const genericWindow = questionDirectedWindow(body, tokens, 700);
+    const rankedReasoning = [
+      hasekiReasoning,
+      takhsisatReasoning,
+      blanketReasoning,
+      genericWindow,
+      ...sentenceUnits(body)
+        .map((text, index) => ({ text, index, score: scoreUnit(text, tokens) }))
+        .filter(x =>
+          x.score > 0 &&
+          x.text.length <= 1000 &&
+          !/اسباب الاستئناف|أسباب الاستئناف|يستند الطعن|التمست الطاعنة|أحكام قضائية مشابهة|اتصل بنا|النص الكامل/u.test(x.text)
+        )
+        .sort((a,b) => b.score - a.score || a.index - b.index)
+        .slice(0, 3)
+        .map(x => x.text),
+    ]
+      .map((text, index) => ({
+        text: normalize(text || ""),
+        index,
+        score: tokens.reduce(
+          (score, token) => score + ((text || "").toLowerCase().includes(token.toLowerCase()) ? 1 : 0),
+          0,
+        ),
+      }))
+      .filter(item =>
+        item.text &&
+        item.score > 0 &&
+        !/اسباب الاستئناف|أسباب الاستئناف|يستند الطعن|التمست الطاعنة|أحكام قضائية مشابهة|اتصل بنا|النص الكامل/u.test(item.text)
+      )
+      .sort((a,b) => b.score - a.score || a.index - b.index);
 
-    if (directReasoning) {
-      addClaim(claims, row, sourceIndex, "court_reasoning", directReasoning, "direct");
-      return;
+    const seenReasoning = new Set<string>();
+    for (const candidate of rankedReasoning) {
+      if (seenReasoning.has(candidate.text)) continue;
+      seenReasoning.add(candidate.text);
+      addClaim(claims, row, sourceIndex, "court_reasoning", candidate.text, "direct");
+      if (claims.filter(c => c.sourceIndex === sourceIndex).length >= 3) break;
     }
-
-    const best = sentenceUnits(body)
-      .map((text, index) => ({ text, index, score: scoreUnit(text, tokens) }))
-      .filter(x => x.score > 0 && !/اسباب الاستئناف|أسباب الاستئناف|يستند الطعن|التمست الطاعنة/u.test(x.text))
-      .sort((a,b) => b.score - a.score || a.index - b.index)[0];
-    if (best) addClaim(claims, row, sourceIndex, "court_reasoning", best.text, "direct");
   });
 
   const total = claims.reduce((n, c) => n + c.exactQuote.length, 0);
@@ -346,6 +398,81 @@ function bestClaim(
     .filter(predicate)
     .map(claim => ({ claim, score: lexicalClaimScore(question, claim) }))
     .sort((a,b) => b.score - a.score || a.claim.sourceIndex - b.claim.sourceIndex)[0]?.claim;
+}
+
+type EvidenceTheme =
+  | "article_2"
+  | "article_4"
+  | "jurisdiction"
+  | "municipal_boundary"
+  | "registration"
+  | "haseki_entity"
+  | "hukr"
+  | "takhsisat"
+  | "rights_structure"
+  | "historical_creation"
+  | "tawliya"
+  | "istibdal"
+  | "mulknama";
+
+function evidenceThemes(value: string): Set<EvidenceTheme> {
+  const n = normalize(value);
+  const themes = new Set<EvidenceTheme>();
+  if (/الماد[ةه]\s*(?:الثاني[ةه]|2|\(2\))/u.test(n)) themes.add("article_2");
+  if (/الماد[ةه]\s*(?:الرابع[ةه]|4|\(4\))/u.test(n)) themes.add("article_4");
+  if (/اختصاص|صلاحي[ةه]|المحاكم\s+الشرعي[ةه]/u.test(n)) themes.add("jurisdiction");
+  if (/البلدي[ةه]|حدود\s+البلدي[ةه]/u.test(n)) themes.add("municipal_boundary");
+  if (/تسجيل|سندات?\s+التسجيل|اخراج\s+القيد/u.test(n)) themes.add("registration");
+  if (/(خاصكي|خاسكي)\s+سلطان|Haseki\s+Sultan/iu.test(n)) themes.add("haseki_entity");
+  if (/الحكر|التحكير/u.test(n)) themes.add("hukr");
+  if (/(?:وقف|[اأإآ]وقاف)\s+(?:ال)?تخصيصات|وقف\s+غير\s+صحيح|بالتخصيصات/u.test(n)) themes.add("takhsisat");
+  if (/رقب(?:ة|ه|تها)|حق\s+المنفع[ةه]|ملكي[ةه]\s+الرقب[ةه]/u.test(n)) themes.add("rights_structure");
+  if (/طبيع[ةه]\s+[إا]نشائه|[إا]نشائه|[إا]نشاء\s+الوقف|وقفي[ةه]|waqfiyya|endowment deed|1552|958\s*AH/iu.test(n)) themes.add("historical_creation");
+  if (/التولي[ةه]/u.test(n)) themes.add("tawliya");
+  if (/استبدال/u.test(n)) themes.add("istibdal");
+  if (/ملكنام[ةه]|همايوني/u.test(n)) themes.add("mulknama");
+  return themes;
+}
+
+export function selectRequiredEvidenceClaims(
+  question: string,
+  claims: EvidenceClaim[],
+  requiredSourceIndexes: number[],
+): EvidenceClaim[] {
+  const requiredThemes = evidenceThemes(question);
+  const selected: EvidenceClaim[] = [];
+
+  for (const sourceIndex of requiredSourceIndexes) {
+    const candidates = claims
+      .filter(claim => claim.sourceIndex === sourceIndex)
+      .map(claim => {
+        const rendered = compactClaimFragments(claim).join(" ");
+        const themes = evidenceThemes(`${claim.citationPointer || ""} ${claim.exactQuote}`);
+        const themeHits = [...themes].filter(theme => requiredThemes.has(theme));
+        return {
+          claim,
+          themes,
+          themeHits,
+          score: themeHits.length * 10 + lexicalClaimScore(question, claim),
+        };
+      })
+      .sort((a,b) => b.score - a.score || a.claim.claimId.localeCompare(b.claim.claimId));
+
+    const first = candidates[0];
+    if (!first) continue;
+    selected.push(first.claim);
+    const coveredThemes = new Set(first.themeHits);
+
+    for (const candidate of candidates.slice(1)) {
+      if (selected.filter(claim => claim.sourceIndex === sourceIndex).length >= 2) break;
+      const newThemes = candidate.themeHits.filter(theme => !coveredThemes.has(theme));
+      if (!newThemes.length) continue;
+      selected.push(candidate.claim);
+      newThemes.forEach(theme => coveredThemes.add(theme));
+    }
+  }
+
+  return selected;
 }
 
 export function requiredEvidenceSourceIndexes(question: string, claims: EvidenceClaim[]): number[] {
@@ -423,12 +550,17 @@ function auditSemanticText(
   const all = normalize(textValue);
   const missing: string[] = [];
   const partyArgumentLeak = /اسباب الاستئناف|أسباب الاستئناف|يستند\s+(?:هذا\s+)?الاستئناف|يستند الطعن|التمست الطاعنة/u.test(all);
+  const asksTakhsisat = /تخصيصات|وقف\s+غير\s+صحيح/u.test(q);
+  const asksArticle2 = /المادة\s*(?:الثانية|2|\(2\))/u.test(q);
+  const asksTakhsisatStructure =
+    (asksArticle2 && asksTakhsisat) ||
+    /المادة\s*(?:الرابعة|4|\(4\))|الفرق|رقب(?:ة|تها)|بيت\s+المال|تخصيص\s+منافع|اعتبر[^؟.]{0,80}تخصيصات|طبيعة[^؟.]{0,80}تخصيصات/u.test(q);
 
   if (/المادة\s*(?:الثانية|2|\(2\))/u.test(q) && !/المادة\s*\(2\)/u.test(all)) missing.push("ARTICLE_2");
-  if (/تخصيصات|وقف\s+غير\s+صحيح/u.test(q) && !/المادة\s*\(4\)|وقف\s+التخصيصات|وقف\s+غير\s+صحيح/u.test(all)) missing.push("TAKHSISAT_RULE");
+  if (asksTakhsisat && !/المادة\s*\(4\)|تخصيصات|وقف\s+غير\s+صحيح/u.test(all)) missing.push("TAKHSISAT_RULE");
   if (/خاصكي|Haseki/iu.test(q) && !/خاصكي\s+سلطان|Haseki\s+Sultan/iu.test(all)) missing.push("HASEKI_LINK");
   if (/طبيعة\s+إنشائه|إنشائه|انشائه/u.test(q) && !/waqfiyya|endowment deed|1552|958\s*AH/iu.test(all)) missing.push("HISTORICAL_CREATION");
-  if (/تخصيصات|وقف\s+غير\s+صحيح/u.test(q) && !/مع بقاء|رقب(?:ة|تها).*بيت\s+المال|بيت\s+المال/u.test(all)) missing.push("LEGAL_QUALIFIER");
+  if (asksTakhsisat && asksTakhsisatStructure && !/مع بقاء|رقب(?:ة|تها).*بيت\s+المال|بيت\s+المال/u.test(all)) missing.push("LEGAL_QUALIFIER");
   if (expectedSourceCount != null && sourceCoverage.length < expectedSourceCount) missing.push("SOURCE_COVERAGE");
 
   return { valid: missing.length === 0 && !partyArgumentLeak, missing, partyArgumentLeak, sourceCoverage };
@@ -440,8 +572,9 @@ export function auditSemanticRetention(question: string, claims: EvidenceClaim[]
   return auditSemanticText(question, all, sourceCoverage, expectedSourceCount);
 }
 
-export function compactClaimFragments(claim: EvidenceClaim): string[] {
+export function compactClaimFragments(claim: EvidenceClaim, question = ""): string[] {
   const quote = normalize(claim.exactQuote);
+  const q = normalize(question);
   const fragments: string[] = [];
 
   if (claim.legalRole === "statute" && claim.citationPointer === "المادة (2)") {
@@ -453,6 +586,18 @@ export function compactClaimFragments(claim: EvidenceClaim): string[] {
       rangeExact(quote, /وبما\s+أن\s+وقفية\s+مثل\s+هذه\s+الأراضي/u, /ليست\s+من\s+الأوقاف\s+الصحيحة/u, 360),
       rangeExact(quote, /تخصيصات\s+كهذه/u, /رقبتها\s+عائدة\s+إلى\s+بيت\s+المال/u, 280),
     ]) if (value) fragments.push(value);
+  } else if (
+    claim.legalRole === "court_reasoning" &&
+    /الوقف\s+الصحيح/u.test(quote) &&
+    /رقب(?:ة|ه)/u.test(quote)
+  ) {
+    const value = rangeExact(
+      quote,
+      /الوقف\s+الصحيح/u,
+      /(?:جانب\s+الوقف|عائد(?:ة|ه)?\s+إلى\s+الوقف|عائده\s+الى\s+الوقف)/u,
+      440,
+    );
+    if (value) fragments.push(value);
   } else if (
     claim.legalRole === "court_reasoning" &&
     /(?:الحكر|التحكير)/u.test(quote) &&
@@ -487,14 +632,39 @@ export function compactClaimFragments(claim: EvidenceClaim): string[] {
     if (value) fragments.push(value);
   }
 
-  if (!fragments.length) fragments.push(takeFullSentences(quote, 300));
+  if (
+    (claim.legalRole === "court_reasoning" || claim.legalRole === "court_holding") &&
+    /اختصاص|صلاحية/u.test(q) &&
+    /اختصاص|صلاحية|المحاكم\s+الشرعية/u.test(quote)
+  ) {
+    const value = sentenceFromAnchor(quote, [/اختصاص\s+المحاكم\s+الشرعية/u, /عدم\s+الاختصاص/u], 420);
+    if (value) fragments.push(value);
+  }
+  if (
+    (claim.legalRole === "court_reasoning" || claim.legalRole === "court_holding") &&
+    /البلدية|حدود\s+البلدية/u.test(q) &&
+    /البلدية/u.test(quote)
+  ) {
+    const value = sentenceFromAnchor(quote, [/تخصيصات/u, /لا\s+يتم\s+تحويله\s+الى\s+ميري\s+او\s+ملك/u], 520);
+    if (value) fragments.push(value);
+  }
+  if (
+    (claim.legalRole === "court_reasoning" || claim.legalRole === "court_holding") &&
+    /تسجيل|سندات\s+التسجيل/u.test(q) &&
+    /تسجيل/u.test(quote)
+  ) {
+    const value = sentenceFromAnchor(quote, [/سندات\s+التسجيل/u, /التسجيل/u], 440);
+    if (value) fragments.push(value);
+  }
+
+  if (!fragments.length) fragments.push(takeFullSentences(quote, 320));
   return [...new Set(fragments)].filter(Boolean);
 }
 
-export function compactEvidencePack(claims: EvidenceClaim[]): string {
+export function compactEvidencePack(claims: EvidenceClaim[], question = ""): string {
   return claims.map(c => [
     `[مصدر خارجي ${c.sourceIndex} | ${c.legalRole}${c.citationPointer ? ` | ${c.citationPointer}` : ""}]`,
-    ...compactClaimFragments(c),
+    ...compactClaimFragments(c, question),
   ].join("\n")).join("\n\n");
 }
 
@@ -503,7 +673,7 @@ export function auditCompactEvidencePack(
   claims: EvidenceClaim[],
   expectedSourceCount?: number,
 ): SemanticRetentionAudit {
-  const pack = compactEvidencePack(claims);
+  const pack = compactEvidencePack(claims, question);
   const sourceCoverage = [...new Set(
     [...pack.matchAll(/\[مصدر خارجي\s+(\d+)/g)].map(m => Number(m[1])),
   )].sort((a,b) => a-b);

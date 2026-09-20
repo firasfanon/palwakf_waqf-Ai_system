@@ -69,4 +69,4 @@ See:
 - `evals/ADMISSION_EVIDENCE.md`
 - `references/PROVENANCE_AND_AUTHORITY_POLICY.md`
 
-Current project status: **PROJECT_PROVEN / DOMAIN-SCOPED CANONICAL CANDIDATE**, pending Mind review and Workspace sovereign decision.
+Current project status: **ACTIVE_CANONICAL_DOMAIN** after Mind review and Workspace sovereign approval. Runtime use remains project/task-authorized and does not imply universal auto-loading or expanded execution authority.

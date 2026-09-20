@@ -31,6 +31,38 @@ describe("PalWakf deterministic legal skill adapter", () => {
     expect(audit.defects).toEqual([]);
   });
 
+  it("accepts a faithful long-form statute excerpt cited to the same provision", () => {
+    const longClaim: EvidenceClaim = {
+      claimId:"LONG-4",sourceId:"law",sourceIndex:1,sourceType:"legal",authorityClass:"reference",legalRole:"statute",
+      exactQuote:"القسم الثاني هو الأراضي المفرزة من الأراضي الأميرية التي أوقفها السلاطين أو أوقفها آخرون بالإذن السلطاني وبما أن وقفية مثل هذه الأراضي هي عبارة عن تخصيص منافع فمثل هذه الأراضي الموقوفة ليست من الأوقاف الصحيحة وتكون رقبتها عائدة إلى بيت المال.",
+      citationPointer:"المادة (4)",qualifiers:["رقبتها عائدة إلى بيت المال"],applicabilityStatus:"direct",verificationStatus:"verbatim_match",
+    };
+    const draft="المادة (4): القسم الثاني هو الأراضي المفرزة من الأراضي الأميرية التي أوقفها السلاطين أو أوقفها آخرون بالإذن السلطاني وبما أن وقفية مثل هذه الأراضي هي عبارة عن تخصيص منافع فمثل هذه الأراضي الموقوفة ليست من الأوقاف الصحيحة وتكون رقبتها عائدة إلى بيت المال [مصدر خارجي 1]";
+    expect(auditLegalDraftWithSkillRules(draft,[longClaim],[rows[0]])).toEqual({valid:true,defects:[],details:[]});
+  });
+
+  it("does not confuse separated hukr usufruct and waqf raqaba assignments", () => {
+    const hukrClaim: EvidenceClaim = {
+      claimId:"H1",sourceId:"hukr",sourceIndex:1,sourceType:"legal",authorityClass:"reference",legalRole:"court_reasoning",
+      exactQuote:"تقضي بتسجيل رقبة العقار للوقف وملكية حق المنفعة بمقتضى التحكير للمدعي، على أن تسجل ملكية رقبة العقار باسم الوقف وحق الحكر المنفعة باسم المدعي.",
+      qualifiers:["رقبة العقار باسم الوقف","حق الحكر المنفعة باسم المدعي"],applicabilityStatus:"case_specific",verificationStatus:"verbatim_match",
+    };
+    const hukrRow: ResearchSourceResult = {id:"hukr",provider:"p",kind:"legal",title:"حكم الحكر",url:"u",content:hukrClaim.exactQuote,authority:"reference",reviewed:false};
+    const draft="المحكمة: تقضي بتسجيل رقبة العقار للوقف وملكية حق المنفعة بمقتضى التحكير للمدعي [مصدر خارجي 1]";
+    expect(auditLegalDraftWithSkillRules(draft,[hukrClaim],[hukrRow]).defects).not.toContain("RIGHT_TYPE_CONFLATION");
+  });
+
+  it("accepts court reasoning that discusses a statute while citing the judgment", () => {
+    const courtClaim: EvidenceClaim = {
+      claimId:"CR1",sourceId:"judgment",sourceIndex:1,sourceType:"legal",authorityClass:"reference",legalRole:"court_reasoning",
+      exactQuote:"المحكمة قررت أن الفرق بين الوقف الصحيح ووقف التخصيصات وفق المادة 4 من قانون الأراضي العثماني، وأن رقبة الوقف الصحيح للوقف بينما تبقى رقبة وقف التخصيصات لبيت المال.",
+      qualifiers:["رقبة وقف التخصيصات لبيت المال"],applicabilityStatus:"case_specific",verificationStatus:"verbatim_match",
+    };
+    const courtRow: ResearchSourceResult = {id:"judgment",provider:"p",kind:"legal",title:"نقض 1543/2016",url:"u",content:courtClaim.exactQuote,authority:"reference",reviewed:false};
+    const draft="المحكمة: الفرق بين الوقف الصحيح ووقف التخصيصات وفق المادة 4 من قانون الأراضي العثماني، ورقبة وقف التخصيصات لبيت المال [مصدر خارجي 1]";
+    expect(auditLegalDraftWithSkillRules(draft,[courtClaim],[courtRow]).defects).not.toContain("CITATION_SOURCE_MISMATCH");
+  });
+
   it("detects article and Haseki overclaim defects", () => {
     const draft=[
       "المادة (2) تقرر أن وقف التخصيصات تخصيص منافع ورقبته لبيت المال [مصدر خارجي 1].",
@@ -70,3 +102,20 @@ describe("PalWakf deterministic legal skill adapter", () => {
     ]));
   });
 });
+
+
+  it("does not treat an incidental procedural article inside a grounded court holding as a statute claim", () => {
+    const localClaims: EvidenceClaim[] = [{
+      claimId:"H1",sourceId:"maqam:cassation-1383-2019",sourceIndex:1,sourceType:"legal",authorityClass:"reference",legalRole:"court_holding",
+      exactQuote:"لهذه الأسباب نقرر قبول الطعن موضوعا وعملا باحكام المادة 237/2-أ والفصل في موضوع الدعوى، والحكم بتسجيل ملكية رقبة العقار باسم الوقف وحق الحكر المنفعة باسم المدعي الطاعن.",
+      qualifiers:[],applicabilityStatus:"case_specific",verificationStatus:"verbatim_match",
+    }];
+    const localRows: ResearchSourceResult[] = [{
+      id:"maqam:cassation-1383-2019",provider:"p",kind:"legal",title:"نقض 1383/2019",url:"u",
+      content:localClaims[0].exactQuote,authority:"reference",reviewed:false,
+    }];
+    const draft = "المحكمة: لهذه الأسباب نقرر قبول الطعن موضوعا وعملا باحكام المادة 237/2-أ والفصل في موضوع الدعوى، والحكم بتسجيل ملكية رقبة العقار باسم الوقف وحق الحكر المنفعة باسم المدعي الطاعن. [مصدر خارجي 1]";
+    expect(auditLegalDraftWithSkillRules(draft, localClaims, localRows)).toEqual({
+      valid:true, defects:[], details:[],
+    });
+  });

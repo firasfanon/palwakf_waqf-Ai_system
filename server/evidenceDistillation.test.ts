@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { auditCompactEvidencePack, auditSemanticRetention, compactClaimFragments, compactEvidencePack, distillEvidenceClaims, requiredEvidenceSourceIndexes, verifyEvidenceClaims } from "./evidenceDistillation";
+import { auditCompactEvidencePack, auditSemanticRetention, compactClaimFragments, compactEvidencePack, distillEvidenceClaims, requiredEvidenceSourceIndexes, selectRequiredEvidenceClaims, verifyEvidenceClaims } from "./evidenceDistillation";
 
 const question = "هل تنطبق المادة الثانية من قانون الأراضي العثماني على وقف خاصكي سلطان إذا اعتُبر وقف تخصيصات؟ وما الدليل على طبيعة إنشائه؟";
 const rows = [
@@ -79,5 +79,60 @@ describe("legal evidence distillation", () => {
     expect(claims[0].exactQuote).toContain("الوقف وإنشاؤه");
     expect(claims[0].exactQuote).toContain("بصحة الوقف");
     expect(claims[0].exactQuote).not.toContain("الأراضي المملوكة");
+  });
+});
+
+
+describe("question-directed court evidence generalization", () => {
+  const appeal96 = [{
+    id:"maqam:appeal-96-2017",kind:"legal",authority:"reference",
+    content:[
+      "المحكمة بعد التدقيق والمداولة، دخول الارض الموقوفة وقف تخصيصات ضمن حدود البلدية لا يتم تحويلها الى اراضي ملك او ميري ويبقى هذا النوع من الاراضي وقفاً.",
+      "ومن خلال الرجوع الى السند نجد بان نوع الارض هي وقف خاسكي سلطان وتمت به اعمال التسوية في عام 2014 وبقيت نوع الارض وقف خاسكي سلطان.",
+      "وان الطعن في نوع الارض يكون من اختصاص المحاكم الشرعية وليس من قبل محكمتنا كونها ليست صاحبة صلاحية واختصاص."
+    ].join(" ")
+  }];
+
+  it("selects municipal-boundary reasoning instead of a fixed Haseki-first excerpt", () => {
+    const q = "هل إدخال أرض من وقف التخصيصات ضمن حدود البلدية يحولها إلى ملك أو ميري وفق استئناف 96/2017؟";
+    const claims = distillEvidenceClaims(q, appeal96, 3200);
+    expect(claims.some(c => /حدود البلدية/u.test(c.exactQuote) && /ملك او ميري/u.test(c.exactQuote))).toBe(true);
+    expect(auditCompactEvidencePack(q, claims).valid).toBe(true);
+  });
+
+  it("retains a separate jurisdiction proposition for a multipart case question", () => {
+    const q = "من صاحب الاختصاص بالطعن في نوع الأرض المسجل كوقف خاسكي سلطان في استئناف 96/2017، ولماذا امتنعت محكمة الاستئناف عن بحثه؟";
+    const claims = distillEvidenceClaims(q, appeal96, 3200);
+    expect(claims.some(c => /اختصاص المحاكم الشرعية/u.test(c.exactQuote))).toBe(true);
+    expect(claims.some(c => /وقف خاسكي سلطان/u.test(c.exactQuote))).toBe(true);
+  });
+});
+
+
+describe("semantic required-claim selection", () => {
+  it("keeps only question-relevant claims from a noisy required court source", () => {
+    const q = "هل إدخال أرض من وقف التخصيصات ضمن حدود البلدية يحولها إلى ملك أو ميري؟";
+    const claims = distillEvidenceClaims(q, [{
+      id:"case",kind:"legal",authority:"reference",
+      content:"المحكمة بعد التدقيق والمداولة: نوع الأرض وقف خاسكي سلطان. دخول الأرض الموقوفة وقف تخصيصات ضمن حدود البلدية لا يحولها إلى ملك أو ميري وتبقى وقفاً. والطعن في النوع من اختصاص المحاكم الشرعية."
+    }], 3200);
+    const required = requiredEvidenceSourceIndexes(q, claims);
+    const selected = selectRequiredEvidenceClaims(q, claims, required);
+    const pack = compactEvidencePack(selected);
+    expect(selected.length).toBeLessThanOrEqual(2);
+    expect(pack).toMatch(/البلدية/u);
+    expect(pack).toMatch(/ملك|ميري/u);
+  });
+
+  it("selects multiple claims only when they cover distinct requested themes", () => {
+    const q = "ما نوع الأرض ومن صاحب الاختصاص بالطعن فيه؟";
+    const claims = distillEvidenceClaims(q, [{
+      id:"case",kind:"legal",authority:"reference",
+      content:"المحكمة بعد التدقيق والمداولة: نوع الأرض وقف خاسكي سلطان. الطعن في نوع الأرض يكون من اختصاص المحاكم الشرعية ومحكمتنا ليست صاحبة صلاحية واختصاص."
+    }], 3200);
+    const selected = selectRequiredEvidenceClaims(q, claims, requiredEvidenceSourceIndexes(q, claims));
+    const pack = compactEvidencePack(selected);
+    expect(pack).toMatch(/وقف خاسكي سلطان/u);
+    expect(pack).toMatch(/اختصاص المحاكم الشرعية/u);
   });
 });

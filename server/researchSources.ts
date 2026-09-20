@@ -57,6 +57,25 @@ export async function searchWikipedia(query: string, limit = 4): Promise<Researc
 function tokens(value: string): string[] {
   return text(value).toLowerCase().replace(/[^\p{L}\p{N}\s]/gu, " ").split(/\s+/).filter(token => token.length >= 3);
 }
+
+function normalizedRequiredMatchTokens(value: string): string[] {
+  return text(value)
+    .toLowerCase()
+    .replace(/ـ/g, "")
+    .replace(/[إأآ]/g, "ا")
+    .replace(/ى/g, "ي")
+    .replace(/ة/g, "ه")
+    .replace(/[^\p{L}\p{N}\s]/gu, " ")
+    .split(/\s+/)
+    .filter(Boolean)
+    .map(token => token.startsWith("ال") && token.length > 4 ? token.slice(2) : token);
+}
+
+export function requiredPhraseMatches(query: string, phrase: string): boolean {
+  const q = normalizedRequiredMatchTokens(query).join(" ");
+  const p = normalizedRequiredMatchTokens(phrase).join(" ");
+  return Boolean(p) && q.includes(p);
+}
 export function researchRelevanceScore(query: string, row: ResearchSourceResult): number {
   const q = [...new Set(tokens(query))];
   if (!q.length) return 0;
@@ -162,7 +181,7 @@ export async function searchAuthoritativeCatalog(query: string, limit = 6): Prom
   const qTokens = new Set(tokens(query));
   const normalizedQuery = text(query).toLowerCase();
   const ranked = AUTHORITATIVE_CATALOG.map(entry => {
-    if (entry.requiredAny?.length && !entry.requiredAny.some(phrase => normalizedQuery.includes(phrase.toLowerCase()))) {
+    if (entry.requiredAny?.length && !entry.requiredAny.some(phrase => requiredPhraseMatches(query, phrase))) {
       return { entry, score: 0 };
     }
     const keyTokens = tokens([entry.title, ...entry.keywords].join(" "));

@@ -53,3 +53,90 @@ describe("structured legal evidence synthesis", () => {
     expect(result?.answer).not.toContain("[مصدر خارجي 2]");
   });
 });
+
+
+describe("multipart deterministic source coverage", () => {
+  it("can render two independently relevant claims from the same required source", () => {
+    const multipartClaims: EvidenceClaim[] = [
+      {claimId:"M1",sourceId:"maqam:appeal-96-2017",sourceIndex:1,sourceType:"legal",authorityClass:"reference",legalRole:"court_reasoning",exactQuote:"نوع الارض هي وقف خاسكي سلطان وبقيت نوع الارض وقف خاسكي سلطان.",qualifiers:[],applicabilityStatus:"case_specific",verificationStatus:"verbatim_match"},
+      {claimId:"M2",sourceId:"maqam:appeal-96-2017",sourceIndex:1,sourceType:"legal",authorityClass:"reference",legalRole:"court_reasoning",exactQuote:"الطعن في نوع الارض يكون من اختصاص المحاكم الشرعية وليس من قبل محكمتنا كونها ليست صاحبة صلاحية واختصاص.",qualifiers:[],applicabilityStatus:"case_specific",verificationStatus:"verbatim_match"},
+    ];
+    const result = synthesizeDeterministicGroundedClaims(
+      "من صاحب الاختصاص بالطعن في نوع الأرض المسجل كوقف خاسكي سلطان في استئناف 96/2017، ولماذا امتنعت محكمة الاستئناف عن بحثه؟",
+      multipartClaims,
+      [1],
+    );
+    expect(result?.sourceIndexes).toEqual([1,1]);
+    expect(result?.answer).toMatch(/وقف خاسكي سلطان/u);
+    expect(result?.answer).toMatch(/اختصاص المحاكم الشرعية/u);
+  });
+});
+
+describe("composite deterministic legal synthesis", () => {
+  it("covers both correct-waqf and takhsisat sides when both are asked", () => {
+    const localClaims: EvidenceClaim[] = [
+      {claimId:"C1",sourceId:"cass",sourceIndex:1,sourceType:"legal",authorityClass:"reference",legalRole:"court_reasoning",exactQuote:"الوقف الصحيح تكون رقبة العقار الموقوف وجميع حقوق التصرف عائدة إلى جانب الوقف.",qualifiers:[],applicabilityStatus:"case_specific",verificationStatus:"verbatim_match"},
+      {claimId:"C2",sourceId:"cass",sourceIndex:1,sourceType:"legal",authorityClass:"reference",legalRole:"court_reasoning",exactQuote:"أما وقف التخصيصات فهو تخصيص منافع مع بقاء رقبتها لبيت المال.",qualifiers:["بقاء رقبتها لبيت المال"],applicabilityStatus:"case_specific",verificationStatus:"verbatim_match"},
+    ];
+    const result = synthesizeDeterministicGroundedClaims(
+      "ما الفرق بين الوقف الصحيح ووقف التخصيصات وأين تبقى رقبة الأرض؟",
+      localClaims,
+      [1],
+    );
+    expect(result?.answer).toContain("الوقف الصحيح");
+    expect(result?.answer).toContain("وقف التخصيصات");
+    expect(result?.answer).toContain("بيت المال");
+  });
+  it("adds an explicit evidence limit for Haseki registry classification", () => {
+    const localClaims: EvidenceClaim[] = [
+      {claimId:"R1",sourceId:"appeal",sourceIndex:1,sourceType:"legal",authorityClass:"reference",legalRole:"court_reasoning",exactQuote:"نوع الارض هي وقف خاسكي سلطان وبقيت نوع الارض وقف خاسكي سلطان.",qualifiers:[],applicabilityStatus:"case_specific",verificationStatus:"verbatim_match"},
+      {claimId:"R2",sourceId:"law",sourceIndex:2,sourceType:"legal",authorityClass:"reference",legalRole:"statute",exactQuote:"وقف التخصيصات تخصيص منافع مع بقاء الرقبة لبيت المال.",citationPointer:"المادة (4)",qualifiers:["بقاء الرقبة لبيت المال"],applicabilityStatus:"direct",verificationStatus:"verbatim_match"},
+    ];
+    const result = synthesizeDeterministicGroundedClaims(
+      "هل يكفي وصف وقف خاسكي سلطان وحده لإثبات أنها وقف تخصيصات، أم يلزم دليل آخر؟",
+      localClaims,
+      [1,2],
+    );
+    expect(result?.answer).toContain("لا يكفي وحده");
+    expect(result?.answer).toContain("[مصدر خارجي 1]");
+    expect(result?.answer).toContain("[مصدر خارجي 2]");
+  });
+  it("adds a jurisdiction-to-land-classification boundary", () => {
+    const localClaims: EvidenceClaim[] = [
+      {claimId:"J1",sourceId:"sharia",sourceIndex:1,sourceType:"legal",authorityClass:"reference",legalRole:"statute",exactQuote:"المادة (2) تنظر المحاكم الشرعية في الوقف والتولية عليه واستبداله.",citationPointer:"المادة (2)",qualifiers:[],applicabilityStatus:"direct",verificationStatus:"verbatim_match"},
+    ];
+    const result = synthesizeDeterministicGroundedClaims(
+      "ما اختصاص المحاكم الشرعية في التولية والاستبدال، وهل هذا النص يقرر تصنيف الأرض ملكاً أو ميرية؟",
+      localClaims,
+      [1],
+    );
+    expect(result?.answer).toContain("لا تقرر بذاتها تصنيف الأرض");
+    expect(result?.answer).toContain("[مصدر خارجي 1]");
+  });
+
+  it("adds the historical-evidence classification limit", () => {
+    const localClaims: EvidenceClaim[] = [
+      {claimId:"H1",sourceId:"study",sourceIndex:1,sourceType:"academic",authorityClass:"scholarly",legalRole:"historical_evidence",exactQuote:"endowment deed (waqfiyya) dated 958 AH / 1552 C.E.",qualifiers:[],applicabilityStatus:"contextual",verificationStatus:"verbatim_match"},
+    ];
+    const result = synthesizeDeterministicGroundedClaims(
+      "ما الذي تثبته وقفية خاصكي سلطان 958هـ/1552م، وما الذي لا تثبته بشأن التصنيف القانوني الحالي؟",
+      localClaims,
+      [1],
+    );
+    expect(result?.answer).toContain("لا تثبت وحدها التصنيف القانوني الحالي");
+    expect(result?.answer).toContain("[مصدر خارجي 1]");
+  });
+
+  it("adds a case-specific municipal-boundary limitation", () => {
+    const localClaims: EvidenceClaim[] = [
+      {claimId:"B1",sourceId:"appeal",sourceIndex:1,sourceType:"legal",authorityClass:"reference",legalRole:"court_reasoning",exactQuote:"دخول الأرض الموقوفة ضمن حدود البلدية لا يجوز أن يحولها إلى أرض ملك.",qualifiers:["لا يجوز أن يحولها إلى أرض ملك"],applicabilityStatus:"case_specific",verificationStatus:"verbatim_match"},
+    ];
+    const result = synthesizeDeterministicGroundedClaims(
+      "هل دخول وقف التخصيصات ضمن حدود البلدية يغير طبيعتها وما حدود الاستدلال من الحكم؟",
+      localClaims,
+      [1],
+    );
+    expect(result?.answer).toContain("لا يثبت بذاته حكماً عاماً");
+    expect(result?.answer).toContain("[مصدر خارجي 1]");
+  });
+});

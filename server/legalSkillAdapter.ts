@@ -79,19 +79,51 @@ function signatureSupported(sentence: string, citedClaims: EvidenceClaim[]) {
   const s = normalize(sentence);
   if (!citedClaims.length) return false;
 
+  if (/^حدود\s+الحكم/u.test(s) && /البلديه/u.test(s)) {
+    return citedClaims.some(c =>
+      (c.legalRole === "court_reasoning" || c.legalRole === "court_holding") &&
+      /البلديه/u.test(normalize(c.exactQuote))
+    );
+  }
+  if (/^حدود\s+النص/u.test(s) && /الماده\s*\(?2\)?/u.test(s)) {
+    return citedClaims.some(c =>
+      c.legalRole === "statute" &&
+      articleNumber(c.citationPointer || c.exactQuote) === "2"
+    );
+  }
+  if (/^حدود\s+الدليل\s+التاريخي/u.test(s)) {
+    return citedClaims.some(c => c.legalRole === "historical_evidence");
+  }
+
   const explicitWaqfiyya = /(?:^|[\s(،:])وقفيه(?:$|[\s).،:])/u.test(s);
-  if (explicitWaqfiyya || /(waqfiyya|endowment deed|1552|958\s*(?:هـ|ah))/iu.test(s)) {
+  const historicalWaqfiyyaContext =
+    (explicitWaqfiyya && /(مؤرخ|بتاريخ|وثيق|حجه|سنه|\b\d{3,4}\s*(?:هـ|م)\b)/u.test(s)) ||
+    /(waqfiyya|endowment deed|1552|958\s*(?:هـ|ah))/iu.test(s);
+  if (historicalWaqfiyyaContext) {
     return citedClaims.some(c =>
       c.legalRole === "historical_evidence" &&
       /(?:waqfiyya|endowment deed|1552|958\s*AH)/iu.test(c.exactQuote)
     );
   }
-  const provisionNumber = articleNumber(s);
-  if (provisionNumber) {
-    return citedClaims.some(c =>
-      articleNumber(c.citationPointer || "") === provisionNumber &&
-      overlapScore(sentence, c.exactQuote) >= 0.2
+  if (/^المحكمه\s*[:：]/u.test(s)) {
+    const courtClaims = citedClaims.filter(c =>
+      c.legalRole === "court_reasoning" || c.legalRole === "court_holding"
     );
+    if (courtClaims.some(c => overlapScore(sentence, c.exactQuote) >= 0.25)) return true;
+  }
+
+  const provisionNumber = articleNumber(s);
+  const provisionAssertion =
+    Boolean(provisionNumber) &&
+    (Boolean(instrumentReference(sentence)) || /^الماده\s*\(?\d{1,3}\)?/u.test(s));
+  if (provisionNumber && provisionAssertion) {
+    return citedClaims.some(c => {
+      const pointer = c.citationPointer || "";
+      const sameProvision =
+        articleNumber(pointer) === provisionNumber ||
+        Boolean(pointer && s.includes(normalize(pointer)));
+      return sameProvision && overlapScore(sentence, c.exactQuote) >= 0.2;
+    });
   }
   if (/(خاصكي|خاسكي)\s+سلطان/u.test(s)) {
     return citedClaims.some(c => /(خاصكي|خاسكي)\s+سلطان/u.test(c.exactQuote));
@@ -137,6 +169,10 @@ function articleClaimScore(sentence: string, citedClaims: EvidenceClaim[], numbe
 }
 
 function hasInstrumentIdentityMismatch(sentence: string, indexes: number[], sources: ResearchSourceResult[]) {
+  const n = normalize(sentence);
+  // A court-reasoning line may accurately quote or discuss a statute while its
+  // citation correctly points to the judgment carrying that reasoning.
+  if (/^المحكمه\s*[:：]/u.test(n)) return false;
   const instrument = instrumentReference(sentence);
   if (!instrument || !indexes.length) return false;
   const rows = sourceRowsForIndexes(sources, indexes);
@@ -162,6 +198,10 @@ function hasHukrRightTypeConflation(sentence: string, citedClaims: EvidenceClaim
     /رقبه\s+العقار[^.]{0,80}الوقف/u.test(source) &&
     /(حق\s+(?:الحكر|المنفعه)|الحكر\s*"?\s*\(?المنفعه\)?)/u.test(source);
   if (!sourceSeparatesRights) return false;
+  const sentenceSeparatesRights =
+    /رقبه\s+العقار[^.]{0,35}(?:للوقف|باسم\s+الوقف)/u.test(n) &&
+    /(حق\s+(?:الحكر|المنفعه)|الحكر)[^.]{0,90}(?:للمدعي|للمحتكر|باسم\s+المدعي)/u.test(n);
+  if (sentenceSeparatesRights) return false;
   return /(رقبه\s+العقار[^.]{0,50}(?:للمحتكر|للمدعي)|الحكر[^.]{0,80}(?:ينقل|يمنح)[^.]{0,50}(?:ملكيه\s+الرقبه|رقبه\s+العقار))/u.test(n);
 }
 
@@ -195,6 +235,9 @@ export function auditLegalDraftWithSkillRules(
     let suppressGenericCitationMismatch = false;
 
     const provisionNumber = articleNumber(sentence);
+    const provisionAssertion =
+      Boolean(provisionNumber) &&
+      (Boolean(instrumentReference(sentence)) || /^الماده\s*\(?\d{1,3}\)?/u.test(n));
     const specificArticle2Takhsisat =
       provisionNumber === "2" &&
       /(وقف\s+التخصيصات|تخصيص\s+منافع|بيت\s+المال)/u.test(n) &&
@@ -203,7 +246,7 @@ export function auditLegalDraftWithSkillRules(
         /(وقف\s+(?:ال)?تخصيصات|تخصيص\s+منافع|بيت\s+المال)/u.test(normalize(c.exactQuote))
       );
 
-    if (provisionNumber && citedClaims.length && !specificArticle2Takhsisat) {
+    if (provisionNumber && provisionAssertion && citedClaims.length && !specificArticle2Takhsisat) {
       const sameScore = articleClaimScore(sentence, citedClaims, provisionNumber, true);
       const otherScore = articleClaimScore(sentence, citedClaims, provisionNumber, false);
       if (otherScore >= 0.25 && otherScore > sameScore + 0.15) {

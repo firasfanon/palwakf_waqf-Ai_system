@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { buildEvidenceSnippet, dedupeResearchSources, filterRelevantResearchSources, researchRelevanceScore, type ResearchSourceResult } from "./researchSources";
+import { buildEvidenceSnippet, dedupeResearchSources, filterRelevantResearchSources, requiredPhraseMatches, researchRelevanceScore, type ResearchSourceResult } from "./researchSources";
 
 const row = (url: string, title = "بحث وقفي", doi?: string): ResearchSourceResult => ({
   id: url, provider: "test", kind: "academic", title, url, content: title,
@@ -22,6 +22,11 @@ describe("research source normalization", () => {
     expect(snippet.length).toBeLessThanOrEqual(700);
     expect(snippet).toContain("خاصكي سلطان");
     expect(snippet).toContain("وقف التخصيصات");
+  });
+  it("matches Arabic required phrases across definite-article morphology", () => {
+    expect(requiredPhraseMatches("أرض من وقف التخصيصات ضمن حدود البلدية", "وقف تخصيصات")).toBe(true);
+    expect(requiredPhraseMatches("بحث عن الأراضي الموقوفة", "الأراضي الموقوفة")).toBe(true);
+    expect(requiredPhraseMatches("بحث إداري عام", "وقف تخصيصات")).toBe(false);
   });
   it("rejects academically indexed but irrelevant results", () => {
     const relevant = row("https://a.test", "قانون الأراضي العثماني ووقف التخصيصات");

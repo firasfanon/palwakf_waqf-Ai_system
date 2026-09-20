@@ -66,3 +66,40 @@ describe("research evidence audit", () => {
     expect(auditResearchSemantics(shariaQuestion, answer, shariaClaims)).toEqual({valid:true,missing:[],conflations:[]});
   });
 });
+
+
+describe("general semantic answer coverage", () => {
+  it("rejects a case answer that omits an evidence-supported jurisdiction issue asked by the user", () => {
+    const q = "من صاحب الاختصاص بالطعن في نوع الأرض المسجل كوقف خاسكي سلطان في استئناف 96/2017؟";
+    const localClaims: EvidenceClaim[] = [
+      {claimId:"J1",sourceId:"maqam:appeal-96-2017",sourceIndex:1,sourceType:"legal",authorityClass:"reference",legalRole:"court_reasoning",exactQuote:"نوع الارض هي وقف خاسكي سلطان.",qualifiers:[],applicabilityStatus:"case_specific",verificationStatus:"verbatim_match"},
+      {claimId:"J2",sourceId:"maqam:appeal-96-2017",sourceIndex:1,sourceType:"legal",authorityClass:"reference",legalRole:"court_reasoning",exactQuote:"الطعن في نوع الارض يكون من اختصاص المحاكم الشرعية ومحكمتنا ليست صاحبة صلاحية واختصاص.",qualifiers:[],applicabilityStatus:"case_specific",verificationStatus:"verbatim_match"},
+    ];
+    const audit = auditResearchSemantics(q, "نوع الأرض وقف خاسكي سلطان. [مصدر خارجي 1]", localClaims);
+    expect(audit.valid).toBe(false);
+    expect(audit.missing).toContain("JURISDICTION_SCOPE");
+  });
+
+  it("does not require an explicit article 4 label when the question asks a case-specific takhsisat issue", () => {
+    const q = "وفق نقض 1543/2016، هل الحكر يرد على وقف التخصيصات أم فرقت المحكمة بينهما؟";
+    const localClaims: EvidenceClaim[] = [{
+      claimId:"K1",sourceId:"maqam:cassation-1543-2016",sourceIndex:1,sourceType:"legal",authorityClass:"reference",legalRole:"court_reasoning",
+      exactQuote:"وقف التخصيصات هو تخصيص منافع مع بقاء الرقبة لبيت المال، والحكر يتعلق بالوقف الصحيح.",qualifiers:["بقاء الرقبة لبيت المال"],applicabilityStatus:"case_specific",verificationStatus:"verbatim_match",
+    }];
+    const answer = "فرقت المحكمة بين وقف التخصيصات بوصفه تخصيص منافع مع بقاء الرقبة لبيت المال وبين الحكر المتعلق بالوقف الصحيح. [مصدر خارجي 1]";
+    const audit = auditResearchSemantics(q, answer, localClaims);
+    expect(audit.valid).toBe(true);
+    expect(audit.missing).not.toContain("ARTICLE_4");
+  });
+
+  it("requires the municipal-boundary effect when the question asks it and evidence contains it", () => {
+    const q = "هل دخول وقف التخصيصات ضمن حدود البلدية يحوله إلى ملك؟";
+    const localClaims: EvidenceClaim[] = [{
+      claimId:"B1",sourceId:"maqam:appeal-96-2017",sourceIndex:1,sourceType:"legal",authorityClass:"reference",legalRole:"court_reasoning",
+      exactQuote:"دخول الارض الموقوفة وقف تخصيصات ضمن حدود البلدية لا يتم تحويلها الى اراضي ملك.",qualifiers:[],applicabilityStatus:"case_specific",verificationStatus:"verbatim_match",
+    }];
+    const audit = auditResearchSemantics(q, "وقف التخصيصات يبقى وقفاً. [مصدر خارجي 1]", localClaims);
+    expect(audit.valid).toBe(false);
+    expect(audit.missing).toContain("MUNICIPAL_BOUNDARY_EFFECT");
+  });
+});
