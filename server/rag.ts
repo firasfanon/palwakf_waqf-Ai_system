@@ -7,6 +7,10 @@ type WaqfCase = typeof waqfCases.$inferSelect;
 type MinisterialInstruction = typeof ministerialInstructions.$inferSelect;
 import { generateEmbeddings, hybridSearch } from "./embeddings";
 import { applyTrustMetadata, assessKnowledgeTrust } from "./assistantTrust";
+import {
+  mapGovernedChunkToKnowledgeDocument,
+  runtimeHybridRagSearch,
+} from "./governedRuntimeRag";
 import type { AuthenticatedUser } from "./_core/types/authUser";
 
 type GroundedKnowledgeDocument = KnowledgeDocument & {
@@ -275,7 +279,23 @@ export async function retrieveRelevantDocuments(
 ): Promise<Array<GroundedKnowledgeDocument & { relevanceScore: number }>> {
   const { category, limit = 5, minScore = 1, useSemanticSearch = true, actor = null, scopeCodes = [] } = options || {};
 
-  // Get all documents (or filtered by category)
+  // Prefer the governed chunk-level RAG path. The database RPC independently
+  // enforces approved + chat eligible + verified source/citation/rights gates.
+  const governedChunks = await runtimeHybridRagSearch(query, {
+    limit: Math.max(limit * 2, 8),
+    useEmbeddings: useSemanticSearch,
+  }).catch(() => []);
+  const governedDocuments = governedChunks
+    .map((chunk) => mapGovernedChunkToKnowledgeDocument(chunk))
+    .filter((doc: any) => !category || doc.category === category)
+    .filter((doc: any) => Number(doc.relevanceScore || 0) >= minScore)
+    .slice(0, limit);
+  if (governedDocuments.length > 0) {
+    return governedDocuments as unknown as Array<GroundedKnowledgeDocument & { relevanceScore: number }>;
+  }
+
+  // Compatibility fallback for sovereignly released documents that predate the
+  // chunk index. Trust policy still applies and fails closed.
   const rawDocuments = await runtimeGetKnowledgeDocuments({
     category,
     isActive: 1,

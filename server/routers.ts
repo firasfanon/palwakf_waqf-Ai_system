@@ -222,6 +222,8 @@ import {
   runtimeVerifyReferenceSource,
   runtimeVerifyKnowledgeCitation,
   runtimeReleaseOfficialKnowledgeDocument,
+  runtimeQueueLearningCandidateReview,
+  runtimeMaterializeResearchLearningCandidate,
   runtimeListKb08bMappingQueue,
   runtimeResolveKb08bMapping,
   runtimeListPageOperationBindings,
@@ -251,6 +253,15 @@ import {
   runtimeListDuplicateCitationReviewTasksV11,
   runtimeReconcileDuplicateCitationReviewTaskV11,
 } from "./knowledgeOperations";
+import {
+  extractDocumentText,
+  ingestGovernedKnowledge,
+  structuralChunkDocument,
+} from "./governedKnowledgeIngestion";
+import {
+  runtimeHybridRagSearch,
+  runtimeResolveKnowledgeEntities,
+} from "./governedRuntimeRag";
 import {
   assertAssistantMaturityOperationEnabled,
   getAssistantMaturityPolicySnapshot,
@@ -2968,6 +2979,134 @@ async function requireKnowledgeScope(ctx: any, requirement: KnowledgeScopeRequir
   }
 }
 
+const knowledgeIngestionRouter = router({
+  previewText: adminProcedure
+    .input(z.object({
+      title: z.string().min(1).max(500),
+      content: z.string().min(1).max(2_000_000),
+    }))
+    .query(async ({ input, ctx }) => {
+      await requireKnowledgeScope(ctx, 'review', 'knowledgeIngestion.previewText');
+      const chunks = structuralChunkDocument(input.content);
+      return {
+        title: input.title,
+        chunkCount: chunks.length,
+        chunks: chunks.slice(0, 50),
+        automaticChatRelease: false,
+        mode: 'governed_structural_chunk_preview_v1',
+      };
+    }),
+
+  ingestText: adminProcedure
+    .input(z.object({
+      inputKind: z.enum(['manual', 'url', 'learning_candidate', 'existing_reference']).default('manual'),
+      retentionBasis: z.enum(['user_provided', 'internal', 'verified_rights', 'metadata_only', 'review_required']).default('review_required'),
+      title: z.string().min(1).max(500),
+      content: z.string().max(2_000_000).default(''),
+      sourceId: z.string().uuid().optional(),
+      sourceName: z.string().max(500).optional(),
+      sourceUrl: z.string().url().optional(),
+      documentType: z.string().max(100).optional(),
+      category: z.string().max(100).optional(),
+      domainScope: z.enum(['waqf_law','fiqh','administrative','historical','public_info','internal_procedure','other']).optional(),
+      language: z.string().max(20).optional(),
+      metadataJson: z.record(z.string(), z.any()).optional(),
+    }))
+    .mutation(async ({ input, ctx }) => {
+      requireAssistantMaturityOperation('controlled_review');
+      const reviewerAuthUserId = await requireKnowledgeScope(ctx, 'review', 'knowledgeIngestion.ingestText');
+      return ingestGovernedKnowledge({ ...input, reviewerAuthUserId });
+    }),
+
+  ingestFile: adminProcedure
+    .input(z.object({
+      filename: z.string().min(1).max(500),
+      mimeType: z.string().max(200).optional(),
+      base64: z.string().min(1).max(20_000_000),
+      retentionBasis: z.enum(['user_provided','internal']).default('user_provided'),
+      title: z.string().min(1).max(500),
+      sourceId: z.string().uuid().optional(),
+      sourceName: z.string().max(500).optional(),
+      documentType: z.string().max(100).optional(),
+      category: z.string().max(100).optional(),
+      domainScope: z.enum(['waqf_law','fiqh','administrative','historical','public_info','internal_procedure','other']).optional(),
+      language: z.string().max(20).optional(),
+      metadataJson: z.record(z.string(), z.any()).optional(),
+    }))
+    .mutation(async ({ input, ctx }) => {
+      requireAssistantMaturityOperation('controlled_review');
+      const reviewerAuthUserId = await requireKnowledgeScope(ctx, 'review', 'knowledgeIngestion.ingestFile');
+      const buffer = Buffer.from(input.base64, 'base64');
+      if (buffer.byteLength > 15 * 1024 * 1024) {
+        throw new TRPCError({ code: 'PAYLOAD_TOO_LARGE', message: 'الحد الأقصى للملف في هذا المسار هو 15MB.' });
+      }
+      const content = await extractDocumentText({
+        buffer,
+        mimeType: input.mimeType,
+        filename: input.filename,
+      });
+      const { base64: _base64, filename, mimeType, ...rest } = input;
+      return ingestGovernedKnowledge({
+        ...rest,
+        reviewerAuthUserId,
+        inputKind: 'upload',
+        originalFilename: filename,
+        mimeType,
+        content,
+      });
+    }),
+
+  resolveEntities: adminProcedure
+    .input(z.object({ query: z.string().min(1).max(2000), limit: z.number().min(1).max(50).optional() }))
+    .query(async ({ input, ctx }) => {
+      await requireKnowledgeScope(ctx, 'review', 'knowledgeIngestion.resolveEntities');
+      return runtimeResolveKnowledgeEntities(input.query, input.limit || 12);
+    }),
+
+  hybridSearchPreview: adminProcedure
+    .input(z.object({
+      query: z.string().min(1).max(4000),
+      limit: z.number().min(1).max(30).optional(),
+      useEmbeddings: z.boolean().optional(),
+    }))
+    .query(async ({ input, ctx }) => {
+      await requireKnowledgeScope(ctx, 'review', 'knowledgeIngestion.hybridSearchPreview');
+      return {
+        results: await runtimeHybridRagSearch(input.query, input),
+        note: 'Strict chat/RAG trust gates are applied by the database RPC.',
+      };
+    }),
+
+  queueLearningCandidate: adminProcedure
+    .input(z.object({
+      knowledgeDocumentId: z.string().uuid(),
+      notes: z.string().max(5000).optional(),
+    }))
+    .mutation(async ({ input, ctx }) => {
+      requireAssistantMaturityOperation('controlled_review');
+      const reviewerAuthUserId = await requireKnowledgeScope(ctx, 'review', 'knowledgeIngestion.queueLearningCandidate');
+      return runtimeQueueLearningCandidateReview({ ...input, reviewerAuthUserId });
+    }),
+
+  materializeResearchLearningCandidate: adminProcedure
+    .input(z.object({
+      toolRunId: z.string().uuid(),
+      notes: z.string().max(5000).optional(),
+    }))
+    .mutation(async ({ input, ctx }) => {
+      requireAssistantMaturityOperation('controlled_review');
+      const reviewerAuthUserId = await requireKnowledgeScope(
+        ctx,
+        'review',
+        'knowledgeIngestion.materializeResearchLearningCandidate',
+      );
+      return runtimeMaterializeResearchLearningCandidate({
+        ...input,
+        reviewerAuthUserId,
+      });
+    }),
+});
+
 const knowledgeTrustRouter = router({
   /** Safe capability handshake: no sensitive review data is returned by this endpoint. */
   access: adminProcedure.query(async ({ ctx }) => ({
@@ -4068,6 +4207,7 @@ export const appRouter = router({
   fetchLogs: fetchLogsRouter,
   fetcher: fetcherRouter,
   knowledgeSearch: knowledgeSearchRouter,
+  knowledgeIngestion: knowledgeIngestionRouter,
   knowledgeTrust: knowledgeTrustRouter,
   knowledgeActivation: knowledgeActivationRouter,
   legacyProvenance: legacyProvenanceRouter,
