@@ -1,4 +1,7 @@
 import { spawn } from "node:child_process";
+import { loadLocalEnvFiles } from "./load-local-env.mjs";
+
+loadLocalEnvFiles();
 
 const child = spawn(process.execPath, ["dist/index.js"], {
   stdio: "inherit",

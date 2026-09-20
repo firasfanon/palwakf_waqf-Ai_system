@@ -1,12 +1,14 @@
 import { Button } from "@/components/ui/button";
 import { MessageCircle, Scale, Building, BookOpen, History } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { trpc } from "@/lib/trpc";
+import { useMemo } from "react";
 
 interface SuggestedQuestionsProps {
   onQuestionClick: (question: string) => void;
 }
 
-const suggestedQuestions = [
+const staticSuggestedQuestions = [
   {
     category: "legal",
     icon: Scale,
@@ -50,6 +52,34 @@ const suggestedQuestions = [
 ];
 
 export function SuggestedQuestions({ onQuestionClick }: SuggestedQuestionsProps) {
+  const { data: runtimeQuestions } = trpc.suggestedQuestions.list.useQuery(undefined, {
+    staleTime: 10 * 60 * 1000,
+  });
+
+  const usingReviewOnlyRuntime = Boolean(
+    (runtimeQuestions as any[] | undefined)?.some((row) => row.reviewOnly),
+  );
+
+  const suggestedQuestions = useMemo(() => {
+    const rows = (runtimeQuestions || []) as any[];
+    if (rows.length === 0) return staticSuggestedQuestions;
+
+    const grouped = new Map<string, string[]>();
+    for (const row of [...rows].sort(
+      (a, b) => Number(a.displayOrder || 0) - Number(b.displayOrder || 0),
+    )) {
+      const category = row.category === "fiqh" ? "jurisprudence" : row.category;
+      grouped.set(category, [...(grouped.get(category) || []), row.question]);
+    }
+
+    return staticSuggestedQuestions
+      .map((category) => ({
+        ...category,
+        questions: grouped.get(category.category) || [],
+      }))
+      .filter((category) => category.questions.length > 0);
+  }, [runtimeQuestions]);
+
   return (
     <div className="suggested-questions-polish-v54 space-y-5 py-4">
       <div className="text-center space-y-2">
@@ -60,6 +90,11 @@ export function SuggestedQuestions({ onQuestionClick }: SuggestedQuestionsProps)
         <p className="text-muted-foreground max-w-md mx-auto">
           اختر أحد الأسئلة الشائعة أو اكتب سؤالك الخاص
         </p>
+        {usingReviewOnlyRuntime && (
+          <p className="text-xs text-muted-foreground">
+            محتوى Legacy مستعاد للاختبار وقيد المراجعة؛ لا يمثل اعتمادًا نهائيًا.
+          </p>
+        )}
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-4xl mx-auto">

@@ -49,36 +49,23 @@ import {
   WAQF_RESEARCH_LEARNING_CANDIDATE_ORIGIN,
 } from './learningCandidate';
 import { createClient, type SupabaseClient } from '@supabase/supabase-js';
-
-
+import {
+  filterPublicKnowledgeDocuments,
+  isLegacyReviewContentUatEnabled,
+  mapLegacyReviewContentPayload,
+  mapPublicKnowledgeRpcPayload,
+  resolveAssistantSupabaseConfig,
+  type LegacyReviewContentKind,
+} from './canonicalRuntimeBinding';
 
 let _assistantSupabaseClient: SupabaseClient<any, any, any, any, any> | null = null;
 
-function getEnv(name: string): string | undefined {
-  const value = process.env[name];
-  if (!value) return undefined;
-  const trimmed = value.trim();
-  return trimmed.length > 0 ? trimmed : undefined;
-}
-
 function getAssistantSupabaseClient() {
-  const url =
-    getEnv('PWF_SUPABASE_URL') ??
-    getEnv('PLATFORM_SUPABASE_URL') ??
-    getEnv('SUPABASE_URL') ??
-    getEnv('VITE_SUPABASE_URL');
-
-  const key =
-    getEnv('PWF_SUPABASE_SERVICE_ROLE_KEY') ??
-    getEnv('PLATFORM_SUPABASE_SERVICE_ROLE_KEY') ??
-    getEnv('SUPABASE_SERVICE_ROLE_KEY') ??
-    getEnv('PLATFORM_SUPABASE_ANON_KEY') ??
-    getEnv('VITE_SUPABASE_ANON_KEY');
-
-  if (!url || !key) return null;
+  const config = resolveAssistantSupabaseConfig(process.env);
+  if (!config) return null;
 
   if (!_assistantSupabaseClient) {
-    _assistantSupabaseClient = createClient(url, key, {
+    _assistantSupabaseClient = createClient(config.url, config.key, {
       auth: {
         persistSession: false,
         autoRefreshToken: false,
@@ -87,6 +74,9 @@ function getAssistantSupabaseClient() {
       global: {
         headers: {
           'x-assistant-runtime': 'palwakf-local-assistant',
+          ...(isLegacyReviewContentUatEnabled(process.env)
+            ? { 'x-palwakf-legacy-content-uat': 'enabled' }
+            : {}),
         },
       },
     });
@@ -331,7 +321,13 @@ function mapAssistantKnowledgeDocumentRow(
   const citations = context.citationsByKnowledgeDocumentId.get(row.id) || [];
   const primaryFile = files.find((file: any) => file.isPrimary === 1) || files[0] || null;
   const legacyId = normalizeLegacyNumericId(metadata.legacy_id);
-  const normalizedSourceUrl = metadata.legacy_source_url || source?.base_url || primaryFile?.fileUrl || null;
+  const normalizedSourceUrl =
+    metadata.legacy_source_url ||
+    metadata.source_url ||
+    metadata?.original_payload?.row?.url ||
+    source?.base_url ||
+    primaryFile?.fileUrl ||
+    null;
   return {
     id: legacyId ?? row.id,
     uuid: row.id,
@@ -378,6 +374,63 @@ function mapAssistantKnowledgeDocumentRow(
       },
     ],
   };
+}
+
+async function tryGetAssistantPublicKnowledgeDocuments(filters?: any) {
+  const client = getAssistantSupabaseClient();
+  if (!client) return null;
+
+  const { data, error } = await client.rpc(
+    'runtime_public_knowledge_documents_v1',
+    {
+      p_search:
+        typeof filters?.search === 'string' && filters.search.trim()
+          ? filters.search.trim()
+          : null,
+      p_category:
+        typeof filters?.category === 'string' && filters.category.trim()
+          ? filters.category.trim()
+          : null,
+      p_limit: Math.min(Math.max(Number(filters?.limit ?? 1000), 1), 1000),
+    },
+  );
+
+  if (error) {
+    recordAssistantRuntimeReadFailure('knowledge_documents', error);
+    return null;
+  }
+
+  recordAssistantRuntimeReadSuccess('knowledge_documents');
+  return (data || [])
+    .map((row: any) => mapPublicKnowledgeRpcPayload(row?.payload ?? row))
+    .filter(Boolean);
+}
+
+async function tryGetAssistantLegacyReviewContent(
+  kind: LegacyReviewContentKind,
+) {
+  if (!isLegacyReviewContentUatEnabled(process.env)) return null;
+
+  const client = getAssistantSupabaseClient();
+  if (!client) return null;
+
+  const { data, error } = await client.rpc(
+    'runtime_legacy_review_content_v1',
+    { p_source_table: kind },
+  );
+
+  if (error) {
+    console.warn(
+      `[runtimeRepository] legacy review content UAT read failed: kind=${kind}`,
+    );
+    return null;
+  }
+
+  return (data || [])
+    .map((row: any, index: number) =>
+      mapLegacyReviewContentPayload(kind, row?.payload ?? row, index),
+    )
+    .filter((row: any) => row.question);
 }
 
 /**
@@ -1308,6 +1361,32 @@ export async function runtimeGetKnowledgeScopeCodes(actor?: { authUserId?: strin
 export async function runtimeCreateKnowledgeDocument(input: any) {
   return await local.createKnowledgeDocument(input);
 }
+export async function runtimeGetPublicKnowledgeDocuments(filters?: any) {
+  const assistantRows = await tryGetAssistantPublicKnowledgeDocuments(filters);
+  if (assistantRows !== null) return assistantRows;
+
+  const fallbackRows = await getFallbackKnowledgeDocuments({
+    category: filters?.category,
+    search: filters?.search,
+    isActive: 1,
+  });
+  return filterPublicKnowledgeDocuments(fallbackRows, filters);
+}
+
+export async function runtimeGetPublicKnowledgeDocumentById(id: any) {
+  const rows = await runtimeGetPublicKnowledgeDocuments({ limit: 1000 });
+  return (rows || []).find(
+    (row: any) =>
+      String(row?.id) === String(id) || String(row?.uuid) === String(id),
+  );
+}
+
+export async function runtimeGetLegacyReviewContent(
+  kind: LegacyReviewContentKind,
+) {
+  return await tryGetAssistantLegacyReviewContent(kind);
+}
+
 export async function runtimeGetKnowledgeDocuments(filters?: any) {
   const assistantRows = await tryGetAssistantKnowledgeDocumentBundle(filters);
   const fallbackRows = await getFallbackKnowledgeDocuments(filters);

@@ -132,6 +132,7 @@ import { checkDatabaseHealth } from "./health/databaseHealth";
 import { checkLlmProviderHealth } from "./llm/providerHealth";
 import { checkSupabaseHealth } from "./health/supabaseHealth";
 import { getTrustMetrics, applyTrustMetadata } from "./assistantTrust";
+import { scorePublicKnowledgeSearch } from "./canonicalRuntimeBinding";
 import { buildPublicReadinessHealth } from "./health/readiness";
 import { getSourceProvenanceAccess, getSourceProvenanceRegistry, resolveSourceProvenanceActor, upsertSourceProvenance, reviewSourceRightsProfile, archiveSourceProvenance } from "./sourceProvenanceRights";
 import { getLegacyManusProvenanceReconciliation } from "./legacyManusProvenance";
@@ -161,6 +162,9 @@ import {
   runtimeGetConversationMessages,
   runtimeCreateKnowledgeDocument,
   runtimeGetKnowledgeDocuments,
+  runtimeGetPublicKnowledgeDocuments,
+  runtimeGetPublicKnowledgeDocumentById,
+  runtimeGetLegacyReviewContent,
   runtimeGetKnowledgeScopeCodes,
   runtimeGetKnowledgeDocumentById,
   runtimeUpdateKnowledgeDocument,
@@ -559,11 +563,11 @@ const knowledgeRouter = router({
   list: publicProcedure
     .input(z.object({ search: z.string().optional(), category: z.string().optional() }).optional())
     .query(async ({ input }) => {
-      return await runtimeGetKnowledgeDocuments({
+      return await runtimeGetPublicKnowledgeDocuments({
         search: input?.search,
         category: input?.category,
-        isActive: 1,
-      } as any);
+        limit: 1000,
+      });
     }),
   adminList: adminProcedure
     .input(z.object({ search: z.string().optional(), category: z.string().optional(), status: z.enum(['all','draft','review_only','approved','rejected']).optional() }).optional())
@@ -577,9 +581,13 @@ const knowledgeRouter = router({
     }),
   getById: publicProcedure
     .input(z.object({ id: z.union([z.number(), z.string()]) }).optional())
-    .query(async ({ input }) => {
+    .query(async ({ input, ctx }) => {
       if (!input?.id) return null;
-      return await runtimeGetKnowledgeDocumentById(input.id);
+      const role = String(ctx.user?.role || '').toLowerCase();
+      const isAdmin = ['admin', 'super_admin', 'superadmin', 'platform_admin'].includes(role);
+      return isAdmin
+        ? await runtimeGetKnowledgeDocumentById(input.id)
+        : await runtimeGetPublicKnowledgeDocumentById(input.id);
     }),
   reviewTrace: adminProcedure
     .input(z.object({ id: z.union([z.number(), z.string()]) }))
@@ -2606,18 +2614,35 @@ const dashboardRouter = router({
 
 const searchRouter = router({
   query: publicProcedure.input(z.any().optional()).query(async ({ input }) => {
-    const q = String(input?.query ?? input?.search ?? '').trim().toLowerCase();
-    const docs = await runtimeGetKnowledgeDocuments({}).catch(() => []);
-    const rows = (docs || []).filter((doc: any) => !q || `${doc.title || ''} ${doc.content || ''} ${doc.tags || ''}`.toLowerCase().includes(q));
-    return rows.slice(0, Number(input?.limit || 20)).map((doc: any) => ({ ...doc, type: 'knowledge_document' }));
+    const rawQuery = String(input?.query ?? input?.search ?? '').trim();
+    const q = rawQuery.toLowerCase();
+    const category = input?.category && input.category !== 'all' ? String(input.category) : undefined;
+    const docs = await runtimeGetPublicKnowledgeDocuments({
+      search: rawQuery || undefined,
+      category,
+      limit: Math.min(Math.max(Number(input?.limit || 20), 1), 100),
+    }).catch(() => []);
+    return (docs || [])
+      .map((doc: any) => ({
+        ...doc,
+        type: 'knowledge_document',
+        relevanceScore: scorePublicKnowledgeSearch(q, doc),
+      }))
+      .sort((a: any, b: any) => b.relevanceScore - a.relevanceScore)
+      .slice(0, Number(input?.limit || 20));
   }),
 });
 
 const advancedSearchRouter = router({
   advanced: publicProcedure.input(z.any().optional()).query(async ({ input }) => {
-    const q = String(input?.query ?? input?.search ?? '').trim().toLowerCase();
+    const rawQuery = String(input?.query ?? input?.search ?? '').trim();
+    const q = rawQuery.toLowerCase();
     const category = input?.category && input.category !== 'all' ? String(input.category) : null;
-    const docs = await runtimeGetKnowledgeDocuments({ category: category || undefined }).catch(() => []);
+    const docs = await runtimeGetPublicKnowledgeDocuments({
+      search: rawQuery || undefined,
+      category: category || undefined,
+      limit: Math.min(Math.max(Number(input?.limit || 50), 1), 100),
+    }).catch(() => []);
     const mapped = (docs || [])
       .filter((doc: any) => !q || `${doc.title || ''} ${doc.content || ''} ${doc.tags || ''} ${doc.source || ''}`.toLowerCase().includes(q))
       .slice(0, Number(input?.limit || 50))
@@ -2654,14 +2679,34 @@ const contactRouter = router({
 });
 
 const faqsRouter = router({
-  list: publicProcedure.input(z.any().optional()).query(async ({ input }) => safeDbRead(() => dbOps.getFAQs({ category: input?.category, isActive: input?.isActive ?? 1 } as any), [])),
+  list: publicProcedure.input(z.any().optional()).query(async ({ input }) => {
+    const staged = await runtimeGetLegacyReviewContent('faqs');
+    if (staged !== null) {
+      const category = input?.category && input.category !== 'all' ? String(input.category) : null;
+      return staged.filter((faq: any) => category ? faq.category === category : true);
+    }
+    return safeDbRead(
+      () => dbOps.getFAQs({ category: input?.category, isActive: input?.isActive ?? 1 } as any),
+      [],
+    );
+  }),
   create: adminProcedure.input(z.any()).mutation(async ({ input, ctx }) => safeDbWrite(() => dbOps.createFAQ(withActor({ ...compactPayload(input), category: input?.category || 'general', order: input?.order ?? 0, isActive: input?.isActive ?? 1 }, ctx) as any))),
   update: adminProcedure.input(genericUpdateInput).mutation(async ({ input }) => safeDbWrite(() => dbOps.updateFAQ(input.id, inputPatch(input) as any))),
   delete: adminProcedure.input(genericIdInput).mutation(async ({ input }) => safeDbWrite(async () => { await dbOps.deleteFAQ(input.id); return { success: true }; })),
-  incrementView: publicProcedure.input(genericIdInput).mutation(async ({ input }) => safeDbRead(async () => { await dbOps.incrementFAQViewCount(input.id); return { success: true, skipped: false }; }, { success: true, skipped: true })),
+  incrementView: publicProcedure.input(genericIdInput).mutation(async ({ input }) => {
+    if (input.id < 0) return { success: true, skipped: true, reason: 'review_only_legacy_staging' };
+    return safeDbRead(async () => { await dbOps.incrementFAQViewCount(input.id); return { success: true, skipped: false }; }, { success: true, skipped: true });
+  }),
   generateFromFrequentQuestions: adminProcedure.input(z.any().optional()).mutation(async ({ input }) => {
     const questions = await import('./cache').then((m) => m.getMostFrequentQuestions(input?.limit || 12)).catch(() => []);
     return { generated: 0, candidates: questions, message: 'تم تجهيز مرشحات الأسئلة من Cache؛ الاعتماد النهائي يدوي.' };
+  }),
+});
+
+const suggestedQuestionsRouter = router({
+  list: publicProcedure.query(async () => {
+    const staged = await runtimeGetLegacyReviewContent('suggested_questions');
+    return staged ?? [];
   }),
 });
 
@@ -4005,6 +4050,7 @@ export const appRouter = router({
   search: searchRouter,
   contact: contactRouter,
   faqs: faqsRouter,
+  suggestedQuestions: suggestedQuestionsRouter,
   properties: propertiesRouter,
   cases: casesRouter,
   rulings: rulingsRouter,
