@@ -333,6 +333,19 @@ class SDKServer {
       };
     }
 
+    if (session.source === "local_users" && ENV.localAuthEnabled) {
+      return {
+        id: 0,
+        openId: session.openId,
+        name: session.name || ENV.localAuthName,
+        email: session.email || ENV.localAuthEmail,
+        loginMethod: "local",
+        role: (session.role || ENV.localAuthRole) as any,
+        lastSignedIn: signedInAt,
+        isActive: 1 as any,
+      } as AuthenticatedUser;
+    }
+
     const sessionUserId = session.openId;
     let user = await db.getUserByOpenId(sessionUserId);
 

@@ -1,48 +1,15 @@
 /**
- * Semantic Search System using OpenAI Embeddings
- * 
- * This module provides functions to generate embeddings for text content
- * and perform semantic similarity search using cosine similarity.
+ * Semantic search helpers.
+ *
+ * Embedding generation is local-first through Ollama and the dedicated
+ * nomic-embed-text provider. This removes the legacy Forge/OpenAI placeholder
+ * from the retrieval path while preserving the existing cosine/hybrid helpers.
  */
 
-import { invokeLLM } from "./_core/llm";
+import { generateLocalEmbedding } from "./knowledgeEmbeddings";
 
-/**
- * Generate embeddings for a given text using OpenAI's text-embedding-3-small model
- * 
- * @param text - The text content to generate embeddings for
- * @returns Array of numbers representing the embedding vector (1536 dimensions)
- */
 export async function generateEmbeddings(text: string): Promise<number[]> {
-  try {
-    // Use OpenAI's embedding model
-    // Note: We're using the invokeLLM infrastructure, but for embeddings
-    // we need to make a direct API call to the embeddings endpoint
-    
-    // For now, we'll use a placeholder implementation
-    // In production, this should call OpenAI's embeddings API
-    const response = await fetch(process.env.BUILT_IN_FORGE_API_URL + "/llm/embeddings", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${process.env.BUILT_IN_FORGE_API_KEY}`,
-      },
-      body: JSON.stringify({
-        input: text,
-        model: "text-embedding-3-small",
-      }),
-    });
-
-    if (!response.ok) {
-      throw new Error(`Embeddings API error: ${response.statusText}`);
-    }
-
-    const data = await response.json();
-    return data.data[0].embedding;
-  } catch (error) {
-    console.error("Error generating embeddings:", error);
-    throw error;
-  }
+  return generateLocalEmbedding(text);
 }
 
 /**

@@ -16,6 +16,24 @@ export function routePathFromHybridTarget(rawTarget: string): string {
   return pathOnly.trim() || "/";
 }
 
+export function redirectTargetFromHybridAddress(
+  hashValue: string,
+  pathnameValue: string,
+  searchValue: string,
+  hashRoutingEnabled: boolean,
+): string {
+  if (hashRoutingEnabled) {
+    const hash = String(hashValue || "");
+    const hashWithoutPrefix = hash.startsWith("#") ? hash.slice(1) : hash;
+    return normalizeHybridTarget(hashWithoutPrefix || "/");
+  }
+
+  const pathname = String(pathnameValue || "/").trim() || "/";
+  const search = String(searchValue || "");
+  const target = `${pathname.startsWith("/") ? pathname : `/${pathname}`}${search.startsWith("?") ? search : ""}`;
+  return normalizeHybridTarget(target);
+}
+
 export function queryStringFromHybridAddress(
   hashValue: string,
   searchValue: string,

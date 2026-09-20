@@ -244,6 +244,7 @@ export default function Chat() {
 
   const createConversationMutation = trpc.chat.createConversation.useMutation();
   const sendMessageMutation = trpc.chat.sendMessage.useMutation();
+  const [researchMode, setResearchMode] = useState<"answer" | "deep_research">("answer");
   const summarizeToolMutation = trpc.aiTools.summarize.useMutation();
   const extractToolMutation = trpc.aiTools.extract.useMutation();
   const classifyToolMutation = trpc.aiTools.classify.useMutation();
@@ -444,6 +445,7 @@ ${extractedText}`;
       await sendMessageMutation.mutateAsync({
         conversationId: targetConversationId,
         message: composedMessage,
+        mode: researchMode,
       });
       await refetchConversations();
       setTimeout(() => {
@@ -944,6 +946,12 @@ ${extractedText}`;
                   />
 
                   <div className="assistant-composer-v54 rounded-[26px] border border-border bg-muted/20 p-3 shadow-sm">
+                    <div className="mb-2 flex items-center justify-between gap-2 rounded-2xl border border-border/60 bg-background/70 px-3 py-2">
+                      <div className="text-xs text-muted-foreground"><span className="font-bold text-foreground">نمط الإجابة:</span> {researchMode === "deep_research" ? "بحث معمق بالمصادر" : "إجابة موثقة"}</div>
+                      <Button type="button" variant={researchMode === "deep_research" ? "default" : "outline"} size="sm" className="rounded-xl" onClick={() => setResearchMode((mode) => mode === "answer" ? "deep_research" : "answer")} disabled={isSubmitting}>
+                        {researchMode === "deep_research" ? "البحث المعمق مفعّل" : "تفعيل البحث المعمق"}
+                      </Button>
+                    </div>
                     <div className="flex flex-wrap items-center gap-2">
                       {voiceInput.isSupported && (
                         <Button type="button" variant={voiceInput.isListening ? "default" : "outline"} size="icon" onClick={() => {

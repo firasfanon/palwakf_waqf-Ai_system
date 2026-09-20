@@ -20,6 +20,9 @@ export default function FAQs() {
     staleTime: 60 * 60 * 1000, // Cache for 1 hour (FAQs don't change often)
     gcTime: 2 * 60 * 60 * 1000, // Keep in cache for 2 hours
   });
+  const usingReviewOnlyRuntime = Boolean(
+    (faqs as any[] | undefined)?.some((faq) => faq.reviewOnly),
+  );
   const incrementViewMutation = trpc.faqs.incrementView.useMutation();
   const generateFAQsMutation = trpc.faqs.generateFromFrequentQuestions.useMutation({
     onSuccess: (data) => {
@@ -96,6 +99,11 @@ export default function FAQs() {
             <p className="text-lg text-muted-foreground text-right">
               إجابات على أكثر الأسئلة شيوعاً حول الأوقاف الإسلامية في فلسطين
             </p>
+            {usingReviewOnlyRuntime && (
+              <p className="text-sm text-muted-foreground text-right">
+                نسخة اختبار من محتوى Legacy مستعاد وقيد المراجعة؛ لا تمثل اعتمادًا نهائيًا.
+              </p>
+            )}
           </div>
         </div>
       </section>

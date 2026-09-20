@@ -1,0 +1,38 @@
+{
+  "schema": "PALWAKF_WAQF_LEGAL_EVIDENCE_ASSURANCE_PROMOTION_CLOSEOUT_V1",
+  "date": "2026-09-20",
+  "skill_id": "PALWAKF_WAQF_LEGAL_EVIDENCE_ASSURANCE_V1",
+  "origin_project": "WAQF_AI",
+  "origin_head": "1780ebb8b8f0a9c67a6e2922c5a528fd4ebb277c",
+  "mind": {
+    "review_doc_id": "1OjHcOX_BYf-Y2PvgGPm8cTMeuWcdyEIeVAdkDkLAqs4",
+    "automated_review": "RECOMMEND_PROJECT_PROVEN",
+    "promotion_recommendation": "RECOMMEND_DOMAIN_SCOPED_CANONICAL_PROMOTION",
+    "canonical_write_allowed": false,
+    "execution_authority_granted": false
+  },
+  "workspace": {
+    "decision_doc_id": "1MbfUhYQ5NMEOg0g66HHIUJDjgX5YoEFzbHEvR4zlAyE",
+    "decision": "APPROVE_DOMAIN_SCOPED_CANONICAL_SKILL",
+    "canonical_class": "DOMAIN",
+    "owner_scope": "DOMAIN:WAQF_LEGAL_RESEARCH_HIGH_ASSURANCE",
+    "portfolio_universal": false,
+    "runtime_enablement": "SEPARATE_PROJECT_TASK_AUTHORIZATION_REQUIRED"
+  },
+  "sovereign_refs": {
+    "global_admission_package": "15Q5rKEGAV3OOTJaIe9si2Gkipn8tsDvrj8_EO2hfxR4",
+    "skills_knowledge_lessons": "17xlAHASMg8Mv1PQvBiqtox5guo3JT3bn6nFdX5AbuOs",
+    "cross_project_skill_register": "1Wx9p-ZZEkMfQTpnZc7kMwSPhSENeuix72P241Tbt-v0",
+    "mind_current_state": "1kb5As0ySDatQXC25LjCiNdAkqTi8Jy2Y8T56niK_qYo",
+    "workspace_current_state": "1lOc_RR65oZXFIEkt92Fb4glYnuEbz1iqDiNeeawcics",
+    "waqf_ai_activation": "1dY7ZD97sayUg2WsxMEgAg0aYOvTjQ90S648Zd80yVbs"
+  },
+  "promotion": {
+    "status": "CLOSED_PASS_DOMAIN_SCOPED_CANONICAL",
+    "waqf_ai_self_promotion": false,
+    "auto_promotion": false,
+    "execution_authority_from_promotion": false,
+    "production_authority": false,
+    "main_merge_authorized": false
+  }
+}

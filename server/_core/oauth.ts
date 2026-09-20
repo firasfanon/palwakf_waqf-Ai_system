@@ -42,7 +42,16 @@ export function registerOAuthRoutes(app: Express) {
 
     try {
       if (!isPlatformBridgeConfigured()) {
-        res.status(503).json({ error: "Platform bridge is not configured for platform user authentication" });
+        const sessionToken = await sdk.createSessionToken(ENV.localAuthOpenId, {
+          name: ENV.localAuthName,
+          expiresInMs: ONE_YEAR_MS,
+          email: ENV.localAuthEmail,
+          role: ENV.localAuthRole === "admin" ? "admin" : "user",
+          source: "local_users",
+        });
+        const cookieOptions = getSessionCookieOptions(req);
+        res.cookie(COOKIE_NAME, sessionToken, { ...cookieOptions, maxAge: ONE_YEAR_MS });
+        res.redirect(302, sanitizeRedirect(getQueryParam(req, "redirect")));
         return;
       }
 

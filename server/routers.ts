@@ -125,12 +125,14 @@ import { classifyDocument, extractInformation, summarizeText } from "./ai-advanc
 import { compareRulings as runCompareRulings, analyzePrecedents as runAnalyzePrecedents, predictCaseOutcome } from "./legal-analysis";
 import { retrieveRelevantDocuments, extractRelevantContext, generateSystemPrompt, buildGroundingReferences, ensureGroundedAnswer } from "./rag";
 import { invokeLLM } from "./_core/llm";
+import { runResearchAnswer } from "./researchOrchestrator";
 import { getPlatformBridgeStatus, checkPlatformBridgeConnectivity, previewPlatformSourceOfTruth, previewMappedPlatformSourceOfTruth, getPlatformSourceOfTruthMatrix, listPlatformAdminUsers, listPlatformOrgUnits, listPlatformWaqfAssets, listPlatformEndowments } from "./platform/bridge";
 import { buildPlatformAssistantContext, formatPlatformAssistantContext } from "./platform/assistantContext";
 import { checkDatabaseHealth } from "./health/databaseHealth";
 import { checkLlmProviderHealth } from "./llm/providerHealth";
 import { checkSupabaseHealth } from "./health/supabaseHealth";
 import { getTrustMetrics, applyTrustMetadata } from "./assistantTrust";
+import { scorePublicKnowledgeSearch } from "./canonicalRuntimeBinding";
 import { buildPublicReadinessHealth } from "./health/readiness";
 import { getSourceProvenanceAccess, getSourceProvenanceRegistry, resolveSourceProvenanceActor, upsertSourceProvenance, reviewSourceRightsProfile, archiveSourceProvenance } from "./sourceProvenanceRights";
 import { getLegacyManusProvenanceReconciliation } from "./legacyManusProvenance";
@@ -160,6 +162,9 @@ import {
   runtimeGetConversationMessages,
   runtimeCreateKnowledgeDocument,
   runtimeGetKnowledgeDocuments,
+  runtimeGetPublicKnowledgeDocuments,
+  runtimeGetPublicKnowledgeDocumentById,
+  runtimeGetLegacyReviewContent,
   runtimeGetKnowledgeScopeCodes,
   runtimeGetKnowledgeDocumentById,
   runtimeUpdateKnowledgeDocument,
@@ -198,6 +203,7 @@ import {
   runtimeDeleteDocumentFile,
   runtimeGetAssistantKnowledgeReadDiagnostics,
   runtimeCreateKnowledgeDocumentFromTool,
+  runtimeCaptureLocalLearningCandidate,
   runtimeCreateAiToolRun,
   runtimeListAiToolRuns,
   runtimeGetAiToolRunDetails,
@@ -216,6 +222,8 @@ import {
   runtimeVerifyReferenceSource,
   runtimeVerifyKnowledgeCitation,
   runtimeReleaseOfficialKnowledgeDocument,
+  runtimeQueueLearningCandidateReview,
+  runtimeMaterializeResearchLearningCandidate,
   runtimeListKb08bMappingQueue,
   runtimeResolveKb08bMapping,
   runtimeListPageOperationBindings,
@@ -245,6 +253,15 @@ import {
   runtimeListDuplicateCitationReviewTasksV11,
   runtimeReconcileDuplicateCitationReviewTaskV11,
 } from "./knowledgeOperations";
+import {
+  extractDocumentText,
+  ingestGovernedKnowledge,
+  structuralChunkDocument,
+} from "./governedKnowledgeIngestion";
+import {
+  runtimeHybridRagSearch,
+  runtimeResolveKnowledgeEntities,
+} from "./governedRuntimeRag";
 import {
   assertAssistantMaturityOperationEnabled,
   getAssistantMaturityPolicySnapshot,
@@ -557,11 +574,11 @@ const knowledgeRouter = router({
   list: publicProcedure
     .input(z.object({ search: z.string().optional(), category: z.string().optional() }).optional())
     .query(async ({ input }) => {
-      return await runtimeGetKnowledgeDocuments({
+      return await runtimeGetPublicKnowledgeDocuments({
         search: input?.search,
         category: input?.category,
-        isActive: 1,
-      } as any);
+        limit: 1000,
+      });
     }),
   adminList: adminProcedure
     .input(z.object({ search: z.string().optional(), category: z.string().optional(), status: z.enum(['all','draft','review_only','approved','rejected']).optional() }).optional())
@@ -575,9 +592,13 @@ const knowledgeRouter = router({
     }),
   getById: publicProcedure
     .input(z.object({ id: z.union([z.number(), z.string()]) }).optional())
-    .query(async ({ input }) => {
+    .query(async ({ input, ctx }) => {
       if (!input?.id) return null;
-      return await runtimeGetKnowledgeDocumentById(input.id);
+      const role = String(ctx.user?.role || '').toLowerCase();
+      const isAdmin = ['admin', 'super_admin', 'superadmin', 'platform_admin'].includes(role);
+      return isAdmin
+        ? await runtimeGetKnowledgeDocumentById(input.id)
+        : await runtimeGetPublicKnowledgeDocumentById(input.id);
     }),
   reviewTrace: adminProcedure
     .input(z.object({ id: z.union([z.number(), z.string()]) }))
@@ -1284,7 +1305,7 @@ const chatRouter = router({
       return { success: true };
     }),
   sendMessage: protectedProcedure
-    .input(z.object({ conversationId: z.number(), message: z.string() }))
+    .input(z.object({ conversationId: z.number(), message: z.string(), mode: z.enum(["answer", "deep_research"]).optional() }))
     .mutation(async ({ input, ctx }) => {
       try {
         console.log('[chat.sendMessage] start', {
@@ -1298,41 +1319,90 @@ const chatRouter = router({
         }
         const userMessage = await runtimeCreateMessage({ conversationId: input.conversationId, role: 'user', content: input.message } as any);
         const scopeCodes = await runtimeGetKnowledgeScopeCodes(ctx.user).catch(() => []);
-        const docs = await retrieveRelevantDocuments(input.message, { limit: 5, minScore: 1, actor: ctx.user, scopeCodes });
-        const groundingReferences = buildGroundingReferences(docs as any);
-        const context = extractRelevantContext(input.message, docs as any, 2500);
         const platformContext = await buildPlatformAssistantContext({
           query: input.message,
           user: ctx.user,
           hints: [conversation.title],
           limit: 3,
         });
-        const systemPrompt = generateSystemPrompt(context, {
-          platformContext: formatPlatformAssistantContext(platformContext),
+        const research = await runResearchAnswer({
+          question: input.message,
+          mode: input.mode || "answer",
+          actor: ctx.user,
+          scopeCodes,
         });
-        let content = 'تعذر توليد الرد.';
-        try {
-          const response = await invokeLLM({ messages: [{ role: 'system', content: systemPrompt }, { role: 'user', content: input.message }] });
-          content = typeof response.choices?.[0]?.message?.content === 'string'
-            ? response.choices[0].message.content
-            : Array.isArray(response.choices?.[0]?.message?.content)
-            ? response.choices[0].message.content.map((part: any) => typeof part === 'string' ? part : part?.text || '').join('\n')
-            : 'تعذر توليد الرد.';
-        } catch (llmError) {
-          if (!isLocalLlmProviderUnavailable(llmError)) {
-            throw llmError;
-          }
-          console.warn('[MB27F2] Chat local LLM provider unavailable; returning safe assistant fallback.', {
-            conversationId: input.conversationId,
-            providerHint: 'ollama-local-11434',
-            docsCount: docs.length,
-          });
-          content = buildLocalLlmUnavailableMessage(input.message, docs.length);
-        }
+        const groundingReferences = research.references;
+        const content = research.answer || 'تعذر توليد إجابة موثقة من الأدلة المتاحة.';
         const assistantMessage = await runtimeCreateMessage({ conversationId: input.conversationId, role: 'assistant', content, sources: JSON.stringify(groundingReferences) } as any);
         await runtimeUpdateConversation(input.conversationId, { updatedAt: new Date().toISOString().slice(0, 19).replace('T', ' ') } as any);
-        console.log('[chat.sendMessage] success', { conversationId: input.conversationId, assistantMessageId: assistantMessage?.id, docsCount: docs.length });
-        return { userMessage, assistantMessage, groundingReferences, platformContextUsed: platformContext, knowledgeScopeCodesApplied: scopeCodes };
+
+        const learningCandidateEligible =
+          research.learningCandidate.eligible &&
+          research.citationAudit.valid &&
+          research.semanticAudit.valid &&
+          research.legalSkillAudit.valid &&
+          research.skillRuntime.status !== "fail_closed_missing_verified_legal_evidence" &&
+          !content.startsWith("[غير محسوم] UNRESOLVED_");
+        const learningCapture = learningCandidateEligible
+          ? await runtimeCaptureLocalLearningCandidate({
+              question: input.message,
+              answer: content,
+              references: groundingReferences,
+              synthesisMode: research.synthesisMode,
+              skillRuntime: research.skillRuntime,
+              citationAudit: research.citationAudit,
+              semanticAudit: research.semanticAudit,
+              legalSkillAudit: research.legalSkillAudit,
+              createdBy: ctx.user!.id,
+            }).catch(() => ({
+              captured: false as const,
+              storage: "local_review_only" as const,
+              reason: "local_learning_candidate_capture_failed" as const,
+            }))
+          : {
+              captured: false as const,
+              storage: "none" as const,
+              reason: "research_result_not_eligible_for_learning_candidate" as const,
+            };
+
+        const learningPersistence = await runtimeCreateAiToolRun({
+          toolKey: 'waqf_research_answer', runStatus: 'completed', approvalStatus: 'pending',
+          title: input.mode === 'deep_research' ? 'بحث وقفي معمق' : 'إجابة وقفية موثقة',
+          inputText: input.message, outputText: content,
+          inputJson: { conversationId: input.conversationId, mode: input.mode || 'answer' },
+          outputJson: { internalEvidenceCount: research.internalEvidenceCount, externalEvidenceCount: research.externalEvidenceCount, externalProviders: research.externalProviders, researchQueries: research.researchQueries, learningCandidate: { ...research.learningCandidate, capture: learningCapture } },
+          sourceContextJson: { references: groundingReferences },
+        }).then((toolRun: any) => ({
+          status: 'persisted' as const,
+          toolRunId: toolRun?.id ?? null,
+          diagnosticCode: null,
+        })).catch((error: any) => {
+          console.error('[chat.sendMessage] ai_tool_run persistence failed', {
+            conversationId: input.conversationId,
+            toolKey: 'waqf_research_answer',
+            error: error?.message || String(error),
+          });
+          return {
+            status: 'failed' as const,
+            toolRunId: null,
+            diagnosticCode: 'ai_tool_run_persistence_failed' as const,
+          };
+        });
+        console.log('[chat.sendMessage] success', {
+          conversationId: input.conversationId,
+          assistantMessageId: assistantMessage?.id,
+          docsCount: research.internalEvidenceCount,
+          learningCandidateCaptured: learningCapture.captured,
+          learningPersistenceStatus: learningPersistence.status,
+        });
+        return {
+          userMessage,
+          assistantMessage,
+          groundingReferences,
+          platformContextUsed: platformContext,
+          knowledgeScopeCodesApplied: scopeCodes,
+          research: { ...research, learningCapture, learningPersistence },
+        };
       } catch (error: any) {
         console.error('[chat.sendMessage] failed', error);
         if (error instanceof TRPCError) {
@@ -2583,18 +2653,35 @@ const dashboardRouter = router({
 
 const searchRouter = router({
   query: publicProcedure.input(z.any().optional()).query(async ({ input }) => {
-    const q = String(input?.query ?? input?.search ?? '').trim().toLowerCase();
-    const docs = await runtimeGetKnowledgeDocuments({}).catch(() => []);
-    const rows = (docs || []).filter((doc: any) => !q || `${doc.title || ''} ${doc.content || ''} ${doc.tags || ''}`.toLowerCase().includes(q));
-    return rows.slice(0, Number(input?.limit || 20)).map((doc: any) => ({ ...doc, type: 'knowledge_document' }));
+    const rawQuery = String(input?.query ?? input?.search ?? '').trim();
+    const q = rawQuery.toLowerCase();
+    const category = input?.category && input.category !== 'all' ? String(input.category) : undefined;
+    const docs = await runtimeGetPublicKnowledgeDocuments({
+      search: rawQuery || undefined,
+      category,
+      limit: Math.min(Math.max(Number(input?.limit || 20), 1), 100),
+    }).catch(() => []);
+    return (docs || [])
+      .map((doc: any) => ({
+        ...doc,
+        type: 'knowledge_document',
+        relevanceScore: scorePublicKnowledgeSearch(q, doc),
+      }))
+      .sort((a: any, b: any) => b.relevanceScore - a.relevanceScore)
+      .slice(0, Number(input?.limit || 20));
   }),
 });
 
 const advancedSearchRouter = router({
   advanced: publicProcedure.input(z.any().optional()).query(async ({ input }) => {
-    const q = String(input?.query ?? input?.search ?? '').trim().toLowerCase();
+    const rawQuery = String(input?.query ?? input?.search ?? '').trim();
+    const q = rawQuery.toLowerCase();
     const category = input?.category && input.category !== 'all' ? String(input.category) : null;
-    const docs = await runtimeGetKnowledgeDocuments({ category: category || undefined }).catch(() => []);
+    const docs = await runtimeGetPublicKnowledgeDocuments({
+      search: rawQuery || undefined,
+      category: category || undefined,
+      limit: Math.min(Math.max(Number(input?.limit || 50), 1), 100),
+    }).catch(() => []);
     const mapped = (docs || [])
       .filter((doc: any) => !q || `${doc.title || ''} ${doc.content || ''} ${doc.tags || ''} ${doc.source || ''}`.toLowerCase().includes(q))
       .slice(0, Number(input?.limit || 50))
@@ -2631,14 +2718,34 @@ const contactRouter = router({
 });
 
 const faqsRouter = router({
-  list: publicProcedure.input(z.any().optional()).query(async ({ input }) => safeDbRead(() => dbOps.getFAQs({ category: input?.category, isActive: input?.isActive ?? 1 } as any), [])),
+  list: publicProcedure.input(z.any().optional()).query(async ({ input }) => {
+    const staged = await runtimeGetLegacyReviewContent('faqs');
+    if (staged !== null) {
+      const category = input?.category && input.category !== 'all' ? String(input.category) : null;
+      return staged.filter((faq: any) => category ? faq.category === category : true);
+    }
+    return safeDbRead(
+      () => dbOps.getFAQs({ category: input?.category, isActive: input?.isActive ?? 1 } as any),
+      [],
+    );
+  }),
   create: adminProcedure.input(z.any()).mutation(async ({ input, ctx }) => safeDbWrite(() => dbOps.createFAQ(withActor({ ...compactPayload(input), category: input?.category || 'general', order: input?.order ?? 0, isActive: input?.isActive ?? 1 }, ctx) as any))),
   update: adminProcedure.input(genericUpdateInput).mutation(async ({ input }) => safeDbWrite(() => dbOps.updateFAQ(input.id, inputPatch(input) as any))),
   delete: adminProcedure.input(genericIdInput).mutation(async ({ input }) => safeDbWrite(async () => { await dbOps.deleteFAQ(input.id); return { success: true }; })),
-  incrementView: publicProcedure.input(genericIdInput).mutation(async ({ input }) => safeDbRead(async () => { await dbOps.incrementFAQViewCount(input.id); return { success: true, skipped: false }; }, { success: true, skipped: true })),
+  incrementView: publicProcedure.input(genericIdInput).mutation(async ({ input }) => {
+    if (input.id < 0) return { success: true, skipped: true, reason: 'review_only_legacy_staging' };
+    return safeDbRead(async () => { await dbOps.incrementFAQViewCount(input.id); return { success: true, skipped: false }; }, { success: true, skipped: true });
+  }),
   generateFromFrequentQuestions: adminProcedure.input(z.any().optional()).mutation(async ({ input }) => {
     const questions = await import('./cache').then((m) => m.getMostFrequentQuestions(input?.limit || 12)).catch(() => []);
     return { generated: 0, candidates: questions, message: 'تم تجهيز مرشحات الأسئلة من Cache؛ الاعتماد النهائي يدوي.' };
+  }),
+});
+
+const suggestedQuestionsRouter = router({
+  list: publicProcedure.query(async () => {
+    const staged = await runtimeGetLegacyReviewContent('suggested_questions');
+    return staged ?? [];
   }),
 });
 
@@ -2899,6 +3006,134 @@ async function requireKnowledgeScope(ctx: any, requirement: KnowledgeScopeRequir
     });
   }
 }
+
+const knowledgeIngestionRouter = router({
+  previewText: adminProcedure
+    .input(z.object({
+      title: z.string().min(1).max(500),
+      content: z.string().min(1).max(2_000_000),
+    }))
+    .query(async ({ input, ctx }) => {
+      await requireKnowledgeScope(ctx, 'review', 'knowledgeIngestion.previewText');
+      const chunks = structuralChunkDocument(input.content);
+      return {
+        title: input.title,
+        chunkCount: chunks.length,
+        chunks: chunks.slice(0, 50),
+        automaticChatRelease: false,
+        mode: 'governed_structural_chunk_preview_v1',
+      };
+    }),
+
+  ingestText: adminProcedure
+    .input(z.object({
+      inputKind: z.enum(['manual', 'url', 'learning_candidate', 'existing_reference']).default('manual'),
+      retentionBasis: z.enum(['user_provided', 'internal', 'verified_rights', 'metadata_only', 'review_required']).default('review_required'),
+      title: z.string().min(1).max(500),
+      content: z.string().max(2_000_000).default(''),
+      sourceId: z.string().uuid().optional(),
+      sourceName: z.string().max(500).optional(),
+      sourceUrl: z.string().url().optional(),
+      documentType: z.string().max(100).optional(),
+      category: z.string().max(100).optional(),
+      domainScope: z.enum(['waqf_law','fiqh','administrative','historical','public_info','internal_procedure','other']).optional(),
+      language: z.string().max(20).optional(),
+      metadataJson: z.record(z.string(), z.any()).optional(),
+    }))
+    .mutation(async ({ input, ctx }) => {
+      requireAssistantMaturityOperation('controlled_review');
+      const reviewerAuthUserId = await requireKnowledgeScope(ctx, 'review', 'knowledgeIngestion.ingestText');
+      return ingestGovernedKnowledge({ ...input, reviewerAuthUserId });
+    }),
+
+  ingestFile: adminProcedure
+    .input(z.object({
+      filename: z.string().min(1).max(500),
+      mimeType: z.string().max(200).optional(),
+      base64: z.string().min(1).max(20_000_000),
+      retentionBasis: z.enum(['user_provided','internal']).default('user_provided'),
+      title: z.string().min(1).max(500),
+      sourceId: z.string().uuid().optional(),
+      sourceName: z.string().max(500).optional(),
+      documentType: z.string().max(100).optional(),
+      category: z.string().max(100).optional(),
+      domainScope: z.enum(['waqf_law','fiqh','administrative','historical','public_info','internal_procedure','other']).optional(),
+      language: z.string().max(20).optional(),
+      metadataJson: z.record(z.string(), z.any()).optional(),
+    }))
+    .mutation(async ({ input, ctx }) => {
+      requireAssistantMaturityOperation('controlled_review');
+      const reviewerAuthUserId = await requireKnowledgeScope(ctx, 'review', 'knowledgeIngestion.ingestFile');
+      const buffer = Buffer.from(input.base64, 'base64');
+      if (buffer.byteLength > 15 * 1024 * 1024) {
+        throw new TRPCError({ code: 'PAYLOAD_TOO_LARGE', message: 'الحد الأقصى للملف في هذا المسار هو 15MB.' });
+      }
+      const content = await extractDocumentText({
+        buffer,
+        mimeType: input.mimeType,
+        filename: input.filename,
+      });
+      const { base64: _base64, filename, mimeType, ...rest } = input;
+      return ingestGovernedKnowledge({
+        ...rest,
+        reviewerAuthUserId,
+        inputKind: 'upload',
+        originalFilename: filename,
+        mimeType,
+        content,
+      });
+    }),
+
+  resolveEntities: adminProcedure
+    .input(z.object({ query: z.string().min(1).max(2000), limit: z.number().min(1).max(50).optional() }))
+    .query(async ({ input, ctx }) => {
+      await requireKnowledgeScope(ctx, 'review', 'knowledgeIngestion.resolveEntities');
+      return runtimeResolveKnowledgeEntities(input.query, input.limit || 12);
+    }),
+
+  hybridSearchPreview: adminProcedure
+    .input(z.object({
+      query: z.string().min(1).max(4000),
+      limit: z.number().min(1).max(30).optional(),
+      useEmbeddings: z.boolean().optional(),
+    }))
+    .query(async ({ input, ctx }) => {
+      await requireKnowledgeScope(ctx, 'review', 'knowledgeIngestion.hybridSearchPreview');
+      return {
+        results: await runtimeHybridRagSearch(input.query, input),
+        note: 'Strict chat/RAG trust gates are applied by the database RPC.',
+      };
+    }),
+
+  queueLearningCandidate: adminProcedure
+    .input(z.object({
+      knowledgeDocumentId: z.string().uuid(),
+      notes: z.string().max(5000).optional(),
+    }))
+    .mutation(async ({ input, ctx }) => {
+      requireAssistantMaturityOperation('controlled_review');
+      const reviewerAuthUserId = await requireKnowledgeScope(ctx, 'review', 'knowledgeIngestion.queueLearningCandidate');
+      return runtimeQueueLearningCandidateReview({ ...input, reviewerAuthUserId });
+    }),
+
+  materializeResearchLearningCandidate: adminProcedure
+    .input(z.object({
+      toolRunId: z.string().uuid(),
+      notes: z.string().max(5000).optional(),
+    }))
+    .mutation(async ({ input, ctx }) => {
+      requireAssistantMaturityOperation('controlled_review');
+      const reviewerAuthUserId = await requireKnowledgeScope(
+        ctx,
+        'review',
+        'knowledgeIngestion.materializeResearchLearningCandidate',
+      );
+      return runtimeMaterializeResearchLearningCandidate({
+        ...input,
+        reviewerAuthUserId,
+      });
+    }),
+});
 
 const knowledgeTrustRouter = router({
   /** Safe capability handshake: no sensitive review data is returned by this endpoint. */
@@ -3169,9 +3404,15 @@ const pageSettingsRouter = router({
 });
 
 const aiRouter = router({
-  chat: publicProcedure.input(z.any()).mutation(async ({ input }) => {
-    const prompt = String(input?.message || input?.prompt || input?.query || '');
-    return { answer: prompt ? `تم استلام الطلب: ${prompt.slice(0, 120)}` : 'تم استلام الطلب.', sources: [], mode: 'local_stub_connected' };
+  chat: protectedProcedure.input(z.object({
+    message: z.string().min(1).optional(), prompt: z.string().min(1).optional(), query: z.string().min(1).optional(),
+    mode: z.enum(['answer', 'deep_research']).optional(),
+  }).refine(value => !!(value.message || value.prompt || value.query), { message: 'يلزم إدخال سؤال' }))
+  .mutation(async ({ input, ctx }) => {
+    const question = String(input.message || input.prompt || input.query || '').trim();
+    const scopeCodes = await runtimeGetKnowledgeScopeCodes(ctx.user).catch(() => []);
+    const research = await runResearchAnswer({ question, mode: input.mode || 'answer', actor: ctx.user, scopeCodes });
+    return { answer: research.answer, sources: research.references, mode: research.mode, research };
   }),
 });
 
@@ -3976,6 +4217,7 @@ export const appRouter = router({
   search: searchRouter,
   contact: contactRouter,
   faqs: faqsRouter,
+  suggestedQuestions: suggestedQuestionsRouter,
   properties: propertiesRouter,
   cases: casesRouter,
   rulings: rulingsRouter,
@@ -3993,6 +4235,7 @@ export const appRouter = router({
   fetchLogs: fetchLogsRouter,
   fetcher: fetcherRouter,
   knowledgeSearch: knowledgeSearchRouter,
+  knowledgeIngestion: knowledgeIngestionRouter,
   knowledgeTrust: knowledgeTrustRouter,
   knowledgeActivation: knowledgeActivationRouter,
   legacyProvenance: legacyProvenanceRouter,
