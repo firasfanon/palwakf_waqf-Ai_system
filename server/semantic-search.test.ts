@@ -178,11 +178,13 @@ describe("Semantic Search System", () => {
   describe("Integration Tests", () => {
     let embedding1: number[];
     let embedding2: number[];
+    let unrelatedEmbedding: number[];
 
     beforeAll(async () => {
-      // Generate embeddings for similar Arabic texts
+      // Generate all integration fixtures with the same active embedding model/dimensions.
       embedding1 = await generateEmbeddings("الوقف في الشريعة الإسلامية");
       embedding2 = await generateEmbeddings("أحكام الوقف في الفقه الإسلامي");
+      unrelatedEmbedding = await generateEmbeddings("صيانة محركات السيارات الحديثة");
     }, 60000);
 
     it("should find semantic similarity between similar Arabic texts", () => {
@@ -202,8 +204,8 @@ describe("Semantic Search System", () => {
         },
         {
           id: 2,
-          title: "قانون الأراضي",
-          embedding: JSON.stringify([0.9, 0.8, 0.7, 0.6, 0.5]),
+          title: "معلومات غير مرتبطة بالوقف",
+          embedding: JSON.stringify(unrelatedEmbedding),
         },
       ];
 
