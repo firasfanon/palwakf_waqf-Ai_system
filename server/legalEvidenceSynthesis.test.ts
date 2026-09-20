@@ -36,6 +36,37 @@ describe("structured legal evidence synthesis", () => {
     expect(answer).toContain("[مصدر خارجي 4]");
   });
 
+  it("renders a concise grounded definition for Khalil al-Rahman waqf from official guidance", () => {
+    const khalilClaims: EvidenceClaim[] = [
+      {
+        claimId:"K1",
+        sourceId:"pla:waqf-types-khalil-al-rahman",
+        sourceIndex:1,
+        sourceType:"legal",
+        authorityClass:"primary",
+        legalRole:"source_excerpt",
+        exactQuote:"الوقت غير الصحيح: وهي الأراضي المفروزة من الأراضي الأميرية التي أوقفتها السلاطين العثمانيين وتكون عبارة عن تخصيص منافع القطع المفرزة من الأراضي الأميرية لجهة معينة (مادة ٤ من القانون العثماني سنة 1858) مثال عليها (وقف صخرة الله المشرفة أو وقف خليل الرحمن او تميم الداري)",
+        qualifiers:[],
+        applicabilityStatus:"direct",
+        verificationStatus:"verbatim_match"
+      },
+    ];
+    const result = synthesizeDeterministicGroundedClaims(
+      "ما هو وقف خليل الرحمن",
+      khalilClaims,
+      [1],
+    );
+    expect(result?.sourceIndexes).toEqual([1]);
+    expect(result?.answer).toContain("وقف خليل الرحمن");
+    expect(result?.answer).toContain("الوقف غير الصحيح");
+    expect(result?.answer).toContain("تخصيص منافع");
+    expect(result?.answer).toContain("المادة (4)");
+    expect(result?.answer).toContain("[مصدر خارجي 1]");
+    expect(result?.answer).toContain("حدود الدليل");
+    expect(result?.answer).not.toContain("المحكمة:");
+    expect(result?.answer).not.toContain("الوقت غير الصحيح");
+  });
+
   it("renders a generic legal answer from only the required grounded source", () => {
     const genericClaims: EvidenceClaim[] = [
       {claimId:"G1",sourceId:"maqam:cassation-1383-2019",sourceIndex:1,sourceType:"legal",authorityClass:"reference",legalRole:"court_reasoning",exactQuote:"كان على المحكمة أن تقضي بتسجيل رقبة العقار للوقف وملكية حق المنفعة بمقتضى التحكير للمدعي.",qualifiers:[],applicabilityStatus:"case_specific",verificationStatus:"verbatim_match"},

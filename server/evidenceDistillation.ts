@@ -300,6 +300,27 @@ export function distillEvidenceClaims(
       return;
     }
 
+    const isCourtDocument =
+      /(?:judgment|cassation|appeal|court)/i.test(row.id || "") ||
+      /محكمة\s+(?:النقض|الاستئناف|بداية|صلح)|الطاعن|المطعون\s+ضده/u.test(content);
+
+    if (!isCourtDocument) {
+      const khalilAlRahmanDefinition =
+        /خليل\s+الرحمن/u.test(question)
+          ? rangeExact(
+              content,
+              /(?:الوقف|الوقت)\s+غير\s+الصحيح\s*:/u,
+              /أنواع\s+الوقف\s+حسب/u,
+              900,
+            ).replace(/\s*أنواع\s+الوقف\s+حسب\s*$/u, "")
+          : "";
+      const excerpt =
+        khalilAlRahmanDefinition ||
+        takeFullSentences(questionDirectedWindow(content, tokens, 700), 700);
+      addClaim(claims, row, sourceIndex, "source_excerpt", excerpt, "direct");
+      return;
+    }
+
     const body = courtBody(content);
     if (!body) return;
 

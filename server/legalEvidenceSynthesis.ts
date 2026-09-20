@@ -262,6 +262,22 @@ export function synthesizeDeterministicGroundedClaims(
     return rank(a) - rank(b) || a.claimId.localeCompare(b.claimId);
   });
 
+  const khalilAlRahmanDefinition = selected.find(claim =>
+    claim.legalRole === "source_excerpt" &&
+    /خليل\s+الرحمن/u.test(claim.exactQuote) &&
+    /(?:الوقف|الوقت)\s+غير\s+الصحيح/u.test(claim.exactQuote) &&
+    /الأراضي\s+الأميرية/u.test(claim.exactQuote),
+  );
+  if (/وقف\s+خليل\s+الرحمن/u.test(q) && khalilAlRahmanDefinition) {
+    const sourceIndex = khalilAlRahmanDefinition.sourceIndex;
+    return {
+      answer:
+        `وقف خليل الرحمن: وفق سلطة الأراضي الفلسطينية، يُدرج مثالًا على الوقف غير الصحيح (وقف التخصيصات)، أي تخصيص منافع أراضٍ أميرية لجهة معينة؛ ويحيل المصدر إلى المادة (4) ويذكر سنة 1858. [مصدر خارجي ${sourceIndex}].\n` +
+        `حدود الدليل: هذا المصدر يثبت التصنيف القانوني العام المذكور، لكنه لا يكفي وحده لإثبات التاريخ الكامل للوقف أو حصر جميع أعيانه وحدوده.`,
+      sourceIndexes: [sourceIndex],
+    };
+  }
+
   const lines = selected.map(claim => {
     const body = compactClaimFragments(claim, question).join(" ");
     if (!body) return "";

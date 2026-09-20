@@ -63,6 +63,22 @@ describe("legal evidence distillation", () => {
     )).toEqual([1]);
   });
 
+  it("classifies official administrative guidance as source evidence rather than court reasoning", () => {
+    const q = "ما هو وقف خليل الرحمن";
+    const officialRows = [{
+      id:"pla:waqf-types-khalil-al-rahman",
+      kind:"legal",
+      authority:"primary",
+      content:"أنواع الأوقاف من حيث المحل. الوقت غير الصحيح: وهي الأراضي المفروزة من الأراضي الأميرية التي أوقفتها السلاطين العثمانيين وتكون عبارة عن تخصيص منافع القطع المفرزة من الأراضي الأميرية لجهة معينة (مادة ٤ من القانون العثماني سنة 1858) مثال عليها (وقف صخرة الله المشرفة أو وقف خليل الرحمن او تميم الداري) أنواع الوقف حسب الجهة الموقوف لها."
+    }];
+    const claims = distillEvidenceClaims(q, officialRows, 2000);
+    expect(claims).toHaveLength(1);
+    expect(claims[0].legalRole).toBe("source_excerpt");
+    expect(claims[0].exactQuote).toContain("وقف خليل الرحمن");
+    expect(claims[0].exactQuote).toContain("الأراضي الأميرية");
+    expect(claims[0].exactQuote).not.toMatch(/أنواع\s+الوقف\s+حسب/u);
+  });
+
   it("extracts article 2 from the correct legal instrument rather than by article number alone", () => {
     const shariaRows = [{
       id:"maqam:sharia-procedure-art2",
