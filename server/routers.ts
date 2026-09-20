@@ -1365,16 +1365,44 @@ const chatRouter = router({
               reason: "research_result_not_eligible_for_learning_candidate" as const,
             };
 
-        void runtimeCreateAiToolRun({
+        const learningPersistence = await runtimeCreateAiToolRun({
           toolKey: 'waqf_research_answer', runStatus: 'completed', approvalStatus: 'pending',
           title: input.mode === 'deep_research' ? 'بحث وقفي معمق' : 'إجابة وقفية موثقة',
           inputText: input.message, outputText: content,
           inputJson: { conversationId: input.conversationId, mode: input.mode || 'answer' },
           outputJson: { internalEvidenceCount: research.internalEvidenceCount, externalEvidenceCount: research.externalEvidenceCount, externalProviders: research.externalProviders, researchQueries: research.researchQueries, learningCandidate: { ...research.learningCandidate, capture: learningCapture } },
           sourceContextJson: { references: groundingReferences },
-        }).catch(() => undefined);
-        console.log('[chat.sendMessage] success', { conversationId: input.conversationId, assistantMessageId: assistantMessage?.id, docsCount: research.internalEvidenceCount, learningCandidateCaptured: learningCapture.captured });
-        return { userMessage, assistantMessage, groundingReferences, platformContextUsed: platformContext, knowledgeScopeCodesApplied: scopeCodes, research: { ...research, learningCapture } };
+        }).then((toolRun: any) => ({
+          status: 'persisted' as const,
+          toolRunId: toolRun?.id ?? null,
+          diagnosticCode: null,
+        })).catch((error: any) => {
+          console.error('[chat.sendMessage] ai_tool_run persistence failed', {
+            conversationId: input.conversationId,
+            toolKey: 'waqf_research_answer',
+            error: error?.message || String(error),
+          });
+          return {
+            status: 'failed' as const,
+            toolRunId: null,
+            diagnosticCode: 'ai_tool_run_persistence_failed' as const,
+          };
+        });
+        console.log('[chat.sendMessage] success', {
+          conversationId: input.conversationId,
+          assistantMessageId: assistantMessage?.id,
+          docsCount: research.internalEvidenceCount,
+          learningCandidateCaptured: learningCapture.captured,
+          learningPersistenceStatus: learningPersistence.status,
+        });
+        return {
+          userMessage,
+          assistantMessage,
+          groundingReferences,
+          platformContextUsed: platformContext,
+          knowledgeScopeCodesApplied: scopeCodes,
+          research: { ...research, learningCapture, learningPersistence },
+        };
       } catch (error: any) {
         console.error('[chat.sendMessage] failed', error);
         if (error instanceof TRPCError) {
