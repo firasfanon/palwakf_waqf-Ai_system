@@ -5,6 +5,9 @@ export type LegalStatusEvidenceKind =
   | "OFFICIAL_CONSOLIDATED_TEXT"
   | "CURRENT_OFFICIAL_APPLICATION"
   | "OFFICIAL_TERRITORY_SPECIFIC_GUIDANCE"
+  | "ARCHIVAL_PRIMARY"
+  | "SECONDARY_STATUS_SIGNAL"
+  | "EXPERT_REVIEW_DECISION"
   | "SECONDARY_REFERENCE";
 
 export type LegalStatusMatrixEvidence = {
@@ -52,6 +55,8 @@ function hasTerritoryEvidence(row: LegalStatusMatrixCandidate): boolean {
       [
         "CURRENT_OFFICIAL_APPLICATION",
         "OFFICIAL_TERRITORY_SPECIFIC_GUIDANCE",
+        "ARCHIVAL_PRIMARY",
+        "EXPERT_REVIEW_DECISION",
       ].includes(item.kind)
   );
 }
@@ -69,11 +74,15 @@ export function evaluateLegalStatusMatrixRow(
     "CURRENT_OFFICIAL_APPLICATION"
   );
   const territoryScopeVerified = hasTerritoryEvidence(row);
+  const expertDecisionVerified = hasEvidence(row, "EXPERT_REVIEW_DECISION");
   const legalStatusVerified =
     row.assertedStatus !== "UNRESOLVED" &&
     (explicitStatusVerified ||
+      expertDecisionVerified ||
       (row.assertedStatus === "AMENDED" &&
-        hasEvidence(row, "OFFICIAL_CONSOLIDATED_TEXT")));
+        hasEvidence(row, "OFFICIAL_CONSOLIDATED_TEXT")) ||
+      (row.assertedStatus === "HISTORICAL" &&
+        hasEvidence(row, "ARCHIVAL_PRIMARY")));
 
   if (!legalStatusVerified)
     reasons.push("legal_status_requires_further_verification");

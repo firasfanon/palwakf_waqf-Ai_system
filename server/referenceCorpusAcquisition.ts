@@ -59,7 +59,7 @@ export function corpusItemToCollectionPolicy(
 ): SourceCollectionPolicy {
   const url = new URL(item.sourceUrl);
   return {
-    collectionId: "mega-b-" + item.corpusId,
+    collectionId: "waqf-reference-" + item.corpusId,
     name: item.title,
     seedUrls: [item.sourceUrl],
     allowedHosts: [url.hostname],
@@ -152,10 +152,11 @@ export async function fetchWithResilience(
     : new Error("network_fetch_failed");
 }
 
-export async function defaultCollectionFetcher(
-  url: string
+export async function defaultCollectionFetcherWithOptions(
+  url: string,
+  options: { timeoutMs?: number; attempts?: number } = {}
 ): Promise<CollectionFetchResponse> {
-  const response = await fetchWithResilience(url);
+  const response = await fetchWithResilience(url, options);
   const body = Buffer.from(await response.arrayBuffer());
   return {
     url: response.url || url,
@@ -166,6 +167,12 @@ export async function defaultCollectionFetcher(
     retrievedAt: new Date().toISOString(),
     headers: Object.fromEntries(response.headers.entries()),
   };
+}
+
+export async function defaultCollectionFetcher(
+  url: string
+): Promise<CollectionFetchResponse> {
+  return defaultCollectionFetcherWithOptions(url);
 }
 
 type RobotsRuleSet = {
@@ -232,7 +239,16 @@ export async function acquireCorpusItemPrivate(input: {
   );
   return crawlSourceCollection({
     policy: corpusItemToCollectionPolicy(input.item),
-    fetcher: input.fetcher || defaultCollectionFetcher,
+    fetcher:
+      input.fetcher ||
+      (url =>
+        defaultCollectionFetcherWithOptions(url, {
+          timeoutMs:
+            input.item.acquisition.timeoutMs ??
+            (input.item.acquisition.kind === "pdf"
+              ? 20_000
+              : DEFAULT_NETWORK_TIMEOUT_MS),
+        })),
     archive,
     robotsAllowed: robotsAllowsUrl,
     wait: sleep,

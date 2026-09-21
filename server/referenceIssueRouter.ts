@@ -17,6 +17,7 @@ export type ReferenceIssueClass =
 export type ReferenceIssueRoute = {
   issueClass: ReferenceIssueClass;
   preferredDomains: ReferenceCorpusDomain[];
+  priorityDomains: ReferenceCorpusDomain[];
   territories: LegalTerritory[];
   preferredEras: ReferenceCorpusEra[];
   requiresLegalStatusVerification: boolean;
@@ -29,6 +30,7 @@ const has = (value: string, pattern: RegExp) => pattern.test(value);
 export function routeReferenceIssue(question: string): ReferenceIssueRoute {
   const q = String(question || "").normalize("NFKC");
   const domains = new Set<ReferenceCorpusDomain>();
+  const priorityDomains = new Set<ReferenceCorpusDomain>();
   const reasons: string[] = [];
   const classes = new Set<ReferenceIssueClass>();
   const territories = new Set<LegalTerritory>();
@@ -70,7 +72,12 @@ export function routeReferenceIssue(question: string): ReferenceIssueRoute {
     domains.add("administrative");
     reasons.push("administrative_terms");
   }
-  if (has(q, /فقه|مذهب|حنفي|مالكي|شافعي|حنبلي|فتوى/u)) {
+  if (
+    has(
+      q,
+      /(?:^|[^\p{L}\p{N}])(?:فقه|فقهي|فقهية|مذهب|المذهب|حنفي|الحنفي|مالكي|المالكي|شافعي|الشافعي|حنبلي|الحنبلي|فتوى)(?=$|[^\p{L}\p{N}])/u
+    )
+  ) {
     classes.add("fiqh");
     domains.add("fiqh");
     reasons.push("fiqh_terms");
@@ -80,22 +87,70 @@ export function routeReferenceIssue(question: string): ReferenceIssueRoute {
     domains.add("sharia");
     reasons.push("sharia_terms");
   }
-  if (has(q, /عثماني|انتداب|تاريخ|حجة|دفتر|طابو|وقفية/u)) {
+  if (
+    has(
+      q,
+      /عثماني|انتداب|تاريخي|تاريخية|دفتر طابو|سجل طابو|وقفية عثمانية|حجة وقفية عثمانية/u
+    )
+  ) {
     classes.add("historical");
     domains.add("historical");
     reasons.push("historical_terms");
   }
-  if (
-    has(
-      q,
-      /قطعة|حوض|تسوية|تسجيل|مساحة|سند تسجيل|ملكية|رقبة|منفعة|حكر|إجارتين|عقار/u
-    )
-  ) {
+
+  const hasRegistrationTerms = has(
+    q,
+    /قطعة|حوض|تسوية|تسجيل|مساحة|سند تسجيل|سجل الأراضي|طابو/u
+  );
+  const hasLeaseTerms = has(
+    q,
+    /إيجار|ايجار|إجارة|اجارة|مستأجر|مؤجر|حكر|إجارتين|بدل الإيجار/u
+  );
+  const hasImmovableTerms = has(
+    q,
+    /أرض|ارض|أراضي|اراضي|عقار|عقارات|غير المنقول|غير منقول|ملكية|رقبة|منفعة/u
+  );
+  const hasMovableTerms = has(q, /مال منقول|أموال منقولة|المنقول/u);
+
+  if (hasRegistrationTerms || hasLeaseTerms || hasImmovableTerms) {
     classes.add("property_title");
-    domains.add("registration_settlement");
-    domains.add("lease_hukr");
+    if (hasRegistrationTerms) {
+      domains.add("registration_settlement");
+      priorityDomains.add("registration_settlement");
+    }
+    if (hasLeaseTerms) {
+      domains.add("lease_hukr");
+      priorityDomains.add("lease_hukr");
+    }
+    if (hasImmovableTerms) {
+      domains.add("land_law");
+      if (!hasRegistrationTerms && !hasLeaseTerms && !hasMovableTerms)
+        priorityDomains.add("land_law");
+    }
     reasons.push("property_title_terms");
   }
+  if (hasMovableTerms) {
+    domains.add("finance_investment");
+    priorityDomains.add("finance_investment");
+    reasons.push("movable_property_terms");
+  }
+
+  if (classes.has("judicial")) priorityDomains.add("case_law");
+  if (classes.has("fiqh")) priorityDomains.add("fiqh");
+  if (classes.has("sharia")) priorityDomains.add("sharia");
+  if (
+    classes.has("administrative") &&
+    !hasRegistrationTerms &&
+    !hasLeaseTerms &&
+    !hasMovableTerms
+  )
+    priorityDomains.add("administrative");
+  if (
+    classes.has("positive_law") &&
+    has(q, /وقف|أوقاف|اوقاف/u) &&
+    !hasLeaseTerms
+  )
+    priorityDomains.add("waqf_law");
 
   if (!territories.size) territories.add("UNKNOWN");
   if (!domains.size) {
@@ -111,9 +166,23 @@ export function routeReferenceIssue(question: string): ReferenceIssueRoute {
         ? [...classes][0]
         : "mixed";
 
+  const explicitWaqfInstrument = has(
+    q,
+    /قانون الأوقاف|قانون الاوقاف|تعديل قانون الأوقاف|تعديل قانون الاوقاف|قرار بقانون[^؟]{0,80}(?:الأوقاف|الاوقاف)/u
+  );
+  const orderedPriorityDomains = [
+    ...(explicitWaqfInstrument
+      ? (["waqf_law"] as ReferenceCorpusDomain[])
+      : []),
+    ...[...priorityDomains].filter(
+      domain => !(explicitWaqfInstrument && domain === "waqf_law")
+    ),
+  ];
+
   return {
     issueClass,
     preferredDomains: [...domains],
+    priorityDomains: orderedPriorityDomains,
     territories: [...territories],
     preferredEras: [...preferredEras],
     requiresLegalStatusVerification:

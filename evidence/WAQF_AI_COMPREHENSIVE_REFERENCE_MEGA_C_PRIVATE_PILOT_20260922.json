@@ -1,0 +1,1221 @@
+{
+  "program": "WAQF_AI_COMPREHENSIVE_WAQF_REFERENCE_V1",
+  "phase": "MEGA_C_CORPUS_SCALE_UP_PRIVATE_PILOT",
+  "generatedAt": "2026-09-21T23:52:15.504Z",
+  "hardBoundaries": {
+    "liveSharedSupabaseMutation": false,
+    "mainMerge": false,
+    "newBaseline": false,
+    "production": false,
+    "publicCorpusRelease": false
+  },
+  "privateArchiveRoot": "<USER_HOME>/.palwakf/private_reference_cache/waqf-ai-mega-c",
+  "selectedCorpusCount": 19,
+  "corpusTotalCount": 29,
+  "acquisitionResults": [
+    {
+      "corpusId": "ottoman-land-code-1858-registry",
+      "status": "PRESERVED_PRIVATE",
+      "sourceUrl": "https://maqam.najah.edu/legislation/169/",
+      "artifactVersionId": "version-bd4c856c808762a0ae805124203a343e",
+      "artifactSha256": "bd4c856c808762a0ae805124203a343e6b2f7d3ca8a09445cae45a636979b15f",
+      "byteSize": 237640,
+      "storageKey": "waqf-reference-ottoman-land-code-1858-registry/objects/artifact-ca0885c20565314b78ae7bbc8a2fc382/sha256-bd4c856c808762a0ae805124203a343e6b2f7d3ca8a09445cae45a636979b15f",
+      "trustLevel": "R2_VERIFIED_IDENTITY",
+      "reviewMode": "ITEM_REVIEW",
+      "chatEligible": false,
+      "publicDisplayEligible": false,
+      "skipped": []
+    },
+    {
+      "corpusId": "land-settlement-law-40-1952-registry",
+      "status": "PRESERVED_PRIVATE",
+      "sourceUrl": "https://laws-portal.najah.edu/legislation/15/",
+      "artifactVersionId": "version-9306accbe92d982b66e2df05394c489e",
+      "artifactSha256": "9306accbe92d982b66e2df05394c489e8b609f499b3d4d5a1da99f235b39e059",
+      "byteSize": 86712,
+      "storageKey": "waqf-reference-land-settlement-law-40-1952-registry/objects/artifact-24b3c5f12414e82092a816121201e843/sha256-9306accbe92d982b66e2df05394c489e8b609f499b3d4d5a1da99f235b39e059",
+      "trustLevel": "R2_VERIFIED_IDENTITY",
+      "reviewMode": "ITEM_REVIEW",
+      "chatEligible": false,
+      "publicDisplayEligible": false,
+      "skipped": []
+    },
+    {
+      "corpusId": "waqf-tenancy-law-5-1964-registry",
+      "status": "PRESERVED_PRIVATE",
+      "sourceUrl": "https://maqam.najah.edu/legislation/42/",
+      "artifactVersionId": "version-92186db186cfd2fba46edb1f16708d76",
+      "artifactSha256": "92186db186cfd2fba46edb1f16708d76d0fcd1be07bec88bc422bedcebfeecdd",
+      "byteSize": 28505,
+      "storageKey": "waqf-reference-waqf-tenancy-law-5-1964-registry/objects/artifact-b2a3c63e70205a9bb6157ab0bcf9c288/sha256-92186db186cfd2fba46edb1f16708d76d0fcd1be07bec88bc422bedcebfeecdd",
+      "trustLevel": "R2_VERIFIED_IDENTITY",
+      "reviewMode": "ITEM_REVIEW",
+      "chatEligible": false,
+      "publicDisplayEligible": false,
+      "skipped": []
+    },
+    {
+      "corpusId": "waqf-amendment-2023-gazette-198-pdf",
+      "status": "PRESERVED_PRIVATE",
+      "sourceUrl": "https://info.wafa.ps/userfiles/server/%D8%A7%D9%84%D9%88%D9%82%D8%A7%D8%A6%D8%B9%20%D8%A7%D9%84%D9%81%D9%84%D8%B3%D8%B7%D9%8A%D9%86%D9%8A%D8%A9%20%D8%A7%D9%84%D8%B9%D8%AF%D8%AF%20198.pdf",
+      "artifactVersionId": "version-a2c69b4a3a7e8793bfa68edb76b8f7ed",
+      "artifactSha256": "a2c69b4a3a7e8793bfa68edb76b8f7ede178895d613f8b04cb90f534c4b5283a",
+      "byteSize": 11863291,
+      "storageKey": "waqf-reference-waqf-amendment-2023-gazette-198-pdf/objects/artifact-7ef107c65849fa7a4d63e658bc3d0d7f/sha256-a2c69b4a3a7e8793bfa68edb76b8f7ede178895d613f8b04cb90f534c4b5283a",
+      "trustLevel": "R2_VERIFIED_IDENTITY",
+      "reviewMode": "ITEM_REVIEW",
+      "chatEligible": false,
+      "publicDisplayEligible": false,
+      "skipped": []
+    },
+    {
+      "corpusId": "land-settlement-process-pla",
+      "status": "PRESERVED_PRIVATE",
+      "sourceUrl": "https://www.pla.pna.ps/ar/Article/481/",
+      "artifactVersionId": "version-dc955ad03f94057fd069f31f99d9c240",
+      "artifactSha256": "dc955ad03f94057fd069f31f99d9c240675ae12f177c1494d07570431e30b0fa",
+      "byteSize": 71969,
+      "storageKey": "waqf-reference-land-settlement-process-pla/objects/artifact-d93b325bd5af05b5d130a37d2e7f1bd4/sha256-dc955ad03f94057fd069f31f99d9c240675ae12f177c1494d07570431e30b0fa",
+      "trustLevel": "R2_VERIFIED_IDENTITY",
+      "reviewMode": "BATCH_REVIEW",
+      "chatEligible": false,
+      "publicDisplayEligible": false,
+      "skipped": []
+    },
+    {
+      "corpusId": "pla-legal-framework-current",
+      "status": "PRESERVED_PRIVATE",
+      "sourceUrl": "https://www.pla.pna.ps/ar/Article/360/%D8%A7%D9%84%D8%A5%D8%B7%D8%A7%D8%B1-%D8%A7%D9%84%D9%82%D8%A7%D9%86%D9%88%D9%86%D9%8A-%D9%84%D8%B9%D9%85%D9%84-%D8%B3%D9%84%D8%B7%D8%A9-%D8%A7%D9%84%D8%A3%D8%B1%D8%A7%D8%B6%D9%8A",
+      "artifactVersionId": "version-c8bc36c53fff01e11f45b6dd939b458e",
+      "artifactSha256": "c8bc36c53fff01e11f45b6dd939b458e762b370b65a77d08cc69760888f56eac",
+      "byteSize": 56574,
+      "storageKey": "waqf-reference-pla-legal-framework-current/objects/artifact-6afa265339a40bb32316e128295d00b4/sha256-c8bc36c53fff01e11f45b6dd939b458e762b370b65a77d08cc69760888f56eac",
+      "trustLevel": "R2_VERIFIED_IDENTITY",
+      "reviewMode": "BATCH_REVIEW",
+      "chatEligible": false,
+      "publicDisplayEligible": false,
+      "skipped": []
+    },
+    {
+      "corpusId": "pla-new-registration-procedure",
+      "status": "PRESERVED_PRIVATE",
+      "sourceUrl": "https://www.pla.pna.ps/ar/Article/312/%D9%85%D8%B9%D8%A7%D9%85%D9%84%D8%A9-%D8%A7%D9%84%D8%AA%D8%B3%D8%AC%D9%8A%D9%84-%D8%A7%D9%84%D8%AC%D8%AF%D9%8A%D8%AF",
+      "artifactVersionId": "version-7e9b4973653c4d4f297198d399193a79",
+      "artifactSha256": "7e9b4973653c4d4f297198d399193a79711b94fb2053e24109576aee317dd629",
+      "byteSize": 64576,
+      "storageKey": "waqf-reference-pla-new-registration-procedure/objects/artifact-3d7aaaea6cdaac4fbf1acb3a903ff8f5/sha256-7e9b4973653c4d4f297198d399193a79711b94fb2053e24109576aee317dd629",
+      "trustLevel": "R2_VERIFIED_IDENTITY",
+      "reviewMode": "BATCH_REVIEW",
+      "chatEligible": false,
+      "publicDisplayEligible": false,
+      "skipped": []
+    },
+    {
+      "corpusId": "pla-lease-transaction-procedure",
+      "status": "PRESERVED_PRIVATE",
+      "sourceUrl": "https://www.pla.pna.ps/ar/Article/324/%D9%85%D8%B9%D8%A7%D9%85%D9%84%D8%A7%D8%AA-%D8%A7%D9%84%D8%A5%D8%AC%D8%A7%D8%B1%D8%A9-%D9%88%D8%AA%D8%AD%D9%88%D9%8A%D9%84%D9%87%D8%A7-%D9%88%D9%81%D9%83%D9%87%D8%A7",
+      "artifactVersionId": "version-ce453ba9ed7a572ecb82c56a0077c955",
+      "artifactSha256": "ce453ba9ed7a572ecb82c56a0077c955e54ddca2f64357edd6e9c29fab43e16e",
+      "byteSize": 60793,
+      "storageKey": "waqf-reference-pla-lease-transaction-procedure/objects/artifact-4ddf84f412faa3c63db4ef9ed0c7fb8d/sha256-ce453ba9ed7a572ecb82c56a0077c955e54ddca2f64357edd6e9c29fab43e16e",
+      "trustLevel": "R2_VERIFIED_IDENTITY",
+      "reviewMode": "BATCH_REVIEW",
+      "chatEligible": false,
+      "publicDisplayEligible": false,
+      "skipped": []
+    },
+    {
+      "corpusId": "mandate-land-transfers-regulations-1940-palquest",
+      "status": "PRESERVED_PRIVATE",
+      "sourceUrl": "https://www.palquest.org/en/node/23188",
+      "artifactVersionId": "version-433d727da8897cdddddd9e067e67903f",
+      "artifactSha256": "433d727da8897cdddddd9e067e67903f8dab2fa2541b5441dad5d7658a57149d",
+      "byteSize": 144061,
+      "storageKey": "waqf-reference-mandate-land-transfers-regulations-1940-palquest/objects/artifact-f3042ed81375c7b049a0b0cb1322d568/sha256-433d727da8897cdddddd9e067e67903f8dab2fa2541b5441dad5d7658a57149d",
+      "trustLevel": "R2_VERIFIED_IDENTITY",
+      "reviewMode": "ITEM_REVIEW",
+      "chatEligible": false,
+      "publicDisplayEligible": false,
+      "skipped": []
+    },
+    {
+      "corpusId": "pla-procedures-manual-2024",
+      "status": "PRESERVED_PRIVATE",
+      "sourceUrl": "https://www.pla.pna.ps/public/files/uploads/2024/procedures_manual.pdf",
+      "artifactVersionId": "version-d3a03c9cfd75c8ad70ed9f4e5bb63d1b",
+      "artifactSha256": "d3a03c9cfd75c8ad70ed9f4e5bb63d1b64a9b15c85adf18fe3b68220aae7676b",
+      "byteSize": 12704181,
+      "storageKey": "waqf-reference-pla-procedures-manual-2024/objects/artifact-67f4c9560f6872af076280c063588f05/sha256-d3a03c9cfd75c8ad70ed9f4e5bb63d1b64a9b15c85adf18fe3b68220aae7676b",
+      "trustLevel": "R2_VERIFIED_IDENTITY",
+      "reviewMode": "BATCH_REVIEW",
+      "chatEligible": false,
+      "publicDisplayEligible": false,
+      "skipped": []
+    },
+    {
+      "corpusId": "mandate-land-transfers-regulations-1940-unispal",
+      "status": "PRESERVED_PRIVATE",
+      "sourceUrl": "https://www.un.org/unispal/wp-content/uploads/2021/04/C-36-M-32-1940-VI_EN.pdf",
+      "artifactVersionId": "version-155ab39309530f2e263c931228e527ad",
+      "artifactSha256": "155ab39309530f2e263c931228e527ad0833793aace1448fa8d574a7d40f0747",
+      "byteSize": 941276,
+      "storageKey": "waqf-reference-mandate-land-transfers-regulations-1940-unispal/objects/artifact-9d8ab2b7445f3ea8349c2166e0fa0149/sha256-155ab39309530f2e263c931228e527ad0833793aace1448fa8d574a7d40f0747",
+      "trustLevel": "R2_VERIFIED_IDENTITY",
+      "reviewMode": "BATCH_REVIEW",
+      "chatEligible": false,
+      "publicDisplayEligible": false,
+      "skipped": []
+    },
+    {
+      "corpusId": "gaza-government-property-legal-guidance",
+      "status": "PRESERVED_PRIVATE",
+      "sourceUrl": "https://www.pla.gov.ps/ar/%D8%A7%D9%84%D8%A5%D8%AF%D8%A7%D8%B1%D8%A9-%D8%A7%D9%84%D8%B9%D8%A7%D9%85%D8%A9-%D9%84%D8%A3%D9%85%D9%84%D8%A7%D9%83-%D8%A7%D9%84%D8%AD%D9%83%D9%88%D9%85%D8%A9-291.html",
+      "artifactVersionId": "version-84f86b1a0e9370212454caf404aefd26",
+      "artifactSha256": "84f86b1a0e9370212454caf404aefd261afa197577128eff819d66b639b47a68",
+      "byteSize": 112731,
+      "storageKey": "waqf-reference-gaza-government-property-legal-guidance/objects/artifact-866df5240d01dfeb044c5b2780121a8a/sha256-84f86b1a0e9370212454caf404aefd261afa197577128eff819d66b639b47a68",
+      "trustLevel": "R2_VERIFIED_IDENTITY",
+      "reviewMode": "ITEM_REVIEW",
+      "chatEligible": false,
+      "publicDisplayEligible": false,
+      "skipped": []
+    },
+    {
+      "corpusId": "movable-rights-security-11-2016",
+      "status": "NO_RECORD",
+      "skipped": [
+        {
+          "url": "https://mjr.ogb.gov.ps/Decrees/ViewText/21943/",
+          "reason": "http_status_403"
+        }
+      ]
+    },
+    {
+      "corpusId": "land-authority-law-2010",
+      "status": "NO_RECORD",
+      "skipped": [
+        {
+          "url": "https://mjr.ogb.gov.ps/Decrees/Details/23283",
+          "reason": "http_status_403"
+        }
+      ]
+    },
+    {
+      "corpusId": "movable-rights-security-11-2016-gazette-120-wafa",
+      "status": "PRESERVED_PRIVATE",
+      "sourceUrl": "https://info.wafa.ps/userfiles/server/pdf/Palestanian_facts_number_120_%281%29.pdf",
+      "artifactVersionId": "version-af5b00e779946d7dcff2917ccbdd0dd4",
+      "artifactSha256": "af5b00e779946d7dcff2917ccbdd0dd46cecc50f80c4b16d622ee80b221f02a4",
+      "byteSize": 4654785,
+      "storageKey": "waqf-reference-movable-rights-security-11-2016-gazette-120-wafa/objects/artifact-eabd0417d9b6a599f114f0b1c1ba9261/sha256-af5b00e779946d7dcff2917ccbdd0dd46cecc50f80c4b16d622ee80b221f02a4",
+      "trustLevel": "R2_VERIFIED_IDENTITY",
+      "reviewMode": "ITEM_REVIEW",
+      "chatEligible": false,
+      "publicDisplayEligible": false,
+      "skipped": []
+    },
+    {
+      "corpusId": "land-authority-law-2010-gazette-86-wafa",
+      "status": "PRESERVED_PRIVATE",
+      "sourceUrl": "https://info.wafa.ps/userfiles/server/pdf/fact_86.pdf",
+      "artifactVersionId": "version-167e860e62fe97b0f5d9716a07e0d847",
+      "artifactSha256": "167e860e62fe97b0f5d9716a07e0d8471c6b04435ff2cede5446c29509015ad4",
+      "byteSize": 783426,
+      "storageKey": "waqf-reference-land-authority-law-2010-gazette-86-wafa/objects/artifact-bf0d6b3c27c143cb42e86c428856e66e/sha256-167e860e62fe97b0f5d9716a07e0d8471c6b04435ff2cede5446c29509015ad4",
+      "trustLevel": "R2_VERIFIED_IDENTITY",
+      "reviewMode": "ITEM_REVIEW",
+      "chatEligible": false,
+      "publicDisplayEligible": false,
+      "skipped": []
+    },
+    {
+      "corpusId": "settlement-authority-7-2016-wafa",
+      "status": "PRESERVED_PRIVATE",
+      "sourceUrl": "https://info.wafa.ps/Pages/Details/33324",
+      "artifactVersionId": "version-c260c701cf718f76479a6549e574a772",
+      "artifactSha256": "c260c701cf718f76479a6549e574a772b96f5344c296d2cf4b46d721803774ef",
+      "byteSize": 49545,
+      "storageKey": "waqf-reference-settlement-authority-7-2016-wafa/objects/artifact-c7536f2217af134c28eae2d378d1c1b3/sha256-c260c701cf718f76479a6549e574a772b96f5344c296d2cf4b46d721803774ef",
+      "trustLevel": "R2_VERIFIED_IDENTITY",
+      "reviewMode": "ITEM_REVIEW",
+      "chatEligible": false,
+      "publicDisplayEligible": false,
+      "skipped": []
+    },
+    {
+      "corpusId": "settlement-authority-7-2016-official",
+      "status": "PRESERVED_PRIVATE",
+      "sourceUrl": "https://mjr.ogb.gov.ps/Decrees/Details/21967",
+      "artifactVersionId": "version-baf1ad0ce36a5c7eb2b509a350c68637",
+      "artifactSha256": "baf1ad0ce36a5c7eb2b509a350c686379fbae263dd32214cf50123e3694d3b28",
+      "byteSize": 28000,
+      "storageKey": "waqf-reference-settlement-authority-7-2016-official/objects/artifact-51990e0b0c3cb9877eb1aacc2ed198c5/sha256-baf1ad0ce36a5c7eb2b509a350c686379fbae263dd32214cf50123e3694d3b28",
+      "trustLevel": "R2_VERIFIED_IDENTITY",
+      "reviewMode": "BATCH_REVIEW",
+      "chatEligible": false,
+      "publicDisplayEligible": false,
+      "skipped": []
+    },
+    {
+      "corpusId": "gaza-land-authority-legal-library",
+      "status": "PRESERVED_PRIVATE",
+      "sourceUrl": "https://www.pla.gov.ps/ar/القوانين-والأنظمة-والقرارات-والتعليمات-المعمول-بها-في-سلطة-الأراضي-1408.html",
+      "artifactVersionId": "version-eb4eb110f7e033ec476aaee696750c69",
+      "artifactSha256": "eb4eb110f7e033ec476aaee696750c69c2037cd7643da61f4a3c5b82bebdea29",
+      "byteSize": 113531,
+      "storageKey": "waqf-reference-gaza-land-authority-legal-library/objects/artifact-b9d00c3a456dd73e4411c4ff56740cba/sha256-eb4eb110f7e033ec476aaee696750c69c2037cd7643da61f4a3c5b82bebdea29",
+      "trustLevel": "R2_VERIFIED_IDENTITY",
+      "reviewMode": "ITEM_REVIEW",
+      "chatEligible": false,
+      "publicDisplayEligible": false,
+      "skipped": []
+    }
+  ],
+  "preservedCount": 17,
+  "offlineRehydratedCount": 17,
+  "offlineNetworkCalls": 0,
+  "allOfflineFixityVerified": true,
+  "extractedTextCacheHitCount": 5,
+  "coverageLedger": [
+    {
+      "familyId": "LAND_WEST_BANK_CURRENT",
+      "title": "West Bank current land-law family",
+      "priority": "P0",
+      "coverageState": "PARTIAL",
+      "reviewPolicy": "EXCEPTION_ONLY",
+      "corpusItemCount": 12,
+      "missingSeedCorpusIds": [],
+      "unresolvedStatusCorpusIds": [
+        "pla-legal-framework-current",
+        "pla-procedures-manual-2024",
+        "land-authority-law-2010",
+        "land-authority-law-2010-gazette-86-wafa",
+        "land-settlement-law-40-1952-registry",
+        "settlement-amendment-8-1955-registry",
+        "expropriation-law-2-1953-consolidated",
+        "settlement-authority-7-2016-official",
+        "settlement-authority-7-2016-wafa",
+        "land-registration-fees-2-1952-consolidated",
+        "land-registration-transfer-fees-2-2012",
+        "pla-new-registration-procedure"
+      ],
+      "rightsPendingCorpusIds": [
+        "pla-legal-framework-current",
+        "pla-procedures-manual-2024",
+        "land-authority-law-2010",
+        "land-authority-law-2010-gazette-86-wafa",
+        "land-settlement-law-40-1952-registry",
+        "settlement-amendment-8-1955-registry",
+        "expropriation-law-2-1953-consolidated",
+        "settlement-authority-7-2016-official",
+        "settlement-authority-7-2016-wafa",
+        "land-registration-fees-2-1952-consolidated",
+        "land-registration-transfer-fees-2-2012",
+        "pla-new-registration-procedure"
+      ],
+      "territories": [
+        "WEST_BANK"
+      ],
+      "complete": false
+    },
+    {
+      "familyId": "LAND_GAZA_CURRENT",
+      "title": "Gaza current land-law family",
+      "priority": "P0",
+      "coverageState": "UNRESOLVED",
+      "reviewPolicy": "EXPERT_REQUIRED",
+      "corpusItemCount": 5,
+      "missingSeedCorpusIds": [],
+      "unresolvedStatusCorpusIds": [
+        "gaza-land-authority-legal-library",
+        "gaza-government-property-legal-guidance",
+        "land-registration-transfer-fees-2-2012",
+        "movable-rights-security-11-2016",
+        "movable-rights-security-11-2016-gazette-120-wafa"
+      ],
+      "rightsPendingCorpusIds": [
+        "gaza-land-authority-legal-library",
+        "gaza-government-property-legal-guidance",
+        "land-registration-transfer-fees-2-2012",
+        "movable-rights-security-11-2016",
+        "movable-rights-security-11-2016-gazette-120-wafa"
+      ],
+      "territories": [
+        "GAZA"
+      ],
+      "complete": false
+    },
+    {
+      "familyId": "LAND_JERUSALEM_TRACK",
+      "title": "Jerusalem-specific land/waqf applicability track",
+      "priority": "P1",
+      "coverageState": "UNRESOLVED",
+      "reviewPolicy": "EXPERT_REQUIRED",
+      "corpusItemCount": 0,
+      "missingSeedCorpusIds": [],
+      "unresolvedStatusCorpusIds": [],
+      "rightsPendingCorpusIds": [],
+      "territories": [
+        "JERUSALEM"
+      ],
+      "complete": false
+    },
+    {
+      "familyId": "LAND_OTTOMAN",
+      "title": "Ottoman land-law family",
+      "priority": "P0",
+      "coverageState": "PARTIAL",
+      "reviewPolicy": "EXPERT_REQUIRED",
+      "corpusItemCount": 1,
+      "missingSeedCorpusIds": [],
+      "unresolvedStatusCorpusIds": [
+        "ottoman-land-code-1858-registry"
+      ],
+      "rightsPendingCorpusIds": [
+        "ottoman-land-code-1858-registry"
+      ],
+      "territories": [
+        "OTTOMAN_PALESTINE",
+        "HISTORIC_PALESTINE"
+      ],
+      "complete": false
+    },
+    {
+      "familyId": "LAND_MANDATE",
+      "title": "British Mandate land-law family",
+      "priority": "P0",
+      "coverageState": "PARTIAL",
+      "reviewPolicy": "EXPERT_REQUIRED",
+      "corpusItemCount": 2,
+      "missingSeedCorpusIds": [],
+      "unresolvedStatusCorpusIds": [
+        "mandate-land-transfers-regulations-1940-palquest",
+        "mandate-land-transfers-regulations-1940-unispal"
+      ],
+      "rightsPendingCorpusIds": [
+        "mandate-land-transfers-regulations-1940-palquest",
+        "mandate-land-transfers-regulations-1940-unispal"
+      ],
+      "territories": [
+        "HISTORIC_PALESTINE"
+      ],
+      "complete": false
+    },
+    {
+      "familyId": "WAQF_POSITIVE_LAW",
+      "title": "Waqf positive-law and administration family",
+      "priority": "P0",
+      "coverageState": "PARTIAL",
+      "reviewPolicy": "EXCEPTION_ONLY",
+      "corpusItemCount": 3,
+      "missingSeedCorpusIds": [],
+      "unresolvedStatusCorpusIds": [
+        "waqf-law-1966-consolidated",
+        "waqf-amendment-2023",
+        "waqf-amendment-2023-gazette-198-pdf"
+      ],
+      "rightsPendingCorpusIds": [
+        "waqf-law-1966-consolidated",
+        "waqf-amendment-2023",
+        "waqf-amendment-2023-gazette-198-pdf"
+      ],
+      "territories": [
+        "WEST_BANK",
+        "GAZA",
+        "JERUSALEM"
+      ],
+      "complete": false
+    },
+    {
+      "familyId": "WAQF_LEASE_HUKR",
+      "title": "Waqf tenancy, hukr and related lease family",
+      "priority": "P0",
+      "coverageState": "PARTIAL",
+      "reviewPolicy": "EXPERT_REQUIRED",
+      "corpusItemCount": 4,
+      "missingSeedCorpusIds": [],
+      "unresolvedStatusCorpusIds": [
+        "waqf-tenancy-law-5-1964-registry",
+        "landlords-tenants-62-1953-consolidated",
+        "landlords-tenants-amendment-35-2022",
+        "pla-lease-transaction-procedure"
+      ],
+      "rightsPendingCorpusIds": [
+        "waqf-tenancy-law-5-1964-registry",
+        "landlords-tenants-62-1953-consolidated",
+        "landlords-tenants-amendment-35-2022",
+        "pla-lease-transaction-procedure"
+      ],
+      "territories": [
+        "WEST_BANK",
+        "GAZA"
+      ],
+      "complete": false
+    },
+    {
+      "familyId": "REGISTRATION_SETTLEMENT",
+      "title": "Registration, settlement, surveying and title family",
+      "priority": "P0",
+      "coverageState": "PARTIAL",
+      "reviewPolicy": "EXCEPTION_ONLY",
+      "corpusItemCount": 8,
+      "missingSeedCorpusIds": [],
+      "unresolvedStatusCorpusIds": [
+        "land-settlement-process-pla",
+        "land-settlement-law-40-1952-registry",
+        "settlement-amendment-8-1955-registry",
+        "settlement-authority-7-2016-official",
+        "settlement-authority-7-2016-wafa",
+        "land-registration-fees-2-1952-consolidated",
+        "land-registration-transfer-fees-2-2012",
+        "pla-new-registration-procedure"
+      ],
+      "rightsPendingCorpusIds": [
+        "land-settlement-process-pla",
+        "land-settlement-law-40-1952-registry",
+        "settlement-amendment-8-1955-registry",
+        "settlement-authority-7-2016-official",
+        "settlement-authority-7-2016-wafa",
+        "land-registration-fees-2-1952-consolidated",
+        "land-registration-transfer-fees-2-2012",
+        "pla-new-registration-procedure"
+      ],
+      "territories": [
+        "WEST_BANK",
+        "GAZA"
+      ],
+      "complete": false
+    },
+    {
+      "familyId": "CASE_LAW",
+      "title": "Waqf/property case-law family",
+      "priority": "P0",
+      "coverageState": "PARTIAL",
+      "reviewPolicy": "EXPERT_REQUIRED",
+      "corpusItemCount": 1,
+      "missingSeedCorpusIds": [],
+      "unresolvedStatusCorpusIds": [
+        "palestinian-supreme-court-technical-office"
+      ],
+      "rightsPendingCorpusIds": [
+        "palestinian-supreme-court-technical-office"
+      ],
+      "territories": [
+        "WEST_BANK",
+        "GAZA",
+        "JERUSALEM"
+      ],
+      "complete": false
+    },
+    {
+      "familyId": "SHARIA_PRIMARY",
+      "title": "Primary sharia evidence family",
+      "priority": "P0",
+      "coverageState": "NOT_STARTED",
+      "reviewPolicy": "EXPERT_REQUIRED",
+      "corpusItemCount": 0,
+      "missingSeedCorpusIds": [],
+      "unresolvedStatusCorpusIds": [],
+      "rightsPendingCorpusIds": [],
+      "territories": [
+        "WEST_BANK",
+        "GAZA",
+        "JERUSALEM",
+        "HISTORIC_PALESTINE"
+      ],
+      "complete": false
+    },
+    {
+      "familyId": "FIQH_CLASSICAL",
+      "title": "Classical and modern fiqh family",
+      "priority": "P0",
+      "coverageState": "NOT_STARTED",
+      "reviewPolicy": "EXPERT_REQUIRED",
+      "corpusItemCount": 0,
+      "missingSeedCorpusIds": [],
+      "unresolvedStatusCorpusIds": [],
+      "rightsPendingCorpusIds": [],
+      "territories": [
+        "WEST_BANK",
+        "GAZA",
+        "JERUSALEM",
+        "HISTORIC_PALESTINE"
+      ],
+      "complete": false
+    },
+    {
+      "familyId": "HISTORICAL_WAQF",
+      "title": "Historical waqf deeds, registers, tapu and maps",
+      "priority": "P1",
+      "coverageState": "NOT_STARTED",
+      "reviewPolicy": "EXPERT_REQUIRED",
+      "corpusItemCount": 0,
+      "missingSeedCorpusIds": [],
+      "unresolvedStatusCorpusIds": [],
+      "rightsPendingCorpusIds": [],
+      "territories": [
+        "OTTOMAN_PALESTINE",
+        "HISTORIC_PALESTINE",
+        "WEST_BANK",
+        "GAZA",
+        "JERUSALEM"
+      ],
+      "complete": false
+    },
+    {
+      "familyId": "FINANCE_PROPERTY",
+      "title": "Movable/immovable finance, tax and investment family",
+      "priority": "P1",
+      "coverageState": "PARTIAL",
+      "reviewPolicy": "EXPERT_REQUIRED",
+      "corpusItemCount": 2,
+      "missingSeedCorpusIds": [],
+      "unresolvedStatusCorpusIds": [
+        "movable-rights-security-11-2016",
+        "movable-rights-security-11-2016-gazette-120-wafa"
+      ],
+      "rightsPendingCorpusIds": [
+        "movable-rights-security-11-2016",
+        "movable-rights-security-11-2016-gazette-120-wafa"
+      ],
+      "territories": [
+        "WEST_BANK",
+        "GAZA"
+      ],
+      "complete": false
+    }
+  ],
+  "legalStatusMatrixSummary": {
+    "rowCount": 17,
+    "conclusionEligibleRows": 5,
+    "reviewRequiredRows": 12,
+    "territoryCounts": {
+      "WEST_BANK": 10,
+      "GAZA": 4,
+      "OTTOMAN_PALESTINE": 1,
+      "HISTORIC_PALESTINE": 1,
+      "JERUSALEM": 1
+    },
+    "unresolvedByTerritory": {
+      "GAZA": 4,
+      "WEST_BANK": 6,
+      "OTTOMAN_PALESTINE": 1,
+      "JERUSALEM": 1
+    }
+  },
+  "expertReviewQueueSummary": {
+    "itemCount": 25,
+    "familyReviewCount": 13,
+    "legalStatusExceptionCount": 12,
+    "perDocumentRoutineRightsReviewCount": 0,
+    "pendingBlockingCount": 22
+  },
+  "scenarioResults": [
+    {
+      "scenarioId": "WAQF_DEED_2023",
+      "question": "ما أثر تعديل قانون الأوقاف سنة 2023 على تسجيل الحجج الوقفية للأموال غير المنقولة؟",
+      "route": {
+        "issueClass": "mixed",
+        "preferredDomains": [
+          "waqf_law",
+          "registration_settlement",
+          "land_law",
+          "finance_investment"
+        ],
+        "priorityDomains": [
+          "waqf_law",
+          "registration_settlement",
+          "finance_investment"
+        ],
+        "territories": [
+          "UNKNOWN"
+        ],
+        "preferredEras": [],
+        "requiresLegalStatusVerification": true,
+        "requiresHumanExpertReview": true,
+        "reasons": [
+          "positive_law_terms",
+          "property_title_terms",
+          "movable_property_terms"
+        ]
+      },
+      "topHits": [
+        {
+          "documentId": "waqf-amendment-2023-gazette-198-pdf",
+          "title": "الوقائع الفلسطينية العدد 198 — قرار بقانون رقم (2) لسنة 2023م بتعديل قانون الأوقاف",
+          "authorityClass": "official_derivative",
+          "legalStatusVerified": false,
+          "usableForConclusion": false,
+          "reasons": [
+            "legal_status_not_verified"
+          ]
+        },
+        {
+          "documentId": "pla-new-registration-procedure",
+          "title": "معاملة التسجيل الجديد للأموال غير المنقولة",
+          "authorityClass": "official_primary",
+          "legalStatusVerified": false,
+          "usableForConclusion": false,
+          "reasons": [
+            "legal_status_not_verified"
+          ]
+        },
+        {
+          "documentId": "movable-rights-security-11-2016-gazette-120-wafa",
+          "title": "الوقائع الفلسطينية العدد 120 — قرار بقانون رقم (11) لسنة 2016م بشأن ضمان الحقوق في المال المنقول",
+          "authorityClass": "official_derivative",
+          "legalStatusVerified": false,
+          "usableForConclusion": false,
+          "reasons": [
+            "legal_status_not_verified"
+          ]
+        },
+        {
+          "documentId": "pla-legal-framework-current",
+          "title": "الإطار القانوني لعمل سلطة الأراضي",
+          "authorityClass": "official_primary",
+          "legalStatusVerified": false,
+          "usableForConclusion": false,
+          "reasons": [
+            "legal_status_not_verified"
+          ]
+        }
+      ],
+      "citationAudit": {
+        "valid": true,
+        "defects": []
+      },
+      "citationCount": 4,
+      "conclusionEligible": false,
+      "disposition": "OFFLINE_RETRIEVAL_CITATION_PASS_STATUS_GATE_CLOSED"
+    },
+    {
+      "scenarioId": "WB_SETTLEMENT",
+      "question": "ما المرجع لإجراءات تسوية الأراضي والتسجيل الجديد في الضفة الغربية؟",
+      "route": {
+        "issueClass": "mixed",
+        "preferredDomains": [
+          "administrative",
+          "registration_settlement",
+          "land_law"
+        ],
+        "priorityDomains": [
+          "registration_settlement"
+        ],
+        "territories": [
+          "WEST_BANK"
+        ],
+        "preferredEras": [],
+        "requiresLegalStatusVerification": true,
+        "requiresHumanExpertReview": true,
+        "reasons": [
+          "administrative_terms",
+          "property_title_terms"
+        ]
+      },
+      "topHits": [
+        {
+          "documentId": "land-settlement-process-pla",
+          "title": "الإدارة العامة لتسوية الأراضي والمياه",
+          "authorityClass": "official_primary",
+          "legalStatusVerified": false,
+          "usableForConclusion": false,
+          "reasons": [
+            "legal_status_not_verified"
+          ]
+        },
+        {
+          "documentId": "pla-procedures-manual-2024",
+          "title": "الإطار القانوني لعمل سلطة الأراضي — نسخة PDF",
+          "authorityClass": "official_primary",
+          "legalStatusVerified": false,
+          "usableForConclusion": false,
+          "reasons": [
+            "legal_status_not_verified"
+          ]
+        },
+        {
+          "documentId": "pla-legal-framework-current",
+          "title": "الإطار القانوني لعمل سلطة الأراضي",
+          "authorityClass": "official_primary",
+          "legalStatusVerified": false,
+          "usableForConclusion": false,
+          "reasons": [
+            "legal_status_not_verified"
+          ]
+        },
+        {
+          "documentId": "settlement-authority-7-2016-official",
+          "title": "قرار بقانون رقم (7) لسنة 2016م بشأن هيئة تسوية الأراضي والمياه",
+          "authorityClass": "official_primary",
+          "legalStatusVerified": false,
+          "usableForConclusion": false,
+          "reasons": [
+            "legal_status_not_verified"
+          ]
+        }
+      ],
+      "citationAudit": {
+        "valid": true,
+        "defects": []
+      },
+      "citationCount": 4,
+      "conclusionEligible": false,
+      "disposition": "OFFLINE_RETRIEVAL_CITATION_PASS_STATUS_GATE_CLOSED"
+    },
+    {
+      "scenarioId": "WB_WAQF_TENANCY",
+      "question": "ما المرجع القانوني للعقارات الوقفية المؤجرة في الضفة، وما علاقته بقانون المالكين والمستأجرين؟",
+      "route": {
+        "issueClass": "mixed",
+        "preferredDomains": [
+          "waqf_law",
+          "lease_hukr",
+          "land_law"
+        ],
+        "priorityDomains": [
+          "lease_hukr"
+        ],
+        "territories": [
+          "WEST_BANK"
+        ],
+        "preferredEras": [],
+        "requiresLegalStatusVerification": true,
+        "requiresHumanExpertReview": true,
+        "reasons": [
+          "positive_law_terms",
+          "property_title_terms"
+        ]
+      },
+      "topHits": [
+        {
+          "documentId": "waqf-tenancy-law-5-1964-registry",
+          "title": "قانون المالكين والمستأجرين للعقارات الوقفية رقم (5) لسنة 1964م",
+          "authorityClass": "reference_secondary",
+          "legalStatusVerified": false,
+          "usableForConclusion": false,
+          "reasons": [
+            "legal_status_not_verified",
+            "secondary_authority"
+          ]
+        },
+        {
+          "documentId": "waqf-amendment-2023-gazette-198-pdf",
+          "title": "الوقائع الفلسطينية العدد 198 — قرار بقانون رقم (2) لسنة 2023م بتعديل قانون الأوقاف",
+          "authorityClass": "official_derivative",
+          "legalStatusVerified": false,
+          "usableForConclusion": false,
+          "reasons": [
+            "legal_status_not_verified"
+          ]
+        },
+        {
+          "documentId": "land-authority-law-2010-gazette-86-wafa",
+          "title": "الوقائع الفلسطينية العدد 86 — قرار بقانون رقم (6) لسنة 2010م بشأن سلطة الأراضي",
+          "authorityClass": "official_derivative",
+          "legalStatusVerified": false,
+          "usableForConclusion": false,
+          "reasons": [
+            "legal_status_not_verified"
+          ]
+        },
+        {
+          "documentId": "pla-lease-transaction-procedure",
+          "title": "معاملات الإجارة وتحويلها وفكها",
+          "authorityClass": "official_primary",
+          "legalStatusVerified": false,
+          "usableForConclusion": false,
+          "reasons": [
+            "legal_status_not_verified"
+          ]
+        }
+      ],
+      "citationAudit": {
+        "valid": true,
+        "defects": []
+      },
+      "citationCount": 3,
+      "conclusionEligible": false,
+      "disposition": "OFFLINE_RETRIEVAL_CITATION_PASS_STATUS_GATE_CLOSED"
+    },
+    {
+      "scenarioId": "GAZA_LAND",
+      "question": "ما المسار القانوني للأراضي والتسجيل في قطاع غزة؟",
+      "route": {
+        "issueClass": "mixed",
+        "preferredDomains": [
+          "land_law",
+          "registration_settlement"
+        ],
+        "priorityDomains": [
+          "registration_settlement"
+        ],
+        "territories": [
+          "GAZA"
+        ],
+        "preferredEras": [],
+        "requiresLegalStatusVerification": true,
+        "requiresHumanExpertReview": true,
+        "reasons": [
+          "positive_law_terms",
+          "property_title_terms"
+        ]
+      },
+      "topHits": [
+        {
+          "documentId": "gaza-government-property-legal-guidance",
+          "title": "الإدارة العامة لأملاك الحكومة — الإطار التشريعي في قطاع غزة",
+          "authorityClass": "official_derivative",
+          "legalStatusVerified": false,
+          "usableForConclusion": false,
+          "reasons": [
+            "legal_status_not_verified"
+          ]
+        },
+        {
+          "documentId": "gaza-land-authority-legal-library",
+          "title": "القوانين والأنظمة والقرارات والتعليمات المعمول بها في سلطة الأراضي",
+          "authorityClass": "official_derivative",
+          "legalStatusVerified": false,
+          "usableForConclusion": false,
+          "reasons": [
+            "legal_status_not_verified"
+          ]
+        },
+        {
+          "documentId": "ottoman-land-code-1858-registry",
+          "title": "قانون الأراضي العثماني",
+          "authorityClass": "reference_secondary",
+          "legalStatusVerified": false,
+          "usableForConclusion": false,
+          "reasons": [
+            "legal_status_not_verified",
+            "secondary_authority"
+          ]
+        }
+      ],
+      "citationAudit": {
+        "valid": true,
+        "defects": []
+      },
+      "citationCount": 3,
+      "conclusionEligible": false,
+      "disposition": "OFFLINE_RETRIEVAL_CITATION_PASS_STATUS_GATE_CLOSED"
+    },
+    {
+      "scenarioId": "OTTOMAN",
+      "question": "ما تصنيف الأراضي في قانون الأراضي العثماني؟",
+      "route": {
+        "issueClass": "mixed",
+        "preferredDomains": [
+          "land_law",
+          "historical"
+        ],
+        "priorityDomains": [
+          "land_law"
+        ],
+        "territories": [
+          "UNKNOWN"
+        ],
+        "preferredEras": [
+          "OTTOMAN"
+        ],
+        "requiresLegalStatusVerification": true,
+        "requiresHumanExpertReview": true,
+        "reasons": [
+          "positive_law_terms",
+          "historical_terms",
+          "property_title_terms"
+        ]
+      },
+      "topHits": [
+        {
+          "documentId": "ottoman-land-code-1858-registry",
+          "title": "قانون الأراضي العثماني",
+          "authorityClass": "reference_secondary",
+          "legalStatusVerified": false,
+          "usableForConclusion": false,
+          "reasons": [
+            "legal_status_not_verified",
+            "secondary_authority"
+          ]
+        }
+      ],
+      "citationAudit": {
+        "valid": true,
+        "defects": []
+      },
+      "citationCount": 1,
+      "conclusionEligible": false,
+      "disposition": "OFFLINE_RETRIEVAL_CITATION_PASS_STATUS_GATE_CLOSED"
+    },
+    {
+      "scenarioId": "MANDATE_1940",
+      "question": "ما القيود التاريخية على انتقال الأراضي في فلسطين في عهد الانتداب سنة 1940؟",
+      "route": {
+        "issueClass": "mixed",
+        "preferredDomains": [
+          "historical",
+          "land_law"
+        ],
+        "priorityDomains": [
+          "land_law"
+        ],
+        "territories": [
+          "UNKNOWN"
+        ],
+        "preferredEras": [
+          "BRITISH_MANDATE"
+        ],
+        "requiresLegalStatusVerification": true,
+        "requiresHumanExpertReview": true,
+        "reasons": [
+          "historical_terms",
+          "property_title_terms"
+        ]
+      },
+      "topHits": [
+        {
+          "documentId": "mandate-land-transfers-regulations-1940-unispal",
+          "title": "League of Nations archive copy — Palestine Land Transfers Regulations 1940",
+          "authorityClass": "archival_primary",
+          "legalStatusVerified": false,
+          "usableForConclusion": false,
+          "reasons": [
+            "legal_status_not_verified"
+          ]
+        },
+        {
+          "documentId": "mandate-land-transfers-regulations-1940-palquest",
+          "title": "Land Transfers Regulations, 1940",
+          "authorityClass": "reference_secondary",
+          "legalStatusVerified": false,
+          "usableForConclusion": false,
+          "reasons": [
+            "legal_status_not_verified",
+            "secondary_authority"
+          ]
+        }
+      ],
+      "citationAudit": {
+        "valid": true,
+        "defects": []
+      },
+      "citationCount": 1,
+      "conclusionEligible": false,
+      "disposition": "OFFLINE_RETRIEVAL_CITATION_PASS_STATUS_GATE_CLOSED"
+    },
+    {
+      "scenarioId": "MOVABLE_IMMOVABLE",
+      "question": "ما الفرق بين تنظيم الأموال المنقولة وغير المنقولة عند بحث حقوق الوقف؟",
+      "route": {
+        "issueClass": "property_title",
+        "preferredDomains": [
+          "land_law",
+          "finance_investment"
+        ],
+        "priorityDomains": [
+          "finance_investment"
+        ],
+        "territories": [
+          "UNKNOWN"
+        ],
+        "preferredEras": [],
+        "requiresLegalStatusVerification": true,
+        "requiresHumanExpertReview": true,
+        "reasons": [
+          "property_title_terms",
+          "movable_property_terms"
+        ]
+      },
+      "topHits": [
+        {
+          "documentId": "movable-rights-security-11-2016-gazette-120-wafa",
+          "title": "الوقائع الفلسطينية العدد 120 — قرار بقانون رقم (11) لسنة 2016م بشأن ضمان الحقوق في المال المنقول",
+          "authorityClass": "official_derivative",
+          "legalStatusVerified": false,
+          "usableForConclusion": false,
+          "reasons": [
+            "legal_status_not_verified"
+          ]
+        },
+        {
+          "documentId": "pla-legal-framework-current",
+          "title": "الإطار القانوني لعمل سلطة الأراضي",
+          "authorityClass": "official_primary",
+          "legalStatusVerified": false,
+          "usableForConclusion": false,
+          "reasons": [
+            "legal_status_not_verified"
+          ]
+        },
+        {
+          "documentId": "gaza-government-property-legal-guidance",
+          "title": "الإدارة العامة لأملاك الحكومة — الإطار التشريعي في قطاع غزة",
+          "authorityClass": "official_derivative",
+          "legalStatusVerified": false,
+          "usableForConclusion": false,
+          "reasons": [
+            "legal_status_not_verified"
+          ]
+        },
+        {
+          "documentId": "ottoman-land-code-1858-registry",
+          "title": "قانون الأراضي العثماني",
+          "authorityClass": "reference_secondary",
+          "legalStatusVerified": false,
+          "usableForConclusion": false,
+          "reasons": [
+            "legal_status_not_verified",
+            "secondary_authority"
+          ]
+        }
+      ],
+      "citationAudit": {
+        "valid": true,
+        "defects": []
+      },
+      "citationCount": 4,
+      "conclusionEligible": false,
+      "disposition": "OFFLINE_RETRIEVAL_CITATION_PASS_STATUS_GATE_CLOSED"
+    },
+    {
+      "scenarioId": "JERUSALEM",
+      "question": "ما القانون النافذ على أرض وقف في القدس اليوم؟",
+      "route": {
+        "issueClass": "mixed",
+        "preferredDomains": [
+          "waqf_law",
+          "land_law"
+        ],
+        "priorityDomains": [
+          "land_law",
+          "waqf_law"
+        ],
+        "territories": [
+          "JERUSALEM"
+        ],
+        "preferredEras": [],
+        "requiresLegalStatusVerification": true,
+        "requiresHumanExpertReview": true,
+        "reasons": [
+          "positive_law_terms",
+          "property_title_terms"
+        ]
+      },
+      "topHits": [],
+      "citationAudit": {
+        "valid": true,
+        "defects": []
+      },
+      "citationCount": 0,
+      "conclusionEligible": false,
+      "disposition": "FAIL_CLOSED_NO_DOMAIN_EVIDENCE"
+    }
+  ],
+  "continuityResults": [
+    {
+      "question": "ما أثر تعديل قانون الأوقاف سنة 2023 على تسجيل الحجج الوقفية للأموال غير المنقولة؟",
+      "networkCalls": 0,
+      "allFixityVerified": true,
+      "rehydratedCount": 17,
+      "topDocumentIds": [
+        "waqf-amendment-2023-gazette-198-pdf",
+        "pla-new-registration-procedure",
+        "movable-rights-security-11-2016-gazette-120-wafa",
+        "pla-legal-framework-current"
+      ],
+      "conclusionEligible": false,
+      "disposition": "OFFLINE_REPLAY_PASS_STATUS_GATE_CLOSED"
+    },
+    {
+      "question": "ما المرجع لإجراءات تسوية الأراضي والتسجيل الجديد في الضفة الغربية؟",
+      "networkCalls": 0,
+      "allFixityVerified": true,
+      "rehydratedCount": 17,
+      "topDocumentIds": [
+        "land-settlement-process-pla",
+        "pla-procedures-manual-2024",
+        "pla-legal-framework-current",
+        "settlement-authority-7-2016-official"
+      ],
+      "conclusionEligible": false,
+      "disposition": "OFFLINE_REPLAY_PASS_STATUS_GATE_CLOSED"
+    },
+    {
+      "question": "ما المرجع القانوني للعقارات الوقفية المؤجرة في الضفة، وما علاقته بقانون المالكين والمستأجرين؟",
+      "networkCalls": 0,
+      "allFixityVerified": true,
+      "rehydratedCount": 17,
+      "topDocumentIds": [
+        "waqf-tenancy-law-5-1964-registry",
+        "waqf-amendment-2023-gazette-198-pdf",
+        "land-authority-law-2010-gazette-86-wafa",
+        "pla-lease-transaction-procedure"
+      ],
+      "conclusionEligible": false,
+      "disposition": "OFFLINE_REPLAY_PASS_STATUS_GATE_CLOSED"
+    },
+    {
+      "question": "ما المسار القانوني للأراضي والتسجيل في قطاع غزة؟",
+      "networkCalls": 0,
+      "allFixityVerified": true,
+      "rehydratedCount": 17,
+      "topDocumentIds": [
+        "gaza-government-property-legal-guidance",
+        "gaza-land-authority-legal-library",
+        "ottoman-land-code-1858-registry"
+      ],
+      "conclusionEligible": false,
+      "disposition": "OFFLINE_REPLAY_PASS_STATUS_GATE_CLOSED"
+    },
+    {
+      "question": "ما تصنيف الأراضي في قانون الأراضي العثماني؟",
+      "networkCalls": 0,
+      "allFixityVerified": true,
+      "rehydratedCount": 17,
+      "topDocumentIds": [
+        "ottoman-land-code-1858-registry"
+      ],
+      "conclusionEligible": false,
+      "disposition": "OFFLINE_REPLAY_PASS_STATUS_GATE_CLOSED"
+    },
+    {
+      "question": "ما القيود التاريخية على انتقال الأراضي في فلسطين في عهد الانتداب سنة 1940؟",
+      "networkCalls": 0,
+      "allFixityVerified": true,
+      "rehydratedCount": 17,
+      "topDocumentIds": [
+        "mandate-land-transfers-regulations-1940-unispal",
+        "mandate-land-transfers-regulations-1940-palquest"
+      ],
+      "conclusionEligible": false,
+      "disposition": "OFFLINE_REPLAY_PASS_STATUS_GATE_CLOSED"
+    },
+    {
+      "question": "ما الفرق بين تنظيم الأموال المنقولة وغير المنقولة عند بحث حقوق الوقف؟",
+      "networkCalls": 0,
+      "allFixityVerified": true,
+      "rehydratedCount": 17,
+      "topDocumentIds": [
+        "movable-rights-security-11-2016-gazette-120-wafa",
+        "pla-legal-framework-current",
+        "gaza-government-property-legal-guidance",
+        "ottoman-land-code-1858-registry"
+      ],
+      "conclusionEligible": false,
+      "disposition": "OFFLINE_REPLAY_PASS_STATUS_GATE_CLOSED"
+    },
+    {
+      "question": "ما القانون النافذ على أرض وقف في القدس اليوم؟",
+      "networkCalls": 0,
+      "allFixityVerified": true,
+      "rehydratedCount": 17,
+      "topDocumentIds": [],
+      "conclusionEligible": false,
+      "disposition": "OFFLINE_REPLAY_FAIL_CLOSED_NO_DOMAIN_EVIDENCE"
+    }
+  ],
+  "corpusBytesIncludedInEvidenceFile": false
+}

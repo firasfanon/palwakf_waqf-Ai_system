@@ -62,6 +62,7 @@ export type ReferenceCorpusItem = {
     respectRobotsTxt: boolean;
     maxDepth: number;
     maxDocuments: number;
+    timeoutMs?: number;
   };
   notes: string[];
 };

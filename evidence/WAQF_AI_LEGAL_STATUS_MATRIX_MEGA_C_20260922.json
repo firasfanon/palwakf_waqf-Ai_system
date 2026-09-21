@@ -1,0 +1,1410 @@
+{
+  "program": "WAQF_AI_COMPREHENSIVE_WAQF_REFERENCE_V1",
+  "phase": "MEGA_C_LEGAL_STATUS_AND_EXPERT_REVIEW",
+  "hardBoundaries": {
+    "liveSharedSupabaseMutation": false,
+    "mainMerge": false,
+    "newBaseline": false,
+    "production": false,
+    "publicCorpusRelease": false
+  },
+  "matrix": {
+    "generatedForDate": "2026-09-22",
+    "rowCount": 17,
+    "conclusionEligibleRows": 5,
+    "reviewRequiredRows": 12,
+    "territoryCounts": {
+      "WEST_BANK": 10,
+      "GAZA": 4,
+      "OTTOMAN_PALESTINE": 1,
+      "HISTORIC_PALESTINE": 1,
+      "JERUSALEM": 1
+    },
+    "unresolvedByTerritory": {
+      "GAZA": 4,
+      "WEST_BANK": 6,
+      "OTTOMAN_PALESTINE": 1,
+      "JERUSALEM": 1
+    },
+    "rows": [
+      {
+        "rowId": "waqf-2023-west-bank",
+        "instrumentId": "PS-DECREE-LAW-2-2023-WAQF",
+        "instrumentTitle": "قرار بقانون رقم (2) لسنة 2023م بتعديل قانون الأوقاف والشؤون والمقدسات الإسلامية رقم (26) لسنة 1966م وتعديلاته",
+        "territory": "WEST_BANK",
+        "asOfDate": "2026-09-21",
+        "assertedStatus": "IN_FORCE",
+        "evidence": [
+          {
+            "evidenceId": "ogb-33311-status",
+            "kind": "EXPLICIT_OFFICIAL_REGISTRY_STATUS",
+            "url": "https://mjr.ogb.gov.ps/Decrees/Details/33311",
+            "publisher": "ديوان الجريدة الرسمية",
+            "proposition": "Official registry marks the decree-law as in force and records an effective date of 2023-02-23.",
+            "territory": null,
+            "observedAt": "2026-09-21"
+          },
+          {
+            "evidenceId": "ogb-2023-hebron-instruction",
+            "kind": "CURRENT_OFFICIAL_APPLICATION",
+            "url": "https://mjr.ogb.gov.ps/Decrees/ViewText/33468/",
+            "publisher": "ديوان الجريدة الرسمية",
+            "proposition": "A later official instruction concerning the Ibrahimi Mosque relies on the 2023 waqf amendment.",
+            "territory": "WEST_BANK",
+            "observedAt": "2026-09-21"
+          }
+        ],
+        "notes": [
+          "Pilot verifies explicit registry status and a West Bank application signal; broader constitutional/territorial questions remain reviewable outside this row."
+        ],
+        "explicitStatusVerified": true,
+        "currentOfficialApplicationVerified": true,
+        "territoryScopeVerified": true,
+        "legalStatusVerified": true,
+        "conclusionEligible": true,
+        "reviewRequired": false,
+        "reasons": []
+      },
+      {
+        "rowId": "waqf-2023-gaza",
+        "instrumentId": "PS-DECREE-LAW-2-2023-WAQF",
+        "instrumentTitle": "قرار بقانون رقم (2) لسنة 2023م بتعديل قانون الأوقاف والشؤون والمقدسات الإسلامية رقم (26) لسنة 1966م وتعديلاته",
+        "territory": "GAZA",
+        "asOfDate": "2026-09-21",
+        "assertedStatus": "UNRESOLVED",
+        "evidence": [
+          {
+            "evidenceId": "ogb-33311-status-global",
+            "kind": "EXPLICIT_OFFICIAL_REGISTRY_STATUS",
+            "url": "https://mjr.ogb.gov.ps/Decrees/Details/33311",
+            "publisher": "ديوان الجريدة الرسمية",
+            "proposition": "The registry status of the instrument is official, but this evidence does not by itself resolve current Gaza applicability.",
+            "territory": null,
+            "observedAt": "2026-09-21"
+          }
+        ],
+        "notes": [
+          "No Gaza-specific current applicability conclusion is inferred from West Bank/central-government evidence."
+        ],
+        "explicitStatusVerified": true,
+        "currentOfficialApplicationVerified": false,
+        "territoryScopeVerified": false,
+        "legalStatusVerified": false,
+        "conclusionEligible": false,
+        "reviewRequired": true,
+        "reasons": [
+          "legal_status_requires_further_verification",
+          "territory_scope_requires_verification",
+          "status_explicitly_unresolved"
+        ]
+      },
+      {
+        "rowId": "waqf-law-1966-west-bank",
+        "instrumentId": "PS-WAQF-LAW-26-1966-CONSOLIDATED",
+        "instrumentTitle": "قانون الأوقاف والشؤون الدينية رقم (26) لسنة 1966م وتعديلاته",
+        "territory": "WEST_BANK",
+        "asOfDate": "2026-09-21",
+        "assertedStatus": "AMENDED",
+        "evidence": [
+          {
+            "evidenceId": "ogb-merged-165",
+            "kind": "OFFICIAL_CONSOLIDATED_TEXT",
+            "url": "https://mjr.ogb.gov.ps/MergedLegislations/ViewText/165",
+            "publisher": "ديوان الجريدة الرسمية",
+            "proposition": "Official consolidated text lists the original law and its amendments through the 2023 decree-law.",
+            "territory": null,
+            "observedAt": "2026-09-21"
+          },
+          {
+            "evidenceId": "ogb-2023-hebron-law-application",
+            "kind": "CURRENT_OFFICIAL_APPLICATION",
+            "url": "https://mjr.ogb.gov.ps/Decrees/ViewText/33468/",
+            "publisher": "ديوان الجريدة الرسمية",
+            "proposition": "Official West Bank instruction relies on the amended waqf legislation.",
+            "territory": "WEST_BANK",
+            "observedAt": "2026-09-21"
+          }
+        ],
+        "notes": [
+          "The row identifies the law as amended, not as an untouched 1966 text."
+        ],
+        "explicitStatusVerified": false,
+        "currentOfficialApplicationVerified": true,
+        "territoryScopeVerified": true,
+        "legalStatusVerified": true,
+        "conclusionEligible": true,
+        "reviewRequired": false,
+        "reasons": []
+      },
+      {
+        "rowId": "settlement-40-1952-west-bank",
+        "instrumentId": "JO-LAND-WATER-SETTLEMENT-40-1952",
+        "instrumentTitle": "قانون تسوية الأراضي والمياه رقم (40) لسنة 1952م",
+        "territory": "WEST_BANK",
+        "asOfDate": "2026-09-21",
+        "assertedStatus": "UNRESOLVED",
+        "evidence": [
+          {
+            "evidenceId": "pla-current-settlement-page",
+            "kind": "CURRENT_OFFICIAL_APPLICATION",
+            "url": "https://www.pla.pna.ps/ar/Article/481/",
+            "publisher": "سلطة الأراضي الفلسطينية",
+            "proposition": "Current Land Authority settlement guidance expressly operates by reference to Law No. 40 of 1952.",
+            "territory": "WEST_BANK",
+            "observedAt": "2026-09-21"
+          },
+          {
+            "evidenceId": "pla-2025-settlement-notice",
+            "kind": "CURRENT_OFFICIAL_APPLICATION",
+            "url": "https://www.pla.pna.ps/public/files/server/works/317-1751794921.pdf",
+            "publisher": "هيئة تسوية الأراضي والمياه",
+            "proposition": "A 2025 official settlement notice invokes Article 6 of Law No. 40 of 1952.",
+            "territory": "WEST_BANK",
+            "observedAt": "2026-09-21"
+          }
+        ],
+        "notes": [
+          "Current official application is verified, but a full amendment/repeal consolidation is still required before asserting a complete legal-status conclusion."
+        ],
+        "explicitStatusVerified": false,
+        "currentOfficialApplicationVerified": true,
+        "territoryScopeVerified": true,
+        "legalStatusVerified": false,
+        "conclusionEligible": false,
+        "reviewRequired": true,
+        "reasons": [
+          "legal_status_requires_further_verification",
+          "current_application_does_not_replace_status_verification",
+          "status_explicitly_unresolved"
+        ]
+      },
+      {
+        "rowId": "land-regime-gaza",
+        "instrumentId": "GAZA-LAND-REGIME-CURRENT-MATRIX-SEED",
+        "instrumentTitle": "مسار تشريعات الأراضي المعمول بها في قطاع غزة",
+        "territory": "GAZA",
+        "asOfDate": "2026-09-21",
+        "assertedStatus": "UNRESOLVED",
+        "evidence": [
+          {
+            "evidenceId": "gaza-pla-government-property",
+            "kind": "OFFICIAL_TERRITORY_SPECIFIC_GUIDANCE",
+            "url": "https://www.pla.gov.ps/ar/%D8%A7%D9%84%D8%A5%D8%AF%D8%A7%D8%B1%D8%A9-%D8%A7%D9%84%D8%B9%D8%A7%D9%85%D8%A9-%D9%84%D8%A3%D9%85%D9%84%D8%A7%D9%83-%D8%A7%D9%84%D8%AD%D9%83%D9%88%D9%85%D8%A9-291.html",
+            "publisher": "سلطة الأراضي الفلسطينية - غزة",
+            "proposition": "Gaza-specific official guidance describes Egyptian-administration legislation and land-law layers relevant to government and waqf property.",
+            "territory": "GAZA",
+            "observedAt": "2026-09-21"
+          }
+        ],
+        "notes": [
+          "This row proves a separate Gaza legal track exists; it intentionally does not collapse that track into a single current statute."
+        ],
+        "explicitStatusVerified": false,
+        "currentOfficialApplicationVerified": false,
+        "territoryScopeVerified": true,
+        "legalStatusVerified": false,
+        "conclusionEligible": false,
+        "reviewRequired": true,
+        "reasons": [
+          "legal_status_requires_further_verification",
+          "status_explicitly_unresolved"
+        ]
+      },
+      {
+        "rowId": "land-authority-6-2010-west-bank",
+        "instrumentId": "PS-DECREE-LAW-6-2010-LAND-AUTHORITY",
+        "instrumentTitle": "قرار بقانون رقم (6) لسنة 2010م بشأن سلطة الأراضي",
+        "territory": "WEST_BANK",
+        "asOfDate": "2026-09-22",
+        "assertedStatus": "IN_FORCE",
+        "evidence": [
+          {
+            "evidenceId": "ogb-23283-explicit-status",
+            "kind": "EXPLICIT_OFFICIAL_REGISTRY_STATUS",
+            "url": "https://mjr.ogb.gov.ps/Decrees/Details/23283",
+            "publisher": "ديوان الجريدة الرسمية",
+            "proposition": "Official legislation registry records the instrument as in force and records its effective date.",
+            "territory": null,
+            "observedAt": "2026-09-22"
+          },
+          {
+            "evidenceId": "pla-current-legal-framework-6-2010",
+            "kind": "CURRENT_OFFICIAL_APPLICATION",
+            "url": "https://www.pla.pna.ps/ar/Article/360/",
+            "publisher": "سلطة الأراضي الفلسطينية",
+            "proposition": "Current Palestinian Land Authority legal-framework material identifies the 2010 Land Authority decree-law among its governing sources.",
+            "territory": "WEST_BANK",
+            "observedAt": "2026-09-22"
+          }
+        ],
+        "notes": [
+          "Pilot conclusion is limited to the status/applicability proposition evidenced here; it does not certify every subordinate rule issued under the law."
+        ],
+        "explicitStatusVerified": true,
+        "currentOfficialApplicationVerified": true,
+        "territoryScopeVerified": true,
+        "legalStatusVerified": true,
+        "conclusionEligible": true,
+        "reviewRequired": false,
+        "reasons": []
+      },
+      {
+        "rowId": "settlement-authority-7-2016-west-bank",
+        "instrumentId": "PS-DECREE-LAW-7-2016-SETTLEMENT-AUTHORITY",
+        "instrumentTitle": "قرار بقانون رقم (7) لسنة 2016م بشأن هيئة تسوية الأراضي والمياه",
+        "territory": "WEST_BANK",
+        "asOfDate": "2026-09-22",
+        "assertedStatus": "REPEALED",
+        "evidence": [
+          {
+            "evidenceId": "ogb-21967-explicit-repeal-status",
+            "kind": "EXPLICIT_OFFICIAL_REGISTRY_STATUS",
+            "url": "https://mjr.ogb.gov.ps/Decrees/Details/21967",
+            "publisher": "ديوان الجريدة الرسمية",
+            "proposition": "Official registry labels the instrument explicitly repealed.",
+            "territory": null,
+            "observedAt": "2026-09-22"
+          }
+        ],
+        "notes": [
+          "Repeal status is explicit in the official registry, while the complete repealing-chain and territorial transition remain expert-review items."
+        ],
+        "explicitStatusVerified": true,
+        "currentOfficialApplicationVerified": false,
+        "territoryScopeVerified": false,
+        "legalStatusVerified": true,
+        "conclusionEligible": false,
+        "reviewRequired": true,
+        "reasons": [
+          "territory_scope_requires_verification"
+        ]
+      },
+      {
+        "rowId": "landlords-tenants-62-1953-west-bank",
+        "instrumentId": "JO-LANDLORD-TENANT-62-1953-CONSOLIDATED-PS",
+        "instrumentTitle": "قانون المالكين والمستأجرين رقم (62) لسنة 1953م وتعديلاته",
+        "territory": "WEST_BANK",
+        "asOfDate": "2026-09-22",
+        "assertedStatus": "AMENDED",
+        "evidence": [
+          {
+            "evidenceId": "ogb-merged-119",
+            "kind": "OFFICIAL_CONSOLIDATED_TEXT",
+            "url": "https://mjr.ogb.gov.ps/MergedLegislations/ViewText/119/",
+            "publisher": "ديوان الجريدة الرسمية",
+            "proposition": "Official consolidated text records the original law and later amendments including the 2022 Palestinian amendment.",
+            "territory": null,
+            "observedAt": "2026-09-22"
+          },
+          {
+            "evidenceId": "pla-current-lease-procedure-62-1953",
+            "kind": "CURRENT_OFFICIAL_APPLICATION",
+            "url": "https://www.pla.pna.ps/ar/Article/324/",
+            "publisher": "سلطة الأراضي الفلسطينية",
+            "proposition": "Current Land Authority lease procedure refers to landlord/tenant rules for relevant transactions.",
+            "territory": "WEST_BANK",
+            "observedAt": "2026-09-22"
+          }
+        ],
+        "notes": [
+          "General landlord/tenant law is kept distinct from the special waqf tenancy law."
+        ],
+        "explicitStatusVerified": false,
+        "currentOfficialApplicationVerified": true,
+        "territoryScopeVerified": true,
+        "legalStatusVerified": true,
+        "conclusionEligible": true,
+        "reviewRequired": false,
+        "reasons": []
+      },
+      {
+        "rowId": "landlords-tenants-62-1953-gaza",
+        "instrumentId": "JO-LANDLORD-TENANT-62-1953-CONSOLIDATED-PS",
+        "instrumentTitle": "قانون المالكين والمستأجرين رقم (62) لسنة 1953م وتعديلاته",
+        "territory": "GAZA",
+        "asOfDate": "2026-09-22",
+        "assertedStatus": "UNRESOLVED",
+        "evidence": [
+          {
+            "evidenceId": "ogb-merged-119-global",
+            "kind": "OFFICIAL_CONSOLIDATED_TEXT",
+            "url": "https://mjr.ogb.gov.ps/MergedLegislations/ViewText/119/",
+            "publisher": "ديوان الجريدة الرسمية",
+            "proposition": "The official consolidated text establishes instrument identity and amendments but does not independently resolve current Gaza applicability.",
+            "territory": null,
+            "observedAt": "2026-09-22"
+          }
+        ],
+        "notes": [
+          "No West Bank operational evidence is imported into the Gaza row."
+        ],
+        "explicitStatusVerified": false,
+        "currentOfficialApplicationVerified": false,
+        "territoryScopeVerified": false,
+        "legalStatusVerified": false,
+        "conclusionEligible": false,
+        "reviewRequired": true,
+        "reasons": [
+          "legal_status_requires_further_verification",
+          "territory_scope_requires_verification",
+          "status_explicitly_unresolved"
+        ]
+      },
+      {
+        "rowId": "waqf-tenancy-5-1964-west-bank",
+        "instrumentId": "JO-WAQF-TENANCY-5-1964",
+        "instrumentTitle": "قانون المالكين والمستأجرين للعقارات الوقفية رقم (5) لسنة 1964م",
+        "territory": "WEST_BANK",
+        "asOfDate": "2026-09-22",
+        "assertedStatus": "UNRESOLVED",
+        "evidence": [
+          {
+            "evidenceId": "maqam-42-secondary-status",
+            "kind": "SECONDARY_STATUS_SIGNAL",
+            "url": "https://maqam.najah.edu/legislation/42/",
+            "publisher": "مقام / جامعة النجاح الوطنية",
+            "proposition": "Trusted legal-reference portal reports the law as in force in the West Bank.",
+            "territory": "WEST_BANK",
+            "observedAt": "2026-09-22"
+          }
+        ],
+        "notes": [
+          "Secondary in-force signal is useful for prioritization but cannot by itself unlock an authoritative status conclusion."
+        ],
+        "explicitStatusVerified": false,
+        "currentOfficialApplicationVerified": false,
+        "territoryScopeVerified": false,
+        "legalStatusVerified": false,
+        "conclusionEligible": false,
+        "reviewRequired": true,
+        "reasons": [
+          "legal_status_requires_further_verification",
+          "territory_scope_requires_verification",
+          "status_explicitly_unresolved"
+        ]
+      },
+      {
+        "rowId": "settlement-amendment-8-1955-west-bank",
+        "instrumentId": "JO-LAND-WATER-SETTLEMENT-AMENDMENT-8-1955",
+        "instrumentTitle": "قانون رقم (8) لسنة 1955م معدل لقانون تسوية الأراضي والمياه",
+        "territory": "WEST_BANK",
+        "asOfDate": "2026-09-22",
+        "assertedStatus": "UNRESOLVED",
+        "evidence": [
+          {
+            "evidenceId": "najah-laws-29-secondary-status",
+            "kind": "SECONDARY_STATUS_SIGNAL",
+            "url": "https://laws-portal.najah.edu/legislation/29/",
+            "publisher": "بوابة القوانين / جامعة النجاح الوطنية",
+            "proposition": "Trusted legal-reference portal reports the amendment as in force in the West Bank.",
+            "territory": "WEST_BANK",
+            "observedAt": "2026-09-22"
+          }
+        ],
+        "notes": [
+          "Requires authoritative consolidation/status evidence before a current-law conclusion."
+        ],
+        "explicitStatusVerified": false,
+        "currentOfficialApplicationVerified": false,
+        "territoryScopeVerified": false,
+        "legalStatusVerified": false,
+        "conclusionEligible": false,
+        "reviewRequired": true,
+        "reasons": [
+          "legal_status_requires_further_verification",
+          "territory_scope_requires_verification",
+          "status_explicitly_unresolved"
+        ]
+      },
+      {
+        "rowId": "expropriation-2-1953-west-bank",
+        "instrumentId": "JO-EXPROPRIATION-LAW-2-1953-CONSOLIDATED-PS",
+        "instrumentTitle": "قانون الاستملاك رقم (2) لسنة 1953م وتعديلاته",
+        "territory": "WEST_BANK",
+        "asOfDate": "2026-09-22",
+        "assertedStatus": "AMENDED",
+        "evidence": [
+          {
+            "evidenceId": "ogb-merged-49",
+            "kind": "OFFICIAL_CONSOLIDATED_TEXT",
+            "url": "https://mjr.ogb.gov.ps/MergedLegislations/ViewText/49/",
+            "publisher": "ديوان الجريدة الرسمية",
+            "proposition": "Official consolidated text records the original expropriation law and subsequent amendments.",
+            "territory": null,
+            "observedAt": "2026-09-22"
+          },
+          {
+            "evidenceId": "maqam-78-secondary-status",
+            "kind": "SECONDARY_STATUS_SIGNAL",
+            "url": "https://maqam.najah.edu/legislation/78/",
+            "publisher": "مقام / جامعة النجاح الوطنية",
+            "proposition": "Trusted legal-reference portal reports current West Bank force as a secondary status signal.",
+            "territory": "WEST_BANK",
+            "observedAt": "2026-09-22"
+          }
+        ],
+        "notes": [
+          "Official consolidation verifies amendment lineage, but secondary territorial status alone does not satisfy the territory gate."
+        ],
+        "explicitStatusVerified": false,
+        "currentOfficialApplicationVerified": false,
+        "territoryScopeVerified": false,
+        "legalStatusVerified": true,
+        "conclusionEligible": false,
+        "reviewRequired": true,
+        "reasons": [
+          "territory_scope_requires_verification"
+        ]
+      },
+      {
+        "rowId": "registration-transfer-fees-2-2012-west-bank",
+        "instrumentId": "PS-DECREE-LAW-2-2012-LAND-REGISTRATION-TRANSFER-FEES",
+        "instrumentTitle": "قرار بقانون رقم (2) لسنة 2012م بشأن رسوم تسجيل وانتقال الأراضي",
+        "territory": "WEST_BANK",
+        "asOfDate": "2026-09-22",
+        "assertedStatus": "UNRESOLVED",
+        "evidence": [
+          {
+            "evidenceId": "ogb-22895-text-west-bank",
+            "kind": "OFFICIAL_TERRITORY_SPECIFIC_GUIDANCE",
+            "url": "https://mjr.ogb.gov.ps/Decrees/ViewText/22895/",
+            "publisher": "ديوان الجريدة الرسمية",
+            "proposition": "The official text distinguishes underlying northern/West Bank registration-fee legislation.",
+            "territory": "WEST_BANK",
+            "observedAt": "2026-09-22"
+          }
+        ],
+        "notes": [
+          "Territorial legal lineage is explicit, but present status remains unresolved until the current status/amendment chain is verified."
+        ],
+        "explicitStatusVerified": false,
+        "currentOfficialApplicationVerified": false,
+        "territoryScopeVerified": true,
+        "legalStatusVerified": false,
+        "conclusionEligible": false,
+        "reviewRequired": true,
+        "reasons": [
+          "legal_status_requires_further_verification",
+          "status_explicitly_unresolved"
+        ]
+      },
+      {
+        "rowId": "registration-transfer-fees-2-2012-gaza",
+        "instrumentId": "PS-DECREE-LAW-2-2012-LAND-REGISTRATION-TRANSFER-FEES",
+        "instrumentTitle": "قرار بقانون رقم (2) لسنة 2012م بشأن رسوم تسجيل وانتقال الأراضي",
+        "territory": "GAZA",
+        "asOfDate": "2026-09-22",
+        "assertedStatus": "UNRESOLVED",
+        "evidence": [
+          {
+            "evidenceId": "ogb-22895-text-gaza",
+            "kind": "OFFICIAL_TERRITORY_SPECIFIC_GUIDANCE",
+            "url": "https://mjr.ogb.gov.ps/Decrees/ViewText/22895/",
+            "publisher": "ديوان الجريدة الرسمية",
+            "proposition": "The official text distinguishes underlying southern/Gaza registration-fee legislation.",
+            "territory": "GAZA",
+            "observedAt": "2026-09-22"
+          }
+        ],
+        "notes": [
+          "The Gaza lineage is tracked independently; the presence of a Palestinian decree-law does not by itself establish current Gaza application."
+        ],
+        "explicitStatusVerified": false,
+        "currentOfficialApplicationVerified": false,
+        "territoryScopeVerified": true,
+        "legalStatusVerified": false,
+        "conclusionEligible": false,
+        "reviewRequired": true,
+        "reasons": [
+          "legal_status_requires_further_verification",
+          "status_explicitly_unresolved"
+        ]
+      },
+      {
+        "rowId": "ottoman-land-code-historic-palestine",
+        "instrumentId": "OTTOMAN-LAND-CODE-1274H-1858",
+        "instrumentTitle": "قانون الأراضي العثماني لسنة 1858م",
+        "territory": "OTTOMAN_PALESTINE",
+        "asOfDate": "1900-01-01",
+        "assertedStatus": "UNRESOLVED",
+        "evidence": [
+          {
+            "evidenceId": "maqam-169-historical-reference",
+            "kind": "SECONDARY_REFERENCE",
+            "url": "https://maqam.najah.edu/legislation/169/",
+            "publisher": "مقام / جامعة النجاح الوطنية",
+            "proposition": "Trusted reference copy supports document identity and text discovery.",
+            "territory": "OTTOMAN_PALESTINE",
+            "observedAt": "2026-09-22"
+          }
+        ],
+        "notes": [
+          "Historical applicability is not promoted to verified until an archival/primary edition or expert decision is linked."
+        ],
+        "explicitStatusVerified": false,
+        "currentOfficialApplicationVerified": false,
+        "territoryScopeVerified": false,
+        "legalStatusVerified": false,
+        "conclusionEligible": false,
+        "reviewRequired": true,
+        "reasons": [
+          "legal_status_requires_further_verification",
+          "territory_scope_requires_verification",
+          "status_explicitly_unresolved"
+        ]
+      },
+      {
+        "rowId": "mandate-land-transfers-1940-historic-palestine",
+        "instrumentId": "MANDATE-PALESTINE-LAND-TRANSFERS-REGULATIONS-1940",
+        "instrumentTitle": "Land Transfers Regulations, 1940",
+        "territory": "HISTORIC_PALESTINE",
+        "asOfDate": "1940-03-01",
+        "assertedStatus": "HISTORICAL",
+        "evidence": [
+          {
+            "evidenceId": "unispal-lon-1940-archive",
+            "kind": "ARCHIVAL_PRIMARY",
+            "url": "https://www.un.org/unispal/wp-content/uploads/2021/04/C-36-M-32-1940-VI_EN.pdf",
+            "publisher": "UNISPAL / League of Nations archival record",
+            "proposition": "Archival record preserves the 1940 Palestine Land Transfers Regulations.",
+            "territory": "HISTORIC_PALESTINE",
+            "observedAt": "2026-09-22"
+          },
+          {
+            "evidenceId": "palquest-1940-reference",
+            "kind": "SECONDARY_REFERENCE",
+            "url": "https://www.palquest.org/en/node/23188",
+            "publisher": "PalQuest / Institute for Palestine Studies",
+            "proposition": "Reference record identifies Palestine Official Gazette Supplement No. 2, issue 988, 28 February 1940.",
+            "territory": "HISTORIC_PALESTINE",
+            "observedAt": "2026-09-22"
+          }
+        ],
+        "notes": [
+          "This verifies historical identity/application context only; it is not a claim of modern force."
+        ],
+        "explicitStatusVerified": false,
+        "currentOfficialApplicationVerified": false,
+        "territoryScopeVerified": true,
+        "legalStatusVerified": true,
+        "conclusionEligible": true,
+        "reviewRequired": false,
+        "reasons": []
+      },
+      {
+        "rowId": "jerusalem-current-land-waqf-track",
+        "instrumentId": "JERUSALEM-CURRENT-LAND-WAQF-TRACK",
+        "instrumentTitle": "المسار القانوني الراهن للأرض والوقف في القدس",
+        "territory": "JERUSALEM",
+        "asOfDate": "2026-09-22",
+        "assertedStatus": "UNRESOLVED",
+        "evidence": [],
+        "notes": [
+          "Intentionally unresolved until a separately approved Jerusalem source family and jurisdiction analysis are completed."
+        ],
+        "explicitStatusVerified": false,
+        "currentOfficialApplicationVerified": false,
+        "territoryScopeVerified": false,
+        "legalStatusVerified": false,
+        "conclusionEligible": false,
+        "reviewRequired": true,
+        "reasons": [
+          "legal_status_requires_further_verification",
+          "territory_scope_requires_verification",
+          "status_explicitly_unresolved"
+        ]
+      }
+    ]
+  },
+  "expertReviewQueue": {
+    "generatedForDate": "2026-09-22",
+    "itemCount": 25,
+    "familyReviewCount": 13,
+    "legalStatusExceptionCount": 12,
+    "perDocumentRoutineRightsReviewCount": 0,
+    "pendingBlockingCount": 22,
+    "items": [
+      {
+        "reviewId": "review-family-case_law",
+        "kind": "SOURCE_FAMILY_AUTHORITY_RIGHTS",
+        "role": "RIGHTS_REVIEWER",
+        "priority": "P0",
+        "subjectId": "CASE_LAW",
+        "subjectTitle": "Waqf/property case-law family",
+        "territory": null,
+        "evidenceRefs": [
+          "palestinian-supreme-court-technical-office"
+        ],
+        "reasons": [
+          "source_family_rights_policy_pending",
+          "source_family_requires_expert_admission"
+        ],
+        "blocksAuthoritativeConclusion": true,
+        "status": "PENDING_HUMAN_REVIEW"
+      },
+      {
+        "reviewId": "review-family-fiqh_classical",
+        "kind": "FIQH_SHARIA_SOURCE_ADMISSION",
+        "role": "FIQH_SHARIA_REVIEWER",
+        "priority": "P0",
+        "subjectId": "FIQH_CLASSICAL",
+        "subjectTitle": "Classical and modern fiqh family",
+        "territory": null,
+        "evidenceRefs": [],
+        "reasons": [
+          "source_family_requires_expert_admission"
+        ],
+        "blocksAuthoritativeConclusion": true,
+        "status": "PENDING_HUMAN_REVIEW"
+      },
+      {
+        "reviewId": "review-family-land_gaza_current",
+        "kind": "SOURCE_FAMILY_AUTHORITY_RIGHTS",
+        "role": "RIGHTS_REVIEWER",
+        "priority": "P0",
+        "subjectId": "LAND_GAZA_CURRENT",
+        "subjectTitle": "Gaza current land-law family",
+        "territory": "GAZA",
+        "evidenceRefs": [
+          "gaza-land-authority-legal-library",
+          "gaza-government-property-legal-guidance",
+          "land-registration-transfer-fees-2-2012",
+          "movable-rights-security-11-2016",
+          "movable-rights-security-11-2016-gazette-120-wafa"
+        ],
+        "reasons": [
+          "source_family_rights_policy_pending",
+          "source_family_requires_expert_admission",
+          "source_family_coverage_unresolved"
+        ],
+        "blocksAuthoritativeConclusion": true,
+        "status": "PENDING_HUMAN_REVIEW"
+      },
+      {
+        "reviewId": "review-family-land_mandate",
+        "kind": "SOURCE_FAMILY_AUTHORITY_RIGHTS",
+        "role": "HISTORICAL_EVIDENCE_REVIEWER",
+        "priority": "P0",
+        "subjectId": "LAND_MANDATE",
+        "subjectTitle": "British Mandate land-law family",
+        "territory": "HISTORIC_PALESTINE",
+        "evidenceRefs": [
+          "mandate-land-transfers-regulations-1940-palquest",
+          "mandate-land-transfers-regulations-1940-unispal"
+        ],
+        "reasons": [
+          "source_family_rights_policy_pending",
+          "source_family_requires_expert_admission"
+        ],
+        "blocksAuthoritativeConclusion": true,
+        "status": "PENDING_HUMAN_REVIEW"
+      },
+      {
+        "reviewId": "review-family-land_ottoman",
+        "kind": "SOURCE_FAMILY_AUTHORITY_RIGHTS",
+        "role": "HISTORICAL_EVIDENCE_REVIEWER",
+        "priority": "P0",
+        "subjectId": "LAND_OTTOMAN",
+        "subjectTitle": "Ottoman land-law family",
+        "territory": null,
+        "evidenceRefs": [
+          "ottoman-land-code-1858-registry"
+        ],
+        "reasons": [
+          "source_family_rights_policy_pending",
+          "source_family_requires_expert_admission"
+        ],
+        "blocksAuthoritativeConclusion": true,
+        "status": "PENDING_HUMAN_REVIEW"
+      },
+      {
+        "reviewId": "review-family-land_west_bank_current",
+        "kind": "SOURCE_FAMILY_AUTHORITY_RIGHTS",
+        "role": "RIGHTS_REVIEWER",
+        "priority": "P0",
+        "subjectId": "LAND_WEST_BANK_CURRENT",
+        "subjectTitle": "West Bank current land-law family",
+        "territory": "WEST_BANK",
+        "evidenceRefs": [
+          "pla-legal-framework-current",
+          "pla-procedures-manual-2024",
+          "land-authority-law-2010",
+          "land-authority-law-2010-gazette-86-wafa",
+          "land-settlement-law-40-1952-registry",
+          "settlement-amendment-8-1955-registry",
+          "expropriation-law-2-1953-consolidated",
+          "settlement-authority-7-2016-official",
+          "settlement-authority-7-2016-wafa",
+          "land-registration-fees-2-1952-consolidated",
+          "land-registration-transfer-fees-2-2012",
+          "pla-new-registration-procedure"
+        ],
+        "reasons": [
+          "source_family_rights_policy_pending"
+        ],
+        "blocksAuthoritativeConclusion": false,
+        "status": "PENDING_HUMAN_REVIEW"
+      },
+      {
+        "reviewId": "review-family-registration_settlement",
+        "kind": "SOURCE_FAMILY_AUTHORITY_RIGHTS",
+        "role": "RIGHTS_REVIEWER",
+        "priority": "P0",
+        "subjectId": "REGISTRATION_SETTLEMENT",
+        "subjectTitle": "Registration, settlement, surveying and title family",
+        "territory": null,
+        "evidenceRefs": [
+          "land-settlement-process-pla",
+          "land-settlement-law-40-1952-registry",
+          "settlement-amendment-8-1955-registry",
+          "settlement-authority-7-2016-official",
+          "settlement-authority-7-2016-wafa",
+          "land-registration-fees-2-1952-consolidated",
+          "land-registration-transfer-fees-2-2012",
+          "pla-new-registration-procedure"
+        ],
+        "reasons": [
+          "source_family_rights_policy_pending"
+        ],
+        "blocksAuthoritativeConclusion": false,
+        "status": "PENDING_HUMAN_REVIEW"
+      },
+      {
+        "reviewId": "review-family-sharia_primary",
+        "kind": "FIQH_SHARIA_SOURCE_ADMISSION",
+        "role": "FIQH_SHARIA_REVIEWER",
+        "priority": "P0",
+        "subjectId": "SHARIA_PRIMARY",
+        "subjectTitle": "Primary sharia evidence family",
+        "territory": null,
+        "evidenceRefs": [],
+        "reasons": [
+          "source_family_requires_expert_admission"
+        ],
+        "blocksAuthoritativeConclusion": true,
+        "status": "PENDING_HUMAN_REVIEW"
+      },
+      {
+        "reviewId": "review-family-waqf_lease_hukr",
+        "kind": "SOURCE_FAMILY_AUTHORITY_RIGHTS",
+        "role": "RIGHTS_REVIEWER",
+        "priority": "P0",
+        "subjectId": "WAQF_LEASE_HUKR",
+        "subjectTitle": "Waqf tenancy, hukr and related lease family",
+        "territory": null,
+        "evidenceRefs": [
+          "waqf-tenancy-law-5-1964-registry",
+          "landlords-tenants-62-1953-consolidated",
+          "landlords-tenants-amendment-35-2022",
+          "pla-lease-transaction-procedure"
+        ],
+        "reasons": [
+          "source_family_rights_policy_pending",
+          "source_family_requires_expert_admission"
+        ],
+        "blocksAuthoritativeConclusion": true,
+        "status": "PENDING_HUMAN_REVIEW"
+      },
+      {
+        "reviewId": "review-family-waqf_positive_law",
+        "kind": "SOURCE_FAMILY_AUTHORITY_RIGHTS",
+        "role": "RIGHTS_REVIEWER",
+        "priority": "P0",
+        "subjectId": "WAQF_POSITIVE_LAW",
+        "subjectTitle": "Waqf positive-law and administration family",
+        "territory": null,
+        "evidenceRefs": [
+          "waqf-law-1966-consolidated",
+          "waqf-amendment-2023",
+          "waqf-amendment-2023-gazette-198-pdf"
+        ],
+        "reasons": [
+          "source_family_rights_policy_pending"
+        ],
+        "blocksAuthoritativeConclusion": false,
+        "status": "PENDING_HUMAN_REVIEW"
+      },
+      {
+        "reviewId": "review-status-jerusalem-current-land-waqf-track",
+        "kind": "LEGAL_STATUS_EXCEPTION",
+        "role": "LEGAL_STATUS_REVIEWER",
+        "priority": "P0",
+        "subjectId": "jerusalem-current-land-waqf-track",
+        "subjectTitle": "المسار القانوني الراهن للأرض والوقف في القدس",
+        "territory": "JERUSALEM",
+        "evidenceRefs": [],
+        "reasons": [
+          "legal_status_requires_further_verification",
+          "territory_scope_requires_verification",
+          "status_explicitly_unresolved"
+        ],
+        "blocksAuthoritativeConclusion": true,
+        "status": "PENDING_HUMAN_REVIEW"
+      },
+      {
+        "reviewId": "review-status-land-regime-gaza",
+        "kind": "LEGAL_STATUS_EXCEPTION",
+        "role": "LEGAL_STATUS_REVIEWER",
+        "priority": "P0",
+        "subjectId": "land-regime-gaza",
+        "subjectTitle": "مسار تشريعات الأراضي المعمول بها في قطاع غزة",
+        "territory": "GAZA",
+        "evidenceRefs": [
+          "gaza-pla-government-property"
+        ],
+        "reasons": [
+          "legal_status_requires_further_verification",
+          "status_explicitly_unresolved"
+        ],
+        "blocksAuthoritativeConclusion": true,
+        "status": "PENDING_HUMAN_REVIEW"
+      },
+      {
+        "reviewId": "review-status-landlords-tenants-62-1953-gaza",
+        "kind": "LEGAL_STATUS_EXCEPTION",
+        "role": "LEGAL_STATUS_REVIEWER",
+        "priority": "P0",
+        "subjectId": "landlords-tenants-62-1953-gaza",
+        "subjectTitle": "قانون المالكين والمستأجرين رقم (62) لسنة 1953م وتعديلاته",
+        "territory": "GAZA",
+        "evidenceRefs": [
+          "ogb-merged-119-global"
+        ],
+        "reasons": [
+          "legal_status_requires_further_verification",
+          "territory_scope_requires_verification",
+          "status_explicitly_unresolved"
+        ],
+        "blocksAuthoritativeConclusion": true,
+        "status": "PENDING_HUMAN_REVIEW"
+      },
+      {
+        "reviewId": "review-status-registration-transfer-fees-2-2012-gaza",
+        "kind": "LEGAL_STATUS_EXCEPTION",
+        "role": "LEGAL_STATUS_REVIEWER",
+        "priority": "P0",
+        "subjectId": "registration-transfer-fees-2-2012-gaza",
+        "subjectTitle": "قرار بقانون رقم (2) لسنة 2012م بشأن رسوم تسجيل وانتقال الأراضي",
+        "territory": "GAZA",
+        "evidenceRefs": [
+          "ogb-22895-text-gaza"
+        ],
+        "reasons": [
+          "legal_status_requires_further_verification",
+          "status_explicitly_unresolved"
+        ],
+        "blocksAuthoritativeConclusion": true,
+        "status": "PENDING_HUMAN_REVIEW"
+      },
+      {
+        "reviewId": "review-status-waqf-2023-gaza",
+        "kind": "LEGAL_STATUS_EXCEPTION",
+        "role": "LEGAL_STATUS_REVIEWER",
+        "priority": "P0",
+        "subjectId": "waqf-2023-gaza",
+        "subjectTitle": "قرار بقانون رقم (2) لسنة 2023م بتعديل قانون الأوقاف والشؤون والمقدسات الإسلامية رقم (26) لسنة 1966م وتعديلاته",
+        "territory": "GAZA",
+        "evidenceRefs": [
+          "ogb-33311-status-global"
+        ],
+        "reasons": [
+          "legal_status_requires_further_verification",
+          "territory_scope_requires_verification",
+          "status_explicitly_unresolved"
+        ],
+        "blocksAuthoritativeConclusion": true,
+        "status": "PENDING_HUMAN_REVIEW"
+      },
+      {
+        "reviewId": "review-family-finance_property",
+        "kind": "SOURCE_FAMILY_AUTHORITY_RIGHTS",
+        "role": "RIGHTS_REVIEWER",
+        "priority": "P1",
+        "subjectId": "FINANCE_PROPERTY",
+        "subjectTitle": "Movable/immovable finance, tax and investment family",
+        "territory": null,
+        "evidenceRefs": [
+          "movable-rights-security-11-2016",
+          "movable-rights-security-11-2016-gazette-120-wafa"
+        ],
+        "reasons": [
+          "source_family_rights_policy_pending",
+          "source_family_requires_expert_admission"
+        ],
+        "blocksAuthoritativeConclusion": true,
+        "status": "PENDING_HUMAN_REVIEW"
+      },
+      {
+        "reviewId": "review-family-historical_waqf",
+        "kind": "SOURCE_FAMILY_AUTHORITY_RIGHTS",
+        "role": "HISTORICAL_EVIDENCE_REVIEWER",
+        "priority": "P1",
+        "subjectId": "HISTORICAL_WAQF",
+        "subjectTitle": "Historical waqf deeds, registers, tapu and maps",
+        "territory": null,
+        "evidenceRefs": [],
+        "reasons": [
+          "source_family_requires_expert_admission"
+        ],
+        "blocksAuthoritativeConclusion": true,
+        "status": "PENDING_HUMAN_REVIEW"
+      },
+      {
+        "reviewId": "review-family-land_jerusalem_track",
+        "kind": "SOURCE_FAMILY_AUTHORITY_RIGHTS",
+        "role": "RIGHTS_REVIEWER",
+        "priority": "P1",
+        "subjectId": "LAND_JERUSALEM_TRACK",
+        "subjectTitle": "Jerusalem-specific land/waqf applicability track",
+        "territory": "JERUSALEM",
+        "evidenceRefs": [],
+        "reasons": [
+          "source_family_requires_expert_admission",
+          "source_family_coverage_unresolved"
+        ],
+        "blocksAuthoritativeConclusion": true,
+        "status": "PENDING_HUMAN_REVIEW"
+      },
+      {
+        "reviewId": "review-status-expropriation-2-1953-west-bank",
+        "kind": "LEGAL_STATUS_EXCEPTION",
+        "role": "LEGAL_STATUS_REVIEWER",
+        "priority": "P1",
+        "subjectId": "expropriation-2-1953-west-bank",
+        "subjectTitle": "قانون الاستملاك رقم (2) لسنة 1953م وتعديلاته",
+        "territory": "WEST_BANK",
+        "evidenceRefs": [
+          "ogb-merged-49",
+          "maqam-78-secondary-status"
+        ],
+        "reasons": [
+          "territory_scope_requires_verification"
+        ],
+        "blocksAuthoritativeConclusion": true,
+        "status": "PENDING_HUMAN_REVIEW"
+      },
+      {
+        "reviewId": "review-status-ottoman-land-code-historic-palestine",
+        "kind": "LEGAL_STATUS_EXCEPTION",
+        "role": "HISTORICAL_EVIDENCE_REVIEWER",
+        "priority": "P1",
+        "subjectId": "ottoman-land-code-historic-palestine",
+        "subjectTitle": "قانون الأراضي العثماني لسنة 1858م",
+        "territory": "OTTOMAN_PALESTINE",
+        "evidenceRefs": [
+          "maqam-169-historical-reference"
+        ],
+        "reasons": [
+          "legal_status_requires_further_verification",
+          "territory_scope_requires_verification",
+          "status_explicitly_unresolved"
+        ],
+        "blocksAuthoritativeConclusion": true,
+        "status": "PENDING_HUMAN_REVIEW"
+      },
+      {
+        "reviewId": "review-status-registration-transfer-fees-2-2012-west-bank",
+        "kind": "LEGAL_STATUS_EXCEPTION",
+        "role": "LEGAL_STATUS_REVIEWER",
+        "priority": "P1",
+        "subjectId": "registration-transfer-fees-2-2012-west-bank",
+        "subjectTitle": "قرار بقانون رقم (2) لسنة 2012م بشأن رسوم تسجيل وانتقال الأراضي",
+        "territory": "WEST_BANK",
+        "evidenceRefs": [
+          "ogb-22895-text-west-bank"
+        ],
+        "reasons": [
+          "legal_status_requires_further_verification",
+          "status_explicitly_unresolved"
+        ],
+        "blocksAuthoritativeConclusion": true,
+        "status": "PENDING_HUMAN_REVIEW"
+      },
+      {
+        "reviewId": "review-status-settlement-40-1952-west-bank",
+        "kind": "LEGAL_STATUS_EXCEPTION",
+        "role": "LEGAL_STATUS_REVIEWER",
+        "priority": "P1",
+        "subjectId": "settlement-40-1952-west-bank",
+        "subjectTitle": "قانون تسوية الأراضي والمياه رقم (40) لسنة 1952م",
+        "territory": "WEST_BANK",
+        "evidenceRefs": [
+          "pla-current-settlement-page",
+          "pla-2025-settlement-notice"
+        ],
+        "reasons": [
+          "legal_status_requires_further_verification",
+          "current_application_does_not_replace_status_verification",
+          "status_explicitly_unresolved"
+        ],
+        "blocksAuthoritativeConclusion": true,
+        "status": "PENDING_HUMAN_REVIEW"
+      },
+      {
+        "reviewId": "review-status-settlement-amendment-8-1955-west-bank",
+        "kind": "LEGAL_STATUS_EXCEPTION",
+        "role": "LEGAL_STATUS_REVIEWER",
+        "priority": "P1",
+        "subjectId": "settlement-amendment-8-1955-west-bank",
+        "subjectTitle": "قانون رقم (8) لسنة 1955م معدل لقانون تسوية الأراضي والمياه",
+        "territory": "WEST_BANK",
+        "evidenceRefs": [
+          "najah-laws-29-secondary-status"
+        ],
+        "reasons": [
+          "legal_status_requires_further_verification",
+          "territory_scope_requires_verification",
+          "status_explicitly_unresolved"
+        ],
+        "blocksAuthoritativeConclusion": true,
+        "status": "PENDING_HUMAN_REVIEW"
+      },
+      {
+        "reviewId": "review-status-settlement-authority-7-2016-west-bank",
+        "kind": "LEGAL_STATUS_EXCEPTION",
+        "role": "LEGAL_STATUS_REVIEWER",
+        "priority": "P1",
+        "subjectId": "settlement-authority-7-2016-west-bank",
+        "subjectTitle": "قرار بقانون رقم (7) لسنة 2016م بشأن هيئة تسوية الأراضي والمياه",
+        "territory": "WEST_BANK",
+        "evidenceRefs": [
+          "ogb-21967-explicit-repeal-status"
+        ],
+        "reasons": [
+          "territory_scope_requires_verification"
+        ],
+        "blocksAuthoritativeConclusion": true,
+        "status": "PENDING_HUMAN_REVIEW"
+      },
+      {
+        "reviewId": "review-status-waqf-tenancy-5-1964-west-bank",
+        "kind": "LEGAL_STATUS_EXCEPTION",
+        "role": "LEGAL_STATUS_REVIEWER",
+        "priority": "P1",
+        "subjectId": "waqf-tenancy-5-1964-west-bank",
+        "subjectTitle": "قانون المالكين والمستأجرين للعقارات الوقفية رقم (5) لسنة 1964م",
+        "territory": "WEST_BANK",
+        "evidenceRefs": [
+          "maqam-42-secondary-status"
+        ],
+        "reasons": [
+          "legal_status_requires_further_verification",
+          "territory_scope_requires_verification",
+          "status_explicitly_unresolved"
+        ],
+        "blocksAuthoritativeConclusion": true,
+        "status": "PENDING_HUMAN_REVIEW"
+      }
+    ]
+  },
+  "corpusCoverageLedger": [
+    {
+      "familyId": "LAND_WEST_BANK_CURRENT",
+      "title": "West Bank current land-law family",
+      "priority": "P0",
+      "coverageState": "PARTIAL",
+      "reviewPolicy": "EXCEPTION_ONLY",
+      "corpusItemCount": 12,
+      "missingSeedCorpusIds": [],
+      "unresolvedStatusCorpusIds": [
+        "pla-legal-framework-current",
+        "pla-procedures-manual-2024",
+        "land-authority-law-2010",
+        "land-authority-law-2010-gazette-86-wafa",
+        "land-settlement-law-40-1952-registry",
+        "settlement-amendment-8-1955-registry",
+        "expropriation-law-2-1953-consolidated",
+        "settlement-authority-7-2016-official",
+        "settlement-authority-7-2016-wafa",
+        "land-registration-fees-2-1952-consolidated",
+        "land-registration-transfer-fees-2-2012",
+        "pla-new-registration-procedure"
+      ],
+      "rightsPendingCorpusIds": [
+        "pla-legal-framework-current",
+        "pla-procedures-manual-2024",
+        "land-authority-law-2010",
+        "land-authority-law-2010-gazette-86-wafa",
+        "land-settlement-law-40-1952-registry",
+        "settlement-amendment-8-1955-registry",
+        "expropriation-law-2-1953-consolidated",
+        "settlement-authority-7-2016-official",
+        "settlement-authority-7-2016-wafa",
+        "land-registration-fees-2-1952-consolidated",
+        "land-registration-transfer-fees-2-2012",
+        "pla-new-registration-procedure"
+      ],
+      "territories": [
+        "WEST_BANK"
+      ],
+      "complete": false
+    },
+    {
+      "familyId": "LAND_GAZA_CURRENT",
+      "title": "Gaza current land-law family",
+      "priority": "P0",
+      "coverageState": "UNRESOLVED",
+      "reviewPolicy": "EXPERT_REQUIRED",
+      "corpusItemCount": 5,
+      "missingSeedCorpusIds": [],
+      "unresolvedStatusCorpusIds": [
+        "gaza-land-authority-legal-library",
+        "gaza-government-property-legal-guidance",
+        "land-registration-transfer-fees-2-2012",
+        "movable-rights-security-11-2016",
+        "movable-rights-security-11-2016-gazette-120-wafa"
+      ],
+      "rightsPendingCorpusIds": [
+        "gaza-land-authority-legal-library",
+        "gaza-government-property-legal-guidance",
+        "land-registration-transfer-fees-2-2012",
+        "movable-rights-security-11-2016",
+        "movable-rights-security-11-2016-gazette-120-wafa"
+      ],
+      "territories": [
+        "GAZA"
+      ],
+      "complete": false
+    },
+    {
+      "familyId": "LAND_JERUSALEM_TRACK",
+      "title": "Jerusalem-specific land/waqf applicability track",
+      "priority": "P1",
+      "coverageState": "UNRESOLVED",
+      "reviewPolicy": "EXPERT_REQUIRED",
+      "corpusItemCount": 0,
+      "missingSeedCorpusIds": [],
+      "unresolvedStatusCorpusIds": [],
+      "rightsPendingCorpusIds": [],
+      "territories": [
+        "JERUSALEM"
+      ],
+      "complete": false
+    },
+    {
+      "familyId": "LAND_OTTOMAN",
+      "title": "Ottoman land-law family",
+      "priority": "P0",
+      "coverageState": "PARTIAL",
+      "reviewPolicy": "EXPERT_REQUIRED",
+      "corpusItemCount": 1,
+      "missingSeedCorpusIds": [],
+      "unresolvedStatusCorpusIds": [
+        "ottoman-land-code-1858-registry"
+      ],
+      "rightsPendingCorpusIds": [
+        "ottoman-land-code-1858-registry"
+      ],
+      "territories": [
+        "OTTOMAN_PALESTINE",
+        "HISTORIC_PALESTINE"
+      ],
+      "complete": false
+    },
+    {
+      "familyId": "LAND_MANDATE",
+      "title": "British Mandate land-law family",
+      "priority": "P0",
+      "coverageState": "PARTIAL",
+      "reviewPolicy": "EXPERT_REQUIRED",
+      "corpusItemCount": 2,
+      "missingSeedCorpusIds": [],
+      "unresolvedStatusCorpusIds": [
+        "mandate-land-transfers-regulations-1940-palquest",
+        "mandate-land-transfers-regulations-1940-unispal"
+      ],
+      "rightsPendingCorpusIds": [
+        "mandate-land-transfers-regulations-1940-palquest",
+        "mandate-land-transfers-regulations-1940-unispal"
+      ],
+      "territories": [
+        "HISTORIC_PALESTINE"
+      ],
+      "complete": false
+    },
+    {
+      "familyId": "WAQF_POSITIVE_LAW",
+      "title": "Waqf positive-law and administration family",
+      "priority": "P0",
+      "coverageState": "PARTIAL",
+      "reviewPolicy": "EXCEPTION_ONLY",
+      "corpusItemCount": 3,
+      "missingSeedCorpusIds": [],
+      "unresolvedStatusCorpusIds": [
+        "waqf-law-1966-consolidated",
+        "waqf-amendment-2023",
+        "waqf-amendment-2023-gazette-198-pdf"
+      ],
+      "rightsPendingCorpusIds": [
+        "waqf-law-1966-consolidated",
+        "waqf-amendment-2023",
+        "waqf-amendment-2023-gazette-198-pdf"
+      ],
+      "territories": [
+        "WEST_BANK",
+        "GAZA",
+        "JERUSALEM"
+      ],
+      "complete": false
+    },
+    {
+      "familyId": "WAQF_LEASE_HUKR",
+      "title": "Waqf tenancy, hukr and related lease family",
+      "priority": "P0",
+      "coverageState": "PARTIAL",
+      "reviewPolicy": "EXPERT_REQUIRED",
+      "corpusItemCount": 4,
+      "missingSeedCorpusIds": [],
+      "unresolvedStatusCorpusIds": [
+        "waqf-tenancy-law-5-1964-registry",
+        "landlords-tenants-62-1953-consolidated",
+        "landlords-tenants-amendment-35-2022",
+        "pla-lease-transaction-procedure"
+      ],
+      "rightsPendingCorpusIds": [
+        "waqf-tenancy-law-5-1964-registry",
+        "landlords-tenants-62-1953-consolidated",
+        "landlords-tenants-amendment-35-2022",
+        "pla-lease-transaction-procedure"
+      ],
+      "territories": [
+        "WEST_BANK",
+        "GAZA"
+      ],
+      "complete": false
+    },
+    {
+      "familyId": "REGISTRATION_SETTLEMENT",
+      "title": "Registration, settlement, surveying and title family",
+      "priority": "P0",
+      "coverageState": "PARTIAL",
+      "reviewPolicy": "EXCEPTION_ONLY",
+      "corpusItemCount": 8,
+      "missingSeedCorpusIds": [],
+      "unresolvedStatusCorpusIds": [
+        "land-settlement-process-pla",
+        "land-settlement-law-40-1952-registry",
+        "settlement-amendment-8-1955-registry",
+        "settlement-authority-7-2016-official",
+        "settlement-authority-7-2016-wafa",
+        "land-registration-fees-2-1952-consolidated",
+        "land-registration-transfer-fees-2-2012",
+        "pla-new-registration-procedure"
+      ],
+      "rightsPendingCorpusIds": [
+        "land-settlement-process-pla",
+        "land-settlement-law-40-1952-registry",
+        "settlement-amendment-8-1955-registry",
+        "settlement-authority-7-2016-official",
+        "settlement-authority-7-2016-wafa",
+        "land-registration-fees-2-1952-consolidated",
+        "land-registration-transfer-fees-2-2012",
+        "pla-new-registration-procedure"
+      ],
+      "territories": [
+        "WEST_BANK",
+        "GAZA"
+      ],
+      "complete": false
+    },
+    {
+      "familyId": "CASE_LAW",
+      "title": "Waqf/property case-law family",
+      "priority": "P0",
+      "coverageState": "PARTIAL",
+      "reviewPolicy": "EXPERT_REQUIRED",
+      "corpusItemCount": 1,
+      "missingSeedCorpusIds": [],
+      "unresolvedStatusCorpusIds": [
+        "palestinian-supreme-court-technical-office"
+      ],
+      "rightsPendingCorpusIds": [
+        "palestinian-supreme-court-technical-office"
+      ],
+      "territories": [
+        "WEST_BANK",
+        "GAZA",
+        "JERUSALEM"
+      ],
+      "complete": false
+    },
+    {
+      "familyId": "SHARIA_PRIMARY",
+      "title": "Primary sharia evidence family",
+      "priority": "P0",
+      "coverageState": "NOT_STARTED",
+      "reviewPolicy": "EXPERT_REQUIRED",
+      "corpusItemCount": 0,
+      "missingSeedCorpusIds": [],
+      "unresolvedStatusCorpusIds": [],
+      "rightsPendingCorpusIds": [],
+      "territories": [
+        "WEST_BANK",
+        "GAZA",
+        "JERUSALEM",
+        "HISTORIC_PALESTINE"
+      ],
+      "complete": false
+    },
+    {
+      "familyId": "FIQH_CLASSICAL",
+      "title": "Classical and modern fiqh family",
+      "priority": "P0",
+      "coverageState": "NOT_STARTED",
+      "reviewPolicy": "EXPERT_REQUIRED",
+      "corpusItemCount": 0,
+      "missingSeedCorpusIds": [],
+      "unresolvedStatusCorpusIds": [],
+      "rightsPendingCorpusIds": [],
+      "territories": [
+        "WEST_BANK",
+        "GAZA",
+        "JERUSALEM",
+        "HISTORIC_PALESTINE"
+      ],
+      "complete": false
+    },
+    {
+      "familyId": "HISTORICAL_WAQF",
+      "title": "Historical waqf deeds, registers, tapu and maps",
+      "priority": "P1",
+      "coverageState": "NOT_STARTED",
+      "reviewPolicy": "EXPERT_REQUIRED",
+      "corpusItemCount": 0,
+      "missingSeedCorpusIds": [],
+      "unresolvedStatusCorpusIds": [],
+      "rightsPendingCorpusIds": [],
+      "territories": [
+        "OTTOMAN_PALESTINE",
+        "HISTORIC_PALESTINE",
+        "WEST_BANK",
+        "GAZA",
+        "JERUSALEM"
+      ],
+      "complete": false
+    },
+    {
+      "familyId": "FINANCE_PROPERTY",
+      "title": "Movable/immovable finance, tax and investment family",
+      "priority": "P1",
+      "coverageState": "PARTIAL",
+      "reviewPolicy": "EXPERT_REQUIRED",
+      "corpusItemCount": 2,
+      "missingSeedCorpusIds": [],
+      "unresolvedStatusCorpusIds": [
+        "movable-rights-security-11-2016",
+        "movable-rights-security-11-2016-gazette-120-wafa"
+      ],
+      "rightsPendingCorpusIds": [
+        "movable-rights-security-11-2016",
+        "movable-rights-security-11-2016-gazette-120-wafa"
+      ],
+      "territories": [
+        "WEST_BANK",
+        "GAZA"
+      ],
+      "complete": false
+    }
+  ],
+  "humanExpertDecisionsIncluded": false
+}

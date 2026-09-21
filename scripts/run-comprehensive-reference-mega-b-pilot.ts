@@ -224,7 +224,10 @@ const pilotResults = scenarios.map(scenario => {
     documents: retrievalDocuments,
     limit: 8,
   });
-  const pack = selectReferenceEvidencePack(hits, 4);
+  const pack = selectReferenceEvidencePack(hits, 4, [
+    ...route.priorityDomains,
+    ...route.preferredDomains,
+  ]);
   const citations = pack.flatMap((hit, index) => {
     const locator = alignedLocator(hit.content, scenario.question);
     if (!locator) return [];
