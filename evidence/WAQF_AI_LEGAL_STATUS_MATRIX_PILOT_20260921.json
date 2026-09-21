@@ -1,0 +1,201 @@
+{
+  "program": "WAQF_AI_COMPREHENSIVE_WAQF_REFERENCE_V1",
+  "phase": "LEGAL_STATUS_MATRIX_PILOT",
+  "hardBoundaries": {
+    "liveSupabaseMutation": false,
+    "mainMerge": false,
+    "newBaseline": false,
+    "production": false,
+    "publicCorpusRelease": false
+  },
+  "generatedForDate": "2026-09-21",
+  "rowCount": 5,
+  "conclusionEligibleRows": 2,
+  "reviewRequiredRows": 3,
+  "unresolvedGazaRows": 2,
+  "rows": [
+    {
+      "rowId": "waqf-2023-west-bank",
+      "instrumentId": "PS-DECREE-LAW-2-2023-WAQF",
+      "instrumentTitle": "قرار بقانون رقم (2) لسنة 2023م بتعديل قانون الأوقاف والشؤون والمقدسات الإسلامية رقم (26) لسنة 1966م وتعديلاته",
+      "territory": "WEST_BANK",
+      "asOfDate": "2026-09-21",
+      "assertedStatus": "IN_FORCE",
+      "evidence": [
+        {
+          "evidenceId": "ogb-33311-status",
+          "kind": "EXPLICIT_OFFICIAL_REGISTRY_STATUS",
+          "url": "https://mjr.ogb.gov.ps/Decrees/Details/33311",
+          "publisher": "ديوان الجريدة الرسمية",
+          "proposition": "Official registry marks the decree-law as in force and records an effective date of 2023-02-23.",
+          "territory": null,
+          "observedAt": "2026-09-21"
+        },
+        {
+          "evidenceId": "ogb-2023-hebron-instruction",
+          "kind": "CURRENT_OFFICIAL_APPLICATION",
+          "url": "https://mjr.ogb.gov.ps/Decrees/ViewText/33468/",
+          "publisher": "ديوان الجريدة الرسمية",
+          "proposition": "A later official instruction concerning the Ibrahimi Mosque relies on the 2023 waqf amendment.",
+          "territory": "WEST_BANK",
+          "observedAt": "2026-09-21"
+        }
+      ],
+      "notes": [
+        "Pilot verifies explicit registry status and a West Bank application signal; broader constitutional/territorial questions remain reviewable outside this row."
+      ],
+      "explicitStatusVerified": true,
+      "currentOfficialApplicationVerified": true,
+      "territoryScopeVerified": true,
+      "legalStatusVerified": true,
+      "conclusionEligible": true,
+      "reviewRequired": false,
+      "reasons": []
+    },
+    {
+      "rowId": "waqf-2023-gaza",
+      "instrumentId": "PS-DECREE-LAW-2-2023-WAQF",
+      "instrumentTitle": "قرار بقانون رقم (2) لسنة 2023م بتعديل قانون الأوقاف والشؤون والمقدسات الإسلامية رقم (26) لسنة 1966م وتعديلاته",
+      "territory": "GAZA",
+      "asOfDate": "2026-09-21",
+      "assertedStatus": "UNRESOLVED",
+      "evidence": [
+        {
+          "evidenceId": "ogb-33311-status-global",
+          "kind": "EXPLICIT_OFFICIAL_REGISTRY_STATUS",
+          "url": "https://mjr.ogb.gov.ps/Decrees/Details/33311",
+          "publisher": "ديوان الجريدة الرسمية",
+          "proposition": "The registry status of the instrument is official, but this evidence does not by itself resolve current Gaza applicability.",
+          "territory": null,
+          "observedAt": "2026-09-21"
+        }
+      ],
+      "notes": [
+        "No Gaza-specific current applicability conclusion is inferred from West Bank/central-government evidence."
+      ],
+      "explicitStatusVerified": true,
+      "currentOfficialApplicationVerified": false,
+      "territoryScopeVerified": false,
+      "legalStatusVerified": false,
+      "conclusionEligible": false,
+      "reviewRequired": true,
+      "reasons": [
+        "legal_status_requires_further_verification",
+        "territory_scope_requires_verification",
+        "status_explicitly_unresolved"
+      ]
+    },
+    {
+      "rowId": "waqf-law-1966-west-bank",
+      "instrumentId": "PS-WAQF-LAW-26-1966-CONSOLIDATED",
+      "instrumentTitle": "قانون الأوقاف والشؤون الدينية رقم (26) لسنة 1966م وتعديلاته",
+      "territory": "WEST_BANK",
+      "asOfDate": "2026-09-21",
+      "assertedStatus": "AMENDED",
+      "evidence": [
+        {
+          "evidenceId": "ogb-merged-165",
+          "kind": "OFFICIAL_CONSOLIDATED_TEXT",
+          "url": "https://mjr.ogb.gov.ps/MergedLegislations/ViewText/165",
+          "publisher": "ديوان الجريدة الرسمية",
+          "proposition": "Official consolidated text lists the original law and its amendments through the 2023 decree-law.",
+          "territory": null,
+          "observedAt": "2026-09-21"
+        },
+        {
+          "evidenceId": "ogb-2023-hebron-law-application",
+          "kind": "CURRENT_OFFICIAL_APPLICATION",
+          "url": "https://mjr.ogb.gov.ps/Decrees/ViewText/33468/",
+          "publisher": "ديوان الجريدة الرسمية",
+          "proposition": "Official West Bank instruction relies on the amended waqf legislation.",
+          "territory": "WEST_BANK",
+          "observedAt": "2026-09-21"
+        }
+      ],
+      "notes": [
+        "The row identifies the law as amended, not as an untouched 1966 text."
+      ],
+      "explicitStatusVerified": false,
+      "currentOfficialApplicationVerified": true,
+      "territoryScopeVerified": true,
+      "legalStatusVerified": true,
+      "conclusionEligible": true,
+      "reviewRequired": false,
+      "reasons": []
+    },
+    {
+      "rowId": "settlement-40-1952-west-bank",
+      "instrumentId": "JO-LAND-WATER-SETTLEMENT-40-1952",
+      "instrumentTitle": "قانون تسوية الأراضي والمياه رقم (40) لسنة 1952م",
+      "territory": "WEST_BANK",
+      "asOfDate": "2026-09-21",
+      "assertedStatus": "UNRESOLVED",
+      "evidence": [
+        {
+          "evidenceId": "pla-current-settlement-page",
+          "kind": "CURRENT_OFFICIAL_APPLICATION",
+          "url": "https://www.pla.pna.ps/ar/Article/481/",
+          "publisher": "سلطة الأراضي الفلسطينية",
+          "proposition": "Current Land Authority settlement guidance expressly operates by reference to Law No. 40 of 1952.",
+          "territory": "WEST_BANK",
+          "observedAt": "2026-09-21"
+        },
+        {
+          "evidenceId": "pla-2025-settlement-notice",
+          "kind": "CURRENT_OFFICIAL_APPLICATION",
+          "url": "https://www.pla.pna.ps/public/files/server/works/317-1751794921.pdf",
+          "publisher": "هيئة تسوية الأراضي والمياه",
+          "proposition": "A 2025 official settlement notice invokes Article 6 of Law No. 40 of 1952.",
+          "territory": "WEST_BANK",
+          "observedAt": "2026-09-21"
+        }
+      ],
+      "notes": [
+        "Current official application is verified, but a full amendment/repeal consolidation is still required before asserting a complete legal-status conclusion."
+      ],
+      "explicitStatusVerified": false,
+      "currentOfficialApplicationVerified": true,
+      "territoryScopeVerified": true,
+      "legalStatusVerified": false,
+      "conclusionEligible": false,
+      "reviewRequired": true,
+      "reasons": [
+        "legal_status_requires_further_verification",
+        "current_application_does_not_replace_status_verification",
+        "status_explicitly_unresolved"
+      ]
+    },
+    {
+      "rowId": "land-regime-gaza",
+      "instrumentId": "GAZA-LAND-REGIME-CURRENT-MATRIX-SEED",
+      "instrumentTitle": "مسار تشريعات الأراضي المعمول بها في قطاع غزة",
+      "territory": "GAZA",
+      "asOfDate": "2026-09-21",
+      "assertedStatus": "UNRESOLVED",
+      "evidence": [
+        {
+          "evidenceId": "gaza-pla-government-property",
+          "kind": "OFFICIAL_TERRITORY_SPECIFIC_GUIDANCE",
+          "url": "https://www.pla.gov.ps/ar/%D8%A7%D9%84%D8%A5%D8%AF%D8%A7%D8%B1%D8%A9-%D8%A7%D9%84%D8%B9%D8%A7%D9%85%D8%A9-%D9%84%D8%A3%D9%85%D9%84%D8%A7%D9%83-%D8%A7%D9%84%D8%AD%D9%83%D9%88%D9%85%D8%A9-291.html",
+          "publisher": "سلطة الأراضي الفلسطينية - غزة",
+          "proposition": "Gaza-specific official guidance describes Egyptian-administration legislation and land-law layers relevant to government and waqf property.",
+          "territory": "GAZA",
+          "observedAt": "2026-09-21"
+        }
+      ],
+      "notes": [
+        "This row proves a separate Gaza legal track exists; it intentionally does not collapse that track into a single current statute."
+      ],
+      "explicitStatusVerified": false,
+      "currentOfficialApplicationVerified": false,
+      "territoryScopeVerified": true,
+      "legalStatusVerified": false,
+      "conclusionEligible": false,
+      "reviewRequired": true,
+      "reasons": [
+        "legal_status_requires_further_verification",
+        "status_explicitly_unresolved"
+      ]
+    }
+  ]
+}

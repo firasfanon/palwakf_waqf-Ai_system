@@ -1,0 +1,442 @@
+{
+    "program":  "WAQF_AI_COMPREHENSIVE_WAQF_REFERENCE_V1",
+    "phase":  "MEGA_B_PRIVATE_CORPUS_PILOT",
+    "generatedAt":  "2026-09-21T19:13:54.832Z",
+    "hardBoundaries":  {
+                           "liveSupabaseMutation":  false,
+                           "mainMerge":  false,
+                           "newBaseline":  false,
+                           "production":  false,
+                           "publicCorpusRelease":  false
+                       },
+    "privateArchiveRoot":  "\u003cUSER_HOME\u003e/.palwakf/private_reference_cache/waqf-ai-mega-b",
+    "acquisitionResults":  [
+                               {
+                                   "corpusId":  "waqf-law-1966-consolidated",
+                                   "status":  "NO_RECORD",
+                                   "skipped":  [
+                                                   {
+                                                       "url":  "https://mjr.ogb.gov.ps/MergedLegislations/ViewText/165",
+                                                       "reason":  "http_status_403"
+                                                   }
+                                               ]
+                               },
+                               {
+                                   "corpusId":  "waqf-amendment-2023",
+                                   "status":  "NO_RECORD",
+                                   "skipped":  [
+                                                   {
+                                                       "url":  "https://mjr.ogb.gov.ps/Decrees/ViewText/33311",
+                                                       "reason":  "http_status_403"
+                                                   }
+                                               ]
+                               },
+                               {
+                                   "corpusId":  "waqf-amendment-2023-gazette-198-pdf",
+                                   "status":  "PRESERVED_PRIVATE",
+                                   "sourceUrl":  "https://info.wafa.ps/userfiles/server/%D8%A7%D9%84%D9%88%D9%82%D8%A7%D8%A6%D8%B9%20%D8%A7%D9%84%D9%81%D9%84%D8%B3%D8%B7%D9%8A%D9%86%D9%8A%D8%A9%20%D8%A7%D9%84%D8%B9%D8%AF%D8%AF%20198.pdf",
+                                   "artifactVersionId":  "version-a2c69b4a3a7e8793bfa68edb76b8f7ed",
+                                   "artifactSha256":  "a2c69b4a3a7e8793bfa68edb76b8f7ede178895d613f8b04cb90f534c4b5283a",
+                                   "byteSize":  11863291,
+                                   "trustLevel":  "R2_VERIFIED_IDENTITY",
+                                   "reviewMode":  "ITEM_REVIEW",
+                                   "chatEligible":  false,
+                                   "publicDisplayEligible":  false,
+                                   "skipped":  [
+
+                                               ]
+                               },
+                               {
+                                   "corpusId":  "land-authority-law-2010",
+                                   "status":  "NO_RECORD",
+                                   "skipped":  [
+                                                   {
+                                                       "url":  "https://mjr.ogb.gov.ps/Decrees/Details/23283",
+                                                       "reason":  "http_status_403"
+                                                   }
+                                               ]
+                               },
+                               {
+                                   "corpusId":  "land-settlement-process-pla",
+                                   "status":  "PRESERVED_PRIVATE",
+                                   "sourceUrl":  "https://www.pla.pna.ps/ar/Article/481/",
+                                   "artifactVersionId":  "version-4d9c9400ca57fac7e0dbaa44fb127f0d",
+                                   "artifactSha256":  "4d9c9400ca57fac7e0dbaa44fb127f0daf0f57e0b902c7c49ed222f344c2aa97",
+                                   "byteSize":  71968,
+                                   "trustLevel":  "R2_VERIFIED_IDENTITY",
+                                   "reviewMode":  "BATCH_REVIEW",
+                                   "chatEligible":  false,
+                                   "publicDisplayEligible":  false,
+                                   "skipped":  [
+
+                                               ]
+                               },
+                               {
+                                   "corpusId":  "ottoman-land-code-1858-registry",
+                                   "status":  "PRESERVED_PRIVATE",
+                                   "sourceUrl":  "https://maqam.najah.edu/legislation/169/",
+                                   "artifactVersionId":  "version-6bad251bbf76de53d2e06f4d07bba18a",
+                                   "artifactSha256":  "6bad251bbf76de53d2e06f4d07bba18a65c3a5271a747fcc297042b423f2430a",
+                                   "byteSize":  237640,
+                                   "trustLevel":  "R2_VERIFIED_IDENTITY",
+                                   "reviewMode":  "ITEM_REVIEW",
+                                   "chatEligible":  false,
+                                   "publicDisplayEligible":  false,
+                                   "skipped":  [
+
+                                               ]
+                               },
+                               {
+                                   "corpusId":  "land-settlement-law-40-1952-registry",
+                                   "status":  "PRESERVED_PRIVATE",
+                                   "sourceUrl":  "https://laws-portal.najah.edu/legislation/15/",
+                                   "artifactVersionId":  "version-250cb3789da68c391b688ca9e96dbe7a",
+                                   "artifactSha256":  "250cb3789da68c391b688ca9e96dbe7a5416bf7e1b95fa66459c470acdc55856",
+                                   "byteSize":  86712,
+                                   "trustLevel":  "R2_VERIFIED_IDENTITY",
+                                   "reviewMode":  "ITEM_REVIEW",
+                                   "chatEligible":  false,
+                                   "publicDisplayEligible":  false,
+                                   "skipped":  [
+
+                                               ]
+                               },
+                               {
+                                   "corpusId":  "gaza-land-authority-legal-library",
+                                   "status":  "PRESERVED_PRIVATE",
+                                   "sourceUrl":  "https://www.pla.gov.ps/ar/ط§ظ„ظ‚ظˆط§ظ†ظٹظ†-ظˆط§ظ„ط£ظ†ط¸ظ…ط©-ظˆط§ظ„ظ‚ط±ط§ط±ط§طھ-ظˆط§ظ„طھط¹ظ„ظٹظ…ط§طھ-ط§ظ„ظ…ط¹ظ…ظˆظ„-ط¨ظ‡ط§-ظپظٹ-ط³ظ„ط·ط©-ط§ظ„ط£ط±ط§ط¶ظٹ-1408.html",
+                                   "artifactVersionId":  "version-099eda27a8f72a0302ed919b62eaa6f7",
+                                   "artifactSha256":  "099eda27a8f72a0302ed919b62eaa6f7b70856a29be9f51996c82659cb41b500",
+                                   "byteSize":  113529,
+                                   "trustLevel":  "R2_VERIFIED_IDENTITY",
+                                   "reviewMode":  "ITEM_REVIEW",
+                                   "chatEligible":  false,
+                                   "publicDisplayEligible":  false,
+                                   "skipped":  [
+
+                                               ]
+                               }
+                           ],
+    "pilotResults":  [
+                         {
+                             "scenarioId":  "WAQF_2023",
+                             "question":  "ظ…ط§ ط£ط«ط± طھط¹ط¯ظٹظ„ 2023 ط¹ظ„ظ‰ ظ‚ط§ظ†ظˆظ† ط§ظ„ط£ظˆظ‚ط§ظپ ظˆط§ظ„ط­ط¬ط¬ ط§ظ„ظˆظ‚ظپظٹط©طں",
+                             "route":  {
+                                           "issueClass":  "mixed",
+                                           "preferredDomains":  [
+                                                                    "waqf_law",
+                                                                    "historical"
+                                                                ],
+                                           "territories":  [
+                                                               "UNKNOWN"
+                                                           ],
+                                           "preferredEras":  [
+
+                                                             ],
+                                           "requiresLegalStatusVerification":  true,
+                                           "requiresHumanExpertReview":  true,
+                                           "reasons":  [
+                                                           "positive_law_terms",
+                                                           "historical_terms"
+                                                       ]
+                                       },
+                             "topHits":  [
+                                             {
+                                                 "documentId":  "waqf-amendment-2023-gazette-198-pdf",
+                                                 "title":  "ط§ظ„ظˆظ‚ط§ط¦ط¹ ط§ظ„ظپظ„ط³ط·ظٹظ†ظٹط© ط§ظ„ط¹ط¯ط¯ 198 â€” ظ‚ط±ط§ط± ط¨ظ‚ط§ظ†ظˆظ† ط±ظ‚ظ… (2) ظ„ط³ظ†ط© 2023ظ… ط¨طھط¹ط¯ظٹظ„ ظ‚ط§ظ†ظˆظ† ط§ظ„ط£ظˆظ‚ط§ظپ",
+                                                 "sourceUrl":  "https://info.wafa.ps/userfiles/server/%D8%A7%D9%84%D9%88%D9%82%D8%A7%D8%A6%D8%B9%20%D8%A7%D9%84%D9%81%D9%84%D8%B3%D8%B7%D9%8A%D9%86%D9%8A%D8%A9%20%D8%A7%D9%84%D8%B9%D8%AF%D8%AF%20198.pdf",
+                                                 "authorityClass":  "official_derivative",
+                                                 "legalStatusVerified":  false,
+                                                 "usableForConclusion":  false,
+                                                 "reasons":  [
+                                                                 "legal_status_not_verified"
+                                                             ],
+                                                 "scores":  {
+                                                                "lexical":  1,
+                                                                "semantic":  0,
+                                                                "authority":  0.5714285714285714,
+                                                                "graph":  0.3,
+                                                                "hybrid":  0.6942857142857143
+                                                            }
+                                             }
+                                         ],
+                             "citations":  [
+                                               {
+                                                   "citationId":  "refcite-b944ab734f775aac940c8f04",
+                                                   "sourceUrl":  "https://info.wafa.ps/userfiles/server/%D8%A7%D9%84%D9%88%D9%82%D8%A7%D8%A6%D8%B9%20%D8%A7%D9%84%D9%81%D9%84%D8%B3%D8%B7%D9%8A%D9%86%D9%8A%D8%A9%20%D8%A7%D9%84%D8%B9%D8%AF%D8%AF%20198.pdf",
+                                                   "artifactVersionId":  "version-a2c69b4a3a7e8793bfa68edb76b8f7ed",
+                                                   "artifactSha256":  "a2c69b4a3a7e8793bfa68edb76b8f7ede178895d613f8b04cb90f534c4b5283a",
+                                                   "locator":  {
+                                                                   "type":  "article",
+                                                                   "value":  "ط§ظ„ظ…ط§ط¯ط© (2003"
+                                                               },
+                                                   "alignmentVerified":  true
+                                               }
+                                           ],
+                             "citationAudit":  {
+                                                   "valid":  true,
+                                                   "defects":  [
+
+                                                               ]
+                                               },
+                             "conclusionEligible":  false,
+                             "pilotDisposition":  "RETRIEVAL_CITATION_PASS_LEGAL_STATUS_GATE_CLOSED"
+                         },
+                         {
+                             "scenarioId":  "SETTLEMENT",
+                             "question":  "ظ…ط§ ط§ظ„ظ…ط±ط¬ط¹ ظ„ط¥ط¬ط±ط§ط،ط§طھ طھط³ظˆظٹط© ط§ظ„ط£ط±ط§ط¶ظٹ ظˆط§ظ„ط§ط¹طھط±ط§ط¶ ط¹ظ„ظ‰ ط¬ط¯ظˆظ„ ط§ظ„ط­ظ‚ظˆظ‚ ظپظٹ ط§ظ„ط¶ظپط©طں",
+                             "route":  {
+                                           "issueClass":  "mixed",
+                                           "preferredDomains":  [
+                                                                    "administrative",
+                                                                    "registration_settlement",
+                                                                    "lease_hukr"
+                                                                ],
+                                           "territories":  [
+                                                               "WEST_BANK"
+                                                           ],
+                                           "preferredEras":  [
+
+                                                             ],
+                                           "requiresLegalStatusVerification":  true,
+                                           "requiresHumanExpertReview":  true,
+                                           "reasons":  [
+                                                           "administrative_terms",
+                                                           "property_title_terms"
+                                                       ]
+                                       },
+                             "topHits":  [
+                                             {
+                                                 "documentId":  "land-settlement-process-pla",
+                                                 "title":  "ط§ظ„ط¥ط¯ط§ط±ط© ط§ظ„ط¹ط§ظ…ط© ظ„طھط³ظˆظٹط© ط§ظ„ط£ط±ط§ط¶ظٹ ظˆط§ظ„ظ…ظٹط§ظ‡",
+                                                 "sourceUrl":  "https://www.pla.pna.ps/ar/Article/481/",
+                                                 "authorityClass":  "official_primary",
+                                                 "legalStatusVerified":  false,
+                                                 "usableForConclusion":  false,
+                                                 "reasons":  [
+                                                                 "legal_status_not_verified"
+                                                             ],
+                                                 "scores":  {
+                                                                "lexical":  0.9636363636363636,
+                                                                "semantic":  0,
+                                                                "authority":  1,
+                                                                "graph":  0,
+                                                                "hybrid":  0.7336363636363636
+                                                            }
+                                             },
+                                             {
+                                                 "documentId":  "land-settlement-law-40-1952-registry",
+                                                 "title":  "ظ‚ط§ظ†ظˆظ† طھط³ظˆظٹط© ط§ظ„ط£ط±ط§ط¶ظٹ ظˆط§ظ„ظ…ظٹط§ظ‡ ط±ظ‚ظ… (40) ظ„ط³ظ†ط© 1952ظ…",
+                                                 "sourceUrl":  "https://laws-portal.najah.edu/legislation/15/",
+                                                 "authorityClass":  "reference_secondary",
+                                                 "legalStatusVerified":  false,
+                                                 "usableForConclusion":  false,
+                                                 "reasons":  [
+                                                                 "legal_status_not_verified",
+                                                                 "secondary_authority"
+                                                             ],
+                                                 "scores":  {
+                                                                "lexical":  0.9454545454545454,
+                                                                "semantic":  0,
+                                                                "authority":  0.2857142857142857,
+                                                                "graph":  0,
+                                                                "hybrid":  0.5825974025974027
+                                                            }
+                                             }
+                                         ],
+                             "citations":  [
+                                               {
+                                                   "citationId":  "refcite-ec8ca07cf6d0a78849e76a03",
+                                                   "sourceUrl":  "https://www.pla.pna.ps/ar/Article/481/",
+                                                   "artifactVersionId":  "version-4d9c9400ca57fac7e0dbaa44fb127f0d",
+                                                   "artifactSha256":  "4d9c9400ca57fac7e0dbaa44fb127f0daf0f57e0b902c7c49ed222f344c2aa97",
+                                                   "locator":  {
+                                                                   "type":  "article",
+                                                                   "value":  "ط§ظ„ظ…ط§ط¯ط© (16)"
+                                                               },
+                                                   "alignmentVerified":  true
+                                               },
+                                               {
+                                                   "citationId":  "refcite-909adc55f9dfbdeb021941ac",
+                                                   "sourceUrl":  "https://laws-portal.najah.edu/legislation/15/",
+                                                   "artifactVersionId":  "version-250cb3789da68c391b688ca9e96dbe7a",
+                                                   "artifactSha256":  "250cb3789da68c391b688ca9e96dbe7a5416bf7e1b95fa66459c470acdc55856",
+                                                   "locator":  {
+                                                                   "type":  "article",
+                                                                   "value":  "ط§ظ„ظ…ط§ط¯ط© (8)"
+                                                               },
+                                                   "alignmentVerified":  true
+                                               }
+                                           ],
+                             "citationAudit":  {
+                                                   "valid":  true,
+                                                   "defects":  [
+
+                                                               ]
+                                               },
+                             "conclusionEligible":  false,
+                             "pilotDisposition":  "RETRIEVAL_CITATION_PASS_LEGAL_STATUS_GATE_CLOSED"
+                         },
+                         {
+                             "scenarioId":  "OTTOMAN",
+                             "question":  "ظ…ط§ طھطµظ†ظٹظپ ط§ظ„ط£ط±ط§ط¶ظٹ ظپظٹ ظ‚ط§ظ†ظˆظ† ط§ظ„ط£ط±ط§ط¶ظٹ ط§ظ„ط¹ط«ظ…ط§ظ†ظٹطں",
+                             "route":  {
+                                           "issueClass":  "mixed",
+                                           "preferredDomains":  [
+                                                                    "land_law",
+                                                                    "historical"
+                                                                ],
+                                           "territories":  [
+                                                               "UNKNOWN"
+                                                           ],
+                                           "preferredEras":  [
+                                                                 "OTTOMAN"
+                                                             ],
+                                           "requiresLegalStatusVerification":  true,
+                                           "requiresHumanExpertReview":  true,
+                                           "reasons":  [
+                                                           "positive_law_terms",
+                                                           "historical_terms"
+                                                       ]
+                                       },
+                             "topHits":  [
+                                             {
+                                                 "documentId":  "ottoman-land-code-1858-registry",
+                                                 "title":  "ظ‚ط§ظ†ظˆظ† ط§ظ„ط£ط±ط§ط¶ظٹ ط§ظ„ط¹ط«ظ…ط§ظ†ظٹ",
+                                                 "sourceUrl":  "https://maqam.najah.edu/legislation/169/",
+                                                 "authorityClass":  "reference_secondary",
+                                                 "legalStatusVerified":  false,
+                                                 "usableForConclusion":  false,
+                                                 "reasons":  [
+                                                                 "legal_status_not_verified",
+                                                                 "secondary_authority"
+                                                             ],
+                                                 "scores":  {
+                                                                "lexical":  1,
+                                                                "semantic":  0,
+                                                                "authority":  0.2857142857142857,
+                                                                "graph":  0,
+                                                                "hybrid":  0.6071428571428571
+                                                            }
+                                             }
+                                         ],
+                             "citations":  [
+                                               {
+                                                   "citationId":  "refcite-54cdeb51798bc92aa4a9182c",
+                                                   "sourceUrl":  "https://maqam.najah.edu/legislation/169/",
+                                                   "artifactVersionId":  "version-6bad251bbf76de53d2e06f4d07bba18a",
+                                                   "artifactSha256":  "6bad251bbf76de53d2e06f4d07bba18a65c3a5271a747fcc297042b423f2430a",
+                                                   "locator":  {
+                                                                   "type":  "article",
+                                                                   "value":  "ط§ظ„ظ…ط§ط¯ط© (133)"
+                                                               },
+                                                   "alignmentVerified":  true
+                                               }
+                                           ],
+                             "citationAudit":  {
+                                                   "valid":  true,
+                                                   "defects":  [
+
+                                                               ]
+                                               },
+                             "conclusionEligible":  false,
+                             "pilotDisposition":  "RETRIEVAL_CITATION_PASS_LEGAL_STATUS_GATE_CLOSED"
+                         },
+                         {
+                             "scenarioId":  "GAZA_REGISTRATION",
+                             "question":  "ظ…ط§ ط§ظ„ظ‚ط§ظ†ظˆظ† ط§ظ„ظ…ط¹ظ…ظˆظ„ ط¨ظ‡ ظپظٹ ظ‚ط·ط§ط¹ ط؛ط²ط© ط¨ط´ط£ظ† طھط³ط¬ظٹظ„ ط§ظ„ط£ط±ط§ط¶ظٹطں",
+                             "route":  {
+                                           "issueClass":  "mixed",
+                                           "preferredDomains":  [
+                                                                    "land_law",
+                                                                    "registration_settlement",
+                                                                    "lease_hukr"
+                                                                ],
+                                           "territories":  [
+                                                               "GAZA"
+                                                           ],
+                                           "preferredEras":  [
+
+                                                             ],
+                                           "requiresLegalStatusVerification":  true,
+                                           "requiresHumanExpertReview":  true,
+                                           "reasons":  [
+                                                           "positive_law_terms",
+                                                           "property_title_terms"
+                                                       ]
+                                       },
+                             "topHits":  [
+                                             {
+                                                 "documentId":  "gaza-land-authority-legal-library",
+                                                 "title":  "ط§ظ„ظ‚ظˆط§ظ†ظٹظ† ظˆط§ظ„ط£ظ†ط¸ظ…ط© ظˆط§ظ„ظ‚ط±ط§ط±ط§طھ ظˆط§ظ„طھط¹ظ„ظٹظ…ط§طھ ط§ظ„ظ…ط¹ظ…ظˆظ„ ط¨ظ‡ط§ ظپظٹ ط³ظ„ط·ط© ط§ظ„ط£ط±ط§ط¶ظٹ",
+                                                 "sourceUrl":  "https://www.pla.gov.ps/ar/ط§ظ„ظ‚ظˆط§ظ†ظٹظ†-ظˆط§ظ„ط£ظ†ط¸ظ…ط©-ظˆط§ظ„ظ‚ط±ط§ط±ط§طھ-ظˆط§ظ„طھط¹ظ„ظٹظ…ط§طھ-ط§ظ„ظ…ط¹ظ…ظˆظ„-ط¨ظ‡ط§-ظپظٹ-ط³ظ„ط·ط©-ط§ظ„ط£ط±ط§ط¶ظٹ-1408.html",
+                                                 "authorityClass":  "official_derivative",
+                                                 "legalStatusVerified":  false,
+                                                 "usableForConclusion":  false,
+                                                 "reasons":  [
+                                                                 "legal_status_not_verified"
+                                                             ],
+                                                 "scores":  {
+                                                                "lexical":  1,
+                                                                "semantic":  0,
+                                                                "authority":  0.5714285714285714,
+                                                                "graph":  0,
+                                                                "hybrid":  0.6642857142857143
+                                                            }
+                                             },
+                                             {
+                                                 "documentId":  "ottoman-land-code-1858-registry",
+                                                 "title":  "ظ‚ط§ظ†ظˆظ† ط§ظ„ط£ط±ط§ط¶ظٹ ط§ظ„ط¹ط«ظ…ط§ظ†ظٹ",
+                                                 "sourceUrl":  "https://maqam.najah.edu/legislation/169/",
+                                                 "authorityClass":  "reference_secondary",
+                                                 "legalStatusVerified":  false,
+                                                 "usableForConclusion":  false,
+                                                 "reasons":  [
+                                                                 "legal_status_not_verified",
+                                                                 "secondary_authority"
+                                                             ],
+                                                 "scores":  {
+                                                                "lexical":  0.84,
+                                                                "semantic":  0,
+                                                                "authority":  0.2857142857142857,
+                                                                "graph":  0,
+                                                                "hybrid":  0.5351428571428571
+                                                            }
+                                             }
+                                         ],
+                             "citations":  [
+                                               {
+                                                   "citationId":  "refcite-555ea3d1f6c8db2980642ef9",
+                                                   "sourceUrl":  "https://www.pla.gov.ps/ar/ط§ظ„ظ‚ظˆط§ظ†ظٹظ†-ظˆط§ظ„ط£ظ†ط¸ظ…ط©-ظˆط§ظ„ظ‚ط±ط§ط±ط§طھ-ظˆط§ظ„طھط¹ظ„ظٹظ…ط§طھ-ط§ظ„ظ…ط¹ظ…ظˆظ„-ط¨ظ‡ط§-ظپظٹ-ط³ظ„ط·ط©-ط§ظ„ط£ط±ط§ط¶ظٹ-1408.html",
+                                                   "artifactVersionId":  "version-099eda27a8f72a0302ed919b62eaa6f7",
+                                                   "artifactSha256":  "099eda27a8f72a0302ed919b62eaa6f7b70856a29be9f51996c82659cb41b500",
+                                                   "locator":  {
+                                                                   "type":  "section",
+                                                                   "value":  "document-body"
+                                                               },
+                                                   "alignmentVerified":  true
+                                               },
+                                               {
+                                                   "citationId":  "refcite-32b5cf120d52fea57b14ad5a",
+                                                   "sourceUrl":  "https://maqam.najah.edu/legislation/169/",
+                                                   "artifactVersionId":  "version-6bad251bbf76de53d2e06f4d07bba18a",
+                                                   "artifactSha256":  "6bad251bbf76de53d2e06f4d07bba18a65c3a5271a747fcc297042b423f2430a",
+                                                   "locator":  {
+                                                                   "type":  "article",
+                                                                   "value":  "ط§ظ„ظ…ط§ط¯ط© (4)"
+                                                               },
+                                                   "alignmentVerified":  true
+                                               }
+                                           ],
+                             "citationAudit":  {
+                                                   "valid":  true,
+                                                   "defects":  [
+
+                                                               ]
+                                               },
+                             "conclusionEligible":  false,
+                             "pilotDisposition":  "RETRIEVAL_CITATION_PASS_LEGAL_STATUS_GATE_CLOSED"
+                         }
+                     ],
+    "corpusBytesIncludedInEvidenceFile":  false
+}
