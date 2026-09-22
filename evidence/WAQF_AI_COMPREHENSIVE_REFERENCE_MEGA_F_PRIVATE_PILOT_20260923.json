@@ -1,0 +1,1977 @@
+{
+  "program": "WAQF_AI_COMPREHENSIVE_WAQF_REFERENCE_V1",
+  "phase": "MEGA_F_PREPRODUCTION_EVIDENCE_OPERABILITY_PRIVATE_PILOT",
+  "generatedAt": "2026-09-22T21:35:27.980Z",
+  "exactAuthorizedBase": "233723c5562ca26ad849ac246e7a96afb9a862df",
+  "hardBoundaries": {
+    "mainMerge": false,
+    "baselinePromotion": false,
+    "liveSharedSupabaseMutation": false,
+    "production": false,
+    "publicCorpusRelease": false,
+    "paidProviderProcurement": false,
+    "actualProductionUserAccountProvisioning": false,
+    "actualSpecialistDecisions": "HUMAN_ACTS_ONLY"
+  },
+  "privateManifest": {
+    "pathHint": "~/.palwakf/private_reference_cache/waqf-ai-mega-f/mega-f-private-source-manifest.json",
+    "sha256": "81d3e560627cc7a38eacde1e5b52d85db967277df30c20512ec8253a8b3f9c9d",
+    "preservedCount": 7,
+    "notPreservedCount": 5,
+    "allPrivateFixityPass": true,
+    "blockedAcquisitionRespectPass": true,
+    "preservedResults": [
+      {
+        "corpusId": "maqam-cassation-1383-2019-hukr",
+        "fileName": "maqam-1383-2019.html",
+        "sha256": "a868798e54b60acd307e918d095a106eaae049fdff3019f5b37c0fa14f064067",
+        "byteSize": 38058,
+        "expectedSha256": "a868798e54b60acd307e918d095a106eaae049fdff3019f5b37c0fa14f064067",
+        "expectedByteSize": 38058,
+        "fixityPass": true,
+        "contentType": "text/html",
+        "pageCount": null
+      },
+      {
+        "corpusId": "maqam-cassation-1543-2016-waqf",
+        "fileName": "maqam-1543-2016.html",
+        "sha256": "d4a15a4052e384883fdfbaf51343dca90fd134481cabdf8d279228807f8d1f9a",
+        "byteSize": 52711,
+        "expectedSha256": "d4a15a4052e384883fdfbaf51343dca90fd134481cabdf8d279228807f8d1f9a",
+        "expectedByteSize": 52711,
+        "fixityPass": true,
+        "contentType": "text/html",
+        "pageCount": null
+      },
+      {
+        "corpusId": "maqam-cassation-397-2023-mosque-waqf",
+        "fileName": "maqam-397-2023.html",
+        "sha256": "fd35da533695065dd9888dfd56509298afca67cfc6cd07a8e376b724108cc4e5",
+        "byteSize": 41097,
+        "expectedSha256": "fd35da533695065dd9888dfd56509298afca67cfc6cd07a8e376b724108cc4e5",
+        "expectedByteSize": 41097,
+        "fixityPass": true,
+        "contentType": "text/html",
+        "pageCount": null
+      },
+      {
+        "corpusId": "gaza-land-authority-legal-library",
+        "fileName": "gaza-pla-legal-library.html",
+        "sha256": "dc1b278bdd4b268c58db99747258df1603b61699a35d511453ace719422e991a",
+        "byteSize": 111226,
+        "expectedSha256": "dc1b278bdd4b268c58db99747258df1603b61699a35d511453ace719422e991a",
+        "expectedByteSize": 111226,
+        "fixityPass": true,
+        "contentType": "text/html",
+        "pageCount": null
+      },
+      {
+        "corpusId": "gaza-pla-land-specific-laws-2020",
+        "fileName": "gaza-pla-land-laws.html",
+        "sha256": "bb21fb543a070f538347317b48a36b9ddb73ded6e2c5cf7b6fd8b2d240f9f9b4",
+        "byteSize": 126655,
+        "expectedSha256": "bb21fb543a070f538347317b48a36b9ddb73ded6e2c5cf7b6fd8b2d240f9f9b4",
+        "expectedByteSize": 126655,
+        "fixityPass": true,
+        "contentType": "text/html",
+        "pageCount": null
+      },
+      {
+        "corpusId": "fiqh-hanafi-hilal-ahkam-al-waqf",
+        "fileName": "fiqh-hilal-ahkam-al-waqf.pdf",
+        "sha256": "b6186e5d6e7378a944eadf8af876781ee1c7647337d2c143222a5eccffa4268d",
+        "byteSize": 6945124,
+        "expectedSha256": "b6186e5d6e7378a944eadf8af876781ee1c7647337d2c143222a5eccffa4268d",
+        "expectedByteSize": 6945124,
+        "fixityPass": true,
+        "contentType": "application/pdf",
+        "pageCount": 348
+      },
+      {
+        "corpusId": "fiqh-hanbali-khallal-kitab-al-wuquf",
+        "fileName": "fiqh-khallal-kitab-al-wuquf.pdf",
+        "sha256": "e882bc8f2eacb167987c5b2e0daa72bded6f56938f068587d5f83a7d2f521037",
+        "byteSize": 11576223,
+        "expectedSha256": "e882bc8f2eacb167987c5b2e0daa72bded6f56938f068587d5f83a7d2f521037",
+        "expectedByteSize": 11576223,
+        "fixityPass": true,
+        "contentType": "application/pdf",
+        "pageCount": 881
+      }
+    ],
+    "notPreserved": [
+      {
+        "bypassAttempted": false,
+        "corpusId": "fiqh-isaf-fi-ahkam-al-awqaf",
+        "sourceUrl": "https://archive.org/download/FP50185/50185.pdf",
+        "result": "HTTP_403"
+      },
+      {
+        "bypassAttempted": false,
+        "corpusId": "bukhari-2737-muslim-1632-waqf-hadith-dorar",
+        "sourceUrl": "https://dorar.net/hadith/sharh/150850",
+        "result": "HTTP_403",
+        "mode": "LIVE_READ_ONLY"
+      },
+      {
+        "bypassAttempted": false,
+        "corpusId": "quran-complex-developer-platform",
+        "sourceUrl": "https://qurancomplex.gov.sa/en/techquran/dev/",
+        "result": "CONNECTION_TIMEOUT",
+        "mode": "LIVE_READ_ONLY"
+      },
+      {
+        "bypassAttempted": false,
+        "corpusId": "jerusalem-israel-land-registry-extract-service",
+        "sourceUrl": "https://www.gov.il/en/service/land_registration_extract",
+        "result": "HTTP_403",
+        "mode": "LIVE_READ_ONLY"
+      },
+      {
+        "bypassAttempted": false,
+        "corpusId": "jerusalem-soi-unregulated-cadastre-service",
+        "sourceUrl": "https://www.gov.il/en/service/information-cadastre-unregulated-area-jerusalem",
+        "result": "HTTP_403",
+        "mode": "LIVE_READ_ONLY"
+      }
+    ]
+  },
+  "caseLaw": {
+    "representativeDecisionCount": 3,
+    "case1383IdentityPass": true,
+    "case1383HoldingTermsPass": true,
+    "appellateChainPass": true,
+    "normalized1383": {
+      "decisionId": "ps-cassation-1383-2019",
+      "court": "Palestinian Court of Cassation",
+      "level": "CASSATION",
+      "caseNumber": "1383/2019",
+      "decisionDate": "2021-01-25",
+      "territory": "WEST_BANK",
+      "sourceCorpusId": "maqam-cassation-1383-2019-hukr",
+      "sourceArtifactSha256": "a868798e54b60acd307e918d095a106eaae049fdff3019f5b37c0fa14f064067",
+      "issueTags": [
+        "waqf",
+        "hukr",
+        "usufruct",
+        "raqaba",
+        "registration"
+      ],
+      "holdingSummary": "Case-specific holding keeps raqaba with the waqf while the hukr/benefit right is registered to the claimant.",
+      "disposition": "CASSATION_ACCEPTED_AND_REGISTRATION_RELIEF_ORDERED",
+      "appellateRelations": [
+        {
+          "relation": "ORIGINATES_FROM",
+          "court": "Hebron Court of First Instance",
+          "caseNumber": "27/2018",
+          "decisionDate": null
+        },
+        {
+          "relation": "CASSATION_OF",
+          "court": "Jerusalem Court of Appeal",
+          "caseNumber": "341/2019",
+          "decisionDate": "2019-09-16"
+        },
+        {
+          "relation": "RESOLVES",
+          "court": "Palestinian Court of Cassation",
+          "caseNumber": "1383/2019",
+          "decisionDate": "2021-01-25"
+        }
+      ],
+      "appellateNormalizationComplete": true,
+      "caseSpecificOnly": true,
+      "generalizationAllowed": false,
+      "specialistReview": "PENDING"
+    },
+    "caseSpecificConclusionPass": true,
+    "generalizationAllowed": false
+  },
+  "corpusConvergence": [
+    {
+      "familyId": "CASE_LAW",
+      "state": "ADVANCED",
+      "coverageState": "PARTIAL",
+      "blocker": "full_representative_appellate_normalization_pending"
+    },
+    {
+      "familyId": "SHARIA_PRIMARY",
+      "state": "ADVANCED",
+      "coverageState": "PARTIAL",
+      "blocker": "primary_bytes_and_specialist_interpretation_pending"
+    },
+    {
+      "familyId": "FIQH_CLASSICAL",
+      "state": "ADVANCED",
+      "coverageState": "PARTIAL",
+      "blocker": "page_locator_and_specialist_interpretation_pending"
+    },
+    {
+      "familyId": "LAND_GAZA_CURRENT",
+      "state": "UNCHANGED_OPEN",
+      "coverageState": "UNRESOLVED",
+      "blocker": "territory_specific_current_status_unresolved"
+    },
+    {
+      "familyId": "LAND_JERUSALEM_TRACK",
+      "state": "UNCHANGED_OPEN",
+      "coverageState": "UNRESOLVED",
+      "blocker": "jurisdiction_and_applicability_unresolved"
+    }
+  ],
+  "territoryPackets": [
+    {
+      "territory": "GAZA",
+      "evidenceCorpusIds": [
+        "gaza-land-authority-legal-library",
+        "gaza-government-property-legal-guidance",
+        "gaza-pla-land-specific-laws-2020"
+      ],
+      "evidenceMode": "PRESERVED_PRIVATE",
+      "evidenceCoverageAdvanced": true,
+      "currentLegalStatusResolved": false,
+      "conclusionEligible": false,
+      "sovereigntyInferenceAllowed": false,
+      "ownershipInferenceAllowed": false,
+      "blockers": [
+        "instrument_by_instrument_current_status_unresolved",
+        "expert_territory_legal_status_review_pending"
+      ]
+    },
+    {
+      "territory": "JERUSALEM",
+      "evidenceCorpusIds": [
+        "jerusalem-israel-land-registry-extract-service",
+        "jerusalem-soi-unregulated-cadastre-service"
+      ],
+      "evidenceMode": "LIVE_READ_ONLY",
+      "evidenceCoverageAdvanced": true,
+      "currentLegalStatusResolved": false,
+      "conclusionEligible": false,
+      "sovereigntyInferenceAllowed": false,
+      "ownershipInferenceAllowed": false,
+      "blockers": [
+        "live_sources_not_privately_preserved",
+        "jurisdiction_and_applicability_unresolved",
+        "expert_territory_legal_status_review_pending"
+      ]
+    }
+  ],
+  "shariaFiqh": {
+    "sourceReadiness": [
+      {
+        "corpusId": "maqam-cassation-1383-2019-hukr",
+        "sourceIdentityVerified": true,
+        "preservedBytes": true,
+        "artifactSha256": "a868798e54b60acd307e918d095a106eaae049fdff3019f5b37c0fa14f064067",
+        "exactPageOrHoldingLocatorVerified": true,
+        "specialistReview": "PENDING",
+        "privateRetrievalEligible": true,
+        "substantiveConclusionEligible": true,
+        "blockers": [
+          "case_specific_only",
+          "specialist_generalization_review_pending"
+        ]
+      },
+      {
+        "corpusId": "maqam-cassation-1543-2016-waqf",
+        "sourceIdentityVerified": true,
+        "preservedBytes": true,
+        "artifactSha256": "d4a15a4052e384883fdfbaf51343dca90fd134481cabdf8d279228807f8d1f9a",
+        "exactPageOrHoldingLocatorVerified": false,
+        "specialistReview": "PENDING",
+        "privateRetrievalEligible": true,
+        "substantiveConclusionEligible": false,
+        "blockers": [
+          "exact_holding_locator_review_pending",
+          "specialist_interpretation_pending"
+        ]
+      },
+      {
+        "corpusId": "maqam-cassation-397-2023-mosque-waqf",
+        "sourceIdentityVerified": true,
+        "preservedBytes": true,
+        "artifactSha256": "fd35da533695065dd9888dfd56509298afca67cfc6cd07a8e376b724108cc4e5",
+        "exactPageOrHoldingLocatorVerified": false,
+        "specialistReview": "PENDING",
+        "privateRetrievalEligible": true,
+        "substantiveConclusionEligible": false,
+        "blockers": [
+          "exact_holding_locator_review_pending",
+          "specialist_interpretation_pending"
+        ]
+      },
+      {
+        "corpusId": "bukhari-2737-muslim-1632-waqf-hadith-dorar",
+        "sourceIdentityVerified": true,
+        "preservedBytes": false,
+        "artifactSha256": null,
+        "exactPageOrHoldingLocatorVerified": true,
+        "specialistReview": "PENDING",
+        "privateRetrievalEligible": false,
+        "substantiveConclusionEligible": false,
+        "blockers": [
+          "live_read_only_source",
+          "primary_collection_bytes_not_preserved",
+          "sharia_specialist_review_pending"
+        ]
+      },
+      {
+        "corpusId": "fiqh-hanafi-hilal-ahkam-al-waqf",
+        "sourceIdentityVerified": true,
+        "preservedBytes": true,
+        "artifactSha256": "b6186e5d6e7378a944eadf8af876781ee1c7647337d2c143222a5eccffa4268d",
+        "exactPageOrHoldingLocatorVerified": false,
+        "specialistReview": "PENDING",
+        "privateRetrievalEligible": true,
+        "substantiveConclusionEligible": false,
+        "blockers": [
+          "scanned_edition_no_governed_page_locator",
+          "fiqh_specialist_review_pending"
+        ]
+      },
+      {
+        "corpusId": "fiqh-hanbali-khallal-kitab-al-wuquf",
+        "sourceIdentityVerified": true,
+        "preservedBytes": true,
+        "artifactSha256": "e882bc8f2eacb167987c5b2e0daa72bded6f56938f068587d5f83a7d2f521037",
+        "exactPageOrHoldingLocatorVerified": false,
+        "specialistReview": "PENDING",
+        "privateRetrievalEligible": true,
+        "substantiveConclusionEligible": false,
+        "blockers": [
+          "scanned_edition_no_governed_page_locator",
+          "fiqh_specialist_review_pending"
+        ]
+      }
+    ],
+    "shariaFailClosedPass": true,
+    "fiqhHitCount": 2,
+    "fiqhFailClosedPass": true,
+    "actualFiqhOrShariaSpecialistDecisionIncluded": false
+  },
+  "continuity": {
+    "localRestoreDrillPass": true,
+    "restoreChecks": [
+      {
+        "corpusId": "maqam-cassation-1383-2019-hukr",
+        "restored": true,
+        "fixityPass": true
+      },
+      {
+        "corpusId": "maqam-cassation-1543-2016-waqf",
+        "restored": true,
+        "fixityPass": true
+      },
+      {
+        "corpusId": "maqam-cassation-397-2023-mosque-waqf",
+        "restored": true,
+        "fixityPass": true
+      },
+      {
+        "corpusId": "gaza-land-authority-legal-library",
+        "restored": true,
+        "fixityPass": true
+      },
+      {
+        "corpusId": "gaza-pla-land-specific-laws-2020",
+        "restored": true,
+        "fixityPass": true
+      }
+    ],
+    "offlineReplayPass": true,
+    "caseOfflineReplay": {
+      "question": "ما أثر الحكر على رقبة العقار في نقض 1383/2019؟",
+      "networkCalls": 0,
+      "allFixityVerified": true,
+      "rehydratedCount": 1,
+      "topDocumentIds": [
+        "maqam-cassation-1383-2019-hukr"
+      ],
+      "conclusionEligible": false,
+      "disposition": "OFFLINE_REPLAY_PASS_STATUS_GATE_CLOSED"
+    },
+    "gazaOfflineReplay": {
+      "question": "ما منظومة قوانين الأراضي في غزة؟",
+      "networkCalls": 0,
+      "allFixityVerified": true,
+      "rehydratedCount": 2,
+      "topDocumentIds": [
+        "gaza-pla-land-specific-laws-2020",
+        "gaza-land-authority-legal-library"
+      ],
+      "conclusionEligible": false,
+      "disposition": "OFFLINE_REPLAY_PASS_STATUS_GATE_CLOSED"
+    },
+    "readiness": {
+      "localImmutableRestoreDrillRequired": true,
+      "localOfflineReplayRequired": true,
+      "fixityRequired": true,
+      "independentProviderCertified": false,
+      "productionContinuityCertified": false,
+      "externalDebt": [
+        "independent_second_provider_not_provisioned",
+        "production_worm_retention_not_certified",
+        "production_restore_runbook_not_accepted"
+      ]
+    }
+  },
+  "multiSourceE2E": {
+    "retrievalDocumentCount": 4,
+    "caseSpecificConclusionPass": true,
+    "caseTopHit": {
+      "documentId": "case-1383-2019-real",
+      "title": "نقض 1383/2019 — الحكر ورقبة العقار الوقفي",
+      "content": "نقض 1383/2019 الحكر ورقبة العقار الوقفي القضية رقم 1383/2019 المنعقدة في محكمة النقض بتاريخ 2021-01-25 الرئيسية أقسام الموقع مجلة الوقائع الفلسطينية التشريعات الأحكام القضائية قرارات الهيئة العامة المدونة الإلكترونية رسائل الماجستير أبحاث ومقالات حول الموقع حول الموقع التعريف بالموسوعة محتويات الموسوعة فكرة الموسوعة شكر وتقدير تنويه اتصل بنا تسجيل الدخول الاشتراك تسجيل الدخول الاشتراك الأحكام القضائية القضية رقم 1383/2019 المنعقدة … السنة 2019 الرقم 1383 تاريخ الفصل 25 يناير، 2021 المحكمة محكمة النقض نوع التقاضي طعون حقوقية التصنيفات حقوق - الملكية - منع معارضة في منفعة النص دولـــــة فــــلســــــطين السلطــــة القضائيـــة محكمــة النقض \"الحكـــــم\" الصادر عن محكمة النقض المنعقدة في رام الله المأذونة بإجراء المحاكمة وإصداره بإسم الشعب العربي الفلسطيني الهـيئـــــــــة الحـاكـمــــــــة بـرئاســـــــة القاضــــــي السيــــــد عبــد الله غـــزلان وعضويـة القضـــاة السادة : محمـــد الحاج ياسيـــن ، فــوّاز عطيــة ، محمـود جامـوس ، كمال جبر الطــــاعـــــن : حازم عيد حامد بدر/ الخليل وكيله المحامي رجب دنديس/ الخليل المطعـــون ضده : احمد سعيد بيوض التميمي بصفته متولي وقف الصحابي تميم الداري بموجب حجة تولية صادرة عن محكمة الخليل الشرعية رقم 340/118/127 تاريخ 30/12/2002/الخليل وكيله المحامي منير الحسيني/ الخليل الإجــــــــــــــراءات تقدم الطاعن بواسطة وكيله بهذا الطعن بتاريخ 27/10/2019 لنقض الحكم الصادربتاريخ 16/9/2019 عن محكمة استئناف القدس المنعقدة برام الله في الاستئناف المدني رقم 341/2019 القاضي: \" برد الاستئناف موضوعا وتأييد الحكم المستأنف، وتضمين المستأنف الرسوم والمصاريف \". تستند اسباب الطعن في مجملها بأن : محكمة الاستئناف اخطأت في حكمها برد الاستئناف رغم أن الدعوى هي منع معاضة في حق المنفعة والتصرف والقرار في عقار وقفي تعود التولية عليه للمطعون ضده، واساس الدعوى هو تنفيذ حجة الحكر. اقر الطاعن بملكية رقبة العقار للوقف، وادعاء الطاعن يتعلق بتبيت ملكيته لحق المنفعة والتصرف والقرار المستند لحجة التحكير، الامر الذي يجعل من قرار محكمة الاستئناف مجافاة للقانون. اخطأت محكمة الاستئناف في عدم تطبيق حكم المادة 1549 من المجلة. وبالنتيجة التمس وكيل الطاعن قبول الطعن شكلا لوروده ضمن الميعاد، وفي الموضوع نقض الحكم الطعين، واصدار الحكم بتثبيت حق الطاعن في المنفعة والتصرف في العقار موضوع الدعوى، وتضمين المطعون ضده الرسوم والمصاريف واتعاب المحاماة. لم يتقدم المطعون ضده بلائحة جوابية رغم تبلغه وفق الاصول. المحكمـــــــــــــــــة بالتدقيق وبعد المداولة، ولورود الطعن ضمن الميعاد القانوني في أول يوم عمل بعد اجازة رسمية تقرر قبوله شكلا. وفي الموضوع ، وعلى ما أنبأت عنه أوراق الدعوى أن المدعي الطاعن ، اقام الدعوى المدنية رقم 27/2018 بتاريخ 28/1/2018 امام محكمة بداية الخليل، ضد المدعى عليه المطعون ضده موضوعها: اثبات ملكية ومنع معارضة في حق المنفعة والقرار والتصرف، على اساس من القول أن جزء من العقار رقم 66 من الحوض 34410 من اراضي الخليل موقع الثغرة العماير، تعود ملكية منفعتها للمدعي بواقع 2355 متر مربع بموجب حجة تحكير صادرة عن محكمة الخليل الشرعية بتاريخ 15/9/2011 ، إذ شرع المدعي في اجراءات تسجيل حجة التحكير من خلال المدعى عليه إلا أن الاخير رفض ذلك. وفي السياق المتصل تقدم المدعى عليه بلائحة جوابية ، ابدى من خلالها أن الدعوى واجبة الرد للتقادم ولانعدام الخصومة وللتناقض والجهالة الفاحشة في الدعوى، وابدى أن حجة التحكير صحيحة وصدرت لصالح المدعي وأن صلاحيته تنحصر في اصدار حجة التحكير وليس في اجراء معاملة تغيير التصرف، وبنتيجة المحاكمة قضت المحكمة بتاريخ 17/3/2019 \" برد الدعوى والحكم على المدعي بالرسوم والمصاريف واتعاب محاماة بواقع 50 دينار اردني\". لم يرتضِ المدعي بالحكم فبادر للطعن فيه امام محكمة استئناف القدس في الاستئناف المدني رقم 341/2019، وبنتيجة المحاكمة قضت المحكمة بتاريخ 16/9/2016 برد الاستئناف موضوعا، وتأييد الحكم المستأنف وتضمين المستأنف الرسوم والمصاريف \". لم يرتضِ المدعي بحكم محكمة الاستئناف، فبادرللطعن فيه بالنقض بتاريخ 27/10/2019 بموجب الطعن الماثل، للاسباب التي سيقت أعلاه. وبعطف النظر على الاسباب التي سيقت في لائحة الطعن، التي انصبت في مجملها بتخطئة محكمة الاستئناف بتأييد الحكم المستأنف الذي قضى برد الدعوى، دون أن تراع أن موضوع الدعوى الاساس هو المطالبة بتنفيذ حجية الحكر الصادرة عن المحكمة الشرعية المختصة بتسجيلها لدى دائرة التسجيل الاراضي ضمن منطقة العقار، وأن المطالبة بتنفيذ الحكر يستند لما اكتسبه المدعي من حقوق بموجب المادة 1549 من المجلة، نرى في ذلك أن قانون تسوية الاراضي والمياه رقم 40 لسنة 1953 وتعديلاته نص في المادة 2 منه على أن المقصود بكلمة الارض:\" الاراضي الاميرية والموقوفة والابنية والاشجار وأي شيئ ثابت على الارض\"، كما وقصد بذات المادة بتسوية الاراضي والمياه :\" تسوية جميع المسائل والاختلافات المتعلقة بأي حق تصرف أو حق تملك في الارض أو المياه أو حق منفعة فيها أو أية حقوق متعلقة بها وقابلة للتسجيل\". ولما كان الباعث على التحكير يقوم على استجابة لضرورة أو مصلحة محققة للوقف، كأن تكون العين الموقوفة قد خربت وتعطل الانتفاع بها كليا، وليس لدى الوقف ريع لتعميرها، فإن ما أنبأت عنه حجة التحكير الصادرة عن المحكمة الشرعية المختصة بمقتضى (المبرز م/3)، اكدت على واقعة طبيعة الارض بأنها صخرية لا ينتفع بها الوقف ولا تدرعليه أي ريع، وبالتالي اصدار حجية التحكير من المحكمة الشرعية المختصة هدفه الاستجابة للضرورة ومصلحة الوقف عملا باحكام المادة 332 من قانون العدل والانصاف في القضاء على مشكلات الوقف، التي نصت على جواز تحكيرها نتيجة تعطل الانتفاع بها ولم يكن للوقف ريع تعمر به. وعليه وبما أن الحكر هو عقد يكسب المحتكر حقا عينيا على ارض الوقف يخوله الانتفاع بها بكافة اوجه الانتفاع بما في ذلك اقامة الابنية أو استعمالها للغراس أو لأي غرض آخر لا يضر بالوقف لقاء اجر محدد، وهذا الحق مشتق من حقوق حق الملكية مع بقاء رقبة العقار لجهة الوقف، فإن حق الانتفاع المتلقى من الحكر يعد حقا عينا مشتقا من حقوق الملكية، وطلب تسجيل هذا الحق في الموقع الرسمي امام دائرة تسجيل الاراضي في منطقة العقار، له اصل ثابت في حكم المادة 3 من قانون تسوية الاراضي والمياه سالف الذكر،سواء أكان الحق في التصرف أو المنفعة ثابتا أم متنازعا فيه. لذلك كان على المحكمة مصدرة الحكم الطعين أن تراع واقع حجية الحكر التي هي تتناول حقا مشتقا من حقوق الملكية، وكان عليها مراعاة احكام قانون تسوية الاراضي والمياه سالف الذكر بأن تقضي بتسجيل رقبة العقار للوقف وملكية حق المنفعة بمقتضى التحكير للمدعي وفق ما أفصح عنه المبرز م/3 سالف الذكر، ولما لم تفعل فإن حكمها قد شابه فساد في الاستدلال وفهم غير سائغ لوقائع الدعوى واستنتاج في غير محله، مما يجعل من بعض اسباب الطعن واردة على الحكم الطعين، الامر الذي يتعين نقضه. لـــــــهذه الأسبـــــــاب نقرر قبول الطعن موضوعا، وعملا باحكام المادة 237/2-أ من الاصول المدنية والتجارية الفصل في موضوع الدعوى لأنه صالح للفصل فيه، وبالتالي الحكم بتسجيل حجة الحكر المبرز م/3 في دائرة اراضي الخليل على أن تسجل ملكية رقبة العقار باسم الوقف وحق الحكر \"المنفعة\" باسم المدعي الطاعن، دون الحكم بالرسوم أو المصاريف أو اتعاب المحاماة لأي مرحلة من مراحل التقاضي. حكما صدر تدقيقا باسم الشعب العربي الفلسطيني بتاريخ 25/01/2021 الكاتـــــــــب الرئيـــــــس ف.ع النص الكامل النصوص القانونية المذكورة في الحكم المادة رقم 2 من قانون تسوية الأراضي والمياه قانون رقم (40) لسنة 1952م المادة رقم 3 من قانون تسوية الأراضي والمياه قانون رقم (40) لسنة 1952م المادة رقم 1549 من مجلة الأحكام العدلية أحكام قضائية مشابهة القضية رقم 341/2019 المنعقدة في محكمة استئناف القدس بتاريخ 2019-09-16 القضية رقم 1177/2017 المنعقدة في محكمة النقض بتاريخ 2018-01-28 القضية رقم 132/2017 المنعقدة في محكمة استئناف القدس بتاريخ 2017-06-12 اتصل بنا نستقبل اقتراحاتكم وملاحظاتكم من خلال وسائل التواصل أدناه: نابلس- فلسطين حرم جامعة النجاح الجديد كلية القانون صندوق البريد: 7 الهاتف: +970 (9) 2345113 داخلي: 4144 البريد الإلكتروني: [email protected] المزيد مجلس القضاء الأعلى المحكمة الدستورية العليا ديوان الجريدة الرسمية المرجع الإلكتروني للجريدة الرسمية النيابة العامة الفلسطينية هيئة مكافحة الفساد المعهد القضائي الفلسطيني وزارة العدل وزارة العمل الجهاز المركزي للإحصاء الفلسطيني اتحاد الغرف التجارية الصناعية الزراعية الفلسطينية سلطة الأراضي الفلسطينية هيئة تسوية الأراضي والمياه موسوعة ودق القانونية المركز الفلسطيني للسلام والديمقراطية جامعة النجاح الوطنية كلية القانون مستودع الأبحاث مجلة جامعة النجاح للأبحاث - ب (العلوم الإنسانية) مجلة جامعة النجاح للقانون والاقتصاد سياسة الخصوصية شروط الاستخدام &copy; 2026 جامعة النجاح الوطنية - كلية القانون",
+      "domain": "case_law",
+      "era": "CONTEMPORARY",
+      "territories": [
+        "WEST_BANK"
+      ],
+      "authorityClass": "reference_secondary",
+      "sourceUrl": "https://maqam.najah.edu/judgments/7576/",
+      "publisher": "مقام / جامعة النجاح الوطنية",
+      "legalStatusVerified": true,
+      "artifactVersionId": "version-a868798e54b60acd307e918d095a106e",
+      "artifactSha256": "a868798e54b60acd307e918d095a106eaae049fdff3019f5b37c0fa14f064067",
+      "locator": "case-specific-holding-and-appellate-chain",
+      "semanticScore": 0.95,
+      "graphScore": 0.7,
+      "structuredConclusionEligible": true,
+      "scores": {
+        "lexical": 1,
+        "semantic": 0.95,
+        "authority": 0.2857142857142857,
+        "graph": 0.7,
+        "hybrid": 1
+      },
+      "usableForConclusion": true,
+      "reasons": [
+        "secondary_authority"
+      ]
+    },
+    "gazaFailClosedPass": true,
+    "gazaTopHit": {
+      "documentId": "gaza-land-lineage-real",
+      "title": "قوانين خاصة بالأراضي — غزة",
+      "content": "قوانين خاصة بالأراضي في غزة سلطة الأراضي الفلسطينية - غزة | قوانين خاصة بالاراضي بحث القائمة الرئيسية سلطة الأراضي تعريف عن سلطة الأراضي رؤيتنا رسالتنا الأهداف الاستراتيجية دليل الخدمات الخطة التشغيلية 2023 التقارير السنوية دراسات رضا متلقي الخدمة دراسات مؤشرات الأداء دراسات الرضا الوظيفي سياسات أمن المعلومات القوانين والأنظمة والقرارات والتعليمات المعمول بها في سلطة الأراضي للاتصال بنا املاك الحكومة تعريف عن الإدارة العامة لأملاك الحكومة الهدف العام مهام الإدارة العامة لأملاك الحكومة التعديات على الأراضي الحكومية التخصيصات (منفعة أو إيجاره) الايجارات المحررات إحصائيات المساحة تعريف عن الإدارة العامة للمساحة الهدف العام مهام الإدارة العامة للمساحة الطابو تعريف عن الإدارة العامة للطابو الهدف العام مهام الإدارة العامة للطابو أنواع المعاملات رسوم المعاملات المكتبة القانونية قرارات رئيس سلطة الأراضي قرارات مجلس الوزراء واللجنة العليا للأراضي الحكومية الخاصة بالأراضي قوانين خاصة بالاراضي قوانين ذات صلة بالأراضـي قوانين هامة القوانين والأنظمة والقرارات والتعليمات المعمول بها في سلطة الأراضي معجم المصطلحات القانونية خدمات المواطنين استعلام المواقع التحقق من موقع القسائم التحقق من مستخرج القيد الاستعلام عن حالة معاملة المعاملات غير المكتملة المعاملات التي سيتم اتلافها في نهاية الشهر الحالي الوكالات طلب تقديم اقتراح طلب تقديم شكوى تقديم طلب نماذج المعاملات اسماء المساحين المعتمدين طلب تقديم شكوى بحث المكتبة القانونية قوانين خاصة بالاراضي 12 مايو, 2020 Share Tweet 7434 قوانين خاصة بالأراضي 1. أمر رقم 575 بشأن إعادة التسجيل. 2. تشكيل لجنة لاملاك الحكومة. 3. قانون الاراضي استملاكها للغايات العامة المعدل رقم 34 لسنة 1946. 4. قانون الاراضي استملاكها للغايات العامة المعدل رقم 64 لسنة 1946. 5. قانون الاراضي استملاكها للغايات العامة رقم 24 لسنة 1943. 6. قانون الأراضي العثمانية. 7. قانون الأراضي العمومية. 8. قانون الأراضي الموات. 9. قانون التصرف بالاموال غير المنقولة. 10. قانون الغاء الوقف على غير الخيرات المعدل لسنة 1954. 11. قانون الغاء الوقف على غير الخيرات. 12. قانون المساحة المعدل رقم 2 لسنة 1946. 13. قانون المساحة لسنة 1929. 14. قانون انتقال الاراضي المعدل رقم 1لسنة 1939. 15. قانون انتقال الاراضي المعدل رقم 13 لسنة 1943. 16. قانون انتقال الاراضي المعدل رقم 16لسنة1938. 17. قانون انتقال الاراضي المعدل رقم 20 لسنة 1937. 18. قانون انتقال الاراضي المعدل رقم 39 لسنة1939. 19. قانون انتقال الاراضي المعدل رقم 69 لسنة 1947. 20. قانون انتقال الاراضي. 21. قانون تسوية حقوق ملكية الاراضي المعدل رقم 12 لسنة 1942. 22. قانون تسوية حقوق ملكية الاراضي المعدل رقم 18 لسنة 1944. 23. قانون تسوية حقوق ملكية الاراضي المعدل رقم 48 لسنة 1939. 24. قانون تسوية حقوق ملكية الاراضي رقم 1 لسنة 1946. 25. قانون تسوية حقوق ملكية الاراضي رقم 9لسنة 1928. 26. قانون تقسيم الاموال المشتركة غير المنقولة. 27. قانون رقم ( 1 ) لسنة 1996م بشأن تمليك الشقق و الطبقات. 28. قانون رقم 1 لسنة 1965 بشأن تطبيق أحكام الشريعة الاسلامية. 29. قانون رقم 2 لسنة 2015 بشان تعديل بعض احكام قانون الأراضي العمومية رقم 6 لسنة 1942. 30. قانون رقم 13 لسنة 1962 بشأن الوصية الواجبة. 31. قانون سجلات الاراضي. 32. قانون مثمني الاراضي رقم 34 لسنة 1947. 33. قانون وضع الاملاك الغير منقولة بصفة تأمينات. القوانين الخاصة بحظر التعديات 1. قانون رقم 5 لسنة 1960. 2. قانون رقم 5 لسنة 2017 بشأن حظر التعدي على الأراضي والعقارات العامة للدولة والأشخاص الاعتبارية العامة. 3. قانون رقم 8 لسنة 1966 المعدل للقانون رقم 5 لسنة 1960. التصنيف : المكتبة القانونية Share Tweet 7434 نسخ الرابط: مواضيع ذات صلة قرارات رئيس سلطة الأراضي 11 مايو, 2020 قرارات مجلس الوزراء واللجنة العليا للأراضي الحكومية الخاصة بالأراضي 11 مايو, 2020 قوانين ذات صلة بالأراضـي 12 مايو, 2020 قوانين هامة 12 مايو, 2020 القوانين والأنظمة والقرارات والتعليمات المعمول بها في سلطة الأراضي 19 مارس, 2020 معجم المصطلحات القانونية 13 مايو, 2020 أخر الاخبار سلطة الأراضي تُقر حزمة إجراءات لتنظيم مهنة التثمين العقاري وتوحيد معايير تقييم الأراضي في قطاع غزة 24 مايو, 2026 رئيس سلطة الأراضي يبحث مع المساحين المرخصين تحديات العمل الميداني وسبل دعم إعادة الإعمار 08 مايو, 2026 خلال ورشة قانونية حول مدة سريان الوكالة العدلية المعمول بها أمام سلطة الأراضي مشاركون يوصون بضرورة النظر في مدة الوكالة العدلية 02 أكتوبر, 2023 لمناقشة عدد من القضايا المهمة رئيس سلطة الأراضي يعقد اجتماعا لمجلس سلطة الأراضي 27 سبتمبر, 2023 خلال لقائه المستشار ضياء المدهون رئيس المجلس الأعلى للقضاء رئيس سلطة الأراضي يؤكد على عمق العلاقة بين الأراضي والمحاكم 27 سبتمبر, 2023 فيس بوك facebook تويتر twitter يوتيوب youtube سلطة الأراضي الفلسطينية البحث في الموقع نص البحث: ضع نص البحث للاستعلام عن مواضيع أخرى جميع حقوق الطبع محفوظة لدى سلطة الاراضي pla.gov.ps الرئيسية أتصل بنا من نحن الرئيسية سلطة الأراضي تعريف عن سلطة الأراضي رؤيتنا رسالتنا الأهداف الاستراتيجية دليل الخدمات الخطة التشغيلية 2023 التقارير السنوية دراسات رضا متلقي الخدمة دراسات مؤشرات الأداء دراسات الرضا الوظيفي سياسات أمن المعلومات القوانين والأنظمة والقرارات والتعليمات المعمول بها في سلطة الأراضي للاتصال بنا املاك الحكومة تعريف عن الإدارة العامة لأملاك الحكومة الهدف العام مهام الإدارة العامة لأملاك الحكومة التعديات على الأراضي الحكومية التخصيصات (منفعة أو إيجاره) الايجارات المحررات إحصائيات المساحة تعريف عن الإدارة العامة للمساحة الهدف العام مهام الإدارة العامة للمساحة الطابو تعريف عن الإدارة العامة للطابو الهدف العام مهام الإدارة العامة للطابو أنواع المعاملات رسوم المعاملات المكتبة القانونية قرارات رئيس سلطة الأراضي قرارات مجلس الوزراء واللجنة العليا للأراضي الحكومية الخاصة بالأراضي قوانين خاصة بالاراضي قوانين ذات صلة بالأراضـي قوانين هامة القوانين والأنظمة والقرارات والتعليمات المعمول بها في سلطة الأراضي معجم المصطلحات القانونية خدمات المواطنين استعلام المواقع التحقق من موقع القسائم التحقق من مستخرج القيد الاستعلام عن حالة معاملة المعاملات غير المكتملة المعاملات التي سيتم اتلافها في نهاية الشهر الحالي الوكالات طلب تقديم اقتراح طلب تقديم شكوى تقديم طلب نماذج المعاملات اسماء المساحين المعتمدين دخول بحث ✕ Log in Sign up Log in with social account or Username Password Remember Me Lost your password? Username Password ✕ Subscribe Join our 868,537 subscribers and get access to the latest tools, freebies, product announcements and much more! Don't worry, we don't spam ✕ الرئيسية سلطة الأراضي تعريف عن سلطة الأراضي رؤيتنا رسالتنا الأهداف الاستراتيجية دليل الخدمات الخطة التشغيلية 2023 التقارير السنوية دراسات رضا متلقي الخدمة دراسات مؤشرات الأداء دراسات الرضا الوظيفي سياسات أمن المعلومات القوانين والأنظمة والقرارات والتعليمات المعمول بها في سلطة الأراضي للاتصال بنا املاك الحكومة تعريف عن الإدارة العامة لأملاك الحكومة الهدف العام مهام الإدارة العامة لأملاك الحكومة التعديات على الأراضي الحكومية التخصيصات (منفعة أو إيجاره) الايجارات المحررات إحصائيات المساحة تعريف عن الإدارة العامة للمساحة الهدف العام مهام الإدارة العامة للمساحة الطابو تعريف عن الإدارة العامة للطابو الهدف العام مهام الإدارة العامة للطابو أنواع المعاملات رسوم المعاملات المكتبة القانونية قرارات رئيس سلطة الأراضي قرارات مجلس الوزراء واللجنة العليا للأراضي الحكومية الخاصة بالأراضي قوانين خاصة بالاراضي قوانين ذات صلة بالأراضـي قوانين هامة القوانين والأنظمة والقرارات والتعليمات المعمول بها في سلطة الأراضي معجم المصطلحات القانونية خدمات المواطنين استعلام المواقع التحقق من موقع القسائم التحقق من مستخرج القيد الاستعلام عن حالة معاملة المعاملات غير المكتملة المعاملات التي سيتم اتلافها في نهاية الشهر الحالي الوكالات طلب تقديم اقتراح طلب تقديم شكوى تقديم طلب نماذج المعاملات اسماء المساحين المعتمدين البحث في الموقع دخول",
+      "domain": "land_law",
+      "era": "CROSS_ERA",
+      "territories": [
+        "GAZA"
+      ],
+      "authorityClass": "official_derivative",
+      "sourceUrl": "https://www.pla.gov.ps/ar/%D9%82%D9%88%D8%A7%D9%86%D9%8A%D9%86-%D8%AE%D8%A7%D8%B5%D8%A9-%D8%A8%D8%A7%D9%84%D8%A7%D8%B1%D8%A7%D8%B6%D9%8A-1403.html",
+      "publisher": "سلطة الأراضي الفلسطينية - غزة",
+      "legalStatusVerified": false,
+      "artifactVersionId": "version-bb21fb543a070f538347317b48a36b9d",
+      "artifactSha256": "bb21fb543a070f538347317b48a36b9ddb73ded6e2c5cf7b6fd8b2d240f9f9b4",
+      "locator": "legal-lineage-inventory",
+      "semanticScore": 0.9,
+      "graphScore": 0.4,
+      "structuredConclusionEligible": false,
+      "scores": {
+        "lexical": 0.9,
+        "semantic": 0.9,
+        "authority": 0.5714285714285714,
+        "graph": 0.4,
+        "hybrid": 1
+      },
+      "usableForConclusion": false,
+      "reasons": [
+        "legal_status_not_verified",
+        "structured_conclusion_gate_closed"
+      ]
+    },
+    "fiqhFailClosedPass": true,
+    "fiqhTopHits": [
+      {
+        "documentId": "fiqh-hanafi-hilal-ahkam-al-waqf-identity",
+        "title": "هلال الرأي — أحكام الوقف",
+        "content": "هلال الرأي — أحكام الوقف محفوظة كطبعة فقهية للبحث الخاص؛ لا يوجد في MEGA_F موضع صفحة موضوعي معتمد للاستنتاج.",
+        "domain": "fiqh",
+        "era": "CROSS_ERA",
+        "territories": [
+          "WEST_BANK",
+          "GAZA",
+          "JERUSALEM",
+          "HISTORIC_PALESTINE"
+        ],
+        "authorityClass": "reference_secondary",
+        "sourceUrl": "https://archive.org/download/fp45181_202605/45181.pdf",
+        "publisher": "طبعة فقهية حنفية محفوظة عبر Internet Archive / بيانات هوية من المكتبة الوقفية",
+        "legalStatusVerified": false,
+        "artifactVersionId": "sha256-b6186e5d6e7378a944eadf8af876781ee1c7647337d2c143222a5eccffa4268d",
+        "artifactSha256": "b6186e5d6e7378a944eadf8af876781ee1c7647337d2c143222a5eccffa4268d",
+        "locator": null,
+        "semanticScore": 0.75,
+        "graphScore": 0,
+        "structuredConclusionEligible": false,
+        "scores": {
+          "lexical": 0.225,
+          "semantic": 0.75,
+          "authority": 0.2857142857142857,
+          "graph": 0,
+          "hybrid": 0.6272857142857142
+        },
+        "usableForConclusion": false,
+        "reasons": [
+          "structured_conclusion_gate_closed",
+          "secondary_authority"
+        ]
+      },
+      {
+        "documentId": "fiqh-hanbali-khallal-kitab-al-wuquf-identity",
+        "title": "الخلال — كتاب الوقوف من مسائل الإمام أحمد بن حنبل",
+        "content": "الخلال — كتاب الوقوف من مسائل الإمام أحمد بن حنبل محفوظة كطبعة فقهية للبحث الخاص؛ لا يوجد في MEGA_F موضع صفحة موضوعي معتمد للاستنتاج.",
+        "domain": "fiqh",
+        "era": "CROSS_ERA",
+        "territories": [
+          "WEST_BANK",
+          "GAZA",
+          "JERUSALEM",
+          "HISTORIC_PALESTINE"
+        ],
+        "authorityClass": "reference_secondary",
+        "sourceUrl": "https://www.archive.org/download/waq10461/10461.pdf",
+        "publisher": "مكتبة المعارف 1410/1989 — نسخة محفوظة عبر Internet Archive",
+        "legalStatusVerified": false,
+        "artifactVersionId": "sha256-e882bc8f2eacb167987c5b2e0daa72bded6f56938f068587d5f83a7d2f521037",
+        "artifactSha256": "e882bc8f2eacb167987c5b2e0daa72bded6f56938f068587d5f83a7d2f521037",
+        "locator": null,
+        "semanticScore": 0.75,
+        "graphScore": 0,
+        "structuredConclusionEligible": false,
+        "scores": {
+          "lexical": 0,
+          "semantic": 0.75,
+          "authority": 0.2857142857142857,
+          "graph": 0,
+          "hybrid": 0.5192857142857144
+        },
+        "usableForConclusion": false,
+        "reasons": [
+          "structured_conclusion_gate_closed",
+          "secondary_authority"
+        ]
+      }
+    ],
+    "shariaFailClosedPass": true,
+    "citationAudit": {
+      "valid": true,
+      "defects": []
+    }
+  },
+  "security": {
+    "negativeAuthorizationCases": 119,
+    "negativeAuthorizationMatrix": [
+      {
+        "role": "PROGRAM_OWNER",
+        "action": "FAIL_CLOSED_OVERRIDE",
+        "expected": "DENY"
+      },
+      {
+        "role": "PROGRAM_OWNER",
+        "action": "EXPORT_PRIVATE_REFERENCE",
+        "expected": "DENY"
+      },
+      {
+        "role": "PROGRAM_OWNER",
+        "action": "CHANGE_TERRITORY_SCOPE",
+        "expected": "SEPARATE_AUTH_REQUIRED"
+      },
+      {
+        "role": "PROGRAM_OWNER",
+        "action": "LIVE_SHARED_DB_MUTATION",
+        "expected": "SEPARATE_AUTH_REQUIRED"
+      },
+      {
+        "role": "PROGRAM_OWNER",
+        "action": "MAIN_MERGE",
+        "expected": "SEPARATE_AUTH_REQUIRED"
+      },
+      {
+        "role": "PROGRAM_OWNER",
+        "action": "BASELINE_PROMOTION",
+        "expected": "SEPARATE_AUTH_REQUIRED"
+      },
+      {
+        "role": "PROGRAM_OWNER",
+        "action": "PRODUCTION_PUBLIC_RELEASE",
+        "expected": "SEPARATE_AUTH_REQUIRED"
+      },
+      {
+        "role": "SYSTEM_ACCESS_ADMIN",
+        "action": "FAIL_CLOSED_OVERRIDE",
+        "expected": "DENY"
+      },
+      {
+        "role": "SYSTEM_ACCESS_ADMIN",
+        "action": "EXPORT_PRIVATE_REFERENCE",
+        "expected": "DENY"
+      },
+      {
+        "role": "SYSTEM_ACCESS_ADMIN",
+        "action": "CHANGE_TERRITORY_SCOPE",
+        "expected": "SEPARATE_AUTH_REQUIRED"
+      },
+      {
+        "role": "SYSTEM_ACCESS_ADMIN",
+        "action": "LIVE_SHARED_DB_MUTATION",
+        "expected": "SEPARATE_AUTH_REQUIRED"
+      },
+      {
+        "role": "SYSTEM_ACCESS_ADMIN",
+        "action": "MAIN_MERGE",
+        "expected": "SEPARATE_AUTH_REQUIRED"
+      },
+      {
+        "role": "SYSTEM_ACCESS_ADMIN",
+        "action": "BASELINE_PROMOTION",
+        "expected": "SEPARATE_AUTH_REQUIRED"
+      },
+      {
+        "role": "SYSTEM_ACCESS_ADMIN",
+        "action": "PRODUCTION_PUBLIC_RELEASE",
+        "expected": "SEPARATE_AUTH_REQUIRED"
+      },
+      {
+        "role": "DEVELOPER_ENGINEER",
+        "action": "FAIL_CLOSED_OVERRIDE",
+        "expected": "DENY"
+      },
+      {
+        "role": "DEVELOPER_ENGINEER",
+        "action": "EXPORT_PRIVATE_REFERENCE",
+        "expected": "DENY"
+      },
+      {
+        "role": "DEVELOPER_ENGINEER",
+        "action": "CHANGE_TERRITORY_SCOPE",
+        "expected": "SEPARATE_AUTH_REQUIRED"
+      },
+      {
+        "role": "DEVELOPER_ENGINEER",
+        "action": "LIVE_SHARED_DB_MUTATION",
+        "expected": "SEPARATE_AUTH_REQUIRED"
+      },
+      {
+        "role": "DEVELOPER_ENGINEER",
+        "action": "MAIN_MERGE",
+        "expected": "SEPARATE_AUTH_REQUIRED"
+      },
+      {
+        "role": "DEVELOPER_ENGINEER",
+        "action": "BASELINE_PROMOTION",
+        "expected": "SEPARATE_AUTH_REQUIRED"
+      },
+      {
+        "role": "DEVELOPER_ENGINEER",
+        "action": "PRODUCTION_PUBLIC_RELEASE",
+        "expected": "SEPARATE_AUTH_REQUIRED"
+      },
+      {
+        "role": "SOURCE_RESEARCHER",
+        "action": "FAIL_CLOSED_OVERRIDE",
+        "expected": "DENY"
+      },
+      {
+        "role": "SOURCE_RESEARCHER",
+        "action": "EXPORT_PRIVATE_REFERENCE",
+        "expected": "DENY"
+      },
+      {
+        "role": "SOURCE_RESEARCHER",
+        "action": "CHANGE_TERRITORY_SCOPE",
+        "expected": "SEPARATE_AUTH_REQUIRED"
+      },
+      {
+        "role": "SOURCE_RESEARCHER",
+        "action": "LIVE_SHARED_DB_MUTATION",
+        "expected": "SEPARATE_AUTH_REQUIRED"
+      },
+      {
+        "role": "SOURCE_RESEARCHER",
+        "action": "MAIN_MERGE",
+        "expected": "SEPARATE_AUTH_REQUIRED"
+      },
+      {
+        "role": "SOURCE_RESEARCHER",
+        "action": "BASELINE_PROMOTION",
+        "expected": "SEPARATE_AUTH_REQUIRED"
+      },
+      {
+        "role": "SOURCE_RESEARCHER",
+        "action": "PRODUCTION_PUBLIC_RELEASE",
+        "expected": "SEPARATE_AUTH_REQUIRED"
+      },
+      {
+        "role": "INGESTION_OPERATOR",
+        "action": "FAIL_CLOSED_OVERRIDE",
+        "expected": "DENY"
+      },
+      {
+        "role": "INGESTION_OPERATOR",
+        "action": "EXPORT_PRIVATE_REFERENCE",
+        "expected": "DENY"
+      },
+      {
+        "role": "INGESTION_OPERATOR",
+        "action": "CHANGE_TERRITORY_SCOPE",
+        "expected": "SEPARATE_AUTH_REQUIRED"
+      },
+      {
+        "role": "INGESTION_OPERATOR",
+        "action": "LIVE_SHARED_DB_MUTATION",
+        "expected": "SEPARATE_AUTH_REQUIRED"
+      },
+      {
+        "role": "INGESTION_OPERATOR",
+        "action": "MAIN_MERGE",
+        "expected": "SEPARATE_AUTH_REQUIRED"
+      },
+      {
+        "role": "INGESTION_OPERATOR",
+        "action": "BASELINE_PROMOTION",
+        "expected": "SEPARATE_AUTH_REQUIRED"
+      },
+      {
+        "role": "INGESTION_OPERATOR",
+        "action": "PRODUCTION_PUBLIC_RELEASE",
+        "expected": "SEPARATE_AUTH_REQUIRED"
+      },
+      {
+        "role": "DATA_GOVERNANCE_STEWARD",
+        "action": "FAIL_CLOSED_OVERRIDE",
+        "expected": "DENY"
+      },
+      {
+        "role": "DATA_GOVERNANCE_STEWARD",
+        "action": "EXPORT_PRIVATE_REFERENCE",
+        "expected": "DENY"
+      },
+      {
+        "role": "DATA_GOVERNANCE_STEWARD",
+        "action": "CHANGE_TERRITORY_SCOPE",
+        "expected": "SEPARATE_AUTH_REQUIRED"
+      },
+      {
+        "role": "DATA_GOVERNANCE_STEWARD",
+        "action": "LIVE_SHARED_DB_MUTATION",
+        "expected": "SEPARATE_AUTH_REQUIRED"
+      },
+      {
+        "role": "DATA_GOVERNANCE_STEWARD",
+        "action": "MAIN_MERGE",
+        "expected": "SEPARATE_AUTH_REQUIRED"
+      },
+      {
+        "role": "DATA_GOVERNANCE_STEWARD",
+        "action": "BASELINE_PROMOTION",
+        "expected": "SEPARATE_AUTH_REQUIRED"
+      },
+      {
+        "role": "DATA_GOVERNANCE_STEWARD",
+        "action": "PRODUCTION_PUBLIC_RELEASE",
+        "expected": "SEPARATE_AUTH_REQUIRED"
+      },
+      {
+        "role": "LEGAL_STATUS_REVIEWER",
+        "action": "FAIL_CLOSED_OVERRIDE",
+        "expected": "DENY"
+      },
+      {
+        "role": "LEGAL_STATUS_REVIEWER",
+        "action": "EXPORT_PRIVATE_REFERENCE",
+        "expected": "DENY"
+      },
+      {
+        "role": "LEGAL_STATUS_REVIEWER",
+        "action": "CHANGE_TERRITORY_SCOPE",
+        "expected": "SEPARATE_AUTH_REQUIRED"
+      },
+      {
+        "role": "LEGAL_STATUS_REVIEWER",
+        "action": "LIVE_SHARED_DB_MUTATION",
+        "expected": "SEPARATE_AUTH_REQUIRED"
+      },
+      {
+        "role": "LEGAL_STATUS_REVIEWER",
+        "action": "MAIN_MERGE",
+        "expected": "SEPARATE_AUTH_REQUIRED"
+      },
+      {
+        "role": "LEGAL_STATUS_REVIEWER",
+        "action": "BASELINE_PROMOTION",
+        "expected": "SEPARATE_AUTH_REQUIRED"
+      },
+      {
+        "role": "LEGAL_STATUS_REVIEWER",
+        "action": "PRODUCTION_PUBLIC_RELEASE",
+        "expected": "SEPARATE_AUTH_REQUIRED"
+      },
+      {
+        "role": "WAQF_DEED_REVIEWER",
+        "action": "FAIL_CLOSED_OVERRIDE",
+        "expected": "DENY"
+      },
+      {
+        "role": "WAQF_DEED_REVIEWER",
+        "action": "EXPORT_PRIVATE_REFERENCE",
+        "expected": "DENY"
+      },
+      {
+        "role": "WAQF_DEED_REVIEWER",
+        "action": "CHANGE_TERRITORY_SCOPE",
+        "expected": "SEPARATE_AUTH_REQUIRED"
+      },
+      {
+        "role": "WAQF_DEED_REVIEWER",
+        "action": "LIVE_SHARED_DB_MUTATION",
+        "expected": "SEPARATE_AUTH_REQUIRED"
+      },
+      {
+        "role": "WAQF_DEED_REVIEWER",
+        "action": "MAIN_MERGE",
+        "expected": "SEPARATE_AUTH_REQUIRED"
+      },
+      {
+        "role": "WAQF_DEED_REVIEWER",
+        "action": "BASELINE_PROMOTION",
+        "expected": "SEPARATE_AUTH_REQUIRED"
+      },
+      {
+        "role": "WAQF_DEED_REVIEWER",
+        "action": "PRODUCTION_PUBLIC_RELEASE",
+        "expected": "SEPARATE_AUTH_REQUIRED"
+      },
+      {
+        "role": "FIQH_SHARIA_REVIEWER",
+        "action": "FAIL_CLOSED_OVERRIDE",
+        "expected": "DENY"
+      },
+      {
+        "role": "FIQH_SHARIA_REVIEWER",
+        "action": "EXPORT_PRIVATE_REFERENCE",
+        "expected": "DENY"
+      },
+      {
+        "role": "FIQH_SHARIA_REVIEWER",
+        "action": "CHANGE_TERRITORY_SCOPE",
+        "expected": "SEPARATE_AUTH_REQUIRED"
+      },
+      {
+        "role": "FIQH_SHARIA_REVIEWER",
+        "action": "LIVE_SHARED_DB_MUTATION",
+        "expected": "SEPARATE_AUTH_REQUIRED"
+      },
+      {
+        "role": "FIQH_SHARIA_REVIEWER",
+        "action": "MAIN_MERGE",
+        "expected": "SEPARATE_AUTH_REQUIRED"
+      },
+      {
+        "role": "FIQH_SHARIA_REVIEWER",
+        "action": "BASELINE_PROMOTION",
+        "expected": "SEPARATE_AUTH_REQUIRED"
+      },
+      {
+        "role": "FIQH_SHARIA_REVIEWER",
+        "action": "PRODUCTION_PUBLIC_RELEASE",
+        "expected": "SEPARATE_AUTH_REQUIRED"
+      },
+      {
+        "role": "HISTORICAL_EVIDENCE_REVIEWER",
+        "action": "FAIL_CLOSED_OVERRIDE",
+        "expected": "DENY"
+      },
+      {
+        "role": "HISTORICAL_EVIDENCE_REVIEWER",
+        "action": "EXPORT_PRIVATE_REFERENCE",
+        "expected": "DENY"
+      },
+      {
+        "role": "HISTORICAL_EVIDENCE_REVIEWER",
+        "action": "CHANGE_TERRITORY_SCOPE",
+        "expected": "SEPARATE_AUTH_REQUIRED"
+      },
+      {
+        "role": "HISTORICAL_EVIDENCE_REVIEWER",
+        "action": "LIVE_SHARED_DB_MUTATION",
+        "expected": "SEPARATE_AUTH_REQUIRED"
+      },
+      {
+        "role": "HISTORICAL_EVIDENCE_REVIEWER",
+        "action": "MAIN_MERGE",
+        "expected": "SEPARATE_AUTH_REQUIRED"
+      },
+      {
+        "role": "HISTORICAL_EVIDENCE_REVIEWER",
+        "action": "BASELINE_PROMOTION",
+        "expected": "SEPARATE_AUTH_REQUIRED"
+      },
+      {
+        "role": "HISTORICAL_EVIDENCE_REVIEWER",
+        "action": "PRODUCTION_PUBLIC_RELEASE",
+        "expected": "SEPARATE_AUTH_REQUIRED"
+      },
+      {
+        "role": "RIGHTS_REVIEWER",
+        "action": "FAIL_CLOSED_OVERRIDE",
+        "expected": "DENY"
+      },
+      {
+        "role": "RIGHTS_REVIEWER",
+        "action": "EXPORT_PRIVATE_REFERENCE",
+        "expected": "DENY"
+      },
+      {
+        "role": "RIGHTS_REVIEWER",
+        "action": "CHANGE_TERRITORY_SCOPE",
+        "expected": "SEPARATE_AUTH_REQUIRED"
+      },
+      {
+        "role": "RIGHTS_REVIEWER",
+        "action": "LIVE_SHARED_DB_MUTATION",
+        "expected": "SEPARATE_AUTH_REQUIRED"
+      },
+      {
+        "role": "RIGHTS_REVIEWER",
+        "action": "MAIN_MERGE",
+        "expected": "SEPARATE_AUTH_REQUIRED"
+      },
+      {
+        "role": "RIGHTS_REVIEWER",
+        "action": "BASELINE_PROMOTION",
+        "expected": "SEPARATE_AUTH_REQUIRED"
+      },
+      {
+        "role": "RIGHTS_REVIEWER",
+        "action": "PRODUCTION_PUBLIC_RELEASE",
+        "expected": "SEPARATE_AUTH_REQUIRED"
+      },
+      {
+        "role": "SECURITY_PRIVACY_REVIEWER",
+        "action": "FAIL_CLOSED_OVERRIDE",
+        "expected": "DENY"
+      },
+      {
+        "role": "SECURITY_PRIVACY_REVIEWER",
+        "action": "EXPORT_PRIVATE_REFERENCE",
+        "expected": "DENY"
+      },
+      {
+        "role": "SECURITY_PRIVACY_REVIEWER",
+        "action": "CHANGE_TERRITORY_SCOPE",
+        "expected": "SEPARATE_AUTH_REQUIRED"
+      },
+      {
+        "role": "SECURITY_PRIVACY_REVIEWER",
+        "action": "LIVE_SHARED_DB_MUTATION",
+        "expected": "SEPARATE_AUTH_REQUIRED"
+      },
+      {
+        "role": "SECURITY_PRIVACY_REVIEWER",
+        "action": "MAIN_MERGE",
+        "expected": "SEPARATE_AUTH_REQUIRED"
+      },
+      {
+        "role": "SECURITY_PRIVACY_REVIEWER",
+        "action": "BASELINE_PROMOTION",
+        "expected": "SEPARATE_AUTH_REQUIRED"
+      },
+      {
+        "role": "SECURITY_PRIVACY_REVIEWER",
+        "action": "PRODUCTION_PUBLIC_RELEASE",
+        "expected": "SEPARATE_AUTH_REQUIRED"
+      },
+      {
+        "role": "PROGRAM_ACCEPTANCE_REVIEWER",
+        "action": "FAIL_CLOSED_OVERRIDE",
+        "expected": "DENY"
+      },
+      {
+        "role": "PROGRAM_ACCEPTANCE_REVIEWER",
+        "action": "EXPORT_PRIVATE_REFERENCE",
+        "expected": "DENY"
+      },
+      {
+        "role": "PROGRAM_ACCEPTANCE_REVIEWER",
+        "action": "CHANGE_TERRITORY_SCOPE",
+        "expected": "SEPARATE_AUTH_REQUIRED"
+      },
+      {
+        "role": "PROGRAM_ACCEPTANCE_REVIEWER",
+        "action": "LIVE_SHARED_DB_MUTATION",
+        "expected": "SEPARATE_AUTH_REQUIRED"
+      },
+      {
+        "role": "PROGRAM_ACCEPTANCE_REVIEWER",
+        "action": "MAIN_MERGE",
+        "expected": "SEPARATE_AUTH_REQUIRED"
+      },
+      {
+        "role": "PROGRAM_ACCEPTANCE_REVIEWER",
+        "action": "BASELINE_PROMOTION",
+        "expected": "SEPARATE_AUTH_REQUIRED"
+      },
+      {
+        "role": "PROGRAM_ACCEPTANCE_REVIEWER",
+        "action": "PRODUCTION_PUBLIC_RELEASE",
+        "expected": "SEPARATE_AUTH_REQUIRED"
+      },
+      {
+        "role": "AUDITOR_READ_ONLY",
+        "action": "FAIL_CLOSED_OVERRIDE",
+        "expected": "DENY"
+      },
+      {
+        "role": "AUDITOR_READ_ONLY",
+        "action": "EXPORT_PRIVATE_REFERENCE",
+        "expected": "DENY"
+      },
+      {
+        "role": "AUDITOR_READ_ONLY",
+        "action": "CHANGE_TERRITORY_SCOPE",
+        "expected": "SEPARATE_AUTH_REQUIRED"
+      },
+      {
+        "role": "AUDITOR_READ_ONLY",
+        "action": "LIVE_SHARED_DB_MUTATION",
+        "expected": "SEPARATE_AUTH_REQUIRED"
+      },
+      {
+        "role": "AUDITOR_READ_ONLY",
+        "action": "MAIN_MERGE",
+        "expected": "SEPARATE_AUTH_REQUIRED"
+      },
+      {
+        "role": "AUDITOR_READ_ONLY",
+        "action": "BASELINE_PROMOTION",
+        "expected": "SEPARATE_AUTH_REQUIRED"
+      },
+      {
+        "role": "AUDITOR_READ_ONLY",
+        "action": "PRODUCTION_PUBLIC_RELEASE",
+        "expected": "SEPARATE_AUTH_REQUIRED"
+      },
+      {
+        "role": "RESEARCH_USER",
+        "action": "FAIL_CLOSED_OVERRIDE",
+        "expected": "DENY"
+      },
+      {
+        "role": "RESEARCH_USER",
+        "action": "EXPORT_PRIVATE_REFERENCE",
+        "expected": "DENY"
+      },
+      {
+        "role": "RESEARCH_USER",
+        "action": "CHANGE_TERRITORY_SCOPE",
+        "expected": "SEPARATE_AUTH_REQUIRED"
+      },
+      {
+        "role": "RESEARCH_USER",
+        "action": "LIVE_SHARED_DB_MUTATION",
+        "expected": "SEPARATE_AUTH_REQUIRED"
+      },
+      {
+        "role": "RESEARCH_USER",
+        "action": "MAIN_MERGE",
+        "expected": "SEPARATE_AUTH_REQUIRED"
+      },
+      {
+        "role": "RESEARCH_USER",
+        "action": "BASELINE_PROMOTION",
+        "expected": "SEPARATE_AUTH_REQUIRED"
+      },
+      {
+        "role": "RESEARCH_USER",
+        "action": "PRODUCTION_PUBLIC_RELEASE",
+        "expected": "SEPARATE_AUTH_REQUIRED"
+      },
+      {
+        "role": "PUBLIC_USER_FUTURE",
+        "action": "FAIL_CLOSED_OVERRIDE",
+        "expected": "DENY"
+      },
+      {
+        "role": "PUBLIC_USER_FUTURE",
+        "action": "EXPORT_PRIVATE_REFERENCE",
+        "expected": "DENY"
+      },
+      {
+        "role": "PUBLIC_USER_FUTURE",
+        "action": "CHANGE_TERRITORY_SCOPE",
+        "expected": "SEPARATE_AUTH_REQUIRED"
+      },
+      {
+        "role": "PUBLIC_USER_FUTURE",
+        "action": "LIVE_SHARED_DB_MUTATION",
+        "expected": "SEPARATE_AUTH_REQUIRED"
+      },
+      {
+        "role": "PUBLIC_USER_FUTURE",
+        "action": "MAIN_MERGE",
+        "expected": "SEPARATE_AUTH_REQUIRED"
+      },
+      {
+        "role": "PUBLIC_USER_FUTURE",
+        "action": "BASELINE_PROMOTION",
+        "expected": "SEPARATE_AUTH_REQUIRED"
+      },
+      {
+        "role": "PUBLIC_USER_FUTURE",
+        "action": "PRODUCTION_PUBLIC_RELEASE",
+        "expected": "SEPARATE_AUTH_REQUIRED"
+      },
+      {
+        "role": "RELEASE_OPERATOR",
+        "action": "FAIL_CLOSED_OVERRIDE",
+        "expected": "DENY"
+      },
+      {
+        "role": "RELEASE_OPERATOR",
+        "action": "EXPORT_PRIVATE_REFERENCE",
+        "expected": "DENY"
+      },
+      {
+        "role": "RELEASE_OPERATOR",
+        "action": "CHANGE_TERRITORY_SCOPE",
+        "expected": "SEPARATE_AUTH_REQUIRED"
+      },
+      {
+        "role": "RELEASE_OPERATOR",
+        "action": "LIVE_SHARED_DB_MUTATION",
+        "expected": "SEPARATE_AUTH_REQUIRED"
+      },
+      {
+        "role": "RELEASE_OPERATOR",
+        "action": "MAIN_MERGE",
+        "expected": "SEPARATE_AUTH_REQUIRED"
+      },
+      {
+        "role": "RELEASE_OPERATOR",
+        "action": "BASELINE_PROMOTION",
+        "expected": "SEPARATE_AUTH_REQUIRED"
+      },
+      {
+        "role": "RELEASE_OPERATOR",
+        "action": "PRODUCTION_PUBLIC_RELEASE",
+        "expected": "SEPARATE_AUTH_REQUIRED"
+      }
+    ],
+    "securityMatrixPass": true,
+    "selfApprovalDenied": true,
+    "failClosedOverrideDenied": true,
+    "productionAccountsProvisioned": false
+  },
+  "performanceCost": {
+    "retrieval": {
+      "iterations": 500,
+      "queryCount": 3,
+      "documentCount": 4,
+      "p50Ms": 0.7721999999998843,
+      "p95Ms": 1.0762999999999465,
+      "maxMs": 3.365599999999972,
+      "averageMs": 0.6270585999999974,
+      "totalMs": 313.9306999999999,
+      "paidProviderCalls": 0,
+      "providerCostUsd": 0,
+      "externalNetworkCalls": 0,
+      "productionSloCertified": false
+    },
+    "hardwareProfile": {
+      "fingerprint": "Intel(R) Core(TM) i5-4570 CPU @ 3.20GHz|4|16|nomic-embed-text:latest,deepseek-r1:latest,palwakf-llama3.2-3b-64k:ctx64k,palwakf-llama3.2-3b-64k:local,deepseek-v4-flash:cloud,gemma4:latest,glm-5.2:cloud,llama3.2:3b,qwen2.5:3b,kimi-k2.7-code:cloud|NVIDIA GeForce GTX 1050|2048",
+      "cpu": {
+        "model": "Intel(R) Core(TM) i5-4570 CPU @ 3.20GHz",
+        "logicalCores": 4,
+        "speedMHz": 3193
+      },
+      "memory": {
+        "totalGiB": 15.907161712646484,
+        "freeGiB": 7.2582855224609375
+      },
+      "ollama": {
+        "models": [
+          "nomic-embed-text:latest",
+          "deepseek-r1:latest",
+          "palwakf-llama3.2-3b-64k:ctx64k",
+          "palwakf-llama3.2-3b-64k:local",
+          "deepseek-v4-flash:cloud",
+          "gemma4:latest",
+          "glm-5.2:cloud",
+          "llama3.2:3b",
+          "qwen2.5:3b",
+          "kimi-k2.7-code:cloud"
+        ],
+        "gpuOffloadObserved": true
+      },
+      "gpu": {
+        "nvidiaDetected": true,
+        "names": [
+          "NVIDIA GeForce GTX 1050"
+        ],
+        "totalVramMiB": 2048
+      },
+      "tier": "constrained",
+      "budgets": {
+        "contextTokens": 2048,
+        "outputTokens": 256,
+        "attemptTimeoutMs": 45000,
+        "evidenceCharsPerSource": 700
+      },
+      "modelCapabilities": [
+        {
+          "model": "qwen2.5:3b",
+          "latencyMs": 13051,
+          "usable": true,
+          "tokensPerSecond": 20.16555924137166,
+          "evalCount": 2,
+          "promptEvalCount": 601,
+          "promptTokensPerSecond": 307.1731838321618,
+          "workloadTokens": 512,
+          "processor": "mixed"
+        },
+        {
+          "model": "llama3.2:3b",
+          "latencyMs": 15790,
+          "usable": true,
+          "tokensPerSecond": 19.294217523008353,
+          "evalCount": 2,
+          "promptEvalCount": 597,
+          "promptTokensPerSecond": 327.70003974117736,
+          "workloadTokens": 512,
+          "processor": "mixed"
+        }
+      ]
+    },
+    "localModelBenchmarks": [
+      {
+        "model": "qwen2.5:3b",
+        "latencyMs": 13051,
+        "usable": true,
+        "tokensPerSecond": 20.16555924137166,
+        "evalCount": 2,
+        "promptEvalCount": 601,
+        "promptTokensPerSecond": 307.1731838321618,
+        "workloadTokens": 512,
+        "processor": "mixed"
+      },
+      {
+        "model": "llama3.2:3b",
+        "latencyMs": 15790,
+        "usable": true,
+        "tokensPerSecond": 19.294217523008353,
+        "evalCount": 2,
+        "promptEvalCount": 597,
+        "promptTokensPerSecond": 327.70003974117736,
+        "workloadTokens": 512,
+        "processor": "mixed"
+      }
+    ],
+    "localModelBenchmarkError": null,
+    "localModelCostPass": true,
+    "paidProviderProcurement": false,
+    "paidProviderCostUsd": 0
+  },
+  "specialistReadiness": {
+    "total": 36,
+    "blocking": 32,
+    "p0": 25,
+    "actualHumanDecisionsIncluded": false,
+    "productionExpertSignoffSatisfied": false
+  },
+  "specialistReviewQueue": [
+    {
+      "reviewId": "review-family-case_law",
+      "kind": "SOURCE_FAMILY_AUTHORITY_RIGHTS",
+      "role": "RIGHTS_REVIEWER",
+      "priority": "P0",
+      "subjectId": "CASE_LAW",
+      "subjectTitle": "Waqf/property case-law family",
+      "territory": null,
+      "evidenceRefs": [
+        "palestinian-supreme-court-technical-office"
+      ],
+      "reasons": [
+        "source_family_rights_policy_pending",
+        "source_family_requires_expert_admission"
+      ],
+      "blocksAuthoritativeConclusion": true,
+      "status": "PENDING_HUMAN_REVIEW"
+    },
+    {
+      "reviewId": "review-family-fiqh_classical",
+      "kind": "FIQH_SHARIA_SOURCE_ADMISSION",
+      "role": "FIQH_SHARIA_REVIEWER",
+      "priority": "P0",
+      "subjectId": "FIQH_CLASSICAL",
+      "subjectTitle": "Classical and modern fiqh family",
+      "territory": null,
+      "evidenceRefs": [],
+      "reasons": [
+        "source_family_requires_expert_admission"
+      ],
+      "blocksAuthoritativeConclusion": true,
+      "status": "PENDING_HUMAN_REVIEW"
+    },
+    {
+      "reviewId": "review-family-land_gaza_current",
+      "kind": "SOURCE_FAMILY_AUTHORITY_RIGHTS",
+      "role": "RIGHTS_REVIEWER",
+      "priority": "P0",
+      "subjectId": "LAND_GAZA_CURRENT",
+      "subjectTitle": "Gaza current land-law family",
+      "territory": "GAZA",
+      "evidenceRefs": [
+        "gaza-land-authority-legal-library",
+        "gaza-government-property-legal-guidance",
+        "land-registration-transfer-fees-2-2012",
+        "movable-rights-security-11-2016",
+        "movable-rights-security-11-2016-gazette-120-wafa"
+      ],
+      "reasons": [
+        "source_family_rights_policy_pending",
+        "source_family_requires_expert_admission",
+        "source_family_coverage_unresolved"
+      ],
+      "blocksAuthoritativeConclusion": true,
+      "status": "PENDING_HUMAN_REVIEW"
+    },
+    {
+      "reviewId": "review-family-land_mandate",
+      "kind": "SOURCE_FAMILY_AUTHORITY_RIGHTS",
+      "role": "HISTORICAL_EVIDENCE_REVIEWER",
+      "priority": "P0",
+      "subjectId": "LAND_MANDATE",
+      "subjectTitle": "British Mandate land-law family",
+      "territory": "HISTORIC_PALESTINE",
+      "evidenceRefs": [
+        "mandate-land-transfers-regulations-1940-palquest",
+        "mandate-land-transfers-regulations-1940-unispal"
+      ],
+      "reasons": [
+        "source_family_rights_policy_pending",
+        "source_family_requires_expert_admission"
+      ],
+      "blocksAuthoritativeConclusion": true,
+      "status": "PENDING_HUMAN_REVIEW"
+    },
+    {
+      "reviewId": "review-family-land_ottoman",
+      "kind": "SOURCE_FAMILY_AUTHORITY_RIGHTS",
+      "role": "HISTORICAL_EVIDENCE_REVIEWER",
+      "priority": "P0",
+      "subjectId": "LAND_OTTOMAN",
+      "subjectTitle": "Ottoman land-law family",
+      "territory": null,
+      "evidenceRefs": [
+        "ottoman-land-code-1858-registry"
+      ],
+      "reasons": [
+        "source_family_rights_policy_pending",
+        "source_family_requires_expert_admission"
+      ],
+      "blocksAuthoritativeConclusion": true,
+      "status": "PENDING_HUMAN_REVIEW"
+    },
+    {
+      "reviewId": "review-family-land_west_bank_current",
+      "kind": "SOURCE_FAMILY_AUTHORITY_RIGHTS",
+      "role": "RIGHTS_REVIEWER",
+      "priority": "P0",
+      "subjectId": "LAND_WEST_BANK_CURRENT",
+      "subjectTitle": "West Bank current land-law family",
+      "territory": "WEST_BANK",
+      "evidenceRefs": [
+        "pla-legal-framework-current",
+        "pla-procedures-manual-2024",
+        "land-authority-law-2010",
+        "land-authority-law-2010-gazette-86-wafa",
+        "land-settlement-law-40-1952-registry",
+        "settlement-amendment-8-1955-registry",
+        "expropriation-law-2-1953-consolidated",
+        "settlement-authority-7-2016-official",
+        "settlement-authority-7-2016-wafa",
+        "land-registration-fees-2-1952-consolidated",
+        "land-registration-transfer-fees-2-2012",
+        "pla-new-registration-procedure"
+      ],
+      "reasons": [
+        "source_family_rights_policy_pending"
+      ],
+      "blocksAuthoritativeConclusion": false,
+      "status": "PENDING_HUMAN_REVIEW"
+    },
+    {
+      "reviewId": "review-family-registration_settlement",
+      "kind": "SOURCE_FAMILY_AUTHORITY_RIGHTS",
+      "role": "RIGHTS_REVIEWER",
+      "priority": "P0",
+      "subjectId": "REGISTRATION_SETTLEMENT",
+      "subjectTitle": "Registration, settlement, surveying and title family",
+      "territory": null,
+      "evidenceRefs": [
+        "land-settlement-process-pla",
+        "land-settlement-law-40-1952-registry",
+        "settlement-amendment-8-1955-registry",
+        "settlement-authority-7-2016-official",
+        "settlement-authority-7-2016-wafa",
+        "land-registration-fees-2-1952-consolidated",
+        "land-registration-transfer-fees-2-2012",
+        "pla-new-registration-procedure"
+      ],
+      "reasons": [
+        "source_family_rights_policy_pending"
+      ],
+      "blocksAuthoritativeConclusion": false,
+      "status": "PENDING_HUMAN_REVIEW"
+    },
+    {
+      "reviewId": "review-family-sharia_primary",
+      "kind": "FIQH_SHARIA_SOURCE_ADMISSION",
+      "role": "FIQH_SHARIA_REVIEWER",
+      "priority": "P0",
+      "subjectId": "SHARIA_PRIMARY",
+      "subjectTitle": "Primary sharia evidence family",
+      "territory": null,
+      "evidenceRefs": [],
+      "reasons": [
+        "source_family_requires_expert_admission"
+      ],
+      "blocksAuthoritativeConclusion": true,
+      "status": "PENDING_HUMAN_REVIEW"
+    },
+    {
+      "reviewId": "review-family-waqf_lease_hukr",
+      "kind": "SOURCE_FAMILY_AUTHORITY_RIGHTS",
+      "role": "RIGHTS_REVIEWER",
+      "priority": "P0",
+      "subjectId": "WAQF_LEASE_HUKR",
+      "subjectTitle": "Waqf tenancy, hukr and related lease family",
+      "territory": null,
+      "evidenceRefs": [
+        "waqf-tenancy-law-5-1964-registry",
+        "landlords-tenants-62-1953-consolidated",
+        "landlords-tenants-amendment-35-2022",
+        "pla-lease-transaction-procedure"
+      ],
+      "reasons": [
+        "source_family_rights_policy_pending",
+        "source_family_requires_expert_admission"
+      ],
+      "blocksAuthoritativeConclusion": true,
+      "status": "PENDING_HUMAN_REVIEW"
+    },
+    {
+      "reviewId": "review-family-waqf_positive_law",
+      "kind": "SOURCE_FAMILY_AUTHORITY_RIGHTS",
+      "role": "RIGHTS_REVIEWER",
+      "priority": "P0",
+      "subjectId": "WAQF_POSITIVE_LAW",
+      "subjectTitle": "Waqf positive-law and administration family",
+      "territory": null,
+      "evidenceRefs": [
+        "waqf-law-1966-consolidated",
+        "waqf-amendment-2023",
+        "waqf-amendment-2023-gazette-198-pdf"
+      ],
+      "reasons": [
+        "source_family_rights_policy_pending"
+      ],
+      "blocksAuthoritativeConclusion": false,
+      "status": "PENDING_HUMAN_REVIEW"
+    },
+    {
+      "reviewId": "review-status-jerusalem-current-land-waqf-track",
+      "kind": "LEGAL_STATUS_EXCEPTION",
+      "role": "LEGAL_STATUS_REVIEWER",
+      "priority": "P0",
+      "subjectId": "jerusalem-current-land-waqf-track",
+      "subjectTitle": "المسار القانوني الراهن للأرض والوقف في القدس",
+      "territory": "JERUSALEM",
+      "evidenceRefs": [],
+      "reasons": [
+        "legal_status_requires_further_verification",
+        "territory_scope_requires_verification",
+        "status_explicitly_unresolved"
+      ],
+      "blocksAuthoritativeConclusion": true,
+      "status": "PENDING_HUMAN_REVIEW"
+    },
+    {
+      "reviewId": "review-status-land-regime-gaza",
+      "kind": "LEGAL_STATUS_EXCEPTION",
+      "role": "LEGAL_STATUS_REVIEWER",
+      "priority": "P0",
+      "subjectId": "land-regime-gaza",
+      "subjectTitle": "مسار تشريعات الأراضي المعمول بها في قطاع غزة",
+      "territory": "GAZA",
+      "evidenceRefs": [
+        "gaza-pla-government-property"
+      ],
+      "reasons": [
+        "legal_status_requires_further_verification",
+        "status_explicitly_unresolved"
+      ],
+      "blocksAuthoritativeConclusion": true,
+      "status": "PENDING_HUMAN_REVIEW"
+    },
+    {
+      "reviewId": "review-status-landlords-tenants-62-1953-gaza",
+      "kind": "LEGAL_STATUS_EXCEPTION",
+      "role": "LEGAL_STATUS_REVIEWER",
+      "priority": "P0",
+      "subjectId": "landlords-tenants-62-1953-gaza",
+      "subjectTitle": "قانون المالكين والمستأجرين رقم (62) لسنة 1953م وتعديلاته",
+      "territory": "GAZA",
+      "evidenceRefs": [
+        "ogb-merged-119-global"
+      ],
+      "reasons": [
+        "legal_status_requires_further_verification",
+        "territory_scope_requires_verification",
+        "status_explicitly_unresolved"
+      ],
+      "blocksAuthoritativeConclusion": true,
+      "status": "PENDING_HUMAN_REVIEW"
+    },
+    {
+      "reviewId": "review-status-registration-transfer-fees-2-2012-gaza",
+      "kind": "LEGAL_STATUS_EXCEPTION",
+      "role": "LEGAL_STATUS_REVIEWER",
+      "priority": "P0",
+      "subjectId": "registration-transfer-fees-2-2012-gaza",
+      "subjectTitle": "قرار بقانون رقم (2) لسنة 2012م بشأن رسوم تسجيل وانتقال الأراضي",
+      "territory": "GAZA",
+      "evidenceRefs": [
+        "ogb-22895-text-gaza"
+      ],
+      "reasons": [
+        "legal_status_requires_further_verification",
+        "status_explicitly_unresolved"
+      ],
+      "blocksAuthoritativeConclusion": true,
+      "status": "PENDING_HUMAN_REVIEW"
+    },
+    {
+      "reviewId": "review-status-waqf-2023-gaza",
+      "kind": "LEGAL_STATUS_EXCEPTION",
+      "role": "LEGAL_STATUS_REVIEWER",
+      "priority": "P0",
+      "subjectId": "waqf-2023-gaza",
+      "subjectTitle": "قرار بقانون رقم (2) لسنة 2023م بتعديل قانون الأوقاف والشؤون والمقدسات الإسلامية رقم (26) لسنة 1966م وتعديلاته",
+      "territory": "GAZA",
+      "evidenceRefs": [
+        "ogb-33311-status-global"
+      ],
+      "reasons": [
+        "legal_status_requires_further_verification",
+        "territory_scope_requires_verification",
+        "status_explicitly_unresolved"
+      ],
+      "blocksAuthoritativeConclusion": true,
+      "status": "PENDING_HUMAN_REVIEW"
+    },
+    {
+      "reviewId": "review-family-finance_property",
+      "kind": "SOURCE_FAMILY_AUTHORITY_RIGHTS",
+      "role": "RIGHTS_REVIEWER",
+      "priority": "P1",
+      "subjectId": "FINANCE_PROPERTY",
+      "subjectTitle": "Movable/immovable finance, tax and investment family",
+      "territory": null,
+      "evidenceRefs": [
+        "movable-rights-security-11-2016",
+        "movable-rights-security-11-2016-gazette-120-wafa"
+      ],
+      "reasons": [
+        "source_family_rights_policy_pending",
+        "source_family_requires_expert_admission"
+      ],
+      "blocksAuthoritativeConclusion": true,
+      "status": "PENDING_HUMAN_REVIEW"
+    },
+    {
+      "reviewId": "review-family-historical_waqf",
+      "kind": "SOURCE_FAMILY_AUTHORITY_RIGHTS",
+      "role": "HISTORICAL_EVIDENCE_REVIEWER",
+      "priority": "P1",
+      "subjectId": "HISTORICAL_WAQF",
+      "subjectTitle": "Historical waqf deeds, registers, tapu and maps",
+      "territory": null,
+      "evidenceRefs": [],
+      "reasons": [
+        "source_family_requires_expert_admission"
+      ],
+      "blocksAuthoritativeConclusion": true,
+      "status": "PENDING_HUMAN_REVIEW"
+    },
+    {
+      "reviewId": "review-family-land_jerusalem_track",
+      "kind": "SOURCE_FAMILY_AUTHORITY_RIGHTS",
+      "role": "RIGHTS_REVIEWER",
+      "priority": "P1",
+      "subjectId": "LAND_JERUSALEM_TRACK",
+      "subjectTitle": "Jerusalem-specific land/waqf applicability track",
+      "territory": "JERUSALEM",
+      "evidenceRefs": [],
+      "reasons": [
+        "source_family_requires_expert_admission",
+        "source_family_coverage_unresolved"
+      ],
+      "blocksAuthoritativeConclusion": true,
+      "status": "PENDING_HUMAN_REVIEW"
+    },
+    {
+      "reviewId": "review-status-expropriation-2-1953-west-bank",
+      "kind": "LEGAL_STATUS_EXCEPTION",
+      "role": "LEGAL_STATUS_REVIEWER",
+      "priority": "P1",
+      "subjectId": "expropriation-2-1953-west-bank",
+      "subjectTitle": "قانون الاستملاك رقم (2) لسنة 1953م وتعديلاته",
+      "territory": "WEST_BANK",
+      "evidenceRefs": [
+        "ogb-merged-49",
+        "maqam-78-secondary-status"
+      ],
+      "reasons": [
+        "territory_scope_requires_verification"
+      ],
+      "blocksAuthoritativeConclusion": true,
+      "status": "PENDING_HUMAN_REVIEW"
+    },
+    {
+      "reviewId": "review-status-ottoman-land-code-historic-palestine",
+      "kind": "LEGAL_STATUS_EXCEPTION",
+      "role": "HISTORICAL_EVIDENCE_REVIEWER",
+      "priority": "P1",
+      "subjectId": "ottoman-land-code-historic-palestine",
+      "subjectTitle": "قانون الأراضي العثماني لسنة 1858م",
+      "territory": "OTTOMAN_PALESTINE",
+      "evidenceRefs": [
+        "maqam-169-historical-reference"
+      ],
+      "reasons": [
+        "legal_status_requires_further_verification",
+        "territory_scope_requires_verification",
+        "status_explicitly_unresolved"
+      ],
+      "blocksAuthoritativeConclusion": true,
+      "status": "PENDING_HUMAN_REVIEW"
+    },
+    {
+      "reviewId": "review-status-registration-transfer-fees-2-2012-west-bank",
+      "kind": "LEGAL_STATUS_EXCEPTION",
+      "role": "LEGAL_STATUS_REVIEWER",
+      "priority": "P1",
+      "subjectId": "registration-transfer-fees-2-2012-west-bank",
+      "subjectTitle": "قرار بقانون رقم (2) لسنة 2012م بشأن رسوم تسجيل وانتقال الأراضي",
+      "territory": "WEST_BANK",
+      "evidenceRefs": [
+        "ogb-22895-text-west-bank"
+      ],
+      "reasons": [
+        "legal_status_requires_further_verification",
+        "status_explicitly_unresolved"
+      ],
+      "blocksAuthoritativeConclusion": true,
+      "status": "PENDING_HUMAN_REVIEW"
+    },
+    {
+      "reviewId": "review-status-settlement-40-1952-west-bank",
+      "kind": "LEGAL_STATUS_EXCEPTION",
+      "role": "LEGAL_STATUS_REVIEWER",
+      "priority": "P1",
+      "subjectId": "settlement-40-1952-west-bank",
+      "subjectTitle": "قانون تسوية الأراضي والمياه رقم (40) لسنة 1952م",
+      "territory": "WEST_BANK",
+      "evidenceRefs": [
+        "pla-current-settlement-page",
+        "pla-2025-settlement-notice"
+      ],
+      "reasons": [
+        "legal_status_requires_further_verification",
+        "current_application_does_not_replace_status_verification",
+        "status_explicitly_unresolved"
+      ],
+      "blocksAuthoritativeConclusion": true,
+      "status": "PENDING_HUMAN_REVIEW"
+    },
+    {
+      "reviewId": "review-status-settlement-amendment-8-1955-west-bank",
+      "kind": "LEGAL_STATUS_EXCEPTION",
+      "role": "LEGAL_STATUS_REVIEWER",
+      "priority": "P1",
+      "subjectId": "settlement-amendment-8-1955-west-bank",
+      "subjectTitle": "قانون رقم (8) لسنة 1955م معدل لقانون تسوية الأراضي والمياه",
+      "territory": "WEST_BANK",
+      "evidenceRefs": [
+        "najah-laws-29-secondary-status"
+      ],
+      "reasons": [
+        "legal_status_requires_further_verification",
+        "territory_scope_requires_verification",
+        "status_explicitly_unresolved"
+      ],
+      "blocksAuthoritativeConclusion": true,
+      "status": "PENDING_HUMAN_REVIEW"
+    },
+    {
+      "reviewId": "review-status-settlement-authority-7-2016-west-bank",
+      "kind": "LEGAL_STATUS_EXCEPTION",
+      "role": "LEGAL_STATUS_REVIEWER",
+      "priority": "P1",
+      "subjectId": "settlement-authority-7-2016-west-bank",
+      "subjectTitle": "قرار بقانون رقم (7) لسنة 2016م بشأن هيئة تسوية الأراضي والمياه",
+      "territory": "WEST_BANK",
+      "evidenceRefs": [
+        "ogb-21967-explicit-repeal-status"
+      ],
+      "reasons": [
+        "territory_scope_requires_verification"
+      ],
+      "blocksAuthoritativeConclusion": true,
+      "status": "PENDING_HUMAN_REVIEW"
+    },
+    {
+      "reviewId": "review-status-waqf-tenancy-5-1964-west-bank",
+      "kind": "LEGAL_STATUS_EXCEPTION",
+      "role": "LEGAL_STATUS_REVIEWER",
+      "priority": "P1",
+      "subjectId": "waqf-tenancy-5-1964-west-bank",
+      "subjectTitle": "قانون المالكين والمستأجرين للعقارات الوقفية رقم (5) لسنة 1964م",
+      "territory": "WEST_BANK",
+      "evidenceRefs": [
+        "maqam-42-secondary-status"
+      ],
+      "reasons": [
+        "legal_status_requires_further_verification",
+        "territory_scope_requires_verification",
+        "status_explicitly_unresolved"
+      ],
+      "blocksAuthoritativeConclusion": true,
+      "status": "PENDING_HUMAN_REVIEW"
+    },
+    {
+      "reviewId": "review-mega-e-haseki-artifact-identity",
+      "kind": "HISTORICAL_IDENTITY_EXCEPTION",
+      "role": "HISTORICAL_EVIDENCE_REVIEWER",
+      "priority": "P0",
+      "subjectId": "haseki-hurrem-kudus-waqfiyya-vgm-2017-public-mirror",
+      "subjectTitle": "Haseki Hürrem Sultan Kudüs Vakfiyesi — VGM 2017 edition public mirror",
+      "territory": "OTTOMAN_PALESTINE",
+      "evidenceRefs": [
+        "private-manifest:haseki-hurrem-sultan-kudus-vakfiyesi",
+        "vgm-publication-record",
+        "ttk-bibliographic-record-587932"
+      ],
+      "reasons": [
+        "official_edition_identity_verified_but_origin_bytes_are_public_mirror",
+        "historical_document_identity_requires_specialist_confirmation"
+      ],
+      "blocksAuthoritativeConclusion": true,
+      "status": "PENDING_HUMAN_REVIEW"
+    },
+    {
+      "reviewId": "review-mega-e-haseki-deed-interpretation",
+      "kind": "WAQF_DEED_INTERPRETATION",
+      "role": "WAQF_DEED_REVIEWER",
+      "priority": "P0",
+      "subjectId": "waqf-deed-haseki-hurrem-kudus-arabic-964ah",
+      "subjectTitle": "Haseki Hürrem Sultan Jerusalem Arabic waqfiyya — Bethlehem and Beit Jala shares",
+      "territory": "OTTOMAN_PALESTINE",
+      "evidenceRefs": [
+        "translation-page-10:item-14",
+        "translation-page-10:item-15"
+      ],
+      "reasons": [
+        "18_of_24_share_language_requires_specialist_deed_interpretation",
+        "no_modern_parcel_or_current_ownership_inference_allowed"
+      ],
+      "blocksAuthoritativeConclusion": true,
+      "status": "PENDING_HUMAN_REVIEW"
+    },
+    {
+      "reviewId": "review-mega-e-haseki-rights",
+      "kind": "SOURCE_FAMILY_AUTHORITY_RIGHTS",
+      "role": "RIGHTS_REVIEWER",
+      "priority": "P0",
+      "subjectId": "haseki-hurrem-kudus-waqfiyya-vgm-2017-public-mirror",
+      "subjectTitle": "Private preservation and use rights for VGM 2017 public mirror",
+      "territory": null,
+      "evidenceRefs": [
+        "private-manifest:haseki-hurrem-sultan-kudus-vakfiyesi"
+      ],
+      "reasons": [
+        "private_research_use_allowed_under_current_governance",
+        "public_display_and_download_remain_unreviewed"
+      ],
+      "blocksAuthoritativeConclusion": true,
+      "status": "PENDING_HUMAN_REVIEW"
+    },
+    {
+      "reviewId": "review-mega-e-sensitive-deed-privacy",
+      "kind": "SECURITY_PRIVACY_EXCEPTION",
+      "role": "SECURITY_PRIVACY_REVIEWER",
+      "priority": "P0",
+      "subjectId": "waqf-sensitive-deed-access-policy",
+      "subjectTitle": "Sensitive deed, beneficiary and witness access policy",
+      "territory": null,
+      "evidenceRefs": [
+        "MEGA_E_RBAC_NEGATIVE_AUTH_MATRIX"
+      ],
+      "reasons": [
+        "production_identity_binding_not_yet_active",
+        "sensitive_deed_access_requires_least_privilege_review"
+      ],
+      "blocksAuthoritativeConclusion": true,
+      "status": "PENDING_HUMAN_REVIEW"
+    },
+    {
+      "reviewId": "review-mega-f-case-law-1383-2019",
+      "kind": "LEGAL_STATUS_EXCEPTION",
+      "role": "LEGAL_STATUS_REVIEWER",
+      "priority": "P0",
+      "subjectId": "ps-cassation-1383-2019",
+      "subjectTitle": "نقض 1383/2019 — appellate normalization and hukr/raqaba holding scope",
+      "territory": "WEST_BANK",
+      "evidenceRefs": [
+        "maqam-cassation-1383-2019-hukr",
+        "first-instance-27-2018",
+        "jerusalem-appeal-341-2019"
+      ],
+      "reasons": [
+        "case_specific_holding_requires_legal_scope_review",
+        "secondary_reference_copy_not_official_court_origin"
+      ],
+      "blocksAuthoritativeConclusion": true,
+      "status": "PENDING_HUMAN_REVIEW"
+    },
+    {
+      "reviewId": "review-mega-f-sharia-primary",
+      "kind": "FIQH_SHARIA_SOURCE_ADMISSION",
+      "role": "FIQH_SHARIA_REVIEWER",
+      "priority": "P0",
+      "subjectId": "SHARIA_PRIMARY",
+      "subjectTitle": "Primary sharia source family — Qur'an infrastructure and waqf hadith identity",
+      "territory": null,
+      "evidenceRefs": [
+        "quran-complex-developer-platform",
+        "bukhari-2737-muslim-1632-waqf-hadith-dorar"
+      ],
+      "reasons": [
+        "primary_collection_bytes_not_fully_preserved",
+        "sharia_interpretation_requires_human_specialist"
+      ],
+      "blocksAuthoritativeConclusion": true,
+      "status": "PENDING_HUMAN_REVIEW"
+    },
+    {
+      "reviewId": "review-mega-f-fiqh-hanafi-hilal",
+      "kind": "FIQH_SHARIA_SOURCE_ADMISSION",
+      "role": "FIQH_SHARIA_REVIEWER",
+      "priority": "P0",
+      "subjectId": "fiqh-hanafi-hilal-ahkam-al-waqf",
+      "subjectTitle": "هلال الرأي — أحكام الوقف — Hanafi edition",
+      "territory": null,
+      "evidenceRefs": [
+        "sha256:b6186e5d6e7378a944eadf8af876781ee1c7647337d2c143222a5eccffa4268d",
+        "pages:348"
+      ],
+      "reasons": [
+        "edition_identity_ready",
+        "substantive_page_locator_not_yet_governed",
+        "fiqh_specialist_review_required"
+      ],
+      "blocksAuthoritativeConclusion": true,
+      "status": "PENDING_HUMAN_REVIEW"
+    },
+    {
+      "reviewId": "review-mega-f-fiqh-hanbali-khallal",
+      "kind": "FIQH_SHARIA_SOURCE_ADMISSION",
+      "role": "FIQH_SHARIA_REVIEWER",
+      "priority": "P0",
+      "subjectId": "fiqh-hanbali-khallal-kitab-al-wuquf",
+      "subjectTitle": "الخلال — كتاب الوقوف — Hanbali edition",
+      "territory": null,
+      "evidenceRefs": [
+        "sha256:e882bc8f2eacb167987c5b2e0daa72bded6f56938f068587d5f83a7d2f521037",
+        "pages:881"
+      ],
+      "reasons": [
+        "edition_identity_ready",
+        "substantive_page_locator_not_yet_governed",
+        "fiqh_specialist_review_required"
+      ],
+      "blocksAuthoritativeConclusion": true,
+      "status": "PENDING_HUMAN_REVIEW"
+    },
+    {
+      "reviewId": "review-mega-f-gaza-current-status",
+      "kind": "LEGAL_STATUS_EXCEPTION",
+      "role": "LEGAL_STATUS_REVIEWER",
+      "priority": "P0",
+      "subjectId": "LAND_GAZA_CURRENT",
+      "subjectTitle": "Gaza current land/waqf legal-status track",
+      "territory": "GAZA",
+      "evidenceRefs": [
+        "gaza-land-authority-legal-library",
+        "gaza-government-property-legal-guidance",
+        "gaza-pla-land-specific-laws-2020"
+      ],
+      "reasons": [
+        "legal_lineage_evidence_expanded",
+        "instrument_by_instrument_current_status_unresolved",
+        "west_bank_status_inheritance_prohibited"
+      ],
+      "blocksAuthoritativeConclusion": true,
+      "status": "PENDING_HUMAN_REVIEW"
+    },
+    {
+      "reviewId": "review-mega-f-jerusalem-track",
+      "kind": "LEGAL_STATUS_EXCEPTION",
+      "role": "LEGAL_STATUS_REVIEWER",
+      "priority": "P0",
+      "subjectId": "LAND_JERUSALEM_TRACK",
+      "subjectTitle": "Jerusalem land/waqf applicability and operational registry track",
+      "territory": "JERUSALEM",
+      "evidenceRefs": [
+        "jerusalem-israel-land-registry-extract-service",
+        "jerusalem-soi-unregulated-cadastre-service"
+      ],
+      "reasons": [
+        "operational_registry_evidence_present",
+        "jurisdiction_and_applicability_unresolved",
+        "no_sovereignty_inference_allowed"
+      ],
+      "blocksAuthoritativeConclusion": true,
+      "status": "PENDING_HUMAN_REVIEW"
+    },
+    {
+      "reviewId": "review-mega-f-continuity-security",
+      "kind": "SECURITY_PRIVACY_EXCEPTION",
+      "role": "SECURITY_PRIVACY_REVIEWER",
+      "priority": "P1",
+      "subjectId": "MEGA_F_CONTINUITY_SECURITY",
+      "subjectTitle": "MEGA_F local restore, private evidence and RBAC/privacy controls",
+      "territory": null,
+      "evidenceRefs": [
+        "MEGA_F_LOCAL_RESTORE_DRILL",
+        "MEGA_F_SECURITY_NEGATIVE_MATRIX",
+        "MEGA_F_LOCAL_PERFORMANCE_COST_BENCHMARK"
+      ],
+      "reasons": [
+        "local_private_operability_evidence_ready",
+        "independent_provider_and_production_identity_enforcement_pending"
+      ],
+      "blocksAuthoritativeConclusion": false,
+      "status": "PENDING_HUMAN_REVIEW"
+    }
+  ],
+  "sharedSupabaseMutations": 0,
+  "externalNetworkCallsDuringOfflineReplay": 0,
+  "overallPass": true,
+  "disposition": "PASS_PREPRODUCTION_EVIDENCE_AND_OPERABILITY_WITH_HUMAN_SPECIALIST_AND_EXTERNAL_INFRASTRUCTURE_DEBT_EXPLICIT"
+}
