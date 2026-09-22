@@ -25,6 +25,8 @@ export type ReferenceRetrievalDocument = {
   graphScore?: number | null;
   conflictFlag?: boolean;
   structuredConclusionEligible?: boolean;
+  conclusionScope?: "GENERAL" | "CASE_SPECIFIC";
+  conclusionScopeTokens?: string[];
 };
 
 export type ReferenceRetrievalHit = ReferenceRetrievalDocument & {
@@ -193,6 +195,16 @@ export function hybridReferenceSearch(input: {
       if (document.conflictFlag) reasons.push("evidence_conflict");
       if (document.structuredConclusionEligible === false)
         reasons.push("structured_conclusion_gate_closed");
+      if (document.conclusionScope === "CASE_SPECIFIC") {
+        const required = (document.conclusionScopeTokens || [])
+          .map(normalize)
+          .filter(Boolean);
+        const normalizedQuery = normalize(input.query);
+        const scopeMatched =
+          required.length > 0 &&
+          required.every(token => normalizedQuery.includes(token));
+        if (!scopeMatched) reasons.push("case_specific_scope_mismatch");
+      }
       if (document.authorityClass === "reference_secondary")
         reasons.push("secondary_authority");
       const usableForConclusion = reasons.every(
@@ -201,6 +213,7 @@ export function hybridReferenceSearch(input: {
             "legal_status_not_verified",
             "evidence_conflict",
             "structured_conclusion_gate_closed",
+            "case_specific_scope_mismatch",
           ].includes(reason)
       );
       return {

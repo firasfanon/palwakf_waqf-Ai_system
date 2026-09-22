@@ -14,6 +14,7 @@ import {
   buildMegaFContinuityReadiness,
   buildMegaFSecurityNegativeMatrix,
   evaluateMegaFGuard,
+  summarizeMegaFRetrievalHitForEvidence,
 } from "./preProductionMegaF";
 import {
   buildMegaFSpecialistReadinessQueue,
@@ -343,6 +344,8 @@ describe("WAQF_AI MEGA_F pre-production evidence and operability convergence", (
         artifactSha256: "c".repeat(64),
         locator: "case-specific-holding",
         structuredConclusionEligible: true,
+        conclusionScope: "CASE_SPECIFIC",
+        conclusionScopeTokens: ["1383/2019"],
         semanticScore: 0.9,
       },
       {
@@ -369,6 +372,26 @@ describe("WAQF_AI MEGA_F pre-production evidence and operability convergence", (
       documents: docs,
     });
     expect(caseHits[0].usableForConclusion).toBe(true);
+
+    const generalCaseHits = hybridReferenceSearch({
+      query: "ما الذي تقرره أحكام النقض عن الحكر بوجه عام؟",
+      route: routeReferenceIssue(
+        "ما الذي تقرره أحكام النقض عن الحكر بوجه عام؟"
+      ),
+      documents: docs,
+    });
+    expect(generalCaseHits).toHaveLength(1);
+    expect(generalCaseHits[0].usableForConclusion).toBe(false);
+    expect(generalCaseHits[0].reasons).toContain(
+      "case_specific_scope_mismatch"
+    );
+
+    const summary = summarizeMegaFRetrievalHitForEvidence(caseHits[0]);
+    expect("content" in summary).toBe(false);
+    expect(JSON.stringify(summary)).not.toContain(
+      "الحكر يكسب حق منفعة مع بقاء رقبة العقار للوقف"
+    );
+
     const gazaHits = hybridReferenceSearch({
       query: "قوانين الأراضي غزة",
       route: routeReferenceIssue("ما القوانين الحالية للأراضي في غزة؟"),

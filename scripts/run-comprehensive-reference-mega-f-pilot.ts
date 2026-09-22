@@ -15,6 +15,7 @@ import {
   buildMegaFContinuityReadiness,
   buildMegaFSecurityNegativeMatrix,
   evaluateMegaFGuard,
+  summarizeMegaFRetrievalHitForEvidence,
 } from "../server/preProductionMegaF";
 import {
   buildMegaFSpecialistReadinessQueue,
@@ -316,6 +317,8 @@ const retrievalDocuments: ReferenceRetrievalDocument[] = [
     graphScore: 0.7,
     structuredConclusionEligible:
       case1383IdentityPass && case1383HoldingTermsPass,
+    conclusionScope: "CASE_SPECIFIC",
+    conclusionScopeTokens: ["1383/2019"],
   },
   {
     documentId: "gaza-land-lineage-real",
@@ -559,11 +562,15 @@ const report = {
   multiSourceE2E: {
     retrievalDocumentCount: retrievalDocuments.length,
     caseSpecificConclusionPass,
-    caseTopHit: caseHits[0] || null,
+    caseTopHit: caseHits[0]
+      ? summarizeMegaFRetrievalHitForEvidence(caseHits[0])
+      : null,
     gazaFailClosedPass,
-    gazaTopHit: gazaHits[0] || null,
+    gazaTopHit: gazaHits[0]
+      ? summarizeMegaFRetrievalHitForEvidence(gazaHits[0])
+      : null,
     fiqhFailClosedPass,
-    fiqhTopHits: fiqhHits,
+    fiqhTopHits: fiqhHits.map(summarizeMegaFRetrievalHitForEvidence),
     shariaFailClosedPass,
     citationAudit,
   },

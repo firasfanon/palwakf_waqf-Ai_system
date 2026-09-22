@@ -333,6 +333,37 @@ Interpretation:
 - One legacy failure was absent in this run, but MEGA_F did not modify the associated legacy subsystem; the decrease is treated as legacy/environment drift, not claimed as a MEGA_F fix.
 - Repository remains globally non-green.
 
+## Independent review repair
+
+The first pushed MEGA_F head was:
+`2c85ce02dfa57763935808b3175e3541391a3730`
+with tree:
+`84b5638749b3fb827434fdfedae98f0123235485`.
+
+Independent review of the remote GitHub head found two material hardening issues before acceptance:
+
+1. The pilot evidence serialized complete retrieval-hit objects. For real Gaza and case-law hits this included extracted third-party source text in the Git evidence file even though raw/private corpus content is required to remain outside Git.
+2. The normalized 1383/2019 judgment was marked case-specific, but generic retrieval had no mechanical scope gate preventing the case-specific holding from being treated as conclusion-usable for a broader hukr question that did not identify the case.
+
+The successor repair:
+
+- adds `CASE_SPECIFIC` conclusion scope and required identity tokens to governed retrieval documents;
+- adds `case_specific_scope_mismatch` as a blocking conclusion reason;
+- marks the 1383/2019 benchmark with required token `1383/2019`;
+- adds regression proof that the exact case query can use the represented holding while a generalized cassation/hukr query cannot;
+- adds `summarizeMegaFRetrievalHitForEvidence`, which emits only provenance, scores, gates and identifiers and never serializes source `content`;
+- regenerates the private-pilot evidence with zero `content` fields and no raw Gaza/case text;
+- reruns TypeScript, 79/79 targeted tests, the real private pilot, and the full repository regression.
+
+Post-repair regression remains:
+- 162 failed;
+- 349 passed;
+- 36 skipped;
+- 547 total;
+- no MEGA_F/reference-retrieval failure introduced.
+
+The exact successor head/tree is recorded after the repair commit/push/remote readback in Workspace sovereign state.
+
 ## Acceptance interpretation
 
 MEGA_F engineering/private-evidence/operability may be accepted only after:

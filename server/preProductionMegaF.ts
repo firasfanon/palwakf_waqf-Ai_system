@@ -9,6 +9,7 @@ import {
   hybridReferenceSearch,
   selectReferenceEvidencePack,
   type ReferenceRetrievalDocument,
+  type ReferenceRetrievalHit,
 } from "./referenceRetrieval";
 
 export type MegaFGuardedAction =
@@ -143,6 +144,54 @@ export function buildMegaFSecurityNegativeMatrix(): Array<{
       expected: "SEPARATE_AUTH_REQUIRED" as const,
     })),
   ]);
+}
+
+export type MegaFEvidenceHitSummary = {
+  documentId: string;
+  title: string;
+  domain: ReferenceRetrievalHit["domain"];
+  era: ReferenceRetrievalHit["era"];
+  territories: ReferenceRetrievalHit["territories"];
+  authorityClass: ReferenceRetrievalHit["authorityClass"];
+  sourceUrl: string;
+  publisher: string;
+  legalStatusVerified: boolean;
+  artifactVersionId: string;
+  artifactSha256: string;
+  locator: string | null;
+  structuredConclusionEligible?: boolean;
+  conclusionScope?: "GENERAL" | "CASE_SPECIFIC";
+  conclusionScopeTokens?: string[];
+  scores: ReferenceRetrievalHit["scores"];
+  usableForConclusion: boolean;
+  reasons: string[];
+};
+
+export function summarizeMegaFRetrievalHitForEvidence(
+  hit: ReferenceRetrievalHit
+): MegaFEvidenceHitSummary {
+  return {
+    documentId: hit.documentId,
+    title: hit.title,
+    domain: hit.domain,
+    era: hit.era,
+    territories: [...hit.territories],
+    authorityClass: hit.authorityClass,
+    sourceUrl: hit.sourceUrl,
+    publisher: hit.publisher,
+    legalStatusVerified: hit.legalStatusVerified,
+    artifactVersionId: hit.artifactVersionId,
+    artifactSha256: hit.artifactSha256,
+    locator: hit.locator,
+    structuredConclusionEligible: hit.structuredConclusionEligible,
+    conclusionScope: hit.conclusionScope,
+    conclusionScopeTokens: hit.conclusionScopeTokens
+      ? [...hit.conclusionScopeTokens]
+      : undefined,
+    scores: { ...hit.scores },
+    usableForConclusion: hit.usableForConclusion,
+    reasons: [...hit.reasons],
+  };
 }
 
 export type MegaFPerformanceBenchmark = {
