@@ -98,8 +98,8 @@ New MEGA_E code introduces:
 ## Targeted validation
 - TypeScript check: PASS
 - Targeted files: 5/5 PASS
-- Targeted tests: 61/61 PASS
-- MEGA_E dedicated: 14/14 PASS
+- Targeted tests: 63/63 PASS
+- MEGA_E dedicated: 16/16 PASS
 - MEGA_D regression: 10/10 PASS
 - MEGA_C regression: 16/16 PASS
 - MEGA_B regression: 18/18 PASS
@@ -136,9 +136,9 @@ Evidence:
 
 Observed:
 - 163 failed
-- 330 passed
+- 332 passed
 - 36 skipped
-- 529 total
+- 531 total
 
 MEGA_D predecessor:
 - 163 failed
@@ -147,7 +147,7 @@ MEGA_D predecessor:
 - 515 total
 
 Therefore:
-- MEGA_E adds 14 passing tests.
+- MEGA_E adds 16 passing tests.
 - Failed-test count remains exactly 163.
 - No MEGA_E-specific failure reference was observed.
 - Repository remains globally non-green due existing legacy/environment/database-dependent failures.
@@ -171,8 +171,26 @@ MEGA_E intentionally does not hide unresolved corpus debt.
 - Actual production identity/account binding is NOT performed.
 - Production security/privacy acceptance is NOT granted.
 
+## Independent review repair
+The first pushed MEGA_E head `279c42f1e0b957fe7762ee430573e93651fbd763` was remotely read back and independently reviewed.
+
+The review found two hardening gaps in artifact admission:
+- a manifest could claim `officialOriginDownload=true` while its acquisition host role still remained `PUBLIC_MIRROR`;
+- explicit Rights or Specialist `REJECTED` states did not independently disable private-benchmark eligibility.
+
+The successor repair:
+- requires both `officialOriginDownload=true` and `acquisitionHostRole=OFFICIAL_ORIGIN` before canonical admission can pass;
+- forces private-benchmark eligibility false when Rights or Specialist review explicitly rejects the artifact;
+- adds two regression tests for these cases.
+
+After repair:
+- targeted tests: 63/63 PASS;
+- MEGA_E dedicated: 16/16 PASS;
+- private real-deed pilot remains PASS with authoritative legal conclusion fail-closed;
+- full repository failed-test count remains 163.
+
 ## Acceptance interpretation
-MEGA_E engineering/private-evidence work may be accepted at the exact reviewed task-branch head after commit/push/readback and independent review.
+MEGA_E engineering/private-evidence work may be accepted only at the successor exact reviewed task-branch head after commit/push/readback and final independent review.
 
 This evidence does NOT authorize or imply:
 - modern ownership of Bethlehem or Beit Jala parcels from the Haseki deed,

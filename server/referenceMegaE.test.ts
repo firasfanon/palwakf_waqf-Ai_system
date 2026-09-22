@@ -93,6 +93,37 @@ describe("WAQF_AI MEGA_E real evidence and pre-production governance", () => {
     expect(decision.reasons).toContain("specialist_review_pending");
   });
 
+  it("does not trust a claimed official download when the acquisition host role is still a public mirror", () => {
+    const decision = assessMegaEHistoricalArtifact({
+      ...manifest,
+      officialOriginDownload: true,
+      canonicalAdmission: true,
+      specialistReview: "APPROVED",
+      rights: {
+        ...manifest.rights,
+        rightsReviewStatus: "VERIFIED",
+      },
+    });
+    expect(decision.privateBenchmarkEligible).toBe(true);
+    expect(decision.canonicalAdmissionEligible).toBe(false);
+    expect(decision.publicReleaseEligible).toBe(false);
+  });
+
+  it("fails private benchmark eligibility when rights or specialist review explicitly rejects the artifact", () => {
+    expect(
+      assessMegaEHistoricalArtifact({
+        ...manifest,
+        rights: { ...manifest.rights, rightsReviewStatus: "REJECTED" },
+      }).privateBenchmarkEligible
+    ).toBe(false);
+    expect(
+      assessMegaEHistoricalArtifact({
+        ...manifest,
+        specialistReview: "REJECTED",
+      }).privateBenchmarkEligible
+    ).toBe(false);
+  });
+
   it("advances historical waqf coverage to PARTIAL without rewriting MEGA_C history", () => {
     const families = megaESourceFamilies();
     const historical = families.find(row => row.familyId === "HISTORICAL_WAQF");

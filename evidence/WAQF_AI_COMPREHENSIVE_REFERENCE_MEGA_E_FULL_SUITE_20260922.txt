@@ -13,14 +13,14 @@ At C:\Users\DELL\AppData\Roaming\npm\pnpm.ps1:24 char:5
 
  RUN  v2.1.9 C:/Users/DELL/StudioProjects/palwakf_waqf_ai_corpus_scale_up_wt
 
- ظ£ô server/referenceMegaC.test.ts (16 tests) 42ms
- ظ£ô server/referenceMegaE.test.ts (14 tests) 39ms
- ظ£ô server/referenceMegaB.test.ts (18 tests) 42ms
+ ظ£ô server/referenceMegaE.test.ts (16 tests) 38ms
+ ظ£ô server/referenceMegaC.test.ts (16 tests) 39ms
+ ظ£ô server/referenceMegaB.test.ts (18 tests) 50ms
  ظ£ô server/evidenceDistillation.test.ts (10 tests) 28ms
- ظ£ô server/referenceMegaD.test.ts (10 tests) 19ms
- ظ£ô server/legalSkillAdapter.test.ts (8 tests) 17ms
- ظ£ô server/legalEvidenceSynthesis.test.ts (10 tests) 32ms
- ظإ» server/interaction-analytics.test.ts (14 tests | 14 failed) 19ms
+ ظ£ô server/referenceMegaD.test.ts (10 tests) 18ms
+ ظ£ô server/legalSkillAdapter.test.ts (8 tests) 20ms
+ ظ£ô server/legalEvidenceSynthesis.test.ts (10 tests) 31ms
+ ظإ» server/interaction-analytics.test.ts (14 tests | 14 failed) 18ms
    ├ù Interaction Analytics > getInteractionStats > should return interaction statistics 7ms
      ظْ Database not available
    ├ù Interaction Analytics > getCommentsOverTime > should return comments over time (last 30 days) 1ms
@@ -37,7 +37,7 @@ At C:\Users\DELL\AppData\Roaming\npm\pnpm.ps1:24 char:5
      ظْ Database not available
    ├ù Interaction Analytics > getCommentsByEntityType > should return comments grouped by entity type 1ms
      ظْ Database not available
-   ├ù Interaction Analytics > getRatingsByEntityType > should return ratings grouped by entity type with average 1ms
+   ├ù Interaction Analytics > getRatingsByEntityType > should return ratings grouped by entity type with average 0ms
      ظْ Database not available
    ├ù Admin Notifications > getAdminUsers > should return list of admin users 1ms
      ظْ Database not available
@@ -49,23 +49,23 @@ At C:\Users\DELL\AppData\Roaming\npm\pnpm.ps1:24 char:5
      ظْ Database not available
    ├ù Admin Notifications > notifyAdminsCommentPendingApproval > should notify admins about comment pending approval 1ms
      ظْ Database not available
- ظ£ô server/researchOrchestrator.test.ts (11 tests) 18ms
- ظإ» server/cache.analytics.test.ts (18 tests | 18 skipped) 14ms
- ظإ» server/knowledgeStats.test.ts (22 tests | 3 failed) 66ms
-   ├ù Knowledge Sources Statistics > Top Active Sources > should include source details 5ms
+ ظ£ô server/researchOrchestrator.test.ts (11 tests) 20ms
+ ظإ» server/cache.analytics.test.ts (18 tests | 18 skipped) 8ms
+ ظإ» server/knowledgeStats.test.ts (22 tests | 3 failed) 82ms
+   ├ù Knowledge Sources Statistics > Top Active Sources > should include source details 6ms
      ظْ expected undefined to be defined
-   ├ù Knowledge Sources Statistics > Fetch Activity > should only include last 7 days 4ms
+   ├ù Knowledge Sources Statistics > Fetch Activity > should only include last 7 days 6ms
      ظْ expected false to be true // Object.is equality
    ├ù Knowledge Sources Statistics > Statistics Consistency > should have consistent totals 1ms
-     ظْ expected '0[object Object][object Object][objecظخ' to be 59 // Object.is equality
- ظإ» server/knowledgeSources.test.ts (20 tests | 12 failed) 80ms
+     ظْ expected '0[object Object][object Object][objecظخ' to be 67 // Object.is equality
+ ظإ» server/knowledgeSources.test.ts (20 tests | 12 failed) 81ms
    ├ù Knowledge Sources Management > Admin Operations > should create a new knowledge source 16ms
      ظْ expected undefined to be true // Object.is equality
-   ├ù Knowledge Sources Management > Admin Operations > should list all knowledge sources 17ms
+   ├ù Knowledge Sources Management > Admin Operations > should list all knowledge sources 16ms
      ظْ expected undefined to be defined
-   ├ù Knowledge Sources Management > Admin Operations > should get a specific knowledge source by ID 3ms
+   ├ù Knowledge Sources Management > Admin Operations > should get a specific knowledge source by ID 2ms
      ظْ No procedure found on path "knowledgeSources,get"
-   ├ù Knowledge Sources Management > Admin Operations > should update a knowledge source 4ms
+   ├ù Knowledge Sources Management > Admin Operations > should update a knowledge source 3ms
      ظْ [
   {
     "expected": "number",
@@ -76,7 +76,7 @@ At C:\Users\DELL\AppData\Roaming\npm\pnpm.ps1:24 char:5
     "message": "Invalid input: expected number, received undefined"
   }
 ]
-   ├ù Knowledge Sources Management > Admin Operations > should toggle source active status 1ms
+   ├ù Knowledge Sources Management > Admin Operations > should toggle source active status 2ms
      ظْ [
   {
     "expected": "number",
@@ -117,18 +117,18 @@ At C:\Users\DELL\AppData\Roaming\npm\pnpm.ps1:24 char:5
     "message": "Invalid input: expected number, received undefined"
   }
 ]
-   ├ù Knowledge Sources Management > Permission Tests > should allow regular users to get source details 3ms
+   ├ù Knowledge Sources Management > Permission Tests > should allow regular users to get source details 4ms
      ظْ Cannot read properties of undefined (reading 'id')
-   ├ù Knowledge Sources Management > Validation Tests > should reject empty name 13ms
-     ظْ promise resolved "{ id: 62, type: 'wikipedia', ظخ(11) }" instead of rejecting
-   ├ù Knowledge Sources Management > Edge Cases > should handle getting non-existent source 4ms
+   ├ù Knowledge Sources Management > Validation Tests > should reject empty name 11ms
+     ظْ promise resolved "{ id: 70, type: 'wikipedia', ظخ(11) }" instead of rejecting
+   ├ù Knowledge Sources Management > Edge Cases > should handle getting non-existent source 3ms
      ظْ expected [Function] to throw error including '╪د┘┘à╪╡╪»╪▒ ╪║┘è╪▒ ┘à┘ê╪ش┘ê╪»' but got 'No procedure found on path "knowledgeظخ'
-   ├ù Knowledge Sources Management > Edge Cases > should handle optional config field 3ms
+   ├ù Knowledge Sources Management > Edge Cases > should handle optional config field 4ms
      ظْ expected undefined to be true // Object.is equality
-   ├ù Knowledge Sources Management > Edge Cases > should handle valid JSON config 3ms
+   ├ù Knowledge Sources Management > Edge Cases > should handle valid JSON config 4ms
      ظْ expected undefined to be true // Object.is equality
- ظإ» server/knowledge.test.ts (24 tests | 22 failed) 35ms
-   ├ù Knowledge Management System > Create Knowledge Document > should create a new knowledge document 14ms
+ ظإ» server/knowledge.test.ts (24 tests | 22 failed) 49ms
+   ├ù Knowledge Management System > Create Knowledge Document > should create a new knowledge document 27ms
      ظْ Database not available
    ├ù Knowledge Management System > Create Knowledge Document > should create document with minimal required fields 1ms
      ظْ Database not available
@@ -154,7 +154,7 @@ At C:\Users\DELL\AppData\Roaming\npm\pnpm.ps1:24 char:5
      ظْ Database not available
    ├ù Knowledge Management System > Delete Knowledge Document > should delete a document 0ms
      ظْ Database not available
-   ├ù Knowledge Management System > Delete Knowledge Document > should not throw error when deleting non-existent document 3ms
+   ├ù Knowledge Management System > Delete Knowledge Document > should not throw error when deleting non-existent document 4ms
      ظْ promise rejected "Error: Database not available" instead of resolving
    ├ù Knowledge Management System > Knowledge Base Integration > should have seeded documents from knowledge_base.json 1ms
      ظْ expected 0 to be greater than or equal to 19
@@ -162,20 +162,20 @@ At C:\Users\DELL\AppData\Roaming\npm\pnpm.ps1:24 char:5
      ظْ expected 0 to be greater than 0
    ├ù Knowledge Management System > Knowledge Base Integration > should have Palestinian Waqf Law document 1ms
      ظْ expected 0 to be greater than 0
-   ├ù Knowledge Management System > Knowledge Base Integration > should have Ottoman Land Law document 1ms
+   ├ù Knowledge Management System > Knowledge Base Integration > should have Ottoman Land Law document 2ms
      ظْ expected 0 to be greater than 0
    ├ù Knowledge Management System > Knowledge Base Integration > should have Majalla documents 1ms
      ظْ expected 0 to be greater than 0
-   ├ù Knowledge Management System > RAG System Integration > should find relevant documents for waqf queries 0ms
+   ├ù Knowledge Management System > RAG System Integration > should find relevant documents for waqf queries 1ms
      ظْ expected 0 to be greater than 0
    ├ù Knowledge Management System > RAG System Integration > should find relevant documents for property queries 1ms
      ظْ expected 0 to be greater than 0
    ├ù Knowledge Management System > RAG System Integration > should find relevant documents for legal queries 0ms
      ظْ expected 0 to be greater than 0
- ظإ» server/admin.test.ts (21 tests | 3 failed) 55ms
-   ├ù Admin APIs - Users Management > should allow admin to get user by ID 8ms
+ ظإ» server/admin.test.ts (21 tests | 3 failed) 52ms
+   ├ù Admin APIs - Users Management > should allow admin to get user by ID 7ms
      ظْ No procedure found on path "admin,users,getById"
-   ├ù Admin APIs - Content Management > should allow admin to filter documents by category 5ms
+   ├ù Admin APIs - Content Management > should allow admin to filter documents by category 4ms
      ظْ expected 'jurisprudence' to be 'law' // Object.is equality
    ├ù Admin APIs - Data Integrity > should return consistent user count across endpoints 3ms
      ظْ [
@@ -190,12 +190,12 @@ At C:\Users\DELL\AppData\Roaming\npm\pnpm.ps1:24 char:5
     "message": "Too big: expected number to be <=100"
   }
 ]
- ظإ» server/references.test.ts (20 tests | 13 failed) 41ms
-   ├ù Land References Router > references.list > should return all active land references 12ms
+ ظإ» server/references.test.ts (20 tests | 13 failed) 37ms
+   ├ù Land References Router > references.list > should return all active land references 13ms
      ظْ expected 0 to be greater than 0
-   ├ù Land References Router > references.getById > should return undefined for non-existent ID 6ms
+   ├ù Land References Router > references.getById > should return undefined for non-existent ID 2ms
      ظْ No procedure found on path "references,getById"
-   ├ù Land References Router > references.getRegions > should return list of unique regions 1ms
+   ├ù Land References Router > references.getRegions > should return list of unique regions 2ms
      ظْ No procedure found on path "references,getRegions"
    ├ù Land References Router > references.getRegions > should return regions in alphabetical order 1ms
      ظْ No procedure found on path "references,getRegions"
@@ -211,16 +211,16 @@ At C:\Users\DELL\AppData\Roaming\npm\pnpm.ps1:24 char:5
      ظْ No procedure found on path "references,getStats"
    ├ù Land References Router > references.create (Admin only) > should create a new land reference 1ms
      ظْ No procedure found on path "references,create"
-   ├ù Land References Router > references.create (Admin only) > should require admin role 8ms
+   ├ù Land References Router > references.create (Admin only) > should require admin role 7ms
      ظْ expected [Function] to throw error including 'Unauthorized' but got 'No procedure found on path "referenceظخ'
    ├ù Land References Router > references.update (Admin only) > should require admin role 1ms
      ظْ expected [Function] to throw error including 'Unauthorized' but got 'No procedure found on path "referenceظخ'
    ├ù Land References Router > references.delete (Admin only) > should require admin role 1ms
      ظْ expected [Function] to throw error including 'Unauthorized' but got 'No procedure found on path "referenceظخ'
- ظإ» server/crud.test.ts (25 tests | 25 failed) 117ms
-   ├ù CRUD Operations Tests > Waqf Properties CRUD > should create a new waqf property 16ms
+ ظإ» server/crud.test.ts (25 tests | 25 failed) 55ms
+   ├ù CRUD Operations Tests > Waqf Properties CRUD > should create a new waqf property 22ms
      ظْ ┘é╪د╪╣╪»╪ر ╪د┘╪ذ┘è╪د┘╪د╪ز ╪د┘╪ز╪┤╪║┘è┘┘è╪ر ╪║┘è╪▒ ┘à╪ز╪د╪ص╪ر╪ؤ ╪ز┘à ┘à┘╪╣ ╪╣┘à┘┘è╪ر ╪د┘┘â╪ز╪د╪ذ╪ر ╪ذ╪»┘ ╪ز┘┘┘è╪░ ╪ح╪ش╪▒╪د╪ة ┘ê┘ç┘à┘è.
-   ├ù CRUD Operations Tests > Waqf Properties CRUD > should list waqf properties 5ms
+   ├ù CRUD Operations Tests > Waqf Properties CRUD > should list waqf properties 4ms
      ظْ expected 0 to be greater than 0
    ├ù CRUD Operations Tests > Waqf Properties CRUD > should get property by id 2ms
      ظْ [
@@ -233,7 +233,7 @@ At C:\Users\DELL\AppData\Roaming\npm\pnpm.ps1:24 char:5
     "message": "Invalid input: expected number, received undefined"
   }
 ]
-   ├ù CRUD Operations Tests > Waqf Properties CRUD > should update a property 27ms
+   ├ù CRUD Operations Tests > Waqf Properties CRUD > should update a property 1ms
      ظْ [
   {
     "expected": "number",
@@ -244,7 +244,7 @@ At C:\Users\DELL\AppData\Roaming\npm\pnpm.ps1:24 char:5
     "message": "Invalid input: expected number, received undefined"
   }
 ]
-   ├ù CRUD Operations Tests > Waqf Properties CRUD > should delete a property 7ms
+   ├ù CRUD Operations Tests > Waqf Properties CRUD > should delete a property 1ms
      ظْ [
   {
     "expected": "number",
@@ -329,11 +329,11 @@ At C:\Users\DELL\AppData\Roaming\npm\pnpm.ps1:24 char:5
     "message": "Invalid input: expected number, received undefined"
   }
 ]
-   ├ù CRUD Operations Tests > Waqf Deeds CRUD > should create a new waqf deed 10ms
+   ├ù CRUD Operations Tests > Waqf Deeds CRUD > should create a new waqf deed 1ms
      ظْ ┘é╪د╪╣╪»╪ر ╪د┘╪ذ┘è╪د┘╪د╪ز ╪د┘╪ز╪┤╪║┘è┘┘è╪ر ╪║┘è╪▒ ┘à╪ز╪د╪ص╪ر╪ؤ ╪ز┘à ┘à┘╪╣ ╪╣┘à┘┘è╪ر ╪د┘┘â╪ز╪د╪ذ╪ر ╪ذ╪»┘ ╪ز┘┘┘è╪░ ╪ح╪ش╪▒╪د╪ة ┘ê┘ç┘à┘è.
-   ├ù CRUD Operations Tests > Waqf Deeds CRUD > should list waqf deeds 2ms
+   ├ù CRUD Operations Tests > Waqf Deeds CRUD > should list waqf deeds 1ms
      ظْ expected 0 to be greater than 0
-   ├ù CRUD Operations Tests > Waqf Deeds CRUD > should get deed by id 15ms
+   ├ù CRUD Operations Tests > Waqf Deeds CRUD > should get deed by id 1ms
      ظْ [
   {
     "expected": "number",
@@ -344,7 +344,7 @@ At C:\Users\DELL\AppData\Roaming\npm\pnpm.ps1:24 char:5
     "message": "Invalid input: expected number, received undefined"
   }
 ]
-   ├ù CRUD Operations Tests > Waqf Deeds CRUD > should update a deed 3ms
+   ├ù CRUD Operations Tests > Waqf Deeds CRUD > should update a deed 1ms
      ظْ [
   {
     "expected": "number",
@@ -366,11 +366,11 @@ At C:\Users\DELL\AppData\Roaming\npm\pnpm.ps1:24 char:5
     "message": "Invalid input: expected number, received undefined"
   }
 ]
-   ├ù CRUD Operations Tests > Ministerial Instructions CRUD > should create a new ministerial instruction 2ms
+   ├ù CRUD Operations Tests > Ministerial Instructions CRUD > should create a new ministerial instruction 1ms
      ظْ ┘é╪د╪╣╪»╪ر ╪د┘╪ذ┘è╪د┘╪د╪ز ╪د┘╪ز╪┤╪║┘è┘┘è╪ر ╪║┘è╪▒ ┘à╪ز╪د╪ص╪ر╪ؤ ╪ز┘à ┘à┘╪╣ ╪╣┘à┘┘è╪ر ╪د┘┘â╪ز╪د╪ذ╪ر ╪ذ╪»┘ ╪ز┘┘┘è╪░ ╪ح╪ش╪▒╪د╪ة ┘ê┘ç┘à┘è.
    ├ù CRUD Operations Tests > Ministerial Instructions CRUD > should list ministerial instructions 1ms
      ظْ expected 0 to be greater than 0
-   ├ù CRUD Operations Tests > Ministerial Instructions CRUD > should get instruction by id 10ms
+   ├ù CRUD Operations Tests > Ministerial Instructions CRUD > should get instruction by id 2ms
      ظْ [
   {
     "expected": "number",
@@ -403,24 +403,26 @@ At C:\Users\DELL\AppData\Roaming\npm\pnpm.ps1:24 char:5
     "message": "Invalid input: expected number, received undefined"
   }
 ]
- ظإ» server/waqf-categories.test.ts (20 tests | 8 failed) 25ms
-   ├ù Waqf Categories Management > createWaqfCategory > should create a new waqf category 12ms
+ ظ£ô server/semantic-search.test.ts (14 tests) 2376ms
+   ظ£ô Semantic Search System > generateEmbeddings > should generate embeddings for Arabic text 2033ms
+ ظإ» server/waqf-categories.test.ts (20 tests | 8 failed) 24ms
+   ├ù Waqf Categories Management > createWaqfCategory > should create a new waqf category 11ms
      ظْ Database not available
    ├ù Waqf Categories Management > createWaqfCategory > should create category without optional fields 1ms
      ظْ Database not available
-   ├ù Waqf Categories Management > getWaqfCategories > should retrieve all active categories 3ms
+   ├ù Waqf Categories Management > getWaqfCategories > should retrieve all active categories 2ms
      ظْ expected 0 to be greater than 0
    ├ù Waqf Categories Management > getWaqfCategoryById > should retrieve a category by ID 1ms
      ظْ expected undefined to be defined
    ├ù Waqf Categories Management > updateWaqfCategory > should update category name 1ms
      ظْ Database not available
-   ├ù Waqf Categories Management > updateWaqfCategory > should update category icon and color 1ms
+   ├ù Waqf Categories Management > updateWaqfCategory > should update category icon and color 0ms
      ظْ Database not available
-   ├ù Waqf Categories Management > updateWaqfCategory > should update category order 0ms
+   ├ù Waqf Categories Management > updateWaqfCategory > should update category order 1ms
      ظْ Database not available
    ├ù Waqf Categories Management > deleteWaqfCategory > should soft delete a category 1ms
      ظْ Database not available
- ظ£ô server/fetchedContentFilters.test.ts (12 tests) 32ms
+ ظ£ô server/fetchedContentFilters.test.ts (12 tests) 51ms
  ظإ» server/cache.test.ts (14 tests | 6 failed) 20ms
    ├ù ┘╪╕╪د┘à Cache ┘┘╪ح╪ش╪د╪ذ╪د╪ز > saveCachedResponse & getCachedResponse > ┘è╪ش╪ذ ╪ث┘ ┘è╪ص┘╪╕ ╪د┘╪ح╪ش╪د╪ذ╪ر ┘┘è ┘é╪د╪╣╪»╪ر ╪د┘╪ذ┘è╪د┘╪د╪ز 8ms
      ظْ expected null not to be null
@@ -434,13 +436,12 @@ At C:\Users\DELL\AppData\Roaming\npm\pnpm.ps1:24 char:5
      ظْ expected null not to be null
    ├ù ┘╪╕╪د┘à Cache ┘┘╪ح╪ش╪د╪ذ╪د╪ز > TTL (Time To Live) > ┘è╪ش╪ذ ╪ث┘ ┘è╪╢┘è┘ expiresAt ╪╣┘╪» ╪د┘╪ص┘╪╕ 1ms
      ظْ expected null not to be null
- ظ£ô server/semantic-search.test.ts (14 tests) 5190ms
-   ظ£ô Semantic Search System > generateEmbeddings > should generate embeddings for Arabic text 4789ms
- ظ£ô server/ai-improvements.test.ts (20 tests) 9ms
- ظإ» server/homeSections.test.ts (12 tests | 7 failed) 38ms
-   ├ù HomeSections Router > create > should allow admin to create a section 22ms
+ ظ£ô server/ai-improvements.test.ts (20 tests) 10ms
+ ظ£ô server/comprehensiveReferenceOrchestrator.test.ts (4 tests) 24ms
+ ظإ» server/homeSections.test.ts (12 tests | 7 failed) 37ms
+   ├ù HomeSections Router > create > should allow admin to create a section 19ms
      ظْ ┘é╪د╪╣╪»╪ر ╪د┘╪ذ┘è╪د┘╪د╪ز ╪د┘╪ز╪┤╪║┘è┘┘è╪ر ╪║┘è╪▒ ┘à╪ز╪د╪ص╪ر╪ؤ ╪ز┘à ┘à┘╪╣ ╪╣┘à┘┘è╪ر ╪د┘┘â╪ز╪د╪ذ╪ر ╪ذ╪»┘ ╪ز┘┘┘è╪░ ╪ح╪ش╪▒╪د╪ة ┘ê┘ç┘à┘è.
-   ├ù HomeSections Router > list > should allow admin to list all sections 3ms
+   ├ù HomeSections Router > list > should allow admin to list all sections 4ms
      ظْ expected 0 to be greater than 0
    ├ù HomeSections Router > listPublished > should allow anyone to list published sections 2ms
      ظْ [
@@ -479,19 +480,18 @@ At C:\Users\DELL\AppData\Roaming\npm\pnpm.ps1:24 char:5
      ظْ ┘é╪د╪╣╪»╪ر ╪د┘╪ذ┘è╪د┘╪د╪ز ╪د┘╪ز╪┤╪║┘è┘┘è╪ر ╪║┘è╪▒ ┘à╪ز╪د╪ص╪ر╪ؤ ╪ز┘à ┘à┘╪╣ ╪╣┘à┘┘è╪ر ╪د┘┘â╪ز╪د╪ذ╪ر ╪ذ╪»┘ ╪ز┘┘┘è╪░ ╪ح╪ش╪▒╪د╪ة ┘ê┘ç┘à┘è.
    ├ù HomeSections Router > delete > should allow admin to delete a section 1ms
      ظْ ┘é╪د╪╣╪»╪ر ╪د┘╪ذ┘è╪د┘╪د╪ز ╪د┘╪ز╪┤╪║┘è┘┘è╪ر ╪║┘è╪▒ ┘à╪ز╪د╪ص╪ر╪ؤ ╪ز┘à ┘à┘╪╣ ╪╣┘à┘┘è╪ر ╪د┘┘â╪ز╪د╪ذ╪ر ╪ذ╪»┘ ╪ز┘┘┘è╪░ ╪ح╪ش╪▒╪د╪ة ┘ê┘ç┘à┘è.
- ظ£ô server/comprehensiveReferenceOrchestrator.test.ts (4 tests) 22ms
- ظ£ô server/waqfReferenceDomain.test.ts (6 tests) 7ms
  ظإ» server/classification.test.ts (10 tests | 10 skipped) 7ms
- ظإ» server/new-features.test.ts (13 tests | 11 failed) 71ms
+ ظ£ô server/waqfReferenceDomain.test.ts (6 tests) 8ms
+ ظإ» server/new-features.test.ts (13 tests | 11 failed) 104ms
    ├ù Knowledge Management Tests > should list knowledge documents 26ms
      ظْ expected 0 to be greater than 0
-   ├ù Knowledge Management Tests > should update knowledge document 6ms
+   ├ù Knowledge Management Tests > should update knowledge document 12ms
      ظْ expected '┘é╪د┘┘ê┘ ╪د┘╪ث┘ê┘é╪د┘ ╪د┘┘┘╪│╪╖┘è┘┘è' to be '┘é╪د┘┘ê┘ ╪د┘╪ث┘ê┘é╪د┘ ╪د┘┘┘╪│╪╖┘è┘┘è ╪د┘┘à╪ص╪»╪س' // Object.is equality
-   ├ù Knowledge Management Tests > should create a FAQ 9ms
+   ├ù Knowledge Management Tests > should create a FAQ 14ms
      ظْ ┘é╪د╪╣╪»╪ر ╪د┘╪ذ┘è╪د┘╪د╪ز ╪د┘╪ز╪┤╪║┘è┘┘è╪ر ╪║┘è╪▒ ┘à╪ز╪د╪ص╪ر╪ؤ ╪ز┘à ┘à┘╪╣ ╪╣┘à┘┘è╪ر ╪د┘┘â╪ز╪د╪ذ╪ر ╪ذ╪»┘ ╪ز┘┘┘è╪░ ╪ح╪ش╪▒╪د╪ة ┘ê┘ç┘à┘è.
-   ├ù Knowledge Management Tests > should list FAQs 1ms
+   ├ù Knowledge Management Tests > should list FAQs 4ms
      ظْ expected 0 to be greater than 0
-   ├ù Knowledge Management Tests > should delete knowledge document (soft delete) 3ms
+   ├ù Knowledge Management Tests > should delete knowledge document (soft delete) 4ms
      ظْ expected undefined to be defined
    ├ù Knowledge Management Tests > should delete FAQ (soft delete) 2ms
      ظْ [
@@ -506,7 +506,7 @@ At C:\Users\DELL\AppData\Roaming\npm\pnpm.ps1:24 char:5
 ]
    ├ù Property Details Tests > should create a property 1ms
      ظْ ┘é╪د╪╣╪»╪ر ╪د┘╪ذ┘è╪د┘╪د╪ز ╪د┘╪ز╪┤╪║┘è┘┘è╪ر ╪║┘è╪▒ ┘à╪ز╪د╪ص╪ر╪ؤ ╪ز┘à ┘à┘╪╣ ╪╣┘à┘┘è╪ر ╪د┘┘â╪ز╪د╪ذ╪ر ╪ذ╪»┘ ╪ز┘┘┘è╪░ ╪ح╪ش╪▒╪د╪ة ┘ê┘ç┘à┘è.
-   ├ù Property Details Tests > should get property by id with all details 2ms
+   ├ù Property Details Tests > should get property by id with all details 4ms
      ظْ [
   {
     "expected": "number",
@@ -528,7 +528,7 @@ At C:\Users\DELL\AppData\Roaming\npm\pnpm.ps1:24 char:5
     "message": "Invalid input: expected number, received undefined"
   }
 ]
-   ├ù Property Details Tests > should delete property (soft delete) 1ms
+   ├ù Property Details Tests > should delete property (soft delete) 2ms
      ظْ [
   {
     "expected": "number",
@@ -539,10 +539,10 @@ At C:\Users\DELL\AppData\Roaming\npm\pnpm.ps1:24 char:5
     "message": "Invalid input: expected number, received undefined"
   }
 ]
-   ├ù File Upload Tests > should upload a file 3ms
+   ├ù File Upload Tests > should upload a file 4ms
      ظْ expected undefined to be defined
- ظإ» server/analytics.test.ts (13 tests | 13 failed) 20ms
-   ├ù Analytics System > Negative Ratings Analysis > should return analysis structure 7ms
+ ظإ» server/analytics.test.ts (13 tests | 13 failed) 21ms
+   ├ù Analytics System > Negative Ratings Analysis > should return analysis structure 9ms
      ظْ Database not available
    ├ù Analytics System > Negative Ratings Analysis > should have non-negative counts 1ms
      ظْ Database not available
@@ -554,13 +554,13 @@ At C:\Users\DELL\AppData\Roaming\npm\pnpm.ps1:24 char:5
      ظْ Database not available
    ├ù Analytics System > Best Answers > should return array of answers 1ms
      ظْ Database not available
-   ├ù Analytics System > Best Answers > should respect limit parameter 0ms
+   ├ù Analytics System > Best Answers > should respect limit parameter 1ms
      ظْ Database not available
    ├ù Analytics System > Best Answers > should return answers with positive ratings 0ms
      ظْ Database not available
    ├ù Analytics System > Improvement Suggestions > should return suggestions structure 1ms
      ظْ Database not available
-   ├ù Analytics System > Improvement Suggestions > should provide actionable suggestions 1ms
+   ├ù Analytics System > Improvement Suggestions > should provide actionable suggestions 0ms
      ظْ Database not available
    ├ù Analytics System > Improvement Suggestions > should base suggestions on patterns 0ms
      ظْ Database not available
@@ -568,14 +568,15 @@ At C:\Users\DELL\AppData\Roaming\npm\pnpm.ps1:24 char:5
      ظْ promise rejected "Error: Database not available" instead of resolving
    ├ù Analytics System > Integration Tests > should return consistent data types 1ms
      ظْ Database not available
- ظ£ô server/researchSources.test.ts (7 tests) 10ms
+ ظ£ô server/researchSources.test.ts (7 tests) 11ms
  ظإ» server/knowledgeSources.fetch.test.ts (4 tests | 4 skipped) 7ms
- ظإ» server/final-features.test.ts (10 tests | 10 failed) 34ms
-   ├ù Dashboard Statistics Tests > should get dashboard statistics 9ms
+ ظ£ô server/legalReferenceModel.test.ts (5 tests) 7ms
+ ظإ» server/final-features.test.ts (10 tests | 10 failed) 64ms
+   ├ù Dashboard Statistics Tests > should get dashboard statistics 10ms
      ظْ expected undefined to be defined
-   ├ù Rulings CRUD Tests > should create a ruling 11ms
+   ├ù Rulings CRUD Tests > should create a ruling 19ms
      ظْ ┘é╪د╪╣╪»╪ر ╪د┘╪ذ┘è╪د┘╪د╪ز ╪د┘╪ز╪┤╪║┘è┘┘è╪ر ╪║┘è╪▒ ┘à╪ز╪د╪ص╪ر╪ؤ ╪ز┘à ┘à┘╪╣ ╪╣┘à┘┘è╪ر ╪د┘┘â╪ز╪د╪ذ╪ر ╪ذ╪»┘ ╪ز┘┘┘è╪░ ╪ح╪ش╪▒╪د╪ة ┘ê┘ç┘à┘è.
-   ├ù Rulings CRUD Tests > should get ruling by id 3ms
+   ├ù Rulings CRUD Tests > should get ruling by id 18ms
      ظْ [
   {
     "expected": "number",
@@ -588,7 +589,7 @@ At C:\Users\DELL\AppData\Roaming\npm\pnpm.ps1:24 char:5
 ]
    ├ù Rulings CRUD Tests > should list rulings 2ms
      ظْ expected 0 to be greater than 0
-   ├ù Rulings CRUD Tests > should update ruling 1ms
+   ├ù Rulings CRUD Tests > should update ruling 5ms
      ظْ [
   {
     "expected": "number",
@@ -599,7 +600,7 @@ At C:\Users\DELL\AppData\Roaming\npm\pnpm.ps1:24 char:5
     "message": "Invalid input: expected number, received undefined"
   }
 ]
-   ├ù Rulings CRUD Tests > should delete ruling (soft delete) 1ms
+   ├ù Rulings CRUD Tests > should delete ruling (soft delete) 3ms
      ظْ [
   {
     "expected": "number",
@@ -610,7 +611,7 @@ At C:\Users\DELL\AppData\Roaming\npm\pnpm.ps1:24 char:5
     "message": "Invalid input: expected number, received undefined"
   }
 ]
-   ├ù Deeds CRUD Tests > should create a deed 1ms
+   ├ù Deeds CRUD Tests > should create a deed 2ms
      ظْ ┘é╪د╪╣╪»╪ر ╪د┘╪ذ┘è╪د┘╪د╪ز ╪د┘╪ز╪┤╪║┘è┘┘è╪ر ╪║┘è╪▒ ┘à╪ز╪د╪ص╪ر╪ؤ ╪ز┘à ┘à┘╪╣ ╪╣┘à┘┘è╪ر ╪د┘┘â╪ز╪د╪ذ╪ر ╪ذ╪»┘ ╪ز┘┘┘è╪░ ╪ح╪ش╪▒╪د╪ة ┘ê┘ç┘à┘è.
    ├ù Deeds CRUD Tests > should get deed by id 1ms
      ظْ [
@@ -623,7 +624,7 @@ At C:\Users\DELL\AppData\Roaming\npm\pnpm.ps1:24 char:5
     "message": "Invalid input: expected number, received undefined"
   }
 ]
-   ├ù Deeds CRUD Tests > should list deeds 3ms
+   ├ù Deeds CRUD Tests > should list deeds 1ms
      ظْ expected 0 to be greater than 0
    ├ù Deeds CRUD Tests > should delete deed (soft delete) 1ms
      ظْ [
@@ -636,27 +637,26 @@ At C:\Users\DELL\AppData\Roaming\npm\pnpm.ps1:24 char:5
     "message": "Invalid input: expected number, received undefined"
   }
 ]
- ظ£ô server/legalReferenceModel.test.ts (5 tests) 7ms
- ظ£ô server/learningCandidate.test.ts (3 tests) 7ms
- ظإ» server/chat.test.ts (9 tests | 4 failed) 51ms
-   ├ù chat.createConversation > should create a new conversation for authenticated user 17ms
+ ظ£ô server/learningCandidate.test.ts (3 tests) 8ms
+ ظإ» server/chat.test.ts (9 tests | 4 failed) 44ms
+   ├ù chat.createConversation > should create a new conversation for authenticated user 16ms
      ظْ expected 1 to be true // Object.is equality
    ├ù faqs.list > should return all active FAQs 2ms
      ظْ expected 0 to be greater than 0
-   ├ù knowledge.list > should return all active knowledge documents 5ms
+   ├ù knowledge.list > should return all active knowledge documents 2ms
      ظْ expected 0 to be greater than 0
    ├ù search.query > should search and return relevant documents 1ms
      ظْ expected 0 to be greater than 0
- ظ£ô server/assistantTrust.test.ts (5 tests) 7ms
- ظ£ô server/search.test.ts (6 tests) 27ms
+ ظ£ô server/search.test.ts (6 tests) 26ms
+ ظ£ô server/assistantTrust.test.ts (5 tests) 6ms
  ظ£ô server/canonicalRuntimeBinding.test.ts (5 tests) 7ms
- ظإ» server/contentTemplates.test.ts (4 tests | 4 skipped) 20ms
  ظ£ô server/sovereignReferenceArchive.test.ts (4 tests) 9ms
  ظ£ô server/domainSkillRuntime.test.ts (4 tests) 5ms
- ظ£ô server/referencePipelineBridge.test.ts (2 tests) 5ms
+ ظإ» server/contentTemplates.test.ts (4 tests | 4 skipped) 16ms
+ ظ£ô server/referencePipelineBridge.test.ts (2 tests) 10ms
+ ظ£ô server/governedKnowledgeIngestion.test.ts (5 tests) 23ms
  ظ£ô server/comprehensiveReferenceMigration.test.ts (5 tests) 7ms
- ظ£ô server/governedKnowledgeIngestion.test.ts (5 tests) 15ms
- ظ£ô server/researchSources.entity.test.ts (4 tests) 7ms
+ ظ£ô server/researchSources.entity.test.ts (4 tests) 6ms
  ظ£ô server/referenceGovernance.test.ts (3 tests) 5ms
  ظ£ô server/waqfDeedProcessing.test.ts (2 tests) 5ms
  ظإ» server/faq-auto.test.ts (8 tests | 8 failed) 16ms
@@ -672,14 +672,14 @@ At C:\Users\DELL\AppData\Roaming\npm\pnpm.ps1:24 char:5
      ظْ Database not available
    ├ù FAQ Auto-Generation System > FAQ Generation Integration > should handle empty database gracefully 4ms
      ظْ promise rejected "Error: Database not available" instead of resolving
-   ├ù FAQ Auto-Generation System > FAQ Generation Integration > should return consistent data types 1ms
+   ├ù FAQ Auto-Generation System > FAQ Generation Integration > should return consistent data types 0ms
      ظْ Database not available
    ├ù FAQ Auto-Generation System > FAQ Generation Integration > should not return duplicate questions 0ms
      ظْ Database not available
+ ظ£ô server/referenceSourceCollections.test.ts (3 tests) 27ms
  ظ£ô server/parcelCrosswalk.test.ts (2 tests) 6ms
- ظ£ô server/referenceSourceCollections.test.ts (3 tests) 29ms
- ظإ» server/advanced.test.ts (6 tests | 3 failed) 23ms
-   ├ù Enhanced Search > should search across all sources 10ms
+ ظإ» server/advanced.test.ts (6 tests | 3 failed) 17ms
+   ├ù Enhanced Search > should search across all sources 9ms
      ظْ No procedure found on path "enhancedSearch,query"
    ├ù Enhanced Search > should search only in knowledge documents 1ms
      ظْ No procedure found on path "enhancedSearch,query"
@@ -691,8 +691,8 @@ At C:\Users\DELL\AppData\Roaming\npm\pnpm.ps1:24 char:5
  ظ£ô server/hybridLocationPath.test.ts (3 tests) 4ms
  ظ£ô server/legalRegressionCorpus.test.ts (12 tests) 16ms
  ظ£ô server/knowledgeEmbeddings.test.ts (2 tests) 6ms
- ظإ» server/auth.logout.test.ts (1 test | 1 failed) 14ms
-   ├ù auth.logout > clears the session cookie and reports success 13ms
+ ظإ» server/auth.logout.test.ts (1 test | 1 failed) 15ms
+   ├ù auth.logout > clears the session cookie and reports success 14ms
      ظْ expected { httpOnly: true, path: '/', ظخ(2) } to match object { maxAge: -1, secure: true, ظخ(3) }
 
 ظ»ظ»ظ»ظ»ظ»ظ» Failed Suites 4 ظ»ظ»ظ»ظ»ظ»ظ»ظ»
@@ -4104,25 +4104,25 @@ TypeError: Cannot read properties of undefined (reading 'id')
 
  FAIL  server/knowledgeSources.test.ts > Knowledge Sources Management >
 Validation Tests > should reject empty name
-AssertionError: promise resolved "{ id: 62, type: 'wikipedia', ظخ(11) }" instead of rejecting
+AssertionError: promise resolved "{ id: 70, type: 'wikipedia', ظخ(11) }" instead of rejecting
 
 - Expected
 + Received
 
 - [Error: rejected promise]
 + Object {
-+   "createdAt": "2026-09-22 20:46:32",
++   "createdAt": "2026-09-22 20:51:40",
 +   "createdBy": 1,
 +   "errorCount": 0,
 +   "fetchFrequency": "manual",
-+   "id": 62,
++   "id": 70,
 +   "isActive": 1,
 +   "itemsCount": 0,
 +   "lastFetchAt": null,
 +   "name": "",
 +   "successCount": 0,
 +   "type": "wikipedia",
-+   "updatedAt": "2026-09-22 20:46:32",
++   "updatedAt": "2026-09-22 20:51:40",
 +   "url": "https://example.com",
 + }
 
@@ -4237,10 +4237,10 @@ sevenDaysAgo).toBe(true);
 
  FAIL  server/knowledgeStats.test.ts > Knowledge Sources Statistics >
 Statistics Consistency > should have consistent totals
-AssertionError: expected '0[object Object][object Object][objecظخ' to be 59 // Object.is equality
+AssertionError: expected '0[object Object][object Object][objecظخ' to be 67 // Object.is equality
 
 - Expected:
-59
+67
 
 + Received:
 "0[object Object][object Object][object Object][object Object]"
@@ -4933,9 +4933,6 @@ Error: Database not available
 
  FAIL  server/waqf-categories.test.ts > Waqf Categories Management >
 updateWaqfCategory > should update category icon and color
- Test Files  21 failed | 35 passed (56)
-      Tests  163 failed | 330 passed | 36 skipped (529)
-   Start at  23:46:25
 Error: Database not available
  ظإ» Module.updateWaqfCategory server/db.ts:2906:18
     2904| export async function updateWaqfCategory(id: number, updates: Partial<ظخ
@@ -4946,6 +4943,9 @@ Error: Database not available
     2908|   await db.update(waqfCategories).set(updates).where(eq(waqfCategoriesظخ
  ظإ» server/waqf-categories.test.ts:94:7
 
+ Test Files  21 failed | 35 passed (56)
+      Tests  163 failed | 332 passed | 36 skipped (531)
+   Start at  23:51:33
 ظ»ظ»ظ»ظ»ظ»ظ»ظ»ظ»ظ»ظ»ظ»ظ»ظ»ظ»ظ»ظ»ظ»ظ»ظ»ظ»[165/167]ظ»
 
  FAIL  server/waqf-categories.test.ts > Waqf Categories Management >
@@ -4959,8 +4959,6 @@ Error: Database not available
     2907|
     2908|   await db.update(waqfCategories).set(updates).where(eq(waqfCategoriesظخ
  ظإ» server/waqf-categories.test.ts:105:7
-   Duration  30.25s (transform 2.03s, setup 0ms, collect 59.45s, tests 6.47s, environment 14ms, prepare 7.67s)
-
 
 ظ»ظ»ظ»ظ»ظ»ظ»ظ»ظ»ظ»ظ»ظ»ظ»ظ»ظ»ظ»ظ»ظ»ظ»ظ»ظ»[166/167]ظ»
 
@@ -4971,6 +4969,8 @@ Error: Database not available
     2914| export async function deleteWaqfCategory(id: number): Promise<void> {
     2915|   const db = await getDb();
     2916|   if (!db) throw new Error("Database not available");
+   Duration  28.77s (transform 2.07s, setup 0ms, collect 58.23s, tests 3.69s, environment 15ms, prepare 7.69s)
+
        |                  ^
     2917|
     2918|   await db.update(waqfCategories).set({ isActive: 0 }).where(eq(waqfCaظخ

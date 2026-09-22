@@ -219,10 +219,15 @@ export function assessMegaEHistoricalArtifact(
   const privateBenchmarkEligible =
     identityVerified &&
     manifest.rights.privatePreservation &&
-    manifest.rights.privateResearchBenchmark;
+    manifest.rights.privateResearchBenchmark &&
+    manifest.rights.rightsReviewStatus !== "REJECTED" &&
+    manifest.specialistReview !== "REJECTED";
+  const officialOriginVerified =
+    manifest.officialOriginDownload &&
+    manifest.acquisitionHostRole === "OFFICIAL_ORIGIN";
   const canonicalAdmissionEligible =
     privateBenchmarkEligible &&
-    manifest.officialOriginDownload &&
+    officialOriginVerified &&
     manifest.rights.rightsReviewStatus === "VERIFIED" &&
     manifest.specialistReview === "APPROVED" &&
     manifest.canonicalAdmission;
