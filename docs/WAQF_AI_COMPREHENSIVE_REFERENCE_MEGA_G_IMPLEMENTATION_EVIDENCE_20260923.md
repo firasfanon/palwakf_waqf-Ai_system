@@ -249,6 +249,58 @@ Interpretation:
 - No reference-retrieval failure reference was observed.
 - The repository remains globally non-green due inherited/legacy/environment debt; MEGA_G does not claim those failures as fixed.
 
+## Independent review repair
+
+The first pushed MEGA_G execution head was:
+`c3e1284d82b62a4466bfd81c828114fc05be9c15`.
+
+Independent review of that remote head found one material terminal-ledger integrity defect:
+
+- multiple ledger rows referenced legacy/nonexistent source-family identifiers, including `LAND_BRITISH_MANDATE`, `LAND_JORDANIAN_WB`, `LAND_PALESTINIAN_WB`, and `WAQF_LAW_CURRENT`;
+- as a direct consequence, `CORP-WAQF-001` was labelled `EXPERT_REVIEW_READY` while its generated `evidenceRefs` were empty.
+
+That violated MEGA_G's own handoff rule: an expert-ready track must resolve to real governed source families and carry traceable evidence.
+
+The repair:
+
+- maps the land ledger to the actual governed families `LAND_MANDATE` and `LAND_WEST_BANK_CURRENT`;
+- maps the waqf legal/admin track to the actual `WAQF_POSITIVE_LAW` family;
+- strengthens `megaGAllMandatoryCorpusTracksTerminal()` so terminal acceptance requires all family IDs to resolve against `megaGSourceFamilies()`;
+- requires every `EXPERT_REVIEW_READY` track to contain non-empty `evidenceRefs`;
+- requires every `EXPLICITLY_DEFERRED_WITH_EVIDENCE_GAP` track to contain an explicit evidence gap;
+- adds regression coverage proving all ledger family IDs resolve and the waqf handoff pack is non-empty.
+
+Post-repair validation:
+
+- TypeScript: PASS
+- targeted test files: 7/7 PASS
+- targeted tests: 96/96 PASS
+- MEGA_G dedicated: 17/17 PASS
+- private pilot disposition remains `PASS_FINAL_CORPUS_TERMINAL_LEDGER_AND_SPECIALIST_HANDOFF_READY_WITH_EXPLICIT_EVIDENCE_GAPS`
+- mandatory tracks: 10
+- expert-review ready: 9
+- explicitly deferred with evidence gap: 1
+- raw retrieval `content` fields in Git evidence: 0
+- `CORP-WAQF-001` evidence refs: `waqf-law-1966-consolidated`, `waqf-amendment-2023`, `waqf-amendment-2023-gazette-198-pdf`
+
+Post-repair full repository regression:
+
+- 162 failed
+- 366 passed
+- 36 skipped
+- 564 total
+- test files: 21 failed / 37 passed / 58 total
+- no MEGA_G failure reference observed
+
+The 162 inherited failures remain legacy/environment debt and are not reclassified as MEGA_G defects.
+
+The functional repair head is:
+`0df81c8fa8b726b8f9e58b82a509896c79cdca8c`
+with tree:
+`c40b42e5e0c554eaa15d5b7c19fc25180235beeb`.
+
+The exact final documentation successor head/tree is recorded in Workspace sovereign state after the final documentation commit/push/readback.
+
 ## Acceptance interpretation
 
 MEGA_G engineering/research corpus-completion and specialist-handoff scope may be accepted only after:
