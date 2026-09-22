@@ -1,0 +1,913 @@
+{
+  "program": "WAQF_AI_COMPREHENSIVE_WAQF_REFERENCE_V1",
+  "phase": "MEGA_G_FINAL_CORPUS_COMPLETION_SPECIALIST_HANDOFF_PRIVATE_PILOT",
+  "generatedAt": "2026-09-22T23:23:40.367Z",
+  "exactAuthorizedBase": "418a98ba3966e3137c1eafb905acf4f5c35224ec",
+  "privateManifest": {
+    "pathHint": "~/.palwakf/private_reference_cache/waqf-ai-mega-g/mega-g-private-handoff-manifest.json",
+    "sha256": "3db9493a9292c70b40d2a86fae379902ec419f9407ec916f05fb06889b928540",
+    "metadataFixity": [
+      {
+        "corpusId": "fiqh-maliki-hattab-ahkam-al-waqf-metadata",
+        "sha256": "6a1fed9904a09c0c86cd76b054e60954f404ac8fcccf93233650f0284160cc0f",
+        "byteSize": 78679,
+        "pass": true
+      },
+      {
+        "corpusId": "fiqh-shafii-al-umm-vol5-ahbas-metadata",
+        "sha256": "da49e6caedd90d3b18e12e5f70ccb78e09e2a907a85af67b028beb2704a921fd",
+        "byteSize": 118910,
+        "pass": true
+      }
+    ],
+    "metadataFixityPass": true,
+    "blockedAcquisition": [
+      {
+        "bypassAttempted": false,
+        "url": "https://archive.org/download/WaqfMaliki/Waqf.pdf",
+        "result": "UPSTREAM_HTTP_500",
+        "sourceId": "fiqh-maliki-hattab-underlying-pdf"
+      },
+      {
+        "bypassAttempted": false,
+        "url": "https://archive.org/download/0136462/05_36462.pdf",
+        "result": "HTTP_403",
+        "sourceId": "fiqh-shafii-al-umm-vol5-underlying-pdf"
+      }
+    ],
+    "noBypassPass": true
+  },
+  "sourceIdentity": {
+    "malikiIdentityPass": true,
+    "shafiiIdentityPass": true,
+    "caseIdentityChecks": {
+      "1383/2019": true,
+      "1543/2016": true,
+      "397/2023": true
+    }
+  },
+  "corpusTerminalLedger": [
+    {
+      "todoId": "CORP-LAND-001",
+      "familyIds": [
+        "LAND_OTTOMAN",
+        "LAND_BRITISH_MANDATE",
+        "LAND_JORDANIAN_WB",
+        "LAND_PALESTINIAN_WB",
+        "LAND_GAZA_CURRENT",
+        "LAND_JERUSALEM_TRACK"
+      ],
+      "terminalState": "EXPERT_REVIEW_READY",
+      "evidenceRefs": [
+        "ottoman-land-code-1858-registry",
+        "gaza-land-authority-legal-library",
+        "gaza-government-property-legal-guidance",
+        "land-registration-transfer-fees-2-2012",
+        "movable-rights-security-11-2016",
+        "movable-rights-security-11-2016-gazette-120-wafa",
+        "gaza-pla-land-specific-laws-2020",
+        "jerusalem-israel-land-registry-extract-service",
+        "jerusalem-soi-unregulated-cadastre-service"
+      ],
+      "reviewRole": "LEGAL_STATUS_REVIEWER",
+      "territories": [
+        "WEST_BANK",
+        "GAZA",
+        "JERUSALEM"
+      ],
+      "unresolvedQuestions": [
+        "Confirm instrument-by-instrument current status and transition effects by territory/date."
+      ],
+      "evidenceGaps": [
+        "Some current-status conclusions remain unresolved by design."
+      ],
+      "completionMeaning": "Canonical era/territory inventory is ready for specialist status review; this does not mean every possible land-law source has been collected."
+    },
+    {
+      "todoId": "CORP-LAND-002",
+      "familyIds": [
+        "LAND_OTTOMAN",
+        "LAND_BRITISH_MANDATE",
+        "LAND_JORDANIAN_WB",
+        "LAND_PALESTINIAN_WB"
+      ],
+      "terminalState": "EXPERT_REVIEW_READY",
+      "evidenceRefs": [
+        "MEGA_C_PRIVATE_ARTIFACT_SET",
+        "MEGA_F_PRIVATE_ARTIFACT_SET",
+        "MEGA_G_PRESERVED_VS_LIVE_ONLY_RIGHTS_LEDGER"
+      ],
+      "reviewRole": "RIGHTS_REVIEWER",
+      "territories": [
+        "WEST_BANK",
+        "GAZA",
+        "JERUSALEM"
+      ],
+      "unresolvedQuestions": [
+        "Review preservation/public-display/download rights independently from legal authority."
+      ],
+      "evidenceGaps": [
+        "Several official/live sources block automated preservation; no bypass is authorized."
+      ],
+      "completionMeaning": "Preserved versus live-only evidence is explicitly separated and ready for rights review."
+    },
+    {
+      "todoId": "CORP-LAND-003",
+      "familyIds": [
+        "LAND_JORDANIAN_WB",
+        "LAND_PALESTINIAN_WB"
+      ],
+      "terminalState": "EXPERT_REVIEW_READY",
+      "evidenceRefs": [
+        "MEGA_C_LEGAL_STATUS_MATRIX"
+      ],
+      "reviewRole": "LEGAL_STATUS_REVIEWER",
+      "territories": [
+        "WEST_BANK"
+      ],
+      "unresolvedQuestions": [
+        "Confirm unresolved/amended/repealed status rows and transition lineage."
+      ],
+      "evidenceGaps": [],
+      "completionMeaning": "West Bank status map is evidence-bundled for specialist review; unresolved rows remain visible."
+    },
+    {
+      "todoId": "CORP-LAND-004",
+      "familyIds": [
+        "LAND_GAZA_CURRENT"
+      ],
+      "terminalState": "EXPLICITLY_DEFERRED_WITH_EVIDENCE_GAP",
+      "evidenceRefs": [
+        "gaza-land-authority-legal-library",
+        "gaza-government-property-legal-guidance",
+        "land-registration-transfer-fees-2-2012",
+        "movable-rights-security-11-2016",
+        "movable-rights-security-11-2016-gazette-120-wafa",
+        "gaza-pla-land-specific-laws-2020",
+        "MEGA_F_GAZA_TERRITORY_PACKET"
+      ],
+      "reviewRole": "LEGAL_STATUS_REVIEWER",
+      "territories": [
+        "GAZA"
+      ],
+      "unresolvedQuestions": [
+        "Determine current force and interaction of Gaza-specific land/registration/waqf instruments."
+      ],
+      "evidenceGaps": [
+        "No sufficiently authoritative consolidated Gaza current-status chain is available in the admitted corpus.",
+        "West Bank status inheritance is prohibited."
+      ],
+      "completionMeaning": "Gaza is terminally deferred with an explicit evidence gap rather than falsely resolved."
+    },
+    {
+      "todoId": "CORP-WAQF-001",
+      "familyIds": [
+        "WAQF_LAW_CURRENT"
+      ],
+      "terminalState": "EXPERT_REVIEW_READY",
+      "evidenceRefs": [],
+      "reviewRole": "LEGAL_STATUS_REVIEWER",
+      "territories": [
+        "WEST_BANK",
+        "GAZA",
+        "JERUSALEM"
+      ],
+      "unresolvedQuestions": [
+        "Confirm subordinate waqf regulations/instructions and territory-specific applicability."
+      ],
+      "evidenceGaps": [
+        "Not every subordinate administrative instrument is represented as a preserved canonical artifact."
+      ],
+      "completionMeaning": "Core historical/current waqf legal/admin family is ready for specialist gap/status review."
+    },
+    {
+      "todoId": "CORP-LEASE-001",
+      "familyIds": [
+        "WAQF_LEASE_HUKR"
+      ],
+      "terminalState": "EXPERT_REVIEW_READY",
+      "evidenceRefs": [
+        "waqf-tenancy-law-5-1964-registry",
+        "landlords-tenants-62-1953-consolidated",
+        "landlords-tenants-amendment-35-2022",
+        "pla-lease-transaction-procedure",
+        "maqam-cassation-1383-2019-hukr",
+        "maqam-cassation-1543-2016-waqf"
+      ],
+      "reviewRole": "LEGAL_STATUS_REVIEWER",
+      "territories": [
+        "WEST_BANK",
+        "GAZA"
+      ],
+      "unresolvedQuestions": [
+        "Confirm relationships among general tenancy, special waqf tenancy, hukr, and ijāratayn by territory/date."
+      ],
+      "evidenceGaps": [
+        "Gaza current applicability remains unresolved."
+      ],
+      "completionMeaning": "Lease/hukr source and case bundle is ready for expert review without collapsing distinct legal constructs."
+    },
+    {
+      "todoId": "CORP-REG-001",
+      "familyIds": [
+        "REGISTRATION_SETTLEMENT"
+      ],
+      "terminalState": "EXPERT_REVIEW_READY",
+      "evidenceRefs": [
+        "land-settlement-process-pla",
+        "land-settlement-law-40-1952-registry",
+        "settlement-amendment-8-1955-registry",
+        "settlement-authority-7-2016-official",
+        "settlement-authority-7-2016-wafa",
+        "land-registration-fees-2-1952-consolidated",
+        "land-registration-transfer-fees-2-2012",
+        "pla-new-registration-procedure",
+        "maqam-cassation-1383-2019-hukr",
+        "maqam-cassation-1543-2016-waqf"
+      ],
+      "reviewRole": "LEGAL_STATUS_REVIEWER",
+      "territories": [
+        "WEST_BANK",
+        "GAZA",
+        "JERUSALEM"
+      ],
+      "unresolvedQuestions": [
+        "Confirm title/settlement/registration status by territory and any surviving historical rules."
+      ],
+      "evidenceGaps": [
+        "Jerusalem applicability remains independently unresolved.",
+        "Gaza current status remains independently unresolved."
+      ],
+      "completionMeaning": "Registration/settlement corpus is ready for expert review with territory gaps preserved."
+    },
+    {
+      "todoId": "CORP-CASE-001",
+      "familyIds": [
+        "CASE_LAW"
+      ],
+      "terminalState": "EXPERT_REVIEW_READY",
+      "evidenceRefs": [
+        "palestinian-supreme-court-technical-office",
+        "maqam-cassation-1383-2019-hukr",
+        "maqam-cassation-1543-2016-waqf",
+        "maqam-cassation-397-2023-mosque-waqf",
+        "ps-cassation-1383-2019",
+        "ps-cassation-1543-2016",
+        "ps-cassation-397-2023"
+      ],
+      "reviewRole": "LEGAL_STATUS_REVIEWER",
+      "territories": [
+        "WEST_BANK"
+      ],
+      "unresolvedQuestions": [
+        "Review case-specific holdings, appellate identity, and generalization limits."
+      ],
+      "evidenceGaps": [
+        "1543/2016 contains conflicting first-instance identifiers that require human review.",
+        "The representative sample is not an exhaustive court corpus."
+      ],
+      "completionMeaning": "Representative waqf/property case-law set is normalized enough for expert review, not universal doctrinal inference."
+    },
+    {
+      "todoId": "CORP-SHARIA-001",
+      "familyIds": [
+        "SHARIA_PRIMARY"
+      ],
+      "terminalState": "EXPERT_REVIEW_READY",
+      "evidenceRefs": [
+        "quran-complex-developer-platform",
+        "bukhari-2737-muslim-1632-waqf-hadith-dorar",
+        "HADITH-BUKHARI-2737",
+        "HADITH-MUSLIM-1632"
+      ],
+      "reviewRole": "FIQH_SHARIA_REVIEWER",
+      "territories": [],
+      "unresolvedQuestions": [
+        "Confirm source admission and the exact scope of any waqf proposition before doctrinal use."
+      ],
+      "evidenceGaps": [
+        "Primary collection bytes are not fully preserved locally."
+      ],
+      "completionMeaning": "Canonical source identities/locators are ready for sharia specialist review; no automated religious ruling is admitted."
+    },
+    {
+      "todoId": "CORP-FIQH-001",
+      "familyIds": [
+        "FIQH_CLASSICAL"
+      ],
+      "terminalState": "EXPERT_REVIEW_READY",
+      "evidenceRefs": [
+        "fiqh-hanafi-hilal-ahkam-al-waqf",
+        "fiqh-hanbali-khallal-kitab-al-wuquf",
+        "fiqh-maliki-hattab-ahkam-al-waqf-metadata",
+        "fiqh-shafii-al-umm-vol5-ahbas-metadata"
+      ],
+      "reviewRole": "FIQH_SHARIA_REVIEWER",
+      "territories": [],
+      "unresolvedQuestions": [
+        "Confirm edition/source admission and select exact doctrinal page locators before proposition extraction."
+      ],
+      "evidenceGaps": [
+        "Maliki and Shafi'i underlying PDFs were not preserved because upstream acquisition failed; metadata pages were preserved instead.",
+        "Substantive doctrinal page locators remain a human-specialist task."
+      ],
+      "completionMeaning": "Hanafi/Maliki/Shafi'i/Hanbali source representation is ready for specialist review without auto-generating madhhab rulings."
+    }
+  ],
+  "corpusSummary": {
+    "mandatoryTracks": 10,
+    "expertReviewReady": 9,
+    "explicitlyDeferredWithEvidenceGap": 1,
+    "noNotStarted": true,
+    "allMandatoryTerminal": true,
+    "everyDeferredHasGap": true
+  },
+  "territoryPackets": [
+    {
+      "territory": "GAZA",
+      "terminalState": "EXPLICITLY_DEFERRED_WITH_EVIDENCE_GAP",
+      "evidenceRefs": [
+        "gaza-land-authority-legal-library",
+        "gaza-government-property-legal-guidance",
+        "land-registration-transfer-fees-2-2012",
+        "movable-rights-security-11-2016",
+        "movable-rights-security-11-2016-gazette-120-wafa",
+        "gaza-pla-land-specific-laws-2020",
+        "MEGA_F_GAZA_TERRITORY_PACKET"
+      ],
+      "currentLegalStatusResolved": false,
+      "authoritativeConclusionEligible": false,
+      "sovereigntyInferenceAllowed": false,
+      "ownershipInferenceAllowed": false,
+      "evidenceGaps": [
+        "instrument_by_instrument_current_force_not_authoritatively_consolidated",
+        "territory_specific_expert_review_pending"
+      ],
+      "specialistRole": "LEGAL_STATUS_REVIEWER"
+    },
+    {
+      "territory": "JERUSALEM",
+      "terminalState": "EXPLICITLY_DEFERRED_WITH_EVIDENCE_GAP",
+      "evidenceRefs": [
+        "jerusalem-israel-land-registry-extract-service",
+        "jerusalem-soi-unregulated-cadastre-service",
+        "MEGA_F_JERUSALEM_TERRITORY_PACKET"
+      ],
+      "currentLegalStatusResolved": false,
+      "authoritativeConclusionEligible": false,
+      "sovereigntyInferenceAllowed": false,
+      "ownershipInferenceAllowed": false,
+      "evidenceGaps": [
+        "operational_registry_evidence_does_not_resolve_jurisdiction_or_applicability",
+        "live_sources_not_privately_preserved",
+        "territory_specific_expert_review_pending"
+      ],
+      "specialistRole": "LEGAL_STATUS_REVIEWER"
+    }
+  ],
+  "territoryFailClosedPass": true,
+  "rightsLedger": [
+    {
+      "sourceId": "maqam-cassation-representative-set",
+      "preservationMode": "PRESERVED_PRIVATE_FULL",
+      "publicReleaseAllowed": false,
+      "specialistRightsReviewPending": true,
+      "evidenceRef": "MEGA_F_PRIVATE_CASE_LAW_ARTIFACTS",
+      "notes": [
+        "Raw judgment copies remain outside Git."
+      ]
+    },
+    {
+      "sourceId": "gaza-land-authority-representative-set",
+      "preservationMode": "PRESERVED_PRIVATE_FULL",
+      "publicReleaseAllowed": false,
+      "specialistRightsReviewPending": true,
+      "evidenceRef": "MEGA_F_PRIVATE_GAZA_ARTIFACTS",
+      "notes": [
+        "Preservation does not imply public redistribution rights."
+      ]
+    },
+    {
+      "sourceId": "fiqh-hanafi-hilal-ahkam-al-waqf",
+      "preservationMode": "PRESERVED_PRIVATE_FULL",
+      "publicReleaseAllowed": false,
+      "specialistRightsReviewPending": true,
+      "evidenceRef": "sha256:b6186e5d6e7378a944eadf8af876781ee1c7647337d2c143222a5eccffa4268d",
+      "notes": [
+        "Substantive doctrinal extraction remains specialist-gated."
+      ]
+    },
+    {
+      "sourceId": "fiqh-hanbali-khallal-kitab-al-wuquf",
+      "preservationMode": "PRESERVED_PRIVATE_FULL",
+      "publicReleaseAllowed": false,
+      "specialistRightsReviewPending": true,
+      "evidenceRef": "sha256:e882bc8f2eacb167987c5b2e0daa72bded6f56938f068587d5f83a7d2f521037",
+      "notes": [
+        "Substantive doctrinal extraction remains specialist-gated."
+      ]
+    },
+    {
+      "sourceId": "fiqh-maliki-hattab-ahkam-al-waqf-metadata",
+      "preservationMode": "PRESERVED_PRIVATE_METADATA_ONLY",
+      "publicReleaseAllowed": false,
+      "specialistRightsReviewPending": true,
+      "evidenceRef": "sha256:6a1fed9904a09c0c86cd76b054e60954f404ac8fcccf93233650f0284160cc0f",
+      "notes": [
+        "Underlying PDF acquisition failed upstream; no bypass attempted."
+      ]
+    },
+    {
+      "sourceId": "fiqh-shafii-al-umm-vol5-ahbas-metadata",
+      "preservationMode": "PRESERVED_PRIVATE_METADATA_ONLY",
+      "publicReleaseAllowed": false,
+      "specialistRightsReviewPending": true,
+      "evidenceRef": "sha256:da49e6caedd90d3b18e12e5f70ccb78e09e2a907a85af67b028beb2704a921fd",
+      "notes": [
+        "Underlying PDF acquisition returned HTTP 403; no bypass attempted."
+      ]
+    },
+    {
+      "sourceId": "quran-complex-developer-platform",
+      "preservationMode": "LIVE_READ_ONLY",
+      "publicReleaseAllowed": false,
+      "specialistRightsReviewPending": true,
+      "evidenceRef": "MEGA_F_SHARIA_SOURCE_READINESS",
+      "notes": [
+        "Official source identity represented; local preservation incomplete."
+      ]
+    },
+    {
+      "sourceId": "bukhari-2737-muslim-1632-waqf-hadith-dorar",
+      "preservationMode": "LIVE_READ_ONLY",
+      "publicReleaseAllowed": false,
+      "specialistRightsReviewPending": true,
+      "evidenceRef": "MEGA_F_SHARIA_SOURCE_READINESS",
+      "notes": [
+        "Automated preservation was blocked; no bypass attempted."
+      ]
+    },
+    {
+      "sourceId": "jerusalem-operational-registry-services",
+      "preservationMode": "LIVE_READ_ONLY",
+      "publicReleaseAllowed": false,
+      "specialistRightsReviewPending": true,
+      "evidenceRef": "MEGA_F_JERUSALEM_TERRITORY_PACKET",
+      "notes": [
+        "Operational source presence does not resolve sovereignty/title/applicability."
+      ]
+    }
+  ],
+  "rightsPass": true,
+  "specialistHandoff": {
+    "packs": [
+      {
+        "packId": "mega-g-pack-corp-land-001",
+        "todoId": "CORP-LAND-001",
+        "role": "LEGAL_STATUS_REVIEWER",
+        "territories": [
+          "WEST_BANK",
+          "GAZA",
+          "JERUSALEM"
+        ],
+        "terminalState": "EXPERT_REVIEW_READY",
+        "evidenceRefs": [
+          "ottoman-land-code-1858-registry",
+          "gaza-land-authority-legal-library",
+          "gaza-government-property-legal-guidance",
+          "land-registration-transfer-fees-2-2012",
+          "movable-rights-security-11-2016",
+          "movable-rights-security-11-2016-gazette-120-wafa",
+          "gaza-pla-land-specific-laws-2020",
+          "jerusalem-israel-land-registry-extract-service",
+          "jerusalem-soi-unregulated-cadastre-service"
+        ],
+        "unresolvedQuestions": [
+          "Confirm instrument-by-instrument current status and transition effects by territory/date."
+        ],
+        "evidenceGaps": [
+          "Some current-status conclusions remain unresolved by design."
+        ],
+        "actualHumanDecisionIncluded": false
+      },
+      {
+        "packId": "mega-g-pack-corp-land-002",
+        "todoId": "CORP-LAND-002",
+        "role": "RIGHTS_REVIEWER",
+        "territories": [
+          "WEST_BANK",
+          "GAZA",
+          "JERUSALEM"
+        ],
+        "terminalState": "EXPERT_REVIEW_READY",
+        "evidenceRefs": [
+          "MEGA_C_PRIVATE_ARTIFACT_SET",
+          "MEGA_F_PRIVATE_ARTIFACT_SET",
+          "MEGA_G_PRESERVED_VS_LIVE_ONLY_RIGHTS_LEDGER"
+        ],
+        "unresolvedQuestions": [
+          "Review preservation/public-display/download rights independently from legal authority."
+        ],
+        "evidenceGaps": [
+          "Several official/live sources block automated preservation; no bypass is authorized."
+        ],
+        "actualHumanDecisionIncluded": false
+      },
+      {
+        "packId": "mega-g-pack-corp-land-003",
+        "todoId": "CORP-LAND-003",
+        "role": "LEGAL_STATUS_REVIEWER",
+        "territories": [
+          "WEST_BANK"
+        ],
+        "terminalState": "EXPERT_REVIEW_READY",
+        "evidenceRefs": [
+          "MEGA_C_LEGAL_STATUS_MATRIX"
+        ],
+        "unresolvedQuestions": [
+          "Confirm unresolved/amended/repealed status rows and transition lineage."
+        ],
+        "evidenceGaps": [],
+        "actualHumanDecisionIncluded": false
+      },
+      {
+        "packId": "mega-g-pack-corp-land-004",
+        "todoId": "CORP-LAND-004",
+        "role": "LEGAL_STATUS_REVIEWER",
+        "territories": [
+          "GAZA"
+        ],
+        "terminalState": "EXPLICITLY_DEFERRED_WITH_EVIDENCE_GAP",
+        "evidenceRefs": [
+          "gaza-land-authority-legal-library",
+          "gaza-government-property-legal-guidance",
+          "land-registration-transfer-fees-2-2012",
+          "movable-rights-security-11-2016",
+          "movable-rights-security-11-2016-gazette-120-wafa",
+          "gaza-pla-land-specific-laws-2020",
+          "MEGA_F_GAZA_TERRITORY_PACKET"
+        ],
+        "unresolvedQuestions": [
+          "Determine current force and interaction of Gaza-specific land/registration/waqf instruments."
+        ],
+        "evidenceGaps": [
+          "No sufficiently authoritative consolidated Gaza current-status chain is available in the admitted corpus.",
+          "West Bank status inheritance is prohibited."
+        ],
+        "actualHumanDecisionIncluded": false
+      },
+      {
+        "packId": "mega-g-pack-corp-waqf-001",
+        "todoId": "CORP-WAQF-001",
+        "role": "LEGAL_STATUS_REVIEWER",
+        "territories": [
+          "WEST_BANK",
+          "GAZA",
+          "JERUSALEM"
+        ],
+        "terminalState": "EXPERT_REVIEW_READY",
+        "evidenceRefs": [],
+        "unresolvedQuestions": [
+          "Confirm subordinate waqf regulations/instructions and territory-specific applicability."
+        ],
+        "evidenceGaps": [
+          "Not every subordinate administrative instrument is represented as a preserved canonical artifact."
+        ],
+        "actualHumanDecisionIncluded": false
+      },
+      {
+        "packId": "mega-g-pack-corp-lease-001",
+        "todoId": "CORP-LEASE-001",
+        "role": "LEGAL_STATUS_REVIEWER",
+        "territories": [
+          "WEST_BANK",
+          "GAZA"
+        ],
+        "terminalState": "EXPERT_REVIEW_READY",
+        "evidenceRefs": [
+          "waqf-tenancy-law-5-1964-registry",
+          "landlords-tenants-62-1953-consolidated",
+          "landlords-tenants-amendment-35-2022",
+          "pla-lease-transaction-procedure",
+          "maqam-cassation-1383-2019-hukr",
+          "maqam-cassation-1543-2016-waqf"
+        ],
+        "unresolvedQuestions": [
+          "Confirm relationships among general tenancy, special waqf tenancy, hukr, and ijāratayn by territory/date."
+        ],
+        "evidenceGaps": [
+          "Gaza current applicability remains unresolved."
+        ],
+        "actualHumanDecisionIncluded": false
+      },
+      {
+        "packId": "mega-g-pack-corp-reg-001",
+        "todoId": "CORP-REG-001",
+        "role": "LEGAL_STATUS_REVIEWER",
+        "territories": [
+          "WEST_BANK",
+          "GAZA",
+          "JERUSALEM"
+        ],
+        "terminalState": "EXPERT_REVIEW_READY",
+        "evidenceRefs": [
+          "land-settlement-process-pla",
+          "land-settlement-law-40-1952-registry",
+          "settlement-amendment-8-1955-registry",
+          "settlement-authority-7-2016-official",
+          "settlement-authority-7-2016-wafa",
+          "land-registration-fees-2-1952-consolidated",
+          "land-registration-transfer-fees-2-2012",
+          "pla-new-registration-procedure",
+          "maqam-cassation-1383-2019-hukr",
+          "maqam-cassation-1543-2016-waqf"
+        ],
+        "unresolvedQuestions": [
+          "Confirm title/settlement/registration status by territory and any surviving historical rules."
+        ],
+        "evidenceGaps": [
+          "Jerusalem applicability remains independently unresolved.",
+          "Gaza current status remains independently unresolved."
+        ],
+        "actualHumanDecisionIncluded": false
+      },
+      {
+        "packId": "mega-g-pack-corp-case-001",
+        "todoId": "CORP-CASE-001",
+        "role": "LEGAL_STATUS_REVIEWER",
+        "territories": [
+          "WEST_BANK"
+        ],
+        "terminalState": "EXPERT_REVIEW_READY",
+        "evidenceRefs": [
+          "palestinian-supreme-court-technical-office",
+          "maqam-cassation-1383-2019-hukr",
+          "maqam-cassation-1543-2016-waqf",
+          "maqam-cassation-397-2023-mosque-waqf",
+          "ps-cassation-1383-2019",
+          "ps-cassation-1543-2016",
+          "ps-cassation-397-2023"
+        ],
+        "unresolvedQuestions": [
+          "Review case-specific holdings, appellate identity, and generalization limits."
+        ],
+        "evidenceGaps": [
+          "1543/2016 contains conflicting first-instance identifiers that require human review.",
+          "The representative sample is not an exhaustive court corpus."
+        ],
+        "actualHumanDecisionIncluded": false
+      },
+      {
+        "packId": "mega-g-pack-corp-sharia-001",
+        "todoId": "CORP-SHARIA-001",
+        "role": "FIQH_SHARIA_REVIEWER",
+        "territories": [],
+        "terminalState": "EXPERT_REVIEW_READY",
+        "evidenceRefs": [
+          "quran-complex-developer-platform",
+          "bukhari-2737-muslim-1632-waqf-hadith-dorar",
+          "HADITH-BUKHARI-2737",
+          "HADITH-MUSLIM-1632"
+        ],
+        "unresolvedQuestions": [
+          "Confirm source admission and the exact scope of any waqf proposition before doctrinal use."
+        ],
+        "evidenceGaps": [
+          "Primary collection bytes are not fully preserved locally."
+        ],
+        "actualHumanDecisionIncluded": false
+      },
+      {
+        "packId": "mega-g-pack-corp-fiqh-001",
+        "todoId": "CORP-FIQH-001",
+        "role": "FIQH_SHARIA_REVIEWER",
+        "territories": [],
+        "terminalState": "EXPERT_REVIEW_READY",
+        "evidenceRefs": [
+          "fiqh-hanafi-hilal-ahkam-al-waqf",
+          "fiqh-hanbali-khallal-kitab-al-wuquf",
+          "fiqh-maliki-hattab-ahkam-al-waqf-metadata",
+          "fiqh-shafii-al-umm-vol5-ahbas-metadata"
+        ],
+        "unresolvedQuestions": [
+          "Confirm edition/source admission and select exact doctrinal page locators before proposition extraction."
+        ],
+        "evidenceGaps": [
+          "Maliki and Shafi'i underlying PDFs were not preserved because upstream acquisition failed; metadata pages were preserved instead.",
+          "Substantive doctrinal page locators remain a human-specialist task."
+        ],
+        "actualHumanDecisionIncluded": false
+      },
+      {
+        "packId": "mega-g-pack-land-jerusalem-track",
+        "todoId": "LAND-JERUSALEM-TRACK",
+        "role": "LEGAL_STATUS_REVIEWER",
+        "territories": [
+          "JERUSALEM"
+        ],
+        "terminalState": "EXPLICITLY_DEFERRED_WITH_EVIDENCE_GAP",
+        "evidenceRefs": [
+          "jerusalem-israel-land-registry-extract-service",
+          "jerusalem-soi-unregulated-cadastre-service",
+          "MEGA_F_JERUSALEM_TERRITORY_PACKET"
+        ],
+        "unresolvedQuestions": [
+          "Determine current jurisdiction/applicability only from admitted territory-specific evidence."
+        ],
+        "evidenceGaps": [
+          "operational_registry_evidence_does_not_resolve_jurisdiction_or_applicability",
+          "live_sources_not_privately_preserved",
+          "territory_specific_expert_review_pending"
+        ],
+        "actualHumanDecisionIncluded": false
+      }
+    ],
+    "summary": {
+      "totalPacks": 11,
+      "expertReviewReadyPacks": 9,
+      "explicitlyDeferredPacks": 2,
+      "queueItems": 47,
+      "p0QueueItems": 36,
+      "blockingQueueItems": 43,
+      "actualHumanDecisionsIncluded": false,
+      "productionExpertSignoffSatisfied": false
+    },
+    "boundaryPass": true
+  },
+  "multiSourceE2E": {
+    "caseHits": [
+      {
+        "documentId": "mega-g-case-1383",
+        "title": "Cassation 1383/2019 — hukr / waqf raqaba",
+        "domain": "case_law",
+        "era": "CONTEMPORARY",
+        "territories": [
+          "WEST_BANK"
+        ],
+        "authorityClass": "reference_secondary",
+        "sourceUrl": "https://maqam.najah.edu/judgments/7576/",
+        "publisher": "Maqam / An-Najah National University",
+        "legalStatusVerified": true,
+        "artifactVersionId": "mega-f-case-1383-private",
+        "artifactSha256": "a868798e54b60acd307e918d095a106eaae049fdff3019f5b37c0fa14f064067",
+        "locator": "case-specific-holding",
+        "structuredConclusionEligible": true,
+        "conclusionScope": "CASE_SPECIFIC",
+        "conclusionScopeTokens": [
+          "1383/2019"
+        ],
+        "scores": {
+          "lexical": 0.44999999999999996,
+          "semantic": 0.95,
+          "authority": 0.2857142857142857,
+          "graph": 0.7,
+          "hybrid": 0.8062857142857143
+        },
+        "usableForConclusion": true,
+        "reasons": [
+          "secondary_authority"
+        ]
+      },
+      {
+        "documentId": "mega-g-gaza-land-inventory",
+        "title": "Gaza Land Authority — land-specific laws inventory",
+        "domain": "land_law",
+        "era": "CONTEMPORARY",
+        "territories": [
+          "GAZA"
+        ],
+        "authorityClass": "official_derivative",
+        "sourceUrl": "https://www.pla.gov.ps/ar/%D9%82%D9%88%D8%A7%D9%86%D9%8A%D9%86-%D8%AE%D8%A7%D8%B5%D8%A9-%D8%A8%D8%A7%D9%84%D8%A7%D8%B1%D8%A7%D8%B6%D9%8A-1403.html",
+        "publisher": "Palestinian Land Authority - Gaza",
+        "legalStatusVerified": false,
+        "artifactVersionId": "mega-f-gaza-private",
+        "artifactSha256": "bb21fb543a070f538347317b48a36b9ddb73ded6e2c5cf7b6fd8b2d240f9f9b4",
+        "locator": "legal-lineage-inventory",
+        "structuredConclusionEligible": false,
+        "scores": {
+          "lexical": 0.0625,
+          "semantic": 0.9,
+          "authority": 0.5714285714285714,
+          "graph": 0.4,
+          "hybrid": 0.3105714285714286
+        },
+        "usableForConclusion": false,
+        "reasons": [
+          "legal_status_not_verified",
+          "structured_conclusion_gate_closed"
+        ]
+      }
+    ],
+    "gazaHits": [
+      {
+        "documentId": "mega-g-gaza-land-inventory",
+        "title": "Gaza Land Authority — land-specific laws inventory",
+        "domain": "land_law",
+        "era": "CONTEMPORARY",
+        "territories": [
+          "GAZA"
+        ],
+        "authorityClass": "official_derivative",
+        "sourceUrl": "https://www.pla.gov.ps/ar/%D9%82%D9%88%D8%A7%D9%86%D9%8A%D9%86-%D8%AE%D8%A7%D8%B5%D8%A9-%D8%A8%D8%A7%D9%84%D8%A7%D8%B1%D8%A7%D8%B6%D9%8A-1403.html",
+        "publisher": "Palestinian Land Authority - Gaza",
+        "legalStatusVerified": false,
+        "artifactVersionId": "mega-f-gaza-private",
+        "artifactSha256": "bb21fb543a070f538347317b48a36b9ddb73ded6e2c5cf7b6fd8b2d240f9f9b4",
+        "locator": "legal-lineage-inventory",
+        "structuredConclusionEligible": false,
+        "scores": {
+          "lexical": 0.1875,
+          "semantic": 0.9,
+          "authority": 0.5714285714285714,
+          "graph": 0.4,
+          "hybrid": 0.6905714285714286
+        },
+        "usableForConclusion": false,
+        "reasons": [
+          "legal_status_not_verified",
+          "structured_conclusion_gate_closed"
+        ]
+      }
+    ],
+    "fiqhHits": [
+      {
+        "documentId": "mega-g-maliki-source-identity",
+        "title": "Maliki waqf source — al-Hattab, Ahkam al-Waqf",
+        "domain": "fiqh",
+        "era": "CROSS_ERA",
+        "territories": [
+          "WEST_BANK",
+          "GAZA",
+          "JERUSALEM",
+          "HISTORIC_PALESTINE"
+        ],
+        "authorityClass": "reference_secondary",
+        "sourceUrl": "https://www.waqfeya.net/books/%D8%A3%D8%AD%D9%83%D8%A7%D9%85-%D8%A7%D9%84%D9%88%D9%82%D9%81-816774af21e74392a33dee1761a2efad",
+        "publisher": "Waqfeya metadata",
+        "legalStatusVerified": false,
+        "artifactVersionId": "mega-g-maliki-metadata",
+        "artifactSha256": "6a1fed9904a09c0c86cd76b054e60954f404ac8fcccf93233650f0284160cc0f",
+        "locator": "whole-work-waqf-source-identity",
+        "structuredConclusionEligible": false,
+        "scores": {
+          "lexical": 0,
+          "semantic": 0.75,
+          "authority": 0.2857142857142857,
+          "graph": 0,
+          "hybrid": 0.5192857142857144
+        },
+        "usableForConclusion": false,
+        "reasons": [
+          "structured_conclusion_gate_closed",
+          "secondary_authority"
+        ]
+      },
+      {
+        "documentId": "mega-g-shafii-source-identity",
+        "title": "Shafii source — al-Umm vol. 5 / al-Ahbas",
+        "domain": "fiqh",
+        "era": "CROSS_ERA",
+        "territories": [
+          "WEST_BANK",
+          "GAZA",
+          "JERUSALEM",
+          "HISTORIC_PALESTINE"
+        ],
+        "authorityClass": "reference_secondary",
+        "sourceUrl": "https://www.waqfeya.net/books/%D8%A7%D9%84%D8%A3%D9%85-%D8%B7-%D8%A7%D9%84%D9%88%D9%81%D8%A7%D8%A1-600ea104307f43a1b06ccf360823dcff",
+        "publisher": "Waqfeya metadata",
+        "legalStatusVerified": false,
+        "artifactVersionId": "mega-g-shafii-metadata",
+        "artifactSha256": "da49e6caedd90d3b18e12e5f70ccb78e09e2a907a85af67b028beb2704a921fd",
+        "locator": "volume-5:al-ahbas",
+        "structuredConclusionEligible": false,
+        "scores": {
+          "lexical": 0,
+          "semantic": 0.75,
+          "authority": 0.2857142857142857,
+          "graph": 0,
+          "hybrid": 0.5192857142857144
+        },
+        "usableForConclusion": false,
+        "reasons": [
+          "structured_conclusion_gate_closed",
+          "secondary_authority"
+        ]
+      }
+    ],
+    "pass": true
+  },
+  "hardBoundaries": {
+    "actualSpecialistDecisions": "HUMAN_ACTS_ONLY",
+    "mainMerge": false,
+    "baselinePromotion": false,
+    "liveSharedSupabaseMutation": false,
+    "production": false,
+    "publicCorpusRelease": false,
+    "paidProviderProcurement": false,
+    "actualProductionUserAccountProvisioning": false,
+    "postMegaGDefaultMegaHEngineering": false
+  },
+  "overallPass": true,
+  "disposition": "PASS_FINAL_CORPUS_TERMINAL_LEDGER_AND_SPECIALIST_HANDOFF_READY_WITH_EXPLICIT_EVIDENCE_GAPS"
+}
