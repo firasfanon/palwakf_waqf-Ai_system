@@ -135,6 +135,11 @@ export function routeReferenceIssue(question: string): ReferenceIssueRoute {
     reasons.push("movable_property_terms");
   }
 
+  if (classes.has("historical") && territories.size > 0) {
+    territories.add("HISTORIC_PALESTINE");
+    if (preferredEras.has("OTTOMAN")) territories.add("OTTOMAN_PALESTINE");
+  }
+
   if (classes.has("judicial")) priorityDomains.add("case_law");
   if (classes.has("fiqh")) priorityDomains.add("fiqh");
   if (classes.has("sharia")) priorityDomains.add("sharia");
