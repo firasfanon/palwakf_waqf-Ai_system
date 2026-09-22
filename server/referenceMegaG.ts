@@ -223,18 +223,16 @@ export function buildMegaGCorpusTerminalLedger(): MegaGCorpusTrack[] {
       todoId: "CORP-LAND-001",
       familyIds: [
         "LAND_OTTOMAN",
-        "LAND_BRITISH_MANDATE",
-        "LAND_JORDANIAN_WB",
-        "LAND_PALESTINIAN_WB",
+        "LAND_MANDATE",
+        "LAND_WEST_BANK_CURRENT",
         "LAND_GAZA_CURRENT",
         "LAND_JERUSALEM_TRACK",
       ],
       terminalState: "EXPERT_REVIEW_READY",
       evidenceRefs: [
         ...familySeedIds("LAND_OTTOMAN"),
-        ...familySeedIds("LAND_BRITISH_MANDATE"),
-        ...familySeedIds("LAND_JORDANIAN_WB"),
-        ...familySeedIds("LAND_PALESTINIAN_WB"),
+        ...familySeedIds("LAND_MANDATE"),
+        ...familySeedIds("LAND_WEST_BANK_CURRENT"),
         ...familySeedIds("LAND_GAZA_CURRENT"),
         ...familySeedIds("LAND_JERUSALEM_TRACK"),
       ],
@@ -251,12 +249,7 @@ export function buildMegaGCorpusTerminalLedger(): MegaGCorpusTrack[] {
     },
     {
       todoId: "CORP-LAND-002",
-      familyIds: [
-        "LAND_OTTOMAN",
-        "LAND_BRITISH_MANDATE",
-        "LAND_JORDANIAN_WB",
-        "LAND_PALESTINIAN_WB",
-      ],
+      familyIds: ["LAND_OTTOMAN", "LAND_MANDATE", "LAND_WEST_BANK_CURRENT"],
       terminalState: "EXPERT_REVIEW_READY",
       evidenceRefs: [
         "MEGA_C_PRIVATE_ARTIFACT_SET",
@@ -276,11 +269,10 @@ export function buildMegaGCorpusTerminalLedger(): MegaGCorpusTrack[] {
     },
     {
       todoId: "CORP-LAND-003",
-      familyIds: ["LAND_JORDANIAN_WB", "LAND_PALESTINIAN_WB"],
+      familyIds: ["LAND_WEST_BANK_CURRENT"],
       terminalState: "EXPERT_REVIEW_READY",
       evidenceRefs: [
-        ...familySeedIds("LAND_JORDANIAN_WB"),
-        ...familySeedIds("LAND_PALESTINIAN_WB"),
+        ...familySeedIds("LAND_WEST_BANK_CURRENT"),
         "MEGA_C_LEGAL_STATUS_MATRIX",
       ],
       reviewRole: "LEGAL_STATUS_REVIEWER",
@@ -314,9 +306,9 @@ export function buildMegaGCorpusTerminalLedger(): MegaGCorpusTrack[] {
     },
     {
       todoId: "CORP-WAQF-001",
-      familyIds: ["WAQF_LAW_CURRENT"],
+      familyIds: ["WAQF_POSITIVE_LAW"],
       terminalState: "EXPERT_REVIEW_READY",
-      evidenceRefs: familySeedIds("WAQF_LAW_CURRENT"),
+      evidenceRefs: familySeedIds("WAQF_POSITIVE_LAW"),
       reviewRole: "LEGAL_STATUS_REVIEWER",
       territories: ["WEST_BANK", "GAZA", "JERUSALEM"],
       unresolvedQuestions: [
@@ -433,13 +425,24 @@ export function buildMegaGCorpusTerminalLedger(): MegaGCorpusTrack[] {
 
 export function megaGAllMandatoryCorpusTracksTerminal(): boolean {
   const ledger = buildMegaGCorpusTerminalLedger();
+  const validFamilyIds = new Set(
+    megaGSourceFamilies().map(family => family.familyId)
+  );
   return (
     ledger.length === 10 &&
-    ledger.every(
-      row =>
+    ledger.every(row => {
+      const terminal =
         row.terminalState === "EXPERT_REVIEW_READY" ||
-        row.terminalState === "EXPLICITLY_DEFERRED_WITH_EVIDENCE_GAP"
-    )
+        row.terminalState === "EXPLICITLY_DEFERRED_WITH_EVIDENCE_GAP";
+      const familiesResolved =
+        row.familyIds.length > 0 &&
+        row.familyIds.every(familyId => validFamilyIds.has(familyId));
+      const evidenceReady =
+        row.terminalState === "EXPERT_REVIEW_READY"
+          ? row.evidenceRefs.length > 0
+          : row.evidenceGaps.length > 0;
+      return terminal && familiesResolved && evidenceReady;
+    })
   );
 }
 

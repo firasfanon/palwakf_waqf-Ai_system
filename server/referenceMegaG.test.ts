@@ -35,6 +35,30 @@ describe("WAQF_AI MEGA_G final corpus completion and specialist handoff", () => 
     ).toBe(true);
   });
 
+  it("resolves every terminal-ledger family id and requires evidence on expert-ready tracks", () => {
+    const validFamilyIds = new Set(
+      megaGSourceFamilies().map(family => family.familyId)
+    );
+    const ledger = buildMegaGCorpusTerminalLedger();
+
+    for (const track of ledger) {
+      expect(track.familyIds.length).toBeGreaterThan(0);
+      expect(
+        track.familyIds.every(familyId => validFamilyIds.has(familyId))
+      ).toBe(true);
+      if (track.terminalState === "EXPERT_REVIEW_READY") {
+        expect(track.evidenceRefs.length).toBeGreaterThan(0);
+      } else {
+        expect(track.evidenceGaps.length).toBeGreaterThan(0);
+      }
+    }
+
+    expect(
+      ledger.find(track => track.todoId === "CORP-WAQF-001")?.evidenceRefs
+        .length
+    ).toBeGreaterThan(0);
+  });
+
   it("marks nine corpus tracks expert-ready and Gaza land status explicitly deferred", () => {
     expect(megaGExpertReadyTracks()).toHaveLength(9);
     expect(megaGDeferredTracks()).toHaveLength(1);

@@ -1,7 +1,7 @@
 {
   "program": "WAQF_AI_COMPREHENSIVE_WAQF_REFERENCE_V1",
   "phase": "MEGA_G_FINAL_CORPUS_COMPLETION_SPECIALIST_HANDOFF_PRIVATE_PILOT",
-  "generatedAt": "2026-09-22T23:23:40.367Z",
+  "generatedAt": "2026-09-22T23:33:46.657Z",
   "exactAuthorizedBase": "418a98ba3966e3137c1eafb905acf4f5c35224ec",
   "privateManifest": {
     "pathHint": "~/.palwakf/private_reference_cache/waqf-ai-mega-g/mega-g-private-handoff-manifest.json",
@@ -51,15 +51,28 @@
       "todoId": "CORP-LAND-001",
       "familyIds": [
         "LAND_OTTOMAN",
-        "LAND_BRITISH_MANDATE",
-        "LAND_JORDANIAN_WB",
-        "LAND_PALESTINIAN_WB",
+        "LAND_MANDATE",
+        "LAND_WEST_BANK_CURRENT",
         "LAND_GAZA_CURRENT",
         "LAND_JERUSALEM_TRACK"
       ],
       "terminalState": "EXPERT_REVIEW_READY",
       "evidenceRefs": [
         "ottoman-land-code-1858-registry",
+        "mandate-land-transfers-regulations-1940-palquest",
+        "mandate-land-transfers-regulations-1940-unispal",
+        "pla-legal-framework-current",
+        "pla-procedures-manual-2024",
+        "land-authority-law-2010",
+        "land-authority-law-2010-gazette-86-wafa",
+        "land-settlement-law-40-1952-registry",
+        "settlement-amendment-8-1955-registry",
+        "expropriation-law-2-1953-consolidated",
+        "settlement-authority-7-2016-official",
+        "settlement-authority-7-2016-wafa",
+        "land-registration-fees-2-1952-consolidated",
+        "land-registration-transfer-fees-2-2012",
+        "pla-new-registration-procedure",
         "gaza-land-authority-legal-library",
         "gaza-government-property-legal-guidance",
         "land-registration-transfer-fees-2-2012",
@@ -87,9 +100,8 @@
       "todoId": "CORP-LAND-002",
       "familyIds": [
         "LAND_OTTOMAN",
-        "LAND_BRITISH_MANDATE",
-        "LAND_JORDANIAN_WB",
-        "LAND_PALESTINIAN_WB"
+        "LAND_MANDATE",
+        "LAND_WEST_BANK_CURRENT"
       ],
       "terminalState": "EXPERT_REVIEW_READY",
       "evidenceRefs": [
@@ -114,11 +126,22 @@
     {
       "todoId": "CORP-LAND-003",
       "familyIds": [
-        "LAND_JORDANIAN_WB",
-        "LAND_PALESTINIAN_WB"
+        "LAND_WEST_BANK_CURRENT"
       ],
       "terminalState": "EXPERT_REVIEW_READY",
       "evidenceRefs": [
+        "pla-legal-framework-current",
+        "pla-procedures-manual-2024",
+        "land-authority-law-2010",
+        "land-authority-law-2010-gazette-86-wafa",
+        "land-settlement-law-40-1952-registry",
+        "settlement-amendment-8-1955-registry",
+        "expropriation-law-2-1953-consolidated",
+        "settlement-authority-7-2016-official",
+        "settlement-authority-7-2016-wafa",
+        "land-registration-fees-2-1952-consolidated",
+        "land-registration-transfer-fees-2-2012",
+        "pla-new-registration-procedure",
         "MEGA_C_LEGAL_STATUS_MATRIX"
       ],
       "reviewRole": "LEGAL_STATUS_REVIEWER",
@@ -162,10 +185,14 @@
     {
       "todoId": "CORP-WAQF-001",
       "familyIds": [
-        "WAQF_LAW_CURRENT"
+        "WAQF_POSITIVE_LAW"
       ],
       "terminalState": "EXPERT_REVIEW_READY",
-      "evidenceRefs": [],
+      "evidenceRefs": [
+        "waqf-law-1966-consolidated",
+        "waqf-amendment-2023",
+        "waqf-amendment-2023-gazette-198-pdf"
+      ],
       "reviewRole": "LEGAL_STATUS_REVIEWER",
       "territories": [
         "WEST_BANK",
@@ -473,9 +500,22 @@
         "terminalState": "EXPERT_REVIEW_READY",
         "evidenceRefs": [
           "ottoman-land-code-1858-registry",
+          "mandate-land-transfers-regulations-1940-palquest",
+          "mandate-land-transfers-regulations-1940-unispal",
+          "pla-legal-framework-current",
+          "pla-procedures-manual-2024",
+          "land-authority-law-2010",
+          "land-authority-law-2010-gazette-86-wafa",
+          "land-settlement-law-40-1952-registry",
+          "settlement-amendment-8-1955-registry",
+          "expropriation-law-2-1953-consolidated",
+          "settlement-authority-7-2016-official",
+          "settlement-authority-7-2016-wafa",
+          "land-registration-fees-2-1952-consolidated",
+          "land-registration-transfer-fees-2-2012",
+          "pla-new-registration-procedure",
           "gaza-land-authority-legal-library",
           "gaza-government-property-legal-guidance",
-          "land-registration-transfer-fees-2-2012",
           "movable-rights-security-11-2016",
           "movable-rights-security-11-2016-gazette-120-wafa",
           "gaza-pla-land-specific-laws-2020",
@@ -522,6 +562,18 @@
         ],
         "terminalState": "EXPERT_REVIEW_READY",
         "evidenceRefs": [
+          "pla-legal-framework-current",
+          "pla-procedures-manual-2024",
+          "land-authority-law-2010",
+          "land-authority-law-2010-gazette-86-wafa",
+          "land-settlement-law-40-1952-registry",
+          "settlement-amendment-8-1955-registry",
+          "expropriation-law-2-1953-consolidated",
+          "settlement-authority-7-2016-official",
+          "settlement-authority-7-2016-wafa",
+          "land-registration-fees-2-1952-consolidated",
+          "land-registration-transfer-fees-2-2012",
+          "pla-new-registration-procedure",
           "MEGA_C_LEGAL_STATUS_MATRIX"
         ],
         "unresolvedQuestions": [
@@ -566,7 +618,11 @@
           "JERUSALEM"
         ],
         "terminalState": "EXPERT_REVIEW_READY",
-        "evidenceRefs": [],
+        "evidenceRefs": [
+          "waqf-law-1966-consolidated",
+          "waqf-amendment-2023",
+          "waqf-amendment-2023-gazette-198-pdf"
+        ],
         "unresolvedQuestions": [
           "Confirm subordinate waqf regulations/instructions and territory-specific applicability."
         ],
