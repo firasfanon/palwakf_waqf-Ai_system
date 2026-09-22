@@ -1,0 +1,116 @@
+{
+  "program": "WAQF_AI_COMPREHENSIVE_WAQF_REFERENCE_V1",
+  "phase": "MEGA_D_PRIVATE_E2E_PILOT",
+  "generatedAt": "2026-09-22T18:56:52.952Z",
+  "hardBoundaries": {
+    "liveSharedSupabaseMutation": false,
+    "mainMerge": false,
+    "baselinePromotion": false,
+    "production": false,
+    "publicCorpusRelease": false
+  },
+  "networkCalls": 0,
+  "privateFixture": {
+    "kind": "CONTROLLED_PRIVATE_DEED_FIXTURE",
+    "path": "<USER_HOME>/.palwakf/private_reference_cache/waqf-ai-mega-d/controlled-private-deed-fixture.json",
+    "sha256": "057a8757147e55d32de2845e53b71838d7b5347ae5b6bbd6d710a57da53cc6e5",
+    "artifactVersionId": "version-057a8757147e55d32de2845e53b71838",
+    "realHistoricalDeedArtifact": false
+  },
+  "realPreservedReferenceEvidence": {
+    "corpusId": "ottoman-land-code-1858-registry",
+    "expectedSha256": "bd4c856c808762a0ae805124203a343e6b2f7d3ca8a09445cae45a636979b15f",
+    "observedSha256": "bd4c856c808762a0ae805124203a343e6b2f7d3ca8a09445cae45a636979b15f",
+    "fixityVerified": true
+  },
+  "gates": {
+    "deed": {
+      "state": "PASS",
+      "deed": {
+        "deedId": "mega-d-private-fixture-deed-1",
+        "title": "حجة وقف تجريبية خاصة لا تمثل وثيقة تاريخية أصلية",
+        "deedDate": "1552-01-01",
+        "courtOrAuthority": "CONTROLLED_PRIVATE_FIXTURE",
+        "waqifEntityIds": [
+          "fixture-waqif"
+        ],
+        "assetIds": [
+          "mega-d-private-fixture-asset-1"
+        ],
+        "beneficiaryIds": [
+          "fixture-beneficiary"
+        ],
+        "nazirEntityIds": [
+          "fixture-nazir"
+        ],
+        "witnessEntityIds": [],
+        "waqfType": "CHARITABLE",
+        "conditionIds": [
+          "fixture-condition-1"
+        ],
+        "relatedDeedIds": [],
+        "preservedArtifactVersionId": "version-057a8757147e55d32de2845e53b71838",
+        "transcriptionReferenceId": "fixture-transcription-1",
+        "registrationStatus": "UNRESOLVED",
+        "settlementStatus": "UNRESOLVED"
+      },
+      "transcriptionId": "fixture-transcription-1",
+      "acceptedConditionIds": [
+        "fixture-condition-1"
+      ],
+      "relationCount": 0,
+      "errors": [],
+      "conclusionEligible": true
+    },
+    "assetTitle": {
+      "state": "PASS",
+      "assetId": "mega-d-private-fixture-asset-1",
+      "titleEventIds": [
+        "fixture-title-event-1"
+      ],
+      "unresolvedDateEventIds": [],
+      "lowConfidenceEventIds": [],
+      "crosswalks": [
+        {
+          "parcelRef": "fixture-28038/1",
+          "confidence": 1,
+          "verifiedEvidenceIds": [
+            "fixture-title-anchor",
+            "fixture-survey-anchor"
+          ],
+          "unresolved": false,
+          "ownershipInferenceAllowed": false,
+          "reasons": []
+        }
+      ],
+      "ownershipInferenceAllowed": false,
+      "errors": [],
+      "conclusionEligible": true
+    },
+    "jurisdiction": {
+      "state": "PASS",
+      "territory": "OTTOMAN_PALESTINE",
+      "regime": "OTTOMAN",
+      "ruleId": "controlled-ottoman-jurisdiction-fixture",
+      "competentAuthority": "CONTROLLED_PILOT_AUTHORITY",
+      "reasons": [],
+      "conclusionEligible": true
+    },
+    "conclusionGate": {
+      "state": "PASS",
+      "conflictFactKeys": [],
+      "reasons": [],
+      "conclusionEligible": true
+    },
+    "ragHitCount": 1,
+    "ragTopDocumentId": "mega-d:mega-d-private-fixture-deed-1:mega-d-private-fixture-asset-1",
+    "citationAudit": {
+      "valid": true,
+      "defects": []
+    }
+  },
+  "pipelinePass": true,
+  "specialistExpertReviewSatisfied": false,
+  "realHistoricalDeedAcceptanceSatisfied": false,
+  "disposition": "PASS_PIPELINE_REAL_HISTORICAL_DEED_ARTIFACT_DEFERRED"
+}
