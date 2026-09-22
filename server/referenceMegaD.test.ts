@@ -221,7 +221,77 @@ describe("WAQF_AI MEGA_D integrated deed/asset/title/jurisdiction flow", () => {
     expect(packet.state).toBe("FAIL_CLOSED");
     expect(packet.unresolvedDateEventIds).toEqual(["gap"]);
     expect(packet.lowConfidenceEventIds).toEqual(["gap"]);
+    expect(packet.errors).toContain("asset_right_required");
     expect(packet.errors).toContain("title_event_evidence_required:gap");
+  });
+
+  it("requires parcel corroboration from independent preserved source versions", () => {
+    const packet = buildMegaDAssetTitlePacket({
+      asset: {
+        assetId: "a",
+        canonicalName: "fixture",
+        assetKind: "IMMOVABLE",
+        waqfType: "CHARITABLE",
+        landClass: "UNRESOLVED",
+        historicalPlaceNames: ["بيت لحم"],
+        currentParcelRefs: ["28038/1"],
+        preservedEvidenceVersionIds: ["deed-v1"],
+      },
+      rights: [
+        {
+          rightId: "right-1",
+          assetId: "a",
+          rightType: "USUFRUCT",
+          holderEntityId: null,
+          validFrom: null,
+          validTo: null,
+          evidenceVersionIds: ["deed-v1"],
+          confidence: 1,
+          verified: true,
+        },
+      ],
+      titleEvents: [
+        {
+          eventId: "event-1",
+          assetId: "a",
+          eventType: "WAQF_DEED",
+          occurredAt: "1900-01-01",
+          sequenceHint: 1,
+          evidenceVersionIds: ["deed-v1"],
+          factSummary: "fixture",
+          confidence: 1,
+          verified: true,
+        },
+      ],
+      parcelCandidates: [
+        {
+          parcelRef: "28038/1",
+          candidateName: "بيت لحم",
+          evidence: [
+            {
+              evidenceId: "title-1",
+              type: "TITLE_RECORD",
+              value: "28038/1",
+              sourceArtifactVersionId: "same-source-v1",
+              verified: true,
+              weight: 1,
+            },
+            {
+              evidenceId: "survey-1",
+              type: "SURVEY_MAP",
+              value: "28038/1",
+              sourceArtifactVersionId: "same-source-v1",
+              verified: true,
+              weight: 1,
+            },
+          ],
+        },
+      ],
+    });
+    expect(packet.state).toBe("FAIL_CLOSED");
+    expect(packet.errors).toContain(
+      "parcel_crosswalk_single_source_version:28038/1"
+    );
   });
 
   it("fails closed on territory-specific legal-status debt", () => {
@@ -342,5 +412,33 @@ describe("WAQF_AI MEGA_D integrated deed/asset/title/jurisdiction flow", () => {
     });
     expect(gate.state).toBe("FAIL_CLOSED");
     expect(gate.reasons).toContain("asset_title_gate_closed");
+
+    const document = buildMegaDStructuredRetrievalDocument({
+      deed: validDeedPacket(),
+      assetTitle: closedAsset,
+      jurisdiction,
+      conclusionGate: gate,
+      source: {
+        domain: "registration_settlement",
+        era: "CONTEMPORARY",
+        territories: ["WEST_BANK"],
+        authorityClass: "official_primary",
+        sourceUrl: "https://official.example/mega-d-closed",
+        publisher: "Private governed pilot",
+        artifactVersionId: "private-deed-version-1",
+        artifactSha256: hash,
+        locator: "page-1:line-10",
+      },
+    });
+    const route = routeReferenceIssue("ما وضع تسجيل أصل وقفي في الضفة؟");
+    const hits = hybridReferenceSearch({
+      query: "تسجيل أصل وقفي الضفة",
+      route,
+      documents: [document],
+    });
+    expect(document.structuredConclusionEligible).toBe(false);
+    expect(hits).toHaveLength(1);
+    expect(hits[0].usableForConclusion).toBe(false);
+    expect(hits[0].reasons).toContain("structured_conclusion_gate_closed");
   });
 });

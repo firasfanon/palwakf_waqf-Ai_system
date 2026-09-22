@@ -36,8 +36,8 @@ MEGA_D integrates existing governed primitives into one fail-closed deed → con
 
 ## Validation results
 - TypeScript `pnpm check`: PASS.
-- Targeted integration suite: 35/35 PASS.
-- MEGA_D dedicated suite: 9/9 PASS.
+- Targeted integration suite: 54/54 PASS (MEGA_B + MEGA_C + MEGA_D + deed/domain/crosswalk regressions).
+- MEGA_D dedicated suite: 10/10 PASS.
 - MEGA_C regression suite included in targeted run: 16/16 PASS.
 - Private E2E pipeline: PASS.
 - RAG structured-evidence hit: PASS.
@@ -66,16 +66,29 @@ Captured evidence:
 
 Observed result:
 - 163 failed
-- 315 passed
+- 316 passed
 - 36 skipped
-- 514 total
+- 515 total
 
 MEGA_C prior recorded baseline:
 - 162 failed
 - 307 passed
 - 36 skipped
 
-MEGA_D adds nine passing tests. The source diff before evidence/documentation was limited to new MEGA_D files; no legacy runtime file was modified. Therefore the single additional legacy failure count is recorded as an environment/legacy-suite drift requiring independent review, not silently classified as a MEGA_D regression.
+MEGA_D adds ten passing tests. The full suite still carries one additional legacy failure relative to the prior MEGA_C count. MEGA_D-specific, MEGA_B, and MEGA_C reference suites are green; the remaining repository failures are recorded as legacy/environment debt and are not silently classified as success.
+
+## Independent review repair
+The first pushed head `82676f96f2b8dc36dbc93128ebe4db47ae59fdfe` exposed a conclusion-gating defect during independent review: a structured document could remain RAG-usable when a deed/asset gate was closed without an evidence-conflict flag.
+
+The successor repair:
+- adds `structuredConclusionEligible` to governed retrieval documents,
+- makes `structured_conclusion_gate_closed` a blocking retrieval reason,
+- requires at least one explicit asset right and one title-chain event for a passing asset/title packet,
+- requires corroborated parcel crosswalk evidence from at least two independent preserved artifact versions,
+- adds regressions proving a closed integrated gate cannot become conclusion-usable in RAG.
+
+The repaired targeted suite is 54/54 PASS and the private pilot remains PASS with the real historical deed artifact explicitly deferred.
+
 ## Boundaries preserved
 - Main merge: NO.
 - Baseline promotion: NO.

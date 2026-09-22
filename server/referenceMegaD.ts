@@ -133,6 +133,9 @@ export function buildMegaDAssetTitlePacket(input: {
   if (!input.asset.preservedEvidenceVersionIds.length)
     errors.push("asset_preserved_evidence_required");
 
+  if (!input.rights.length) errors.push("asset_right_required");
+  if (!input.titleEvents.length) errors.push("title_event_required");
+
   for (const right of input.rights) {
     if (right.assetId !== input.asset.assetId)
       errors.push("right_asset_mismatch:" + right.rightId);
@@ -161,6 +164,19 @@ export function buildMegaDAssetTitlePacket(input: {
     if (!decision) errors.push("parcel_crosswalk_missing:" + parcelRef);
     else if (decision.unresolved)
       errors.push("parcel_crosswalk_unresolved:" + parcelRef);
+    else {
+      const candidate = input.parcelCandidates.find(
+        row => row.parcelRef === parcelRef
+      );
+      const independentVersions = new Set(
+        (candidate?.evidence || [])
+          .filter(row => row.verified)
+          .map(row => row.sourceArtifactVersionId)
+          .filter(Boolean)
+      );
+      if (independentVersions.size < 2)
+        errors.push("parcel_crosswalk_single_source_version:" + parcelRef);
+    }
   }
 
   const clean = unique(errors);
@@ -282,6 +298,7 @@ export function buildMegaDStructuredRetrievalDocument(input: {
     title: deed.title,
     content,
     conflictFlag: input.conclusionGate.conflictFactKeys.length > 0,
+    structuredConclusionEligible: input.conclusionGate.conclusionEligible,
     legalStatusVerified: input.jurisdiction.conclusionEligible,
   };
 }

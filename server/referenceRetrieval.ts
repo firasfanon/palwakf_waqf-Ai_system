@@ -24,6 +24,7 @@ export type ReferenceRetrievalDocument = {
   semanticScore?: number | null;
   graphScore?: number | null;
   conflictFlag?: boolean;
+  structuredConclusionEligible?: boolean;
 };
 
 export type ReferenceRetrievalHit = ReferenceRetrievalDocument & {
@@ -190,11 +191,17 @@ export function hybridReferenceSearch(input: {
         reasons.push("legal_status_not_verified");
       }
       if (document.conflictFlag) reasons.push("evidence_conflict");
+      if (document.structuredConclusionEligible === false)
+        reasons.push("structured_conclusion_gate_closed");
       if (document.authorityClass === "reference_secondary")
         reasons.push("secondary_authority");
       const usableForConclusion = reasons.every(
         reason =>
-          !["legal_status_not_verified", "evidence_conflict"].includes(reason)
+          ![
+            "legal_status_not_verified",
+            "evidence_conflict",
+            "structured_conclusion_gate_closed",
+          ].includes(reason)
       );
       return {
         ...document,
