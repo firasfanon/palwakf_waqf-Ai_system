@@ -1,0 +1,352 @@
+{
+  "generatedAt": "2026-09-23",
+  "program": "POST-G-DEV-002",
+  "authorization": {
+    "baseHead": "c8ae5bd3d38f8e3380d110ded19cd09f30530df0",
+    "baseTree": "095220826a84e56b1d7c67acebe06cccc4a7a534",
+    "branch": "task/WAQF-AI-POST-G-FINAL-ENGINEERING-EVIDENCE-GAP-CLOSURE-V1",
+    "realSpecialistDecisions": false,
+    "productionUserAccounts": false,
+    "productionRoleGrants": false,
+    "liveSharedSupabaseMutation": false,
+    "mainMerge": false,
+    "baselinePromotion": false,
+    "production": false,
+    "publicCorpusRelease": false
+  },
+  "summary": {
+    "program": "POST-G-DEV-002",
+    "finalEngineeringBatch": true,
+    "qa002": {
+      "terminalState": "DEFERRED_WITH_EXPLICIT_EVIDENCE_GAP",
+      "benchmarkExecuted": false,
+      "sampleCount": 0,
+      "meanCharacterErrorRate": null,
+      "meanWordErrorRate": null,
+      "meanConfidence": null,
+      "uncertainSegmentCount": 0,
+      "correctionProvenanceCount": 0,
+      "evidenceGaps": [
+        "verified_page_aligned_ground_truth_unavailable",
+        "automated_extraction_or_translation_is_not_human_verified_ocr_ground_truth"
+      ],
+      "artifactEvidence": [
+        "MEGA_E_HASEKI_VGM_2017_PRESERVED_PDF_SHA256_5e4e1b095c29810793d9bbaabf5c632ac8628617497125aaf78fd919c22687ef",
+        "MEGA_E_EXTRACTED_TEXT_SHA256_2ae86747cd95a9e1425efcc274e01ff517d6a0226a799393fb92befc49812435",
+        "MEGA_E_TRANSLATION_LOCATORS_PAGE_10_ITEMS_14_15"
+      ],
+      "sourceTextAvailable": true,
+      "pageAlignedHumanGroundTruthAvailable": false
+    },
+    "pilot006": {
+      "terminalState": "PASS",
+      "representativeCaseCount": 3,
+      "caseNumbers": ["1383/2019", "1543/2016", "397/2023"],
+      "sharedIssueTags": ["raqaba", "waqf"],
+      "cases": [
+        {
+          "caseNumber": "1383/2019",
+          "holdingSummary": "Case-specific holding keeps raqaba with the waqf while the hukr/benefit right is registered to the claimant.",
+          "appellateChain": [
+            "FIRST_INSTANCE:27/2018",
+            "APPEAL:341/2019",
+            "CASSATION:1383/2019"
+          ],
+          "normalizationState": "NORMALIZED",
+          "sourceConflictNotes": [],
+          "caseSpecificOnly": true,
+          "generalizationAllowed": false
+        },
+        {
+          "caseNumber": "1543/2016",
+          "holdingSummary": "Representative case on the legal characterization of waqf and allocation-type waqf; exact doctrinal use remains specialist-reviewed.",
+          "appellateChain": [
+            "FIRST_INSTANCE:1025/2013",
+            "APPEAL:455/2015",
+            "CASSATION:1543/2016"
+          ],
+          "normalizationState": "EXPERT_REVIEW_READY_WITH_SOURCE_CONFLICT",
+          "sourceConflictNotes": [
+            "The preserved decision text also references first-instance number 1053/2013 in the appellate-result narrative while separately identifying 1025/2013 as the filed civil case.",
+            "MEGA_G preserves both identifiers and does not silently choose one as a corrected value."
+          ],
+          "caseSpecificOnly": true,
+          "generalizationAllowed": false
+        },
+        {
+          "caseNumber": "397/2023",
+          "holdingSummary": "Newer representative mosque/waqf property decision; no universal property rule is inferred.",
+          "appellateChain": [
+            "FIRST_INSTANCE:257/2006",
+            "APPEAL:21/2022",
+            "CASSATION:397/2023"
+          ],
+          "normalizationState": "NORMALIZED",
+          "sourceConflictNotes": [],
+          "caseSpecificOnly": true,
+          "generalizationAllowed": false
+        }
+      ],
+      "descriptiveSynthesisAllowed": true,
+      "doctrinalGeneralizationAllowed": false,
+      "humanSpecialistAcceptanceIncluded": false
+    },
+    "pilot007": {
+      "terminalState": "DEFERRED_WITH_EXPLICIT_EVIDENCE_GAP",
+      "artifactVersionId": "sha256-5e4e1b095c29810793d9bbaabf5c632ac8628617497125aaf78fd919c22687ef",
+      "historicalEventCount": 2,
+      "historicalFactsVerified": true,
+      "titleChain": {
+        "events": [
+          {
+            "eventId": "haseki-bethlehem-waqf-deed-1557",
+            "assetId": "historical-waqf-share-beytul-lahm-18-of-24",
+            "eventType": "WAQF_DEED",
+            "occurredAt": null,
+            "sequenceHint": 1,
+            "evidenceVersionIds": [
+              "sha256-5e4e1b095c29810793d9bbaabf5c632ac8628617497125aaf78fd919c22687ef"
+            ],
+            "factSummary": "VGM 2017 translation page 10 item 14 records an 18/24 historical waqf share in Beytü'l-Lahm.",
+            "confidence": 0.99,
+            "verified": true
+          },
+          {
+            "eventId": "haseki-beitjala-waqf-deed-1557",
+            "assetId": "historical-waqf-share-beyticala-18-of-24",
+            "eventType": "WAQF_DEED",
+            "occurredAt": null,
+            "sequenceHint": 1,
+            "evidenceVersionIds": [
+              "sha256-5e4e1b095c29810793d9bbaabf5c632ac8628617497125aaf78fd919c22687ef"
+            ],
+            "factSummary": "VGM 2017 translation page 10 item 15 records an 18/24 historical waqf share in Beyticala.",
+            "confidence": 0.99,
+            "verified": true
+          }
+        ],
+        "unresolvedDateEvents": [
+          "haseki-bethlehem-waqf-deed-1557",
+          "haseki-beitjala-waqf-deed-1557"
+        ],
+        "lowConfidenceEvents": []
+      },
+      "currentParcelIdentityResolved": false,
+      "currentTitleResolved": false,
+      "currentOwnershipInferenceAllowed": false,
+      "evidenceGaps": [
+        "no_governed_settlement_or_title_record_links_historical_share_to_current_parcel",
+        "no_verified_two_source_parcel_crosswalk_to_current_parcel",
+        "exact_historical_event_date_is_range_known_but_not_exactly_resolved"
+      ]
+    },
+    "pilot008": {
+      "terminalState": "PASS",
+      "classes": [
+        {
+          "classId": "PRIVATE_PENDING",
+          "realSource": true,
+          "sourceId": "maqam-cassation-1383-2019-hukr",
+          "decisions": {
+            "PRESERVE": "ALLOW",
+            "DISPLAY": "DENY",
+            "DOWNLOAD": "DENY",
+            "RAG": "REVIEW_REQUIRED",
+            "QUOTE": "REVIEW_REQUIRED",
+            "PUBLIC_RELEASE": "DENY"
+          }
+        },
+        {
+          "classId": "LIVE_READ_ONLY",
+          "realSource": true,
+          "sourceId": "jerusalem-israel-land-registry-extract-service",
+          "decisions": {
+            "PRESERVE": "DENY",
+            "DISPLAY": "DENY",
+            "DOWNLOAD": "DENY",
+            "RAG": "DENY",
+            "QUOTE": "REVIEW_REQUIRED",
+            "PUBLIC_RELEASE": "DENY"
+          }
+        },
+        {
+          "classId": "INTERNAL_VERIFIED_TEST_FIXTURE",
+          "realSource": false,
+          "sourceId": "TEST_RIGHTS_INTERNAL",
+          "decisions": {
+            "PRESERVE": "ALLOW",
+            "DISPLAY": "DENY",
+            "DOWNLOAD": "DENY",
+            "RAG": "ALLOW",
+            "QUOTE": "ALLOW",
+            "PUBLIC_RELEASE": "DENY"
+          }
+        },
+        {
+          "classId": "PUBLIC_VERIFIED_TEST_FIXTURE",
+          "realSource": false,
+          "sourceId": "TEST_RIGHTS_PUBLIC",
+          "decisions": {
+            "PRESERVE": "ALLOW",
+            "DISPLAY": "ALLOW",
+            "DOWNLOAD": "ALLOW",
+            "RAG": "ALLOW",
+            "QUOTE": "ALLOW",
+            "PUBLIC_RELEASE": "ALLOW"
+          }
+        }
+      ],
+      "publicReleaseFromPrivatePreservation": false,
+      "actualRightsMutated": false
+    },
+    "conflictRevalidation": {
+      "terminalState": "PASS",
+      "conflictCount": 1,
+      "silentResolutionAllowed": false,
+      "authoritativeConclusionEligible": false
+    },
+    "retrievalCitation": {
+      "terminalState": "PASS",
+      "exactCaseUsable": true,
+      "broadCaseGeneralizationBlocked": true,
+      "citationAuditValid": true,
+      "citationDefects": []
+    },
+    "gateTerminalization": [
+      {
+        "gateId": "GATE-04",
+        "terminalState": "DEFERRED_WITH_EXPLICIT_EVIDENCE_GAP",
+        "evidenceRefs": [
+          "MEGA_E_HASEKI_VGM_2017_PRESERVED_PDF_SHA256_5e4e1b095c29810793d9bbaabf5c632ac8628617497125aaf78fd919c22687ef",
+          "MEGA_E_EXTRACTED_TEXT_SHA256_2ae86747cd95a9e1425efcc274e01ff517d6a0226a799393fb92befc49812435",
+          "MEGA_E_TRANSLATION_LOCATORS_PAGE_10_ITEMS_14_15"
+        ],
+        "evidenceGaps": [
+          "verified_page_aligned_ground_truth_unavailable",
+          "automated_extraction_or_translation_is_not_human_verified_ocr_ground_truth"
+        ]
+      },
+      {
+        "gateId": "GATE-05",
+        "terminalState": "DEFERRED_WITH_EXPLICIT_EVIDENCE_GAP",
+        "evidenceRefs": [
+          "sha256-5e4e1b095c29810793d9bbaabf5c632ac8628617497125aaf78fd919c22687ef"
+        ],
+        "evidenceGaps": [
+          "no_governed_settlement_or_title_record_links_historical_share_to_current_parcel",
+          "no_verified_two_source_parcel_crosswalk_to_current_parcel",
+          "exact_historical_event_date_is_range_known_but_not_exactly_resolved"
+        ]
+      },
+      {
+        "gateId": "GATE-06",
+        "terminalState": "DEFERRED_WITH_EXPLICIT_EVIDENCE_GAP",
+        "evidenceRefs": [],
+        "evidenceGaps": [
+          "no_verified_issue_territory_regime_date_rule_in_admitted_corpus",
+          "jerusalem_applicability_requires_external_specialist_evidence"
+        ]
+      },
+      {
+        "gateId": "GATE-07",
+        "terminalState": "PASS",
+        "evidenceRefs": ["POST_G_DEV_002_CONFLICT_REGRESSION"],
+        "evidenceGaps": []
+      },
+      {
+        "gateId": "GATE-08",
+        "terminalState": "PASS",
+        "evidenceRefs": [
+          "MEGA_F_PRIVATE_PENDING_RIGHTS",
+          "MEGA_F_JERUSALEM_LIVE_READ_ONLY_RIGHTS",
+          "POST_G_DEV_002_SYNTHETIC_POLICY_BRANCH_FIXTURES"
+        ],
+        "evidenceGaps": []
+      },
+      {
+        "gateId": "GATE-10",
+        "terminalState": "PASS",
+        "evidenceRefs": [
+          "MEGA_F_CASE_1383_EXACT_SCOPE",
+          "POST_G_DEV_002_REFERENCE_CITATION_AUDIT"
+        ],
+        "evidenceGaps": []
+      }
+    ],
+    "staleTodos": [
+      {
+        "todoId": "PILOT-001",
+        "terminalStatus": "DONE",
+        "reason": "The bounded official-source pilot scope was completed by the governed scale-up, private preservation and zero-network replay; exhaustive corpus expansion is continuous nonblocking enrichment.",
+        "evidenceRefs": ["MEGA_C_PRIVATE_ARTIFACT_SET", "MEGA_G_GATE09_PASS"]
+      },
+      {
+        "todoId": "PILOT-002",
+        "terminalStatus": "DEFERRED",
+        "reason": "One real charitable historical deed benchmark is complete, but family/hukr/later-deed representation and substantive deed interpretation require additional evidence or human specialist review and do not block engineering preproduction entry.",
+        "evidenceRefs": [
+          "MEGA_E_HASEKI_REAL_DEED_BENCHMARK",
+          "POST_G_DEV_002_QA002_EXPLICIT_EVIDENCE_GAP"
+        ]
+      },
+      {
+        "todoId": "PILOT-003",
+        "terminalStatus": "DONE",
+        "reason": "Temporal scenarios across Ottoman, Mandate, West Bank, Gaza and unresolved Jerusalem were already exercised with fail-closed status separation.",
+        "evidenceRefs": ["MEGA_C_TEMPORAL_SCENARIOS", "GATE15_PASS"]
+      },
+      {
+        "todoId": "PILOT-004",
+        "terminalStatus": "DONE",
+        "reason": "Cross-territory West Bank/Gaza/Jerusalem separation is regression-proven without status inheritance.",
+        "evidenceRefs": ["MEGA_G_TERRITORY_TERMINAL_PACKETS", "GATE11_PASS"]
+      },
+      {
+        "todoId": "PILOT-005",
+        "terminalStatus": "DEFERRED",
+        "reason": "Fiqh/positive-law semantic separation is technically proven; expert-reviewed doctrinal acceptance remains a preproduction human gate.",
+        "evidenceRefs": [
+          "MEGA_G_FIQH_HANDOFF",
+          "GATE12_PREPRODUCTION_HUMAN_DEBT"
+        ]
+      }
+    ],
+    "megaGRightsPublicReleaseAllowed": false,
+    "allInScopeEngineeringGatesTerminal": true,
+    "ambiguousInProgressEngineeringGates": 0,
+    "realSpecialistDecisionsIncluded": false,
+    "productionEffect": "NONE",
+    "preproductionEngineeringEntryEligible": true
+  },
+  "pass": true,
+  "disposition": "PASS_FINAL_ENGINEERING_EVIDENCE_GAP_CLOSURE_READY_FOR_PREPRODUCTION_BOUNDARY_DECISION",
+  "validation": {
+    "typecheck": "PASS",
+    "targetedTestFiles": "12_OF_12_PASS",
+    "targetedTests": "138_OF_138_PASS",
+    "dedicatedTests": "15_OF_15_PASS",
+    "fullRegression": {
+      "failed": 163,
+      "passed": 397,
+      "skipped": 36,
+      "total": 596,
+      "failedFiles": 21,
+      "passedFiles": 39,
+      "totalFiles": 60
+    },
+    "predecessorPostGDev001": {
+      "failed": 163,
+      "passed": 382,
+      "skipped": 36,
+      "total": 581,
+      "failedFiles": 21,
+      "passedFiles": 38,
+      "totalFiles": 59
+    },
+    "failedTestFileSetUnchanged": true,
+    "uniqueFailBlockIdentityCount": 59,
+    "failBlockIdentitySetUnchanged": true,
+    "newScopeFailureReferences": 0
+  },
+  "engineeringAcceptance": "PASS_FINAL_ENGINEERING_EVIDENCE_GAP_CLOSURE_READY_FOR_PREPRODUCTION_BOUNDARY_DECISION"
+}
