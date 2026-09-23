@@ -1,0 +1,102 @@
+{
+  "generatedAt": "2026-09-23",
+  "program": "POST-G-DEV-001",
+  "scope": "NON_PRODUCTION_REVIEW_WORKFLOW_PREPRODUCTION_SIMULATION",
+  "authorization": {
+    "baseHead": "c473b17a331fce935c3e28b4993403d87a04dd65",
+    "baseTree": "d976136d63e8ef884522b059defd7c3e778b5261",
+    "branch": "task/WAQF-AI-POST-G-NONPROD-REVIEW-WORKFLOW-SIMULATION-V1",
+    "realSpecialistDecisions": false,
+    "productionUserAccounts": false,
+    "productionRoleGrants": false,
+    "liveSharedSupabaseMutation": false,
+    "mainMerge": false,
+    "baselinePromotion": false,
+    "production": false,
+    "publicCorpusRelease": false
+  },
+  "fixtureBoundary": {
+    "allFixturesStrictlyNonAuthoritative": true,
+    "mayEnterReviewerAuthority": false,
+    "mayEnterHumanSignoff": false,
+    "maySatisfyGate13": false
+  },
+  "queue": {
+    "total": 47,
+    "p0": 36,
+    "blocking": 43,
+    "byRole": {
+      "RIGHTS_REVIEWER": 10,
+      "FIQH_SHARIA_REVIEWER": 7,
+      "HISTORICAL_EVIDENCE_REVIEWER": 5,
+      "LEGAL_STATUS_REVIEWER": 22,
+      "WAQF_DEED_REVIEWER": 1,
+      "SECURITY_PRIVACY_REVIEWER": 2
+    },
+    "byTerritory": {
+      "GLOBAL_OR_NONE": 22,
+      "GAZA": 7,
+      "HISTORIC_PALESTINE": 1,
+      "WEST_BANK": 10,
+      "JERUSALEM": 4,
+      "OTTOMAN_PALESTINE": 3
+    }
+  },
+  "simulation": {
+    "decisions": 47,
+    "auditEvents": 47,
+    "dispositions": {
+      "ACCEPT": 16,
+      "DEFER": 17,
+      "REJECT": 14
+    },
+    "emptyEvidenceReviewCount": 5,
+    "emptyEvidenceSafeDefers": true,
+    "totalQueueItems": 47,
+    "effectiveTestDecisions": 47,
+    "blockingQueueItems": 43,
+    "blockingItemsTestCovered": 43,
+    "simulatedWorkflowCoverageComplete": true,
+    "gate13Satisfied": false,
+    "authoritativeHumanDecisions": 0,
+    "productionEffect": "NONE"
+  },
+  "negativeUat": {
+    "wrongTerritoryDenied": true,
+    "wrongRoleDenied": true,
+    "recusalDenied": true,
+    "selfApprovalDenied": true,
+    "corruptedAuthorityFixtureDenied": true
+  },
+  "pass": true,
+  "validation": {
+    "typecheck": "PASS",
+    "targetedTestFiles": "8_OF_8_PASS",
+    "targetedTests": "113_OF_113_PASS",
+    "dedicatedTests": "17_OF_17_PASS",
+    "fullRegression": {
+      "failed": 163,
+      "passed": 382,
+      "skipped": 36,
+      "total": 581,
+      "failedFiles": 21,
+      "passedFiles": 38,
+      "totalFiles": 59
+    },
+    "predecessorMegaGFullRegression": {
+      "failed": 162,
+      "passed": 366,
+      "skipped": 36,
+      "total": 564,
+      "failedFiles": 21,
+      "passedFiles": 37,
+      "totalFiles": 58
+    },
+    "failingTestFileIdentitySetUnchanged": true,
+    "failingTestFileIdentityCount": 59,
+    "knowledgeStatsFailedTestVariance": "2_TO_3_LEGACY_RUNTIME_DATA_TIME_WINDOW_VARIANCE",
+    "knowledgeStatsDiffFromAuthorizedBase": "EMPTY",
+    "postGDev001FailureReferences": 0
+  },
+  "engineeringAcceptance": "PASS_NON_PRODUCTION_REVIEW_WORKFLOW_SIMULATION_WITH_ZERO_AUTHORITATIVE_OR_PRODUCTION_EFFECT"
+}
