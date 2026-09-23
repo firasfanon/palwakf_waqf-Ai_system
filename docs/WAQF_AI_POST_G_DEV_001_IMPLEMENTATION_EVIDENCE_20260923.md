@@ -68,7 +68,7 @@ MEGA_G predecessor evidence:
 - 564 total
 - 21 failed files / 37 passed files / 58 total files
 
-The set of failing test-file identities remains exactly the same (59 FAIL block identities).
+The set of 21 failed test files remains unchanged, and the set of 59 unique FAIL block identities also remains unchanged.
 The only per-file failed-test-count variance is server/knowledgeStats.test.ts: 2 → 3 failed tests.
 POST-G-DEV-001 does not modify server/knowledgeStats.ts or server/knowledgeStats.test.ts; diff from the exact authorized base for those files is empty.
 The isolated knowledgeStats failures are legacy/runtime-data/time-window consistency failures and are classified outside this batch.

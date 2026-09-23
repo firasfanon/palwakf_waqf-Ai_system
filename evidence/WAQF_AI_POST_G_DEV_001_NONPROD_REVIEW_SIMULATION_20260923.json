@@ -92,8 +92,10 @@
       "passedFiles": 37,
       "totalFiles": 58
     },
-    "failingTestFileIdentitySetUnchanged": true,
-    "failingTestFileIdentityCount": 59,
+    "failedTestFileSetUnchanged": true,
+    "failedTestFileCount": 21,
+    "failingFailBlockIdentitySetUnchanged": true,
+    "failingFailBlockIdentityCount": 59,
     "knowledgeStatsFailedTestVariance": "2_TO_3_LEGACY_RUNTIME_DATA_TIME_WINDOW_VARIANCE",
     "knowledgeStatsDiffFromAuthorizedBase": "EMPTY",
     "postGDev001FailureReferences": 0
