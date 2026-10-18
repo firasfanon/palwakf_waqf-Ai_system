@@ -1,14 +1,18 @@
 import { spawn } from "node:child_process";
-import { resolve } from "node:path";
 import { loadLocalEnvFiles } from "./load-local-env.mjs";
 
 loadLocalEnvFiles();
 
-const tsxCli = resolve("node_modules/tsx/dist/cli.mjs");
-
 const child = spawn(
   process.execPath,
-  [tsxCli, "watch", "server/_core/index.ts"],
+  [
+    "--watch-path=server",
+    "--watch-path=shared",
+    "--watch-path=vite.config.ts",
+    "--import",
+    "tsx",
+    "server/_core/index.ts",
+  ],
   {
     stdio: "inherit",
     env: { ...process.env, NODE_ENV: "development" },
@@ -16,7 +20,7 @@ const child = spawn(
 );
 
 child.on("error", error => {
-  console.error("[run-dev] Failed to start tsx:", error);
+  console.error("[run-dev] Failed to start development runtime:", error);
   process.exit(1);
 });
 
