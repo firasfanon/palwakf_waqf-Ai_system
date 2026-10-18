@@ -1,6 +1,6 @@
 import { ENV } from "./env";
 import { runtimeGetSystemSettings } from "../runtimeRepository";
-import { benchmarkInstalledModels, detectHardwareAdaptiveProfile, orderModelsByCapability } from "../hardwareAdaptiveRuntime";
+import { benchmarkInstalledModels, detectHardwareAdaptiveProfile, isCapabilityRuntimeEligible, orderModelsByCapability } from "../hardwareAdaptiveRuntime";
 
 export type Role = "system" | "user" | "assistant" | "tool" | "function";
 
@@ -225,7 +225,7 @@ type RuntimeLlmConfig = {
 };
 
 const trim = (value: unknown) => (typeof value === 'string' ? value.trim() : '');
-const OLLAMA_LOCAL_FALLBACK_MODELS = ['qwen2.5:3b', 'palwakf-llama3.2-3b-64k:local', 'llama3.2:3b'];
+const OLLAMA_LOCAL_FALLBACK_MODELS = ['qwen2.5:3b', 'llama3.2:3b', 'palwakf-llama3.2-3b-64k:local'];
 const OLLAMA_RESEARCH_FALLBACK_MODELS = ['qwen2.5:3b', 'deepseek-r1:latest', 'palwakf-llama3.2-3b-64k:ctx64k', 'palwakf-llama3.2-3b-64k:local', 'llama3.2:3b'];
 
 type OllamaTagResponse = {
@@ -448,13 +448,13 @@ export async function invokeLLM(params: InvokeParams): Promise<InvokeResult> {
     const workloadTokens = Math.min(1800, Math.max(300, estimatedPromptTokens));
     const matchingCapabilities = () => (hardwareProfile.modelCapabilities || [])
       .filter(item => Math.abs(item.workloadTokens - workloadTokens) <= Math.max(256, workloadTokens * 0.25));
-    if (matchingCapabilities().length === 0) {
+    if (matchingCapabilities().length === 0 && estimatedPromptTokens >= 900) {
       await benchmarkInstalledModels(hardwareProfile, workloadTokens);
     }
     const measured = new Map(matchingCapabilities().map(item => [item.model, item]));
     modelsToTry = orderModelsByCapability(modelsToTry, hardwareProfile)
       .filter(model => !model.endsWith(":cloud"))
-      .filter(model => measured.get(model)?.usable === true);
+      .filter(model => isCapabilityRuntimeEligible(measured.get(model)));
     if (estimatedPromptTokens >= 900 && modelsToTry.length === 0) {
       throw new Error("UNRESOLVED_PROVIDER_CAPABILITY: NO_LOCAL_MODEL_CERTIFIED_FOR_WORKLOAD");
     }

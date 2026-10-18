@@ -178,7 +178,7 @@ export async function detectHardwareAdaptiveProfile(force = false): Promise<Hard
       ? { contextTokens: 4096, outputTokens: 512, attemptTimeoutMs: 45000, evidenceCharsPerSource: 1200 }
       : partialGpuAvailable
         ? { contextTokens: 2048, outputTokens: 256, attemptTimeoutMs: 45000, evidenceCharsPerSource: 700 }
-        : { contextTokens: 2048, outputTokens: 256, attemptTimeoutMs: 30000, evidenceCharsPerSource: 700 };
+        : { contextTokens: 2048, outputTokens: 256, attemptTimeoutMs: 45000, evidenceCharsPerSource: 700 };
   const fingerprint = [
     cpus[0]?.model,
     logicalCores,
@@ -231,6 +231,16 @@ export function orderModelsByCapability(models: string[], profile: HardwareAdapt
     if (right && !right.usable && !left) return -1;
     return 0;
   });
+}
+
+export function isCapabilityRuntimeEligible(capability: ModelCapability | undefined): boolean {
+  if (!capability) return true;
+  if (capability.usable) return true;
+
+  // A benchmark timeout only proves the model missed the shorter calibration
+  // window. Runtime attempts have their own larger bounded deadline, so a
+  // timeout must remain retryable instead of becoming a multi-day hard block.
+  return capability.failureReason === "timeout";
 }
 
 export function clearHardwareAdaptiveProfileCache() { cached = null; capabilityCache.clear(); }
