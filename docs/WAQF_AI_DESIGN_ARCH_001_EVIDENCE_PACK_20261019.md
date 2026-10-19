@@ -33,7 +33,7 @@ Browser/CDP UAT:
 - unnamed actionable controls: 0.
 - RTL document/body verified.
 - LTR isolation for identifiers/hashes/URLs exercised in Design System catalog.
-- automated design/accessibility/architecture contracts: 17/17 PASS.
+- automated design/accessibility/architecture contracts: 18/18 PASS.
 
 Independent/manual screen-reader and final WCAG acceptance remain part of separate independent acceptance; they are not fabricated here.
 
@@ -80,33 +80,43 @@ Accepted historical baseline:
 - passed tests: 397
 - skipped: 36
 
-DESIGN-ARCH-001 final:
+DESIGN-ARCH-001 final isolated regression:
 - failed files: 21
-- failed tests: 163
+- failed tests: 162
 - passed files: 41
-- passed tests: 409
+- passed tests: 410
 - skipped: 36
+- total: 608
 
 Comparison:
-- same historical failed-file set: true
+- exact historical failed-file set preserved: true
 - new failure files: 0
-- new failure count: 0
+- historical failed-test count improved by: 1
+
+Rejected contaminated replay:
+- temporary authenticated-UAT .env/.env.local copies were present;
+- failing files shifted to 22 and server/search.test.ts appeared in the failed-file set;
+- this run was rejected as non-comparable;
+- copied env files were removed without reading values before the final isolated regression.
 
 ## Security / trust / citation
 
 Final targeted regression:
-- test files: 13/13 PASS
-- tests: 83/83 PASS
+- test files: 14/14 PASS
+- tests: 90/90 PASS
+- scope includes trust, governed ingestion/learning/RAG, reference governance, legal/evidence, research/source/citation, architecture fitness, Design System and accessibility contracts.
 
 ## Build gates
 
 - design:verify: PASS
-- design:test: 17/17 PASS
+- design:test: 18/18 PASS
 - pnpm check: PASS
 - pnpm build: PASS
 - bundle budget: PASS
 - git diff --check: PASS
-- browser UAT: PASS
+- authenticated dev-runtime browser UAT: 15/15 PASS
+- static-preview admin denial retained only as negative auth-guard evidence
+- browser UAT harness terminalizes any failed route/viewport with non-zero exit
 - full regression: NO_NEW_FAILURES relative to accepted baseline
 
 ## Hard boundaries preserved
@@ -123,6 +133,7 @@ Final targeted regression:
 
 D:\PALWAKF_DEV_WORKSPACE\07_EVIDENCE_STAGING\WAQF_AI_DESIGN_ARCH_001_20261019
 
-Evidence files: 57.
+Evidence files hashed in final manifest: 76.
 Evidence manifest: evidence_manifest.json.
-Evidence manifest SHA256: 5B25AEE12025DEEFE8B613E9E60FF15EA191C34DE76CE6703AA98FB4BF3E9B6E.
+Evidence manifest SHA256: CD24FA804B81E8C307EA7C27156F7B59098748D288222AFCBF64B685E90BDDB0.
+Final engineering status: FINAL_ENGINEERING_STATUS.txt.

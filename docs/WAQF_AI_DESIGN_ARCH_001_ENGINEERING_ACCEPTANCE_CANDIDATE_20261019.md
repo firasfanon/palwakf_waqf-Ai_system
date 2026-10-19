@@ -15,40 +15,42 @@ This document is not final sovereign acceptance and is not production authorizat
 PASS:
 - deterministic Design Token build/verification;
 - DTCG schema metadata validation through architecture fitness test;
-- Design/Accessibility/Admin Registry/Architecture tests 17/17;
+- Design/Accessibility/Admin Registry/Architecture tests 18/18;
 - TypeScript check;
 - production build;
 - bundle budget;
 - git diff check;
 - responsive browser UAT 15/15;
-- security/trust/citation suite 83/83;
+- targeted trust/design/architecture suite 14 files / 90 tests PASS;
 - full regression with NEW_REGRESSION=0.
 
-Final measured regression state:
+Final isolated regression state:
 - failed suites: 21, identical to the accepted historical failed-suite set;
-- failed tests: 163, unchanged;
+- failed tests: 162, one fewer than the accepted historical 163;
 - passed suites: 41;
-- passed tests: 409;
+- passed tests: 410;
 - skipped tests: 36;
 - total tests: 608;
-- failed-suite set diff versus accepted baseline: 0.
+- exact failed-suite set diff versus accepted baseline: 0;
+- NEW_FAILING_FILES=0.
 
-Critical fail-closed trust/citation/research verification:
-- assistantTrust: 5/5 PASS;
-- governed ingestion/learning/runtime RAG/reference governance: 11/11 PASS;
-- legal/evidence model: 37/37 PASS;
-- research/source/citation orchestration: 30/30 PASS;
-- combined critical suite: 83/83 PASS.
+A non-authoritative regression replay performed while temporary UAT .env/.env.local copies were present produced a different 22-file failure distribution and introduced server/search.test.ts into that set. That replay was rejected as contaminated evidence. After removing the copied environment files, the isolated regression returned to the exact accepted 21-file set and improved the historical failed-test count to 162.
+
+Critical fail-closed trust/citation/research/design verification:
+- final targeted run: 14 test files PASS;
+- final targeted run: 90/90 tests PASS;
+- includes assistant trust, governed ingestion/learning/runtime RAG, reference governance, legal/evidence model, research/source/citation orchestration, architecture fitness, Design System contracts and accessibility contracts.
 
 Browser UAT provenance:
-- authoritative recorded browser UAT: 15/15 PASS across 390px mobile, tablet and desktop;
+- final authenticated/local-admin dev-runtime UAT: 15/15 PASS across 390px mobile, tablet and desktop;
 - routes include Home, Chat, Knowledge Base, Design System Catalog and the explicitly deferred Mustakshif surface;
 - horizontal overflow: 0;
 - unnamed actionable controls: 0;
 - runtime exceptions: 0;
 - screenshots and browser_uat.json are preserved in the evidence pack;
-- a later replay attempt did not execute because the local CDP endpoint was unavailable (ECONNREFUSED 127.0.0.1:9223);
-- no client/UI source changed after the accepted 15/15 UAT; subsequent changes were server-layer boundary cleanup only. The prior visual UAT therefore remains the applicable visual evidence. No claim is made that the failed CDP replay itself passed.
+- a static-preview replay correctly denied protected Admin routes. It was retained as negative auth-guard evidence, not Admin visual acceptance;
+- an earlier CDP replay could not start because port 9223 was unavailable; this was an environment failure, not a UI result;
+- the browser-UAT harness was corrected to exit non-zero whenever summary.failed > 0, and the behavior is now guarded by a contract test.
 
 ## Architecture disposition
 
@@ -88,7 +90,7 @@ The project now has:
 
 Bundle evidence:
 - authorized-base entry bundle: 5,478,069 bytes;
-- candidate entry bundle: 472,980 bytes;
+- candidate entry bundle: 473,030 bytes;
 - reduction: approximately 91.37%;
 - enforced entry budget: 550,000 bytes.
 

@@ -207,3 +207,8 @@ const summary = {
 fs.writeFileSync(path.join(evidenceDir, "browser_uat.json"), JSON.stringify(summary, null, 2));
 console.log(JSON.stringify(summary, null, 2));
 cdp.close();
+
+if (summary.failed > 0) {
+  console.error(`Browser UAT failed: ${summary.failed}/${summary.routes} route-viewport checks failed.`);
+  process.exitCode = 1;
+}

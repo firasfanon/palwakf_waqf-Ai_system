@@ -32,4 +32,10 @@ describe("WAQF_AI accessibility and responsive contracts", () => {
     expect(source).toContain("مؤجل بقرار منتج");
     expect(source).toContain("لا ينفذ");
   });
+
+  it("browser UAT fails closed when any route-viewport check fails", () => {
+    const source = read("scripts/design-system/browser-uat.mjs");
+    expect(source).toContain("if (summary.failed > 0)");
+    expect(source).toContain("process.exitCode = 1");
+  });
 });
