@@ -101,13 +101,13 @@ export default function PrecedentsTool() {
         {result && (
           <>
             {result.toolRunId ? (
-              <Card className="border-emerald-200 bg-emerald-50/70">
+              <Card className="border-status-success/30 bg-status-success/70">
                 <CardContent className="flex flex-col gap-3 pt-6 lg:flex-row lg:items-center lg:justify-between">
                   <div className="space-y-1">
-                    <p className="text-sm font-semibold text-emerald-900">تم حفظ التشغيل سياديًا</p>
-                    <p className="text-xs text-emerald-800">معرف التشغيل: {result.toolRunId}</p>
+                    <p className="text-sm font-semibold text-status-success">تم حفظ التشغيل سياديًا</p>
+                    <p className="text-xs text-status-success">معرف التشغيل: {result.toolRunId}</p>
                   </div>
-                  <Button variant="outline" onClick={() => navigate(APP_ROUTES.adminToolsRuns)} className="border-emerald-300 text-emerald-900">
+                  <Button variant="outline" onClick={() => navigate(APP_ROUTES.adminToolsRuns)} className="border-status-success/30 text-status-success">
                     فتح سجل التشغيل والاعتماد
                   </Button>
                 </CardContent>
@@ -153,7 +153,7 @@ export default function PrecedentsTool() {
                     <h3 className="mb-3 font-semibold">التوصيات</h3>
                     <div className="space-y-2">
                       {result.recommendations.map((rec: string, i: number) => (
-                        <div key={i} className="rounded-xl bg-emerald-50 p-3 text-sm leading-7 text-emerald-900">{rec}</div>
+                        <div key={i} className="rounded-xl bg-status-success/10 p-3 text-sm leading-7 text-status-success">{rec}</div>
                       ))}
                     </div>
                   </div>

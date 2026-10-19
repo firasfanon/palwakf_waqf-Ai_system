@@ -303,7 +303,7 @@ export default function ContentTemplates() {
                       </TableCell>
                       <TableCell className="text-center">
                         {template.isActive === 1 ? (
-                          <Badge variant="default" className="bg-green-500">
+                          <Badge variant="default" className="bg-status-success">
                             نشط
                           </Badge>
                         ) : (
@@ -317,7 +317,7 @@ export default function ContentTemplates() {
                             size="icon"
                             onClick={() => handleClone(template.id)}
                             title="استنساخ"
-                            className="text-blue-600 hover:text-blue-700"
+                            className="text-primary hover:text-primary"
                           >
                             <Copy className="h-4 w-4" />
                           </Button>

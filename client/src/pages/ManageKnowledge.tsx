@@ -389,7 +389,7 @@ export default function ManageKnowledge() {
                   <div className="text-sm text-muted-foreground">المعتمدة</div>
                   <div className="mt-1 text-2xl font-bold">{counts.approved}</div>
                 </div>
-                <FileCheck2 className="h-5 w-5 text-emerald-600" />
+                <FileCheck2 className="h-5 w-5 text-status-success" />
               </CardContent>
             </Card>
             <Card className="border-border/60 bg-background/70 shadow-none">
@@ -398,7 +398,7 @@ export default function ManageKnowledge() {
                   <div className="text-sm text-muted-foreground">للمراجعة</div>
                   <div className="mt-1 text-2xl font-bold">{counts.reviewOnly}</div>
                 </div>
-                <Clock3 className="h-5 w-5 text-amber-600" />
+                <Clock3 className="h-5 w-5 text-status-warning" />
               </CardContent>
             </Card>
             <Card className="border-border/60 bg-background/70 shadow-none">
@@ -547,7 +547,7 @@ export default function ManageKnowledge() {
                                   size="sm"
                                   onClick={() => handleDelete(doc.id, doc.title)}
                                   disabled={isReadOnlyDoc(doc)}
-                                  className="rounded-xl text-red-600 hover:text-red-700"
+                                  className="rounded-xl text-status-danger hover:text-status-danger"
                                 >
                                   <Trash2 className="h-4 w-4" />
                                 </Button>

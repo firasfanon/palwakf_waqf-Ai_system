@@ -45,7 +45,7 @@ export function RelatedKnowledge({ query }: RelatedKnowledgeProps) {
       <Card>
         <CardHeader>
           <CardTitle className="text-lg flex items-center gap-2">
-            <BookOpen className="h-5 w-5 text-blue-600" />
+            <BookOpen className="h-5 w-5 text-primary" />
             مراجع ذات صلة
           </CardTitle>
         </CardHeader>
@@ -63,7 +63,7 @@ export function RelatedKnowledge({ query }: RelatedKnowledgeProps) {
       <Card>
         <CardHeader>
           <CardTitle className="text-lg flex items-center gap-2">
-            <BookOpen className="h-5 w-5 text-blue-600" />
+            <BookOpen className="h-5 w-5 text-primary" />
             مراجع ذات صلة
           </CardTitle>
         </CardHeader>
@@ -84,7 +84,7 @@ export function RelatedKnowledge({ query }: RelatedKnowledgeProps) {
       <Card>
         <CardHeader>
           <CardTitle className="text-lg flex items-center gap-2">
-            <BookOpen className="h-5 w-5 text-blue-600" />
+            <BookOpen className="h-5 w-5 text-primary" />
             مراجع ذات صلة
           </CardTitle>
         </CardHeader>
@@ -101,7 +101,7 @@ export function RelatedKnowledge({ query }: RelatedKnowledgeProps) {
     <Card>
       <CardHeader>
         <CardTitle className="text-lg flex items-center gap-2">
-          <BookOpen className="h-5 w-5 text-blue-600" />
+          <BookOpen className="h-5 w-5 text-primary" />
           مراجع ذات صلة ({searchResults.total})
         </CardTitle>
       </CardHeader>
@@ -110,14 +110,14 @@ export function RelatedKnowledge({ query }: RelatedKnowledgeProps) {
           const Icon = categoryIcons[doc.category] || BookOpen;
           return (
             <Link key={doc.id} href={`/knowledge-base/${doc.id}`}>
-              <div className="p-3 border rounded-lg hover:bg-gray-50 hover:border-blue-300 transition-all cursor-pointer group">
+              <div className="p-3 border rounded-lg hover:bg-gray-50 hover:border-primary/30 transition-all cursor-pointer group">
                 <div className="flex items-start gap-2 mb-2">
                   <Badge variant="secondary" className="text-xs shrink-0">
                     <Icon className="h-3 w-3 ml-1" />
                     {categoryLabels[doc.category]}
                   </Badge>
                 </div>
-                <h4 className="text-sm font-semibold text-gray-900 group-hover:text-blue-600 transition-colors line-clamp-2 mb-1">
+                <h4 className="text-sm font-semibold text-gray-900 group-hover:text-primary transition-colors line-clamp-2 mb-1">
                   {doc.title}
                 </h4>
                 {doc.source && (
@@ -129,7 +129,7 @@ export function RelatedKnowledge({ query }: RelatedKnowledgeProps) {
                   <span className="text-xs text-gray-400">
                     {new Date(doc.createdAt).toLocaleDateString("ar-EG")}
                   </span>
-                  <ExternalLink className="h-3 w-3 text-gray-400 group-hover:text-blue-600" />
+                  <ExternalLink className="h-3 w-3 text-gray-400 group-hover:text-primary" />
                 </div>
               </div>
             </Link>
@@ -138,7 +138,7 @@ export function RelatedKnowledge({ query }: RelatedKnowledgeProps) {
         {searchResults.total > 5 && (
           <Link href={`/knowledge-base?query=${encodeURIComponent(query)}`}>
             <div className="text-center py-2">
-              <span className="text-sm text-blue-600 hover:text-blue-700 font-medium">
+              <span className="text-sm text-primary hover:text-primary font-medium">
                 عرض جميع النتائج ({searchResults.total})
               </span>
             </div>

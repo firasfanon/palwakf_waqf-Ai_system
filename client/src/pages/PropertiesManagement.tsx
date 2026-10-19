@@ -277,9 +277,9 @@ export default function PropertiesManagement() {
                       <span
                         className={`inline-block px-2 py-1 text-xs rounded-full ${
                           property.status === "active"
-                            ? "bg-green-100 text-green-800"
+                            ? "bg-status-success/10 text-status-success"
                             : property.status === "disputed"
-                            ? "bg-red-100 text-red-800"
+                            ? "bg-status-danger/10 text-status-danger"
                             : "bg-gray-100 text-gray-800"
                         }`}
                       >

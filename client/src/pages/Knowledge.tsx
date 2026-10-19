@@ -109,8 +109,8 @@ export default function Knowledge() {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <Button variant="ghost" size="icon" asChild>
-                <Link href="/">
-                  <ArrowRight className="w-5 h-5" />
+                <Link href="/" aria-label="العودة إلى الصفحة الرئيسية">
+                  <ArrowRight className="w-5 h-5" aria-hidden="true" />
                 </Link>
               </Button>
               <div className="flex items-center gap-2">

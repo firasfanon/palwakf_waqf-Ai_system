@@ -41,7 +41,7 @@ export default function AnalyticsDashboard() {
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">تقييمات إيجابية</CardTitle>
-            <ThumbsUp className="h-4 w-4 text-green-600" />
+            <ThumbsUp className="h-4 w-4 text-status-success" />
           </CardHeader>
           <CardContent>
             {statsLoading ? (
@@ -60,7 +60,7 @@ export default function AnalyticsDashboard() {
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">تقييمات سلبية</CardTitle>
-            <ThumbsDown className="h-4 w-4 text-red-600" />
+            <ThumbsDown className="h-4 w-4 text-status-danger" />
           </CardHeader>
           <CardContent>
             {statsLoading ? (
@@ -224,7 +224,7 @@ export default function AnalyticsDashboard() {
                   <div key={index} className="border-b pb-2 last:border-0">
                     <div className="flex items-start justify-between gap-2 mb-1">
                       <p className="text-sm font-medium flex-1">رسالة #{item.messageId}</p>
-                      <Badge variant="default" className="bg-green-600">
+                      <Badge variant="default" className="bg-status-success">
                         <ThumbsUp className="h-3 w-3 mr-1" />
                         {item.positiveRatings}
                       </Badge>

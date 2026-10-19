@@ -45,10 +45,10 @@ export const ReferencesDisplay: React.FC<ReferencesDisplayProps> = ({ references
   const citationLabel: Record<string, string> = { verified: 'استشهاد متحقق', linked: 'استشهاد مرتبط', missing: 'استشهاد غير مكتمل', rejected: 'استشهاد مرفوض' };
 
   return (
-    <div className="mt-3 pt-3 border-t border-emerald-100">
+    <div className="mt-3 pt-3 border-t border-status-success/30">
       <div className="flex items-center gap-2 mb-2">
-        <BookOpen size={16} className="text-emerald-600" />
-        <span className="text-sm font-semibold text-emerald-700">
+        <BookOpen size={16} className="text-status-success" />
+        <span className="text-sm font-semibold text-status-success">
           المصادر والأدلة ({references.length})
         </span>
       </div>
@@ -59,21 +59,21 @@ export const ReferencesDisplay: React.FC<ReferencesDisplayProps> = ({ references
           return (
             <div
               key={ref.uuid || ref.id || index}
-              className="bg-emerald-50 rounded-lg p-3 hover:bg-emerald-100 transition-colors"
+              className="bg-status-success/10 rounded-lg p-3 hover:bg-status-success/10 transition-colors"
             >
               <div className="flex items-start justify-between gap-2">
                 <div className="flex-1">
                   <div className="flex flex-wrap items-center gap-2 mb-1">
-                    <span className="bg-emerald-600 text-white px-2 py-0.5 rounded text-xs font-semibold">
+                    <span className="bg-status-success text-white px-2 py-0.5 rounded text-xs font-semibold">
                       {ref.external ? `مصدر خارجي ${index + 1}` : `مرجع ${index + 1}`}
                     </span>
                     {ref.category && (
-                      <span className="bg-emerald-200 text-emerald-800 px-2 py-0.5 rounded text-xs">
+                      <span className="bg-status-success/10 text-status-success px-2 py-0.5 rounded text-xs">
                         {ref.category}
                       </span>
                     )}
                     {typeof ref.citationsCount === 'number' && ref.citationsCount > 0 && (
-                      <span className="text-xs text-emerald-800 font-medium">
+                      <span className="text-xs text-status-success font-medium">
                         اقتباسات: {ref.citationsCount}
                       </span>
                     )}
@@ -89,7 +89,7 @@ export const ReferencesDisplay: React.FC<ReferencesDisplayProps> = ({ references
                       </span>
                     )}
                     {ref.citationVerificationStatus && (
-                      <span className={`rounded-full border px-2 py-0.5 text-xs ${ref.citationVerificationStatus === 'verified' ? 'border-emerald-200 bg-emerald-100 text-emerald-800' : 'border-amber-200 bg-amber-50 text-amber-800'}`}>
+                      <span className={`rounded-full border px-2 py-0.5 text-xs ${ref.citationVerificationStatus === 'verified' ? 'border-status-success/30 bg-status-success/10 text-status-success' : 'border-status-warning/30 bg-status-warning/10 text-status-warning'}`}>
                         {citationLabel[ref.citationVerificationStatus] || ref.citationVerificationStatus}
                       </span>
                     )}
@@ -122,21 +122,21 @@ export const ReferencesDisplay: React.FC<ReferencesDisplayProps> = ({ references
                     )}
 
                     {typeof ref.relevanceScore === 'number' && ref.relevanceScore > 0 && (
-                      <span className="text-emerald-700 font-medium">
+                      <span className="text-status-success font-medium">
                         الصلة: {Math.round(ref.relevanceScore * 10) / 10}
                       </span>
                     )}
                   </div>
 
                   {ref.citationLocator && (
-                    <div className="mt-2 text-xs text-emerald-900">
+                    <div className="mt-2 text-xs text-status-success">
                       <span className="font-semibold">الموضع:</span> {ref.citationLocator}
                     </div>
                   )}
 
                   {ref.citationExcerpt && (
-                    <div className="mt-2 rounded-md border border-emerald-200 bg-white/70 p-2 text-xs text-gray-700">
-                      <div className="mb-1 flex items-center gap-1 font-semibold text-emerald-700">
+                    <div className="mt-2 rounded-md border border-status-success/30 bg-white/70 p-2 text-xs text-gray-700">
+                      <div className="mb-1 flex items-center gap-1 font-semibold text-status-success">
                         <Quote size={12} />
                         مقتطف مرجعي
                       </div>
@@ -158,7 +158,7 @@ export const ReferencesDisplay: React.FC<ReferencesDisplayProps> = ({ references
                   href={detailsHref}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-emerald-600 hover:text-emerald-800 transition-colors"
+                  className="text-status-success hover:text-status-success transition-colors"
                   title="عرض التفاصيل"
                 >
                   <ExternalLink size={16} />

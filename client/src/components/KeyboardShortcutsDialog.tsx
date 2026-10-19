@@ -126,7 +126,7 @@ export function KeyboardShortcutsDialog({
       <DialogContent className="max-w-3xl max-h-[80vh] overflow-y-auto" dir="rtl">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2 text-2xl">
-            <Keyboard className="w-6 h-6 text-emerald-600" />
+            <Keyboard className="w-6 h-6 text-status-success" />
             اختصارات لوحة المفاتيح
           </DialogTitle>
         </DialogHeader>
@@ -134,7 +134,7 @@ export function KeyboardShortcutsDialog({
         <div className="space-y-6 mt-4">
           {Object.entries(groupedShortcuts).map(([category, shortcuts]) => (
             <div key={category}>
-              <h3 className="text-lg font-semibold text-emerald-700 mb-3 pb-2 border-b-2 border-emerald-200">
+              <h3 className="text-lg font-semibold text-status-success mb-3 pb-2 border-b-2 border-status-success/30">
                 {category}
               </h3>
               <div className="space-y-2">
@@ -144,7 +144,7 @@ export function KeyboardShortcutsDialog({
                     className="flex items-center justify-between p-3 rounded-lg hover:bg-gray-50 transition-colors group"
                   >
                     <div className="flex items-center gap-3">
-                      <div className="p-2 rounded-lg bg-emerald-50 text-emerald-600 group-hover:bg-emerald-100 transition-colors">
+                      <div className="p-2 rounded-lg bg-status-success/10 text-status-success group-hover:bg-status-success/10 transition-colors">
                         {shortcut.icon}
                       </div>
                       <span className="text-gray-700 font-medium">
@@ -154,7 +154,7 @@ export function KeyboardShortcutsDialog({
                     <div className="flex items-center gap-1">
                       {shortcut.keys.map((key, i) => (
                         <div key={i} className="flex items-center">
-                          <kbd className="px-3 py-1.5 bg-white border-2 border-gray-300 rounded-md text-sm font-mono font-semibold text-gray-700 shadow-sm group-hover:border-emerald-400 group-hover:text-emerald-700 transition-colors">
+                          <kbd className="px-3 py-1.5 bg-white border-2 border-gray-300 rounded-md text-sm font-mono font-semibold text-gray-700 shadow-sm group-hover:border-status-success/30 group-hover:text-status-success transition-colors">
                             {key}
                           </kbd>
                           {i < shortcut.keys.length - 1 && (
@@ -173,13 +173,13 @@ export function KeyboardShortcutsDialog({
         </div>
 
         {/* Footer Tips */}
-        <div className="mt-6 p-4 bg-gradient-to-r from-emerald-50 to-blue-50 rounded-lg border border-emerald-200">
+        <div className="mt-6 p-4 ds-gradient-info-success-soft rounded-lg border border-status-success/30">
           <div className="flex items-start gap-3">
             <div className="p-2 bg-white rounded-lg">
-              <Keyboard className="w-5 h-5 text-emerald-600" />
+              <Keyboard className="w-5 h-5 text-status-success" />
             </div>
             <div className="flex-1">
-              <h4 className="font-semibold text-emerald-900 mb-1">
+              <h4 className="font-semibold text-status-success mb-1">
                 نصائح سريعة
               </h4>
               <ul className="text-sm text-gray-700 space-y-1">

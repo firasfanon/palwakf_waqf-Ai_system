@@ -74,7 +74,7 @@ export default function CacheAnalytics() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-gray-900 dark:to-gray-800 p-6" dir="rtl">
+    <div className="min-h-screen ds-gradient-success-surface p-6" dir="rtl">
       <div className="max-w-7xl mx-auto space-y-6">
         {/* Breadcrumbs */}
         <Breadcrumbs
@@ -107,7 +107,7 @@ export default function CacheAnalytics() {
             <Button
               onClick={handleUpdateSuggestions}
               disabled={isUpdatingSuggestions}
-              className="flex items-center gap-2 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700"
+              className="flex items-center gap-2 ds-gradient-success-action"
             >
               <RefreshCw className="h-4 w-4" />
               {isUpdatingSuggestions ? "جاري التحديث..." : "تحديث الأسئلة المقترحة"}
@@ -127,9 +127,9 @@ export default function CacheAnalytics() {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {/* Total Cached */}
-            <Card className="p-6 bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 border-blue-200 dark:border-blue-800">
+            <Card className="p-6 ds-gradient-info-card border-primary/30 dark:border-primary">
               <div className="flex items-center justify-between mb-4">
-                <div className="p-3 bg-blue-500 rounded-lg">
+                <div className="p-3 bg-primary rounded-lg">
                   <Database className="h-6 w-6 text-white" />
                 </div>
               </div>
@@ -140,9 +140,9 @@ export default function CacheAnalytics() {
             </Card>
 
             {/* Total Hits */}
-            <Card className="p-6 bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900/20 dark:to-green-800/20 border-green-200 dark:border-green-800">
+            <Card className="p-6 ds-gradient-success-card border-status-success/30 dark:border-status-success">
               <div className="flex items-center justify-between mb-4">
-                <div className="p-3 bg-green-500 rounded-lg">
+                <div className="p-3 bg-status-success rounded-lg">
                   <TrendingUp className="h-6 w-6 text-white" />
                 </div>
               </div>
@@ -166,9 +166,9 @@ export default function CacheAnalytics() {
             </Card>
 
             {/* Average Rating */}
-            <Card className="p-6 bg-gradient-to-br from-yellow-50 to-yellow-100 dark:from-yellow-900/20 dark:to-yellow-800/20 border-yellow-200 dark:border-yellow-800">
+            <Card className="p-6 ds-gradient-warning-card border-status-warning/30 dark:border-status-warning">
               <div className="flex items-center justify-between mb-4">
-                <div className="p-3 bg-yellow-500 rounded-lg">
+                <div className="p-3 bg-status-warning rounded-lg">
                   <Star className="h-6 w-6 text-white" />
                 </div>
               </div>
@@ -185,7 +185,7 @@ export default function CacheAnalytics() {
           {/* Hit Rate Trend Chart */}
           <Card className="p-6">
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-2">
-              <TrendingUp className="h-6 w-6 text-emerald-600" />
+              <TrendingUp className="h-6 w-6 text-status-success" />
               معدل Cache Hit Rate
             </h2>
             {stats ? (
@@ -280,7 +280,7 @@ export default function CacheAnalytics() {
           {/* Rating Distribution Chart */}
           <Card className="p-6 lg:col-span-2">
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-2">
-              <Star className="h-6 w-6 text-yellow-500" />
+              <Star className="h-6 w-6 text-status-warning" />
               توزيع التقييمات
             </h2>
             {frequentQuestions && frequentQuestions.length > 0 ? (
@@ -314,7 +314,7 @@ export default function CacheAnalytics() {
         <Card className="p-6">
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white flex items-center gap-2">
-              <MessageSquare className="h-6 w-6 text-emerald-600" />
+              <MessageSquare className="h-6 w-6 text-status-success" />
               الأسئلة الأكثر شيوعاً
             </h2>
             <Button
@@ -368,10 +368,10 @@ export default function CacheAnalytics() {
                       </td>
                       <td className="py-3 px-4 text-center">
                         <span className={`inline-block px-3 py-1 rounded-full text-xs font-semibold ${
-                          q.category === 'legal' ? 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300' :
-                          q.category === 'jurisprudence' ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300' :
+                          q.category === 'legal' ? 'bg-primary/10 text-primary dark:bg-primary/30 dark:text-primary' :
+                          q.category === 'jurisprudence' ? 'bg-status-success/10 text-status-success dark:bg-status-success/30 dark:text-status-success' :
                           q.category === 'administrative' ? 'bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-300' :
-                          q.category === 'historical' ? 'bg-orange-100 text-orange-800 dark:bg-orange-900/30 dark:text-orange-300' :
+                          q.category === 'historical' ? 'bg-status-warning/10 text-status-warning dark:bg-status-warning/30 dark:text-status-warning' :
                           'bg-gray-100 text-gray-800 dark:bg-gray-900/30 dark:text-gray-300'
                         }`}>
                           {q.category === 'legal' ? 'قانونية' :
@@ -382,14 +382,14 @@ export default function CacheAnalytics() {
                         </span>
                       </td>
                       <td className="py-3 px-4 text-center">
-                        <span className="inline-flex items-center gap-1 px-3 py-1 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-800 dark:text-emerald-300 rounded-full text-sm font-semibold">
+                        <span className="inline-flex items-center gap-1 px-3 py-1 bg-status-success/10 dark:bg-status-success/30 text-status-success dark:text-status-success rounded-full text-sm font-semibold">
                           <Eye className="h-3 w-3" />
                           {q.hitCount}
                         </span>
                       </td>
                       <td className="py-3 px-4 text-center">
                         {q.rating && !isNaN(Number(q.rating)) ? (
-                          <span className="inline-flex items-center gap-1 px-3 py-1 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-300 rounded-full text-sm font-semibold">
+                          <span className="inline-flex items-center gap-1 px-3 py-1 bg-status-warning/10 dark:bg-status-warning/30 text-status-warning dark:text-status-warning rounded-full text-sm font-semibold">
                             <Star className="h-3 w-3 fill-current" />
                             {Number(q.rating).toFixed(2)}
                           </span>
@@ -420,7 +420,7 @@ export default function CacheAnalytics() {
             </DialogHeader>
             <div className="space-y-4 mt-4">
               {previewQuestions.map((q, index) => (
-                <Card key={index} className="p-4 bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-900/20 dark:to-teal-900/20">
+                <Card key={index} className="p-4 ds-gradient-success-card">
                   <div className="flex items-start justify-between gap-4">
                     <div className="flex-1">
                       <p className="text-gray-900 dark:text-white font-medium mb-2">
@@ -428,10 +428,10 @@ export default function CacheAnalytics() {
                       </p>
                       <div className="flex items-center gap-3 text-sm">
                         <span className={`px-2 py-1 rounded text-xs font-semibold ${
-                          q.category === 'legal' ? 'bg-blue-100 text-blue-800' :
-                          q.category === 'jurisprudence' ? 'bg-green-100 text-green-800' :
+                          q.category === 'legal' ? 'bg-primary/10 text-primary' :
+                          q.category === 'jurisprudence' ? 'bg-status-success/10 text-status-success' :
                           q.category === 'administrative' ? 'bg-purple-100 text-purple-800' :
-                          q.category === 'historical' ? 'bg-orange-100 text-orange-800' :
+                          q.category === 'historical' ? 'bg-status-warning/10 text-status-warning' :
                           'bg-gray-100 text-gray-800'
                         }`}>
                           {q.category === 'legal' ? 'قانونية' :
@@ -446,7 +446,7 @@ export default function CacheAnalytics() {
                         </span>
                         {q.rating && (
                           <span className="text-gray-600 dark:text-gray-400 flex items-center gap-1">
-                            <Star className="h-3 w-3 fill-current text-yellow-500" />
+                            <Star className="h-3 w-3 fill-current text-status-warning" />
                             {Number(q.rating).toFixed(2)}
                           </span>
                         )}
@@ -461,7 +461,7 @@ export default function CacheAnalytics() {
                 إغلاق
               </Button>
               <Button 
-                className="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700"
+                className="ds-gradient-success-action"
                 onClick={() => {
                   toast.success("تم حفظ الأسئلة المقترحة! يمكنك الآن تحديث ملف SuggestedQuestions.tsx يدوياً.");
                   setShowPreview(false);

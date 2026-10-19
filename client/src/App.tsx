@@ -1,33 +1,50 @@
 import React, { useEffect } from "react";
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import NotFound from "@/pages/NotFound";
-import { Router, Route, Switch, useLocation } from "wouter";
+
+import { Router, Route, Switch } from "wouter";
 import { useHybridLocation } from "./lib/useHybridLocation";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Navbar from "./components/Navbar";
-import Home from "@/pages/Home";
-import References from "@/pages/References";
-import Chat from "@/pages/Chat";
-import Bookmarks from "@/pages/Bookmarks";
-import FavoriteConversations from "@/pages/FavoriteConversations";
-import ExportData from "@/pages/ExportData";
-import Stats from "@/pages/Stats";
-import FAQs from "@/pages/FAQs";
-import AboutUs from "@/pages/AboutUs";
-import ContactUs from "@/pages/ContactUs";
-import Search from "@/pages/Search";
-import Knowledge from "@/pages/Knowledge";
-import KnowledgeDetails from "@/pages/KnowledgeDetails";
-import AdvancedSearch from "@/pages/AdvancedSearch";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 import { adminRouteEntries } from "@/config/adminRegistryV2";
 
 import { SiteSettingsProvider, useSiteSettings } from "./contexts/SiteSettingsContext";
 import Footer from "./components/Footer";
+
+const NotFound = React.lazy(() => import("@/pages/NotFound"));
+const Home = React.lazy(() => import("@/pages/Home"));
+const References = React.lazy(() => import("@/pages/References"));
+const Chat = React.lazy(() => import("@/pages/Chat"));
+const Bookmarks = React.lazy(() => import("@/pages/Bookmarks"));
+const FavoriteConversations = React.lazy(() => import("@/pages/FavoriteConversations"));
+const ExportData = React.lazy(() => import("@/pages/ExportData"));
+const Stats = React.lazy(() => import("@/pages/Stats"));
+const FAQs = React.lazy(() => import("@/pages/FAQs"));
+const AboutUs = React.lazy(() => import("@/pages/AboutUs"));
+const ContactUs = React.lazy(() => import("@/pages/ContactUs"));
+const Search = React.lazy(() => import("@/pages/Search"));
+const Knowledge = React.lazy(() => import("@/pages/Knowledge"));
+const KnowledgeDetails = React.lazy(() => import("@/pages/KnowledgeDetails"));
+const AdvancedSearch = React.lazy(() => import("@/pages/AdvancedSearch"));
+const ComingSoon = React.lazy(() => import("./pages/ComingSoon"));
 import AdminLayoutV2 from "./components/admin/AdminLayoutV2";
-import ComingSoon from "./pages/ComingSoon";
+
 
 function isAdminRuntimeRoute() {
   if (typeof window === "undefined") return false;
@@ -59,8 +76,6 @@ function useAdminScopeBootstrap() {
 
 // Admin Router - handles ALL /admin/* routes
 function AdminRouter() {
-  const [location] = useLocation();
-  console.log('[AdminRouter] RENDERED with location:', location);
   return (
     <AdminLayoutV2>
       <Switch>
@@ -75,8 +90,6 @@ function AdminRouter() {
 
 // Public Router - handles ALL public routes (UNCHANGED)
 function PublicRouter() {
-  const [location] = useLocation();
-  console.log('[PublicRouter] RENDERED with location:', location);
   return (
     <div className="flex flex-col min-h-screen">
       <Navbar />
@@ -121,15 +134,6 @@ function ThemeShell({ children }: { children: React.ReactNode }) {
 
 // Top-level Router - separates Admin from Public (NO CONDITIONALS!)
 function AppRouter() {
-  const [location] = useLocation();
-  console.log('[AppRouter] rendering with location:', location);
-  console.log('[AppRouter] location.startsWith("/admin"):', location.startsWith('/admin'));
-  console.log('[AppRouter] route candidates:', [
-    { pattern: '/admin/*', matches: /^\/admin(\/|$)/.test(location) },
-    { pattern: '/admin', matches: location === '/admin' },
-    { pattern: 'fallback', matches: true }
-  ]);
-  
   return (
     <Switch>
       {/* Admin catch-all - matches /admin and /admin/* */}
@@ -143,7 +147,6 @@ function AppRouter() {
 }
 
 function App() {
-  console.log('[App] mounting');
   useAdminScopeBootstrap();
 
   return (
@@ -151,9 +154,11 @@ function App() {
       <SiteSettingsProvider>
         <ThemeShell>
           <TooltipProvider>
-            <Router hook={useHybridLocation}>
-              <AppRouter />
-            </Router>
+            <React.Suspense fallback={<div className="p-6 text-sm text-muted-foreground" role="status" aria-live="polite">جارٍ تحميل الواجهة…</div>}>
+              <Router hook={useHybridLocation}>
+                <AppRouter />
+              </Router>
+            </React.Suspense>
             <Toaster />
           </TooltipProvider>
         </ThemeShell>

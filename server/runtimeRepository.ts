@@ -48,135 +48,22 @@ import {
   buildLearningCandidateKnowledgeDraft,
   WAQF_RESEARCH_LEARNING_CANDIDATE_ORIGIN,
 } from './learningCandidate';
-import { createClient, type SupabaseClient } from '@supabase/supabase-js';
 import {
   filterPublicKnowledgeDocuments,
   isLegacyReviewContentUatEnabled,
   mapLegacyReviewContentPayload,
   mapPublicKnowledgeRpcPayload,
-  resolveAssistantSupabaseConfig,
   type LegacyReviewContentKind,
 } from './canonicalRuntimeBinding';
+import {
+  assistantRuntimeBundleCircuitOpen,
+  recordAssistantRuntimeReadFailure,
+  recordAssistantRuntimeReadSuccess,
+  runtimeGetAssistantKnowledgeReadDiagnostics,
+} from './infrastructure/supabase/assistantRuntimeClient';
+import { getAssistantDataPort } from './infrastructure/supabase/assistantDataAdapter';
 
-let _assistantSupabaseClient: SupabaseClient<any, any, any, any, any> | null = null;
-
-function getAssistantSupabaseClient() {
-  const config = resolveAssistantSupabaseConfig(process.env);
-  if (!config) return null;
-
-  if (!_assistantSupabaseClient) {
-    _assistantSupabaseClient = createClient(config.url, config.key, {
-      auth: {
-        persistSession: false,
-        autoRefreshToken: false,
-      },
-      db: { schema: 'assistant' },
-      global: {
-        headers: {
-          'x-assistant-runtime': 'palwakf-local-assistant',
-          ...(isLegacyReviewContentUatEnabled(process.env)
-            ? { 'x-palwakf-legacy-content-uat': 'enabled' }
-            : {}),
-        },
-      },
-    });
-  }
-
-  return _assistantSupabaseClient;
-}
-
-type AssistantRuntimeReadComponent =
-  | 'knowledge_documents'
-  | 'knowledge_sources'
-  | 'reference_documents'
-  | 'reference_files'
-  | 'knowledge_citations';
-
-type AssistantRuntimeReadState = {
-  status: 'unknown' | 'ready' | 'degraded';
-  lastSuccessAt: string | null;
-  lastFailureAt: string | null;
-  retryAfter: string | null;
-  failureClass: 'configuration' | 'network' | 'permission_or_schema' | 'unknown' | null;
-  failureCount: number;
-};
-
-const ASSISTANT_BUNDLE_RETRY_MS = 30_000;
-const assistantRuntimeReadStates: Record<AssistantRuntimeReadComponent, AssistantRuntimeReadState> = {
-  knowledge_documents: { status: 'unknown', lastSuccessAt: null, lastFailureAt: null, retryAfter: null, failureClass: null, failureCount: 0 },
-  knowledge_sources: { status: 'unknown', lastSuccessAt: null, lastFailureAt: null, retryAfter: null, failureClass: null, failureCount: 0 },
-  reference_documents: { status: 'unknown', lastSuccessAt: null, lastFailureAt: null, retryAfter: null, failureClass: null, failureCount: 0 },
-  reference_files: { status: 'unknown', lastSuccessAt: null, lastFailureAt: null, retryAfter: null, failureClass: null, failureCount: 0 },
-  knowledge_citations: { status: 'unknown', lastSuccessAt: null, lastFailureAt: null, retryAfter: null, failureClass: null, failureCount: 0 },
-};
-
-function classifyAssistantRuntimeReadFailure(error: any): AssistantRuntimeReadState['failureClass'] {
-  const message = String(error?.message || error || '').toLowerCase();
-  if (/missing|not available|not configured|service role|supabase/.test(message) && /key|url|config|available|configured/.test(message)) return 'configuration';
-  if (/fetch failed|network|socket|timeout|econn|enotfound/.test(message)) return 'network';
-  if (/permission|rls|does not exist|schema|column|relation|42501|42p01/.test(message)) return 'permission_or_schema';
-  return 'unknown';
-}
-
-function recordAssistantRuntimeReadSuccess(component: AssistantRuntimeReadComponent): void {
-  const state = assistantRuntimeReadStates[component];
-  state.status = 'ready';
-  state.lastSuccessAt = new Date().toISOString();
-  state.retryAfter = null;
-  state.failureClass = null;
-  state.failureCount = 0;
-}
-
-function recordAssistantRuntimeReadFailure(component: AssistantRuntimeReadComponent, error: any): void {
-  const state = assistantRuntimeReadStates[component];
-  const now = Date.now();
-  state.status = 'degraded';
-  state.lastFailureAt = new Date(now).toISOString();
-  state.retryAfter = new Date(now + ASSISTANT_BUNDLE_RETRY_MS).toISOString();
-  state.failureClass = classifyAssistantRuntimeReadFailure(error);
-  state.failureCount += 1;
-
-  // Never print raw connection details, URLs or driver payloads in normal runtime logs.
-  if (state.failureCount === 1) {
-    console.warn(`[runtimeRepository] assistant knowledge bundle companion rejected: component=${component}; failure_class=${state.failureClass}; retry_backoff_seconds=30`);
-  }
-}
-
-function assistantRuntimeBundleCircuitOpen(): boolean {
-  const now = Date.now();
-  return Object.values(assistantRuntimeReadStates).some((state) => {
-    const retryMs = state.retryAfter ? Date.parse(state.retryAfter) : 0;
-    return state.status === 'degraded' && Number.isFinite(retryMs) && retryMs > now;
-  });
-}
-
-/** Safe diagnostics for authorized operations surfaces. Never exposes URLs, keys or raw driver errors. */
-export function runtimeGetAssistantKnowledgeReadDiagnostics() {
-  const configured = Boolean(getAssistantSupabaseClient());
-  const components = Object.fromEntries(
-    Object.entries(assistantRuntimeReadStates).map(([component, state]) => [
-      component,
-      {
-        status: state.status,
-        lastSuccessAt: state.lastSuccessAt,
-        lastFailureAt: state.lastFailureAt,
-        retryAfter: state.retryAfter,
-        failureClass: state.failureClass,
-        failureCount: state.failureCount,
-      },
-    ]),
-  );
-  const circuitOpen = assistantRuntimeBundleCircuitOpen();
-  const degraded = Object.values(assistantRuntimeReadStates).some((state) => state.status === 'degraded');
-  return {
-    contract: 'assistant_runtime_read_diagnostics_v1',
-    runtimeConfigured: configured,
-    bundleGate: !configured ? 'not_configured' : circuitOpen ? 'cooldown_active' : degraded ? 'degraded_recovery_pending' : 'ready_or_not_yet_exercised',
-    partialBundlePolicy: 'reject_partial_bundle_and_fall_back_to_existing_safe_store',
-    retryBackoffSeconds: ASSISTANT_BUNDLE_RETRY_MS / 1000,
-    components,
-  };
-}
+export { runtimeGetAssistantKnowledgeReadDiagnostics } from './infrastructure/supabase/assistantRuntimeClient';
 
 function normalizeLegacyNumericId(value: any): number | null {
   if (typeof value === 'number' && Number.isFinite(value)) return value;
@@ -377,23 +264,14 @@ function mapAssistantKnowledgeDocumentRow(
 }
 
 async function tryGetAssistantPublicKnowledgeDocuments(filters?: any) {
-  const client = getAssistantSupabaseClient();
-  if (!client) return null;
+  const port = getAssistantDataPort();
+  if (!port) return null;
 
-  const { data, error } = await client.rpc(
-    'runtime_public_knowledge_documents_v1',
-    {
-      p_search:
-        typeof filters?.search === 'string' && filters.search.trim()
-          ? filters.search.trim()
-          : null,
-      p_category:
-        typeof filters?.category === 'string' && filters.category.trim()
-          ? filters.category.trim()
-          : null,
-      p_limit: Math.min(Math.max(Number(filters?.limit ?? 1000), 1), 1000),
-    },
-  );
+  const { data, error } = await port.rpc<any[]>('runtime_public_knowledge_documents_v1', {
+    p_search: typeof filters?.search === 'string' && filters.search.trim() ? filters.search.trim() : null,
+    p_category: typeof filters?.category === 'string' && filters.category.trim() ? filters.category.trim() : null,
+    p_limit: Math.min(Math.max(Number(filters?.limit ?? 1000), 1), 1000),
+  });
 
   if (error) {
     recordAssistantRuntimeReadFailure('knowledge_documents', error);
@@ -411,18 +289,15 @@ async function tryGetAssistantLegacyReviewContent(
 ) {
   if (!isLegacyReviewContentUatEnabled(process.env)) return null;
 
-  const client = getAssistantSupabaseClient();
-  if (!client) return null;
+  const port = getAssistantDataPort();
+  if (!port) return null;
 
-  const { data, error } = await client.rpc(
-    'runtime_legacy_review_content_v1',
-    { p_source_table: kind },
-  );
+  const { data, error } = await port.rpc<any[]>('runtime_legacy_review_content_v1', {
+    p_source_table: kind,
+  });
 
   if (error) {
-    console.warn(
-      `[runtimeRepository] legacy review content UAT read failed: kind=${kind}`,
-    );
+    console.warn(`[runtimeRepository] legacy review content UAT read failed: kind=${kind}`);
     return null;
   }
 
@@ -444,14 +319,15 @@ export async function runtimeGetKnowledgeDocumentByExactUuid(id: unknown) {
   const exactUuid = normalizeExactKnowledgeDocumentUuid(id);
   if (!exactUuid) return undefined;
 
-  const client = getAssistantSupabaseClient();
-  if (!client) return undefined;
+  const port = getAssistantDataPort();
+  if (!port) return undefined;
 
-  const { data, error } = await client
-    .from('knowledge_documents')
-    .select(ASSISTANT_KNOWLEDGE_DOCUMENT_SELECT)
-    .eq('id', exactUuid)
-    .maybeSingle();
+  const { data, error } = await port.select<any>({
+    table: 'knowledge_documents',
+    columns: ASSISTANT_KNOWLEDGE_DOCUMENT_SELECT,
+    filters: [{ op: 'eq', column: 'id', value: exactUuid }],
+    single: 'maybeSingle',
+  });
 
   if (error) {
     recordAssistantRuntimeReadFailure('knowledge_documents', error);
@@ -466,35 +342,39 @@ export async function runtimeGetKnowledgeDocumentByExactUuid(id: unknown) {
     emptyAssistantKnowledgeDocumentMapContext(),
   );
 
-  // This resolver is entered with a sovereign C4 UUID. Keep that UUID as the
-  // primary runtime id even when legacy metadata contains a numeric legacy_id,
-  // so the later AR1 session read remains on the same exact, bounded path.
   return { ...mapped, id: data.id, uuid: data.id };
 }
 
 async function tryGetAssistantKnowledgeDocumentBundle(filters?: any) {
-  const client = getAssistantSupabaseClient();
-  if (!client) return null;
-
-  // A recent companion failure means a document bundle might be incomplete. Avoid repeated reads and
-  // reject the entire bundle rather than returning a deceptively complete-looking partial result.
+  const port = getAssistantDataPort();
+  if (!port) return null;
   if (assistantRuntimeBundleCircuitOpen()) return null;
 
-  let query = client
-    .from('knowledge_documents')
-    .select(ASSISTANT_KNOWLEDGE_DOCUMENT_SELECT)
-    .order('updated_at', { ascending: false })
-    .order('created_at', { ascending: false });
-
-  if (filters?.category) query = query.eq('category', filters.category);
+  const documentFilters: any[] = [];
+  if (filters?.category) documentFilters.push({ op: 'eq', column: 'category', value: filters.category });
   if (filters?.isActive !== undefined && Number(filters.isActive) === 1) {
-    query = query.eq('status', 'approved').eq('is_chat_eligible', true);
+    documentFilters.push(
+      { op: 'eq', column: 'status', value: 'approved' },
+      { op: 'eq', column: 'is_chat_eligible', value: true },
+    );
+  }
+  const requestedSearch = typeof filters?.search === 'string' ? escapeIlikeValue(filters.search) : '';
+  if (requestedSearch) {
+    documentFilters.push({
+      op: 'or',
+      expression: 'title.ilike.%' + requestedSearch + '%,content.ilike.%' + requestedSearch + '%',
+    });
   }
 
-  const requestedSearch = typeof filters?.search === 'string' ? escapeIlikeValue(filters.search) : '';
-  if (requestedSearch) query = query.or(`title.ilike.%${requestedSearch}%,content.ilike.%${requestedSearch}%`);
-
-  const { data, error } = await query;
+  const { data, error } = await port.select<any[]>({
+    table: 'knowledge_documents',
+    columns: ASSISTANT_KNOWLEDGE_DOCUMENT_SELECT,
+    filters: documentFilters,
+    order: [
+      { column: 'updated_at', ascending: false },
+      { column: 'created_at', ascending: false },
+    ],
+  });
   if (error) {
     recordAssistantRuntimeReadFailure('knowledge_documents', error);
     return null;
@@ -511,10 +391,11 @@ async function tryGetAssistantKnowledgeDocumentBundle(filters?: any) {
 
   const sourceById = new Map<string, any>();
   if (sourceIds.length > 0) {
-    const { data: sourceRows, error: sourceError } = await client
-      .from('knowledge_sources')
-      .select('id, name, type, base_url, description, authority_level, is_active, metadata_json, created_at, updated_at')
-      .in('id', sourceIds);
+    const { data: sourceRows, error: sourceError } = await port.select<any[]>({
+      table: 'knowledge_sources',
+      columns: 'id, name, type, base_url, description, authority_level, is_active, metadata_json, created_at, updated_at',
+      filters: [{ op: 'in', column: 'id', values: sourceIds }],
+    });
     if (sourceError) {
       recordAssistantRuntimeReadFailure('knowledge_sources', sourceError);
       bundleRejected = true;
@@ -526,10 +407,11 @@ async function tryGetAssistantKnowledgeDocumentBundle(filters?: any) {
 
   const referenceDocumentById = new Map<string, any>();
   if (referenceDocumentIds.length > 0) {
-    const { data: referenceRows, error: referenceError } = await client
-      .from('reference_documents')
-      .select('id, source_id, title, document_type, language, status, authority_level, domain_scope, source_type, summary, metadata_json, created_at, updated_at')
-      .in('id', referenceDocumentIds);
+    const { data: referenceRows, error: referenceError } = await port.select<any[]>({
+      table: 'reference_documents',
+      columns: 'id, source_id, title, document_type, language, status, authority_level, domain_scope, source_type, summary, metadata_json, created_at, updated_at',
+      filters: [{ op: 'in', column: 'id', values: referenceDocumentIds }],
+    });
     if (referenceError) {
       recordAssistantRuntimeReadFailure('reference_documents', referenceError);
       bundleRejected = true;
@@ -549,11 +431,12 @@ async function tryGetAssistantKnowledgeDocumentBundle(filters?: any) {
 
   const filesByReferenceDocumentId = new Map<string, any[]>();
   if (referenceDocumentIds.length > 0) {
-    const { data: fileRows, error: fileError } = await client
-      .from('reference_files')
-      .select('id, reference_document_id, storage_path, original_filename, mime_type, file_size_bytes, file_hash, is_primary, ocr_text, extracted_text, metadata_json, created_at')
-      .in('reference_document_id', referenceDocumentIds)
-      .order('created_at', { ascending: false });
+    const { data: fileRows, error: fileError } = await port.select<any[]>({
+      table: 'reference_files',
+      columns: 'id, reference_document_id, storage_path, original_filename, mime_type, file_size_bytes, file_hash, is_primary, ocr_text, extracted_text, metadata_json, created_at',
+      filters: [{ op: 'in', column: 'reference_document_id', values: referenceDocumentIds }],
+      order: [{ column: 'created_at', ascending: false }],
+    });
     if (fileError) {
       recordAssistantRuntimeReadFailure('reference_files', fileError);
       bundleRejected = true;
@@ -570,11 +453,12 @@ async function tryGetAssistantKnowledgeDocumentBundle(filters?: any) {
 
   const citationsByKnowledgeDocumentId = new Map<string, any[]>();
   if (documentIds.length > 0) {
-    const { data: citationRows, error: citationError } = await client
-      .from('knowledge_citations')
-      .select('id, knowledge_document_id, reference_document_id, reference_file_id, citation_type, locator, excerpt, metadata_json, created_at')
-      .in('knowledge_document_id', documentIds)
-      .order('created_at', { ascending: false });
+    const { data: citationRows, error: citationError } = await port.select<any[]>({
+      table: 'knowledge_citations',
+      columns: 'id, knowledge_document_id, reference_document_id, reference_file_id, citation_type, locator, excerpt, metadata_json, created_at',
+      filters: [{ op: 'in', column: 'knowledge_document_id', values: documentIds }],
+      order: [{ column: 'created_at', ascending: false }],
+    });
     if (citationError) {
       recordAssistantRuntimeReadFailure('knowledge_citations', citationError);
       bundleRejected = true;
@@ -596,44 +480,36 @@ async function tryGetAssistantKnowledgeDocumentBundle(filters?: any) {
   for (const doc of mappedDocs) {
     if (Array.isArray(doc.documentFiles)) doc.documentFiles = doc.documentFiles.map((file: any) => ({ ...file, documentId: doc.id }));
   }
-
   return mappedDocs;
 }
 
 async function tryGetAssistantSystemSettings() {
-  const client = getAssistantSupabaseClient();
-  if (!client) return null;
+  const port = getAssistantDataPort();
+  if (!port) return null;
 
-  const { data, error } = await client
-    .from('system_settings')
-    .select('key, value_json')
-    .limit(500);
-
+  const { data, error } = await port.select<any[]>({
+    table: 'system_settings',
+    columns: 'key, value_json',
+    limit: 500,
+  });
   if (error) {
     console.warn('[runtimeRepository] assistant.system_settings read failed, falling back to local store', error.message);
     return null;
   }
-
   if (!data || data.length === 0) return null;
 
   const patch: Record<string, any> = {};
-  for (const row of data) {
-    patch[row.key] = row.value_json;
-  }
+  for (const row of data) patch[row.key] = row.value_json;
   return patch;
 }
 
 async function tryGetAssistantKnowledgeSources(filters?: any) {
-  const client = getAssistantSupabaseClient();
-  if (!client) return null;
+  const port = getAssistantDataPort();
+  if (!port) return null;
 
-  let query = client
-    .from('knowledge_sources')
-    .select('id, name, type, base_url, description, authority_level, is_active, metadata_json, created_at, updated_at')
-    .order('created_at', { ascending: false });
-
+  const sourceFilters: any[] = [];
   if (filters?.isActive !== undefined) {
-    query = query.eq('is_active', Number(filters.isActive) === 1);
+    sourceFilters.push({ op: 'eq', column: 'is_active', value: Number(filters.isActive) === 1 });
   }
 
   const requestedType = typeof filters?.type === 'string' ? filters.type.trim() : '';
@@ -641,10 +517,15 @@ async function tryGetAssistantKnowledgeSources(filters?: any) {
     const normalizedType = ['wikipedia', 'rss', 'scraper', 'pdf_url', 'api'].includes(requestedType)
       ? 'external_fetch'
       : requestedType;
-    query = query.eq('type', normalizedType);
+    sourceFilters.push({ op: 'eq', column: 'type', value: normalizedType });
   }
 
-  const { data, error } = await query;
+  const { data, error } = await port.select<any[]>({
+    table: 'knowledge_sources',
+    columns: 'id, name, type, base_url, description, authority_level, is_active, metadata_json, created_at, updated_at',
+    filters: sourceFilters,
+    order: [{ column: 'created_at', ascending: false }],
+  });
 
   if (error) {
     console.warn('[runtimeRepository] assistant.knowledge_sources read failed, falling back to local store', error.message);
@@ -707,12 +588,12 @@ async function hasLocalKnowledgeDocument(id: any) {
   return !!doc;
 }
 
-function requireAssistantSupabaseClient() {
-  const client = getAssistantSupabaseClient();
-  if (!client) {
-    throw new Error('Assistant Supabase client is not configured');
+function requireAssistantDataPort() {
+  const port = getAssistantDataPort();
+  if (!port) {
+    throw new Error('Assistant data port is not configured');
   }
-  return client;
+  return port;
 }
 
 export async function runtimeCaptureLocalLearningCandidate(input: {
@@ -726,7 +607,7 @@ export async function runtimeCaptureLocalLearningCandidate(input: {
   legalSkillAudit?: any;
   createdBy?: number | null;
 }) {
-  if (getAssistantSupabaseClient()) {
+  if (getAssistantDataPort()) {
     return {
       captured: false,
       storage: "shared_runtime",
@@ -765,7 +646,7 @@ export async function runtimeCaptureLocalLearningCandidate(input: {
 }
 
 export async function runtimeCreateAiToolRun(input: any) {
-  const client = requireAssistantSupabaseClient();
+  const port = requireAssistantDataPort();
   const insertPayload = {
     tool_key: input.toolKey,
     run_status: input.runStatus ?? 'completed',
@@ -783,15 +664,14 @@ export async function runtimeCreateAiToolRun(input: any) {
     notes: input.notes ?? null,
   };
 
-  const { data, error } = await client
-    .from('ai_tool_runs')
-    .insert(insertPayload)
-    .select('*')
-    .single();
+  const { data, error } = await port.insert<any>({
+    table: 'ai_tool_runs',
+    values: insertPayload,
+    returning: '*',
+    single: 'single',
+  });
 
-  if (error) {
-    throw new Error(`Failed to create ai_tool_run: ${error.message}`);
-  }
+  if (error) throw new Error(`Failed to create ai_tool_run: ${error.message}`);
 
   await runtimeCreateAiToolRunEvent({
     toolRunId: data.id,
@@ -808,9 +688,7 @@ export async function runtimeCreateAiToolRun(input: any) {
     await runtimeCreateAiToolRunEvent({
       toolRunId: data.id,
       eventType: 'completed',
-      eventPayload: {
-        toolKey: insertPayload.tool_key,
-      },
+      eventPayload: { toolKey: insertPayload.tool_key },
       createdByAdminUserId: input.createdByAdminUserId ?? null,
     });
   }
@@ -826,55 +704,42 @@ export async function runtimeCreateAiToolRun(input: any) {
       createdByAdminUserId: input.createdByAdminUserId ?? null,
     });
   }
-
   return data;
 }
 
-
-
 export async function runtimeListAiToolRuns(input: any = {}) {
-  const client = requireAssistantSupabaseClient();
+  const port = requireAssistantDataPort();
   const limit = Math.min(Math.max(Number(input.limit ?? 50), 1), 200);
-  let query = client
-    .from('ai_tool_runs')
-    .select('*')
-    .order('created_at', { ascending: false })
-    .limit(limit);
-
-  if (input.toolKey) {
-    query = query.eq('tool_key', input.toolKey);
-  }
-  if (input.approvalStatus) {
-    query = query.eq('approval_status', input.approvalStatus);
-  }
-  if (input.runStatus) {
-    query = query.eq('run_status', input.runStatus);
-  }
+  const filters: any[] = [];
+  if (input.toolKey) filters.push({ op: 'eq', column: 'tool_key', value: input.toolKey });
+  if (input.approvalStatus) filters.push({ op: 'eq', column: 'approval_status', value: input.approvalStatus });
+  if (input.runStatus) filters.push({ op: 'eq', column: 'run_status', value: input.runStatus });
   if (input.searchText) {
     const term = String(input.searchText).trim();
-    if (term) {
-      query = query.or(`title.ilike.%${term}%,input_text.ilike.%${term}%`);
-    }
+    if (term) filters.push({ op: 'or', expression: 'title.ilike.%' + term + '%,input_text.ilike.%' + term + '%' });
   }
 
-  const { data, error } = await query;
-  if (error) {
-    throw new Error(`Failed to list ai_tool_runs: ${error.message}`);
-  }
+  const { data, error } = await port.select<any[]>({
+    table: 'ai_tool_runs',
+    columns: '*',
+    filters,
+    order: [{ column: 'created_at', ascending: false }],
+    limit,
+  });
+  if (error) throw new Error(`Failed to list ai_tool_runs: ${error.message}`);
   return data || [];
 }
 
 export async function runtimeGetAiToolRunMetrics() {
-  const client = requireAssistantSupabaseClient();
-  const { data, error } = await client
-    .from('ai_tool_runs')
-    .select('tool_key, approval_status, run_status, created_at')
-    .order('created_at', { ascending: false })
-    .limit(500);
+  const port = requireAssistantDataPort();
+  const { data, error } = await port.select<any[]>({
+    table: 'ai_tool_runs',
+    columns: 'tool_key, approval_status, run_status, created_at',
+    order: [{ column: 'created_at', ascending: false }],
+    limit: 500,
+  });
 
-  if (error) {
-    throw new Error(`Failed to load ai_tool_run metrics: ${error.message}`);
-  }
+  if (error) throw new Error(`Failed to load ai_tool_run metrics: ${error.message}`);
 
   const rows = data || [];
   const metrics = {
@@ -889,7 +754,6 @@ export async function runtimeGetAiToolRunMetrics() {
     if (row.approval_status) metrics.byApproval[row.approval_status] = (metrics.byApproval[row.approval_status] || 0) + 1;
     if (row.run_status) metrics.byRunStatus[row.run_status] = (metrics.byRunStatus[row.run_status] || 0) + 1;
   }
-
   return metrics;
 }
 
@@ -1013,52 +877,47 @@ function analyzeAiToolRunQuality(run: any, links: any[] = [], events: any[] = []
 }
 
 export async function runtimeGetAiToolBackendActivationSnapshot() {
-  const client = requireAssistantSupabaseClient();
-  const [{ data: runs, error: runsError }, { data: links, error: linksError }, { data: events, error: eventsError }] = await Promise.all([
-    client
-      .from('ai_tool_runs')
-      .select('id, tool_key, run_status, approval_status, created_at, error_message')
-      .order('created_at', { ascending: false })
-      .limit(1000),
-    client
-      .from('ai_tool_run_links')
-      .select('tool_run_id, link_type, knowledge_document_id, created_at')
-      .order('created_at', { ascending: false })
-      .limit(2000),
-    client
-      .from('ai_tool_run_events')
-      .select('tool_run_id, event_type, created_at')
-      .order('created_at', { ascending: false })
-      .limit(5000),
+  const port = requireAssistantDataPort();
+  const [runsResult, linksResult, eventsResult] = await Promise.all([
+    port.select<any[]>({
+      table: 'ai_tool_runs',
+      columns: 'id, tool_key, run_status, approval_status, created_at, error_message',
+      order: [{ column: 'created_at', ascending: false }],
+      limit: 1000,
+    }),
+    port.select<any[]>({
+      table: 'ai_tool_run_links',
+      columns: 'tool_run_id, link_type, knowledge_document_id, created_at',
+      order: [{ column: 'created_at', ascending: false }],
+      limit: 2000,
+    }),
+    port.select<any[]>({
+      table: 'ai_tool_run_events',
+      columns: 'tool_run_id, event_type, created_at',
+      order: [{ column: 'created_at', ascending: false }],
+      limit: 5000,
+    }),
   ]);
 
-  if (runsError) throw new Error(`Failed to load ai_tool backend activation runs: ${runsError.message}`);
-  if (linksError) throw new Error(`Failed to load ai_tool backend activation links: ${linksError.message}`);
-  if (eventsError) throw new Error(`Failed to load ai_tool backend activation events: ${eventsError.message}`);
+  if (runsResult.error) throw new Error(`Failed to load ai_tool backend activation runs: ${runsResult.error.message}`);
+  if (linksResult.error) throw new Error(`Failed to load ai_tool backend activation links: ${linksResult.error.message}`);
+  if (eventsResult.error) throw new Error(`Failed to load ai_tool backend activation events: ${eventsResult.error.message}`);
+
+  const runs = runsResult.data || [];
+  const links = linksResult.data || [];
+  const events = eventsResult.data || [];
 
   const runsByTool = new Map<string, any[]>();
-  for (const run of runs || []) {
+  for (const run of runs) {
     const key = String((run as any).tool_key || 'unknown');
     runsByTool.set(key, [...(runsByTool.get(key) || []), run]);
-  }
-
-  const eventsByRun = new Map<string, any[]>();
-  for (const event of events || []) {
-    const runId = String((event as any).tool_run_id || '');
-    eventsByRun.set(runId, [...(eventsByRun.get(runId) || []), event]);
-  }
-
-  const linksByRun = new Map<string, any[]>();
-  for (const link of links || []) {
-    const runId = String((link as any).tool_run_id || '');
-    linksByRun.set(runId, [...(linksByRun.get(runId) || []), link]);
   }
 
   const records = sovereignAiToolKeys.map((toolKey) => {
     const toolRuns = runsByTool.get(toolKey) || [];
     const toolRunIds = new Set(toolRuns.map((run: any) => String(run.id)));
-    const toolEvents = (events || []).filter((event: any) => toolRunIds.has(String(event.tool_run_id)));
-    const toolLinks = (links || []).filter((link: any) => toolRunIds.has(String(link.tool_run_id)));
+    const toolEvents = events.filter((event: any) => toolRunIds.has(String(event.tool_run_id)));
+    const toolLinks = links.filter((link: any) => toolRunIds.has(String(link.tool_run_id)));
     const latestRun = toolRuns[0] || null;
     const stats = {
       totalRuns: toolRuns.length,
@@ -1105,71 +964,63 @@ export async function runtimeGetAiToolBackendActivationSnapshot() {
 }
 
 export async function runtimeGetAiToolRunDetails(toolRunId: string) {
-  const client = requireAssistantSupabaseClient();
-  const { data: run, error: runError } = await client
-    .from('ai_tool_runs')
-    .select('*')
-    .eq('id', toolRunId)
-    .maybeSingle();
+  const port = requireAssistantDataPort();
+  const runResult = await port.select<any>({
+    table: 'ai_tool_runs',
+    columns: '*',
+    filters: [{ op: 'eq', column: 'id', value: toolRunId }],
+    single: 'maybeSingle',
+  });
+  if (runResult.error) throw new Error(`Failed to load ai_tool_run: ${runResult.error.message}`);
+  if (!runResult.data) return null;
 
-  if (runError) {
-    throw new Error(`Failed to load ai_tool_run: ${runError.message}`);
-  }
-  if (!run) return null;
-
-  const [{ data: links, error: linksError }, { data: events, error: eventsError }] = await Promise.all([
-    client
-      .from('ai_tool_run_links')
-      .select('*')
-      .eq('tool_run_id', toolRunId)
-      .order('created_at', { ascending: false }),
-    client
-      .from('ai_tool_run_events')
-      .select('*')
-      .eq('tool_run_id', toolRunId)
-      .order('created_at', { ascending: false }),
+  const [linksResult, eventsResult] = await Promise.all([
+    port.select<any[]>({
+      table: 'ai_tool_run_links',
+      columns: '*',
+      filters: [{ op: 'eq', column: 'tool_run_id', value: toolRunId }],
+      order: [{ column: 'created_at', ascending: false }],
+    }),
+    port.select<any[]>({
+      table: 'ai_tool_run_events',
+      columns: '*',
+      filters: [{ op: 'eq', column: 'tool_run_id', value: toolRunId }],
+      order: [{ column: 'created_at', ascending: false }],
+    }),
   ]);
 
-  if (linksError) {
-    throw new Error(`Failed to load ai_tool_run_links: ${linksError.message}`);
-  }
-  if (eventsError) {
-    throw new Error(`Failed to load ai_tool_run_events: ${eventsError.message}`);
-  }
+  if (linksResult.error) throw new Error(`Failed to load ai_tool_run_links: ${linksResult.error.message}`);
+  if (eventsResult.error) throw new Error(`Failed to load ai_tool_run_events: ${eventsResult.error.message}`);
 
-  const normalizedLinks = links || [];
-  const normalizedEvents = events || [];
-
+  const normalizedLinks = linksResult.data || [];
+  const normalizedEvents = eventsResult.data || [];
   return {
-    run,
+    run: runResult.data,
     links: normalizedLinks,
     events: normalizedEvents,
-    quality: analyzeAiToolRunQuality(run, normalizedLinks, normalizedEvents),
+    quality: analyzeAiToolRunQuality(runResult.data, normalizedLinks, normalizedEvents),
   };
 }
 
 export async function runtimeUpdateAiToolRunReview(input: any) {
-  const client = requireAssistantSupabaseClient();
+  const port = requireAssistantDataPort();
   const updatePayload: any = {
     approval_status: input.approvalStatus,
     notes: input.notes ?? null,
   };
-
   if (input.approvalStatus === 'approved') {
     updatePayload.approved_at = input.approvedAt ?? new Date().toISOString();
     updatePayload.approved_by_admin_user_id = input.approvedByAdminUserId ?? null;
   }
 
-  const { data, error } = await client
-    .from('ai_tool_runs')
-    .update(updatePayload)
-    .eq('id', input.toolRunId)
-    .select('*')
-    .single();
-
-  if (error) {
-    throw new Error(`Failed to update ai_tool_run review: ${error.message}`);
-  }
+  const { data, error } = await port.update<any>({
+    table: 'ai_tool_runs',
+    values: updatePayload,
+    filters: [{ op: 'eq', column: 'id', value: input.toolRunId }],
+    returning: '*',
+    single: 'single',
+  });
+  if (error) throw new Error(`Failed to update ai_tool_run review: ${error.message}`);
 
   await runtimeCreateAiToolRunEvent({
     toolRunId: input.toolRunId,
@@ -1180,45 +1031,39 @@ export async function runtimeUpdateAiToolRunReview(input: any) {
     },
     createdByAdminUserId: input.approvedByAdminUserId ?? null,
   });
-
   return data;
 }
 
 export async function runtimeReopenAiToolRun(input: any) {
-  const client = requireAssistantSupabaseClient();
-  const { data, error } = await client
-    .from('ai_tool_runs')
-    .update({
+  const port = requireAssistantDataPort();
+  const { data, error } = await port.update<any>({
+    table: 'ai_tool_runs',
+    values: {
       approval_status: 'pending',
       approved_at: null,
       approved_by_admin_user_id: null,
       notes: input.notes ?? null,
-    })
-    .eq('id', input.toolRunId)
-    .select('*')
-    .single();
-
-  if (error) {
-    throw new Error(`Failed to reopen ai_tool_run: ${error.message}`);
-  }
+    },
+    filters: [{ op: 'eq', column: 'id', value: input.toolRunId }],
+    returning: '*',
+    single: 'single',
+  });
+  if (error) throw new Error(`Failed to reopen ai_tool_run: ${error.message}`);
 
   await runtimeCreateAiToolRunEvent({
     toolRunId: input.toolRunId,
     eventType: 'reopened',
-    eventPayload: {
-      notes: input.notes ?? null,
-    },
+    eventPayload: { notes: input.notes ?? null },
     createdByAdminUserId: input.createdByAdminUserId ?? null,
   });
-
   return data;
 }
 
 export async function runtimeCreateAiToolRunLink(input: any) {
-  const client = requireAssistantSupabaseClient();
-  const { data, error } = await client
-    .from('ai_tool_run_links')
-    .insert({
+  const port = requireAssistantDataPort();
+  const { data, error } = await port.insert<any>({
+    table: 'ai_tool_run_links',
+    values: {
       tool_run_id: input.toolRunId,
       link_type: input.linkType,
       knowledge_document_id: input.knowledgeDocumentId ?? null,
@@ -1228,39 +1073,33 @@ export async function runtimeCreateAiToolRunLink(input: any) {
       message_id: input.messageId ?? null,
       created_by_admin_user_id: input.createdByAdminUserId ?? null,
       notes: input.notes ?? null,
-    })
-    .select('*')
-    .single();
-
-  if (error) {
-    throw new Error(`Failed to create ai_tool_run_link: ${error.message}`);
-  }
-
+    },
+    returning: '*',
+    single: 'single',
+  });
+  if (error) throw new Error(`Failed to create ai_tool_run_link: ${error.message}`);
   return data;
 }
 
 export async function runtimeCreateAiToolRunEvent(input: any) {
-  const client = requireAssistantSupabaseClient();
-  const { data, error } = await client
-    .from('ai_tool_run_events')
-    .insert({
+  const port = requireAssistantDataPort();
+  const { data, error } = await port.insert<any>({
+    table: 'ai_tool_run_events',
+    values: {
       tool_run_id: input.toolRunId,
       event_type: input.eventType,
       event_payload: input.eventPayload ?? {},
       created_by_admin_user_id: input.createdByAdminUserId ?? null,
-    })
-    .select('*')
-    .single();
-
-  if (error) {
-    throw new Error(`Failed to create ai_tool_run_event: ${error.message}`);
-  }
-
+    },
+    returning: '*',
+    single: 'single',
+  });
+  if (error) throw new Error(`Failed to create ai_tool_run_event: ${error.message}`);
   return data;
 }
 
 export async function runtimeCreateKnowledgeDocumentFromTool(input: any) {
-  const client = requireAssistantSupabaseClient();
+  const port = requireAssistantDataPort();
   const metadata = {
     tool: input.tool,
     sourceText: input.sourceText ?? null,
@@ -1268,7 +1107,6 @@ export async function runtimeCreateKnowledgeDocumentFromTool(input: any) {
     createdVia: 'ai_tool',
     toolRunId: input.toolRunId ?? null,
   };
-
   const insertPayload = {
     title: input.title,
     content: input.content,
@@ -1281,15 +1119,13 @@ export async function runtimeCreateKnowledgeDocumentFromTool(input: any) {
     created_by: input.createdByAdminUserId ?? null,
   };
 
-  const { data, error } = await client
-    .from('knowledge_documents')
-    .insert(insertPayload)
-    .select('*')
-    .single();
-
-  if (error) {
-    throw new Error(`Failed to create knowledge document from tool: ${error.message}`);
-  }
+  const { data, error } = await port.insert<any>({
+    table: 'knowledge_documents',
+    values: insertPayload,
+    returning: '*',
+    single: 'single',
+  });
+  if (error) throw new Error(`Failed to create knowledge document from tool: ${error.message}`);
 
   if (input.toolRunId) {
     await runtimeCreateAiToolRunLink({
@@ -1299,7 +1135,6 @@ export async function runtimeCreateKnowledgeDocumentFromTool(input: any) {
       createdByAdminUserId: input.createdByAdminUserId ?? null,
       notes: 'Knowledge draft generated from AI tool run',
     });
-
     await runtimeCreateAiToolRunEvent({
       toolRunId: input.toolRunId,
       eventType: 'linked_to_knowledge',
@@ -1310,7 +1145,6 @@ export async function runtimeCreateKnowledgeDocumentFromTool(input: any) {
       createdByAdminUserId: input.createdByAdminUserId ?? null,
     });
   }
-
   return data;
 }
 
@@ -1335,18 +1169,20 @@ export async function runtimeGetConversationMessages(conversationId: number) {
 }
 
 export async function runtimeGetKnowledgeScopeCodes(actor?: { authUserId?: string | null; platformUserId?: string | null } | null): Promise<string[]> {
-  const client = getAssistantSupabaseClient();
+  const port = getAssistantDataPort();
   const authUserId = actor?.authUserId || actor?.platformUserId || null;
-  if (!client || !authUserId) return [];
+  if (!port || !authUserId) return [];
 
-  const { data, error } = await client
-    .from('knowledge_scope_assignments')
-    .select('scope_code, expires_at')
-    .eq('auth_user_id', authUserId)
-    .eq('is_active', true);
+  const { data, error } = await port.select<any[]>({
+    table: 'knowledge_scope_assignments',
+    columns: 'scope_code, expires_at',
+    filters: [
+      { op: 'eq', column: 'auth_user_id', value: authUserId },
+      { op: 'eq', column: 'is_active', value: true },
+    ],
+  });
 
   if (error) {
-    // KB58 schema may not be applied yet. Keep the runtime fail-closed for non-public scopes.
     console.warn('[runtimeRepository] assistant.knowledge_scope_assignments unavailable; non-public knowledge remains denied for non-privileged actors', error.message);
     return [];
   }

@@ -32,43 +32,9 @@ import {
   exportUserConversations,
   exportUserBookmarks,
 } from "./export";
-// Stub functions for conversations and knowledge routers
-// These are placeholders since the actual implementation files are not available
-const createConversation = async (...args: any[]) => ({ error: "Not implemented" });
-const getConversations = async (...args: any[]) => [];
-const getConversation = async (...args: any[]) => null;
-const updateConversation = async (...args: any[]) => ({ error: "Not implemented" });
-const deleteConversation = async (...args: any[]) => ({ success: true });
-const createMessage = async (...args: any[]) => ({ error: "Not implemented" });
-const getMessages = async (...args: any[]) => [];
-const updateMessage = async (...args: any[]) => ({ error: "Not implemented" });
-const deleteMessage = async (...args: any[]) => ({ success: true });
-const updateMessageRating = async (...args: any[]) => ({ error: "Not implemented" });
-const getMessageRatings = async (...args: any[]) => [];
-const createComment = async (...args: any[]) => ({ error: "Not implemented" });
-const getComments = async (...args: any[]) => [];
-const updateComment = async (...args: any[]) => ({ error: "Not implemented" });
-const deleteComment = async (...args: any[]) => ({ success: true });
-const createRating = async (...args: any[]) => ({ error: "Not implemented" });
-const getRatings = async (...args: any[]) => [];
-const updateRating = async (...args: any[]) => ({ error: "Not implemented" });
-const deleteRating = async (...args: any[]) => ({ success: true });
-
-const getKnowledgeSources = async (...args: any[]) => [];
-const getKnowledgeSource = async (...args: any[]) => null;
-const createKnowledgeSource = async (...args: any[]) => ({ error: "Not implemented" });
-const updateKnowledgeSource = async (...args: any[]) => ({ error: "Not implemented" });
-const deleteKnowledgeSource = async (...args: any[]) => ({ success: true });
-const getKnowledgeSourceStats = async (...args: any[]) => ({});
-const getFetchedContent = async (...args: any[]) => [];
-const getFetchedContentItem = async (...args: any[]) => null;
-const createFetchedContent = async (...args: any[]) => ({ error: "Not implemented" });
-const updateFetchedContent = async (...args: any[]) => ({ error: "Not implemented" });
-const deleteFetchedContent = async (...args: any[]) => ({ success: true });
-const getFetchLogs = async (...args: any[]) => [];
-const createFetchLog = async (...args: any[]) => ({ error: "Not implemented" });
-const updateFetchLog = async (...args: any[]) => ({ error: "Not implemented" });
-const deleteFetchLog = async (...args: any[]) => ({ success: true });
+// DESIGN-ARCH-001: legacy placeholder helpers were removed.
+  // Active APIs must bind to a real runtime/application implementation or fail closed
+  // through an explicitly deprecated contract. Do not reintroduce success-shaped stubs.
 import {
   listWatchlists,
   createWatchlist,
@@ -115,9 +81,37 @@ import {
   permissions,
   rolePermissions,
 } from "../drizzle/schema";
-import { getDb, getJudicialRulingById } from "./db";
+import { getJudicialRulingById } from "./db";
 import * as dbOps from "./db";
-import { eq, and, desc, sql, inArray } from "drizzle-orm";
+import {
+  buildDailySeries,
+  createAdminNotification,
+  deleteAdminComment,
+  deleteAdminNotification,
+  getAdminActivityLog,
+  getAdminDashboardStats,
+  getAdminSecurityCounts,
+  getAdminUserActivity,
+  getAnalyticsRatingStats,
+  getBestRatedAnswers,
+  getFaqDistribution,
+  getFrequentUserQuestions,
+  getNegativeRatingAnalysis,
+  getOperationsSnapshot,
+  isAdminDatabaseAvailable,
+  linkAdminFileToEntity,
+  listAdminComments,
+  listAdminFiles,
+  listAdminNotifications,
+  listAdminUsersInternal,
+  listFaqsInternal,
+  setAdminCommentApproval,
+  storeContactMessage,
+  toBoolean,
+  unlinkAdminFileFromEntity,
+  updateAdminUserInternal,
+  updateFaqInternal,
+} from "./application/adminOperationsService";
 import { extractPdfFields } from "./pdf-extraction/extractPdfFields";
 import { extractTextFromFile } from "./fileExtractor";
 import { fetchFromSource } from "./knowledge-fetchers";
@@ -432,141 +426,129 @@ const exportRouter = router({
   // }),
 });
 
-// Conversations router
+// Legacy conversations contract retained for a bounded migration window.
+// Current product UI uses chat.*. These endpoints either bridge to the real runtime
+// with ownership checks or fail closed with an explicit migration target.
+function parseLegacyNumericId(value: string, label: string): number {
+  const id = Number(value);
+  if (!Number.isInteger(id) || id <= 0) {
+    throw new TRPCError({ code: "BAD_REQUEST", message: `معرّف ${label} غير صالح` });
+  }
+  return id;
+}
+
+async function requireOwnedConversation(id: number, userId: number) {
+  const conversation = await runtimeGetConversationById(id);
+  if (!conversation || Number(conversation.userId) !== Number(userId)) {
+    throw new TRPCError({ code: "NOT_FOUND", message: "المحادثة غير موجودة" });
+  }
+  return conversation;
+}
+
+function legacyConversationEndpointRetired(target: string): never {
+  throw new TRPCError({
+    code: "BAD_REQUEST",
+    message: `هذا المسار القديم موقوف عن الاستهلاك الجديد. استخدم ${target}.`,
+  });
+}
+
 const conversationsRouter = router({
   create: protectedProcedure
     .input(z.object({ title: z.string().optional() }))
-    .mutation(async ({ input, ctx }) => {
-      if (!ctx.user) throw new TRPCError({ code: "UNAUTHORIZED" });
-      return await createConversation(ctx.user.id, input.title);
-    }),
-  list: protectedProcedure.query(async ({ ctx }) => {
-    if (!ctx.user) throw new TRPCError({ code: "UNAUTHORIZED" });
-    return await getConversations(ctx.user.id);
-  }),
+    .mutation(async ({ input, ctx }) =>
+      runtimeCreateConversation({
+        userId: ctx.user!.id,
+        title: input.title || "محادثة جديدة",
+        category: "general",
+        isActive: 1,
+      } as any),
+    ),
+  list: protectedProcedure.query(async ({ ctx }) =>
+    runtimeGetUserConversations(ctx.user!.id),
+  ),
   get: protectedProcedure
     .input(z.object({ id: z.string() }))
     .query(async ({ input, ctx }) => {
-      if (!ctx.user) throw new TRPCError({ code: "UNAUTHORIZED" });
-      return await getConversation(input.id, ctx.user.id);
+      const id = parseLegacyNumericId(input.id, "المحادثة");
+      return await requireOwnedConversation(id, ctx.user!.id);
     }),
   update: protectedProcedure
     .input(z.object({ id: z.string(), title: z.string() }))
     .mutation(async ({ input, ctx }) => {
-      if (!ctx.user) throw new TRPCError({ code: "UNAUTHORIZED" });
-      return await updateConversation(input.id, ctx.user.id, input.title);
+      const id = parseLegacyNumericId(input.id, "المحادثة");
+      await requireOwnedConversation(id, ctx.user!.id);
+      return await runtimeUpdateConversation(id, { title: input.title } as any);
     }),
   delete: protectedProcedure
     .input(z.object({ id: z.string() }))
     .mutation(async ({ input, ctx }) => {
-      if (!ctx.user) throw new TRPCError({ code: "UNAUTHORIZED" });
-      return await deleteConversation(input.id, ctx.user.id);
+      const id = parseLegacyNumericId(input.id, "المحادثة");
+      await requireOwnedConversation(id, ctx.user!.id);
+      await runtimeUpdateConversation(id, { isActive: 0 } as any);
+      return { success: true, mode: "soft_delete" };
     }),
   createMessage: protectedProcedure
-    .input(
-      z.object({
-        conversationId: z.string(),
-        content: z.string(),
-        role: z.enum(["user", "assistant"]),
-      })
-    )
+    .input(z.object({
+      conversationId: z.string(),
+      content: z.string(),
+      role: z.enum(["user", "assistant"]),
+    }))
     .mutation(async ({ input, ctx }) => {
-      if (!ctx.user) throw new TRPCError({ code: "UNAUTHORIZED" });
-      return await createMessage(
-        input.conversationId,
-        ctx.user.id,
-        input.content,
-        input.role
-      );
+      const conversationId = parseLegacyNumericId(input.conversationId, "المحادثة");
+      await requireOwnedConversation(conversationId, ctx.user!.id);
+      return await runtimeCreateMessage({
+        conversationId,
+        content: input.content,
+        role: input.role,
+      } as any);
     }),
   getMessages: protectedProcedure
     .input(z.object({ conversationId: z.string() }))
     .query(async ({ input, ctx }) => {
-      if (!ctx.user) throw new TRPCError({ code: "UNAUTHORIZED" });
-      return await getMessages(input.conversationId, ctx.user.id);
+      const conversationId = parseLegacyNumericId(input.conversationId, "المحادثة");
+      await requireOwnedConversation(conversationId, ctx.user!.id);
+      return await runtimeGetConversationMessages(conversationId);
     }),
+
+  // The remaining legacy mutation shapes are incompatible with the governed
+  // chat/review contracts and have no current client consumers. They remain
+  // fail-closed during the migration window instead of returning fake success.
   updateMessage: protectedProcedure
     .input(z.object({ id: z.string(), content: z.string() }))
-    .mutation(async ({ input, ctx }) => {
-      if (!ctx.user) throw new TRPCError({ code: "UNAUTHORIZED" });
-      return await updateMessage(input.id, ctx.user.id, input.content);
-    }),
+    .mutation(() => legacyConversationEndpointRetired("chat.sendMessage / governed message history")),
   deleteMessage: protectedProcedure
     .input(z.object({ id: z.string() }))
-    .mutation(async ({ input, ctx }) => {
-      if (!ctx.user) throw new TRPCError({ code: "UNAUTHORIZED" });
-      return await deleteMessage(input.id, ctx.user.id);
-    }),
+    .mutation(() => legacyConversationEndpointRetired("chat.* governed conversation lifecycle")),
   updateMessageRating: protectedProcedure
     .input(z.object({ messageId: z.string(), rating: z.number().min(1).max(5) }))
-    .mutation(async ({ input, ctx }) => {
-      if (!ctx.user) throw new TRPCError({ code: "UNAUTHORIZED" });
-      return await updateMessageRating(input.messageId, ctx.user.id, input.rating);
-    }),
+    .mutation(() => legacyConversationEndpointRetired("ratings.rate")),
   getMessageRatings: protectedProcedure
     .input(z.object({ conversationId: z.string() }))
-    .query(async ({ input, ctx }) => {
-      if (!ctx.user) throw new TRPCError({ code: "UNAUTHORIZED" });
-      return await getMessageRatings(input.conversationId, ctx.user.id);
-    }),
+    .query(() => legacyConversationEndpointRetired("ratings.getUserRating")),
   createComment: protectedProcedure
-    .input(
-      z.object({
-        messageId: z.string(),
-        content: z.string(),
-      })
-    )
-    .mutation(async ({ input, ctx }) => {
-      if (!ctx.user) throw new TRPCError({ code: "UNAUTHORIZED" });
-      return await createComment(input.messageId, ctx.user.id, input.content);
-    }),
+    .input(z.object({ messageId: z.string(), content: z.string() }))
+    .mutation(() => legacyConversationEndpointRetired("governed review/comment workflow")),
   getComments: protectedProcedure
     .input(z.object({ messageId: z.string() }))
-    .query(async ({ input, ctx }) => {
-      if (!ctx.user) throw new TRPCError({ code: "UNAUTHORIZED" });
-      return await getComments(input.messageId, ctx.user.id);
-    }),
+    .query(() => legacyConversationEndpointRetired("governed review/comment workflow")),
   updateComment: protectedProcedure
     .input(z.object({ id: z.string(), content: z.string() }))
-    .mutation(async ({ input, ctx }) => {
-      if (!ctx.user) throw new TRPCError({ code: "UNAUTHORIZED" });
-      return await updateComment(input.id, ctx.user.id, input.content);
-    }),
+    .mutation(() => legacyConversationEndpointRetired("governed review/comment workflow")),
   deleteComment: protectedProcedure
     .input(z.object({ id: z.string() }))
-    .mutation(async ({ input, ctx }) => {
-      if (!ctx.user) throw new TRPCError({ code: "UNAUTHORIZED" });
-      return await deleteComment(input.id, ctx.user.id);
-    }),
+    .mutation(() => legacyConversationEndpointRetired("governed review/comment workflow")),
   createRating: protectedProcedure
-    .input(
-      z.object({
-        messageId: z.string(),
-        rating: z.number().min(1).max(5),
-      })
-    )
-    .mutation(async ({ input, ctx }) => {
-      if (!ctx.user) throw new TRPCError({ code: "UNAUTHORIZED" });
-      return await createRating(input.messageId, ctx.user.id, input.rating);
-    }),
+    .input(z.object({ messageId: z.string(), rating: z.number().min(1).max(5) }))
+    .mutation(() => legacyConversationEndpointRetired("ratings.rate")),
   getRatings: protectedProcedure
     .input(z.object({ messageId: z.string() }))
-    .query(async ({ input, ctx }) => {
-      if (!ctx.user) throw new TRPCError({ code: "UNAUTHORIZED" });
-      return await getRatings(input.messageId, ctx.user.id);
-    }),
+    .query(() => legacyConversationEndpointRetired("ratings.getUserRating")),
   updateRating: protectedProcedure
     .input(z.object({ id: z.string(), rating: z.number().min(1).max(5) }))
-    .mutation(async ({ input, ctx }) => {
-      if (!ctx.user) throw new TRPCError({ code: "UNAUTHORIZED" });
-      return await updateRating(input.id, ctx.user.id, input.rating);
-    }),
+    .mutation(() => legacyConversationEndpointRetired("ratings.rate")),
   deleteRating: protectedProcedure
     .input(z.object({ id: z.string() }))
-    .mutation(async ({ input, ctx }) => {
-      if (!ctx.user) throw new TRPCError({ code: "UNAUTHORIZED" });
-      return await deleteRating(input.id, ctx.user.id);
-    }),
+    .mutation(() => legacyConversationEndpointRetired("ratings.delete")),
 });
 
 // Knowledge router
@@ -896,8 +878,7 @@ const knowledgeSourcesRouter = router({
   fetch: adminProcedure
     .input(z.object({ id: z.number() }))
     .mutation(async ({ input }) => {
-      const db = await getDb();
-      if (!db) {
+      if (!(await isAdminDatabaseAvailable())) {
         return {
           sourceId: input.id,
           sourceName: "local-mode",
@@ -1867,414 +1848,10 @@ const adminPageBackendActivationMatrix = [
   { href: '/admin/platform-bridge', title: 'جسر المنصة', backendRoute: 'platformBridge.*', status: 'connected', operation: 'read-sovereign' },
 ];
 
-function isDbUnavailable(error: unknown) {
-  return error instanceof Error && /database not available/i.test(error.message);
-}
-
-async function getOptionalDb() {
-  try {
-    return await getDb();
-  } catch (error) {
-    console.warn('[admin-27b] Database unavailable; using safe empty-state fallback', error);
-    return null;
-  }
-}
-
-function toNumber(value: any, fallback = 0) {
-  const n = Number(value);
-  return Number.isFinite(n) ? n : fallback;
-}
-
-function toBoolean(value: any) {
-  if (typeof value === 'boolean') return value;
-  if (typeof value === 'number') return value !== 0;
-  if (typeof value === 'string') return !['0', 'false', 'no', 'off', 'inactive'].includes(value.toLowerCase());
-  return false;
-}
-
-function safeDate(value: any) {
-  if (!value) return null;
-  if (value instanceof Date) return Number.isNaN(value.getTime()) ? null : value;
-  const raw = String(value).trim();
-  if (!raw) return null;
-  const normalized = /^\d{4}-\d{2}-\d{2}\s+\d{2}:\d{2}/.test(raw)
-    ? raw.replace(/\s+/, 'T')
-    : raw;
-  const d = new Date(normalized);
-  return Number.isNaN(d.getTime()) ? null : d;
-}
-
-function normalizeRuntimeDate(value: any) {
-  const d = safeDate(value);
-  return d ? d.toISOString() : (value ?? null);
-}
-
-function runtimeDateTime(value: any) {
-  const d = safeDate(value);
-  return d ? d.getTime() : 0;
-}
-
-function inDateRange(value: any, after?: string, before?: string) {
-  const d = safeDate(value);
-  if (!d) return true;
-  if (after) {
-    const a = safeDate(after);
-    if (a && d < a) return false;
-  }
-  if (before) {
-    const b = safeDate(before);
-    if (b) {
-      b.setHours(23, 59, 59, 999);
-      if (d > b) return false;
-    }
-  }
-  return true;
-}
-
-function paginate<T>(rows: T[], page = 1, limit = 20) {
-  const safePage = Math.max(1, Number(page) || 1);
-  const safeLimit = Math.min(Math.max(1, Number(limit) || 20), 100);
-  const start = (safePage - 1) * safeLimit;
-  return {
-    rows: rows.slice(start, start + safeLimit),
-    page: safePage,
-    limit: safeLimit,
-    total: rows.length,
-    totalPages: Math.max(1, Math.ceil(rows.length / safeLimit)),
-  };
-}
-
-async function countTable(table: any) {
-  const db = await getOptionalDb();
-  if (!db) return 0;
-  try {
-    const rows = await db.select({ count: sql<number>`count(*)` }).from(table as any);
-    return toNumber((rows as any[])?.[0]?.count, 0);
-  } catch (error) {
-    console.warn('[admin-27b] countTable failed', error);
-    return 0;
-  }
-}
-
-async function selectAllSafe(table: any, limit = 1000) {
-  const db = await getOptionalDb();
-  if (!db) return [] as any[];
-  try {
-    return await db.select().from(table as any).limit(limit) as any[];
-  } catch (error) {
-    console.warn('[admin-27b] selectAllSafe failed', error);
-    return [] as any[];
-  }
-}
-
-async function buildDailySeries(table: any, dateField: any, days = 30, label = 'count') {
-  const safeDays = Math.min(Math.max(Number(days) || 30, 1), 365);
-  const rows = await selectAllSafe(table, 5000);
-  const buckets = new Map<string, number>();
-  for (let i = safeDays - 1; i >= 0; i--) {
-    const d = new Date();
-    d.setDate(d.getDate() - i);
-    buckets.set(d.toISOString().slice(0, 10), 0);
-  }
-  const min = new Date();
-  min.setDate(min.getDate() - safeDays);
-  for (const row of rows) {
-    const d = safeDate(row?.createdAt ?? row?.created_at ?? row?.updatedAt ?? row?.updated_at);
-    if (!d || d < min) continue;
-    const key = d.toISOString().slice(0, 10);
-    if (buckets.has(key)) buckets.set(key, (buckets.get(key) || 0) + 1);
-  }
-  return Array.from(buckets.entries()).map(([date, count]) => ({ date, [label]: count }));
-}
-
-function normalizeAdminUserRow(row: any, conversationCount = 0) {
-  return {
-    id: row.id,
-    openId: row.openId ?? row.open_id ?? null,
-    name: row.name || row.email || `مستخدم #${row.id}`,
-    email: row.email || '',
-    loginMethod: row.loginMethod ?? row.login_method ?? null,
-    role: row.role || 'user',
-    isActive: toBoolean(row.isActive ?? row.is_active ?? 1),
-    createdAt: row.createdAt ?? row.created_at ?? null,
-    updatedAt: row.updatedAt ?? row.updated_at ?? null,
-    lastSignedIn: row.lastSignedIn ?? row.last_signed_in ?? row.createdAt ?? row.created_at ?? null,
-    conversationCount,
-  };
-}
-
-async function listAdminUsersInternal(input: any = {}) {
-  const userRows = await selectAllSafe(users, 5000);
-  const conversationRows = await selectAllSafe(conversations, 10000);
-  const conversationCounts = new Map<number, number>();
-  for (const conversation of conversationRows) {
-    const userId = Number(conversation.userId ?? conversation.user_id ?? 0);
-    if (!userId) continue;
-    conversationCounts.set(userId, (conversationCounts.get(userId) || 0) + 1);
-  }
-
-  const search = String(input.search || '').trim().toLowerCase();
-  const normalized = userRows
-    .map((row) => normalizeAdminUserRow(row, conversationCounts.get(Number(row.id)) || 0))
-    .filter((row) => !input.role || row.role === input.role)
-    .filter((row) => !search || `${row.name} ${row.email} ${row.openId}`.toLowerCase().includes(search))
-    .filter((row) => inDateRange(row.createdAt, input.createdAfter, input.createdBefore))
-    .filter((row) => inDateRange(row.lastSignedIn, input.lastSignedInAfter, input.lastSignedInBefore))
-    .sort((a, b) => `${b.createdAt || ''}`.localeCompare(`${a.createdAt || ''}`));
-
-  const paginated = paginate(normalized, input.page, input.limit);
-  return {
-    users: paginated.rows,
-    total: paginated.total,
-    page: paginated.page,
-    limit: paginated.limit,
-    totalPages: paginated.totalPages,
-  };
-}
-
-async function updateAdminUserInternal(userId: number, updates: any) {
-  const db = await getOptionalDb();
-  if (!db) throw new TRPCError({ code: 'PRECONDITION_FAILED', message: 'قاعدة بيانات المستخدمين غير متاحة في هذه البيئة.' });
-  await db.update(users).set(updates).where(eq(users.id, userId));
-  const rows = await db.select().from(users).where(eq(users.id, userId)).limit(1);
-  return rows[0] ? normalizeAdminUserRow(rows[0]) : null;
-}
-
-async function listFaqsInternal() {
-  const rows = await selectAllSafe(faqs, 5000);
-  return rows
-    .map((row) => ({ ...row, isActive: toBoolean(row.isActive ?? row.is_active ?? 0), viewCount: toNumber(row.viewCount ?? row.view_count, 0) }))
-    .sort((a, b) => toNumber(a.order, 0) - toNumber(b.order, 0) || toNumber(b.viewCount, 0) - toNumber(a.viewCount, 0));
-}
-
-async function updateFaqInternal(id: number, updates: any) {
-  const db = await getOptionalDb();
-  if (!db) throw new TRPCError({ code: 'PRECONDITION_FAILED', message: 'قاعدة بيانات الأسئلة الشائعة غير متاحة.' });
-  const payload: any = { ...updates };
-  if ('isActive' in payload) payload.isActive = payload.isActive ? 1 : 0;
-  await db.update(faqs).set(payload).where(eq(faqs.id, id));
-  const rows = await db.select().from(faqs).where(eq(faqs.id, id)).limit(1);
-  return rows[0] ? { ...rows[0], isActive: toBoolean((rows[0] as any).isActive) } : null;
-}
-
-async function getAdminDashboardStats() {
-  const [totalUsers, totalConversations, totalMessages, totalFAQs, totalDocuments] = await Promise.all([
-    countTable(users),
-    countTable(conversations),
-    countTable(messages),
-    countTable(faqs),
-    countTable(knowledgeDocuments),
-  ]);
-  const toolMetrics = await runtimeGetAiToolRunMetrics().catch(() => ({ total: 0, byRunStatus: {}, byApproval: {}, byTool: {} }));
-  return {
-    totalUsers,
-    totalConversations,
-    totalMessages,
-    totalFAQs,
-    totalDocuments,
-    totalAiToolRuns: toolMetrics.total || 0,
-    activeBackendRoutes: adminPageBackendActivationMatrix.length,
-  };
-}
-
-async function getFaqDistribution() {
-  const rows = await listFaqsInternal();
-  const byCategory = new Map<string, number>();
-  for (const row of rows) byCategory.set(row.category || 'general', (byCategory.get(row.category || 'general') || 0) + 1);
-  return Array.from(byCategory.entries()).map(([category, count]) => ({ category, count }));
-}
-
-async function getAdminActivityLog(input: any = {}) {
-  const limit = Math.min(Math.max(Number(input.limit || 50), 1), 100);
-  const type = input.type || 'all';
-  const activities: any[] = [];
-
-  if (type === 'all' || type === 'conversations') {
-    const rows = await selectAllSafe(conversations, limit);
-    activities.push(...rows.map((row) => ({
-      id: row.id,
-      type: 'conversation',
-      title: row.title || `محادثة #${row.id}`,
-      userName: row.userId ? `مستخدم #${row.userId}` : null,
-      createdAt: row.updatedAt || row.createdAt,
-    })));
-  }
-  if (type === 'all' || type === 'messages') {
-    const rows = await selectAllSafe(messages, limit);
-    activities.push(...rows.map((row) => ({
-      id: row.id,
-      type: 'message',
-      title: String(row.content || '').slice(0, 120) || `رسالة #${row.id}`,
-      userName: null,
-      createdAt: row.createdAt,
-    })));
-  }
-  if (type === 'all' || type === 'faqs') {
-    const rows = await listFaqsInternal();
-    activities.push(...rows.slice(0, limit).map((row) => ({
-      id: row.id,
-      type: 'faq',
-      title: row.question || `سؤال شائع #${row.id}`,
-      userName: null,
-      createdAt: row.updatedAt || row.createdAt,
-    })));
-  }
-
-  if (activities.length === 0) {
-    const runs = await runtimeListAiToolRuns({ limit }).catch(() => []);
-    activities.push(...(runs || []).map((row: any) => ({
-      id: row.id,
-      type: 'ai_tool_run',
-      title: row.title || `تشغيل أداة ${row.tool_key}`,
-      userName: row.created_by_admin_user_id ? `إداري #${row.created_by_admin_user_id}` : null,
-      createdAt: row.created_at,
-    })));
-  }
-
-  return activities
-    .sort((a, b) => runtimeDateTime(b.createdAt) - runtimeDateTime(a.createdAt))
-    .slice(0, limit)
-    .map((activity) => ({
-      ...activity,
-      createdAt: normalizeRuntimeDate(activity.createdAt),
-    }));
-}
-
-async function getAnalyticsRatingStats() {
-  const rows = await selectAllSafe(messageRatings, 10000);
-  const positive = rows.filter((r) => String(r.rating) === 'helpful').length;
-  const negative = rows.filter((r) => String(r.rating) === 'not_helpful').length;
-  const total = positive + negative;
-  const positivePercentage = total ? Math.round((positive / total) * 100) : 0;
-  return { total, positive, negative, positivePercentage, negativePercentage: total ? 100 - positivePercentage : 0 };
-}
-
-async function getNegativeRatingAnalysis() {
-  const ratingsRows = await selectAllSafe(messageRatings, 10000);
-  const messageRows = await selectAllSafe(messages, 10000);
-  const byMessageId = new Map(messageRows.map((m) => [Number(m.id), m]));
-  const negatives = ratingsRows.filter((r) => String(r.rating) === 'not_helpful');
-  let withoutSources = 0;
-  let shortResponses = 0;
-  for (const rating of negatives) {
-    const msg = byMessageId.get(Number(rating.messageId ?? rating.message_id));
-    if (!msg?.sources) withoutSources++;
-    if (String(msg?.content || '').length < 160) shortResponses++;
-  }
-  const commonIssues = [] as string[];
-  if (withoutSources > 0) commonIssues.push('نقص المصادر');
-  if (shortResponses > 0) commonIssues.push('إجابات قصيرة');
-  if (negatives.length > 0 && commonIssues.length === 0) commonIssues.push('تحتاج مراجعة نوعية');
-  return { totalNegative: negatives.length, withoutSources, shortResponses, commonIssues };
-}
-
-async function getFrequentUserQuestions(limit = 10) {
-  const rows = await selectAllSafe(messages, 10000);
-  const counts = new Map<string, number>();
-  for (const row of rows) {
-    if (row.role !== 'user') continue;
-    const content = String(row.content || '').trim();
-    if (!content) continue;
-    const key = content.slice(0, 260);
-    counts.set(key, (counts.get(key) || 0) + 1);
-  }
-  return Array.from(counts.entries())
-    .map(([content, count]) => ({ content, count }))
-    .sort((a, b) => b.count - a.count)
-    .slice(0, Math.min(Math.max(Number(limit) || 10, 1), 50));
-}
-
-async function getBestRatedAnswers(limit = 10) {
-  const ratingsRows = await selectAllSafe(messageRatings, 10000);
-  const messageRows = await selectAllSafe(messages, 10000);
-  const byMessageId = new Map(messageRows.map((m) => [Number(m.id), m]));
-  const counts = new Map<number, number>();
-  for (const rating of ratingsRows) {
-    if (String(rating.rating) !== 'helpful') continue;
-    const messageId = Number(rating.messageId ?? rating.message_id);
-    counts.set(messageId, (counts.get(messageId) || 0) + 1);
-  }
-  return Array.from(counts.entries())
-    .map(([messageId, positiveRatings]) => ({ messageId, positiveRatings, content: String(byMessageId.get(messageId)?.content || '').slice(0, 300) }))
-    .sort((a, b) => b.positiveRatings - a.positiveRatings)
-    .slice(0, Math.min(Math.max(Number(limit) || 10, 1), 50));
-}
-
-async function getOperationsSnapshot(kind: 'cache' | 'integrations' | 'webhooks' | 'backup') {
-  const settings = await runtimeGetSystemSettings().catch(() => ({} as any));
-  const toolMetrics = await runtimeGetAiToolRunMetrics().catch(() => ({ total: 0, byRunStatus: {}, byApproval: {}, byTool: {} }));
-  const sourceStats = await runtimeGetKnowledgeSourcesStats().catch(() => ({ totalSources: 0, activeSources: 0, successRate: 0, lastFetchDate: null }));
-  const cacheStats = await import('./cache').then((m) => m.getCacheStats()).catch(() => ({ totalCached: 0, totalHits: 0, avgRating: 0, topQuestions: [] }));
-  const now = new Date().toISOString();
-
-  if (kind === 'cache') {
-    return {
-      generatedAt: now,
-      status: 'connected',
-      title: 'إدارة Cache مفعلة للقراءة التشغيلية',
-      metrics: {
-        totalCached: cacheStats.totalCached || 0,
-        totalHits: cacheStats.totalHits || 0,
-        avgRating: cacheStats.avgRating || 0,
-        aiToolRuns: toolMetrics.total || 0,
-      },
-      topQuestions: cacheStats.topQuestions || [],
-      actions: [{ key: 'cleanExpired', label: 'تنظيف المنتهي', enabled: true, mode: 'safe' }],
-    };
-  }
-
-  if (kind === 'integrations') {
-    const envChecks = [
-      { key: 'supabase', label: 'Supabase Assistant Runtime', configured: !!(process.env.PWF_SUPABASE_URL || process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL) },
-      { key: 'llm', label: 'LLM Provider', configured: !!settings.llmEnabled && settings.llmProvider !== 'disabled' },
-      { key: 'email', label: 'SMTP Email', configured: !!settings.emailEnabled },
-      { key: 'fetching', label: 'Knowledge Fetchers', configured: (sourceStats.totalSources || 0) > 0 },
-    ];
-    return {
-      generatedAt: now,
-      status: 'connected',
-      title: 'التكاملات مربوطة بقراءة إعدادات النظام والمصادر',
-      metrics: { configured: envChecks.filter((x) => x.configured).length, total: envChecks.length, activeSources: sourceStats.activeSources || 0, successRate: sourceStats.successRate || 0 },
-      integrations: envChecks,
-    };
-  }
-
-  if (kind === 'webhooks') {
-    const events = [
-      { event: 'ai_tool_run.completed', source: 'assistant.ai_tool_runs', enabled: true, mode: 'internal_event' },
-      { event: 'ai_tool_run.approved', source: 'assistant.ai_tool_run_events', enabled: true, mode: 'internal_event' },
-      { event: 'knowledge_document.created', source: 'assistant.knowledge_documents', enabled: true, mode: 'internal_event' },
-      { event: 'fetched_content.approved', source: 'assistant.fetched_content', enabled: true, mode: 'internal_event' },
-    ];
-    return {
-      generatedAt: now,
-      status: 'connected',
-      title: 'Webhooks مفعلة كخريطة أحداث داخلية دون إرسال خارجي تلقائي',
-      metrics: { totalEvents: events.length, externalDispatch: 0, internalEvents: events.length },
-      events,
-    };
-  }
-
-  return {
-    generatedAt: now,
-    status: 'connected',
-    title: 'النسخ الاحتياطي مفعل كـ manifest حوكمي آمن',
-    metrics: {
-      knowledgeDocuments: await countTable(knowledgeDocuments),
-      knowledgeSources: await countTable(knowledgeSources),
-      fetchedContent: await countTable(fetchedContent),
-      fetchLogs: await countTable(fetchLogs),
-      aiToolRuns: toolMetrics.total || 0,
-    },
-    includedScopes: ['assistant.knowledge_documents', 'assistant.knowledge_sources', 'assistant.fetched_content', 'assistant.ai_tool_runs', 'runtime settings'],
-  };
-}
-
-
 const adminRouter = router({
   backendActivationSnapshot: adminProcedure.query(async () => {
     const [stats, toolSnapshot] = await Promise.all([
-      getAdminDashboardStats(),
+      getAdminDashboardStats(adminPageBackendActivationMatrix.length),
       runtimeGetAiToolBackendActivationSnapshot().catch(() => null),
     ]);
     return {
@@ -2288,7 +1865,7 @@ const adminRouter = router({
     };
   }),
   systemStats: adminProcedure.query(async () => {
-    return await getAdminDashboardStats();
+    return await getAdminDashboardStats(adminPageBackendActivationMatrix.length);
   }),
   charts: router({
     userGrowth: adminProcedure
@@ -2317,21 +1894,7 @@ const adminRouter = router({
       .query(async ({ input }) => listAdminUsersInternal(input || {})),
     getActivity: adminProcedure
       .input(z.object({ userId: z.number() }))
-      .query(async ({ input }) => {
-        const conversationRows = (await selectAllSafe(conversations, 5000)).filter((row) => Number(row.userId) === input.userId);
-        const conversationIds = new Set(conversationRows.map((row) => Number(row.id)));
-        const messageRows = (await selectAllSafe(messages, 10000)).filter((row) => conversationIds.has(Number(row.conversationId)));
-        return {
-          conversationCount: conversationRows.length,
-          messageCount: messageRows.length,
-          averageRating: 0,
-          lastActivity: [...conversationRows, ...messageRows].map((row) => row.updatedAt || row.createdAt).filter(Boolean).sort().reverse()[0] || null,
-          items: [
-            ...conversationRows.slice(0, 10).map((row) => ({ type: 'conversation', title: row.title || `محادثة #${row.id}`, createdAt: row.createdAt })),
-            ...messageRows.slice(0, 10).map((row) => ({ type: 'message', title: String(row.content || '').slice(0, 120), createdAt: row.createdAt })),
-          ].sort((a, b) => `${b.createdAt || ''}`.localeCompare(`${a.createdAt || ''}`)).slice(0, 15),
-        };
-      }),
+      .query(async ({ input }) => getAdminUserActivity(input.userId)),
     updateRole: adminProcedure
       .input(z.object({ userId: z.number(), role: z.enum(['admin','user']) }))
       .mutation(async ({ input }) => updateAdminUserInternal(input.userId, { role: input.role })),
@@ -2444,12 +2007,7 @@ const adminRouter = router({
         generatedAt: new Date().toISOString(),
         status: 'connected',
         settings,
-        counts: {
-          users: await countTable(users),
-          roles: await countTable(roles),
-          permissions: await countTable(permissions),
-          rolePermissions: await countTable(rolePermissions),
-        },
+        counts: await getAdminSecurityCounts(),
         health: { database: databaseHealth, llm: llmHealth, ready: databaseHealth.available && llmHealth.available },
         guards: ['adminProcedure', 'protectedProcedure', 'role-aware local bootstrap', 'providerHealthGate', 'databaseHealthGate'],
       };
@@ -2625,30 +2183,11 @@ async function safeDbWrite<T>(fn: () => Promise<T>): Promise<T> {
   try { return await fn(); } catch (error) { return asTrpcDbError(error); }
 }
 
-async function updateTableByIdSafe(table: any, id: number, patch: any) {
-  const db = await getOptionalDb();
-  if (!db) throw new Error('Database not available');
-  await db.update(table).set(patch).where(eq(table.id, id));
-  const rows = await db.select().from(table).where(eq(table.id, id)).limit(1);
-  return (rows as any[])?.[0] ?? null;
-}
-
-async function deleteTableByIdSafe(table: any, id: number, softField?: string) {
-  const db = await getOptionalDb();
-  if (!db) throw new Error('Database not available');
-  if (softField) {
-    await db.update(table).set({ [softField]: 0 }).where(eq(table.id, id));
-    return { success: true, softDeleted: true };
-  }
-  await db.delete(table).where(eq(table.id, id));
-  return { success: true };
-}
-
 const genericIdInput = z.object({ id: z.number() });
 const genericUpdateInput = z.object({ id: z.number(), data: z.any().optional() }).passthrough();
 
 const dashboardRouter = router({
-  stats: adminProcedure.query(async () => getAdminDashboardStats()),
+  stats: adminProcedure.query(async () => getAdminDashboardStats(adminPageBackendActivationMatrix.length)),
 });
 
 const searchRouter = router({
@@ -2701,20 +2240,7 @@ const advancedSearchRouter = router({
 });
 
 const contactRouter = router({
-  send: publicProcedure.input(z.any()).mutation(async ({ input }) => {
-    const db = await getOptionalDb();
-    if (!db) return { success: true, stored: false, mode: 'local_no_db', message: 'تم استلام الرسالة محليًا دون حفظ قاعدة بيانات.' };
-    const { contactMessages } = await import('../drizzle/schema');
-    await db.insert(contactMessages).values({
-      name: input?.name || 'زائر',
-      email: input?.email || 'unknown@example.local',
-      subject: input?.subject || 'رسالة تواصل',
-      message: input?.message || input?.content || '',
-      userId: null,
-      status: 'new',
-    } as any);
-    return { success: true, stored: true };
-  }),
+  send: publicProcedure.input(z.any()).mutation(async ({ input }) => storeContactMessage(input)),
 });
 
 const faqsRouter = router({
@@ -2833,40 +2359,25 @@ const contentTemplatesRouter = router({
 });
 
 const notificationsRouter = router({
-  getAll: adminProcedure.query(async () => selectAllSafe(notifications, 500)),
-  create: adminProcedure.input(z.any()).mutation(async ({ input, ctx }) => safeDbWrite(async () => {
-    const db = await getOptionalDb();
-    if (!db) throw new Error('Database not available');
-    const typeMap: Record<string, string> = { info: 'announcement', success: 'update', warning: 'alert', error: 'system' };
-    await db.insert(notifications).values({
-      title: input?.title || 'إشعار',
-      content: input?.message || input?.content || '',
-      type: (typeMap[input?.type] || input?.type || 'announcement') as any,
-      targetAudience: input?.targetUserIds?.length ? 'specific' : 'all',
-      targetUserIds: input?.targetUserIds ? JSON.stringify(input.targetUserIds) : null,
-      status: 'sent',
-      sentCount: input?.targetUserIds?.length || 0,
-      readCount: 0,
-      createdBy: ctx.user?.id || 1,
-      userId: input?.targetUserIds?.[0] || null,
-    } as any);
-    return { success: true };
-  })),
-  delete: adminProcedure.input(genericIdInput).mutation(async ({ input }) => safeDbWrite(() => deleteTableByIdSafe(notifications, input.id))),
+  getAll: adminProcedure.query(async () => listAdminNotifications()),
+  create: adminProcedure.input(z.any()).mutation(async ({ input, ctx }) =>
+    safeDbWrite(() => createAdminNotification(input, ctx.user?.id))),
+  delete: adminProcedure.input(genericIdInput).mutation(async ({ input }) =>
+    safeDbWrite(() => deleteAdminNotification(input.id))),
 });
 
 const commentsRouter = router({
-  getAll: adminProcedure.query(async () => {
-    const rows = await selectAllSafe(comments, 1000);
-    return rows.map((row: any) => ({ ...row, status: row.isApproved ? 'approved' : 'pending', userName: row.userId ? `مستخدم #${row.userId}` : null }));
-  }),
-  approve: adminProcedure.input(genericIdInput).mutation(async ({ input }) => safeDbWrite(() => updateTableByIdSafe(comments, input.id, { isApproved: 1 }))),
-  reject: adminProcedure.input(genericIdInput).mutation(async ({ input }) => safeDbWrite(() => updateTableByIdSafe(comments, input.id, { isApproved: 0 }))),
-  delete: adminProcedure.input(genericIdInput).mutation(async ({ input }) => safeDbWrite(() => deleteTableByIdSafe(comments, input.id))),
+  getAll: adminProcedure.query(async () => listAdminComments()),
+  approve: adminProcedure.input(genericIdInput).mutation(async ({ input }) =>
+    safeDbWrite(() => setAdminCommentApproval(input.id, true))),
+  reject: adminProcedure.input(genericIdInput).mutation(async ({ input }) =>
+    safeDbWrite(() => setAdminCommentApproval(input.id, false))),
+  delete: adminProcedure.input(genericIdInput).mutation(async ({ input }) =>
+    safeDbWrite(() => deleteAdminComment(input.id))),
 });
 
 const reportsRouter = router({
-  summary: adminProcedure.query(async () => ({ generatedAt: new Date().toISOString(), dashboard: await getAdminDashboardStats(), waqf: await dbOps.getWaqfStatistics().catch(() => null) })),
+  summary: adminProcedure.query(async () => ({ generatedAt: new Date().toISOString(), dashboard: await getAdminDashboardStats(adminPageBackendActivationMatrix.length), waqf: await dbOps.getWaqfStatistics().catch(() => null) })),
 });
 
 const digitalLibraryRouter = router({
@@ -2876,12 +2387,14 @@ const digitalLibraryRouter = router({
 const filesRouter = router({
   list: adminProcedure.input(z.any().optional()).query(async ({ input }) => {
     if (input?.documentId) return runtimeGetDocumentFiles(input.documentId).catch(() => []);
-    return selectAllSafe(files, 1000);
+    return listAdminFiles();
   }),
   upload: adminProcedure.input(z.any()).mutation(async ({ input }) => safeDbWrite(async () => runtimeAddDocumentFile({ documentId: input?.documentId ?? 0, fileUrl: input?.fileUrl || input?.url || '', fileType: input?.fileType || 'other', fileName: input?.fileName || input?.name || 'file', fileSize: input?.fileSize || null, language: input?.language || null, extractedText: input?.extractedText || null } as any))),
   delete: adminProcedure.input(genericIdInput).mutation(async ({ input }) => safeDbWrite(async () => { await runtimeDeleteDocumentFile(input.id); return { success: true }; })),
-  linkToEntity: adminProcedure.input(z.any()).mutation(async ({ input }) => safeDbWrite(() => updateTableByIdSafe(files, input.id, { linkedEntityType: input.entityType || 'none', linkedEntityId: input.entityId || null }))),
-  unlinkFromEntity: adminProcedure.input(genericIdInput).mutation(async ({ input }) => safeDbWrite(() => updateTableByIdSafe(files, input.id, { linkedEntityType: 'none', linkedEntityId: null }))),
+  linkToEntity: adminProcedure.input(z.any()).mutation(async ({ input }) =>
+    safeDbWrite(() => linkAdminFileToEntity(input.id, input.entityType, input.entityId))),
+  unlinkFromEntity: adminProcedure.input(genericIdInput).mutation(async ({ input }) =>
+    safeDbWrite(() => unlinkAdminFileFromEntity(input.id))),
 });
 
 const fetchLogsRouter = router({

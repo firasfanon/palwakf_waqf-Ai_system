@@ -375,7 +375,7 @@ export default function KnowledgeManagement() {
                         {doc.title}
                       </TableCell>
                       <TableCell>
-                        <span className="inline-block px-2 py-1 text-xs rounded-full bg-blue-100 text-blue-800">
+                        <span className="inline-block px-2 py-1 text-xs rounded-full bg-primary/10 text-primary">
                           {categoryLabels[doc.category] || doc.category}
                         </span>
                       </TableCell>
@@ -399,7 +399,7 @@ export default function KnowledgeManagement() {
                             size="sm"
                             onClick={() => handleDeleteDoc(doc.id)}
                           >
-                            <Trash2 className="h-4 w-4 text-red-600" />
+                            <Trash2 className="h-4 w-4 text-status-danger" />
                           </Button>
                         </div>
                       </TableCell>
@@ -548,7 +548,7 @@ export default function KnowledgeManagement() {
                           size="sm"
                           onClick={() => handleDeleteFaq(faq.id)}
                         >
-                          <Trash2 className="h-4 w-4 text-red-600" />
+                          <Trash2 className="h-4 w-4 text-status-danger" />
                         </Button>
                       </div>
                     </div>

@@ -193,15 +193,15 @@ export default function RolePermissions() {
 
           {/* Preview Stats */}
           {hasChanges && (
-            <Card className="p-4 bg-blue-50 dark:bg-blue-950 border-blue-200 dark:border-blue-800">
+            <Card className="p-4 bg-primary/10 dark:bg-primary border-primary/30 dark:border-primary">
               <div className="flex items-center gap-4">
                 <div className="flex-1">
                   <p className="text-sm font-medium">معاينة التغييرات</p>
                   <div className="flex gap-4 mt-2 text-sm">
-                    <span className="text-green-600 dark:text-green-400">
+                    <span className="text-status-success dark:text-status-success">
                       +{additionsCount} إضافة
                     </span>
-                    <span className="text-red-600 dark:text-red-400">
+                    <span className="text-status-danger dark:text-status-danger">
                       -{removalsCount} إزالة
                     </span>
                     <span className="text-muted-foreground">
@@ -246,10 +246,10 @@ export default function RolePermissions() {
                             className={`flex items-start gap-3 p-3 rounded-lg border ${
                               hasChange
                                 ? willBeAssigned
-                                  ? "bg-green-50 dark:bg-green-950 border-green-200 dark:border-green-800"
-                                  : "bg-red-50 dark:bg-red-950 border-red-200 dark:border-red-800"
+                                  ? "bg-status-success/10 dark:bg-status-success border-status-success/30 dark:border-status-success"
+                                  : "bg-status-danger/10 dark:bg-status-danger border-status-danger/30 dark:border-status-danger"
                                 : willBeAssigned
-                                ? "bg-blue-50 dark:bg-blue-950 border-blue-200 dark:border-blue-800"
+                                ? "bg-primary/10 dark:bg-primary border-primary/30 dark:border-primary"
                                 : "bg-muted/50"
                             }`}
                           >

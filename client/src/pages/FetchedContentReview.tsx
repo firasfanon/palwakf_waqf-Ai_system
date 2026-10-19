@@ -389,15 +389,15 @@ export default function FetchedContentReview() {
                 </div>
                 <div>
                   <p className="text-sm text-muted-foreground">تقييمات إيجابية</p>
-                  <p className="text-2xl font-bold text-green-600">{ratingsStats.positive}</p>
+                  <p className="text-2xl font-bold text-status-success">{ratingsStats.positive}</p>
                 </div>
                 <div>
                   <p className="text-sm text-muted-foreground">تقييمات سلبية</p>
-                  <p className="text-2xl font-bold text-red-600">{ratingsStats.negative}</p>
+                  <p className="text-2xl font-bold text-status-danger">{ratingsStats.negative}</p>
                 </div>
                 <div>
                   <p className="text-sm text-muted-foreground">معدل الدقة</p>
-                  <p className="text-2xl font-bold text-blue-600">{ratingsStats.accuracyRate.toFixed(1)}%</p>
+                  <p className="text-2xl font-bold text-primary">{ratingsStats.accuracyRate.toFixed(1)}%</p>
                 </div>
               </div>
             </div>
@@ -654,7 +654,7 @@ export default function FetchedContentReview() {
                             {processOneMutation.isPending ? (
                               <Loader2 className="h-4 w-4 animate-spin" />
                             ) : (
-                              <Zap className="h-4 w-4 text-yellow-600" />
+                              <Zap className="h-4 w-4 text-status-warning" />
                             )}
                           </Button>
                           <Button
@@ -675,7 +675,7 @@ export default function FetchedContentReview() {
                             onClick={() => approveMutation.mutate({ id: item.id })}
                             disabled={approveMutation.isPending}
                           >
-                            <CheckCircle className="h-4 w-4 text-green-600" />
+                            <CheckCircle className="h-4 w-4 text-status-success" />
                           </Button>
                           <Button
                             size="sm"
@@ -683,7 +683,7 @@ export default function FetchedContentReview() {
                             onClick={() => rejectMutation.mutate({ id: item.id })}
                             disabled={rejectMutation.isPending}
                           >
-                            <XCircle className="h-4 w-4 text-red-600" />
+                            <XCircle className="h-4 w-4 text-status-danger" />
                           </Button>
                         </>
                       )}
@@ -753,7 +753,7 @@ export default function FetchedContentReview() {
                     href={previewItem.url || previewItem.sourceUrl} 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="text-blue-600 hover:underline text-sm truncate block"
+                    className="text-primary hover:underline text-sm truncate block"
                   >
                     {previewItem.url || previewItem.sourceUrl || "—"}
                   </a>
@@ -771,7 +771,7 @@ export default function FetchedContentReview() {
               {/* Smart Processing - Process Button */}
               <div className="flex items-center justify-between p-3 bg-muted rounded-lg">
                 <div className="flex items-center gap-2">
-                  <Zap className="h-4 w-4 text-yellow-600" />
+                  <Zap className="h-4 w-4 text-status-warning" />
                   <span className="text-sm font-medium">المعالجة الذكية (Rule-based)</span>
                   {previewItem.processedAt && (
                     <Badge variant="outline" className="text-xs">تمت المعالجة</Badge>
@@ -799,7 +799,7 @@ export default function FetchedContentReview() {
                 <div className="p-4 rounded-lg cleanup-surface-info">
                   <div className="flex items-center justify-between mb-2">
                     <div className="flex items-center gap-2">
-                      <Sparkles className="h-4 w-4 text-blue-600" />
+                      <Sparkles className="h-4 w-4 text-primary" />
                       <h3 className="font-semibold">التصنيف الذكي</h3>
                     </div>
                     <div className="flex gap-2">
@@ -812,7 +812,7 @@ export default function FetchedContentReview() {
                         })}
                         disabled={rateClassificationMutation.isPending}
                       >
-                        <ThumbsUp className="h-4 w-4 text-green-600" />
+                        <ThumbsUp className="h-4 w-4 text-status-success" />
                       </Button>
                       <Button
                         size="sm"
@@ -823,7 +823,7 @@ export default function FetchedContentReview() {
                         })}
                         disabled={rateClassificationMutation.isPending}
                       >
-                        <ThumbsDown className="h-4 w-4 text-red-600" />
+                        <ThumbsDown className="h-4 w-4 text-status-danger" />
                       </Button>
                     </div>
                   </div>
@@ -951,7 +951,7 @@ export default function FetchedContentReview() {
               <div className="p-4 border rounded-lg space-y-3">
                 <div className="flex items-center justify-between gap-3 flex-wrap">
                   <div className="flex items-center gap-2">
-                    <Sparkles className="h-4 w-4 text-amber-600" />
+                    <Sparkles className="h-4 w-4 text-status-warning" />
                     <h3 className="font-semibold">سياق المنصة المرتبط</h3>
                   </div>
                   <div className="flex items-center gap-2">
@@ -1028,7 +1028,7 @@ export default function FetchedContentReview() {
               {reviewEvents && reviewEvents.length > 0 && (
                 <div className="p-4 border rounded-lg space-y-3">
                   <div className="flex items-center gap-2">
-                    <Calendar className="h-4 w-4 text-blue-600" />
+                    <Calendar className="h-4 w-4 text-primary" />
                     <h3 className="font-semibold">سجل المراجعة والاعتماد</h3>
                   </div>
                   <div className="space-y-2 max-h-64 overflow-y-auto pr-1">

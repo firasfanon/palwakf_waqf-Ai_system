@@ -81,7 +81,7 @@ export default function WaqfAnalytics() {
             <TrendingUp className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-green-600">+12%</div>
+            <div className="text-2xl font-bold text-status-success">+12%</div>
             <p className="text-xs text-muted-foreground mt-1">
               نمو الأوقاف هذا الشهر
             </p>
@@ -164,7 +164,7 @@ export default function WaqfAnalytics() {
                     </div>
                     <div className="h-2 bg-secondary rounded-full overflow-hidden">
                       <div
-                        className="h-full bg-green-600 rounded-full transition-all"
+                        className="h-full bg-status-success rounded-full transition-all"
                         style={{ width: `${percentage}%` }}
                       />
                     </div>
@@ -199,10 +199,10 @@ export default function WaqfAnalytics() {
                   : item.status === "inactive" ? "غير نشط" 
                   : item.status === "disputed" ? "متنازع عليه" 
                   : "قيد التطوير";
-                const statusColor = item.status === "active" ? "bg-green-600" 
+                const statusColor = item.status === "active" ? "bg-status-success"
                   : item.status === "inactive" ? "bg-gray-400" 
-                  : item.status === "disputed" ? "bg-red-600" 
-                  : "bg-yellow-600";
+                  : item.status === "disputed" ? "bg-status-danger"
+                  : "bg-status-warning";
                 return (
                   <div key={index} className="space-y-2">
                     <div className="flex items-center justify-between text-sm">
@@ -251,7 +251,7 @@ export default function WaqfAnalytics() {
                     </div>
                     <div className="h-2 bg-secondary rounded-full overflow-hidden">
                       <div
-                        className="h-full bg-blue-600 rounded-full transition-all"
+                        className="h-full bg-primary rounded-full transition-all"
                         style={{ width: `${percentage}%` }}
                       />
                     </div>

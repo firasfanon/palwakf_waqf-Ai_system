@@ -197,10 +197,10 @@ export default function DataFetching() {
             <Card>
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium">عناصر معتمدة</CardTitle>
-                <CheckCircle className="h-4 w-4 text-green-600" />
+                <CheckCircle className="h-4 w-4 text-status-success" />
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold text-green-600">{stats?.totalItemsApproved || 0}</div>
+                <div className="text-2xl font-bold text-status-success">{stats?.totalItemsApproved || 0}</div>
                 <p className="text-xs text-muted-foreground">عنصر</p>
               </CardContent>
             </Card>
@@ -239,11 +239,11 @@ export default function DataFetching() {
                     <div key={log.id} className="flex items-center justify-between p-3 border rounded-lg">
                       <div className="flex items-center gap-3">
                         {log.status === "success" ? (
-                          <CheckCircle className="h-5 w-5 text-green-600" />
+                          <CheckCircle className="h-5 w-5 text-status-success" />
                         ) : log.status === "failed" ? (
-                          <XCircle className="h-5 w-5 text-red-600" />
+                          <XCircle className="h-5 w-5 text-status-danger" />
                         ) : (
-                          <AlertCircle className="h-5 w-5 text-yellow-600" />
+                          <AlertCircle className="h-5 w-5 text-status-warning" />
                         )}
                         <div>
                           <p className="font-medium">عملية #{log.id}</p>
@@ -527,8 +527,8 @@ export default function DataFetching() {
                 )}
               </Button>
 
-              <div className="rounded-lg bg-amber-50 dark:bg-amber-950/20 p-4 border border-amber-200 dark:border-amber-800">
-                <p className="text-sm text-amber-800 dark:text-amber-200">
+              <div className="rounded-lg bg-status-warning/10 dark:bg-status-warning/20 p-4 border border-status-warning/30 dark:border-status-warning">
+                <p className="text-sm text-status-warning dark:text-status-warning">
                   <strong>ملاحظة:</strong> استخراج النص من PDFs قد يستغرق وقتاً طويلاً،
                   خاصة للملفات الكبيرة أو المصورة (OCR).
                 </p>

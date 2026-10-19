@@ -189,13 +189,13 @@ export default function InteractionAnalytics() {
                     <div key={star} className="space-y-1">
                       <div className="flex items-center justify-between text-sm">
                         <span className="flex items-center gap-1">
-                          {star} <Star className="h-3 w-3 fill-yellow-400 text-yellow-400" />
+                          {star} <Star className="h-3 w-3 fill-status-warning text-status-warning" />
                         </span>
                         <span className="font-medium">{count}</span>
                       </div>
                       <div className="h-2 bg-secondary rounded-full overflow-hidden">
                         <div
-                          className="h-full bg-yellow-400 transition-all"
+                          className="h-full bg-status-warning/10 transition-all"
                           style={{ width: `${percentage}%` }}
                         />
                       </div>
@@ -279,7 +279,7 @@ export default function InteractionAnalytics() {
                     <div className="flex items-center gap-2">
                       <span className="text-sm font-medium">{item.count} تقييم</span>
                       <Badge variant="outline" className="gap-1">
-                        {item.avgRating} <Star className="h-3 w-3 fill-yellow-400 text-yellow-400" />
+                        {item.avgRating} <Star className="h-3 w-3 fill-status-warning text-status-warning" />
                       </Badge>
                     </div>
                   </div>

@@ -77,7 +77,7 @@ export default function Navbar() {
       <div className="container">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-3 cursor-pointer">
+          <Link href="/" className="flex items-center gap-3 cursor-pointer" aria-label={settings?.siteName || "الصفحة الرئيسية"}>
               {settings?.logoUrl ? (
                 <img 
                   src={settings.logoUrl} 
@@ -334,13 +334,13 @@ export default function Navbar() {
                 
                 {/* Bookmarks & Favorites */}
                 <Button variant="ghost" size="sm" asChild>
-                  <Link href="/bookmarks">
-                    <Bookmark className="w-4 h-4" />
+                  <Link href="/bookmarks" aria-label="المحفوظات">
+                    <Bookmark className="w-4 h-4" aria-hidden="true" />
                   </Link>
                 </Button>
                 <Button variant="ghost" size="sm" asChild>
-                  <Link href="/favorites">
-                    <Star className="w-4 h-4" />
+                  <Link href="/favorites" aria-label="المحادثات المفضلة">
+                    <Star className="w-4 h-4" aria-hidden="true" />
                   </Link>
                 </Button>
               </>

@@ -81,7 +81,7 @@ export default function RatingStars({
     <Card>
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
-          <Star className="h-5 w-5 fill-yellow-400 text-yellow-400" />
+          <Star className="h-5 w-5 fill-status-warning text-status-warning" />
           {title}
         </CardTitle>
       </CardHeader>
@@ -100,7 +100,7 @@ export default function RatingStars({
                     className={cn(
                       "h-4 w-4",
                       star <= Math.round(avgRating)
-                        ? "fill-yellow-400 text-yellow-400"
+                        ? "fill-status-warning text-status-warning"
                         : "text-gray-300"
                     )}
                   />
@@ -134,8 +134,8 @@ export default function RatingStars({
                   className={cn(
                     "h-8 w-8 transition-colors",
                     star <= displayRating
-                      ? "fill-yellow-400 text-yellow-400"
-                      : "text-gray-300 hover:text-yellow-200"
+                      ? "fill-status-warning text-status-warning"
+                      : "text-gray-300 hover:text-status-warning"
                   )}
                 />
               </button>
@@ -178,11 +178,11 @@ export default function RatingStars({
                 <div key={star} className="flex items-center gap-3">
                   <div className="flex items-center gap-1 w-16">
                     <span className="text-sm font-medium">{star}</span>
-                    <Star className="h-3 w-3 fill-yellow-400 text-yellow-400" />
+                    <Star className="h-3 w-3 fill-status-warning text-status-warning" />
                   </div>
                   <div className="flex-1 h-2 bg-gray-200 rounded-full overflow-hidden">
                     <div
-                      className="h-full bg-yellow-400 transition-all duration-300"
+                      className="h-full bg-status-warning/10 transition-all duration-300"
                       style={{ width: `${percentage}%` }}
                     />
                   </div>

@@ -42,8 +42,8 @@ export default function ToolsGuide() {
       icon: TrendingUp,
       title: "تحليل السوابق القضائية",
       route: getAdminToolRoute("precedents"),
-      color: "text-blue-600",
-      bgColor: "bg-blue-50",
+      color: "text-primary",
+      bgColor: "bg-primary/10",
       description: "أداة متخصصة في البحث عن السوابق القضائية المشابهة وتحليل الأنماط القانونية المتكررة.",
       features: [
         "البحث الذكي عن السوابق المشابهة",
@@ -60,8 +60,8 @@ export default function ToolsGuide() {
       icon: Scale,
       title: "مقارنة الأحكام",
       route: getAdminToolRoute("compare"),
-      color: "text-green-600",
-      bgColor: "bg-green-50",
+      color: "text-status-success",
+      bgColor: "bg-status-success/10",
       description: "أداة لمقارنة حكمين قضائيين أو نصين قانونيين وتحليل أوجه التشابه والاختلاف بينهما.",
       features: [
         "مقارنة تفصيلية بين حكمين",
@@ -78,8 +78,8 @@ export default function ToolsGuide() {
       icon: FileSearch,
       title: "التلخيص الذكي",
       route: getAdminToolRoute("summarize"),
-      color: "text-orange-600",
-      bgColor: "bg-orange-50",
+      color: "text-status-warning",
+      bgColor: "bg-status-warning/10",
       description: "أداة ذكية لتلخيص الأحكام والوثائق القانونية الطويلة بشكل مختصر ومفيد.",
       features: [
         "تلخيص تلقائي للنصوص الطويلة",
@@ -114,8 +114,8 @@ export default function ToolsGuide() {
       icon: Zap,
       title: "التصنيف التلقائي",
       route: getAdminToolRoute("classify"),
-      color: "text-yellow-600",
-      bgColor: "bg-yellow-50",
+      color: "text-status-warning",
+      bgColor: "bg-status-warning/10",
       description: "أداة لتصنيف النصوص والوثائق تلقائيًا وربط الناتج بمسار المعرفة للمراجعة.",
       features: [
         "تحديد الفئة الرئيسية والفرعية",
@@ -214,11 +214,11 @@ export default function ToolsGuide() {
                       مثال عملي
                     </h3>
                     <div className="space-y-2">
-                      <div className="bg-background p-3 rounded border-r-4 border-blue-500">
+                      <div className="bg-background p-3 rounded border-r-4 border-primary">
                         <p className="text-xs text-muted-foreground mb-1">المدخل:</p>
                         <p className="text-sm font-medium">{tool.example.input}</p>
                       </div>
-                      <div className="bg-background p-3 rounded border-r-4 border-green-500">
+                      <div className="bg-background p-3 rounded border-r-4 border-status-success">
                         <p className="text-xs text-muted-foreground mb-1">المخرج المتوقع:</p>
                         <p className="text-sm font-medium">{tool.example.output}</p>
                       </div>
@@ -231,41 +231,41 @@ export default function ToolsGuide() {
         </div>
 
         {/* Tips Section */}
-        <Card className="border-yellow-500/30 bg-yellow-50/50">
+        <Card className="border-status-warning/30 bg-status-warning/50">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <Zap className="h-6 w-6 text-yellow-600" />
+              <Zap className="h-6 w-6 text-status-warning" />
               نصائح للاستخدام الأمثل
             </CardTitle>
           </CardHeader>
           <CardContent>
             <ul className="space-y-3">
               <li className="flex items-start gap-2">
-                <span className="text-yellow-600 mt-1">→</span>
+                <span className="text-status-warning mt-1">→</span>
                 <span>استخدم <strong>التنبؤ بنتائج القضايا</strong> في المراحل الأولى لتقييم فرص النجاح</span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-yellow-600 mt-1">→</span>
+                <span className="text-status-warning mt-1">→</span>
                 <span>استفد من <strong>تحليل السوابق</strong> لبناء حجج قانونية قوية</span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-yellow-600 mt-1">→</span>
+                <span className="text-status-warning mt-1">→</span>
                 <span>استخدم <strong>مقارنة الأحكام</strong> لفهم الاختلافات في التطبيق القانوني</span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-yellow-600 mt-1">→</span>
+                <span className="text-status-warning mt-1">→</span>
                 <span>استعن بـ <strong>التلخيص الذكي</strong> لتوفير الوقت في قراءة الأحكام الطويلة</span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-yellow-600 mt-1">→</span>
+                <span className="text-status-warning mt-1">→</span>
                 <span>استخدم <strong>استخراج الكيانات</strong> لتنظيم وفهرسة الوثائق القانونية</span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-yellow-600 mt-1">→</span>
+                <span className="text-status-warning mt-1">→</span>
                 <span>جرّب <strong>توليد الوثائق</strong> لإنشاء مسودات أولية للمذكرات القانونية</span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-yellow-600 mt-1">→</span>
+                <span className="text-status-warning mt-1">→</span>
                 <span>استفد من <strong>الإجابة على الأسئلة</strong> للحصول على معلومات سريعة ودقيقة</span>
               </li>
             </ul>

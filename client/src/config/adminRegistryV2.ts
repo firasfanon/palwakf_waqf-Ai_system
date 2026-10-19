@@ -61,93 +61,186 @@ import {
   Rocket,
   type LucideIcon,
 } from "lucide-react";
+
 import { APP_ROUTES } from "@/lib/appRoutes";
 
-import ComingSoon from "@/pages/ComingSoon";
-import MustakshifAiPage from "@/pages/admin/MustakshifAiPage";
+function lazyPage(loader: () => Promise<{ default: ComponentType<any> }>): ComponentType<any> {
+  const LazyComponent = React.lazy(loader);
+  return function DeferredAdminPage(props: any) {
+    return React.createElement(
+      React.Suspense,
+      {
+        fallback: React.createElement(
+          "div",
+          { className: "p-6 text-sm text-muted-foreground", role: "status", "aria-live": "polite" },
+          "جارٍ تحميل مساحة العمل…",
+        ),
+      },
+      React.createElement(LazyComponent, props),
+    );
+  };
+}
+
+const MustakshifAiPage = lazyPage(() => import("@/pages/admin/MustakshifAiPage"));
+const AdminDashboard = lazyPage(() => import("@/pages/AdminDashboard"));
+const AdminActivity = lazyPage(() => import("@/pages/AdminActivity"));
+const AnalyticsDashboard = lazyPage(() => import("@/pages/AnalyticsDashboard"));
+const PropertiesManagement = lazyPage(() => import("@/pages/PropertiesManagement"));
+const CasesManagement = lazyPage(() => import("@/pages/CasesManagement"));
+const RulingsManagement = lazyPage(() => import("@/pages/RulingsManagement"));
+const DeedsManagement = lazyPage(() => import("@/pages/DeedsManagement"));
+const InstructionsManagement = lazyPage(() => import("@/pages/InstructionsManagement"));
+const WaqfCategoriesManagement = lazyPage(() => import("@/pages/WaqfCategoriesManagement"));
+const AdminContent = lazyPage(() => import("@/pages/AdminContent"));
+const ContentTemplates = lazyPage(() => import("@/pages/admin/ContentTemplates"));
+const HomeSectionsManagement = lazyPage(() => import("@/pages/HomeSectionsManagement"));
+const NotificationsManagement = lazyPage(() => import("@/pages/admin/NotificationsManagement"));
+const CommentsManagement = lazyPage(() => import("@/pages/admin/CommentsManagement"));
+const SiteSettings = lazyPage(() => import("@/pages/SiteSettings"));
+const ManageKnowledge = lazyPage(() => import("@/pages/ManageKnowledge"));
+const DigitalLibrary = lazyPage(() => import("@/pages/DigitalLibrary"));
+const FilesManagement = lazyPage(() => import("@/pages/FilesManagement"));
+const KnowledgeDashboard = lazyPage(() => import("@/pages/admin/KnowledgeDashboard"));
+const KnowledgeSourcesManagement = lazyPage(() => import("@/pages/admin/KnowledgeSourcesManagement"));
+const SourceProvenanceRightsRegistry = lazyPage(() => import("@/pages/admin/SourceProvenanceRightsRegistry"));
+const DataFetching = lazyPage(() => import("@/pages/admin/DataFetching"));
+const FetchedContentReview = lazyPage(() => import("@/pages/FetchedContentReview"));
+const FetchLogsManagement = lazyPage(() => import("@/pages/admin/FetchLogsManagement"));
+const KnowledgeReviewOperations = lazyPage(() => import("@/pages/admin/KnowledgeReviewOperations"));
+const KnowledgeActivationCenter = lazyPage(() => import("@/pages/admin/KnowledgeActivationCenter"));
+const LegacyProvenanceResolutionCenter = lazyPage(() => import("@/pages/admin/LegacyProvenanceResolutionCenter"));
+const KnowledgeOperationsWorkspace = lazyPage(() => import("@/pages/admin/KnowledgeOperationsWorkspace"));
+const KB08BPilotCandidate = lazyPage(() => import("@/pages/admin/KB08BPilotCandidate"));
+const DeferredMegaBatchAAudit = lazyPage(() => import("@/pages/admin/DeferredMegaBatchAAudit"));
+const ToolOutputIntake = lazyPage(() => import("@/pages/admin/ToolOutputIntake"));
+const SourceInventoryPreview = lazyPage(() => import("@/pages/admin/SourceInventoryPreview"));
+const RemoteStagingEvidence = lazyPage(() => import("@/pages/admin/RemoteStagingEvidence"));
+const OperationsSearch = lazyPage(() => import("@/pages/admin/OperationsSearch"));
+const Chat = lazyPage(() => import("@/pages/Chat"));
+const AITools = lazyPage(() => import("@/pages/AITools"));
+const ClassifyTool = lazyPage(() => import("@/pages/ClassifyTool"));
+const ExtractTool = lazyPage(() => import("@/pages/ExtractTool"));
+const SummarizeTool = lazyPage(() => import("@/pages/SummarizeTool"));
+const CompareTool = lazyPage(() => import("@/pages/CompareTool"));
+const PrecedentsTool = lazyPage(() => import("@/pages/PrecedentsTool"));
+const PredictTool = lazyPage(() => import("@/pages/PredictTool"));
+const ToolsGuide = lazyPage(() => import("@/pages/ToolsGuide"));
+const AIToolRuns = lazyPage(() => import("@/pages/AIToolRuns"));
+const Reports = lazyPage(() => import("@/pages/admin/Reports"));
+const CacheAnalytics = lazyPage(() => import("@/pages/CacheAnalytics"));
+const InteractionAnalytics = lazyPage(() => import("@/pages/InteractionAnalytics"));
+const WaqfAnalytics = lazyPage(() => import("@/pages/WaqfAnalytics"));
+const ManageUsers = lazyPage(() => import("@/pages/ManageUsers"));
+const Roles = lazyPage(() => import("@/pages/admin/Roles"));
+const Permissions = lazyPage(() => import("@/pages/admin/Permissions"));
+const AuditLogs = lazyPage(() => import("@/pages/admin/AuditLogs"));
+const Security = lazyPage(() => import("@/pages/admin/Security"));
+const ApiKeys = lazyPage(() => import("@/pages/admin/ApiKeys"));
+const AdminSystemSettings = lazyPage(() => import("@/pages/AdminSystemSettings"));
+const AdminUsers = lazyPage(() => import("@/pages/AdminUsers"));
+const Dashboard = lazyPage(() => import("@/pages/Dashboard"));
+const Cache = lazyPage(() => import("@/pages/admin/Cache"));
+const Maintenance = lazyPage(() => import("@/pages/admin/Maintenance"));
+const Backup = lazyPage(() => import("@/pages/admin/Backup"));
+const Integrations = lazyPage(() => import("@/pages/admin/Integrations"));
+const Webhooks = lazyPage(() => import("@/pages/admin/Webhooks"));
+const Billing = lazyPage(() => import("@/pages/admin/Billing"));
+const PlatformBridgePage = lazyPage(() => import("@/pages/admin/PlatformBridgePage"));
+const RolePermissions = lazyPage(() => import("@/pages/admin/RolePermissions"));
+const PageSettings = lazyPage(() => import("@/pages/admin/PageSettings"));
+const AdminPagesClassification = lazyPage(() => import("@/pages/admin/AdminPagesClassification"));
+const DesignSystemCatalog = lazyPage(() => import("@/pages/admin/DesignSystemCatalog"));
+const PropertyDetails = lazyPage(() => import("@/pages/PropertyDetails"));
+const CaseDetails = lazyPage(() => import("@/pages/CaseDetails"));
+const RulingDetails = lazyPage(() => import("@/pages/RulingDetails"));
+const KnowledgeSearch = lazyPage(() => import("@/pages/admin/KnowledgeSearch").then((m) => ({ default: m.KnowledgeSearch })));
+
+
+
+
 
 // Admin pages (existing files)
-import AdminDashboard from "@/pages/AdminDashboard";
-import AdminActivity from "@/pages/AdminActivity";
-import AnalyticsDashboard from "@/pages/AnalyticsDashboard";
 
-import PropertiesManagement from "@/pages/PropertiesManagement";
-import CasesManagement from "@/pages/CasesManagement";
-import RulingsManagement from "@/pages/RulingsManagement";
-import DeedsManagement from "@/pages/DeedsManagement";
-import InstructionsManagement from "@/pages/InstructionsManagement";
-import WaqfCategoriesManagement from "@/pages/WaqfCategoriesManagement";
 
-import AdminContent from "@/pages/AdminContent";
-import ContentTemplates from "@/pages/admin/ContentTemplates";
-import HomeSectionsManagement from "@/pages/HomeSectionsManagement";
-import NotificationsManagement from "@/pages/admin/NotificationsManagement";
-import CommentsManagement from "@/pages/admin/CommentsManagement";
-import SiteSettings from "@/pages/SiteSettings";
 
-import ManageKnowledge from "@/pages/ManageKnowledge";
-import DigitalLibrary from "@/pages/DigitalLibrary";
-import FilesManagement from "@/pages/FilesManagement";
-import KnowledgeDashboard from "@/pages/admin/KnowledgeDashboard";
-import KnowledgeSourcesManagement from "@/pages/admin/KnowledgeSourcesManagement";
-import SourceProvenanceRightsRegistry from "@/pages/admin/SourceProvenanceRightsRegistry";
-import DataFetching from "@/pages/admin/DataFetching";
-import FetchedContentReview from "@/pages/FetchedContentReview";
-import FetchLogsManagement from "@/pages/admin/FetchLogsManagement";
-import { KnowledgeSearch } from "@/pages/admin/KnowledgeSearch";
-import KnowledgeReviewOperations from "@/pages/admin/KnowledgeReviewOperations";
-import KnowledgeActivationCenter from "@/pages/admin/KnowledgeActivationCenter";
-import LegacyProvenanceResolutionCenter from "@/pages/admin/LegacyProvenanceResolutionCenter";
-import KnowledgeOperationsWorkspace from "@/pages/admin/KnowledgeOperationsWorkspace";
-import KB08BPilotCandidate from "@/pages/admin/KB08BPilotCandidate";
-import DeferredMegaBatchAAudit from "@/pages/admin/DeferredMegaBatchAAudit";
-import ToolOutputIntake from "@/pages/admin/ToolOutputIntake";
-import SourceInventoryPreview from "@/pages/admin/SourceInventoryPreview";
-import RemoteStagingEvidence from "@/pages/admin/RemoteStagingEvidence";
-import OperationsSearch from "@/pages/admin/OperationsSearch";
-import Chat from "@/pages/Chat";
 
-import AITools from "@/pages/AITools";
-import ClassifyTool from "@/pages/ClassifyTool";
-import ExtractTool from "@/pages/ExtractTool";
-import SummarizeTool from "@/pages/SummarizeTool";
-import CompareTool from "@/pages/CompareTool";
-import PrecedentsTool from "@/pages/PrecedentsTool";
-import PredictTool from "@/pages/PredictTool";
-import ToolsGuide from "@/pages/ToolsGuide";
-import AIToolRuns from "@/pages/AIToolRuns";
 
-import Reports from "@/pages/admin/Reports";
-import CacheAnalytics from "@/pages/CacheAnalytics";
-import InteractionAnalytics from "@/pages/InteractionAnalytics";
-import WaqfAnalytics from "@/pages/WaqfAnalytics";
 
-import ManageUsers from "@/pages/ManageUsers";
-import Roles from "@/pages/admin/Roles";
-import Permissions from "@/pages/admin/Permissions";
 
-import AuditLogs from "@/pages/admin/AuditLogs";
-import Security from "@/pages/admin/Security";
-import ApiKeys from "@/pages/admin/ApiKeys";
 
-import AdminSystemSettings from "@/pages/AdminSystemSettings";
-import AdminUsers from "@/pages/AdminUsers";
-import Dashboard from "@/pages/Dashboard";
 
-import Cache from "@/pages/admin/Cache";
-import Maintenance from "@/pages/admin/Maintenance";
-import Backup from "@/pages/admin/Backup";
-import Integrations from "@/pages/admin/Integrations";
-import Webhooks from "@/pages/admin/Webhooks";
-import Billing from "@/pages/admin/Billing";
-import PlatformBridgePage from "@/pages/admin/PlatformBridgePage";
-import RolePermissions from "@/pages/admin/RolePermissions";
-import PageSettings from "@/pages/admin/PageSettings";
-import AdminPagesClassification from "@/pages/admin/AdminPagesClassification";
 
-import PropertyDetails from "@/pages/PropertyDetails";
-import CaseDetails from "@/pages/CaseDetails";
-import RulingDetails from "@/pages/RulingDetails";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 export interface NavItem {
   title: string;
@@ -171,8 +264,8 @@ export type AdminRouteEntry = {
   component: ComponentType<any>;
 };
 
-export type AdminPageLifecycle = "operational" | "empty_state_ready" | "backend_pending" | "stub_page" | "access_restricted";
-export type AdminPageDataState = "connected" | "empty" | "pending_backend" | "static_stub" | "restricted";
+export type AdminPageLifecycle = "operational" | "empty_state_ready" | "backend_pending" | "deferred" | "stub_page" | "access_restricted";
+export type AdminPageDataState = "connected" | "empty" | "pending_backend" | "deferred" | "static_stub" | "restricted";
 
 export type AdminPageClassificationRecord = {
   sectionTitle: string;
@@ -216,7 +309,7 @@ export const adminRegistrySections: RegistryNavSection[] = [
     icon: Building2,
     items: [
       { title: "إدارة العقارات الوقفية", href: "/admin/properties", icon: Building2, component: PropertiesManagement , lifecycle: "operational", dataState: "connected", note: "تم تفعيل properties.* للقراءة والإنشاء والتحديث والحذف الآمن ضمن Mega Batch 27D مع بقاء الربط السيادي النهائي عبر waqf_asset_id ضمن منصة PalWakf." },
-      { title: "مستكشف الأراضي + AI", href: "/admin/mustakshif-ai", icon: Map, component: MustakshifAiPage , lifecycle: "stub_page", dataState: "static_stub", note: "مؤجلة رسميًا لحين ربط مستكشف الأراضي/AI بالمالك السيادي في PalWakf؛ ليست backend_pending داخل المساعد." },
+      { title: "مستكشف الأراضي + AI", href: "/admin/mustakshif-ai", icon: Map, component: MustakshifAiPage, lifecycle: "deferred", dataState: "deferred", note: "DESIGN-ARCH-001: مؤجل بقرار منتج صريح إلى مسار GIS/الأصول؛ مساحة العمل المعرفي الحالية هي السطح التشغيلي القانوني/المعرفي ولا يُحتسب هذا السطح كوظيفة مكتملة." },
       { title: "إدارة القضايا الوقفية", href: "/admin/cases", icon: Scale, component: CasesManagement , lifecycle: "operational", dataState: "connected", note: "تم تفعيل cases.* للقراءة والإنشاء والتحديث والحذف الآمن ضمن Mega Batch 27D كمسار إداري مساعد." },
       { title: "إدارة الأحكام القضائية", href: "/admin/rulings", icon: Gavel, component: RulingsManagement , lifecycle: "operational", dataState: "connected", note: "تم تفعيل rulings.* للقراءة والإنشاء والتحديث والحذف ضمن Mega Batch 27D." },
       { title: "إدارة الحجج الوقفية", href: "/admin/deeds", icon: FileText, component: DeedsManagement , lifecycle: "operational", dataState: "connected", note: "تم تفعيل deeds.* للقراءة والإنشاء والتحديث والحذف ضمن Mega Batch 27D." },
@@ -317,13 +410,15 @@ export const adminRegistrySections: RegistryNavSection[] = [
     title: "الصيانة والتشغيل",
     icon: Wrench,
     items: [
-      { title: "إعدادات النظام", href: "/admin/system-settings", icon: Sliders, component: AdminSystemSettings , lifecycle: "operational", dataState: "connected", note: "إعدادات النظام مربوطة عبر systemSettings.* وعمليات الصيانة الآمنة." },
+      { title: "إعدادات النظام", href: "/admin/system-settings", icon: Sliders, component: AdminSystemSettings, lifecycle: "operational", dataState: "connected", note: "إعدادات النظام مربوطة عبر systemSettings.* وعمليات الصيانة الآمنة." },
+      { title: "نظام التصميم", href: "/admin/design-system", icon: Layers, component: DesignSystemCatalog, lifecycle: "operational", dataState: "connected", note: "DESIGN-ARCH-001: كتالوج داخلي محكوم للتوكنز والمكونات والحالات الدلالية وRTL/Bidi." },
       { title: "إدارة Cache", href: "/admin/cache", icon: Trash2, component: Cache, lifecycle: "operational", dataState: "connected", note: "تم تحويلها من placeholder إلى قراءة backend عبر admin.operations.cacheSnapshot." },
       { title: "وضع الصيانة", href: "/admin/maintenance", icon: Wrench, component: Maintenance , lifecycle: "operational", dataState: "connected", note: "تم تحويلها إلى maintenanceSnapshot يقرأ حالة الخادم وقاعدة البيانات وCache مع تعطيل الإجراءات الحساسة." },
       { title: "النسخ الاحتياطي", href: "/admin/backup", icon: HardDrive, component: Backup, lifecycle: "operational", dataState: "connected", note: "تم تفعيلها كـ manifest حوكمي آمن دون dump أو restore هدّام من الواجهة." },
       { title: "التكاملات", href: "/admin/integrations", icon: Plug, component: Integrations, lifecycle: "operational", dataState: "connected", note: "تم تحويلها إلى قراءة حالة فعلية من admin.operations.integrationsSnapshot." },
       { title: "جسر المنصة", href: "/admin/platform-bridge", icon: Link2, component: PlatformBridgePage , lifecycle: "operational", dataState: "connected", note: "جسر المنصة مربوطة عبر platformBridge.* للقراءة السيادية فقط." },
       { title: "Webhooks", href: "/admin/webhooks", icon: Webhook, component: Webhooks, lifecycle: "operational", dataState: "connected", note: "تم ربطها بخريطة أحداث داخلية عبر admin.operations.webhooksSnapshot دون إرسال خارجي تلقائي." },
+      { title: "الفواتير", href: "/admin/billing", icon: FileBarChart, component: Billing, hidden: true, lifecycle: "deferred", dataState: "deferred", note: "DESIGN-ARCH-001: مسار توافق داخلي مؤجل بقرار منتج؛ لا توجد خدمة فوترة فعالة ولا يُحتسب كوظيفة مكتملة." },
     ],
   },
 ];
@@ -331,11 +426,8 @@ export const adminRegistrySections: RegistryNavSection[] = [
 function stripForNav(item: RegistryNavItem): NavItem {
   const { component, hidden, children, ...rest } = item;
   const navRest = rest as NavItem;
-
-  // ✅ Safety: if a leaf route has no component, treat it as Coming Soon.
-  // For parent items with children, we keep it expandable even if its own page isn't ready.
+  // A leaf without a bound component is disabled; a generic placeholder is never synthesized.
   if (!component && !children?.length) {
-    navRest.comingSoon = true;
     navRest.disabled = true;
   }
 
@@ -377,16 +469,9 @@ export const adminNavSections: NavSection[] = adminRegistrySections.map((section
 }));
 
 function resolveRouteComponent(item: RegistryNavItem): ComponentType<any> | null {
+  // Routes are admitted only when an explicit component is bound.
+  // Deferred work uses an explicit classified surface rather than a generated placeholder.
   if (item.component) return item.component;
-  if (item.comingSoon) return () => React.createElement(ComingSoon, { title: item.title });
-
-  // ✅ Default: if it's a leaf (no children) and has no component,
-  // still register a route that renders ComingSoon instead of falling into the router catch-all.
-  if (!item.children?.length) {
-    return () => React.createElement(ComingSoon, { title: item.title });
-  }
-
-  // Parent items with children may act as groups; do not force a route unless explicitly provided.
   return null;
 }
 
@@ -409,7 +494,6 @@ const extraRoutes: AdminRouteEntry[] = [
   // admin internal pages (not in sidebar)
   { path: "/admin/role-permissions", component: RolePermissions },
   { path: "/admin/page-settings", component: PageSettings },
-  { path: "/admin/billing", component: Billing },
 
   // details
   { path: "/admin/properties/:id", component: PropertyDetails },

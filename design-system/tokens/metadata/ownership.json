@@ -1,0 +1,12 @@
+{
+  "owner": "WAQF_AI Product + UX + Architecture Engineering",
+  "status": "experimental",
+  "version": "0.1.0",
+  "changePolicy": "PR/review required for semantic or component token changes",
+  "layers": ["primitive","semantic","component","theme"],
+  "rtlFirst": true,
+  "generatedArtifacts": [
+    "client/src/styles/generated-design-tokens.css",
+    "client/src/lib/designTokens.generated.ts"
+  ]
+}

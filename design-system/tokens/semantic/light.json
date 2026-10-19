@@ -1,0 +1,68 @@
+{
+  "$schema": "https://www.designtokens.org/schemas/2025.10/format.json",
+  "$description": "Semantic light-theme aliases. Names describe purpose, not current value.",
+  "color": {
+    "background": {
+      "canvas": {
+        "$type": "color",
+        "$value": "{color.neutral.50}"
+      },
+      "surface": {
+        "$type": "color",
+        "$value": "{color.neutral.0}"
+      }
+    },
+    "text": {
+      "primary": {
+        "$type": "color",
+        "$value": "{color.neutral.900}"
+      },
+      "secondary": {
+        "$type": "color",
+        "$value": "{color.neutral.700}"
+      },
+      "muted": {
+        "$type": "color",
+        "$value": "{color.neutral.500}"
+      }
+    },
+    "action": {
+      "primary": {
+        "$type": "color",
+        "$value": "{color.brand.blue.700}"
+      },
+      "primaryHover": {
+        "$type": "color",
+        "$value": "{color.brand.blue.600}"
+      },
+      "accent": {
+        "$type": "color",
+        "$value": "{color.brand.gold.500}"
+      }
+    },
+    "border": {
+      "default": {
+        "$type": "color",
+        "$value": "{color.neutral.200}"
+      }
+    },
+    "status": {
+      "success": {
+        "$type": "color",
+        "$value": "{color.state.success}"
+      },
+      "warning": {
+        "$type": "color",
+        "$value": "{color.state.warning}"
+      },
+      "danger": {
+        "$type": "color",
+        "$value": "{color.state.danger}"
+      },
+      "info": {
+        "$type": "color",
+        "$value": "{color.state.info}"
+      }
+    }
+  }
+}

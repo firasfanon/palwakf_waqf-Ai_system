@@ -100,8 +100,8 @@ export default function AdminActivity() {
               <Card key={index} className="hover:shadow-md transition-shadow">
                 <CardContent className="pt-6">
                   <div className="flex items-start gap-4">
-                    <div className="p-2 rounded-lg bg-blue-50">
-                      <Icon className="h-5 w-5 text-blue-600" />
+                    <div className="p-2 rounded-lg bg-primary/10">
+                      <Icon className="h-5 w-5 text-primary" />
                     </div>
                     <div className="flex-1">
                       <div className="flex items-center gap-2 mb-1">

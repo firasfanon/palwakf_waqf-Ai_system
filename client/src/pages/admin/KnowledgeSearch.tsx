@@ -132,7 +132,7 @@ const [category, setCategory] = useState<string>(ALL_CATEGORIES);
           </div>
 
           {generateChunksMutation.data && (
-            <div className="p-3 bg-green-50 border border-green-200 rounded text-sm text-green-800">
+            <div className="p-3 bg-status-success/10 border border-status-success/30 rounded text-sm text-status-success">
               ✓ تم إنشاء {generateChunksMutation.data.created ?? generateChunksMutation.data.generated ?? 0} chunks
               {generateChunksMutation.data.skipped > 0 &&
                 ` (تم تخطي ${generateChunksMutation.data.skipped})`}
@@ -140,7 +140,7 @@ const [category, setCategory] = useState<string>(ALL_CATEGORIES);
           )}
 
           {searchMutation.data?.error && (
-            <div className="p-3 bg-red-50 border border-red-200 rounded text-sm text-red-800">
+            <div className="p-3 bg-status-danger/10 border border-status-danger/30 rounded text-sm text-status-danger">
               ✗ خطأ: {searchMutation.data.error}
             </div>
           )}
@@ -194,7 +194,7 @@ const [category, setCategory] = useState<string>(ALL_CATEGORIES);
                           href={result.url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-blue-500 hover:underline text-xs"
+                          className="text-primary hover:underline text-xs"
                         >
                           فتح
                         </a>

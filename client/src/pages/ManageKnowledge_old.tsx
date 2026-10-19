@@ -305,7 +305,7 @@ export default function ManageKnowledge() {
                     <TableRow key={doc.id}>
                       <TableCell className="font-medium">{doc.title}</TableCell>
                       <TableCell>
-                        <span className="inline-flex items-center rounded-full px-2 py-1 text-xs font-medium bg-blue-50 text-blue-700">
+                        <span className="inline-flex items-center rounded-full px-2 py-1 text-xs font-medium bg-primary/10 text-primary">
                           {categoryLabels[doc.category] || doc.category}
                         </span>
                       </TableCell>
@@ -336,7 +336,7 @@ export default function ManageKnowledge() {
                             size="sm"
                             onClick={() => handleDelete(doc.id, doc.title)}
                           >
-                            <Trash2 className="h-4 w-4 text-red-500" />
+                            <Trash2 className="h-4 w-4 text-status-danger" />
                           </Button>
                         </div>
                       </TableCell>
@@ -366,7 +366,7 @@ export default function ManageKnowledge() {
             <div className="grid gap-4 py-4">
               <div className="grid gap-2">
                 <Label htmlFor="title">
-                  العنوان <span className="text-red-500">*</span>
+                  العنوان <span className="text-status-danger">*</span>
                 </Label>
                 <Input
                   id="title"
@@ -381,7 +381,7 @@ export default function ManageKnowledge() {
 
               <div className="grid gap-2">
                 <Label htmlFor="category">
-                  الفئة <span className="text-red-500">*</span>
+                  الفئة <span className="text-status-danger">*</span>
                 </Label>
                 <Select
                   value={formData.category}
@@ -408,7 +408,7 @@ export default function ManageKnowledge() {
 
               <div className="grid gap-2">
                 <Label htmlFor="content">
-                  المحتوى <span className="text-red-500">*</span>
+                  المحتوى <span className="text-status-danger">*</span>
                 </Label>
                 <Textarea
                   id="content"
@@ -477,7 +477,7 @@ export default function ManageKnowledge() {
                   </p>
                 )}
                 {formData.pdfUrl && (
-                  <p className="text-sm text-blue-600">
+                  <p className="text-sm text-primary">
                     <a href={formData.pdfUrl} target="_blank" rel="noopener noreferrer">
                       عرض الملف المرفوع
                     </a>

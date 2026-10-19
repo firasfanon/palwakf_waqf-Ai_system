@@ -135,13 +135,13 @@ export default function CompareTool() {
         {result && (
           <>
             {result.toolRunId ? (
-              <Card className="border-emerald-200 bg-emerald-50/70">
+              <Card className="border-status-success/30 bg-status-success/70">
                 <CardContent className="flex flex-col gap-3 pt-6 lg:flex-row lg:items-center lg:justify-between">
                   <div className="space-y-1">
-                    <p className="text-sm font-semibold text-emerald-900">تم حفظ التشغيل سياديًا</p>
-                    <p className="text-xs text-emerald-800">معرف التشغيل: {result.toolRunId}</p>
+                    <p className="text-sm font-semibold text-status-success">تم حفظ التشغيل سياديًا</p>
+                    <p className="text-xs text-status-success">معرف التشغيل: {result.toolRunId}</p>
                   </div>
-                  <Button variant="outline" onClick={() => navigate(APP_ROUTES.adminToolsRuns)} className="border-emerald-300 text-emerald-900">
+                  <Button variant="outline" onClick={() => navigate(APP_ROUTES.adminToolsRuns)} className="border-status-success/30 text-status-success">
                     فتح سجل التشغيل والاعتماد
                   </Button>
                 </CardContent>
@@ -177,7 +177,7 @@ export default function CompareTool() {
                     <h3 className="mb-3 font-semibold">أوجه التشابه</h3>
                     <div className="space-y-2">
                       {result.similarities.map((sim: string, i: number) => (
-                        <div key={i} className="rounded-xl border border-emerald-200 bg-emerald-50 p-3 text-sm leading-7 text-emerald-900">{sim}</div>
+                        <div key={i} className="rounded-xl border border-status-success/30 bg-status-success/10 p-3 text-sm leading-7 text-status-success">{sim}</div>
                       ))}
                     </div>
                   </div>
@@ -188,7 +188,7 @@ export default function CompareTool() {
                     <h3 className="mb-3 font-semibold">أوجه الاختلاف</h3>
                     <div className="space-y-2">
                       {result.differences.map((diff: string, i: number) => (
-                        <div key={i} className="rounded-xl border border-amber-200 bg-amber-50 p-3 text-sm leading-7 text-amber-900">{diff}</div>
+                        <div key={i} className="rounded-xl border border-status-warning/30 bg-status-warning/10 p-3 text-sm leading-7 text-status-warning">{diff}</div>
                       ))}
                     </div>
                   </div>

@@ -97,13 +97,13 @@ export default function SummarizeTool() {
         {result && (
           <>
             {result.toolRunId ? (
-              <Card className="border-emerald-200 bg-emerald-50/70">
+              <Card className="border-status-success/30 bg-status-success/70">
                 <CardContent className="flex flex-col gap-3 pt-6 lg:flex-row lg:items-center lg:justify-between">
                   <div className="space-y-1">
-                    <p className="text-sm font-semibold text-emerald-900">تم حفظ التشغيل سياديًا</p>
-                    <p className="text-xs text-emerald-800">معرف التشغيل: {result.toolRunId}</p>
+                    <p className="text-sm font-semibold text-status-success">تم حفظ التشغيل سياديًا</p>
+                    <p className="text-xs text-status-success">معرف التشغيل: {result.toolRunId}</p>
                   </div>
-                  <Button variant="outline" onClick={() => navigate(APP_ROUTES.adminToolsRuns)} className="border-emerald-300 text-emerald-900">
+                  <Button variant="outline" onClick={() => navigate(APP_ROUTES.adminToolsRuns)} className="border-status-success/30 text-status-success">
                     فتح سجل التشغيل والاعتماد
                   </Button>
                 </CardContent>
@@ -123,8 +123,8 @@ export default function SummarizeTool() {
                     <h3 className="font-semibold mb-3">النقاط الرئيسية</h3>
                     <ul className="space-y-2">
                       {result.keyPoints.map((point: string, i: number) => (
-                        <li key={i} className="flex items-start gap-2 p-3 bg-blue-50 rounded">
-                          <span className="text-blue-600 mt-1">•</span>
+                        <li key={i} className="flex items-start gap-2 p-3 bg-primary/10 rounded">
+                          <span className="text-primary mt-1">•</span>
                           <span className="leading-relaxed">{point}</span>
                         </li>
                       ))}
@@ -133,7 +133,7 @@ export default function SummarizeTool() {
                 )}
 
                 {result.recommendations && result.recommendations.length > 0 && (
-                  <div className="p-4 bg-green-50 rounded-lg">
+                  <div className="p-4 bg-status-success/10 rounded-lg">
                     <h3 className="font-semibold mb-2">الخلاصة / التوصيات</h3>
                     <ul className="list-disc list-inside space-y-2">
                       {result.recommendations.map((rec: string, i: number) => <li key={i} className="leading-relaxed">{rec}</li>)}

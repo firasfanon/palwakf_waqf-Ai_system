@@ -301,7 +301,7 @@ export default function AIToolRuns() {
                         <div className="rounded-xl bg-accent/40 p-3 text-sm">درجة الجاهزية: {selectedQuality.score}/100</div>
                       </div>
                       {selectedQuality.warnings?.length ? (
-                        <div className="space-y-1 rounded-xl border border-amber-500/30 bg-amber-500/10 p-3 text-sm leading-7">
+                        <div className="space-y-1 rounded-xl border border-status-warning/30 bg-status-warning/10 p-3 text-sm leading-7">
                           {selectedQuality.warnings.map((warning: string) => <p key={warning}>• {warning}</p>)}
                         </div>
                       ) : (

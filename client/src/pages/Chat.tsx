@@ -148,8 +148,8 @@ const smartToolSamples: Record<SmartToolMode, ToolSample[]> = {
 };
 
 const evaluationStatusMeta: Record<EvaluationStatus, { label: string; className: string }> = {
-  pass: { label: "ناجح", className: "bg-emerald-100 text-emerald-700 border-emerald-200" },
-  review: { label: "يحتاج مراجعة", className: "bg-amber-100 text-amber-700 border-amber-200" },
+  pass: { label: "ناجح", className: "bg-status-success/10 text-status-success border-status-success/30" },
+  review: { label: "يحتاج مراجعة", className: "bg-status-warning/10 text-status-warning border-status-warning/30" },
   fail: { label: "غير مقنع", className: "bg-rose-100 text-rose-700 border-rose-200" },
 };
 
@@ -777,8 +777,8 @@ ${extractedText}`;
             <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
               <div className="flex items-center gap-3">
                 <Button variant="outline" size="icon" asChild className="rounded-2xl border-border bg-background">
-                  <Link href="/">
-                    <ArrowRight className="h-5 w-5" />
+                  <Link href="/" aria-label="العودة إلى الصفحة الرئيسية">
+                    <ArrowRight className="h-5 w-5" aria-hidden="true" />
                   </Link>
                 </Button>
                 <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary">
@@ -793,7 +793,7 @@ ${extractedText}`;
               <div className="flex flex-wrap items-center gap-2">
                 <div className="rounded-2xl border border-border bg-background px-4 py-2 text-xs">
                   <span className="font-semibold">حالة مزود الذكاء: </span>
-                  <span className={cn(providerHealth?.available ? "text-emerald-600" : "text-amber-600", "font-bold")}>{providerHealth?.available ? "متصل" : "غير متصل"}</span>
+                  <span className={cn(providerHealth?.available ? "text-status-success" : "text-status-warning", "font-bold")}>{providerHealth?.available ? "متصل" : "غير متصل"}</span>
                   <span className="mr-2 text-muted-foreground">{providerHealth?.model || "غير محدد"}</span>
                 </div>
                 <Button variant="outline" className="rounded-2xl border-border bg-background text-foreground" onClick={() => setIsSidebarVisible((prev) => !prev)}>
@@ -1186,13 +1186,13 @@ ${extractedText}`;
                         <div className="text-xs text-muted-foreground">إجمالي الاختبارات</div>
                         <div className="mt-2 text-2xl font-black text-foreground">{evaluationSummary.total}</div>
                       </div>
-                      <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-4">
-                        <div className="text-xs text-emerald-700">ناجح</div>
-                        <div className="mt-2 text-2xl font-black text-emerald-700">{evaluationSummary.pass}</div>
+                      <div className="rounded-2xl border border-status-success/30 bg-status-success/10 p-4">
+                        <div className="text-xs text-status-success">ناجح</div>
+                        <div className="mt-2 text-2xl font-black text-status-success">{evaluationSummary.pass}</div>
                       </div>
-                      <div className="rounded-2xl border border-amber-200 bg-amber-50 p-4">
-                        <div className="text-xs text-amber-700">يحتاج مراجعة</div>
-                        <div className="mt-2 text-2xl font-black text-amber-700">{evaluationSummary.review}</div>
+                      <div className="rounded-2xl border border-status-warning/30 bg-status-warning/10 p-4">
+                        <div className="text-xs text-status-warning">يحتاج مراجعة</div>
+                        <div className="mt-2 text-2xl font-black text-status-warning">{evaluationSummary.review}</div>
                       </div>
                       <div className="rounded-2xl border border-rose-200 bg-rose-50 p-4">
                         <div className="text-xs text-rose-700">غير مقنع</div>

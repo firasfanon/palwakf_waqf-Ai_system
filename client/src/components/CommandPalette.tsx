@@ -251,7 +251,7 @@ export function CommandPalette({
                       onClick={cmd.action}
                       className={`w-full flex items-center justify-between px-3 py-3 rounded-lg transition-all ${
                         isSelected
-                          ? "bg-gradient-to-r from-emerald-50 to-emerald-100 border-r-4 border-emerald-600"
+                          ? "ds-gradient-success-card border-r-4 border-status-success"
                           : "hover:bg-gray-50"
                       }`}
                     >
@@ -259,7 +259,7 @@ export function CommandPalette({
                         <div
                           className={`p-2 rounded-lg ${
                             isSelected
-                              ? "bg-emerald-600 text-white"
+                              ? "bg-status-success text-white"
                               : "bg-gray-100 text-gray-600"
                           }`}
                         >
@@ -268,7 +268,7 @@ export function CommandPalette({
                         <div className="text-right">
                           <div
                             className={`font-medium ${
-                              isSelected ? "text-emerald-900" : "text-gray-900"
+                              isSelected ? "text-status-success" : "text-gray-900"
                             }`}
                           >
                             {cmd.title}
@@ -281,7 +281,7 @@ export function CommandPalette({
                       <div
                         className={`px-3 py-1 rounded-md text-xs font-mono ${
                           isSelected
-                            ? "bg-emerald-600 text-white"
+                            ? "bg-status-success text-white"
                             : "bg-gray-200 text-gray-600"
                         }`}
                       >
@@ -311,7 +311,7 @@ export function CommandPalette({
               للإغلاق
             </span>
           </div>
-          <div className="text-emerald-600 font-medium">
+          <div className="text-status-success font-medium">
             {filteredCommands.length} أمر متاح
           </div>
         </div>

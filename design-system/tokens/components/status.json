@@ -1,0 +1,48 @@
+{
+  "$schema": "https://www.designtokens.org/schemas/2025.10/format.json",
+  "$description": "Component-level contracts for governed status surfaces.",
+  "component": {
+    "status": {
+      "success": {
+        "foreground": {
+          "$type": "color",
+          "$value": "{color.status.success}"
+        },
+        "border": {
+          "$type": "color",
+          "$value": "{color.status.success}"
+        }
+      },
+      "warning": {
+        "foreground": {
+          "$type": "color",
+          "$value": "{color.status.warning}"
+        },
+        "border": {
+          "$type": "color",
+          "$value": "{color.status.warning}"
+        }
+      },
+      "danger": {
+        "foreground": {
+          "$type": "color",
+          "$value": "{color.status.danger}"
+        },
+        "border": {
+          "$type": "color",
+          "$value": "{color.status.danger}"
+        }
+      },
+      "info": {
+        "foreground": {
+          "$type": "color",
+          "$value": "{color.status.info}"
+        },
+        "border": {
+          "$type": "color",
+          "$value": "{color.status.info}"
+        }
+      }
+    }
+  }
+}

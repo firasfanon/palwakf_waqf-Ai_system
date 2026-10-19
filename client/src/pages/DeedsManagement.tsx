@@ -527,9 +527,9 @@ export default function DeedsManagement() {
                     <span
                       className={`inline-block px-2 py-1 text-xs rounded-full ${
                         deed.status === "active"
-                          ? "bg-green-100 text-green-800"
+                          ? "bg-status-success/10 text-status-success"
                           : deed.status === "disputed"
-                          ? "bg-red-100 text-red-800"
+                          ? "bg-status-danger/10 text-status-danger"
                           : "bg-gray-100 text-gray-800"
                       }`}
                     >
@@ -553,7 +553,7 @@ export default function DeedsManagement() {
                         size="sm"
                         onClick={() => handleDelete(deed.id)}
                       >
-                        <Trash2 className="h-4 w-4 text-red-600" />
+                        <Trash2 className="h-4 w-4 text-status-danger" />
                       </Button>
                     </div>
                   </TableCell>

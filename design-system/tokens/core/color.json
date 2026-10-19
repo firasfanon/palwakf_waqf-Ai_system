@@ -1,0 +1,239 @@
+{
+  "$schema": "https://www.designtokens.org/schemas/2025.10/format.json",
+  "$description": "PalWakf primitive color tokens. Platform-neutral source of truth.",
+  "color": {
+    "brand": {
+      "blue": {
+        "500": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.1608,
+              0.451,
+              0.7294
+            ],
+            "alpha": 1,
+            "hex": "#2973BA"
+          }
+        },
+        "600": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.1059,
+              0.3569,
+              0.6078
+            ],
+            "alpha": 1,
+            "hex": "#1B5B9B"
+          }
+        },
+        "700": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.0745,
+              0.2706,
+              0.4824
+            ],
+            "alpha": 1,
+            "hex": "#13457B"
+          }
+        }
+      },
+      "gold": {
+        "500": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.8235,
+              0.6471,
+              0.1843
+            ],
+            "alpha": 1,
+            "hex": "#D2A52F"
+          }
+        },
+        "600": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.651,
+              0.4863,
+              0.102
+            ],
+            "alpha": 1,
+            "hex": "#A67C1A"
+          }
+        }
+      },
+      "red": {
+        "600": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.6863,
+              0.1608,
+              0.1608
+            ],
+            "alpha": 1,
+            "hex": "#AF2929"
+          }
+        }
+      }
+    },
+    "neutral": {
+      "0": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            1,
+            1,
+            1
+          ],
+          "alpha": 1,
+          "hex": "#FFFFFF"
+        }
+      },
+      "50": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.9765,
+            0.9804,
+            0.9843
+          ],
+          "alpha": 1,
+          "hex": "#F9FAFB"
+        }
+      },
+      "100": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.9529,
+            0.9569,
+            0.9647
+          ],
+          "alpha": 1,
+          "hex": "#F3F4F6"
+        }
+      },
+      "200": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.898,
+            0.9059,
+            0.9216
+          ],
+          "alpha": 1,
+          "hex": "#E5E7EB"
+        }
+      },
+      "500": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.4196,
+            0.451,
+            0.502
+          ],
+          "alpha": 1,
+          "hex": "#6B7280"
+        }
+      },
+      "700": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.2157,
+            0.2549,
+            0.3176
+          ],
+          "alpha": 1,
+          "hex": "#374151"
+        }
+      },
+      "900": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.0667,
+            0.0941,
+            0.1529
+          ],
+          "alpha": 1,
+          "hex": "#111827"
+        }
+      }
+    },
+    "state": {
+      "success": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.0863,
+            0.5373,
+            0.2941
+          ],
+          "alpha": 1,
+          "hex": "#16894B"
+        }
+      },
+      "warning": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.8549,
+            0.5176,
+            0.0392
+          ],
+          "alpha": 1,
+          "hex": "#DA840A"
+        }
+      },
+      "danger": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.7647,
+            0.1451,
+            0.1451
+          ],
+          "alpha": 1,
+          "hex": "#C32525"
+        }
+      },
+      "info": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.1451,
+            0.3882,
+            0.7255
+          ],
+          "alpha": 1,
+          "hex": "#2563B9"
+        }
+      }
+    }
+  }
+}

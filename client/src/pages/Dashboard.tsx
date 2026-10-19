@@ -70,7 +70,7 @@ export default function Dashboard() {
       icon: Building2,
       description: "إجمالي العقارات المسجلة",
       href: "/admin/properties",
-      color: "text-blue-600",
+      color: "text-primary",
     },
     {
       title: "القضايا",
@@ -78,7 +78,7 @@ export default function Dashboard() {
       icon: Gavel,
       description: "القضايا النشطة والمغلقة",
       href: "/admin/cases",
-      color: "text-amber-600",
+      color: "text-status-warning",
     },
     {
       title: "الأحكام القضائية",
@@ -94,7 +94,7 @@ export default function Dashboard() {
       icon: FileCheck,
       description: "الحجج والوثائق",
       href: "/admin/deeds",
-      color: "text-green-600",
+      color: "text-status-success",
     },
     {
       title: "التعليمات الوزارية",
@@ -102,7 +102,7 @@ export default function Dashboard() {
       icon: ScrollText,
       description: "التعليمات والقرارات",
       href: "/admin/instructions",
-      color: "text-red-600",
+      color: "text-status-danger",
     },
   ];
 
@@ -215,10 +215,10 @@ export default function Dashboard() {
                           <div
                             className={`rounded-full h-2 transition-all ${
                               item.status === "resolved"
-                                ? "bg-green-500"
+                                ? "bg-status-success"
                                 : item.status === "in_court"
-                                ? "bg-amber-500"
-                                : "bg-blue-500"
+                                ? "bg-status-warning"
+                                : "bg-primary"
                             }`}
                             style={{
                               width: `${

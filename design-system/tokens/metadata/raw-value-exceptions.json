@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "policy": "Raw visual values are allowed only in token source files, explicitly governed theme definitions, or a documented exception.",
+  "temporaryLegacyExceptions": [
+    {"path":"client/src/index.css","reason":"Legacy token definitions pending generated-token migration"},
+    {"path":"client/src/styles/admin.css","reason":"Admin legacy surface migration occurs inside DESIGN-ARCH-001"},
+    {"path":"client/src/pages/SiteSettings.tsx","reason":"Theme-editor palette values are user-configurable theme seed definitions"},
+    {"path":"client/src/lib/themes.ts","reason":"Theme preset seed definitions"},
+    {"path":"client/src/components/ui/chart.tsx","reason":"Chart palette fallbacks; governed chart-token migration pending"}
+  ]
+}

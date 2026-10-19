@@ -237,11 +237,11 @@ export default function CasesManagement() {
                     <span
                       className={`inline-block px-2 py-1 text-xs rounded-full ${
                         caseItem.status === "resolved"
-                          ? "bg-green-100 text-green-800"
+                          ? "bg-status-success/10 text-status-success"
                           : caseItem.status === "in_court"
-                          ? "bg-blue-100 text-blue-800"
+                          ? "bg-primary/10 text-primary"
                           : caseItem.status === "under_investigation"
-                          ? "bg-yellow-100 text-yellow-800"
+                          ? "bg-status-warning/10 text-status-warning"
                           : "bg-gray-100 text-gray-800"
                       }`}
                     >

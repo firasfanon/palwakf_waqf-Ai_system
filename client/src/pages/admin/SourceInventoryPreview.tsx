@@ -225,7 +225,7 @@ export default function SourceInventoryPreview() {
               التصنيفات المعروضة ليست حكمًا قانونيًا نهائيًا.
             </div>
             <div className="rounded-xl border border-dashed p-4">
-              <AlertTriangle className="mb-2 h-5 w-5 text-amber-600" />
+              <AlertTriangle className="mb-2 h-5 w-5 text-status-warning" />
               كل عنصر غير موثق يبقى NOT_VERIFIED.
             </div>
           </div>
@@ -274,7 +274,7 @@ export default function SourceInventoryPreview() {
                 ))}
               </div>
               {analysis.missingRequired.length ? (
-                <p className="mt-4 text-sm leading-7 text-amber-700">
+                <p className="mt-4 text-sm leading-7 text-status-warning">
                   يلزم استكمال: {analysis.missingRequired.map((item) => item.label).join("، ")}.
                 </p>
               ) : (

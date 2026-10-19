@@ -391,7 +391,7 @@ export default function InstructionsManagement() {
                     {instruction.title}
                   </TableCell>
                   <TableCell>
-                    <span className="inline-block px-2 py-1 text-xs rounded-full bg-blue-100 text-blue-800">
+                    <span className="inline-block px-2 py-1 text-xs rounded-full bg-primary/10 text-primary">
                       {typeLabels[instruction.type] || instruction.type}
                     </span>
                   </TableCell>
@@ -420,7 +420,7 @@ export default function InstructionsManagement() {
                         size="sm"
                         onClick={() => handleDelete(instruction.id)}
                       >
-                        <Trash2 className="h-4 w-4 text-red-600" />
+                        <Trash2 className="h-4 w-4 text-status-danger" />
                       </Button>
                     </div>
                   </TableCell>

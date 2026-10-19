@@ -1,0 +1,31 @@
+{
+  "contract": "WAQF_AI_CONTRACT_LIFECYCLE_V1",
+  "version": 1,
+  "states": [
+    "ACTIVE",
+    "DEPRECATED",
+    "MIGRATION_WINDOW",
+    "NO_NEW_CONSUMERS",
+    "RETIREMENT_READY",
+    "RETIRED"
+  ],
+  "rules": {
+    "ACTIVE": "May be used by new and existing consumers.",
+    "DEPRECATED": "Replacement must be named; existing consumers may continue during a documented window.",
+    "MIGRATION_WINDOW": "Migration evidence and compatibility tests are required.",
+    "NO_NEW_CONSUMERS": "New bindings are rejected; only migration/compatibility work is allowed.",
+    "RETIREMENT_READY": "Known consumers are migrated and negative lookup confirms no remaining admitted consumers.",
+    "RETIRED": "Contract is historical only and cannot be selected at runtime."
+  },
+  "requiredMetadata": [
+    "contractId",
+    "version",
+    "state",
+    "owner",
+    "introducedAt",
+    "supersededBy",
+    "migrationDeadline",
+    "knownConsumers"
+  ],
+  "breakingChangePolicy": "Breaking changes require a new contract version and explicit migration path."
+}

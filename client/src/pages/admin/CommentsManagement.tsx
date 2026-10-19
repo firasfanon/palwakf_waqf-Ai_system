@@ -113,11 +113,11 @@ export default function CommentsManagement() {
   const getStatusColor = (status: string) => {
     switch (status) {
       case "approved":
-        return "bg-green-500";
+        return "bg-status-success";
       case "rejected":
-        return "bg-red-500";
+        return "bg-status-danger";
       default:
-        return "bg-yellow-500";
+        return "bg-status-warning";
     }
   };
 
@@ -278,7 +278,7 @@ export default function CommentsManagement() {
                             onClick={() => handleApprove(comment.id)}
                             disabled={approveMutation.isPending}
                           >
-                            <CheckCircle className="w-4 h-4 text-green-500" />
+                            <CheckCircle className="w-4 h-4 text-status-success" />
                           </Button>
                           <Button
                             variant="ghost"
@@ -286,7 +286,7 @@ export default function CommentsManagement() {
                             onClick={() => handleReject(comment.id)}
                             disabled={rejectMutation.isPending}
                           >
-                            <XCircle className="w-4 h-4 text-red-500" />
+                            <XCircle className="w-4 h-4 text-status-danger" />
                           </Button>
                         </>
                       )}
@@ -296,7 +296,7 @@ export default function CommentsManagement() {
                         onClick={() => handleDelete(comment.id)}
                         disabled={deleteMutation.isPending}
                       >
-                        <Trash2 className="w-4 h-4 text-red-500" />
+                        <Trash2 className="w-4 h-4 text-status-danger" />
                       </Button>
                     </div>
                   </TableCell>

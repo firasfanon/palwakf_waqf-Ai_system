@@ -428,10 +428,10 @@ export default function RulingsManagement() {
                     <span
                       className={`inline-block px-2 py-1 text-xs rounded-full ${
                         ruling.status === "final"
-                          ? "bg-green-100 text-green-800"
+                          ? "bg-status-success/10 text-status-success"
                           : ruling.status === "appealable"
-                          ? "bg-blue-100 text-blue-800"
-                          : "bg-yellow-100 text-yellow-800"
+                          ? "bg-primary/10 text-primary"
+                          : "bg-status-warning/10 text-status-warning"
                       }`}
                     >
                       {statusLabels[ruling.status] || ruling.status}

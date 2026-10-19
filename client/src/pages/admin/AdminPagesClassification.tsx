@@ -10,6 +10,7 @@ const lifecycleLabelMap: Record<AdminPageClassificationRecord["lifecycle"], stri
   operational: "تعمل فعليًا",
   empty_state_ready: "جاهزة مع Empty State",
   backend_pending: "تحتاج Backend",
+  deferred: "مؤجلة بقرار منتج",
   stub_page: "واجهة Placeholder",
   access_restricted: "مقيدة بصلاحيات",
 };
@@ -18,6 +19,7 @@ const dataStateLabelMap: Record<AdminPageClassificationRecord["dataState"], stri
   connected: "مرتبطة",
   empty: "فارغة آمنة",
   pending_backend: "بانتظار ربط",
+  deferred: "مؤجلة",
   static_stub: "ثابتة/Stub",
   restricted: "محجوبة",
 };
@@ -26,6 +28,7 @@ const lifecycleVariantMap: Record<AdminPageClassificationRecord["lifecycle"], "d
   operational: "default",
   empty_state_ready: "secondary",
   backend_pending: "outline",
+  deferred: "secondary",
   stub_page: "outline",
   access_restricted: "destructive",
 };
@@ -58,6 +61,7 @@ export default function AdminPagesClassification() {
       operational: 0,
       empty_state_ready: 0,
       backend_pending: 0,
+      deferred: 0,
       stub_page: 0,
       access_restricted: 0,
     }
@@ -77,9 +81,9 @@ export default function AdminPagesClassification() {
       icon: Link2,
     },
     {
-      title: "واجهات Placeholder أو محجوبة",
-      value: totals.stub_page + totals.access_restricted,
-      description: "إما صفحات stub أو مسارات ما زالت تحتاج توحيد صلاحيات.",
+      title: "مؤجلة / Placeholder / محجوبة",
+      value: totals.deferred + totals.stub_page + totals.access_restricted,
+      description: "المؤجل بقرار منتج منفصل بوضوح عن أي stub غير مقبول أو مسار مقيد.",
       icon: ShieldAlert,
     },
     {

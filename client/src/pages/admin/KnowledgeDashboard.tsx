@@ -126,11 +126,11 @@ export default function KnowledgeDashboard() {
           <CardContent>
             <div className="text-2xl font-bold">{stats?.successRate || 0}%</div>
             <div className="flex gap-2 mt-1">
-              <span className="text-xs text-green-600 flex items-center gap-1">
+              <span className="text-xs text-status-success flex items-center gap-1">
                 <CheckCircle className="h-3 w-3" />
                 {stats?.totalSuccess || 0}
               </span>
-              <span className="text-xs text-red-600 flex items-center gap-1">
+              <span className="text-xs text-status-danger flex items-center gap-1">
                 <XCircle className="h-3 w-3" />
                 {stats?.totalErrors || 0}
               </span>
@@ -275,10 +275,10 @@ export default function KnowledgeDashboard() {
                       <Badge variant="outline">{TYPE_LABELS[source.type] || source.type}</Badge>
                     </TableCell>
                     <TableCell className="text-center">{source.itemsCount || 0}</TableCell>
-                    <TableCell className="text-center text-green-600">
+                    <TableCell className="text-center text-status-success">
                       {source.successCount || 0}
                     </TableCell>
-                    <TableCell className="text-center text-red-600">
+                    <TableCell className="text-center text-status-danger">
                       {source.errorCount || 0}
                     </TableCell>
                     <TableCell>

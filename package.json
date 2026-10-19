@@ -34,7 +34,11 @@
     "verify:mega-batch-ar1-c4-direct-knowledge-document-metadata-exact-lookup-repair-v1": "node scripts/verify-mega-batch-ar1-c4-direct-knowledge-document-metadata-exact-lookup-repair-v1.mjs",
     "verify:mega-batch-ar1-deterministic-candidate-review-and-ephemeral-session-authority-prep-v1": "node scripts/verify-mega-batch-ar1-deterministic-candidate-review-and-ephemeral-session-authority-prep-v1.mjs",
     "verify:mega-batch-ar1-explicit-ephemeral-session-start-and-evidence-only-runtime-uat-v1": "node scripts/verify-mega-batch-ar1-explicit-ephemeral-session-start-and-evidence-only-runtime-uat-v1.mjs",
-    "test:mega-batch-ar1-explicit-ephemeral-session-start-and-evidence-only-runtime-uat-v1": "node scripts/test-mega-batch-ar1-explicit-ephemeral-session-start-and-evidence-only-runtime-uat-v1.mjs"
+    "test:mega-batch-ar1-explicit-ephemeral-session-start-and-evidence-only-runtime-uat-v1": "node scripts/test-mega-batch-ar1-explicit-ephemeral-session-start-and-evidence-only-runtime-uat-v1.mjs",
+    "design:tokens:build": "node scripts/design-system/build-tokens.mjs",
+    "design:verify": "node scripts/design-system/verify-design-system.mjs",
+    "design:test": "vitest run --config vitest.design.config.ts",
+    "design:bundle-budget": "node scripts/design-system/verify-bundle-budget.mjs"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.693.0",

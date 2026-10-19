@@ -102,13 +102,13 @@ export default function ExtractTool() {
         {result && (
           <>
             {result.toolRunId ? (
-              <Card className="border-emerald-200 bg-emerald-50/70">
+              <Card className="border-status-success/30 bg-status-success/70">
                 <CardContent className="flex flex-col gap-3 pt-6 lg:flex-row lg:items-center lg:justify-between">
                   <div className="space-y-1">
-                    <p className="text-sm font-semibold text-emerald-900">تم حفظ التشغيل سياديًا</p>
-                    <p className="text-xs text-emerald-800">معرف التشغيل: {result.toolRunId}</p>
+                    <p className="text-sm font-semibold text-status-success">تم حفظ التشغيل سياديًا</p>
+                    <p className="text-xs text-status-success">معرف التشغيل: {result.toolRunId}</p>
                   </div>
-                  <Button variant="outline" onClick={() => navigate(APP_ROUTES.adminToolsRuns)} className="border-emerald-300 text-emerald-900">
+                  <Button variant="outline" onClick={() => navigate(APP_ROUTES.adminToolsRuns)} className="border-status-success/30 text-status-success">
                     فتح سجل التشغيل والاعتماد
                   </Button>
                 </CardContent>
@@ -134,7 +134,7 @@ export default function ExtractTool() {
                       <h3 className="font-semibold mb-2">{section}</h3>
                       <div className="flex flex-wrap gap-2">
                         {values.map((value: string, i: number) => (
-                          <span key={i} className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm">{value}</span>
+                          <span key={i} className="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm">{value}</span>
                         ))}
                       </div>
                     </div>
@@ -157,7 +157,7 @@ export default function ExtractTool() {
                     <h3 className="font-semibold mb-2">الإحالات/الهوامش المستخرجة</h3>
                     <div className="flex flex-wrap gap-2">
                       {result.citations.map((citation: string, i: number) => (
-                        <span key={i} className="px-3 py-1 bg-amber-100 text-amber-700 rounded-full text-sm">{citation}</span>
+                        <span key={i} className="px-3 py-1 bg-status-warning/10 text-status-warning rounded-full text-sm">{citation}</span>
                       ))}
                     </div>
                   </div>

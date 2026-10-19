@@ -41,7 +41,7 @@ export function MessageRating({ messageId }: MessageRatingProps) {
         disabled={rateMessageMutation.isPending}
         className={`h-7 px-2 ${
           currentRating === "helpful"
-            ? "bg-green-100 text-green-700 hover:bg-green-100"
+            ? "bg-status-success/10 text-status-success hover:bg-status-success/10"
             : ""
         }`}
       >
@@ -55,7 +55,7 @@ export function MessageRating({ messageId }: MessageRatingProps) {
         disabled={rateMessageMutation.isPending}
         className={`h-7 px-2 ${
           currentRating === "not_helpful"
-            ? "bg-red-100 text-red-700 hover:bg-red-100"
+            ? "bg-status-danger/10 text-status-danger hover:bg-status-danger/10"
             : ""
         }`}
       >

@@ -376,8 +376,8 @@ export default function PageSettings() {
                     <p className="text-xs text-muted-foreground mb-1">حالة الصفحة:</p>
                     <span className={`px-3 py-1 rounded-full text-sm ${
                       formData.isActive === 1 
-                        ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200' 
-                        : 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200'
+                        ? 'bg-status-success/10 text-status-success dark:bg-status-success dark:text-status-success'
+                        : 'bg-status-danger/10 text-status-danger dark:bg-status-danger dark:text-status-danger'
                     }`}>
                       {formData.isActive === 1 ? 'نشطة' : 'غير نشطة'}
                     </span>
@@ -386,8 +386,8 @@ export default function PageSettings() {
               </div>
               
               {formData.customJs && (
-                <div className="mt-4 p-4 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg">
-                  <p className="text-sm text-yellow-800 dark:text-yellow-200">
+                <div className="mt-4 p-4 bg-status-warning/10 dark:bg-status-warning/20 border border-status-warning/30 dark:border-status-warning rounded-lg">
+                  <p className="text-sm text-status-warning dark:text-status-warning">
                     <strong>ملاحظة:</strong> Custom JavaScript لن يتم تنفيذه في المعاينة لأسباب أمنية. سيتم تطبيقه على الصفحة الفعلية بعد الحفظ.
                   </p>
                 </div>

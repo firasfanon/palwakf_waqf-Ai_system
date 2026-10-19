@@ -291,7 +291,7 @@ export default function HomeSectionsManagement() {
                                 title={section.isActive ? "إخفاء" : "إظهار"}
                               >
                                 {section.isActive ? (
-                                  <Eye className="h-4 w-4 text-green-600" />
+                                  <Eye className="h-4 w-4 text-status-success" />
                                 ) : (
                                   <EyeOff className="h-4 w-4 text-gray-400" />
                                 )}
@@ -308,7 +308,7 @@ export default function HomeSectionsManagement() {
                                 size="icon"
                                 onClick={() => handleDelete(section.id)}
                               >
-                                <Trash2 className="h-4 w-4 text-red-600" />
+                                <Trash2 className="h-4 w-4 text-status-danger" />
                               </Button>
                             </div>
                           </div>

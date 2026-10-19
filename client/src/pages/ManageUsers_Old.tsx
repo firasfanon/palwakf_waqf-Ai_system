@@ -147,8 +147,8 @@ export default function ManageUsers() {
 {/* Header */}
       <div className="mb-8">
         <div className="flex items-center gap-3 mb-2">
-          <div className="p-3 rounded-lg bg-blue-50">
-            <Users className="w-6 h-6 text-blue-600" />
+          <div className="p-3 rounded-lg bg-primary/10">
+            <Users className="w-6 h-6 text-primary" />
           </div>
           <div>
             <h1 className="text-3xl font-bold">إدارة المستخدمين</h1>

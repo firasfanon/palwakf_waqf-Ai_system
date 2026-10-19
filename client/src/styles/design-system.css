@@ -1,0 +1,108 @@
+@theme inline {
+  --color-status-success: var(--ds-color-status-success);
+  --color-status-warning: var(--ds-color-status-warning);
+  --color-status-danger: var(--ds-color-status-danger);
+  --color-status-info: var(--ds-color-status-info);
+}
+
+.ds-status {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-space-xs);
+  border: 1px solid currentColor;
+  border-radius: var(--ds-radius-md);
+  padding: var(--ds-space-xs) var(--ds-space-sm);
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.ds-status[data-tone="success"] {
+  color: var(--ds-color-status-success);
+  background: color-mix(in srgb, var(--ds-color-status-success) 10%, transparent);
+}
+
+.ds-status[data-tone="warning"] {
+  color: var(--ds-color-status-warning);
+  background: color-mix(in srgb, var(--ds-color-status-warning) 10%, transparent);
+}
+
+.ds-status[data-tone="danger"] {
+  color: var(--ds-color-status-danger);
+  background: color-mix(in srgb, var(--ds-color-status-danger) 10%, transparent);
+}
+
+.ds-status[data-tone="info"] {
+  color: var(--ds-color-status-info);
+  background: color-mix(in srgb, var(--ds-color-status-info) 10%, transparent);
+}
+
+.ds-bidi-isolate {
+  unicode-bidi: isolate;
+}
+
+.ds-review-grid {
+  display: grid;
+  gap: var(--ds-space-md);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+}
+
+.ds-responsive-table-shell {
+  max-width: 100%;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+}
+
+/* DESIGN-ARCH-001 semantic gradient contracts. */
+.ds-gradient-success-surface {
+  background-image: linear-gradient(
+    to bottom right,
+    color-mix(in srgb, var(--ds-color-status-success) 8%, hsl(var(--background))),
+    color-mix(in srgb, var(--ds-color-status-success) 3%, hsl(var(--background)))
+  );
+}
+
+.ds-gradient-success-action {
+  background-image: linear-gradient(
+    to right,
+    var(--ds-color-status-success),
+    color-mix(in srgb, var(--ds-color-status-success) 78%, var(--ds-color-action-primary) 22%)
+  );
+  color: hsl(var(--primary-foreground));
+}
+
+.ds-gradient-success-action:hover {
+  filter: brightness(0.92);
+}
+
+.ds-gradient-info-card {
+  background-image: linear-gradient(
+    to bottom right,
+    color-mix(in srgb, var(--ds-color-status-info) 10%, hsl(var(--card))),
+    color-mix(in srgb, var(--ds-color-status-info) 18%, hsl(var(--card)))
+  );
+}
+
+.ds-gradient-success-card {
+  background-image: linear-gradient(
+    to bottom right,
+    color-mix(in srgb, var(--ds-color-status-success) 10%, hsl(var(--card))),
+    color-mix(in srgb, var(--ds-color-status-success) 18%, hsl(var(--card)))
+  );
+}
+
+.ds-gradient-warning-card {
+  background-image: linear-gradient(
+    to bottom right,
+    color-mix(in srgb, var(--ds-color-status-warning) 10%, hsl(var(--card))),
+    color-mix(in srgb, var(--ds-color-status-warning) 18%, hsl(var(--card)))
+  );
+}
+
+.ds-gradient-info-success-soft {
+  background-image: linear-gradient(
+    to right,
+    color-mix(in srgb, var(--ds-color-status-success) 8%, hsl(var(--card))),
+    color-mix(in srgb, var(--ds-color-status-info) 8%, hsl(var(--card)))
+  );
+}

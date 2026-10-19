@@ -59,11 +59,11 @@ function getMatchedOn(alert: AlertRowLike) {
 function statusBadgeClass(status?: string | null) {
   switch (status) {
     case 'new':
-      return 'bg-blue-100 text-blue-800';
+      return 'bg-primary/10 text-primary';
     case 'seen':
-      return 'bg-yellow-100 text-yellow-800';
+      return 'bg-status-warning/10 text-status-warning';
     case 'done':
-      return 'bg-green-100 text-green-800';
+      return 'bg-status-success/10 text-status-success';
     default:
       return 'bg-gray-100 text-gray-800';
   }
@@ -509,7 +509,7 @@ export default function AlertsCenter() {
               <Button
                 onClick={showEditModal ? handleEditWatchlist : handleCreateWatchlist}
                 disabled={updateWatchlistMutation.isPending || createWatchlistMutation.isPending}
-                className="bg-green-600 hover:bg-green-700"
+                className="bg-status-success hover:bg-status-success"
               >
                 {showEditModal ? "حفظ التعديلات" : "إنشاء"}
               </Button>
@@ -558,7 +558,7 @@ export default function AlertsCenter() {
             <Button
               onClick={handleDeleteWatchlist}
               disabled={deleteWatchlistMutation.isPending}
-              className="bg-red-600 hover:bg-red-700"
+              className="bg-status-danger hover:bg-status-danger"
             >
               حذف
             </Button>
@@ -580,7 +580,7 @@ export default function AlertsCenter() {
             <Button
               onClick={() => bulkDeleteMutation.mutate({ ids: Array.from(selectedIds) })}
               disabled={bulkDeleteMutation.isPending}
-              className="bg-red-600 hover:bg-red-700"
+              className="bg-status-danger hover:bg-status-danger"
             >
               حذف
             </Button>
@@ -606,7 +606,7 @@ export default function AlertsCenter() {
               <div>
                 <span className="font-semibold">الرابط:</span>
                 {selectedAlert.url ? (
-                  <a href={selectedAlert.url} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline block mt-1">
+                  <a href={selectedAlert.url} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline block mt-1">
                     {selectedAlert.url}
                   </a>
                 ) : (
@@ -644,21 +644,21 @@ export default function AlertsCenter() {
       {statsQuery.data && (
         <AdminCard title="إحصائيات التنبيهات">
           <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
-            <div className="p-3 bg-blue-50 rounded border border-blue-200">
+            <div className="p-3 bg-primary/10 rounded border border-primary/30">
               <div className="text-xs text-muted-foreground">إجمالي التنبيهات</div>
-              <div className="text-2xl font-bold text-blue-700 mt-1">{statsQuery.data.totalAlerts}</div>
+              <div className="text-2xl font-bold text-primary mt-1">{statsQuery.data.totalAlerts}</div>
             </div>
-            <div className="p-3 bg-yellow-50 rounded border border-yellow-200">
+            <div className="p-3 bg-status-warning/10 rounded border border-status-warning/30">
               <div className="text-xs text-muted-foreground">جديد</div>
-              <div className="text-2xl font-bold text-yellow-700 mt-1">{statsQuery.data.newAlerts}</div>
+              <div className="text-2xl font-bold text-status-warning mt-1">{statsQuery.data.newAlerts}</div>
             </div>
-            <div className="p-3 bg-orange-50 rounded border border-orange-200">
+            <div className="p-3 bg-status-warning/10 rounded border border-status-warning/30">
               <div className="text-xs text-muted-foreground">مشاهد</div>
-              <div className="text-2xl font-bold text-orange-700 mt-1">{statsQuery.data.seenAlerts}</div>
+              <div className="text-2xl font-bold text-status-warning mt-1">{statsQuery.data.seenAlerts}</div>
             </div>
-            <div className="p-3 bg-green-50 rounded border border-green-200">
+            <div className="p-3 bg-status-success/10 rounded border border-status-success/30">
               <div className="text-xs text-muted-foreground">منتهي</div>
-              <div className="text-2xl font-bold text-green-700 mt-1">{statsQuery.data.doneAlerts}</div>
+              <div className="text-2xl font-bold text-status-success mt-1">{statsQuery.data.doneAlerts}</div>
             </div>
             <div className="p-3 bg-purple-50 rounded border border-purple-200">
               <div className="text-xs text-muted-foreground">قوائم نشطة</div>
@@ -672,7 +672,7 @@ export default function AlertsCenter() {
                 {statsQuery.data.topWatchlists.map((w, i) => (
                   <div key={i} className="flex justify-between items-center text-sm p-2 bg-muted rounded">
                     <span>{w.name}</span>
-                    <span className="font-semibold text-blue-600">{w.count}</span>
+                    <span className="font-semibold text-primary">{w.count}</span>
                   </div>
                 ))}
               </div>
@@ -696,7 +696,7 @@ export default function AlertsCenter() {
             <div className="pt-2 border-t border-border">
               <div className="flex justify-between items-center text-sm">
                 <span className="text-muted-foreground">إجمالي الـ 7 أيام:</span>
-                <span className="font-semibold text-blue-600">{trendQuery.data.totalCreated}</span>
+                <span className="font-semibold text-primary">{trendQuery.data.totalCreated}</span>
               </div>
             </div>
           </div>
@@ -710,7 +710,7 @@ export default function AlertsCenter() {
             <Button
               onClick={() => runWatchlistsMutation.mutate({})}
               disabled={runWatchlistsMutation.isPending}
-              className="bg-blue-600 hover:bg-blue-700"
+              className="bg-primary hover:bg-primary"
             >
               {runWatchlistsMutation.isPending ? "جاري التشغيل..." : "تشغيل قوائم المراقبة"}
             </Button>
@@ -744,7 +744,7 @@ export default function AlertsCenter() {
                   statuses: "pending,approved",
                 });
               }}
-              className="bg-green-600 hover:bg-green-700"
+              className="bg-status-success hover:bg-status-success"
             >
               إنشاء قائمة مراقبة جديدة
             </Button>
@@ -782,7 +782,7 @@ export default function AlertsCenter() {
                   <Button
                     size="sm"
                     variant="outline"
-                    className="text-red-600 hover:text-red-700"
+                    className="text-status-danger hover:text-status-danger"
                     onClick={() => openDeleteModal(w)}
                   >
                     حذف
@@ -924,7 +924,7 @@ export default function AlertsCenter() {
 
       {/* Bulk Actions Bar */}
       {selectedIds.size > 0 && (
-        <div className="p-3 bg-blue-50 border border-blue-200 rounded flex justify-between items-center mb-4">
+        <div className="p-3 bg-primary/10 border border-primary/30 rounded flex justify-between items-center mb-4">
           <span className="text-sm font-medium">تم تحديد {selectedIds.size} عنصر</span>
           <div className="flex gap-2">
             <Button
@@ -944,7 +944,7 @@ export default function AlertsCenter() {
             <Button
               size="sm"
               onClick={() => setShowBulkDeleteModal(true)}
-              className="bg-red-600 hover:bg-red-700"
+              className="bg-status-danger hover:bg-status-danger"
             >
               حذف
             </Button>
@@ -1001,7 +1001,7 @@ export default function AlertsCenter() {
                       <td className="p-3 text-sm max-w-xs truncate">
                         <button
                           onClick={() => openAlertDetails(alert.alert)}
-                          className="text-blue-600 hover:underline"
+                          className="text-primary hover:underline"
                         >
                           {alert.alert.title || '—'}
                         </button>
@@ -1010,13 +1010,13 @@ export default function AlertsCenter() {
                       <td className="p-3 text-sm space-x-2">
                         <button
                           onClick={() => markSeenMutation.mutate({ id: alert.alert.id })}
-                          className="text-blue-600 hover:underline"
+                          className="text-primary hover:underline"
                         >
                           مشاهد
                         </button>
                         <button
                           onClick={() => markDoneMutation.mutate({ id: alert.alert.id })}
-                          className="text-green-600 hover:underline"
+                          className="text-status-success hover:underline"
                         >
                           منتهي
                         </button>
@@ -1084,7 +1084,7 @@ export default function AlertsCenter() {
                         setShowPublicTemplatesModal(false);
                         setShowCreateModal(true);
                       }}
-                      className="bg-blue-600 hover:bg-blue-700"
+                      className="bg-primary hover:bg-primary"
                     >
                       استخدم
                     </Button>

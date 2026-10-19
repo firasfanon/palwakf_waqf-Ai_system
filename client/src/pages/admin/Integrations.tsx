@@ -43,7 +43,7 @@ export default function Integrations() {
           ) : integrations.map((item: any) => (
             <div key={item.key} className="flex items-center justify-between rounded-2xl border p-4">
               <div className="flex items-center gap-3">
-                {item.configured ? <CheckCircle2 className="h-5 w-5 text-emerald-600" /> : <XCircle className="h-5 w-5 text-muted-foreground" />}
+                {item.configured ? <CheckCircle2 className="h-5 w-5 text-status-success" /> : <XCircle className="h-5 w-5 text-muted-foreground" />}
                 <div>
                   <p className="font-semibold">{item.label}</p>
                   <p className="text-xs text-muted-foreground">{item.key}</p>
