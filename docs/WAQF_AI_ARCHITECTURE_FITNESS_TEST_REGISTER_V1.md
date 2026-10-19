@@ -39,10 +39,14 @@ Current gates:
 ## Current measured state
 
 - direct router DB mutations: 0
+- router imports from infrastructure/db: 0
 - provider query syntax in runtimeRepository: 0
 - Supabase SDK/createClient in runtimeRepository: 0
 - unclassified admin stubs: 0
-- architecture/design/client contract test suite: 13/13 PASS
+- router LOC: 3,779 (task budget <4,000)
+- runtimeRepository LOC: 1,500
+- bounded legacy dbOps compatibility calls: 71 (non-increasing exception register)
+- architecture/design/client contract test suite: 17/17 PASS
 
 ## Contract lifecycle
 

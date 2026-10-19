@@ -1,139 +1,128 @@
-# WAQF_AI DESIGN-ARCH-001 Evidence Pack — 2026-10-19
+# WAQF_AI DESIGN-ARCH-001 Engineering Evidence Pack
 
-## Authority and exact base
-
-- Task: DESIGN-ARCH-001
-- Authorized branch base: task/WAQF-AI-POST-G-FINAL-ENGINEERING-EVIDENCE-GAP-CLOSURE-V1
-- Authorized base HEAD: 55571730a205afc5b4400637077228076952eea0
-- Authorized base TREE: 8015fde0fb4d58353f700a595704297e6b42d403
-- Execution branch: task/WAQF-AI-DESIGN-ARCH-001-V1
-- Mode: one integrated mega batch.
-- No main merge, baseline promotion, production deployment, public corpus release, paid-provider procurement, production role grant, or shared Supabase mutation occurred.
+Date: 2026-10-19
+Task: DESIGN-ARCH-001
+Authorized base HEAD: 55571730a205afc5b4400637077228076952eea0
+Authorized base TREE: 8015fde0fb4d58353f700a595704297e6b42d403
+Branch: task/WAQF-AI-DESIGN-ARCH-001-V1
+Source candidate commit: 4231cc1e1c663d14c8b929adc4d2f8bc87882993
+Source candidate tree: 8d98bfe2f96cbc6663d02f19609920c2b4e67643
 
 ## Design System
 
-Implemented:
-- platform-neutral token source under design-system/tokens;
-- DTCG 2025.10 schema metadata on token documents;
-- deterministic CSS and TypeScript generation;
-- semantic status tokens and governed gradient contracts;
-- internal Design System catalog at /admin/design-system;
-- StatusBadge with icon + text + semantic color;
-- raw state-color normalization;
-- explicit raw-HEX exception ledger;
-- legacy UI lifecycle classification;
-- Mustakshif AI reclassified from generic stub to explicit deferred product surface.
+- Platform-neutral token source added under design-system/tokens/**.
+- DTCG schema metadata present on token source documents.
+- Deterministic generators produce CSS and typed TypeScript artifacts.
+- Governed Design System catalog is bound at /admin/design-system.
+- Semantic StatusBadge uses icon + text + semantic tone; status does not rely on color alone.
+- Raw red/green/blue/yellow/amber/emerald/orange state utility violations: 0.
+- Unclassified raw HEX violations: 0.
+- Raw HEX exceptions are bounded by design-system/tokens/metadata/raw-value-exceptions.json.
+- Unclassified admin stub pages: 0.
+- Mustakshif GIS/AI is explicitly classified as deferred and not counted as completed functionality.
 
-Final design gate:
-- design:verify PASS;
-- rawStateColorViolations=0;
-- unclassifiedHexViolations=0;
-- unclassifiedAdminStubs=0;
-- design contract / accessibility / registry / architecture suite = 17/17 PASS.
+## Responsive / RTL / accessibility engineering evidence
 
-## Architecture
+Browser/CDP UAT:
+- routes: 15/15 PASS.
+- 390px: 5/5 PASS.
+- tablet 768px: 5/5 PASS.
+- desktop 1440px: 5/5 PASS.
+- horizontal overflow: 0.
+- runtime exceptions: 0.
+- unnamed actionable controls: 0.
+- RTL document/body verified.
+- LTR isolation for identifiers/hashes/URLs exercised in Design System catalog.
+- automated design/accessibility/architecture contracts: 17/17 PASS.
 
-Implemented:
-- direct Drizzle select/insert/update/delete removed from server/routers.ts;
-- Admin operations extracted to server/application/adminOperationsService.ts;
-- DB-specific admin operations isolated under server/infrastructure/db;
-- AssistantDataPort introduced under server/ports;
-- Supabase provider implementation isolated under server/infrastructure/supabase;
-- runtimeRepository no longer creates Supabase clients directly;
-- architecture fitness tests enforce router DB boundary, app/provider separation, client Supabase prohibition, token source, route/productization rules;
-- material contract lifecycle recorded in contract/CONTRACT_LIFECYCLE_V1.json.
+Independent/manual screen-reader and final WCAG acceptance remain part of separate independent acceptance; they are not fabricated here.
 
-Measured:
-- routers.ts reduced below 4,000-line engineering budget;
-- runtimeRepository reduced from the pre-assessment state;
-- direct router DB mutation=0;
-- client business imports of the dormant Supabase bridge=0.
+## Software architecture
+
+Before DESIGN-ARCH-001:
+- server/routers.ts approximately 4,266 LOC.
+- server/runtimeRepository.ts approximately 1,664 LOC.
+- direct db.* operations existed in router layer.
+- Supabase SDK/query construction was mixed into runtimeRepository.
+
+Candidate:
+- server/routers.ts: 3,779 LOC.
+- server/runtimeRepository.ts: 1,500 LOC.
+- server/application/adminOperationsService.ts: 730 LOC.
+- direct router DB mutations: 0.
+- router infrastructure/db imports: 0.
+- AssistantDataPort introduced.
+- SupabaseAssistantDataAdapter introduced.
+- assistant runtime client/circuit/diagnostics moved to infrastructure adapter.
+- router dbOps legacy compatibility references: 71, explicitly registered and non-increasing.
+
+## Contract lifecycle
+
+contract/CONTRACT_LIFECYCLE_V1.json defines:
+ACTIVE → DEPRECATED → MIGRATION_WINDOW → NO_NEW_CONSUMERS → RETIREMENT_READY → RETIRED.
 
 ## Delivery / bundle
 
-Authorized-base entry JS: 5,478,069 bytes.
-Candidate entry JS: 473,030 bytes.
-Reduction: approximately 91.4%.
-Entry budget: 550,000 bytes.
-Headroom: 76,970 bytes.
-Budget gate: PASS.
+- Authorized-base entry bundle: 5,478,069 bytes.
+- Candidate entry bundle: 473,030 bytes.
+- Reduction: approximately 91.37%.
+- Enforced entry budget: 550,000 bytes.
+- Budget result: PASS.
+- Public lazy pages: 16.
+- Admin lazy pages: 73.
 
-Public and admin pages use lazy route boundaries; providers/navigation remain in the critical shell.
+## Regression
 
-## Responsive / accessibility / visual UAT
+Accepted historical baseline:
+- failed files: 21
+- failed tests: 163
+- passed files: 39
+- passed tests: 397
+- skipped: 36
 
-Final browser run used Edge headless/CDP against the DESIGN-ARCH-001 runtime.
+DESIGN-ARCH-001 final:
+- failed files: 21
+- failed tests: 163
+- passed files: 41
+- passed tests: 409
+- skipped: 36
 
-Routes:
-- /
-- /chat
-- /knowledge-base
-- /admin/design-system
-- /admin/mustakshif-ai
+Comparison:
+- same historical failed-file set: true
+- new failure files: 0
+- new failure count: 0
 
-Viewports:
-- 390x844
-- 768x1024
-- 1440x1000
+## Security / trust / citation
 
-Result:
-- total 15/15 PASS;
-- 390px 5/5 PASS;
-- tablet 5/5 PASS;
-- desktop 5/5 PASS;
-- unintended horizontal overflow=0;
-- unnamed actionable controls=0 in tested routes;
-- runtime exceptions=0;
-- keyboard focus traversal proven on tested routes;
-- RTL/Bidi evidence exercised, including LTR evidence identifiers inside RTL surfaces.
+Final targeted regression:
+- test files: 13/13 PASS
+- tests: 83/83 PASS
 
-This is engineering accessibility evidence, not a claim of a completed human screen-reader certification.
+## Build gates
 
-## Regression and trust
+- design:verify: PASS
+- design:test: 17/17 PASS
+- pnpm check: PASS
+- pnpm build: PASS
+- bundle budget: PASS
+- git diff --check: PASS
+- browser UAT: PASS
+- full regression: NO_NEW_FAILURES relative to accepted baseline
 
-Final full regression:
-- 21 failed files;
-- 163 failed tests;
-- 409 passed;
-- 36 skipped;
-- 608 total tests.
+## Hard boundaries preserved
 
-The 21-file / 163-test failure baseline is the existing historical environment-dependent baseline and did not increase.
-NEW_REGRESSION=0.
+- no main merge
+- no baseline promotion
+- no shared Supabase mutation
+- no production deployment
+- no public corpus release
+- no paid provider procurement
+- no fake human signoff
 
-Targeted trust/security/citation regression:
-- 13 files PASS;
-- 83/83 tests PASS.
-
-TypeScript:
-- pnpm check PASS.
-
-Build:
-- pnpm build PASS;
-- CSS artifact contamination discovered during closure review was removed;
-- final clean build completed without those CSS optimizer warnings.
-
-Git:
-- git diff --check PASS.
-
-## External evidence location
+## Evidence directory
 
 D:\PALWAKF_DEV_WORKSPACE\07_EVIDENCE_STAGING\WAQF_AI_DESIGN_ARCH_001_20261019
 
-Includes:
-- browser_uat.json;
-- 390/tablet/desktop screenshots;
-- full regression logs;
-- trust/security/citation regression logs;
-- design/check/build/bundle evidence.
-
-## Remaining non-DESIGN-ARCH gates
-
-Not closed or fabricated by this task:
-- real human specialist signoff;
-- independent final acceptance;
-- external WORM provider procurement/certification;
-- production identity/RBAC;
-- production SLO/scale/cost certification;
-- shared-database rights materialization requiring separate mutation authorization;
-- production/public release.
+Evidence files: 57.
+Evidence manifest: evidence_manifest.json.
+Evidence manifest SHA256: 5B25AEE12025DEEFE8B613E9E60FF15EA191C34DE76CE6703AA98FB4BF3E9B6E.
